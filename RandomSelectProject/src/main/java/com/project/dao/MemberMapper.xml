@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.project.dao.MemberMapper">
+	<insert name="putMember" parameterType="MateDTO">
+		
+	</insert>
+	<select name="getMemberInfoByMemId" resultType="MateDTO">
+	
+	</select>
+	<select name="getMemIdByMemberTerms" resultType="string">
+	
+	</select>
+	<select name="getMemIdByMemberTerms" resultType="string">
+	
+	</select>
+	<select name="getMyInfoByMemId" resultType="MateDTO">
+	
+	</select>
+	<update name="setMemberInfoByMemberTerms" parameterType="MateDTO">
+	
+	</update>
+	<insert name="putLeave" parameterType="LeaveDTO">
+	
+	</insert>
+	<delete name="dropMemberInfoByMemId" parameterType="string">
+	
+	</delete>
+</mapper>
