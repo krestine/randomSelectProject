@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-.-mapper.dtd">
+<mapper namespace="ezo.mp.dao.CartMapper">
+
+
+	<insert id="insertCart" parameterType="Cart">
+		insert into Cart
+		(CARTNUMBER, EA,AMOUNT,USERID,PRODUCTCODE )
+		values
+		(sq_cartNum.NEXTVAL,#{productEA},#{amount}, #{userid}, #{productCode})
+	</insert>
+
+	<select id="getCarts" resultType="CartInfo">
+		select cart.cartnumber, cart.ea, cart.amount, product.productname
+		from cart, product 
+		where cart.userid=#{userid} and cart.productcode=product.productcode
+	</select>
+	
+		<select id="getCart" resultType="CartInfo">
+		select cart.cartnumber, cart.ea, cart.amount, product.productname
+		from cart, product 
+		where cart.cartnumber=#{cartnumber} and cart.productcode=product.productcode
+	</select>
+	
+	<delete id="cartDelete" parameterType="String">
+		delete from cart where cartnumber=#{cartnumber}
+	</delete>
+
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ezo.mp.dao.BoardMapper">
+
+	<select id="getAllBoard" resultType="Board">
+		select
+		userId,title,qaDate,boardNumber,hit from QABOARDS ORDER BY
+		boardNumber
+		DESC
+	</select>
+
+	<insert id="insertBoard" parameterType="Board">
+		insert into QABOARDS
+		(USERID, TITLE, QACONTEXT, QADATE, BOARDNUMBER, HIT)
+		values(#{userId},
+		#{title}, #{qaContext}, sysdate, sq_qaboard.NEXTVAL, 0)
+	</insert>
+
+	<select id="myBoardList" resultType="Board" parameterType="String">
+		select userId,title,qaDate,boardNumber,hit from QABOARDS 
+		where userid = #{userid}
+		ORDER BY
+		boardNumber DESC
+	</select>
+
+
+	<select id="getBoard" parameterType="int" resultType="Board">
+		select
+		userId,title, qaDate, qaContext,boardNumber,hit
+		from QABOARDS
+		where
+		BOARDNUMBER = #{boardNumber}
+	</select>
+
+	<update id="updateBoard" parameterType="Board">
+		update QABOARDS set
+		title=#{title},
+		qaContext=#{qaContext},
+		QADATE=sysdate
+		where
+		boardNumber=#{boardNumber}
+	</update>
+
+	<delete id="deleteBoard" parameterType="int">delete from QABOARDS
+		where
+		BOARDNUMBER =
+		#{boardNumber}
+	</delete>
+
+
+
+</mapper>
