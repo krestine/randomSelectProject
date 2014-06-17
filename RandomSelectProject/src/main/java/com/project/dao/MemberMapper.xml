@@ -9,11 +9,11 @@
 		(memid,memname,membirth,mempasswd,memmobile,memgrade,leave)
 		values
 		(#{memId}, #{memName}, #{memBirth}, #{memPasswd}, #{memMobile},
-		'1','o')
+		'1','0')
 	</insert>
 
 	<!-- 로그인 -->
-	<select id="getMemberInfoByMemId" parameterType="MemberDTO"
+	<select id="getMemberInfoByMemberTerms" parameterType="MemberDTO"
 		resultType="MemberDTO">
 		select memid, memname from member
 		where memid=#{memId} and
@@ -60,7 +60,7 @@
 
 	<!-- 탈퇴 -->
 	<update id="putLeave" parameterType="MemberDTO">
-		update member set leave='x',
+		update member set leave='1',
 		leavereason=#{leaveReason}, leavedate=sysdate
 		where memid=#{memId}
 	</update>
