@@ -46,7 +46,7 @@
 	<!-- 회원:현재비밀번호 확인 -->
 	<select id="getMemPasswdByMemId" parameterType="MemberDTO"
 		resultType="string">
-		select memid, mempasswd, memname, memgrade from member
+		select leave from member
 		where memid=#{memId} and mempasswd=#{memPasswd}
 	</select>
 
@@ -59,7 +59,7 @@
 	</update>
 
 	<!-- 회원:탈퇴 -->
-	<update id="putLeave" parameterType="MemberDTO">
+	<update id="setLeave" parameterType="MemberDTO">
 		update member set leave='1',
 		leavereason=#{leaveReason}, leavedate=sysdate
 		where memid=#{memId}
