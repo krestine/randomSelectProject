@@ -64,4 +64,6 @@
 		leavereason=#{leaveReason}, leavedate=sysdate
 		where memid=#{memId}
 	</update>
+	
+	
 </mapper>
