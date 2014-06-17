@@ -1,8 +1,8 @@
 package com.project.domain;
 
 public class MemberDTO {
-	
-	//memberField
+
+	// memberField
 	private String memId;
 	private String memPasswd;
 	private String memName;
@@ -12,11 +12,11 @@ public class MemberDTO {
 	private String black;
 	private String leave;
 	private String leaveReason;
-	
-	//member Field end
-	
-	//getter & setter
-	
+
+	// member Field end
+
+	// getter & setter
+
 	public String getMemId() {
 		return memId;
 	}
@@ -41,8 +41,6 @@ public class MemberDTO {
 		this.memName = memName;
 	}
 
-<<<<<<< HEAD
-=======
 	public String getMemBirth() {
 		return memBirth;
 	}
@@ -51,7 +49,6 @@ public class MemberDTO {
 		this.memBirth = memBirth;
 	}
 
->>>>>>> 472ae866971b2419579b7f21b384c51d1fb58291
 	public String getMemMobile() {
 		return memMobile;
 	}
@@ -92,10 +89,9 @@ public class MemberDTO {
 		this.leaveReason = leaveReason;
 	}
 
-	//getter & setter end
-	
-	
-	//hashCode & equals
+	// getter & setter end
+
+	// hashCode & equals
 
 	@Override
 	public int hashCode() {
@@ -175,30 +171,21 @@ public class MemberDTO {
 		return true;
 	}
 
-	//hashCode & equals end
-	
-	//toString
+	// hashCode & equals end
+
+	// toString
 
 	@Override
 	public String toString() {
-<<<<<<< HEAD
-		return "MemberDTO [memId=" + memId + ", mempasswd=" + memPasswd
-				+ ", memName=" + memName + ", memMobile=" + memMobile
-				+ ", memGrade=" + memGrade + ", black=" + black + ", leave="
-				+ leave + ", leaveReason=" + leaveReason + "]";
-=======
+
 		return "MemberDTO [memId=" + memId + ", memPasswd=" + memPasswd
 				+ ", memName=" + memName + ", memBirth=" + memBirth
 				+ ", memMobile=" + memMobile + ", memGrade=" + memGrade
 				+ ", black=" + black + ", leave=" + leave + ", leaveReason="
 				+ leaveReason + "]";
->>>>>>> 472ae866971b2419579b7f21b384c51d1fb58291
+
 	}
-	
-	//toString end
 
+	// toString end
 
-	
-	
-	
 }
