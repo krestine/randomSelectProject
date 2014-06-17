@@ -24,12 +24,12 @@
 	
 	<!-- 관리자 : 식당 삭제 -->
 	<delete id="dropRestntById" parameterType="string">
-		delete from restnt where id = #{id}
+		delete from restnt where id = #{restntid}
 	</delete>
 	
 	<!-- 관리자 : 식당 수정 -->
 	<update id="setRestntById"  parameterType="RestntDTO">
-		update restnt set name = #{name}, latitude = #{latitude}, longitude=#{longitude}, phone=#{phone}, type=#{type}, address1=#{address1}, address2=#{address2}, address3=#{address3}, address4=#{address4} where id = #{id}
+		update restnt set restntname = #{restntname}, restntlatitude = #{restntlatitude}, restntlongitude=#{restntlongitude}, restntphone=#{restntphone}, restnttype=#{restnttype}, restntaddress1=#{restntaddress1}, restntaddress2=#{restntaddress2}, restntaddress3=#{restntaddress3}, restntaddress4=#{restntaddress4} where restntid = #{restntid}
 	</update>
 	
 	<!-- 관리자 : 식당 추가 -->
