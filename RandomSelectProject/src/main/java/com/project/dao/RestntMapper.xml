@@ -32,4 +32,13 @@
 		
 	</insert>
 	
+	<select id="getRestntById" parameterType="RestntDTO" resultType="RestntDTO">
+	select restntname,
+	restntLatitude,restntLongitude,
+	restntAddress1,restntAddress2,
+	restntAddress3,restntAddress4;
+	restntPhone,restntType where restntid=#{restntId}
+	</select>
+	
+	
 </mapper>
