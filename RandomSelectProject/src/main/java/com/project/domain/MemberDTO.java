@@ -1,69 +1,98 @@
 package com.project.domain;
 
 public class MemberDTO {
-	//memberField
+
+	// memberField
 	private String memId;
-	private String mempasswd;
+	private String memPasswd;
 	private String memName;
+	private String memBirth;
 	private String memMobile;
 	private String memGrade;
 	private String black;
 	private String leave;
 	private String leaveReason;
-	//member Field end
-	
-	//getter & setter
+
+	// member Field end
+
+	// getter & setter
+
 	public String getMemId() {
 		return memId;
 	}
+
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-	public String getMempasswd() {
-		return mempasswd;
+
+	public String getMemPasswd() {
+		return memPasswd;
 	}
-	public void setMempasswd(String mempasswd) {
-		this.mempasswd = mempasswd;
+
+	public void setMemPasswd(String memPasswd) {
+		this.memPasswd = memPasswd;
 	}
+
 	public String getMemName() {
 		return memName;
 	}
+
 	public void setMemName(String memName) {
 		this.memName = memName;
 	}
+
+	public String getMemBirth() {
+		return memBirth;
+	}
+
+	public void setMemBirth(String memBirth) {
+		this.memBirth = memBirth;
+	}
+
 	public String getMemMobile() {
 		return memMobile;
 	}
+
 	public void setMemMobile(String memMobile) {
 		this.memMobile = memMobile;
 	}
+
 	public String getMemGrade() {
 		return memGrade;
 	}
+
 	public void setMemGrade(String memGrade) {
 		this.memGrade = memGrade;
 	}
+
 	public String getBlack() {
 		return black;
 	}
+
 	public void setBlack(String black) {
 		this.black = black;
 	}
+
 	public String getLeave() {
 		return leave;
 	}
+
 	public void setLeave(String leave) {
 		this.leave = leave;
 	}
+
 	public String getLeaveReason() {
 		return leaveReason;
 	}
+
 	public void setLeaveReason(String leaveReason) {
 		this.leaveReason = leaveReason;
 	}
-	//getter & setter end
-	
-	//hashCode & equals
+
+	// getter & setter end
+
+	// hashCode & equals
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -73,16 +102,18 @@ public class MemberDTO {
 		result = prime * result
 				+ ((leaveReason == null) ? 0 : leaveReason.hashCode());
 		result = prime * result
+				+ ((memBirth == null) ? 0 : memBirth.hashCode());
+		result = prime * result
 				+ ((memGrade == null) ? 0 : memGrade.hashCode());
 		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
 		result = prime * result
 				+ ((memMobile == null) ? 0 : memMobile.hashCode());
 		result = prime * result + ((memName == null) ? 0 : memName.hashCode());
 		result = prime * result
-				+ ((mempasswd == null) ? 0 : mempasswd.hashCode());
+				+ ((memPasswd == null) ? 0 : memPasswd.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -107,6 +138,11 @@ public class MemberDTO {
 				return false;
 		} else if (!leaveReason.equals(other.leaveReason))
 			return false;
+		if (memBirth == null) {
+			if (other.memBirth != null)
+				return false;
+		} else if (!memBirth.equals(other.memBirth))
+			return false;
 		if (memGrade == null) {
 			if (other.memGrade != null)
 				return false;
@@ -127,25 +163,29 @@ public class MemberDTO {
 				return false;
 		} else if (!memName.equals(other.memName))
 			return false;
-		if (mempasswd == null) {
-			if (other.mempasswd != null)
+		if (memPasswd == null) {
+			if (other.memPasswd != null)
 				return false;
-		} else if (!mempasswd.equals(other.mempasswd))
+		} else if (!memPasswd.equals(other.memPasswd))
 			return false;
 		return true;
 	}
-	//hashCode & equals end
-	
-	//toString
+
+	// hashCode & equals end
+
+	// toString
+
 	@Override
 	public String toString() {
-		return "MemberDTO [memId=" + memId + ", mempasswd=" + mempasswd
-				+ ", memName=" + memName + ", memMobile=" + memMobile
-				+ ", memGrade=" + memGrade + ", black=" + black + ", leave="
-				+ leave + ", leaveReason=" + leaveReason + "]";
+
+		return "MemberDTO [memId=" + memId + ", memPasswd=" + memPasswd
+				+ ", memName=" + memName + ", memBirth=" + memBirth
+				+ ", memMobile=" + memMobile + ", memGrade=" + memGrade
+				+ ", black=" + black + ", leave=" + leave + ", leaveReason="
+				+ leaveReason + "]";
+
 	}
-	//toString end
-	
-	
-	
+
+	// toString end
+
 }
