@@ -60,10 +60,39 @@
 
 	<!-- 탈퇴 -->
 	<update id="putLeave" parameterType="MemberDTO">
-		update member set leave='1',
-		leavereason=#{leaveReason}, leavedate=sysdate
+		update member set 
+		leave='1',
+		leavereason=#{leaveReason}, 
+		leavedate=sysdate
 		where memid=#{memId}
 	</update>
 	
+	<!--관리자 : 아이디로 유저 검색 -->
+	<select id="getMemberListById" resultType="MemberDTO" parameterType="String">
+	select memberid,membername,membergrade,black where memid = #{memId}  
+	</select>
 	
+	<!--관리자 : 이름으로 유저 검색  -->
+	<select id="getMemberListByName" resultType="MemberDTO" parameterType="String">
+	select memberid,membername,membergrade,black where memname = #{memName}  
+	</select>
+	
+	<!--관리자 : 등급으로 유저 검색  -->
+	<select id="getMemberListByGrade" resultType="MemberDTO" parameterType="String">
+	select memberid,membername,membergrade,black where memgrade = #{memGrade}  
+	</select>
+	
+	<!--관리자 : 블랙으로 유저 검색  -->
+	<select id="getMemberListByBlack" resultType="MemberDTO" parameterType="String">
+	select memberid,membername,membergrade,black where memblack = #{memBlack}  
+	</select>
+	
+	<!--관리자 : 회원 정보 수정  -->
+	<update id="setMemberInfo" parameterType="MemberDTO">
+	update member set 
+	membergrade=#{memberGrade},
+	black = #{black}
+	where memid=#{memId}
+	</update>
+
 </mapper>
