@@ -1,5 +1,5 @@
 package com.project.dao;
 
-public class MenuMapper {
+public interface MenuMapper {
 
 }

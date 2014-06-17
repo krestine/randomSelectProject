@@ -1,5 +1,5 @@
 package com.project.service;
 
-public class LeaveService {
+public interface LeaveService {
 
 }

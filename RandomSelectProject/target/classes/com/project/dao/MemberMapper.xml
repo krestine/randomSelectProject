@@ -5,25 +5,33 @@
 	<insert id="putMember" parameterType="MateDTO">
 
 	</insert>
+	
 	<select id="getMemberInfoByMemId" resultType="MateDTO">
 
 	</select>
+	
 	<select id="getMemIdByMemberTerms" resultType="string">
 
 	</select>
+	
 	<select id="getMemIdByMemberTerms" resultType="string">
 
 	</select>
+	
 	<select id="getMyInfoByMemId" resultType="MateDTO">
 
 	</select>
+	
 	<update id="setMemberInfoByMemberTerms" parameterType="MateDTO">
 
 	</update>
+	
 	<insert id="putLeave" parameterType="LeaveDTO">
 
 	</insert>
+	
 	<delete id="dropMemberInfoByMemId" parameterType="string">
 
 	</delete>
+
 </mapper>
