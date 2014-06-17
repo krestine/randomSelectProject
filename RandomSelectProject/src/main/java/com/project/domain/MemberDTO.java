@@ -3,65 +3,83 @@ package com.project.domain;
 public class MemberDTO {
 	//memberField
 	private String memId;
-	private String mempasswd;
+	private String memPasswd;
 	private String memName;
 	private String memMobile;
 	private String memGrade;
 	private String black;
 	private String leave;
 	private String leaveReason;
+	
 	//member Field end
 	
 	//getter & setter
 	public String getMemId() {
 		return memId;
 	}
+
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-	public String getMempasswd() {
-		return mempasswd;
+
+	public String getMemPasswd() {
+		return memPasswd;
 	}
-	public void setMempasswd(String mempasswd) {
-		this.mempasswd = mempasswd;
+
+	public void setMemPasswd(String memPasswd) {
+		this.memPasswd = memPasswd;
 	}
+
 	public String getMemName() {
 		return memName;
 	}
+
 	public void setMemName(String memName) {
 		this.memName = memName;
 	}
+
 	public String getMemMobile() {
 		return memMobile;
 	}
+
 	public void setMemMobile(String memMobile) {
 		this.memMobile = memMobile;
 	}
+
 	public String getMemGrade() {
 		return memGrade;
 	}
+
 	public void setMemGrade(String memGrade) {
 		this.memGrade = memGrade;
 	}
+
 	public String getBlack() {
 		return black;
 	}
+
 	public void setBlack(String black) {
 		this.black = black;
 	}
+
 	public String getLeave() {
 		return leave;
 	}
+
 	public void setLeave(String leave) {
 		this.leave = leave;
 	}
+
 	public String getLeaveReason() {
 		return leaveReason;
 	}
+
 	public void setLeaveReason(String leaveReason) {
 		this.leaveReason = leaveReason;
 	}
+
 	//getter & setter end
+	
 	
 	//hashCode & equals
 	@Override
@@ -79,7 +97,7 @@ public class MemberDTO {
 				+ ((memMobile == null) ? 0 : memMobile.hashCode());
 		result = prime * result + ((memName == null) ? 0 : memName.hashCode());
 		result = prime * result
-				+ ((mempasswd == null) ? 0 : mempasswd.hashCode());
+				+ ((memPasswd == null) ? 0 : memPasswd.hashCode());
 		return result;
 	}
 	
@@ -127,10 +145,10 @@ public class MemberDTO {
 				return false;
 		} else if (!memName.equals(other.memName))
 			return false;
-		if (mempasswd == null) {
-			if (other.mempasswd != null)
+		if (memPasswd == null) {
+			if (other.memPasswd != null)
 				return false;
-		} else if (!mempasswd.equals(other.mempasswd))
+		} else if (!memPasswd.equals(other.memPasswd))
 			return false;
 		return true;
 	}
@@ -139,7 +157,7 @@ public class MemberDTO {
 	//toString
 	@Override
 	public String toString() {
-		return "MemberDTO [memId=" + memId + ", mempasswd=" + mempasswd
+		return "MemberDTO [memId=" + memId + ", mempasswd=" + memPasswd
 				+ ", memName=" + memName + ", memMobile=" + memMobile
 				+ ", memGrade=" + memGrade + ", black=" + black + ", leave="
 				+ leave + ", leaveReason=" + leaveReason + "]";

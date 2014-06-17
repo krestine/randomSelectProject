@@ -2,18 +2,18 @@ package com.project.domain;
 
 public class MateDTO {
 	//memberFiled
-	private String memid;
+	private String memId;
 	private String mateId;
 	private String mateStatus;
 	private String infoStatus;
 	//memberFiled end
 	
 	//getter & setter
-	public String getMemid() {
-		return memid;
+	public String getMemId() {
+		return memId;
 	}
-	public void setMemid(String memid) {
-		this.memid = memid;
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
 	public String getMateId() {
 		return mateId;
@@ -45,9 +45,10 @@ public class MateDTO {
 		result = prime * result + ((mateId == null) ? 0 : mateId.hashCode());
 		result = prime * result
 				+ ((mateStatus == null) ? 0 : mateStatus.hashCode());
-		result = prime * result + ((memid == null) ? 0 : memid.hashCode());
+		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -72,10 +73,10 @@ public class MateDTO {
 				return false;
 		} else if (!mateStatus.equals(other.mateStatus))
 			return false;
-		if (memid == null) {
-			if (other.memid != null)
+		if (memId == null) {
+			if (other.memId != null)
 				return false;
-		} else if (!memid.equals(other.memid))
+		} else if (!memId.equals(other.memId))
 			return false;
 		return true;
 	}
@@ -84,7 +85,7 @@ public class MateDTO {
 	
 	@Override
 	public String toString() {
-		return "MateDTO [memid=" + memid + ", mateId=" + mateId
+		return "MateDTO [memId=" + memId + ", mateId=" + mateId
 				+ ", mateStatus=" + mateStatus + ", infoStatus=" + infoStatus
 				+ "]";
 	}

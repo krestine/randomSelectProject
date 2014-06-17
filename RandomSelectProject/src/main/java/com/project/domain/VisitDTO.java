@@ -4,17 +4,17 @@ import java.sql.Date;
 
 public class VisitDTO {
 	//memberField
-	private String memid;
+	private String MemId;
 	private Date visitDate;
 	private String visitRestntId;
 	//memberField end
 	
 	//getter & setter
-	public String getMemid() {
-		return memid;
+	public String getMemId() {
+		return MemId;
 	}
-	public void setMemid(String memid) {
-		this.memid = memid;
+	public void setMemId(String MemId) {
+		this.MemId = MemId;
 	}
 	public Date getVisitDate() {
 		return visitDate;
@@ -35,7 +35,7 @@ public class VisitDTO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((memid == null) ? 0 : memid.hashCode());
+		result = prime * result + ((MemId == null) ? 0 : MemId.hashCode());
 		result = prime * result
 				+ ((visitDate == null) ? 0 : visitDate.hashCode());
 		result = prime * result
@@ -51,10 +51,10 @@ public class VisitDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		VisitDTO other = (VisitDTO) obj;
-		if (memid == null) {
-			if (other.memid != null)
+		if (MemId == null) {
+			if (other.MemId != null)
 				return false;
-		} else if (!memid.equals(other.memid))
+		} else if (!MemId.equals(other.MemId))
 			return false;
 		if (visitDate == null) {
 			if (other.visitDate != null)
@@ -73,7 +73,7 @@ public class VisitDTO {
 	//toString
 	@Override
 	public String toString() {
-		return "VisitDTO [memid=" + memid + ", visitDate=" + visitDate
+		return "VisitDTO [MemId=" + MemId + ", visitDate=" + visitDate
 				+ ", visitRestntId=" + visitRestntId + "]";
 	}
 	//toString end
