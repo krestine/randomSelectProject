@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ezo.mp.dao.OrderMapper">
+
+
+
+	<insert id="insertOrder" parameterType="Order">
+		insert into
+		Orders
+		(ordernumber,totalamount,productcode,userid,cartnumber,recontext,payment)
+		values
+		(sq_orderNum.NEXTVAL,#{totalamount},#{productcode},
+		#{userid},#{cartnumber},#{recontext},#{payment})
+		<!-- (sq_orderNum.NEXTVAL,#{totalamount},1, #{userid},#{cartnumber},#{recontext},#{payment}, 
+			) -->
+	</insert>
+	
+	<select id="getAllorderlist" resultType="Order">
+		select orders.ordernumber, orders.totalamount, product.productname, cart.ea, users.address, orders.recontext, orders.payment
+		from orders, users, product, cart 
+		where orders.userid=#{userid} and users.userid=#{userid} and orders.productcode=product.productcode and orders.cartnumber=cart.cartnumber  order by orders.ordernumber desc 
+	</select>
+
+</mapper>
