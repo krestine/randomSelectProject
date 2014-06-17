@@ -43,22 +43,12 @@
 		memid=#{memId}
 	</select>
 
-
-	</update>
-	
-	<insert id="putLeave" parameterType="MemberDTO">
-
-	</insert>
-	
-	<delete id="dropMemberInfoByMemId" parameterType="string">
-
 	<!-- 현재비밀번호 확인 -->
 	<select id="getMemPasswdByMemId" parameterType="MemberDTO"
 		resultType="string">
 		select mempasswd from member
 		where memid=#{memId}
 	</select>
-
 
 	<!-- 정보수정 -->
 	<update id="setMemberInfoByMemberTerms" parameterType="MemberDTO">
