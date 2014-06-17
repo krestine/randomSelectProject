@@ -41,8 +41,6 @@ public class MemberDTO {
 		this.memName = memName;
 	}
 
-<<<<<<< HEAD
-=======
 	public String getMemBirth() {
 		return memBirth;
 	}
@@ -51,7 +49,6 @@ public class MemberDTO {
 		this.memBirth = memBirth;
 	}
 
->>>>>>> 472ae866971b2419579b7f21b384c51d1fb58291
 	public String getMemMobile() {
 		return memMobile;
 	}
@@ -181,18 +178,11 @@ public class MemberDTO {
 
 	@Override
 	public String toString() {
-<<<<<<< HEAD
-		return "MemberDTO [memId=" + memId + ", mempasswd=" + memPasswd
-				+ ", memName=" + memName + ", memMobile=" + memMobile
-				+ ", memGrade=" + memGrade + ", black=" + black + ", leave="
-				+ leave + ", leaveReason=" + leaveReason + "]";
-=======
 		return "MemberDTO [memId=" + memId + ", memPasswd=" + memPasswd
 				+ ", memName=" + memName + ", memBirth=" + memBirth
 				+ ", memMobile=" + memMobile + ", memGrade=" + memGrade
 				+ ", black=" + black + ", leave=" + leave + ", leaveReason="
 				+ leaveReason + "]";
->>>>>>> 472ae866971b2419579b7f21b384c51d1fb58291
 	}
 	
 	//toString end
