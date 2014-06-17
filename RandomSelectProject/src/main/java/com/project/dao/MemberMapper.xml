@@ -3,24 +3,24 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.MemberMapper">
 
-	<!-- 회원가입 -->
+	<!-- 공통:회원가입 -->
 	<insert id="putMember" parameterType="MemberDTO">
 		insert into member
 		(memid,memname,membirth,mempasswd,memmobile,memgrade,leave)
 		values
 		(#{memId}, #{memName}, #{memBirth}, #{memPasswd}, #{memMobile},
-		'1','o')
+		'1','0')
 	</insert>
 
-	<!-- 로그인 -->
-	<select id="getMemberInfoByMemId" parameterType="MemberDTO"
+	<!-- 회원:로그인 -->
+	<select id="getMemberInfoByMemberTerms" parameterType="MemberDTO"
 		resultType="MemberDTO">
 		select memid, memname from member
 		where memid=#{memId} and
 		mempasswd=#{memPasswd}
 	</select>
 
-	<!-- 아이디찾기 -->
+	<!-- 회원:아이디찾기 -->
 	<select id="getMemIdByMemberTerms" parameterType="MemberDTO"
 		resultType="string">
 		select memid from member
@@ -28,7 +28,7 @@
 		membirth=#{memBirth} and memmobile=#{memMobile}
 	</select>
 
-	<!-- 비밀번호찾기 -->
+	<!-- 회원:비밀번호찾기 -->
 	<select id="getMemPasswdByMemberTerms" parameterType="MemberDTO"
 		resultType="string">
 		select mempasswd from member
@@ -36,21 +36,21 @@
 		membirth=#{memBirth} and memmobile=#{memMobile}
 	</select>
 
-	<!-- 내정보 -->
+	<!-- 회원:내정보 -->
 	<select id="getMyInfoByMemId" parameterType="MemberDTO"
 		resultType="MemberDTO">
 		select memid, memname, memgrade from member where
 		memid=#{memId}
 	</select>
 
-	<!-- 현재비밀번호 확인 -->
+	<!-- 회원:현재비밀번호 확인 -->
 	<select id="getMemPasswdByMemId" parameterType="MemberDTO"
 		resultType="string">
-		select mempasswd from member
-		where memid=#{memId}
+		select memid, mempasswd, memname, memgrade from member
+		where memid=#{memId} and mempasswd=#{memPasswd}
 	</select>
 
-	<!-- 정보수정 -->
+	<!-- 회원:정보수정 -->
 	<update id="setMemberInfoByMemberTerms" parameterType="MemberDTO">
 		update
 		member set mempasswd=#{memPasswd}, memmobile=#{memMobile}
@@ -58,9 +58,9 @@
 		memid=#{memId}
 	</update>
 
-	<!-- 탈퇴 -->
+	<!-- 회원:탈퇴 -->
 	<update id="putLeave" parameterType="MemberDTO">
-		update member set leave='x',
+		update member set leave='1',
 		leavereason=#{leaveReason}, leavedate=sysdate
 		where memid=#{memId}
 	</update>
