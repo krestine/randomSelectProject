@@ -1,19 +1,22 @@
 package com.project.domain;
 
 public class MemberDTO {
-	//memberField
+
+	// memberField
 	private String memId;
 	private String memPasswd;
 	private String memName;
+	private String memBirth;
 	private String memMobile;
 	private String memGrade;
 	private String black;
 	private String leave;
 	private String leaveReason;
-	
-	//member Field end
-	
-	//getter & setter
+
+	// member Field end
+
+	// getter & setter
+
 	public String getMemId() {
 		return memId;
 	}
@@ -36,6 +39,14 @@ public class MemberDTO {
 
 	public void setMemName(String memName) {
 		this.memName = memName;
+	}
+
+	public String getMemBirth() {
+		return memBirth;
+	}
+
+	public void setMemBirth(String memBirth) {
+		this.memBirth = memBirth;
 	}
 
 	public String getMemMobile() {
@@ -78,10 +89,10 @@ public class MemberDTO {
 		this.leaveReason = leaveReason;
 	}
 
-	//getter & setter end
-	
-	
-	//hashCode & equals
+	// getter & setter end
+
+	// hashCode & equals
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,6 +101,8 @@ public class MemberDTO {
 		result = prime * result + ((leave == null) ? 0 : leave.hashCode());
 		result = prime * result
 				+ ((leaveReason == null) ? 0 : leaveReason.hashCode());
+		result = prime * result
+				+ ((memBirth == null) ? 0 : memBirth.hashCode());
 		result = prime * result
 				+ ((memGrade == null) ? 0 : memGrade.hashCode());
 		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
@@ -100,7 +113,7 @@ public class MemberDTO {
 				+ ((memPasswd == null) ? 0 : memPasswd.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -124,6 +137,11 @@ public class MemberDTO {
 			if (other.leaveReason != null)
 				return false;
 		} else if (!leaveReason.equals(other.leaveReason))
+			return false;
+		if (memBirth == null) {
+			if (other.memBirth != null)
+				return false;
+		} else if (!memBirth.equals(other.memBirth))
 			return false;
 		if (memGrade == null) {
 			if (other.memGrade != null)
@@ -152,18 +170,22 @@ public class MemberDTO {
 			return false;
 		return true;
 	}
-	//hashCode & equals end
-	
-	//toString
+
+	// hashCode & equals end
+
+	// toString
+
 	@Override
 	public String toString() {
-		return "MemberDTO [memId=" + memId + ", mempasswd=" + memPasswd
-				+ ", memName=" + memName + ", memMobile=" + memMobile
-				+ ", memGrade=" + memGrade + ", black=" + black + ", leave="
-				+ leave + ", leaveReason=" + leaveReason + "]";
+
+		return "MemberDTO [memId=" + memId + ", memPasswd=" + memPasswd
+				+ ", memName=" + memName + ", memBirth=" + memBirth
+				+ ", memMobile=" + memMobile + ", memGrade=" + memGrade
+				+ ", black=" + black + ", leave=" + leave + ", leaveReason="
+				+ leaveReason + "]";
+
 	}
-	//toString end
-	
-	
-	
+
+	// toString end
+
 }

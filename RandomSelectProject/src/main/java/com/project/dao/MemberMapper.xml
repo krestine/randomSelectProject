@@ -2,36 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.MemberMapper">
-	<insert id="putMember" parameterType="MateDTO">
 
+	<!-- 회원가입 -->
+	<insert id="putMember" parameterType="MemberDTO">
+		insert into member
+		(memid,memname,membirth,mempasswd,memmobile,memgrade,leave)
+		values
+		(#{memId}, #{memName}, #{memBirth}, #{memPasswd}, #{memMobile},
+		'1','o')
 	</insert>
-	
-	<select id="getMemberInfoByMemId" resultType="MateDTO">
 
+	<!-- 로그인 -->
+	<select id="getMemberInfoByMemId" parameterType="MemberDTO"
+		resultType="MemberDTO">
+		select memid, memname from member
+		where memid=#{memId} and
+		mempasswd=#{memPasswd}
 	</select>
-	
-	<select id="getMemIdByMemberTerms" resultType="string">
 
+	<!-- 아이디찾기 -->
+	<select id="getMemIdByMemberTerms" parameterType="MemberDTO"
+		resultType="string">
+		select memid from member
+		where memname=#{memName} and
+		membirth=#{memBirth} and memmobile=#{memMobile}
 	</select>
-	
-	<select id="getMemIdByMemberTerms" resultType="string">
 
+	<!-- 비밀번호찾기 -->
+	<select id="getMemPasswdByMemberTerms" parameterType="MemberDTO"
+		resultType="string">
+		select mempasswd from member
+		where memid=#{memId} and
+		membirth=#{memBirth} and memmobile=#{memMobile}
 	</select>
-	
-	<select id="getMyInfoByMemId" resultType="MateDTO">
 
+	<!-- 내정보 -->
+	<select id="getMyInfoByMemId" parameterType="MemberDTO"
+		resultType="MemberDTO">
+		select memid, memname, memgrade from member where
+		memid=#{memId}
 	</select>
-	
-	<update id="setMemberInfoByMemberTerms" parameterType="MateDTO">
 
+	<!-- 현재비밀번호 확인 -->
+	<select id="getMemPasswdByMemId" parameterType="MemberDTO"
+		resultType="string">
+		select mempasswd from member
+		where memid=#{memId}
+	</select>
+
+	<!-- 정보수정 -->
+	<update id="setMemberInfoByMemberTerms" parameterType="MemberDTO">
+		update
+		member set mempasswd=#{memPasswd}, memmobile=#{memMobile}
+		where
+		memid=#{memId}
 	</update>
-	
-	<insert id="putLeave" parameterType="LeaveDTO">
 
-	</insert>
-	
-	<delete id="dropMemberInfoByMemId" parameterType="string">
-
-	</delete>
-
+	<!-- 탈퇴 -->
+	<update id="putLeave" parameterType="MemberDTO">
+		update member set leave='x',
+		leavereason=#{leaveReason}, leavedate=sysdate
+		where memid=#{memId}
+	</update>
 </mapper>
