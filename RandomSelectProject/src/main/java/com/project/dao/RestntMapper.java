@@ -5,16 +5,16 @@ import java.util.List;
 import com.project.domain.RestntDTO;
 
 public interface RestntMapper {
-<<<<<<< HEAD
+
 	
-	// 식당 정보
+	// 회원 : 식당 정보
 	RestntDTO getRestntByRestntId(RestntDTO restntDto);
 	
-	// 식당 리스트
+	// 회원 : 식당 리스트
 	List<RestntDTO> getRestntListByRestntTerms(RestntDTO restntDto);
 	
 	
-=======
+
 	//관리자 : 전체 식당 리스트
 	List<RestntDTO> getRestntList();
 
@@ -31,6 +31,5 @@ public interface RestntMapper {
 	List<RestntDTO> getRestntListByAddr(RestntDTO restntDto);
 
 	// 관리자 : 식당관리 - 식당리스트에서 식당선택 - 상세정보 표시
-	RestntDTO getRestntInfoById(String restntId);
->>>>>>> 299f68b1c74ac87f0a0d11e6dc0020beed92c1f3
+
 }
