@@ -48,5 +48,4 @@ public class CommunityController {
 		return "community/restntDetail";
 	}
 
-	
 }
