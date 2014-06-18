@@ -10,7 +10,7 @@
 	</select>
 
 	<!-- 관리자 : 메뉴 상세 정보표시 -->
-	<select id="getMenuInfoByMenuId" parameterType="MenuDTO"
+	<select id="getMenuInfoByMenuId" parameterType="String"
 		resultType="MenuDTO">
 		select menuid,menuname,restntId,menuPrice,menuCalorie,menuNote
 		where menuid = #{menuId}
@@ -37,7 +37,7 @@
 	</update>
 
 	<!-- 관리자 : 메뉴 삭제 -->
-	<delete id="DropMenuByMenuId" parameterType="String">
+	<delete id="dropMenuByMenuId" parameterType="String">
 		delete from menu
 		where
 		menuId=#{menuId}

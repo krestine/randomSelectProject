@@ -1,9 +1,11 @@
 package com.project.service;
 
+import java.util.List;
+
 import com.project.domain.MemberDTO;
 
 public interface MemberService {
-	
+
 	// 회원가입
 	void putMember(MemberDTO memberDto);
 
@@ -27,5 +29,20 @@ public interface MemberService {
 
 	// 탈퇴
 	MemberDTO putLeave(MemberDTO memberDto);
-	
+
+	// 관리자 : 아이디로 유저 검색
+	List<MemberDTO> getMemberListById(String memId);
+
+	// 관리자 : 이름으로 유저 검색
+	List<MemberDTO> getMemberListByName(String memName);
+
+	// 관리자 : 등급으로 유저 검색
+	List<MemberDTO> getMemberListByGrade(String memGrade);
+
+	// 관리자 : 블랙으로 유저 검색
+	List<MemberDTO> getMemberListByBlack(String black);
+
+	// 관리자 : 회원 정보 수정
+	void setMemberInfo(MemberDTO memberDto);
+
 }
