@@ -20,25 +20,40 @@
 		select * from restnt
 	</select>
 	
+	<!--관리자 : 식당 정보 삭제  -->
 	<delete id="dropRestntById" parameterType="string">
 		delete from restnt where id = #{id}
 	</delete>
 	
+	<!--관리자 : 식당정보 수정  -->
 	<update id="setRestntById"  parameterType="RestntDTO">
 		update restnt set name = #{name}, latitude = #{latitude}, longitude=#{longitude}, phone=#{phone}, type=#{type}, address1=#{address1}, address2=#{address2}, address3=#{address3}, address4=#{address4} where id = #{id}
 	</update>
 	
+	<!--관리자 : 식당정보 추가  -->
 	<insert id="putRestnt" parameterType="RestntDTO">
 		
 	</insert>
 	
-	<select id="getRestntById" parameterType="RestntDTO" resultType="RestntDTO">
+	
+	<!--관리자: 식당관리 - 주소필터 적용 - 식당 리스트 표시  -->
+	<select id="getRestntListByAddr" parameterType="RestntDTO">
+	select restntid, restntname from restnt 
+	where restntAddress1=#{restntAddress1},
+	restntAddress2=#{restntAddress2},
+	restntAddress3={restntAddress3},
+	restntAddress4=#{restntAddress4}
+	</select>
+	
+	<!--관리자 : 식당관리 - 식당리스트에서 식당선택 - 상세정보 표시  -->
+	<select id="getRestntInfoById" parameterType="RestntDTO" resultType="RestntDTO">
 	select restntname,
 	restntLatitude,restntLongitude,
 	restntAddress1,restntAddress2,
 	restntAddress3,restntAddress4;
 	restntPhone,restntType where restntid=#{restntId}
 	</select>
+	
 	
 	
 </mapper>
