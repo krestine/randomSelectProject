@@ -41,10 +41,13 @@ public class CommunityController {
 	}
 	
 	// 식당 상세정보
+<<<<<<< HEAD
+=======
 	@RequestMapping("/restntDetailProc.do")
 	public String restntDetailProc(){
 		System.out.println("restntDetailProc()");
 		return "community/restntDetail";
 	}
+>>>>>>> 3ff581ab656cb224a69ad61c9cced3e25dc4464c
 	
 }
