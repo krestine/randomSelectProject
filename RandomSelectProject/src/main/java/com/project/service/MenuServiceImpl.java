@@ -1,28 +1,28 @@
 package com.project.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.project.dao.MenuMapper;
 import com.project.domain.MenuDTO;
-
 @Service
 public class MenuServiceImpl implements MenuService {
-	
 	@Autowired
 	MenuMapper menuMapper;
 	
 	@Override
-	// 관리자 : 메뉴 리스트
+	// 관리자: 메뉴 리스트
 	public List<MenuDTO> getMenuListByRestntId(MenuDTO menuDto) {
-		
+		// TODO Auto-generated method stub
 		return menuMapper.getMenuListByRestntId(menuDto);
 	}
 	
 	// 관리자, 회원 : 메뉴 상세 정보표시
 	@Override
 	public MenuDTO getMenuInfoByMenuId(String menuId) {
-		
+		// TODO Auto-generated method stub
 		return menuMapper.getMenuInfoByMenuId(menuId);
 	}
 	
@@ -47,9 +47,4 @@ public class MenuServiceImpl implements MenuService {
 		
 	}
 
-	
-	
-	
-	
-	
 }

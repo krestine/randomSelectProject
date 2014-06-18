@@ -3,13 +3,13 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.MenuMapper.xml">
 
-	<!-- 관리자 : 해당 식당의 모든 메뉴 가져오기 -->
-	<select id="getMenuListByRestntId" parameterType="String" resultType="MenuDAO">
-		select * from menu where restntId = #{restntId}
+	<!-- 관리자: 메뉴 리스트 불러오기 -->
+	<select id="getMenuListByRestntId" parameterType="MenuDTO"
+		resultType="MenuDTO">
+		select menuid,menuname from menu where restntid=#{restntId}
 	</select>
 
-
-	<!-- 관리자, 회원 : 메뉴 상세 정보표시 -->
+	<!-- 관리자 : 메뉴 상세 정보표시 -->
 	<select id="getMenuInfoByMenuId" parameterType="String"
 		resultType="MenuDTO">
 		select menuid,menuname,restntId,menuPrice,menuCalorie,menuNote
@@ -36,19 +36,11 @@
 		menuId=#{menuId}
 	</update>
 
-
 	<!-- 관리자 : 메뉴 삭제 -->
-	<delete id="dropMenuByMenuId" parameterType="string">
-		delete from menu where menuId = #{menuId}
+	<delete id="dropMenuByMenuId" parameterType="String">
+		delete from menu
+		where
+		menuId=#{menuId}
 	</delete>
-	
-	<!-- 관리자 : 메뉴 수정 -->
-	<update id="setMenuByMenuId"  parameterType="MenuDTO">
-		update menu set menuId = #{menuId}, menuName = #{menuName}. restntId = #{restntId}, menuName = #{menuName}, menuPrice = #{menuPrice}, menuCalorie = #{menuCalorie}, menuNote = #{menuNote} 
-	</update>
-	
-	<!-- 관리자 : 메뉴 추가 -->
-	<insert id="putRestnt" parameterType="RestntDTO">
-		insert into menu (menuId, menuName, restntId, menuName, menuPrice, menuCalorie, menuNote). values(#{menuId}, #{menuName}, #{restntId}, #{menuName,} #{menuPrice}, #{menuCalorie}, #{menuNote})
-	</insert>
+
 </mapper>

@@ -8,59 +8,48 @@ import org.springframework.stereotype.Service;
 import com.project.dao.RestntMapper;
 import com.project.domain.RestntDTO;
 
-
-
 @Service
 public class RestntServiceImpl implements RestntService {
-	
+
 	@Autowired
-	private RestntMapper restntMapper;
-	
-	
-	// 회원 : 식당 정보
-	@Override
-	public RestntDTO getRestntInfoByRestntId(String restntId) {
-		
-		return restntMapper.getRestntInfoByRestntId(restntId);
-	}
+	RestntMapper restntMapper;
 
 	@Override
 	public List<RestntDTO> getRestntList() {
+		// TODO Auto-generated method stub
 		return restntMapper.getRestntList();
 	}
 
 	@Override
-	public void putRestnt(RestntDTO restntDto) {
-
+	public RestntDTO dropRestntById(String restntId) {
+		// TODO Auto-generated method stub
+		return restntMapper.dropRestntById(restntId);
 	}
 
 	@Override
-	public RestntDTO getRestntListByAddressCode(String addressCode) {
-		return restntMapper.getRestntListByAddressCode(addressCode);
+	public void setRestntById(RestntDTO restntDto) {
+		restntMapper.setRestntById(restntDto);
+		
+	}
+
+	@Override
+	public void putRestnt(RestntDTO restntDto) {
+		restntMapper.putRestnt(restntDto);
+		
+	}
+
+	@Override
+	public List<RestntDTO> getRestntListByAddr(RestntDTO restntDto) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public RestntDTO getRestntInfoById(String restntId) {
-		return restntMapper.getRestntInfoById(restntId);
-	}
-
-	@Override
-	public void dropRestntByRestntId(String restntId) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
-
-
-
-
 	
 	
-
-	@Override
-	public void setRestntByRestntId(RestntDTO restntDto) {
-		// TODO Auto-generated method stub
-
-	}
-
 
 }

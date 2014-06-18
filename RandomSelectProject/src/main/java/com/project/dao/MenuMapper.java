@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.project.domain.MenuDTO;
 
-
 public interface MenuMapper {
 	
 	// 관리자: 메뉴 리스트
@@ -21,9 +20,5 @@ public interface MenuMapper {
 
 	// 관리자 : 메뉴 삭제
 	void dropMenuByMenuId(String menuId);
-	
-	
-	
-	
-	
+
 }
