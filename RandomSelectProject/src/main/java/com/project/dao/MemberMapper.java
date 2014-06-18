@@ -30,6 +30,10 @@ public interface MemberMapper {
 	// 탈퇴
 	MemberDTO putLeave(MemberDTO memberDto);
 
+	//회원 : 검색 설정
+	void setOptionInfoByMemId(MemberDTO memberDto);
+	
+	
 	// 관리자 : 아이디로 유저 검색
 	List<MemberDTO> getMemberListById(String memId);
 
