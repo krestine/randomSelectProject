@@ -1,0 +1,16 @@
+5.5 method                           
+                           
+select Sql 관련 메소드: get[컬럼 명(단수)or테이블명+info(복수)or테이블명+s(리스트)]By[조건]                            
+                           
+inset Sql 관련 메소드: put[테이블명]                            
+                           
+delete Sql 관련 메소드: drop[컬럼명(단수)or테이블명+info(복수)]By[조건]                           
+                           
+update Sql 관련 메소드: set[컬럼명(단수)or테이블명+info(복수)]By[조건]                           
+                           
+관련된 컬럼이 2개 이상일때 컬럼들을 공통적으로 분류할수 있는 1개의 영단어뒤에 info를 붙인다.                           
+From~ to~ 에 붙일 테이블명은 mapper파일 명에  적혀있으므로, From~,  To~ 는 생략,                           
+where 조건을 명시해야 구분이 가능한 경우라면 where 절을 명시한다. By[조건절]                           
+ex)    getAllmemberByMemberName         select all from member where name = ?               
+   getMemberListInfoByMemberGrade         select memberName, memberId, memberGrade from member where memberGrade=?               
+   getMemberListInfoByBlack         select memberName, memberId, memberGrade from member where Black = true               
