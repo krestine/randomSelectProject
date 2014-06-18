@@ -56,7 +56,7 @@
 	<!-- 회원:정보수정 -->
 	<update id="setMemberInfoByMemberTerms" parameterType="MemberDTO">
 		update
-		member set mempasswd=#{memPasswd}, memmobile=#{memMobile}
+		member set mempasswd=#{tempPw}, memmobile=#{memMobile}
 		where
 		memid=#{memId}
 	</update>
