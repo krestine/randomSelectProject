@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.project.dao.RestntMapper;
 import com.project.domain.RestntDTO;
 
@@ -16,18 +17,11 @@ public class RestntServiceImpl implements RestntService {
 	private RestntMapper restntMapper;
 	
 	
-	// 회원 : 식당 리스트
-	@Override
-	public List<RestntDTO> getRestntListByRestntTerms(RestntDTO restntDto) {
-		
-		return restntMapper.getRestntListByRestntTerms(restntDto);
-	}
-	
 	// 회원 : 식당 정보
 	@Override
-	public RestntDTO getRestntByRestntId(RestntDTO restntDto) {
+	public RestntDTO getRestntInfoByRestntId(String restntId) {
 		
-		return restntMapper.getRestntByRestntId(restntDto);
+		return restntMapper.getRestntInfoByRestntId(restntId);
 	}
 
 	@Override
@@ -60,11 +54,10 @@ public class RestntServiceImpl implements RestntService {
 		return null;
 	}
 
-	@Override
-	public RestntDTO getRestntInfoById(String restntId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
+
+
 	
 	
 
