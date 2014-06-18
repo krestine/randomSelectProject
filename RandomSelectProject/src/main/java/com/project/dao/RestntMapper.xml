@@ -17,31 +17,30 @@
 	</resultMap> -->
 	
 	
-	<!-- 회원, 관리자 : 식당 리스트 -->
+	<!-- 공통, 회원, 관리자 : 식당 전체 리스트 -->
 	<select id="getRestntList" resultType="RestntDTO">
 		select * from restnt
 	</select>
 	
-
-	<!--관리자 : 식당 정보 삭제  -->
-
+	<!-- 공통, 회원, 관리자 : 식당 코드를 사용한 필터 적용 후 리스트 -->
+	<select id="getRestntListByAddessCode" resultType="RestntDTO" parameterType="string">
+		select * from restnt where addressCode like '${addresscode}%'
+	</select>
+	
 	<!-- 관리자 : 식당 삭제 -->
-
-	<delete id="dropRestntById" parameterType="string">
-		delete from restnt where id = #{restntid}
+	<delete id="dropRestntByrestntId" parameterType="string">
+		delete from restnt where id = #{restntId}
 	</delete>
 	
-
-	<!--관리자 : 식당정보 수정  -->
-
-	<update id="setRestntById"  parameterType="String">
-		update restnt set restntname = #{restntname}, restntlatitude = #{restntlatitude}, restntlongitude=#{restntlongitude}, restntphone=#{restntphone}, restnttype=#{restnttype}, restntaddress1=#{restntaddress1}, restntaddress2=#{restntaddress2}, restntaddress3=#{restntaddress3}, restntaddress4=#{restntaddress4} where restntid = #{restntid}
+	<!-- 관리자 : 식당 수정 -->
+	<update id="setRestntByrestntId"  parameterType="RestntDTO">
+		update restnt set restntName = #{restntName}, restntLatitude = #{restntLatitude}, restntLongitude=#{restntLongitude}, restntPhone=#{restntPhone}, restntType=#{restntType}, restntAddress1=#{restntAddress1}, restntAddress2=#{restntAddress2}, restntAddress3=#{restntAddress3}, restntAddress4=#{restntAddress4} where restntId = #{restntId}
 	</update>
 	
 	<!--관리자 : 식당정보 추가  -->
 
 	<insert id="putRestnt" parameterType="RestntDTO">
-		insert into restnt (restntId, restntName, restntLatitude, restntLonogitude, restntAddress1, restntAddress2, restntAddress3, restntAddress4, restntPhone, restntType), values (#{restntId}, #{restntname}, #{restntlatitude}, #{restntlongitude}, #{restntaddress1}, #{restntaddress2}, #{restntaddress3}, #{restntaddress4}, #{restntPhone}, #{restntType})
+		insert into restnt (restntId, restntName, restntLatitude, res tntLonogitude, restntAddress1, restntAddress2, restntAddress3, restntAddress4, restntPhone, restntType), values (#{restntId}, #{restntName}, #{restntLatitude}, #{restntLongitude}, #{restntAddress1}, #{restntAddress2}, #{restntAddress3}, #{restntAddress4}, #{restntPhone}, #{restntType})
 	</insert>
 	
 	
