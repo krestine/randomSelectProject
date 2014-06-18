@@ -12,8 +12,15 @@ public class RestntDTO {
 	private String restntAddress4;
 	private String restntPhone;
 	private String restntType;
+	private String restntAddessCode;
 	//memberField end
 	
+	public String getRestntAddessCode() {
+		return restntAddessCode;
+	}
+	public void setRestntAddessCode(String restntAddessCode) {
+		this.restntAddessCode = restntAddessCode;
+	}
 	//getter & setter
 	public String getRestntId() {
 		return restntId;
@@ -75,11 +82,23 @@ public class RestntDTO {
 	public void setRestntType(String restntType) {
 		this.restntType = restntType;
 	}
-	//getter & setter end
+	@Override
+	public String toString() {
+		return "RestntDTO [restntId=" + restntId + ", restntName=" + restntName
+				+ ", restntLatitude=" + restntLatitude + ", restntLongitude="
+				+ restntLongitude + ", restntAddress1=" + restntAddress1
+				+ ", restntAddress2=" + restntAddress2 + ", restntAddress3="
+				+ restntAddress3 + ", restntAddress4=" + restntAddress4
+				+ ", restntPhone=" + restntPhone + ", restntType=" + restntType
+				+ ", restntAddessCode=" + restntAddessCode + "]";
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime
+				* result
+				+ ((restntAddessCode == null) ? 0 : restntAddessCode.hashCode());
 		result = prime * result
 				+ ((restntAddress1 == null) ? 0 : restntAddress1.hashCode());
 		result = prime * result
@@ -102,8 +121,6 @@ public class RestntDTO {
 				+ ((restntType == null) ? 0 : restntType.hashCode());
 		return result;
 	}
-	
-	//hash code & equals
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -113,6 +130,11 @@ public class RestntDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		RestntDTO other = (RestntDTO) obj;
+		if (restntAddessCode == null) {
+			if (other.restntAddessCode != null)
+				return false;
+		} else if (!restntAddessCode.equals(other.restntAddessCode))
+			return false;
 		if (restntAddress1 == null) {
 			if (other.restntAddress1 != null)
 				return false;
@@ -165,24 +187,5 @@ public class RestntDTO {
 			return false;
 		return true;
 	}
-	//hash code & equals end
-	
-	//toString
-	@Override
-	public String toString() {
-		return "RestntDTO [restntId=" + restntId + ", restntName=" + restntName
-				+ ", restntLatitude=" + restntLatitude + ", restntLongitude="
-				+ restntLongitude + ", restntAddress1=" + restntAddress1
-				+ ", restntAddress2=" + restntAddress2 + ", restntAddress3="
-				+ restntAddress3 + ", restntAddress4=" + restntAddress4
-				+ ", restntPhone=" + restntPhone + ", restntType=" + restntType
-				+ "]";
-	}
-	//toString end
-	
-	
-	
-	
-	
 	
 }
