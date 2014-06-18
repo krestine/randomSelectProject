@@ -55,7 +55,8 @@ public class MemberController {
 	@RequestMapping(value = "/findIdProc.do", method = RequestMethod.POST)
 	public String findIdProc(Model model, MemberDTO memberDto) {
 		System.out.println("findIdProc()");
-
+		String userId = memberService.getMemIdByMemberTerms(memberDto);
+		model.addAttribute("userId", userId);
 		return "member/findIdOk";
 	}
 
@@ -69,15 +70,18 @@ public class MemberController {
 	@RequestMapping(value = "/findPasswordProc.do", method = RequestMethod.POST)
 	public String findPasswordProc(Model model, MemberDTO memberDto) {
 		System.out.println("findPasswordProc()");
-
+		String userPassword = memberService
+				.getMemPasswdByMemberTerms(memberDto);
+		model.addAttribute("userPassword", userPassword);
 		return "member/findPasswordOk";
 	}
 
 	// 내정보
 	@RequestMapping("/myInfoForm.do")
-	public String myInfoForm() {
+	public String myInfoForm(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoForm()");
-
+		MemberDTO userInfo = memberService.getMyInfoByMemId(memberDto);
+		model.addAttribute("userInfo", userInfo);
 		return "mypage/myInfo";
 	}
 
@@ -85,8 +89,12 @@ public class MemberController {
 	@RequestMapping(value = "/myInfoProc.do", method = RequestMethod.POST)
 	public String myInfoProc(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoProc()");
-
-		return "mypage/myInfoOk";
+		String nowPasswd = memberService.getMemPasswdByMemId(memberDto);
+		if (nowPasswd == null) {
+			return "mypage/myInfo";
+		}
+		memberService.setMemberInfoByMemberTerms(memberDto);
+		return "/myInfoForm.do";
 	}
 
 	// 탈퇴
@@ -99,7 +107,7 @@ public class MemberController {
 	@RequestMapping(value = "/dropProc.do", method = RequestMethod.POST)
 	public String dropProc(Model model, MemberDTO memberDto) {
 		System.out.println("dropProc()");
-
+		memberService.setLeave(memberDto);
 		return "mypage/dropOk";
 	}
 
