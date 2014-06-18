@@ -2,5 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.EvaluateMapper">
-
+	<!--관리자 : 유저 아이디로 평가 목록 열람  -->
+	<select id="getEvaluateListByUserId" parameterType="String" resultType="EvaluateDTO">
+		select * from evaluate where userid = #{userId}
+	</select>
 </mapper>

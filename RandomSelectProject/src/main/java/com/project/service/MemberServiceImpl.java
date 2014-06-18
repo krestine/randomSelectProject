@@ -1,5 +1,7 @@
 package com.project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +60,46 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberDTO putLeave(MemberDTO memberDto) {
 		return memberMapper.putLeave(memberDto);
+	}
+
+	// 회원 : 검색 설정
+	public void setOptionInfoByMemId(MemberDTO memberDto) {
+		memberMapper.setOptionInfoByMemId(memberDto);
+	}
+
+	// 관리자 : 아이디로 유저 검색
+	@Override
+	public List<MemberDTO> getMemberListById(String memId) {
+
+		return memberMapper.getMemberListById(memId);
+	}
+
+	// 관리자 : 이름으로 유저 검색
+	@Override
+	public List<MemberDTO> getMemberListByName(String memName) {
+
+		return memberMapper.getMemberListByName(memName);
+	}
+
+	// 관리자 : 등급으로 유저 검색
+	@Override
+	public List<MemberDTO> getMemberListByGrade(String memGrade) {
+
+		return memberMapper.getMemberListByGrade(memGrade);
+	}
+
+	// 관리자 : 블랙으로 유저 검색
+	@Override
+	public List<MemberDTO> getMemberListByBlack(String black) {
+
+		return memberMapper.getMemberListByBlack(black);
+	}
+
+	// 관리자 : 회원 정보 수정
+	@Override
+	public void setMemberInfo(MemberDTO memberDto) {
+		memberMapper.setMemberInfo(memberDto);
+
 	}
 
 }
