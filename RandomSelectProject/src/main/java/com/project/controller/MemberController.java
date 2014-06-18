@@ -26,6 +26,8 @@ public class MemberController {
 	public String registerProc(Model model, MemberDTO memberDto) {
 		System.out.println("registerProc()");
 		memberService.putMember(memberDto);
+		MemberDTO welcome = memberService.getMyInfoByMemId(memberDto);
+		model.addAttribute("welcome", welcome);
 		return "member/registerOk";
 	}
 
