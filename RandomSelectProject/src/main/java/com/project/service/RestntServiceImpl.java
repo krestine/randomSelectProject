@@ -49,6 +49,26 @@ public class RestntServiceImpl implements RestntService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
+
+	@Override
+	public RestntDTO getRestntListByAddessCode(String addressCode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void dropRestntByRestntId(String restntId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setRestntByRestntId(RestntDTO restntDto) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

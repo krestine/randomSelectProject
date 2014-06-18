@@ -6,7 +6,7 @@ import com.project.domain.RestntDTO;
 
 public interface RestntService {
 	//공통, 회원, 관리자 : 식당 전체 리스트
-	RestntDTO getRestntList();
+	List<RestntDTO> getRestntList();
 	
 	//공통, 회원, 관리자 : 식당 시/도 필터 적용 후 리스트
 	RestntDTO getRestntListByAddessCode(String addressCode);
@@ -22,4 +22,6 @@ public interface RestntService {
 
 	//관리자 : 식당관리 - 식당리스트에서 식당선택 - 상세정보 표시
 	RestntDTO getRestntInfoById(String restntId);
+	
+	
 }
