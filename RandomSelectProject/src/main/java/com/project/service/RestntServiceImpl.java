@@ -16,39 +16,34 @@ public class RestntServiceImpl implements RestntService {
 
 	@Override
 	public List<RestntDTO> getRestntList() {
-		// TODO Auto-generated method stub
 		return restntMapper.getRestntList();
 	}
 
 	@Override
-	public RestntDTO dropRestntById(String restntId) {
-		// TODO Auto-generated method stub
-		return restntMapper.dropRestntById(restntId);
+	public void dropRestntByRestntId(String restntId) {
+
 	}
 
 	@Override
-	public void setRestntById(RestntDTO restntDto) {
-		restntMapper.setRestntById(restntDto);
+	public void setRestntByRestntId(RestntDTO restntDto) {
 		
 	}
 
 	@Override
 	public void putRestnt(RestntDTO restntDto) {
-		restntMapper.putRestnt(restntDto);
 		
 	}
 
 	@Override
-	public List<RestntDTO> getRestntListByAddr(RestntDTO restntDto) {
-		// TODO Auto-generated method stub
-		return null;
+	public RestntDTO getRestntListByAddressCode(String addressCode) {
+		return restntMapper.getRestntListByAddressCode(addressCode);
 	}
 
 	@Override
 	public RestntDTO getRestntInfoById(String restntId) {
-		// TODO Auto-generated method stub
-		return null;
+		return restntMapper.getRestntInfoById(restntId);
 	}
+<<<<<<< HEA
 
 	
 
@@ -71,5 +66,7 @@ public class RestntServiceImpl implements RestntService {
 	}
 	
 	
+=======
+>>>>>>> 3459b98d3fa3f7b7318c25c4c68abf84d8b569af
 
 }
