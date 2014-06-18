@@ -26,12 +26,12 @@ public class RestntServiceImpl implements RestntService {
 
 	@Override
 	public void setRestntByRestntId(RestntDTO restntDto) {
-		
+
 	}
 
 	@Override
 	public void putRestnt(RestntDTO restntDto) {
-		
+
 	}
 
 	@Override
