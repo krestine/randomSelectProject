@@ -1,5 +1,7 @@
 package com.project.service;
 
-public interface EvaluateService {
+import com.project.domain.EvaluateDTO;
 
+public interface EvaluateService {
+	EvaluateDTO getEvaluateListByMemId(String memId); 
 }

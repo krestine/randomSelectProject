@@ -37,9 +37,31 @@
 		update restnt set restntName = #{restntName}, restntLatitude = #{restntLatitude}, restntLongitude=#{restntLongitude}, restntPhone=#{restntPhone}, restntType=#{restntType}, restntAddress1=#{restntAddress1}, restntAddress2=#{restntAddress2}, restntAddress3=#{restntAddress3}, restntAddress4=#{restntAddress4} where restntId = #{restntId}
 	</update>
 	
-	<!-- 관리자 : 식당 추가 -->
+	<!--관리자 : 식당정보 추가  -->
+
 	<insert id="putRestnt" parameterType="RestntDTO">
 		insert into restnt (restntId, restntName, restntLatitude, res tntLonogitude, restntAddress1, restntAddress2, restntAddress3, restntAddress4, restntPhone, restntType), values (#{restntId}, #{restntName}, #{restntLatitude}, #{restntLongitude}, #{restntAddress1}, #{restntAddress2}, #{restntAddress3}, #{restntAddress4}, #{restntPhone}, #{restntType})
 	</insert>
+	
+	
+	<!--관리자: 식당관리 - 주소필터 적용 - 식당 리스트 표시  -->
+	<select id="getRestntListByAddr" parameterType="RestntDTO">
+	select restntid, restntname from restnt 
+	where restntAddress1=#{restntAddress1},
+	restntAddress2=#{restntAddress2},
+	restntAddress3={restntAddress3},
+	restntAddress4=#{restntAddress4}
+	</select>
+	
+	<!--관리자 : 식당관리 - 식당리스트에서 식당선택 - 상세정보 표시  -->
+	<select id="getRestntInfoById" parameterType="RestntDTO" resultType="String">
+	select restntname,
+	restntLatitude,restntLongitude,
+	restntAddress1,restntAddress2,
+	restntAddress3,restntAddress4;
+	restntPhone,restntType where restntid=#{restntId}
+	</select>
+	
+	
 	
 </mapper>

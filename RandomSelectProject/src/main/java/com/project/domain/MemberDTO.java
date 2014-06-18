@@ -12,13 +12,39 @@ public class MemberDTO {
 	private String black;
 	private String leave;
 	private String leaveReason;
-
+	private int memWalkRange;
+	private int memCarRange;
+	private String memExcMenu;
 	// member Field end
 
 	// getter & setter
 
 	public String getMemId() {
 		return memId;
+	}
+
+	public int getMemWalkRange() {
+		return memWalkRange;
+	}
+
+	public void setMemWalkRange(int memWalkRange) {
+		this.memWalkRange = memWalkRange;
+	}
+
+	public int getMemCarRange() {
+		return memCarRange;
+	}
+
+	public void setMemCarRange(int memCarRange) {
+		this.memCarRange = memCarRange;
+	}
+
+	public String getMemExcMenu() {
+		return memExcMenu;
+	}
+
+	public void setMemExcMenu(String memExcMenu) {
+		this.memExcMenu = memExcMenu;
 	}
 
 	public void setMemId(String memId) {
@@ -103,6 +129,9 @@ public class MemberDTO {
 				+ ((leaveReason == null) ? 0 : leaveReason.hashCode());
 		result = prime * result
 				+ ((memBirth == null) ? 0 : memBirth.hashCode());
+		result = prime * result + memCarRange;
+		result = prime * result
+				+ ((memExcMenu == null) ? 0 : memExcMenu.hashCode());
 		result = prime * result
 				+ ((memGrade == null) ? 0 : memGrade.hashCode());
 		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
@@ -111,6 +140,7 @@ public class MemberDTO {
 		result = prime * result + ((memName == null) ? 0 : memName.hashCode());
 		result = prime * result
 				+ ((memPasswd == null) ? 0 : memPasswd.hashCode());
+		result = prime * result + memWalkRange;
 		return result;
 	}
 
@@ -143,6 +173,13 @@ public class MemberDTO {
 				return false;
 		} else if (!memBirth.equals(other.memBirth))
 			return false;
+		if (memCarRange != other.memCarRange)
+			return false;
+		if (memExcMenu == null) {
+			if (other.memExcMenu != null)
+				return false;
+		} else if (!memExcMenu.equals(other.memExcMenu))
+			return false;
 		if (memGrade == null) {
 			if (other.memGrade != null)
 				return false;
@@ -168,6 +205,8 @@ public class MemberDTO {
 				return false;
 		} else if (!memPasswd.equals(other.memPasswd))
 			return false;
+		if (memWalkRange != other.memWalkRange)
+			return false;
 		return true;
 	}
 
@@ -177,13 +216,13 @@ public class MemberDTO {
 
 	@Override
 	public String toString() {
-
 		return "MemberDTO [memId=" + memId + ", memPasswd=" + memPasswd
 				+ ", memName=" + memName + ", memBirth=" + memBirth
 				+ ", memMobile=" + memMobile + ", memGrade=" + memGrade
 				+ ", black=" + black + ", leave=" + leave + ", leaveReason="
-				+ leaveReason + "]";
-
+				+ leaveReason + ", memWalkRange=" + memWalkRange
+				+ ", memCarRange=" + memCarRange + ", memExcMenu=" + memExcMenu
+				+ "]";
 	}
 
 	// toString end
