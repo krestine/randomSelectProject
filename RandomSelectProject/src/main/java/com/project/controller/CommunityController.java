@@ -21,5 +21,4 @@ public class CommunityController {
 	
 	// 식당 상세정보
 	
-	
 }
