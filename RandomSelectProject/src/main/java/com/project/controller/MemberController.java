@@ -23,9 +23,9 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/registerProc.do", method = RequestMethod.POST)
-	public String registerProc(Model model, MemberDTO memberDTO) {
+	public String registerProc(Model model, MemberDTO memberDto) {
 		System.out.println("registerProc()");
-		
+		memberService.putMember(memberDto);
 		return "member/registerOk";
 	}
 
@@ -37,9 +37,11 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/loginProc.do", method = RequestMethod.POST)
-	public String loginProc() {
+	public String loginProc(Model model, MemberDTO memberDto) {
 		System.out.println("loginProc()");
-
+		MemberDTO loginUser = memberService
+				.getMemberInfoByMemberTerms(memberDto);
+		model.addAttribute("loginUser", loginUser);
 		return "member/loginOk";
 	}
 
@@ -47,12 +49,11 @@ public class MemberController {
 	@RequestMapping("/findIdForm.do")
 	public String findIdForm() {
 		System.out.println("findIdForm()");
-
 		return "member/findId";
 	}
 
 	@RequestMapping(value = "/findIdProc.do", method = RequestMethod.POST)
-	public String findIdProc() {
+	public String findIdProc(Model model, MemberDTO memberDto) {
 		System.out.println("findIdProc()");
 
 		return "member/findIdOk";
@@ -66,7 +67,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/findPasswordProc.do", method = RequestMethod.POST)
-	public String findPasswordProc() {
+	public String findPasswordProc(Model model, MemberDTO memberDto) {
 		System.out.println("findPasswordProc()");
 
 		return "member/findPasswordOk";
@@ -82,7 +83,7 @@ public class MemberController {
 
 	// 현재 비밀번호 확인 , 정보수정
 	@RequestMapping(value = "/myInfoProc.do", method = RequestMethod.POST)
-	public String myInfoProc() {
+	public String myInfoProc(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoProc()");
 
 		return "mypage/myInfoOk";
@@ -96,10 +97,18 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/dropProc.do", method = RequestMethod.POST)
-	public String dropProc() {
+	public String dropProc(Model model, MemberDTO memberDto) {
 		System.out.println("dropProc()");
 
 		return "mypage/dropOk";
+	}
+
+	// 로그아웃
+	@RequestMapping("/logoutForm.do")
+	public String logOutForm() {
+		System.out.println("logOutForm()");
+
+		return "member/logout";
 	}
 
 }
