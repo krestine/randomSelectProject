@@ -2,8 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.MateMapper">
-	<select id="getMateIdsByMemId">
-
+	
+	<!-- 회원 : 친구 리스트 -->
+	<select id="getMateListByMateId" parameterType="MateDTO" resultType="MateDTO">
+		select * from mate where 
+		memid=#{mateId}
 	</select>
-
+	
+	<!-- 회원: 친구 아이디(이건 필요한건지?) -->
+	<select id="getMateIdByMemId" parameterType="MateDTO" resultType="MateDTO">
+		select from mate where
+		memid=#{mateId}
+	</select>
+	
+	<!-- 회원: 친구정보 -->
+	<select id="getMateInfoByMateId" parameterType="MateDTO" resultType="MateDTO">
+		select mateid, memid, matestatus, infostatus from mate
+		mateid=#{mateId}
+	</select>
+	
+	
 </mapper>

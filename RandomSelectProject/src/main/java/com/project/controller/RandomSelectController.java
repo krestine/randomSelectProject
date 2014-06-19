@@ -16,7 +16,7 @@ import com.project.service.RestntService;
 
 @Controller
 public class RandomSelectController {
-	
+
 	@Autowired
 	private RestntService restntService;
 	

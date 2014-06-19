@@ -2,11 +2,9 @@ package com.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.project.domain.MemberDTO;
 import com.project.service.MemberService;
 
 @Controller
@@ -17,15 +15,14 @@ public class MemberController {
 
 	// 회원가입
 	@RequestMapping("/registerForm.do")
-	public String registerForm(Model model) {
+	public String registerForm() {
 		System.out.println("registerForm()");
 		return "member/register";
 	}
 
 	@RequestMapping(value = "/registerProc.do", method = RequestMethod.POST)
-	public String registerProc(Model model, MemberDTO memberDto) {
+	public String registerProc() {
 		System.out.println("registerProc()");
-		memberService.putMember(memberDto);
 		return "member/registerOk";
 	}
 
@@ -37,11 +34,8 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/loginProc.do", method = RequestMethod.POST)
-	public String loginProc(Model model, MemberDTO memberDto) {
+	public String loginProc() {
 		System.out.println("loginProc()");
-		MemberDTO loginUser = memberService
-				.getMemberInfoByMemberTerms(memberDto);
-		model.addAttribute("loginUser", loginUser);
 		return "member/loginOk";
 	}
 
@@ -53,9 +47,8 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/findIdProc.do", method = RequestMethod.POST)
-	public String findIdProc(Model model, MemberDTO memberDto) {
+	public String findIdProc() {
 		System.out.println("findIdProc()");
-
 		return "member/findIdOk";
 	}
 
@@ -67,9 +60,8 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/findPasswordProc.do", method = RequestMethod.POST)
-	public String findPasswordProc(Model model, MemberDTO memberDto) {
+	public String findPasswordProc() {
 		System.out.println("findPasswordProc()");
-
 		return "member/findPasswordOk";
 	}
 
@@ -77,15 +69,13 @@ public class MemberController {
 	@RequestMapping("/myInfoForm.do")
 	public String myInfoForm() {
 		System.out.println("myInfoForm()");
-
 		return "mypage/myInfo";
 	}
 
 	// 현재 비밀번호 확인 , 정보수정
 	@RequestMapping(value = "/myInfoProc.do", method = RequestMethod.POST)
-	public String myInfoProc(Model model, MemberDTO memberDto) {
+	public String myInfoProc() {
 		System.out.println("myInfoProc()");
-
 		return "mypage/myInfoOk";
 	}
 
@@ -97,18 +87,9 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/dropProc.do", method = RequestMethod.POST)
-	public String dropProc(Model model, MemberDTO memberDto) {
+	public String dropProc() {
 		System.out.println("dropProc()");
-
 		return "mypage/dropOk";
-	}
-
-	// 로그아웃
-	@RequestMapping("/logoutForm.do")
-	public String logOutForm() {
-		System.out.println("logOutForm()");
-
-		return "member/logout";
 	}
 
 }
