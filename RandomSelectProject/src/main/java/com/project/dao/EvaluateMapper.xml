@@ -27,6 +27,10 @@
 		where memId=#{memId}
 		select restntName where evaluate.restntId=restnt.restntId
 	</select>
+	<!--user가 똑같은 식당을 날짜가 다르게 몇번을 방문할 수 있는데 이것은 방문테이블에서 레스토랑 아이디를 매번 가져와야하는 번거로움이 있음
+	그리하여 평가테이블에 레스토랑아이디 부분을 넣어서 바로 평가테이블에서 레스토랑 아이디 부분을 쓸 수있게 해야함. 
+	그리고 id에 평가안한 것을 -1로 점수를 넣어줘서 평가한 방문리스트와 평가안한 방문리스트가 이것을 같이 사용하되 기본값-1은 평가안한 것
+	점수 주면 평가 된 점수로 보여주게 함   -->
 
 <!-- 	 회원: 평가안한 방문리스트 입력 
 	<update id="setEvaluationInfoByEvaluationTerms" parameterType="EvaluateDTO">
