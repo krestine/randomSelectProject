@@ -8,5 +8,7 @@ public interface EvaluateMapper {
 	EvaluateDTO getEvaluateListByMemId(String memId);
 	
 	//회원 : 유저의 평가
-	MateDTO getEvaluateByMemId(String memId);
+	EvaluateDTO getEvaluateByMemId(String memId);
+	
+	
 }
