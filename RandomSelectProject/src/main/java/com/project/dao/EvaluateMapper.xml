@@ -26,6 +26,7 @@
 		select evaluateId, evaluateDate, RestntId from Evaluate
 		where memId=#{memId}
 		select restntName where evaluate.restntId=restnt.restntId
+	<!--어떻게 구현하지???  -->
 	</select>
 
 <!-- 	 회원: 평가안한 방문리스트 입력 
