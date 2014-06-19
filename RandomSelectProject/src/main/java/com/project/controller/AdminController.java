@@ -38,9 +38,9 @@ public class AdminController {
 	
 	//관리자 메인 페이지
 	@RequestMapping(value = "/adminMainProc.do")
-	String adminMainProc(Model model ){
+	String adminMainProc(Model model){
 		
-		return "adminMain";
+		return "admin/adminMain";
 	}
 	
 	//회원 검색 페이지
@@ -95,13 +95,13 @@ public class AdminController {
 		return "restntManant";
 	}
 	
-	//식당 선택 페이지 패러미터, 주소 필터 : 셀렉트 박스와 관련된 query 문 추가 해야함
+	//식당 선택 페이지  주소 필터 : 패러미터, 셀렉트 박스와 관련된 query 문 추가 해야함
 	@RequestMapping(value = "/restntSelectForm.do")
 	String restntSelectForm(Model model){
 		return "restntSelect";
 	}
 	
-	//지역 필터 적용
+	//주소 필터 적용-> 검색 결과 : 식당 리스트
 	@RequestMapping(value = "/restntSelectProc.do" ,method = RequestMethod.POST)
 	String restntSelectProc(Model model, String addressCode){
 		List<RestntDTO> restnts = restntService.getRestntListByAddressCode(addressCode);
@@ -109,11 +109,17 @@ public class AdminController {
 		return "restntListAdmin";
 		
 	} 
-	
+	//식당 리스트에서 식당 이름 선택 -> 식당 상세 정보 표시
+	@RequestMapping(value = "/restntInfoForm.do" ,method = RequestMethod.POST)
 	String restntInfoForm(Model model,String restntId){
 		RestntDTO restnt = restntService.getRestntInfoById(restntId);
 		model.addAttribute("restnt", restnt);
 		return "restntInfo";
 	} 
 	
+	//식당 정보 추가
+	
+	//식당 정보 삭제
+	
+	//식당 정보 수정
 }
