@@ -24,9 +24,7 @@
 	
 
 	<!--관리자 : 식당 정보 삭제  -->
-
-	<!-- 관리자 : 식당 삭제 -->
-
+	
 	<delete id="dropRestntById" parameterType="string">
 		delete from restnt where id = #{restntid}
 	</delete>

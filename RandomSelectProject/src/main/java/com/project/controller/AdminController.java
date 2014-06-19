@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.domain.EvaluateDTO;
 import com.project.domain.MemberDTO;
+import com.project.domain.MenuDTO;
 import com.project.domain.RestntDTO;
 import com.project.service.EvaluateService;
 import com.project.service.MemberService;
 import com.project.service.MenuService;
 import com.project.service.RestntService;
 import com.project.service.SettingService;
+
 
 public class AdminController {
 
@@ -114,6 +116,7 @@ public class AdminController {
 	}
 
 	// 식당 정보 추가
+	@RequestMapping(value = "/restntInfoInsert.do", method = RequestMethod.POST)
 	String restntInfoInsert(Model model, RestntDTO restntDto) {
 		restntService.putRestnt(restntDto);
 		RestntDTO restnt = restntService.getRestntInfoById(restntDto
@@ -123,6 +126,7 @@ public class AdminController {
 	}
 
 	// 식당 정보 수정
+	@RequestMapping(value = "/restntInfoUpdate.do", method = RequestMethod.POST)
 	String restntInfoUpdate(Model model, RestntDTO restntDto) {
 		restntService.setRestntById(restntDto);
 		RestntDTO restnt = restntService.getRestntInfoById(restntDto
@@ -132,9 +136,50 @@ public class AdminController {
 	}
 
 	// 식당 정보 삭제
+	@RequestMapping(value = "/restntInfoDelete.do", method = RequestMethod.POST)
 	String restntInfoDelete(Model model, String restntId) {
 		restntService.dropRestntById(restntId);
 		return "restntInfo";
 	}
 
+	// 메뉴 리스트
+	@RequestMapping(value = "/menuListProc.do", method = RequestMethod.POST)
+	String menuListProc(Model model, MenuDTO menuDto) {
+		List<MenuDTO> menus = menuService.getMenuListByRestntId(menuDto);
+		model.addAttribute("menus", menus);
+		return "menuList";
+	}
+
+	// 메뉴 상세 정보표시
+	@RequestMapping(value = "/menuManantProc.do", method = RequestMethod.POST)
+	String menuManantProc(Model model,String menuId) {
+		MenuDTO menu = menuService.getMenuInfoByMenuId(menuId);
+		model.addAttribute("menu",  menu);
+		return "menuManant";
+	}
+
+	// 메뉴 추가
+	@RequestMapping(value = "/menuInfoInsert.do", method = RequestMethod.POST)
+	String menuInfoInsert(Model model,MenuDTO menuDto) {
+		menuService.putMenu(menuDto);
+		MenuDTO menu = menuService.getMenuInfoByMenuId(menuDto.getMenuId());
+		model.addAttribute("menu",  menu);
+		return "menuManant";
+	}
+
+	// 메뉴 수정
+	@RequestMapping(value = "/menuInfoUpdate.do", method = RequestMethod.POST)
+	String menuInfoUpdate(Model model,MenuDTO menuDto) {
+		menuService.setMenuByMenuId(menuDto);
+		MenuDTO menu = menuService.getMenuInfoByMenuId(menuDto.getMenuId());
+		model.addAttribute("menu",  menu);
+		return "menuManant";
+	}
+
+	// 메뉴 삭제
+	@RequestMapping(value = "/menuInfoDelete.do", method = RequestMethod.POST)
+	String menuInfoDelete(Model model,String menuId){
+		menuService.dropMenuByMenuId(menuId);
+		return "menuManant";
+	}
 }
