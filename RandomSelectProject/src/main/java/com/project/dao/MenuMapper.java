@@ -9,7 +9,7 @@ public interface MenuMapper {
 	// 관리자: 메뉴 리스트
 	List<MenuDTO> getMenuListByRestntId(MenuDTO menuDto);
 
-	// 관리자 : 메뉴 상세 정보표시
+	// 관리자, 회원 : 메뉴 상세 정보표시
 	MenuDTO getMenuInfoByMenuId(String menuId);
 
 	// 관리자 : 메뉴 추가

@@ -15,14 +15,36 @@ public class MemberDTO {
 	private int memWalkRange;
 	private int memCarRange;
 	private String memExcMenu;
-	private String tempPw;
-
 	// member Field end
 
 	// getter & setter
 
 	public String getMemId() {
 		return memId;
+	}
+
+	public int getMemWalkRange() {
+		return memWalkRange;
+	}
+
+	public void setMemWalkRange(int memWalkRange) {
+		this.memWalkRange = memWalkRange;
+	}
+
+	public int getMemCarRange() {
+		return memCarRange;
+	}
+
+	public void setMemCarRange(int memCarRange) {
+		this.memCarRange = memCarRange;
+	}
+
+	public String getMemExcMenu() {
+		return memExcMenu;
+	}
+
+	public void setMemExcMenu(String memExcMenu) {
+		this.memExcMenu = memExcMenu;
 	}
 
 	public void setMemId(String memId) {
@@ -93,38 +115,6 @@ public class MemberDTO {
 		this.leaveReason = leaveReason;
 	}
 
-	public int getMemWalkRange() {
-		return memWalkRange;
-	}
-
-	public void setMemWalkRange(int memWalkRange) {
-		this.memWalkRange = memWalkRange;
-	}
-
-	public int getMemCarRange() {
-		return memCarRange;
-	}
-
-	public void setMemCarRange(int memCarRange) {
-		this.memCarRange = memCarRange;
-	}
-
-	public String getMemExcMenu() {
-		return memExcMenu;
-	}
-
-	public void setMemExcMenu(String memExcMenu) {
-		this.memExcMenu = memExcMenu;
-	}
-
-	public String getTempPw() {
-		return tempPw;
-	}
-
-	public void setTempPw(String tempPw) {
-		this.tempPw = tempPw;
-	}
-
 	// getter & setter end
 
 	// hashCode & equals
@@ -151,7 +141,6 @@ public class MemberDTO {
 		result = prime * result
 				+ ((memPasswd == null) ? 0 : memPasswd.hashCode());
 		result = prime * result + memWalkRange;
-		result = prime * result + ((tempPw == null) ? 0 : tempPw.hashCode());
 		return result;
 	}
 
@@ -218,11 +207,6 @@ public class MemberDTO {
 			return false;
 		if (memWalkRange != other.memWalkRange)
 			return false;
-		if (tempPw == null) {
-			if (other.tempPw != null)
-				return false;
-		} else if (!tempPw.equals(other.tempPw))
-			return false;
 		return true;
 	}
 
@@ -238,7 +222,7 @@ public class MemberDTO {
 				+ ", black=" + black + ", leave=" + leave + ", leaveReason="
 				+ leaveReason + ", memWalkRange=" + memWalkRange
 				+ ", memCarRange=" + memCarRange + ", memExcMenu=" + memExcMenu
-				+ ", tempPw=" + tempPw + "]";
+				+ "]";
 	}
 
 	// toString end

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.EvaluateMapper">
-	<!--관리자 : 유저 아이디로 평가 목록 열람  -->
+	<!--관리자, 회원 : 유저 아이디로 평가 목록 열람  -->
 	<select id="getEvaluateListByUserId" parameterType="String" resultType="EvaluateDTO">
 		select * from evaluate where userid = #{userId}
 	</select>
@@ -26,6 +26,7 @@
 		select evaluateId, evaluateDate, RestntId from Evaluate
 		where memId=#{memId}
 		select restntName where evaluate.restntId=restnt.restntId
+	<!--어떻게 구현하지???  -->
 	</select>
 	<!--user가 똑같은 식당을 날짜가 다르게 몇번을 방문할 수 있는데 이것은 방문테이블에서 레스토랑 아이디를 매번 가져와야하는 번거로움이 있음
 	그리하여 평가테이블에 레스토랑아이디 부분을 넣어서 바로 평가테이블에서 레스토랑 아이디 부분을 쓸 수있게 해야함. 
