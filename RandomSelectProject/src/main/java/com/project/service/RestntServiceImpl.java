@@ -27,14 +27,9 @@ public class RestntServiceImpl implements RestntService {
 	}
 
 	@Override
-
-	public List<RestntDTO> getRestntListByAddressCode(String addressCode) {
-		return restntMapper.getRestntListByAddressCode(addressCode);
-	}
 	public void setRestntById(RestntDTO restntDto) {
 		restntMapper.setRestntById(restntDto);
 		
-
 	}
 
 	@Override
@@ -43,29 +38,20 @@ public class RestntServiceImpl implements RestntService {
 		
 	}
 
-	@Override
-	public List<RestntDTO> getRestntListByAddr(RestntDTO restntDto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public RestntDTO getRestntInfoById(String restntId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return restntMapper.getRestntInfoById(restntId);
 	}
 
 	@Override
-	public void dropRestntByRestntId(String restntId) {
+	public List<RestntDTO> getRestntListByAddressCode(String addressCode) {
 		// TODO Auto-generated method stub
-		
+		return restntMapper.getRestntListByAddr(addressCode);
 	}
 
-	@Override
-	public void setRestntByRestntId(RestntDTO restntDto) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 	
 
