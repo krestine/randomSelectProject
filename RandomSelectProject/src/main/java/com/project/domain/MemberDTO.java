@@ -15,6 +15,8 @@ public class MemberDTO {
 	private int memWalkRange;
 	private int memCarRange;
 	private String memExcMenu;
+	private String tempPw;
+
 	// member Field end
 
 	// getter & setter
