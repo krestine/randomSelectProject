@@ -15,7 +15,7 @@ public interface EvaluateService {
 	EvaluateDTO getEvaluateListByMemid(EvaluateDTO evaluateDto);
 
 	// 평가한 방문리스트 수정
-	EvaluateDTO setEvaluationInfoByEvaluationTerms(EvaluateDTO evaluateDto);
+	EvaluateDTO setEvaluateInfoByEvaluateTerms(String string);
 
 	// 평가안한 방문리스트
 	EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto);

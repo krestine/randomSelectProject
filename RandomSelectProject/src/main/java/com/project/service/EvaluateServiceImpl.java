@@ -21,9 +21,9 @@ public class EvaluateServiceImpl implements EvaluateService {
 	}
 
 	// 평가한 방문리스트 수정
-	public EvaluateDTO setEvaluationInfoByEvaluationTerms(
+	public EvaluateDTO setEvaluateInfoByEvaluateTerms(
 			EvaluateDTO evaluateDto) {
-		return evaluateMapper.setEvaluationInfoByEvaluationTerms(evaluateDto);
+		return evaluateMapper.setEvaluateInfoByEvaluateTerms(evaluateDto);
 	}
 
 	// 평가안한 방문리스트
