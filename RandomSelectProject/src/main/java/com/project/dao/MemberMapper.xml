@@ -3,26 +3,24 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.MemberMapper">
 
-
-
-	<!-- 공통:회원가입 -->
+	<!-- 회원가입 -->
 	<insert id="putMember" parameterType="MemberDTO">
 		insert into member
 		(memid,memname,membirth,mempasswd,memmobile,memgrade,leave)
 		values
 		(#{memId}, #{memName}, #{memBirth}, #{memPasswd}, #{memMobile},
-		'1','0')
+		'1','o')
 	</insert>
 
-	<!-- 회원:로그인 -->
-	<select id="getMemberInfoByMemberTerms" parameterType="MemberDTO"
+	<!-- 로그인 -->
+	<select id="getMemberInfoByMemId" parameterType="MemberDTO"
 		resultType="MemberDTO">
 		select memid, memname from member
 		where memid=#{memId} and
 		mempasswd=#{memPasswd}
 	</select>
 
-	<!-- 회원:아이디찾기 -->
+	<!-- 아이디찾기 -->
 	<select id="getMemIdByMemberTerms" parameterType="MemberDTO"
 		resultType="string">
 		select memid from member
@@ -30,7 +28,7 @@
 		membirth=#{memBirth} and memmobile=#{memMobile}
 	</select>
 
-	<!-- 회원:비밀번호찾기 -->
+	<!-- 비밀번호찾기 -->
 	<select id="getMemPasswdByMemberTerms" parameterType="MemberDTO"
 		resultType="string">
 		select mempasswd from member
@@ -38,39 +36,43 @@
 		membirth=#{memBirth} and memmobile=#{memMobile}
 	</select>
 
-	<!-- 회원:내정보 -->
+	<!-- 내정보 -->
 	<select id="getMyInfoByMemId" parameterType="MemberDTO"
 		resultType="MemberDTO">
 		select memid, memname, memgrade from member where
 		memid=#{memId}
 	</select>
 
-	<!-- 회원:현재비밀번호 확인 -->
+	<!-- 현재비밀번호 확인 -->
 	<select id="getMemPasswdByMemId" parameterType="MemberDTO"
 		resultType="string">
-		select leave from member
-		where memid=#{memId} and
-		mempasswd=#{memPasswd}
+		select mempasswd from member
+		where memid=#{memId}
 	</select>
 
-	<!-- 회원:정보수정 -->
+	<!-- 정보수정 -->
 	<update id="setMemberInfoByMemberTerms" parameterType="MemberDTO">
 		update
-		member set mempasswd=#{tempPw}, memmobile=#{memMobile}
+		member set mempasswd=#{memPasswd}, memmobile=#{memMobile}
 		where
 		memid=#{memId}
 	</update>
 
-	<!-- 회원:탈퇴 -->
-	<update id="setLeave" parameterType="MemberDTO">
-		update member set leave='1',
-		leavereason=#{leaveReason}, leavedate=sysdate
-		where memid=#{memId}
+	<!-- 탈퇴 -->
+	<update id="putLeave" parameterType="MemberDTO">
+
+		update member set
+		leave='1',
+		leavereason=#{leaveReason},
+		leavedate=sysdate
+		update member set
+		leave='x',
+		leavereason=#{leaveReason},
+		leavedate=sysdate
+
+		where
+		memid=#{memId}
 	</update>
-
-
-
-	<!--admin -->
 
 	<!--회원 : 검색 설정 -->
 	<update id="setOptionInfoByMemId" parameterType="MemberDTO">
@@ -81,6 +83,7 @@
 		memExcMenu = #{memExcMenu}
 		where memid=#{memId}
 	</update>
+
 
 	<!--관리자 : 아이디로 유저 검색 -->
 	<select id="getMemberListById" resultType="MemberDTO"
