@@ -5,6 +5,7 @@ import java.util.List;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.domain.EvaluateDTO;
 import com.project.domain.MemberDTO;
+import com.project.domain.RestntDTO;
 import com.project.service.EvaluateService;
 import com.project.service.MemberService;
 import com.project.service.MenuService;
@@ -84,9 +86,34 @@ public class AdminController {
 	String memberEvaluateListProc(Model model,String memId){
 		List<EvaluateDTO> memberEvaluates = evaluateService.getEvaluateListByMemId(memId);
 		model.addAttribute("memberEvaluates", memberEvaluates);
-		return "memberEvaluateList";
+		return "memberEvaluateListAdmin";
 	}
 	
 	//식당 관리 페이지
+	@RequestMapping(value = "/restntManantProc.do")
+	String restntManantProc(Model model){
+		return "restntManant";
+	}
+	
+	//식당 선택 페이지 패러미터, 주소 필터 : 셀렉트 박스와 관련된 query 문 추가 해야함
+	@RequestMapping(value = "/restntSelectForm.do")
+	String restntSelectForm(Model model){
+		return "restntSelect";
+	}
+	
+	//지역 필터 적용
+	@RequestMapping(value = "/restntSelectProc.do" ,method = RequestMethod.POST)
+	String restntSelectProc(Model model, String addressCode){
+		List<RestntDTO> restnts = restntService.getRestntListByAddressCode(addressCode);
+		model.addAttribute("restnts", restnts);
+		return "restntListAdmin";
+		
+	} 
+	
+	String restntInfoForm(Model model,String restntId){
+		RestntDTO restnt = restntService.getRestntInfoById(restntId);
+		model.addAttribute("restnt", restnt);
+		return "restntInfo";
+	} 
 	
 }

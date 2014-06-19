@@ -25,7 +25,7 @@ public class RestntServiceImpl implements RestntService {
 	}
 
 	@Override
-	public RestntDTO getRestntListByAddressCode(String addressCode) {
+	public List<RestntDTO> getRestntListByAddressCode(String addressCode) {
 		return restntMapper.getRestntListByAddressCode(addressCode);
 	}
 

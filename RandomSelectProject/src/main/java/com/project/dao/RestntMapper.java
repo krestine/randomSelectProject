@@ -9,8 +9,8 @@ public interface RestntMapper {
 	List<RestntDTO> getRestntList();
 
 	// 공통, 회원, 관리자 : 식당 시/도 필터 적용 후 리스트
-	RestntDTO getRestntListByAddressCode(String addressCode);
-
+	List<RestntDTO> getRestntListByAddressCode(String addressCode);
+	
 	// 관리자 : 식당 삭제
 	void dropRestntByRestntId(String restntId);
 
