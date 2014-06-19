@@ -152,29 +152,34 @@ public class AdminController {
 
 	// 메뉴 상세 정보표시
 	@RequestMapping(value = "/menuManantProc.do", method = RequestMethod.POST)
-	String menuManantProc(Model model) {
-		
+	String menuManantProc(Model model,String menuId) {
+		MenuDTO menu = menuService.getMenuInfoByMenuId(menuId);
+		model.addAttribute("menu",  menu);
 		return "menuManant";
 	}
 
 	// 메뉴 추가
 	@RequestMapping(value = "/menuInfoInsert.do", method = RequestMethod.POST)
-	String menuInfoInsert(Model model) {
-
-		return null;
+	String menuInfoInsert(Model model,MenuDTO menuDto) {
+		menuService.putMenu(menuDto);
+		MenuDTO menu = menuService.getMenuInfoByMenuId(menuDto.getMenuId());
+		model.addAttribute("menu",  menu);
+		return "menuManant";
 	}
 
 	// 메뉴 수정
 	@RequestMapping(value = "/menuInfoUpdate.do", method = RequestMethod.POST)
-	String menuInfoUpdate(Model model) {
-
-		return null;
+	String menuInfoUpdate(Model model,MenuDTO menuDto) {
+		menuService.setMenuByMenuId(menuDto);
+		MenuDTO menu = menuService.getMenuInfoByMenuId(menuDto.getMenuId());
+		model.addAttribute("menu",  menu);
+		return "menuManant";
 	}
 
 	// 메뉴 삭제
 	@RequestMapping(value = "/menuInfoDelete.do", method = RequestMethod.POST)
-	String menuInfoDelete(Model model){
-		
-		return null;
+	String menuInfoDelete(Model model,String menuId){
+		menuService.dropMenuByMenuId(menuId);
+		return "menuManant";
 	}
 }
