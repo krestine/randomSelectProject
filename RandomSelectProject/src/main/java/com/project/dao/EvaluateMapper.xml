@@ -7,15 +7,26 @@
 		resultType="EvaluateDTO">
 		select * from evaluate where userid = #{userId}
 	</select>
-	<!--회원:식당평가한 목록 -->
+	<!--구성회:회원:식당평가한 목록 -->
 	<select id="getEvaluateListByMemId" parameterType="String"
 		resultType="EvaluateDTO">
-		select evaluateId, evaluateScore, evaluateDate, restntId
-		from Evaluate
-		where memId=#{memId}
-
-		select resntName where
-		evaluate.restntId = restnt.restntId
+		select evaluateId, evaluateScore, evaluateDate, restntName
+		from Evaluate e, restnt r
+		where
+		e.memId=#{memId}
+		and e.restntId = r.restntId
+		and evaluateScore != -1	
+	</select>
+	
+	<!--구성회:회원:평가하지 않은 목록 -->
+	<select id="getEvaluateListByMemId" parameterType="String"
+		resultType="EvaluateDTO">
+		select evaluateId, evaluateScore, evaluateDate, restntName
+		from Evaluate e, restnt r
+		where
+		e.memId=#{memId}
+		and e.restntId = r.restntId
+		and evaluateScore = -1	
 	</select>
 
 	<!-- 회원: 평가한 방문리스트 수정 -->
