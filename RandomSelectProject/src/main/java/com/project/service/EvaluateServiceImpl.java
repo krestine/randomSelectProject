@@ -15,57 +15,57 @@ public class EvaluateServiceImpl implements EvaluateService {
 	EvaluateMapper evaluateMapper;
 
 	// 평가한 방문 리스트
-
-	public EvaluateDTO getEvaluateListByMemId(EvaluateDTO evaluateDto) {
-		return evaluateMapper.getEvaluateListByMemId(evaluateDto);
-	}
-
-	// 평가한 방문리스트 수정
-	public EvaluateDTO setEvaluateInfoByEvaluateTerms(
-			EvaluateDTO evaluateDto) {
-		return evaluateMapper.setEvaluateInfoByEvaluateTerms(evaluateDto);
-	}
-
-	// 평가안한 방문리스트
-	public EvaluateDTO getnEvaluationListByMemId(EvaluateDTO evaluateDto) {
+	public EvaluateDTO getEvaluateListByMemId11(EvaluateDTO evaluateDto) {
 		return evaluateMapper.getnEvaluateListByMemId(evaluateDto);
 
 	}
+		
 
-	/*
-	 * //식당평가 안한 점수 입력 public EvaluateDTO
-	 * setEvaluationInfoByEvaluationTerms(EvaluateDTO evaluateDto){ return
-	 * evaluateMapper.setEvaluationInfoByEvaluationTerms(evaluateDto); }
-	 */
+		// 평가한 방문리스트 수정
 
-	@Override
-	public List<EvaluateDTO> getEvaluateListByMemId(String memId) {
+	public void setEvaluateInfoByEvaluateTerms(String string){
+		return;
+	};
 
-		return evaluateMapper.getEvaluateListByMemId(memId);
-	}
+	/*	void setEvaluateInfoByEvaluateTerms(String evaluateDto);*/
 
-	@Override
-	public MemberDTO getMemberInfoByMemberTerms(MemberDTO memberDto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public EvaluateDTO getEvaluateListByMemid(EvaluateDTO evaluateDto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		// 평가안한 방문리스트
+		public EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto) {
+			return evaluateMapper.getnEvaluateListByMemId(evaluateDto);
 
-	@Override
-	public EvaluateDTO setEvaluateInfoByEvaluateTerms(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		}
 
+
+		 // 식당평가 안한 점수 입력
+		public void putEvaluateByScore(EvaluateDTO evaluateDto){
+			
+		}
+
+
+		@Override
+		public List<EvaluateDTO> getEvaluateListByMemId(String memId) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+		@Override
+		public EvaluateDTO getEvaluateListByMemId(Object evalScore) {
+			// TODO Auto-generated method stub
+			return null;
+		};
+		 
+	
 }
+
+
+
+
+	
+	
+	
+
+	
+	  
