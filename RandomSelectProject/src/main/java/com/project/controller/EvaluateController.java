@@ -90,7 +90,7 @@ public class EvaluateController {
 		
 		// 방문날짜,restntId
 		List<EvaluateDTO> listPart1 =evaluateService.getVisitsByMemid(memId);
-
+		
 		// 식당이름
 		List<String restntId> listPart2 =evaluateService.getRestntnameByRestId(restntId);
 			
