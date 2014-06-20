@@ -15,7 +15,7 @@
 	</select>
 
 	<!-- 회원: 평가한 방문리스트 수정 -->
-	<update id="setEvaluationInfoByEvaluationTerms" parameterType="EvaluateDTO">
+	<update id="setEvaluateInfoByEvaluateTerms" parameterType="EvaluateDTO">
 		update Evaluate set evalScore =#{evalScore},
 		where evalId=#{evalId}
 	</update>
@@ -34,7 +34,7 @@
 	점수 주면 평가 된 점수로 보여주게 함   -->
 
 <!-- 	 회원: 평가안한 방문리스트 입력 
-	<update id="setEvaluationInfoByEvaluationTerms" parameterType="EvaluateDTO">
+	<update id="setEvaluateInfoByEvaluateTerms" parameterType="EvaluateDTO">
 		update Evaluate set evalScore =#{evalScore},
 		where evalId=#{evalId}
 	</update> -->

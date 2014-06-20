@@ -13,10 +13,12 @@ public interface EvaluateMapper {
 	EvaluateDTO getEvaluateListByMemId(EvaluateDTO evaluateDto);
 
 	// 평가한 방문리스트 수정
-	EvaluateDTO setEvaluationInfoByEvaluationTerms(EvaluateDTO evaluateDto);
-
+	/*EvaluateDTO setEvaluationInfoByEvaluationTerms(EvaluateDTO evaluateDto);*/
+	Object setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto);
 	// 평가안한 방문리스트
 	EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto);
+
+	
 
 	/*
 	 * // 식당평가 안한 점수 입력 EvaluateDTO

@@ -12,16 +12,21 @@ public interface EvaluateService {
 	MemberDTO getMemberInfoByMemberTerms(MemberDTO memberDto);
 
 	// 평가한 방문 리스트
-	EvaluateDTO getEvaluateListByMemid(EvaluateDTO evaluateDto);
+	EvaluateDTO getEvaluateListByMemid(Object evalScore);
 
 	// 평가한 방문리스트 수정
-	EvaluateDTO setEvaluationInfoByEvaluationTerms(EvaluateDTO evaluateDto);
-
+/*	EvaluateDTO setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto);*/
+	void setEvaluateInfoByEvaluateTerms(String evaluateDto);
 	// 평가안한 방문리스트
 	EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto);
+
+
 
 	/*// 식당평가 안한 점수 입력
 	 EvaluateDTO setEvaluationInfoByEvaluationTerms(EvaluateDTO evaluateDto);
 	*/
 
 }
+
+
+
