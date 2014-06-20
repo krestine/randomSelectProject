@@ -1,5 +1,7 @@
 package com.project.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,6 +65,7 @@ public class EvaluateController {
 	@RequestMapping("/EvaluateList.do")
 	public void putEvaluateByScore(EvaluateDTO evaluateDto) {
 	}
+
 	/*
 	 * // 회원 리스트에서 아이디 클릭 -> 회원의 평가 정보 리스트 표시 페이지
 	 * 
@@ -77,25 +80,22 @@ public class EvaluateController {
 	 * System.out.println("mateListProc()"); return "community/mateList"; }
 	 */
 
+	// ////////////////////////////////////////////////////////////////////////////////
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//////////////////////////////////////////////////////////////////////////////////
-
-	
-	
 	// 평가한 식당목록
 	@RequestMapping(value = "/evaluateListForm.do", method = RequestMethod.POST)
 	public String evaluateListForm(Model model, String memId) {
+		// 방문날짜,restntId
+		List<EvaluateDTO> listPart1 =evaluateService.getVisitsByMemid(memId);
 
+		// 식당이름
+		List<String restntId> listPart2 =evaluateService.getRestntnameByRestId(restntId);
+			
+		// 평가점수
+
+		
+		
+		
 		return "evaluate/evaluateList";
 	}
 
@@ -120,8 +120,10 @@ public class EvaluateController {
 		return "/nEvaluateListForm.do";
 	}
 
+	// 방문날짜,restntId
 
+	// 식당이름
 
-
+	// 평가점수
 
 }

@@ -59,7 +59,7 @@
 	<!--회원: 평가한 식당목록 -->
 	<!-- 방문날짜,restntId -->
 	<select id="getVisitsByMemid" parameterType="String" resultType="EvaluateDTO">
-		select restntId,visitdate from visit where memid =#{memId} and
+		select restntId,evaluatedate from evaluate where memid =#{memId} and
 		evaluate.score != '-1'
 		orderby visitdate desc
 	</select>
@@ -82,7 +82,7 @@
 
 	<!-- 회원: 평가 안한 식당목록 -->
 	<!-- 방문날짜,restntId -->
-	<select id="getEvaluateListByMemId" parameterType="String"
+	<select id="getNevaluateListByMemId" parameterType="String"
 		resultType="EvaluateDTO">
 		select restntId,visitdate from visit where memid =#{memId}
 		and evaluate.score = '-1'
