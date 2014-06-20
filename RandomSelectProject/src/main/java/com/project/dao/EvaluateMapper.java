@@ -28,6 +28,46 @@ public interface EvaluateMapper {
 	// 식당평가 안한 점수 입력
 	public void putEvaluateByScore(EvaluateDTO evaluateDto);
 	
+	
+	
+	
+	/////////////////////////////////////////////////////////////////
+	
+	
+	// 회원: 평가한 식당목록
+	// 방문날짜,restntId
+getVisitsByMemid" parameterType="String" resultType="EvaluateDTO">
+
+
+// 식당이름 
+	<select id="getRestntnameByRestId" parameterType="String"
+		resultType="EvaluateDTO">
+
+
+// 평가점수 
+	<select id="getScoreByEvaluateTerms" parameterType="String"
+		resultType="EvaluateDTO">
+
+
+
+
+// 회원: 평가 안한 식당목록 
+// 방문날짜,restntId 
+	<select id="getEvaluateListByMemId" parameterType="String"
+		resultType="EvaluateDTO">
+
+// 회원: 식당 평가 수정 ,입력 
+	<update id="setScoreByEvaluateTerms" parameterType="EvaluateDTO">
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
 
