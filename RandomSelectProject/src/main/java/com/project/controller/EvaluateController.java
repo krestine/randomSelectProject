@@ -85,6 +85,9 @@ public class EvaluateController {
 	// 평가한 식당목록
 	@RequestMapping(value = "/evaluateListForm.do", method = RequestMethod.POST)
 	public String evaluateListForm(Model model, String memId) {
+		
+		System.out.println("evaluateListForm()");
+		
 		// 방문날짜,restntId
 		List<EvaluateDTO> listPart1 =evaluateService.getVisitsByMemid(memId);
 
@@ -101,29 +104,25 @@ public class EvaluateController {
 
 	// 식당 평가 수정
 	@RequestMapping(value = "/evaluateListProc.do", method = RequestMethod.POST)
-	public String evaluateListProc(Model model, String memId) {
-
+	public String evaluateListProc(Model model, EvaluateDTO evaluateDTO) {
+		System.out.println("evaluateListProc()");
+		evaluateService.setScoreByEvaluateTerms(evaluateDTO);
 		return "/evaluateListForm.do";
 	}
 
 	// 평가 안한 식당목록
 	@RequestMapping(value = "/nEvaluateListForm.do", method = RequestMethod.POST)
 	public String nEvaluateListForm(Model model, String memId) {
+		System.out.println("nEvaluateListForm()");
 
 		return "evaluate/nEvaluateList";
 	}
 
 	// 식당 평가 입력
 	@RequestMapping(value = "/nEvaluateListProc.do", method = RequestMethod.POST)
-	public String nEvaluateListProc(Model model, String memId) {
-
+	public String nEvaluateListProc(Model model, EvaluateDTO evaluateDTO) {
+		System.out.println("nEvaluateListProc()");
+		evaluateService.setScoreByEvaluateTerms(evaluateDTO);
 		return "/nEvaluateListForm.do";
 	}
-
-	// 방문날짜,restntId
-
-	// 식당이름
-
-	// 평가점수
-
 }
