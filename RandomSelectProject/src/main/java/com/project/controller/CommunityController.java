@@ -34,6 +34,7 @@ public class CommunityController {
 	// 회원 : 친구 상세정보
 	@RequestMapping(value = "/mateDetailProc.do")
 	public String mateDetailProc(){
+		
 		System.out.println("mateDetailProc()");
 		return "community/mateDetail";
 	}

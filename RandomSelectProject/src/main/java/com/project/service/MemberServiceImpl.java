@@ -62,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.setLeave(memberDto);
 	}
 
-	// admin
+    //admin
 
 	// 회원 : 검색 설정
 	public void setOptionInfoByMemId(MemberDTO memberDto) {
