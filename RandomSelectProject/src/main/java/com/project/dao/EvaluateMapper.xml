@@ -11,12 +11,17 @@
 		resultType="EvaluateDTO">
 		select evaluateId, evaluateScore, evaluateDate, restntId  from Evaluate
 		where memId=#{memId}
+		
 		select resntName where evaluate.restntId = restnt.restntId
 	</select>
 
 	<!-- 회원: 평가한 방문리스트 수정 -->
 	<update id="setEvaluateInfoByEvaluateTerms" parameterType="EvaluateDTO">
+
 		update Evaluate set evalScore =#{evalScore},
+
+		update Evaluate set evalScore =#{evalScore}
+
 		where evalId=#{evalId}
 	</update>
 

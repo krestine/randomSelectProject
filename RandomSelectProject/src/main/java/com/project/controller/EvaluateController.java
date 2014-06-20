@@ -1,15 +1,14 @@
 package com.project.controller;
 
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import com.project.domain.EvaluateDTO;
-import com.project.domain.RestntDTO;
 import com.project.service.EvaluateService;
 
 @Controller
@@ -17,19 +16,13 @@ public class EvaluateController {
 
 	@Autowired
 	private EvaluateService evaluateService;
-// restntService는 쓰지않을것임. evaluate테이블에 RestntId 내용 추가해서 넣을 것이기 때문에 
-//내가 만들것.. 식당평가 목록과 식당평점정보수정 그리고 평가안한 방문리스트와 평점입력 하기만 만들면 되는데 ㅠㅠ 흡..
-	private Object evalScore;
-	
-
-
-	
-	// 식당평가한 목록
+// 식당평가한 목록
 	@RequestMapping("/evaluateListProc.do")
 	public String evaluateListProc() {
 		System.out.println("evaluateListProc()");
 		return "history/visitList ";
 	}
+
 	/*// 식당 정보 추가
 	String restntInfoInsert(Model model, RestntDTO restntDto) {
 		restntService.putRestnt(restntDto);
@@ -49,17 +42,19 @@ public class EvaluateController {
 			
 		}
 	*/
-	//식당 평점정보 수정
-	@RequestMapping(value = "/EvaluateListForm.do", method = RequestMethod.POST)
-	public String evaluateInfoUpdateForm(Model model, String evaluateDto) {
-		
-		EvaluateDTO evaluate = evaluateService.getEvaluateListByMemid(evalScore);
+	
+
+/*	// 식당 평점정보 수정
+	@RequestMapping(value = "/EvaluateList.do", method = RequestMethod.POST)
+	String evaluateInfoUpdate(Model model, String evaluateDto) {
+		evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto);
+		@SuppressWarnings("unchecked")
+		List<EvaluateDTO> evaluate = evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto);
 		model.addAttribute("evaluate", evaluate);
-		return "EvaluateInfoUpdateForm";
-	}
-	
-	
-		
+		return "nEvaluate/visitList";
+	}*/
+
+
 	// 평가안한 방문리스트
 	@RequestMapping("/nEvaluateListForm.do")
 	public String nEvaluateListForm() {
@@ -67,6 +62,10 @@ public class EvaluateController {
 		return "history/visitList";
 	}
 
+	//식당 평점정보 입력
+	@RequestMapping("/EvaluateList.do")
+	public void putEvaluateByScore(EvaluateDTO evaluateDto) {
+	}
 	/*	// 회원 리스트에서 아이디 클릭 -> 회원의 평가 정보 리스트 표시 페이지
 	@RequestMapping(value = "EvaluateListProc.do", method = RequestMethod.POST)
 	String EvaluateListProc(Model model, String memId) {
