@@ -52,7 +52,7 @@
 	restntAddress4=#{restntAddress4}
 	</select>
 	
-	<!--관리자 : 식당관리 - 식당리스트에서 식당선택 - 상세정보 표시  -->
+	<!--관리자, 회원 : 식당관리 - 식당리스트에서 식당선택 - 상세정보 표시  -->
 	<select id="getRestntInfoById" parameterType="RestntDTO" resultType="String">
 	select restntname,
 	restntLatitude,restntLongitude,
@@ -61,6 +61,11 @@
 	restntPhone,restntType where restntid=#{restntId}
 	</select>
 	
+	<!-- 회원 : 식당 코드 -->
+	<select id = "getRestntId" parameterType="RestntDTO" resultType="String">
+		select restntid from restnt where restntName = #{restntName}
+		
+	</select>
 	
 	
 </mapper>

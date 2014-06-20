@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.MenuMapper.xml">
 
-	<!-- 관리자: 메뉴 리스트 불러오기 -->
+	<!-- 관리자, 회원 : 메뉴 리스트 불러오기 -->
 	<select id="getMenuListByRestntId" parameterType="MenuDTO"
 		resultType="MenuDTO">
 		select menuid,menuname from menu where restntid=#{restntId}
