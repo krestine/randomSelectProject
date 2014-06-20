@@ -62,4 +62,10 @@ public class EvaluateServiceImpl implements EvaluateService {
 		return null;
 	}
 
+	@Override
+	public EvaluateDTO setEvaluateInfoByEvaluateTerms(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
