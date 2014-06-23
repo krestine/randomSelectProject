@@ -92,7 +92,7 @@ public class EvaluateController {
 		List<EvaluateDTO> listPart1 =evaluateService.getVisitsByMemid(memId);
 		
 		// 식당이름
-		List<String restntId> listPart2 =evaluateService.getRestntnameByRestId(restntId);
+		List<String> restntId listPart2 =evaluateService.getRestntnameByRestId(restntId);
 			
 		// 평가점수
 
