@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.controller.Evaluate;
 import com.project.dao.EvaluateMapper;
 import com.project.domain.EvaluateDTO;
 
@@ -39,12 +40,11 @@ public class EvaluateServiceImpl implements EvaluateService {
 	}
 
 	@Override
-	public List<EvaluateDTO> getEvaluateListByMemId(String memId) {
+	public List<EvaluateDTO> getEvaluateListByMemId1(String memId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public EvaluateDTO getEvaluateListByMemId(Object evalScore) {
 		// TODO Auto-generated method stub
 		return null;
@@ -77,6 +77,30 @@ public class EvaluateServiceImpl implements EvaluateService {
 	// 회원: 식당 평가 수정 ,입력
 	public void setScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
 		evaluateMapper.setScoreByEvaluateTerms(evaluateDTO);
+	}
+
+	@Override
+	public Evaluate getEvaluateListByMemId(String memId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EvaluateDTO getEvaluateListByMemId(Object evalScore, Object getMemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<EvaluateDTO> getRestntnameByRestId(List<String> restntId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
