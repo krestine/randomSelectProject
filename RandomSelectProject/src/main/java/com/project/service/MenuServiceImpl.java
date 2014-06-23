@@ -13,7 +13,7 @@ public class MenuServiceImpl implements MenuService {
 	MenuMapper menuMapper;
 	
 	@Override
-	// 관리자: 메뉴 리스트
+	// 관리자, 회원 : 메뉴 리스트
 	public List<MenuDTO> getMenuListByRestntId(MenuDTO menuDto) {
 		// TODO Auto-generated method stub
 		return menuMapper.getMenuListByRestntId(menuDto);

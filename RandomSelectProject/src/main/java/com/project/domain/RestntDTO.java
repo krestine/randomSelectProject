@@ -12,6 +12,7 @@ public class RestntDTO {
 	private String restntAddress4;
 	private String restntPhone;
 	private String restntType;
+	private String restntEval;
 	//memberField end
 	
 	//getter & setter
@@ -75,7 +76,13 @@ public class RestntDTO {
 	public void setRestntType(String restntType) {
 		this.restntType = restntType;
 	}
-	//getter & setter end
+	
+	public String getRestntEval() {
+		return restntEval;
+	}
+	public void setRestntEval(String restntEval) {
+		this.restntEval = restntEval;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,6 +95,8 @@ public class RestntDTO {
 				+ ((restntAddress3 == null) ? 0 : restntAddress3.hashCode());
 		result = prime * result
 				+ ((restntAddress4 == null) ? 0 : restntAddress4.hashCode());
+		result = prime * result
+				+ ((restntEval == null) ? 0 : restntEval.hashCode());
 		result = prime * result
 				+ ((restntId == null) ? 0 : restntId.hashCode());
 		result = prime * result
@@ -103,7 +112,6 @@ public class RestntDTO {
 		return result;
 	}
 	
-	//hash code & equals
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -132,6 +140,11 @@ public class RestntDTO {
 			if (other.restntAddress4 != null)
 				return false;
 		} else if (!restntAddress4.equals(other.restntAddress4))
+			return false;
+		if (restntEval == null) {
+			if (other.restntEval != null)
+				return false;
+		} else if (!restntEval.equals(other.restntEval))
 			return false;
 		if (restntId == null) {
 			if (other.restntId != null)
@@ -165,9 +178,7 @@ public class RestntDTO {
 			return false;
 		return true;
 	}
-	//hash code & equals end
 	
-	//toString
 	@Override
 	public String toString() {
 		return "RestntDTO [restntId=" + restntId + ", restntName=" + restntName
@@ -176,9 +187,8 @@ public class RestntDTO {
 				+ ", restntAddress2=" + restntAddress2 + ", restntAddress3="
 				+ restntAddress3 + ", restntAddress4=" + restntAddress4
 				+ ", restntPhone=" + restntPhone + ", restntType=" + restntType
-				+ "]";
+				+ ", restntEval=" + restntEval + "]";
 	}
-	//toString end
 	
 	
 	
