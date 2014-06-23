@@ -2,20 +2,23 @@ package com.project.service;
 
 import java.util.List;
 
+import com.project.controller.Evaluate;
 import com.project.domain.EvaluateDTO;
 
 public interface EvaluateService {
-	List<EvaluateDTO> getEvaluateListByMemId(String memId);
+	Evaluate getEvaluateListByMemId = null;
+
+	Evaluate getEvaluateListByMemId(String memId);
 
 	// 평가한 방문 리스트
-	EvaluateDTO getEvaluateListByMemId(Object evalScore);
+	EvaluateDTO getEvaluateListByMemId(Object evalScore, Object getMemId);
 
 	// 평가한 방문리스트 점수 수정
 
 	/* EvaluateDTO setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto); */
-	/* void setEvaluateInfoByEvaluateTerms(String evaluateDto); */
+	/* void setEvaluateInfoByEvaluateTerms(String evaluateDto);*/ 
 
-	void setEvaluateInfoByEvaluateTerms(String string);
+	void setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto);
 
 	// 평가안한 방문리스트
 	EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto);
@@ -30,7 +33,7 @@ public interface EvaluateService {
 	List<EvaluateDTO> getVisitsByMemid(String memId);
 
 	// 식당이름
-	List<EvaluateDTO> getRestntnameByRestId(String restntId);
+	List<EvaluateDTO> getRestntnameByRestId(List<String> restntId);
 
 	// 평가점수
 	List<EvaluateDTO> getScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
@@ -41,5 +44,7 @@ public interface EvaluateService {
 
 	// 회원: 식당 평가 수정 ,입력
 	void setScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
+
+	List<EvaluateDTO> getEvaluateListByMemId1(String memId);
 
 }
