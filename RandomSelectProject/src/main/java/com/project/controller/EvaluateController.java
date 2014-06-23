@@ -75,21 +75,18 @@ public class EvaluateController {
 
 	// ////////////////////////////////////////////////////////////////////////////////
 
-	// 평가한 식당목록
+	/*// 평가한 식당목록
 	@RequestMapping(value = "/evaluateListForm.do", method = RequestMethod.POST)
 	public String evaluateListForm(Model model, String memId) {
 		
 		System.out.println("evaluateListForm()");
 		
-		// 방문날짜,restntId
-		List<EvaluateDTO> listPart1 =evaluateService.getVisitsByMemid(memId);
-	
-
+		
 				
 		
-		return "evaluate/evaluateList";
+	
 	}
-
+*/
 	// 식당 평가 수정
 	@RequestMapping(value = "/evaluateListProc.do", method = RequestMethod.POST)
 	public String evaluateListProc(Model model, EvaluateDTO evaluateDto) {
