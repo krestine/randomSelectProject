@@ -7,6 +7,7 @@
 <title>아무거나</title>
 </head>
 <body>
+
 	<h1> Hello world!  </h1>
 	<a href="/myapp/member/login.do">로그인</a>
 	<a href="/myapp/member/register.do">회원가입</a>
@@ -14,6 +15,9 @@
 	<a href="/myapp/community/mateList.do">커뮤니티</a>
 	<a href="/myapp/ladder/ladderMake.do">복불복</a>
 	<a href="/myapp/setting/setting.do">설정</a>
+
+=======
+	이 놈은 view 밑에 있는 메인
 
 </body>
 </html>
