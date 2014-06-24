@@ -7,7 +7,7 @@
 <title>findId.jsp</title>
 </head>
 <body>
-	<form action="/findIdProc.do" method="post">
+	<form action="findIdProc.do" method="post">
 		<table align="center" border="0" cellspacing="0" cellpadding="0"
 			bgcolor="white">
 			<tr>
@@ -21,6 +21,10 @@
 			<tr>
 				<td>전화번호</td>
 				<td><input type="text" name="memMobile"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="아이디찾기"></td>
+				<td><button onclick="findPasswordForm.do">비밀번호찾기</button></td>
 			</tr>
 		</table>
 	</form>
