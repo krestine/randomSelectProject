@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,11 +32,11 @@
 				myLongitude = position.coords.longitude;
 				var pos = new google.maps.LatLng(myLatitude, myLongitude);
 
-				//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: '³» À§Ä¡'});
+				//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: 'ë‚´ ìœ„ì¹˜'});
 				var marker = new google.maps.Marker({
 					position : pos,
 					map : map,
-					title : '³» À§Ä¡'
+					title : 'ë‚´ ìœ„ì¹˜'
 				});
 
 				var searchRadius = {
@@ -66,9 +66,9 @@
 		alert(errorFlag);
 
 		if (errorFlag) {
-			var content = 'À§Ä¡ ÃßÀû ¼­ºñ½º µ¿ÀÛ ½ÇÆĞ';
+			var content = 'ìœ„ì¹˜ ì¶”ì  ì„œë¹„ìŠ¤ ë™ì‘ ì‹¤íŒ¨';
 		} else {
-			var content = 'ºê¶ó¿ìÀú°¡ À§Ä¡ ÃßÀû ¼­ºñ½º¸¦ Áö¿øÇÏÁö ¾Ê½À´Ï´Ù. ºê¶ó¿ìÀú¸¦ ÃÖ½Å ¹öÀüÀ¸·Î ¾÷µ¥ÀÌÆ®ÇØ ÁÖ¼¼¿ä.';
+			var content = 'ë¸Œë¼ìš°ì €ê°€ ìœ„ì¹˜ ì¶”ì  ì„œë¹„ìŠ¤ë¥¼ ì§€ì›í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ë¸Œë¼ìš°ì €ë¥¼ ìµœì‹  ë²„ì „ìœ¼ë¡œ ì—…ë°ì´íŠ¸í•´ ì£¼ì„¸ìš”.';
 		}
 
 		var options = {
