@@ -34,4 +34,5 @@ public class RandomSelectController {
 		model.addAttribute("restntList", restntList);
 		return "selectResult";
 	}
+
 }
