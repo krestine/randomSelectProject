@@ -20,9 +20,17 @@ public class MemberDTO {
 	// member Field end
 
 	// getter & setter
-
+	
 	public String getMemId() {
 		return memId;
+	}
+
+	public String getTempPw() {
+		return tempPw;
+	}
+
+	public void setTempPw(String tempPw) {
+		this.tempPw = tempPw;
 	}
 
 	public int getMemWalkRange() {
@@ -143,6 +151,7 @@ public class MemberDTO {
 		result = prime * result
 				+ ((memPasswd == null) ? 0 : memPasswd.hashCode());
 		result = prime * result + memWalkRange;
+		result = prime * result + ((tempPw == null) ? 0 : tempPw.hashCode());
 		return result;
 	}
 
@@ -209,6 +218,11 @@ public class MemberDTO {
 			return false;
 		if (memWalkRange != other.memWalkRange)
 			return false;
+		if (tempPw == null) {
+			if (other.tempPw != null)
+				return false;
+		} else if (!tempPw.equals(other.tempPw))
+			return false;
 		return true;
 	}
 
@@ -224,7 +238,7 @@ public class MemberDTO {
 				+ ", black=" + black + ", leave=" + leave + ", leaveReason="
 				+ leaveReason + ", memWalkRange=" + memWalkRange
 				+ ", memCarRange=" + memCarRange + ", memExcMenu=" + memExcMenu
-				+ "]";
+				+ ", tempPw=" + tempPw + "]";
 	}
 
 	// toString end
