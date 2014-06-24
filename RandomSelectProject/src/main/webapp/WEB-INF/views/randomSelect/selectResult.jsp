@@ -14,24 +14,6 @@
 	var lmarker, rmarker;
 	var sRadius = 1000;
 
-	function calcDistance(lat1, lon1, lat2, lon2) {
-		var EARTH_R, Rad, radLat1, radLat2, radDist;
-		var distance, ret;
-
-		EARTH_R = 6371000.0;
-		Rad = Math.PI / 180;
-		radLat1 = Rad * lat1;
-		radLat2 = Rad * lat2;
-		radDist = Rad * (lon1 - lon2);
-
-		distance = Math.sin(radLat1) * Math.sin(radLat2);
-		distance = distance + Math.cos(radLat1) * Math.cos(radLat2)
-				* Math.cos(radDist);
-		ret = EARTH_R * Math.acos(distance);
-
-		return Math.round(Math.round(ret) / 1000);
-	}
-
 	function initialize() {
 		var myOptions = {
 			zoom : 12,
@@ -47,7 +29,7 @@
 				//alert('position: ' + position);
 
 				//alert(position.coords.latitude + ', ' + position.coords.longitude);
-				
+
 				myLatitude = position.coords.latitude;
 				myLongitude = position.coords.longitude;
 				var pos = new google.maps.LatLng(myLatitude, myLongitude);
@@ -70,14 +52,8 @@
 					radius : sRadius
 				};
 				// Add the circle for this city to the map.
-				cityCircle = new google.maps.Circle(searchRadius);
+				searchCircle = new google.maps.Circle(searchRadius);
 
-				
-				var randomLon = Math.random() + 37;
-				var randomLat = Math.random() + 127;
-				if(calcDistance(pos.))
-				
-				
 				map.setCenter(pos);
 			}, function() {
 				handleNoGeolocation(true);
