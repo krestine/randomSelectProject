@@ -34,7 +34,7 @@ public class AdminController {
 	// 관리자 메인 페이지
 	@RequestMapping(value = "/adminMainProc.do")
 	String adminMainProc(Model model) {
-
+		
 		return "admin/adminMain";
 	}
 
