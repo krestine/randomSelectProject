@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>restntDetail</title>
 </head>
 <body>
+<h1>restnt</h1>
+
 
 </body>
 </html>

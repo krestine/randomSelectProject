@@ -21,8 +21,42 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<context:annotation-config />
 	<context:component-scan base-package="com.project.myapp" />
+	<context:component-scan base-package="com.project.config" />
+	<context:component-scan base-package="com.project.controller" />
+	<context:component-scan base-package="com.project.dao" />
+	<context:component-scan base-package="com.project.domain" />
+	<context:component-scan base-package="com.project.service" />
+	<annotation-driven />
+
+	<beans:bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<beans:property name="url"
+			value="jdbc:oracle:thin:@192.168.0.30:1521:orcl" />
+		<beans:property name="username" value="sjy" />
+		<beans:property name="password" value="admin" />
+	</beans:bean>
+	<beans:bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+
 	
-	
+	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="mapperLocations" value="classpath:com/project/dao/*.xml" />
+		<beans:property name="typeAliasesPackage" value="com.project.domain" />
+	</beans:bean>
+	<!-- define the SqlSessionTemplate -->
+	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg index="0" ref="sqlSessionFactory" />
+	</beans:bean>
+
+
+	<beans:bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<beans:property name="basePackage" value="com.project.dao" />
+	</beans:bean>
 	
 </beans:beans>
