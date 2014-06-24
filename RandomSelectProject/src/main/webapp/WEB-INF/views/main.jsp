@@ -9,6 +9,7 @@
 <body>
 
 	<h1> Hello world!  </h1>
+<<<<<<< HEAD
 	<a href="/myapp/member/login.do">로그인</a>
 	<a href="/myapp/member/register.do">회원가입</a>
 	<a href="/myapp/randomSelect/selectResult.do">아무거나</a>
@@ -18,6 +19,15 @@
 
 =======
 	이 놈은 view 밑에 있는 메인
+=======
+	<a href="loginForm.do">로그인</a>
+	<a href="registerForm.do">회원가입</a>
+	<a href="selectResult.do">아무거나</a>
+	<a href="mateList.do">커뮤니티</a>
+	<a href="ladderMake.do">복불복</a>
+	<a href="setting.do">설정</a>
+
+>>>>>>> 7f78c43d11000a957b5fb725b3d81afa84b8a869
 
 </body>
 </html>

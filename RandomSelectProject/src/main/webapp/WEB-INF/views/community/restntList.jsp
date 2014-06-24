@@ -11,7 +11,11 @@
 
 ${restntListProc }
 
+<<<<<<< HEAD
 <a href="restntListProc.do">
+=======
+<a href="restntListProc.do">식당리스트</a>
+>>>>>>> 7f78c43d11000a957b5fb725b3d81afa84b8a869
 
 </body>
 </html>

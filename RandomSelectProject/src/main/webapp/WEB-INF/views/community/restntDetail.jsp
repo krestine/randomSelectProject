@@ -8,7 +8,11 @@
 </head>
 <body>
 <h1>restnt</h1>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f78c43d11000a957b5fb725b3d81afa84b8a869
 
+${restntDetailProc }
 </body>
 </html>
