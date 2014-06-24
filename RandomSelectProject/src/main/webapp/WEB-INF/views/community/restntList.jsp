@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>restntList</title>
 </head>
 <body>
+<h1>restntList</h1>
+
+${restntListProc }
+
+<a href="restntListProc.do">
 
 </body>
 </html>
