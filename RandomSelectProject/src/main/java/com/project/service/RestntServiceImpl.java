@@ -50,6 +50,13 @@ public class RestntServiceImpl implements RestntService {
 		// TODO Auto-generated method stub
 		return restntMapper.getRestntListByAddr(addressCode);
 	}
+	
+	// 히원 : 식당하나
+	@Override
+	public RestntDTO getRestnt(String restntId) {
+		
+		return restntMapper.getRestnt(restntId);
+	}
 
 	
 	

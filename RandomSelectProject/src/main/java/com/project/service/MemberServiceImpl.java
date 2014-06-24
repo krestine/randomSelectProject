@@ -50,6 +50,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.getMemPasswdByMemId(memberDto);
 	}
 
+	// 회원:비밀번호만 변경
+	@Override
+	public void setMemPasswdByMemberTerms(MemberDTO memberDto) {
+		memberMapper.setMemPasswdByMemberTerms(memberDto);
+	}
+
 	// 회원:정보수정
 	@Override
 	public void setMemberInfoByMemberTerms(MemberDTO memberDto) {

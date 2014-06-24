@@ -5,9 +5,12 @@ import java.util.List;
 import com.project.domain.RestntDTO;
 
 public interface RestntService {
-	// 관리자 : 전체 식당 리스트
+	// 관리자, 회원 : 전체 식당 리스트
 	List<RestntDTO> getRestntList();
-
+	
+	// 회원 : 식당 하나
+	RestntDTO getRestnt(String restntId);
+	
 	// 관리자 : 식당 삭제
 	RestntDTO dropRestntById(String restntId);
 

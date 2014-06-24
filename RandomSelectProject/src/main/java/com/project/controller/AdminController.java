@@ -34,14 +34,14 @@ public class AdminController {
 	// 관리자 메인 페이지
 	@RequestMapping(value = "/adminMainProc.do")
 	String adminMainProc(Model model) {
-
+		
 		return "admin/adminMain";
 	}
 
 	// 회원 검색 페이지
 	@RequestMapping(value = "/memberSearchForm.do")
 	String memberSearchForm(Model model) {
-		return "memberSearch";
+		return "admin/memberSearch";
 	}
 
 	// Id로 회원검색
@@ -79,7 +79,7 @@ public class AdminController {
 	// 회원 리스트에서 아이디 클릭 -> 회원의 평가 정보 리스트 표시 페이지
 	@RequestMapping(value = "memberEvaluateListProc.do", method = RequestMethod.POST)
 	String memberEvaluateListProc(Model model, String memId) {
-		List<EvaluateDTO> memberEvaluates = evaluateService
+		List<EvaluateDTO> memberEvaluates = (List<EvaluateDTO>) evaluateService
 				.getEvaluateListByMemId(memId);
 		model.addAttribute("memberEvaluates", memberEvaluates);
 		return "memberEvaluateListAdmin";

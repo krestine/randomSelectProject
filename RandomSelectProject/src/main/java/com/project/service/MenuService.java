@@ -5,9 +5,9 @@ import java.util.List;
 import com.project.domain.MenuDTO;
 
 public interface MenuService {
-	// 관리자: 메뉴 리스트
+	// 관리자, 회원 : 메뉴 리스트
 	List<MenuDTO> getMenuListByRestntId(MenuDTO menuDto);
-
+	
 	// 관리자, 회원 : 메뉴 상세 정보표시
 	MenuDTO getMenuInfoByMenuId(String menuId);
 
