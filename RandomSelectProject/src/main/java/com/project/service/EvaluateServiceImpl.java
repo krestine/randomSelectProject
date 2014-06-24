@@ -16,7 +16,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	// 평가한 방문 리스트
 	public EvaluateDTO getEvaluateListByMemId11(EvaluateDTO evaluateDto) {
-		return evaluateMapper.getnEvaluateListByMemId(evaluateDto);
+		return (EvaluateDTO) evaluateMapper.getEvaluateListByMemId(evaluateDto);
 
 	}
 
@@ -29,8 +29,8 @@ public class EvaluateServiceImpl implements EvaluateService {
 	/* void setEvaluateInfoByEvaluateTerms(String evaluateDto); */
 
 	// 평가안한 방문리스트
-	public EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto) {
-		return evaluateMapper.getnEvaluateListByMemId(evaluateDto);
+	public EvaluateDTO getnEvaluateListByMemId(String evaluateDto) {
+		return (EvaluateDTO) evaluateMapper.getNEvaluateListByMemId(evaluateDto);
 
 	}
 
@@ -71,7 +71,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 	// 회원: 평가 안한 식당목록
 	// 방문날짜,restntId
 	public List<EvaluateDTO> getNevaluateListByMemId(String memId) {
-		return evaluateMapper.getnEvaluateListByMemId(memId);
+		return (List<EvaluateDTO>) evaluateMapper.getnEvaluateListByMemId(memId);
 	}
 
 	// 회원: 식당 평가 수정 ,입력
@@ -80,7 +80,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 	}
 
 	@Override
-	public Evaluate getEvaluateListByMemId(String memId) {
+	public EvaluateDTO getEvaluateListByMemId(String memId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -99,6 +99,12 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	@Override
 	public List<EvaluateDTO> getRestntnameByRestId(List<String> restntId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -19,7 +19,7 @@ public interface EvaluateMapper {
 	void setEvaluateInfoByEvaluateTerms(String string);
 
 	// 평가안한 방문리스트
-	EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto);
+	EvaluateDTO getnEvaluateListByMemId(String memId);
 
 	// 식당평가 안한 점수 입력
 	public void putEvaluateByScore(EvaluateDTO evaluateDto);
