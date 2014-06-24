@@ -13,39 +13,40 @@
 	</insert>
 
 	<!-- 회원:로그인 -->
-	<select id="getMemberInfoByMemberTerms" parameterType="MemberDTO">
-		resultType="MemberDTO">
+	<select id="getMemberInfoByMemberTerms" parameterType="MemberDTO" resultType="MemberDTO">
 		select memid, memname from member
 		where memid=#{memId} and
 		mempasswd=#{memPasswd}
 	</select>
 
 	<!-- 회원:아이디찾기 -->
-	<select id="getMemIdByMemberTerms" parameterType="MemberDTO">
-		resultType="String">
+
+	<select id="getMemIdByMemberTerms" parameterType="MemberDTO" resultType="String">
+
 		select memid from member
 		where memname=#{memName} and
 		membirth=#{memBirth} and memmobile=#{memMobile}
 	</select>
 
 	<!-- 회원:비밀번호찾기 -->
-	<select id="getMemPasswdByMemberTerms" parameterType="MemberDTO">
-		resultType="String">
+
+	<select id="getMemPasswdByMemberTerms" parameterType="MemberDTO" resultType="String">
+
 		select mempasswd from member
 		where memid=#{memId} and
 		membirth=#{memBirth} and memmobile=#{memMobile}
 	</select>
 
 	<!-- 회원:내정보 -->
-	<select id="getMyInfoByMemId" parameterType="MemberDTO">
-		resultType="MemberDTO">
+	<select id="getMyInfoByMemId" parameterType="MemberDTO" resultType="MemberDTO">
 		select memid, memname, memgrade from member where
 		memid=#{memId}
 	</select>
 
 	<!-- 회원:현재비밀번호 확인 -->
-	<select id="getMemPasswdByMemId" parameterType="MemberDTO">
-		resultType="String">
+
+	<select id="getMemPasswdByMemId" parameterType="MemberDTO" resultType="String">
+
 		select leave from member
 		where memid=#{memId} and
 		mempasswd=#{memPasswd}
@@ -93,31 +94,32 @@
 
 
 	<!--관리자 : 아이디로 유저 검색 -->
-	<select id="getMemberListById" resultType="MemberDTO"
-		parameterType="String">
+
+	<select id="getMemberListById" resultType="MemberDTO" parameterType="String">
+
 		select memid,memname,memgrade,black where memid
 		= #{memId}
 	</select>
 
 	<!--관리자 : 이름으로 유저 검색 -->
-	<select id="getMemberListByName" resultType="MemberDTO">
 
-		parameterType="String">
+	<select id="getMemberListByName" resultType="MemberDTO" parameterType="String">
+
 		select memid,memname,memgrade,black where
 		memname = #{memName}
 	</select>
 
 
 	<!--관리자 : 등급으로 유저 검색 -->
-	<select id="getMemberListByGrade" resultType="MemberDTO"> 
-	parameterType="String">
+
+	<select id="getMemberListByGrade" resultType="MemberDTO" parameterType="String">
+
 		select memid,memname,memgrade,black where
 		memgrade = #{memGrade}
 	</select>
 
 	<!--관리자 : 블랙으로 유저 검색 -->
-	<select id="getMemberListByBlack" resultType="MemberDTO">
-		parameterType="String">
+	<select id="getMemberListByBlack" resultType="MemberDTO" parameterType="String">
 		select memid,memname,memgrade,black where
 		black = #{memBlack}
 	</select>
