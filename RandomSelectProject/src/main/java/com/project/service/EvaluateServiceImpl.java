@@ -79,7 +79,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 	}
 
 	@Override
-	public EvaluateDTO getEvaluateListByMemId(String memId) {
+	public List<EvaluateDTO> getEvaluateListByMemId(String memId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
