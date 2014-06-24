@@ -17,6 +17,8 @@
 	
 	url pattend *.do  빠져있어서 안되는거였어요.   -->
 	
+	
+	
 	<h1> Hello world!  </h1>
 	<a href="loginForm.do">로그인</a>
 	<a href="registerForm.do">회원가입</a>
