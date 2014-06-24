@@ -22,6 +22,9 @@
 				<td>전화번호</td>
 				<td><input type="text" name="memMobile"></td>
 			</tr>
+				<tr>
+				<td><input type="submit" value="아이디찾기"></td>
+			</tr>
 		</table>
 	</form>
 </body>

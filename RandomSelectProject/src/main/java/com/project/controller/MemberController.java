@@ -46,13 +46,13 @@ public class MemberController {
 	}
 
 	// 아이디찾기
-	@RequestMapping("/findIdForm.do")
+	@RequestMapping("findIdForm.do")
 	public String findIdForm() {
 		System.out.println("findIdForm()");
 		return "member/findId";
 	}
 
-	@RequestMapping(value = "/findIdProc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "findIdProc.do", method = RequestMethod.POST)
 	public String findIdProc(Model model, MemberDTO memberDto) {
 		System.out.println("findIdProc()");
 		String userId = memberService.getMemIdByMemberTerms(memberDto);

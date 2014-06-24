@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<form action="/loginProc.do" method="post">
+	<form action="loginProc.do" method="post">
 		<table align="center" border="0" cellspacing="0" cellpadding="0"
 			bgcolor="white">
 
@@ -32,7 +32,7 @@
 			</tr>
 
 			<tr>
-				<td><a href='/findIdForm.do'>아이디/비밀번호 찾기</a></td>
+				<td><a href="findIdForm.do">아이디/비밀번호 찾기</a></td>
 			</tr>
 
 		</table>
