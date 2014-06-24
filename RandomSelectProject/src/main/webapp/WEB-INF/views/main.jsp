@@ -9,24 +9,24 @@
 <body>
 
 	<h1> Hello world!  </h1>
-<<<<<<< HEAD
 
-	<a href="/myapp/member/login.do">·Î±×ÀÎ</a>
-	<a href="/myapp/member/register.do">È¸¿ø°¡ÀÔ</a>
-	<a href="/myapp/randomSelect/selectResult.do">¾Æ¹«°Å³ª</a>
-	<a href="/myapp/community/mateList.do">Ä¿¹Â´ÏÆ¼</a>
-	<a href="/myapp/ladder/ladderMake.do">º¹ºÒº¹</a>
-	<a href="/myapp/setting/setting.do">¼³Á¤</a>
+
+	<a href="/myapp/member/login.do">ï¿½Î±ï¿½ï¿½ï¿½</a>
+	<a href="/myapp/member/register.do">È¸ï¿½ï¿½ï¿½ï¿½</a>
+	<a href="/myapp/randomSelect/selectResult.do">ï¿½Æ¹ï¿½ï¿½Å³ï¿½</a>
+	<a href="/myapp/community/mateList.do">Ä¿ï¿½Â´ï¿½Æ¼</a>
+	<a href="/myapp/ladder/ladderMake.do">ï¿½ï¿½ï¿½Òºï¿½</a>
+	<a href="/myapp/setting/setting.do">ï¿½ï¿½ï¿½ï¿½</a>
 
 =======
-	ÀÌ ³ðÀº view ¹Ø¿¡ ÀÖ´Â ¸ÞÀÎ
+	ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ view ï¿½Ø¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½
 =======
-	<a href="loginForm.do">·Î±×ÀÎ</a>
-	<a href="registerForm.do">È¸¿ø°¡ÀÔ</a>
-	<a href="selectResult.do">¾Æ¹«°Å³ª</a>
-	<a href="mateList.do">Ä¿¹Â´ÏÆ¼</a>
-	<a href="ladderMake.do">º¹ºÒº¹</a>
-	<a href="setting.do">¼³Á¤</a>
+	<a href="loginForm.do">ï¿½Î±ï¿½ï¿½ï¿½</a>
+	<a href="registerForm.do">È¸ï¿½ï¿½ï¿½ï¿½</a>
+	<a href="selectResult.do">ï¿½Æ¹ï¿½ï¿½Å³ï¿½</a>
+	<a href="mateList.do">Ä¿ï¿½Â´ï¿½Æ¼</a>
+	<a href="ladderMake.do">ï¿½ï¿½ï¿½Òºï¿½</a>
+	<a href="setting.do">ï¿½ï¿½ï¿½ï¿½</a>
 =======
 	<a href="loginForm.do">ë¡œê·¸ì¸</a>
 	<a href="registerForm.do">íšŒì›ê°€ìž…</a>
@@ -34,7 +34,7 @@
 	<a href="mateList.do">ì»¤ë®¤ë‹ˆí‹°</a>
 	<a href="ladderMake.do">ë³µë¶ˆë³µ</a>
 	<a href="setting.do">ì„¤ì •</a>
->>>>>>> 8fff81a92e4c9a3401be5dc0934168990d633ca9
+
 
 
 </body>
