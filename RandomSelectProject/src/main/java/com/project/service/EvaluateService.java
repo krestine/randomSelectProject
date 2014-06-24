@@ -6,9 +6,9 @@ import com.project.controller.Evaluate;
 import com.project.domain.EvaluateDTO;
 
 public interface EvaluateService {
-	Evaluate getEvaluateListByMemId = null;
+	EvaluateDTO getEvaluateListByMemId = null;
 
-	Evaluate getEvaluateListByMemId(String memId);
+	EvaluateDTO getEvaluateListByMemId(String memId);
 
 	// 평가한 방문 리스트
 	EvaluateDTO getEvaluateListByMemId(Object evalScore, Object getMemId);

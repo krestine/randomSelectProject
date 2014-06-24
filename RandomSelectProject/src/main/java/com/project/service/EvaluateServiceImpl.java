@@ -71,7 +71,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 	// 회원: 평가 안한 식당목록
 	// 방문날짜,restntId
 	public List<EvaluateDTO> getNevaluateListByMemId(String memId) {
-		return evaluateMapper.getNevaluateListByMemId(memId);
+		return evaluateMapper.getnEvaluateListByMemId(memId);
 	}
 
 	// 회원: 식당 평가 수정 ,입력

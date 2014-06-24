@@ -9,7 +9,7 @@ public interface EvaluateMapper {
 	List<EvaluateDTO> getEvaluateListByMemId(String memId);
 
 	// 평가한 방문 리스트
-	EvaluateDTO getEvaluateListByMemId(Object evalScore);
+	List<EvaluateDTO> getEvaluateListByMemId(Object evalScore);
 
 	// 평가한 방문리스트 수정
 
@@ -38,9 +38,9 @@ public interface EvaluateMapper {
 
 	// 회원: 평가 안한 식당목록
 	// 방문날짜,restntId
-	List<EvaluateDTO> getNevaluateListByMemId(String memId);
+	List<EvaluateDTO> getNEvaluateListByMemId(String memId);
 
 	// 회원: 식당 평가 수정 ,입력
-	void setScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
+	void setScoreByEvaluateTerms(EvaluateDTO evaluateDto);
 
 }
