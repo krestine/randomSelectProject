@@ -80,10 +80,6 @@ public class EvaluateController {
 	public String evaluateListForm(Model model, String memId) {
 		
 		System.out.println("evaluateListForm()");
-		
-		
-				
-		
 	
 	}
 */
