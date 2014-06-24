@@ -34,4 +34,11 @@ public class RandomSelectController {
 		model.addAttribute("restntList", restntList);
 		return "selectResult";
 	}
+
+	@RequestMapping(value = "/mainProc.do")
+	String adminMainProc(Model model) {
+		
+		return "randomSelect/main";
+	}
+
 }
