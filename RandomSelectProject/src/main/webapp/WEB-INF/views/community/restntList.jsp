@@ -11,7 +11,7 @@
 
 ${restntListProc }
 
-<a href="restntListProc.do">
+<a href="restntListProc.do">식당리스트</a>
 
 </body>
 </html>

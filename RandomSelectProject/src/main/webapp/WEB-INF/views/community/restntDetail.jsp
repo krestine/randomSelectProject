@@ -9,6 +9,6 @@
 <body>
 <h1>restnt</h1>
 
-
+${restntDetailProc }
 </body>
 </html>
