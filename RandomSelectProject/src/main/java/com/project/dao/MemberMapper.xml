@@ -90,14 +90,14 @@
 		= #{memId}
 	</select>
 
-	<!--관리자 : 이름으로 유저 검색 -->
+	<!--관리자, 회원 : 이름으로 유저 검색 -->
 	<select id="getMemberListByName" resultType="MemberDTO"
 		parameterType="String">
 		select memberid,membername,membergrade,black where
 		memname = #{memName}
 	</select>
 
-	<!--관리자 : 등급으로 유저 검색 -->
+	<!--관리자, 회원 : 등급으로 유저 검색 -->
 	<select id="getMemberListByGrade" resultType="MemberDTO"
 		parameterType="String">
 		select memberid,membername,membergrade,black where
