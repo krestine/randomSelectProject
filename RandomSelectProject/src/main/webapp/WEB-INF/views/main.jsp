@@ -9,20 +9,15 @@
 <body>
 
 	<h1> Hello world!  </h1>
-<<<<<<< HEAD
-	<a href="loginForm.do">�α���</a>
-	<a href="registerForm.do">ȸ������</a>
-	<a href="selectResult.do">�ƹ��ų�</a>
-	<a href="mateListProc.do">Ŀ�´�Ƽ</a>
-	
-=======
+
+
 	<a href="loginForm.do">로그인</a>
 	<a href="registerForm.do">회원가입</a>
 	<a href="selectResult.do">아무거나</a>
 	<a href="mateList.do">커뮤니티</a>
 	<a href="ladderMake.do">복불복</a>
 	<a href="setting.do">설정</a>
->>>>>>> 8fff81a92e4c9a3401be5dc0934168990d633ca9
+
 
 
 </body>

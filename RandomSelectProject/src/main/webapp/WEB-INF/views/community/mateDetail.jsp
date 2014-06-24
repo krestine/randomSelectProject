@@ -10,7 +10,7 @@
 
 
 <h1>mate</h1>
-${mateDetailproc }
+<a href="mateListProc.do">친구리스트</a>
 
 
 </body>

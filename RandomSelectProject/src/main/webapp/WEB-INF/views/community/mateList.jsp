@@ -9,11 +9,11 @@
 <body>
 	<h1>mateList</h1>
 
-${mateListProc }
 
-<a href="mateDetailProc.do">»ó¼¼Á¤º¸</a>
+
+<a href="mateDetailProc.do">mateList</a>
 	
-
+<a href="restntListProc.do">ì‹ë‹¹ ë¦¬ìŠ¤íŠ¸</a>
 
 </body>
 </html>

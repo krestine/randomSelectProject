@@ -9,6 +9,8 @@
 <body>
 <h1>restnt</h1>
 
-${restntDetailProc }
+식당 상세정보
+
+<a href="restntListProc.do">리스트</a>
 </body>
 </html>
