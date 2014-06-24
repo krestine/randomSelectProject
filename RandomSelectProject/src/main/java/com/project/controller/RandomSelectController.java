@@ -35,4 +35,10 @@ public class RandomSelectController {
 		return "selectResult";
 	}
 
+	@RequestMapping("/randomSelect/main.do")
+	String adminMainProc(Model model) {
+		
+		return "randomSelect/main";
+	}
+
 }

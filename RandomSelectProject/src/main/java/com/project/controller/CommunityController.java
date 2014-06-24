@@ -1,5 +1,7 @@
 package com.project.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ public class CommunityController {
 	
 	@Autowired
 	private MateService mateService;
+	@Autowired
 	private RestntService restntService;
 	
 	
@@ -39,22 +42,34 @@ public class CommunityController {
 		return "community/mateDetail";
 	}
 	
-	// 회원 : 식당 리스트
+	/*//회원 : 식당 리스트
 	@RequestMapping("/restntListProc.do")
 	public ModelAndView restntListProc(Model model){
 		model.addAttribute("restntList", restntService.getRestntList());
 		System.out.println("restntListProc()");
 		return new ModelAndView("community/restntList");
+	}*/
+	
+	
+	@RequestMapping("/restntListProc.do")
+	public String restntListProc(Model model, RestntDTO restntDto){
+		List<RestntDTO> restnts = restntService.getRestntList();
+		model.addAttribute("restnts", restnts);
+		return "restntList";
 	}
-
+		
+	
+	
+	
 	// 회원 : 식당 상세정보
 	@RequestMapping("/restntDetailProc.do")
 	public String restntDetailProc(Model model, String restntId){
 		RestntDTO restnt = restntService.getRestntInfoById(restntId);
+		
 		model.addAttribute("restnt",restnt);
 		System.out.println("restntDetailProc()");
 		return "community/restntDetail";
-		
+	
 	}
 	
 	/*@RequestMapping("/productContext.do")
