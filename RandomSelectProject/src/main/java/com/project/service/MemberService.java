@@ -23,6 +23,9 @@ public interface MemberService {
 
 	// 회원:현재비밀번호확인
 	String getMemPasswdByMemId(MemberDTO memberDto);
+	
+	// 회원:비밀번호만 변경
+	void setMemPasswdByMemberTerms(MemberDTO memberDto);
 
 	// 회원:정보수정
 	void setMemberInfoByMemberTerms(MemberDTO memberDto);

@@ -89,9 +89,20 @@ public class MemberController {
 	@RequestMapping(value = "/myInfoProc.do", method = RequestMethod.POST)
 	public String myInfoProc(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoProc()");
+
+		// 현재비밀번호 확인
 		String nowPasswd = memberService.getMemPasswdByMemId(memberDto);
 		if (nowPasswd == null) {
+			model.addAttribute("errmessage", "아이디,비밀번호 불일치");
 			return "mypage/myInfo";
+		} else if (Integer.parseInt(nowPasswd) == 1) {
+			model.addAttribute("errmessage", "탈퇴한 회원");
+			return "mypage/myInfo";
+		}
+
+		// 탈퇴하지 않았고 현재비밀번호 일치할때 비밀번호만 변경
+		if (memberDto.getMemMobile() == null) {
+			memberService.setMemPasswdByMemberTerms(memberDto);
 		}
 		memberService.setMemberInfoByMemberTerms(memberDto);
 		return "/myInfoForm.do";
