@@ -9,12 +9,11 @@
 <body>
 	<h1>mateList</h1>
 
-${mateListProc }
 
-<a href="mateListProc.do">
-</a>
+
+<a href="mateDetailProc.do">mateList</a>
 	
-
+<a href="restntListProc.do">식당 리스트</a>
 
 </body>
 </html>

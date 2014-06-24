@@ -13,6 +13,8 @@
 =======
 >>>>>>> 7f78c43d11000a957b5fb725b3d81afa84b8a869
 
-${restntDetailProc }
+식당 상세정보
+
+<a href="restntListProc.do">리스트</a>
 </body>
 </html>
