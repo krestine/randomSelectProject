@@ -18,7 +18,9 @@
 	</select>
 	
 	<!--구성회:회원:평가하지 않은 목록 -->
-	<select id="getUnEvaluateListByMemId" parameterType="String" resultType="EvaluateDTO">
+
+	<select id="getnEvaluateListByMemId" parameterType="String" resultType="EvaluateDTO">
+
 		select evalId, Score, evalDate, restntName
 		from Evaluate e, restnt r
 		where
