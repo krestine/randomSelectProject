@@ -15,7 +15,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	// 평가한 방문 리스트
 	public EvaluateDTO getEvaluateListByMemId(EvaluateDTO evaluateDto) {
-		return (EvaluateDTO) evaluateMapper.getEvaluateListByMemId(evaluateDto);
+		return (EvaluateDTO) evaluateMapper.getnEvaluateListByMemId(evaluateDto);
 
 	}
 
@@ -29,7 +29,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	// 평가안한 방문리스트
 	public EvaluateDTO getnEvaluateListByMemId(String evaluateDto) {
-		return (EvaluateDTO) evaluateMapper.getNEvaluateListByMemId(evaluateDto);
+		return (EvaluateDTO) evaluateMapper.getEvaluateListByMemId(evaluateDto);
 
 	}
 
@@ -70,7 +70,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 	// 회원: 평가 안한 식당목록
 	// 방문날짜,restntId
 	public List<EvaluateDTO> getNevaluateListByMemId(String memId) {
-		return (List<EvaluateDTO>) evaluateMapper.getnEvaluateListByMemId(memId);
+		return (List<EvaluateDTO>) evaluateMapper.getEvaluateListByMemId(memId);
 	}
 
 	// 회원: 식당 평가 수정 ,입력
