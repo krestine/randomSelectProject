@@ -7,7 +7,7 @@ import com.project.domain.EvaluateDTO;
 public interface EvaluateService {
 	
 
-	EvaluateDTO getEvaluateListByMemId(String memId);
+	List<EvaluateDTO> getEvaluateListByMemId(String memId);
 
 	// 평가한 방문 리스트
 	EvaluateDTO getEvaluateListByMemId(Object evalScore, Object getMemId);
