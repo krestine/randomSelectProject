@@ -20,13 +20,6 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-<<<<<<< HEAD
-	<welcome-file-list>
-		<welcome-file>main.do</welcome-file>
-	</welcome-file-list>
-=======
-
->>>>>>> 164b4a066ecefae5d2fcef921de745be2b69c348
 
 	<!-- Processes application requests -->
 	<servlet>
