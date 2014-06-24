@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	이 놈은 view 밑에 있는 메인
 </body>
 </html>
