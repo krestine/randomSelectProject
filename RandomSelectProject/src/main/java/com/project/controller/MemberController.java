@@ -16,13 +16,13 @@ public class MemberController {
 	private MemberService memberService;
 
 	// 회원가입
-	@RequestMapping("/registerForm.do")
+	@RequestMapping("registerForm.do")
 	public String registerForm(Model model) {
 		System.out.println("registerForm()");
 		return "member/register";
 	}
 
-	@RequestMapping(value = "/registerProc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "registerProc.do", method = RequestMethod.POST)
 	public String registerProc(Model model, MemberDTO memberDto) {
 		System.out.println("registerProc()");
 		memberService.putMember(memberDto);
@@ -30,13 +30,13 @@ public class MemberController {
 	}
 
 	// 로그인
-	@RequestMapping("/loginForm.do")
+	@RequestMapping("loginForm.do")
 	public String loginForm() {
 		System.out.println("loginForm()");
 		return "member/login";
 	}
 
-	@RequestMapping(value = "/loginProc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "loginProc.do", method = RequestMethod.POST)
 	public String loginProc(Model model, MemberDTO memberDto) {
 		System.out.println("loginProc()");
 		MemberDTO loginUser = memberService
@@ -61,13 +61,13 @@ public class MemberController {
 	}
 
 	// 비밀번호찾기
-	@RequestMapping("/findPasswordForm.do")
+	@RequestMapping("findPasswordForm.do")
 	public String findPasswordForm() {
 		System.out.println("findPasswordForm()");
 		return "member/findPassword";
 	}
 
-	@RequestMapping(value = "/findPasswordProc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "findPasswordProc.do", method = RequestMethod.POST)
 	public String findPasswordProc(Model model, MemberDTO memberDto) {
 		System.out.println("findPasswordProc()");
 		String userPassword = memberService
@@ -77,7 +77,7 @@ public class MemberController {
 	}
 
 	// 내정보
-	@RequestMapping("/myInfoForm.do")
+	@RequestMapping("myInfoForm.do")
 	public String myInfoForm(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoForm()");
 		MemberDTO userInfo = memberService.getMyInfoByMemId(memberDto);
@@ -86,7 +86,7 @@ public class MemberController {
 	}
 
 	// 현재 비밀번호 확인 , 정보수정
-	@RequestMapping(value = "/myInfoProc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "myInfoProc.do", method = RequestMethod.POST)
 	public String myInfoProc(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoProc()");
 
@@ -109,13 +109,13 @@ public class MemberController {
 	}
 
 	// 탈퇴
-	@RequestMapping("/dropForm.do")
+	@RequestMapping("dropForm.do")
 	public String dropForm() {
 		System.out.println("dropForm()");
 		return "mypage/drop";
 	}
 
-	@RequestMapping(value = "/dropProc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "dropProc.do", method = RequestMethod.POST)
 	public String dropProc(Model model, MemberDTO memberDto) {
 		System.out.println("dropProc()");
 		memberService.setLeave(memberDto);
@@ -123,7 +123,7 @@ public class MemberController {
 	}
 
 	// 로그아웃
-	@RequestMapping("/logoutForm.do")
+	@RequestMapping("logoutForm.do")
 	public String logOutForm() {
 		System.out.println("logOutForm()");
 
