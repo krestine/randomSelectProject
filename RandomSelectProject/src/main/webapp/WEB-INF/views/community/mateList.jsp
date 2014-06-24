@@ -11,8 +11,7 @@
 
 ${mateListProc }
 
-<a href="mateListProc.do">
-</a>
+<a href="mateDetailProc.do">상세정보</a>
 	
 
 
