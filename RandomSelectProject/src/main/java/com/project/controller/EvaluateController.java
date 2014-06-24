@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.domain.EvaluateDTO;
+import com.project.domain.MenuDTO;
 import com.project.service.EvaluateService;
 
 @Controller
@@ -24,12 +25,7 @@ public class EvaluateController {
 		return "history/visitList ";
 	}
 
-	/*
-	 * // 식당 정보 추가 String restntInfoInsert(Model model, RestntDTO restntDto) {
-	 * restntService.putRestnt(restntDto); RestntDTO restnt =
-	 * restntService.getRestntInfoById(restntDto .getRestntId());
-	 * model.addAttribute("restnt", restnt); return "restntInfo"; }
-	 */
+	
 	// 식당 평점정보 수정
 	/*
 	 * @RequestMapping(value = "/EvaluateList.do", method = RequestMethod.POST)
@@ -49,10 +45,7 @@ public class EvaluateController {
 	 * String evaluateInfoUpdate(Model model, String evaluateDto) {
 	 * evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto);
 	 * 
-	 * @SuppressWarnings("unchecked") List<EvaluateDTO> evaluate =
-	 * evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto);
-	 * model.addAttribute("evaluate", evaluate); return "nEvaluate/visitList"; }
-	 */
+	
 
 	// 평가안한 방문리스트
 	@RequestMapping("/nEvaluateListForm.do")
@@ -90,25 +83,23 @@ public class EvaluateController {
 		
 		// 방문날짜,restntId
 		List<EvaluateDTO> listPart1 =evaluateService.getVisitsByMemid(memId);
-		
-		// 식당이름
-		List<String> listPart2 =evaluateService.getRestntnameByRestId(restntId);
-			
-		// 평가점수
+	
 
-		
-		
+				
 		
 		return "evaluate/evaluateList";
 	}
 
 	// 식당 평가 수정
 	@RequestMapping(value = "/evaluateListProc.do", method = RequestMethod.POST)
-	public String evaluateListProc(Model model, EvaluateDTO evaluateDTO) {
-		System.out.println("evaluateListProc()");
-		evaluateService.setScoreByEvaluateTerms(evaluateDTO);
+	public String evaluateListProc(Model model, EvaluateDTO evaluateDto) {
+		evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto);
+		Evaluate evaluate=(Evaluate) evaluateService.getEvaluateListByMemId(evaluateDto.getMemId());
+		model.addAttribute("evaluate", evaluate);
 		return "/evaluateListForm.do";
 	}
+	
+	
 
 	// 평가 안한 식당목록
 	@RequestMapping(value = "/nEvaluateListForm.do", method = RequestMethod.POST)
