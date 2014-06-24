@@ -79,7 +79,7 @@ public class AdminController {
 	// 회원 리스트에서 아이디 클릭 -> 회원의 평가 정보 리스트 표시 페이지
 	@RequestMapping(value = "memberEvaluateListProc.do", method = RequestMethod.POST)
 	String memberEvaluateListProc(Model model, String memId) {
-		List<EvaluateDTO> memberEvaluates = (List<EvaluateDTO>) evaluateService
+		List<EvaluateDTO> memberEvaluates =  evaluateService
 				.getEvaluateListByMemId(memId);
 		model.addAttribute("memberEvaluates", memberEvaluates);
 		return "memberEvaluateListAdmin";

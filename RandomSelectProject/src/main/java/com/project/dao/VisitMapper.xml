@@ -3,8 +3,4 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.VisitMapper">
 
-<select id="getVisitsByVisitId">
-
-</select>
-
 </mapper>

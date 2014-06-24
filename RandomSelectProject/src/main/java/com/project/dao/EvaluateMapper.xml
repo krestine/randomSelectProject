@@ -3,14 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.EvaluateMapper">
 	<!--관리자, 회원 : 유저 아이디로 평가 목록 열람 -->
-	<select id="getEvaluateListByUserId" parameterType="String"
-		resultType="EvaluateDTO">
+	<select id="getEvaluateListByUserId" parameterType="String" resultType="EvaluateDTO">
 		select * from evaluate where userid = #{userId} and score != -1
 	</select>
 	
 	<!--구성회:회원:식당평가한 목록 -->
-	<select id="getEvaluateListByMemId" parameterType="String"
-		resultType="EvaluateDTO">
+	<select id="getEvaluateListByMemId" parameterType="String" resultType="EvaluateDTO">
 		select evalId, Score, evalDate, restntName
 		from Evaluate e, restnt r
 		where
@@ -20,8 +18,7 @@
 	</select>
 	
 	<!--구성회:회원:평가하지 않은 목록 -->
-	<select id="getEvaluateListByMemId" parameterType="String"
-		resultType="EvaluateDTO">
+	<select id="getEvaluateListByMemId" parameterType="String" resultType="EvaluateDTO">
 		select evalId, Score, evalDate, restntName
 		from Evaluate e, restnt r
 		where
