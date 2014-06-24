@@ -8,10 +8,8 @@
 	
 </script>
 <script type="text/javascript">
-	var lat1 = "", lon1 = "", lat2 = "", lon2 = "";
 	var myLatitude, myLongitude;
 	var map;
-	var lmarker, rmarker;
 	var sRadius = 1000;
 
 	function initialize() {
@@ -51,6 +49,7 @@
 					center : pos,
 					radius : sRadius
 				};
+
 				// Add the circle for this city to the map.
 				searchCircle = new google.maps.Circle(searchRadius);
 
@@ -83,6 +82,9 @@
 	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script type="text/javascript">
+
 </script>
 </head>
 <body>
