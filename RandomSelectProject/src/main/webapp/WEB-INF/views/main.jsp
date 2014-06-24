@@ -12,9 +12,8 @@
 	<a href="loginForm.do">로그인</a>
 	<a href="registerForm.do">회원가입</a>
 	<a href="selectResult.do">아무거나</a>
-	<a href="mateList.do">커뮤니티</a>
-	<a href="ladderMake.do">복불복</a>
-	<a href="setting.do">설정</a>
+	<a href="mateListProc.do">커뮤니티</a>
+	
 
 
 </body>

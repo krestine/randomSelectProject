@@ -16,7 +16,7 @@
 	</listener>
 
 	<welcome-file-list>
-		<welcome-file>/WEB-INF/views/main.jsp</welcome-file>
+		<welcome-file>main.do</welcome-file>
 	</welcome-file-list>
 
 	<!-- Processes application requests -->
@@ -46,7 +46,7 @@
 	
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
 </web-app>
