@@ -67,11 +67,7 @@
 	restntPhone,restntType where restntid=#{restntId}
 	</select>
 	
-	<!-- 회원 : 식당 코드 -->
-	<select id = "getRestntId" parameterType="RestntDTO" resultType="String">
-		select restntid from restnt where restntName = #{restntName}
-		
-	</select>
+	
 	
 	
 </mapper>

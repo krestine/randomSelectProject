@@ -1,3 +1,4 @@
+
 package com.project.controller;
 
 import java.util.List;
@@ -80,6 +81,10 @@ public class EvaluateController {
 	public String evaluateListForm(Model model, String memId) {
 		
 		System.out.println("evaluateListForm()");
+		
+		
+				
+		
 	
 	}
 */
@@ -87,7 +92,7 @@ public class EvaluateController {
 	@RequestMapping(value = "/evaluateListProc.do", method = RequestMethod.POST)
 	public String evaluateListProc(Model model, EvaluateDTO evaluateDto) {
 		evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto);
-		Evaluate evaluate=(Evaluate) evaluateService.getEvaluateListByMemId(evaluateDto.getMemId());
+		EvaluateDTO evaluate=(EvaluateDTO) evaluateService.getEvaluateListByMemId(evaluateDto.getMemId());
 		model.addAttribute("evaluate", evaluate);
 		return "/evaluateListForm.do";
 	}
@@ -110,3 +115,4 @@ public class EvaluateController {
 		return "/nEvaluateListForm.do";
 	}
 }
+
