@@ -4,10 +4,16 @@
 <html>
 <head>
 <script type="text/javascript"
-	src="http://maps.googleapis.com/maps/api/js?sensor=false&language=ko">
+	src="http://maps.googleapis.com/maps/api/js?sensor=true&language=ko">
 	
 </script>
 <script type="text/javascript">
+	var lat1 = "", lon1 = "", lat2 = "", lon2 = "";
+	var myLatitude, myLongitude;
+	var map;
+	var lmarker, rmarker;
+	var sRadius = 1000;
+
 	function calcDistance(lat1, lon1, lat2, lon2) {
 		var EARTH_R, Rad, radLat1, radLat2, radDist;
 		var distance, ret;
@@ -23,11 +29,9 @@
 				* Math.cos(radDist);
 		ret = EARTH_R * Math.acos(distance);
 
-		//return Math.round(Math.round(ret) / 1000);
-		return Math.round(Math.round(ret));
+		return Math.round(Math.round(ret) / 1000);
 	}
 
-	var map;
 	function initialize() {
 		var myOptions = {
 			zoom : 12,
@@ -42,13 +46,13 @@
 			navigator.geolocation.getCurrentPosition(function(position) {
 				//alert('position: ' + position);
 
-				alert(position.coords.latitude + ', '
-						+ position.coords.longitude);
+				//alert(position.coords.latitude + ', ' + position.coords.longitude);
+				
+				myLatitude = position.coords.latitude;
+				myLongitude = position.coords.longitude;
+				var pos = new google.maps.LatLng(myLatitude, myLongitude);
 
-				var pos = new google.maps.LatLng(position.coords.latitude,
-						position.coords.longitude);
-
-				//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: 'Location found using HTML5.'});
+				//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: '³» À§Ä¡'});
 				var marker = new google.maps.Marker({
 					position : pos,
 					map : map,
@@ -58,16 +62,22 @@
 				var searchRadius = {
 					strokeColor : '#00FF00',
 					strokeOpacity : 0.8,
-					strokeWeight : 1,
+					strokeWeight : 2,
 					fillColor : '#00FF00',
 					fillOpacity : 0.25,
 					map : map,
 					center : pos,
-					radius : 1000
+					radius : sRadius
 				};
 				// Add the circle for this city to the map.
 				cityCircle = new google.maps.Circle(searchRadius);
 
+				
+				var randomLon = Math.random() + 37;
+				var randomLat = Math.random() + 127;
+				if(calcDistance(pos.))
+				
+				
 				map.setCenter(pos);
 			}, function() {
 				handleNoGeolocation(true);
