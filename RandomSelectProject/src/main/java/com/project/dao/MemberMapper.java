@@ -24,6 +24,9 @@ public interface MemberMapper {
 	// 회원:현재비밀번호확인
 	String getMemPasswdByMemId(MemberDTO memberDto);
 
+	// 회원:비밀번호만 변경
+	void setMemPasswdByMemberTerms(MemberDTO memberDto);
+
 	// 회원:정보수정
 	void setMemberInfoByMemberTerms(MemberDTO memberDto);
 
@@ -32,10 +35,9 @@ public interface MemberMapper {
 
 	// admin
 
-	//회원 : 검색 설정
+	// 회원 : 검색 설정
 	void setOptionInfoByMemId(MemberDTO memberDto);
-	
-	
+
 	// 관리자 : 아이디로 유저 검색
 	List<MemberDTO> getMemberListById(String memId);
 
