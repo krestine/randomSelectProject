@@ -41,7 +41,7 @@ public class AdminController {
 	// 회원 검색 페이지
 	@RequestMapping(value = "/memberSearchForm.do")
 	String memberSearchForm(Model model) {
-		return "memberSearch";
+		return "admin/memberSearch";
 	}
 
 	// Id로 회원검색

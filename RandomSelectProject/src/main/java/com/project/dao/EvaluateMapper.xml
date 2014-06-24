@@ -5,7 +5,7 @@
 	<!--관리자, 회원 : 유저 아이디로 평가 목록 열람 -->
 	<select id="getEvaluateListByUserId" parameterType="String"
 		resultType="EvaluateDTO">
-		select * from evaluate where userid = #{userId}
+		select * from evaluate where userid = #{userId} and score != -1
 	</select>
 	
 	<!--구성회:회원:식당평가한 목록 -->
@@ -30,7 +30,7 @@
 		and Score = -1	
 	</select>
 
-	<!-- 회원: 평가한 방문리스트 -->
+	<!-- 회원: 식당 평가 -->
 	<update id="setEvaluateInfoByEvaluateTerms" parameterType="EvaluateDTO">
 
 		update Evaluate set evalScore =#{evalScore},
