@@ -6,7 +6,7 @@ import com.project.controller.Evaluate;
 import com.project.domain.EvaluateDTO;
 
 public interface EvaluateService {
-	EvaluateDTO getEvaluateListByMemId = null;
+	
 
 	EvaluateDTO getEvaluateListByMemId(String memId);
 

@@ -15,7 +15,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 	EvaluateMapper evaluateMapper;
 
 	// 평가한 방문 리스트
-	public EvaluateDTO getEvaluateListByMemId11(EvaluateDTO evaluateDto) {
+	public EvaluateDTO getEvaluateListByMemId(EvaluateDTO evaluateDto) {
 		return (EvaluateDTO) evaluateMapper.getEvaluateListByMemId(evaluateDto);
 
 	}
