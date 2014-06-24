@@ -16,10 +16,10 @@ public interface EvaluateMapper {
 	/* EvaluateDTO setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto); */
 	/* void setEvaluateInfoByEvaluateTerms(String evaluateDto); */
 
-	void setEvaluateInfoByEvaluateTerms(String string);
+	List<EvaluateDTO> setEvaluateInfoByEvaluateTerms(String string);
 
 	// 평가안한 방문리스트
-	EvaluateDTO getnEvaluateListByMemId(String memId);
+	List<EvaluateDTO> getnEvaluateListByMemId(String memId);
 
 	// 식당평가 안한 점수 입력
 	public void putEvaluateByScore(EvaluateDTO evaluateDto);
