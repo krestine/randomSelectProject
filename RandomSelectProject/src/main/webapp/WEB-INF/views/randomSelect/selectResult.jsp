@@ -29,25 +29,25 @@ body {
 	var sDistance;
 	var map;
 	var sRadius = 1000;
-	
-	 function calcDistance(lat1, lon1, lat2, lon2){
-	        var EARTH_R, Rad, radLat1, radLat2, radDist; 
-	        var distance, ret;
 
-	        EARTH_R = 6371000.0;
-	        Rad = Math.PI/180;
-	        radLat1 = Rad * lat1;
-	        radLat2 = Rad * lat2;
-	        radDist = Rad * (lon1 - lon2);
-	        
-	        distance = Math.sin(radLat1) * Math.sin(radLat2);
-	        distance = distance + Math.cos(radLat1) * Math.cos(radLat2) * Math.cos(radDist);
-	        ret = EARTH_R * Math.acos(distance);
+	function calcDistance(lat1, lon1, lat2, lon2) {
+		var EARTH_R, Rad, radLat1, radLat2, radDist;
+		var distance, ret;
 
-	        return  Math.round(ret);
-	    }
-	
-	
+		EARTH_R = 6371000.0;
+		Rad = Math.PI / 180;
+		radLat1 = Rad * lat1;
+		radLat2 = Rad * lat2;
+		radDist = Rad * (lon1 - lon2);
+
+		distance = Math.sin(radLat1) * Math.sin(radLat2);
+		distance = distance + Math.cos(radLat1) * Math.cos(radLat2)
+				* Math.cos(radDist);
+		ret = EARTH_R * Math.acos(distance);
+
+		return Math.round(ret);
+	}
+
 	function initialize() {
 		geocoder = new google.maps.Geocoder();
 		var myOptions = {
@@ -60,90 +60,115 @@ body {
 		if (navigator.geolocation) {
 			//alert('navigator.geolocation: ' + navigator.geolocation);
 
-			navigator.geolocation.getCurrentPosition(function(position) {
-				//alert('position: ' + position);
+			navigator.geolocation
+					.getCurrentPosition(
+							function(position) {
+								//alert('position: ' + position);
 
-				//alert(position.coords.latitude + ', ' + position.coords.longitude);
+								//alert(position.coords.latitude + ', ' + position.coords.longitude);
 
-				myLatitude = position.coords.latitude;
-				myLongitude = position.coords.longitude;
-				var pos = new google.maps.LatLng(myLatitude, myLongitude);
+								myLatitude = position.coords.latitude;
+								myLongitude = position.coords.longitude;
+								var pos = new google.maps.LatLng(myLatitude,
+										myLongitude);
 
-				//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: '내 위치'});
-				var myMarker = new google.maps.Marker({
-					position : pos,
-					map : map,
-					title : '내 위치'
-				});
+								//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: '내 위치'});
+								var myMarker = new google.maps.Marker({
+									position : pos,
+									map : map,
+									title : '내 위치'
+								});
 
-				geocoder.geocode({'latLng': pos}, function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
-					      if (results[0]) {
-					    	  var myInfoWindow = new google.maps.InfoWindow();
- 					    	  myInfoWindow.setContent('내 위치 : ' + results[0].formatted_address);
- 					    	  myInfoWindow.open(map, myMarker);
-					      } else {
-					        alert('결과를 찾을 수 없습니다.');
-					      }
-					    } else {
-					      alert('Geocoder failed due to: ' + status);
-					    }
-				});
-				
-				var searchRadius = {
-					strokeColor : '#00FF00',
-					strokeOpacity : 0.8,
-					strokeWeight : 2,
-					fillColor : '#00FF00',
-					fillOpacity : 0.25,
-					map : map,
-					center : pos,
-					radius : sRadius
-				};
+								geocoder
+										.geocode(
+												{
+													'latLng' : pos
+												},
+												function(results, status) {
+													if (status == google.maps.GeocoderStatus.OK) {
+														if (results[0]) {
+															var myInfoWindow = new google.maps.InfoWindow();
+															myInfoWindow
+																	.setContent('내 위치 : '
+																			+ results[0].formatted_address);
+															myInfoWindow.open(
+																	map,
+																	myMarker);
+														} else {
+															alert('결과를 찾을 수 없습니다.');
+														}
+													} else {
+														alert('Geocoder failed due to: '
+																+ status);
+													}
+												});
 
-				// Add the circle for this city to the map.
-				searchCircle = new google.maps.Circle(searchRadius);
-				
-				
-				do{
-					randomLatitude = Math.random() + 37;
-					randomLongitude = Math.random() + 127;
-					sDistance = calcDistance(myLatitude, myLongitude, randomLatitude, randomLongitude);
-				} while(sDistance > sRadius);
-				
-				var pos2 = new google.maps.LatLng(randomLatitude, randomLongitude);
-				
-				var restntMarker = new google.maps.Marker({
-					position : pos2,
-					map : map,
-					title : '식당 위치'
-				});
-				
-				geocoder.geocode({'latLng': pos2}, function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
-					      if (results[0]) {
-					    	  var restntInfoWindow = new google.maps.InfoWindow();
- 					    	  restntInfoWindow.setContent('식당 위치 : ' + results[0].formatted_address);
- 					    	  restntInfoWindow.open(map, restntMarker);
-					      } else {
-					        alert('결과를 찾을 수 없습니다.');
-					      }
-					    } else {
-					      alert('Geocoder failed due to: ' + status);
-					    }
-				});
-				
-				//var restntInfoWindow = new google.maps.InfoWindow({map: map, position: pos2, content: '식당 위치'});
-				
+								var searchRadius = {
+									strokeColor : '#00FF00',
+									strokeOpacity : 0.8,
+									strokeWeight : 2,
+									fillColor : '#00FF00',
+									fillOpacity : 0.25,
+									map : map,
+									center : pos,
+									radius : sRadius
+								};
 
-				map.setCenter(pos);
-			}, function() {
-				handleNoGeolocation(true);
-			});
+								// Add the circle for this city to the map.
+								searchCircle = new google.maps.Circle(
+										searchRadius);
+
+								do {
+									randomLatitude = Math.random() + 37;
+									randomLongitude = Math.random() + 127;
+									sDistance = calcDistance(myLatitude,
+											myLongitude, randomLatitude,
+											randomLongitude);
+								} while (sDistance > sRadius);
+
+								var pos2 = new google.maps.LatLng(
+										randomLatitude, randomLongitude);
+
+								var restntMarker = new google.maps.Marker({
+									position : pos2,
+									map : map,
+									title : '식당 위치'
+								});
+
+								geocoder
+										.geocode(
+												{
+													'latLng' : pos2
+												},
+												function(results, status) {
+													if (status == google.maps.GeocoderStatus.OK) {
+														if (results[0]) {
+															var restntInfoWindow = new google.maps.InfoWindow();
+															restntInfoWindow
+																	.setContent('식당 위치 : '
+																			+ results[0].formatted_address);
+															restntInfoWindow
+																	.open(map,
+																			restntMarker);
+														} else {
+															alert('결과를 찾을 수 없습니다.');
+														}
+													} else {
+														alert('Geocoder failed due to: '
+																+ status);
+													}
+												});
+
+								//var restntInfoWindow = new google.maps.InfoWindow({map: map, position: pos2, content: '식당 위치'});
+
+								map.setCenter(pos);
+							}, function() {
+								handleNoGeolocation(true);
+							});
 		} else {
 			handleNoGeolocation(false);
 		}
-		
+
 	}
 
 	function handleNoGeolocation(errorFlag) {
