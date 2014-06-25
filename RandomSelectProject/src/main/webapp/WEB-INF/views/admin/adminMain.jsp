@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,13 +16,13 @@
 		document.getElementById("GoSelect").submit();
 	}
 </script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
 	<form id="GoSelect">
-		<input type="button" value="íšŒì›ê´€ë¦¬" onclick="memberGo()"> 
-		<input type="button" value="ì‹ë‹¹ê´€ë¦¬" onclick="restntGo()">
+		<input type="button" value="È¸¿ø°ü¸®" onclick="memberGo()"> 
+		<input type="button" value="½Ä´ç°ü¸®" onclick="restntGo()">
 	</form>
 </body>
 </html>

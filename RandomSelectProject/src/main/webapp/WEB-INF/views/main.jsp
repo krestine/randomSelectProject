@@ -1,51 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Л∙└К╛╢Й╠╟К┌≤</title>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>╬ф╧╚╟еЁ╙</title>
 </head>
 <body>
-
-<<<<<<< HEAD
 	<h1> Hello world!  </h1>
-
-
-<<<<<<< HEAD
-	<a href="/myapp/member/login.do">О©╫н╠О©╫О©╫О©╫</a>
-	<a href="/myapp/member/register.do">х╦О©╫О©╫О©╫О©╫</a>
-	<a href="/myapp/randomSelect/selectResult.do">О©╫ф╧О©╫О©╫еЁО©╫</a>
-	<a href="/myapp/community/mateList.do">д©О©╫б╢О©╫ф╪</a>
-	<a href="/myapp/ladder/ladderMake.do">О©╫О©╫О©╫р╨О©╫</a>
-	<a href="/myapp/setting/setting.do">О©╫О©╫О©╫О©╫</a>
-
-=======
-	О©╫О©╫ О©╫О©╫О©╫О©╫ view О©╫ь©О©╫ О©╫ж╢О©╫ О©╫О©╫О©╫О©╫
-=======
-	<a href="loginForm.do">О©╫н╠О©╫О©╫О©╫</a>
-	<a href="registerForm.do">х╦О©╫О©╫О©╫О©╫</a>
-	<a href="selectResult.do">О©╫ф╧О©╫О©╫еЁО©╫</a>
-	<a href="mateList.do">д©О©╫б╢О©╫ф╪</a>
-	<a href="ladderMake.do">О©╫О©╫О©╫р╨О©╫</a>
-	<a href="setting.do">О©╫О©╫О©╫О©╫</a>
-=======
-=======
-=======
-	<h1>Hello world!</h1>
->>>>>>> 525652d6f9db6d045074977293957ec014b94e1f
->>>>>>> 0407f5a45bb5675d5f5c1fe4d5ccb9b247759b32
-	<a href="loginForm.do">К║°Й╥╦Л²╦</a>
-	<a href="registerForm.do">М ▄Л⌡░Й╟─Л·┘</a>
-	<a href="selectResult.do">Л∙└К╛╢Й╠╟К┌≤</a>
-	<a href="mateList.do">Л╩╓К╝╓К▀┬М▀╟</a>
-	<a href="ladderMake.do">КЁ╣К╤┬КЁ╣</a>
-	<a href="setting.do">Л└╓Л═∙</a>
-	<a href="myInfoForm.do">К┌╢Л═∙КЁ╢</a>
-
-
-
-
+	<a href="/myapp/member/login.do">╥н╠вюн</a>
+	<a href="/myapp/member/register.do">х╦©Ь╟║ют</a>
+	<a href="/myapp/randomSelect/selectResult.do">╬ф╧╚╟еЁ╙</a>
+	<a href="/myapp/community/mateList.do">д©╧б╢оф╪</a>
+	<a href="/myapp/ladder/ladderMake.do">╨╧╨р╨╧</a>
+	<a href="/myapp/setting/setting.do">╪Ёа╓</a>
 
 </body>
 </html>
