@@ -5,8 +5,7 @@
 	
 	<!-- 회원 : 친구 리스트 -->
 	<select id="getMateListByMateId" parameterType="MateDTO" resultType="MateDTO">
-		select * from mate where 
-		memid=#{mateId}
+		select * from mate 	
 	</select>
 	
 	<!-- 회원: 친구 아이디 -->
