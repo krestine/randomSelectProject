@@ -8,7 +8,7 @@
 <title>설정</title>
 </head>
 <body>
-	<form action="">
+	<form action="settingProc.do" method="post">
 		검색 설정: 도보 <br> <select name="walkRange">
 			<c:forEach items="${walkRanges}" var="walkRange">
 				<option>${walkRange.walkRange}</option>
@@ -18,12 +18,12 @@
 				<option>${carRange.carRange}</option>
 			</c:forEach>
 		</select> <br> <br> 검색 설정 : 제외메뉴 <br> 
-			<c:forEach items="${excMenus}" var="excMenu">
-				<input type="checkbox" value="${excMenu.excMenu}" name="${excMenu.excMenu}">${excMenu.excMenu}
+			<c:forEach items="${excMenus}" var="excMenu" varStatus="num">
+				<input type="checkbox" value="${num.index}" name="menus">${excMenu.excMenu}
 				<br>
 			</c:forEach>
 		<br>
-		
+		<input type="submit" value="저장" >	
 	</form>
 
 

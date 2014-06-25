@@ -8,8 +8,11 @@
 <title>회원 명단</title>
 </head>
 <body>
+	회원 아이디&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///    회원 이름                  ///     회원 등급                    ///     블랙 리스트
+	<br>
 	<c:forEach items="${members}" var="member" >
-	${member.memId} /// ${member.memName} /// ${member.memGrade} /// ${member.black} 
+	${member.memId} /// ${member.memName}&nbsp;&nbsp;&nbsp;&nbsp; /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${member.memGrade}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/// ${member.black} 
+	<br>
 	</c:forEach>
 </body>
 </html>
