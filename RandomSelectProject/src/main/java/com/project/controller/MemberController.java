@@ -55,11 +55,12 @@ public class MemberController {
 				session = request.getSession(true);
 			}
 			session.setAttribute("loginUser", loginUser);
-			//model.addAttribute("loginUser", loginUser);
+			// model.addAttribute("loginUser", loginUser);
+			
 			return "member/loginOk";
 		} else {
-			request.setAttribute("error", "아이디와 비밀번호를 확인해주세요");
-			return "loginForm.do";
+			request.setAttribute("errmessage", "아이디와 비밀번호를 확인해주세요");
+			return "forward:loginForm.do";
 		}
 
 	}
@@ -124,7 +125,7 @@ public class MemberController {
 			memberService.setMemPasswdByMemberTerms(memberDto);
 		}
 		memberService.setMemberInfoByMemberTerms(memberDto);
-		return "/myInfoForm.do";
+		return "forward:myInfoForm.do";
 	}
 
 	// 탈퇴
