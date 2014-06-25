@@ -135,7 +135,10 @@
 	<select id="getMemberListByBlack" resultType="MemberDTO">
 		select memid,memname,memgrade,black from member where
 		black = 1
+
 	</select>
+
+	
 
 	<!--관리자 : 회원 정보 수정 -->
 	<update id="setMemberInfo" parameterType="MemberDTO">
