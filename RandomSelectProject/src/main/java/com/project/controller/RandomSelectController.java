@@ -22,7 +22,7 @@ public class RandomSelectController {
 	
 	@RequestMapping("/selectResult.do")
 	public String randomSelectMain(Model model, HttpServletRequest request){
-		HttpSession session = request.getSession();
+/*		HttpSession session = request.getSession();
 		MemberDTO memberDto = (MemberDTO) session.getAttribute("memberDto");
 		if(memberDto==null){
 			model.addAttribute("loginMode", "0");
@@ -31,7 +31,7 @@ public class RandomSelectController {
 			model.addAttribute("loginMode", memberDto.getMemGrade());
 		}
 		List<RestntDTO> restntList = restntService.getRestntList();
-		model.addAttribute("restntList", restntList);
+		model.addAttribute("restntList", restntList);*/
 		return "randomSelect/selectResult";
 	}
 
