@@ -8,13 +8,13 @@
 </head>
 <body>
 
-<<<<<<< HEAD
+
 	<h1> Hello world!  </h1>
 
 
-=======
+
 	<h1>Hello world!</h1>
->>>>>>> 525652d6f9db6d045074977293957ec014b94e1f
+
 	<a href="loginForm.do">로그인</a>
 	<a href="registerForm.do">회원가입</a>
 	<a href="selectResult.do">아무거나</a>
