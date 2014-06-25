@@ -49,8 +49,9 @@ body {
 	
 	
 	function initialize() {
+		geocoder = new google.maps.Geocoder();
 		var myOptions = {
-			zoom : 15,
+			zoom : 14,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
 		map = new google.maps.Map(document.getElementById('map_canvas'),
@@ -69,12 +70,26 @@ body {
 				var pos = new google.maps.LatLng(myLatitude, myLongitude);
 
 				//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: '내 위치'});
-				var marker = new google.maps.Marker({
+				var myMarker = new google.maps.Marker({
 					position : pos,
 					map : map,
 					title : '내 위치'
 				});
 
+				geocoder.geocode({'latLng': pos}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+					      if (results[0]) {
+					    	  var myInfoWindow = new google.maps.InfoWindow();
+ 					    	  myInfoWindow.setContent('내 위치 : ' + results[0].formatted_address);
+ 					    	  myInfoWindow.open(map, myMarker);
+					      } else {
+					        alert('결과를 찾을 수 없습니다.');
+					      }
+					    } else {
+					      alert('Geocoder failed due to: ' + status);
+					    }
+				});
+				
 				var searchRadius = {
 					strokeColor : '#00FF00',
 					strokeOpacity : 0.8,
@@ -97,7 +112,28 @@ body {
 				} while(sDistance > sRadius);
 				
 				var pos2 = new google.maps.LatLng(randomLatitude, randomLongitude);
-				var infowindow = new google.maps.InfoWindow({map: map, position: pos2, content: '식당 위치'});
+				
+				var restntMarker = new google.maps.Marker({
+					position : pos2,
+					map : map,
+					title : '식당 위치'
+				});
+				
+				geocoder.geocode({'latLng': pos2}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+					      if (results[0]) {
+					    	  var restntInfoWindow = new google.maps.InfoWindow();
+ 					    	  restntInfoWindow.setContent('식당 위치 : ' + results[0].formatted_address);
+ 					    	  restntInfoWindow.open(map, restntMarker);
+					      } else {
+					        alert('결과를 찾을 수 없습니다.');
+					      }
+					    } else {
+					      alert('Geocoder failed due to: ' + status);
+					    }
+				});
+				
+				//var restntInfoWindow = new google.maps.InfoWindow({map: map, position: pos2, content: '식당 위치'});
 				
 
 				map.setCenter(pos);
@@ -107,6 +143,7 @@ body {
 		} else {
 			handleNoGeolocation(false);
 		}
+		
 	}
 
 	function handleNoGeolocation(errorFlag) {
@@ -124,14 +161,11 @@ body {
 			content : content
 		};
 
-		var infowindow = new google.map.InfoWindow(options);
+		var errorInfoWindow = new google.map.InfoWindow(options);
 		map.setCenter(options.position);
 	}
 
 	//google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-<script type="text/javascript">
-
 </script>
 </head>
 <body onload="initialize()">
