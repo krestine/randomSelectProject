@@ -2,12 +2,17 @@ package com.project.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.crsh.shell.impl.command.system.repl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+
 
 
 
@@ -28,7 +33,8 @@ public class SettingController {
 	
 	@Autowired
 	private SettingService settingService;
-	
+	private String menuCode = "00000000000000";
+	private StringBuffer stringBuffer;
 	@RequestMapping(value = "/settingForm.do", method =RequestMethod.POST)
 	String settingForm(Model model){
 		List<SettingDTO> walkRanges = settingService.getWalkRange();
@@ -42,8 +48,14 @@ public class SettingController {
 	}
 	
 	@RequestMapping(value = "/settingProc.do", method = RequestMethod.POST)
-	String settingProc(Model model, MemberDTO memberDto){
-		memberService.setOptionInfoByMemId(memberDto);
+	String settingProc(Model model, MemberDTO memberDto, HttpServletRequest request){
+		System.out.println("왓수?");
+		stringBuffer.append(menuCode);
+		String[] menus = request.getParameterValues("menus");
+		for(String str:menus){
+		System.out.println(str);
+		}
+		/*memberService.setOptionInfoByMemId(memberDto);*/
 		return "setting/setting";
 	}
 	
