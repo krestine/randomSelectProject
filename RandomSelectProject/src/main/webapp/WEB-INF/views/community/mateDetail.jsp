@@ -12,6 +12,6 @@
 <h1>mateDetail</h1>
 <a href="mateListProc.do">친구리스트</a>
 
-
+<a href=randomSelect/main.do>메인으로</a>
 </body>
 </html>

@@ -12,5 +12,6 @@
 
 
 <a href="restntListProc.do">리스트로</a>
+<a href=randomSelect/main.do>메인으로</a>
 </body>
 </html>

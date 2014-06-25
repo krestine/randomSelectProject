@@ -22,14 +22,10 @@
 <body>
 	<h1>mateList</h1> 
 	<form id="community" method="POST">
-	<input type="button" id="getMateInfoByMemId" onclick="mateDetail()" value="친구 상세보기" />
-	<input type="button" id="getRestntList" onclick="restntList()" value="식당 리스트" />
+		<input type="button" onclick="mateDetail()" value="친구 상세보기" />
+		<input type="button" onclick="restntList()" value="식당 리스트" />
 	</form>
-=======
-<a href="mateDetailProc.do">친구 상세정보</a>
+	<a href=randomSelect/main.do>메인으로</a>
 	
-<a href="restntListProc.do">식당 리스트</a>
-
-
 </body>
 </html>

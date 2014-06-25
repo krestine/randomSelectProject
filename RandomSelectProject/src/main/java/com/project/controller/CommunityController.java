@@ -56,7 +56,7 @@ public class CommunityController {
 	}
 		
 	// 회원 : 식당 상세정보
-	@RequestMapping("/restntDetailProc.do")
+	@RequestMapping(value="/restntDetailProc.do", method = RequestMethod.POST)
 	public String restntDetailProc(Model model, String restntId){
 		RestntDTO restnt = restntService.getRestntInfoById(restntId);
 		model.addAttribute("restnt", restnt);
