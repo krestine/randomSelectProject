@@ -49,15 +49,25 @@ public class SettingController {
 	
 	@RequestMapping(value = "/settingProc.do", method = RequestMethod.POST)
 	String settingProc(Model model, MemberDTO memberDto, HttpServletRequest request){
-		System.out.println("왓수?");
-		stringBuffer.append(menuCode);
+		System.out.println("settingProc.do 실행");
+		System.out.println(menuCode);
 		String[] menus = request.getParameterValues("menus");
 		for(String str:menus){
 		System.out.println(str);
+		menuCodeGenerater(str);
 		}
 		/*memberService.setOptionInfoByMemId(memberDto);*/
 		return "setting/setting";
 	}
 	
+	String menuCodeGenerater(String str){
+		int index =Integer.parseInt(str);
+		stringBuffer= new StringBuffer(menuCode);
+		stringBuffer.setCharAt(index, '1');
+		menuCode=stringBuffer.toString();
+		System.out.println(menuCode);
+		
+		return menuCode;
+	}
 
 }
