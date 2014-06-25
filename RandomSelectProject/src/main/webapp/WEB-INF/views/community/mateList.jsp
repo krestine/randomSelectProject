@@ -25,7 +25,7 @@
 		<input type="button" onclick="mateDetail()" value="친구 상세보기" />
 		<input type="button" onclick="restntList()" value="식당 리스트" />
 	</form>
-	<a href=randomSelect/main.do>메인으로</a>
+	<a href=randomSelect/main.do>메인</a>
 	
 </body>
 </html>
