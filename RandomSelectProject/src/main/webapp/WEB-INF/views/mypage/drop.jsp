@@ -9,6 +9,9 @@
 <title>drop.jsp</title>
 </head>
 <body>
+	탈퇴한 아이디는 영구적으로 사용불가합니다.
+	<br> 재가입시 다른 아이디를 사용해 주세요.
+	<br>
 	<form action="dropProc.do" method="post">
 		<table align="center" border="0" cellspacing="0" cellpadding="0"
 			bgcolor="white">
@@ -19,7 +22,11 @@
 			</tr>
 
 			<tr>
+				<td><input type="hidden" name="memId"
+					value="${loginUser.memId}"></td>
 				<td><input type="submit" value="회원탈퇴"></td>
+			</tr>
 		</table>
+	</form>
 </body>
 </html>

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<%
-		session.getAttribute("memId");
+		session.getAttribute("loginUser");
 	%>
 	${loginUser.memName}회원님 환영합니다.
 	<form action="myInfoForm.do" method="post">

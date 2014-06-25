@@ -7,7 +7,7 @@
 <title>login.jsp</title>
 </head>
 <body>
-	${error}
+	${errmessage}
 	<form action="loginProc.do" method="post">
 		<table align="center" border="0" cellspacing="0" cellpadding="0"
 			bgcolor="white">

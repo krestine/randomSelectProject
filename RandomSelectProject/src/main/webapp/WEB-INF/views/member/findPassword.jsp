@@ -7,7 +7,7 @@
 <title>findPassword.jsp</title>
 </head>
 <body>
-	<form action="/findPasswordProc.do" method="post">
+	<form action="findPasswordProc.do" method="post">
 		<table align="center" border="0" cellspacing="0" cellpadding="0"
 			bgcolor="white">
 			<tr>

@@ -5,9 +5,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>findId.jsp</title>
+<script type="text/javascript">
+	function findId() {
+		document.getElementById("form").action = "findIdProc.do";
+		document.getElementById("form").submit();
+	}
+	function findPw() {
+		document.getElementById("form").action = "findPasswordForm.do";
+		document.getElementById("form").submit();
+	}
+</script>
 </head>
 <body>
-	<form action="findIdProc.do" method="post">
+	<form id="form" method="post">
 		<table align="center" border="0" cellspacing="0" cellpadding="0"
 			bgcolor="white">
 			<tr>
@@ -23,8 +33,8 @@
 				<td><input type="text" name="memMobile"></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="아이디찾기"></td>
-				<td><button onclick="findPasswordForm.do">비밀번호찾기</button></td>
+				<td><input type="button" onclick="findId()" value="아이디찾기"></td>
+				<td><input type="button" onclick="findPw()" value="비밀번호찾기"></td>
 			</tr>
 		</table>
 	</form>
