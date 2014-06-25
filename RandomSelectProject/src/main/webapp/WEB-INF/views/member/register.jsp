@@ -10,7 +10,8 @@
 		var mM1 = document.getElementById('mM1');
 		var mM2 = document.getElementById('mM2');
 		var mM3 = document.getElementById('mM3');
-		var memMobile = mM1.value + "-" + mM2.value + "-" + mM3.value;
+		var mMT = mM1.value + "-" + mM2.value + "-" + mM3.value;
+		document.form.memMobile.value = mMT.value;
 		return join();
 	}
 	function join() {
@@ -55,7 +56,7 @@
 						<option value="019">019</option>
 				</select> - <input type="text" id="mM2" size="4" maxlength="4"> - <input
 					type="text" id="mM3" size="4" maxlength="4"> <input
-					type="hidden" name="memMobile" id="memMobile"></td>
+					type="hidden" name="memMobile" id="memMobile" value="${mMT}"></td>
 			</tr>
 			<tr>
 				<td><input type="button" onclick="javascript:formCheck()"

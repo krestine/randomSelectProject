@@ -39,14 +39,11 @@
 	<a href="mateListProc.do">커뮤니티</a>
 	<a href="ladderMake.do">복불복</a>
 	<a href="settingForm.do">설정</a> 
-<<<<<<< HEAD
 	<a href="evaluate.do">평가 </a>
 
-=======
 	<form id="setting" method="post">
 	<input type="button" onclick="settingGo()" value="설정 ">
 	<input type="button" onclick="adminGo()" value="관리">
 	</form>
->>>>>>> 2f5fbfd6a272b8074ee854b0a67dd755d0d095be
 </body>
 </html>
