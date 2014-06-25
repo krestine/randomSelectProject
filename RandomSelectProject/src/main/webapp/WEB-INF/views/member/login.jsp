@@ -7,7 +7,7 @@
 <title>login.jsp</title>
 </head>
 <body>
-
+	${errmessage}
 	<form action="loginProc.do" method="post">
 		<table align="center" border="0" cellspacing="0" cellpadding="0"
 			bgcolor="white">
@@ -23,11 +23,7 @@
 			</tr>
 
 			<tr>
-				<td><input type="checkbox" name="rememId"></td>
-				<td>아이디기억</td>
-			</tr>
-
-			<tr>
+				<td><input type="checkbox" name="rememId">아이디기억</td>
 				<td><input type="submit" value="로그인"></td>
 			</tr>
 

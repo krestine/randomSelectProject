@@ -1,5 +1,9 @@
 package com.project.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.eclipse.jetty.jndi.local.localContextRoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +29,11 @@ public class MemberController {
 	@RequestMapping(value = "registerProc.do", method = RequestMethod.POST)
 	public String registerProc(Model model, MemberDTO memberDto) {
 		System.out.println("registerProc()");
+		MemberDTO userId = memberService.getMyInfoByMemId(memberDto);
+		if (userId != null) {
+			model.addAttribute("errmessage", "이미 사용하고 있는 아이디입니다.");
+			return "forward:registerForm.do";
+		}
 		memberService.putMember(memberDto);
 		return "member/registerOk";
 	}
@@ -37,12 +46,28 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "loginProc.do", method = RequestMethod.POST)
-	public String loginProc(Model model, MemberDTO memberDto) {
+	public String loginProc(Model model, MemberDTO memberDto,
+			HttpServletRequest request) {
 		System.out.println("loginProc()");
+
+		HttpSession session = request.getSession();
+
 		MemberDTO loginUser = memberService
 				.getMemberInfoByMemberTerms(memberDto);
-		model.addAttribute("loginUser", loginUser);
-		return "member/loginOk";
+
+		if (loginUser != null) {
+			if (!session.isNew()) {
+				session = request.getSession(true);
+			}
+			session.setAttribute("loginUser", loginUser);
+			// model.addAttribute("loginUser", loginUser);
+
+			return "member/loginOk";
+		} else {
+			request.setAttribute("errmessage", "아이디와 비밀번호를 확인해주세요");
+			return "forward:loginForm.do";
+		}
+
 	}
 
 	// 아이디찾기
@@ -56,6 +81,10 @@ public class MemberController {
 	public String findIdProc(Model model, MemberDTO memberDto) {
 		System.out.println("findIdProc()");
 		String userId = memberService.getMemIdByMemberTerms(memberDto);
+		if (userId == null) {
+			model.addAttribute("errmessage", "정보를 다시 확인해주세요");
+			return "forward:findIdForm.do";
+		}
 		model.addAttribute("userId", userId);
 		return "member/findIdOk";
 	}
@@ -72,12 +101,16 @@ public class MemberController {
 		System.out.println("findPasswordProc()");
 		String userPassword = memberService
 				.getMemPasswdByMemberTerms(memberDto);
+		if (userPassword == null) {
+			model.addAttribute("errmessage", "정보를 다시 확인해주세요");
+			return "forward:findPasswordForm.do";
+		}
 		model.addAttribute("userPassword", userPassword);
 		return "member/findPasswordOk";
 	}
 
 	// 내정보
-	@RequestMapping("myInfoForm.do")
+	@RequestMapping(value = "myInfoForm.do", method = RequestMethod.POST)
 	public String myInfoForm(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoForm()");
 		MemberDTO userInfo = memberService.getMyInfoByMemId(memberDto);
@@ -105,7 +138,7 @@ public class MemberController {
 			memberService.setMemPasswdByMemberTerms(memberDto);
 		}
 		memberService.setMemberInfoByMemberTerms(memberDto);
-		return "/myInfoForm.do";
+		return "forward:myInfoForm.do";
 	}
 
 	// 탈퇴

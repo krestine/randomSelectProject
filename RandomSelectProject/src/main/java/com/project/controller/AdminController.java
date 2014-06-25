@@ -3,6 +3,7 @@ package com.project.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +18,7 @@ import com.project.service.MenuService;
 import com.project.service.RestntService;
 import com.project.service.SettingService;
 
-
+@Controller
 public class AdminController {
 
 	@Autowired
@@ -49,31 +50,34 @@ public class AdminController {
 	String memberSearchByIdProc(Model model, String memId) {
 		List<MemberDTO> members = memberService.getMemberListById(memId);
 		model.addAttribute("members", members);
-		return "memberList";
+		return "admin/memberList";
 	}
 
 	// 이름으로 회원검색
 	@RequestMapping(value = "/memberSearchByNameProc.do", method = RequestMethod.POST)
 	String memberSearchByNameProc(Model model, String memName) {
-		List<MemberDTO> members = memberService.getMemberListById(memName);
+		System.out.println(memName);
+		List<MemberDTO> members = memberService.getMemberListByName(memName);
 		model.addAttribute("members", members);
-		return "memberList";
+		return "admin/memberList";
 	}
 
 	// 등급으로 회원 검색
 	@RequestMapping(value = "/memberSearchByGradeProc.do", method = RequestMethod.POST)
 	String memberSearchByGradeProc(Model model, String memGrade) {
-		List<MemberDTO> members = memberService.getMemberListById(memGrade);
+		System.out.println(memGrade);
+		List<MemberDTO> members = memberService.getMemberListByGrade(memGrade);
 		model.addAttribute("members", members);
-		return "memberList";
+		return "admin/memberList";
 	}
 
 	// 블랙 으로 회원 검색
 	@RequestMapping(value = "/memberSearchByBlackProc.do", method = RequestMethod.POST)
-	String memberSearchByBlackProc(Model model, String Black) {
-		List<MemberDTO> members = memberService.getMemberListById(Black);
+	String memberSearchByBlackProc(Model model, String black) {
+		System.out.println(black);
+		List<MemberDTO> members = memberService.getMemberListByBlack(black);
 		model.addAttribute("members", members);
-		return "memberList";
+		return "admin/memberList";
 	}
 
 	// 회원 리스트에서 아이디 클릭 -> 회원의 평가 정보 리스트 표시 페이지
@@ -82,19 +86,19 @@ public class AdminController {
 		List<EvaluateDTO> memberEvaluates =  evaluateService
 				.getEvaluateListByMemId(memId);
 		model.addAttribute("memberEvaluates", memberEvaluates);
-		return "memberEvaluateListAdmin";
+		return "admin/memberEvaluateListAdmin";
 	}
 
 	// 식당 관리 페이지
 	@RequestMapping(value = "/restntManantProc.do")
 	String restntManantProc(Model model) {
-		return "restntManant";
+		return "admin/restntManant";
 	}
 
 	// 식당 선택 페이지 주소 필터 : 패러미터, 셀렉트 박스와 관련된 query 문 추가 해야함
 	@RequestMapping(value = "/restntSelectForm.do")
 	String restntSelectForm(Model model) {
-		return "restntSelect";
+		return "admin/restntSelect";
 	}
 
 	// 주소 필터 적용-> 검색 결과 : 식당 리스트
@@ -103,7 +107,7 @@ public class AdminController {
 		List<RestntDTO> restnts = restntService
 				.getRestntListByAddressCode(addressCode);
 		model.addAttribute("restnts", restnts);
-		return "restntListAdmin";
+		return "admin/restntListAdmin";
 
 	}
 
@@ -112,7 +116,7 @@ public class AdminController {
 	String restntInfoForm(Model model, String restntId) {
 		RestntDTO restnt = restntService.getRestntInfoById(restntId);
 		model.addAttribute("restnt", restnt);
-		return "restntInfo";
+		return "admin/restntInfo";
 	}
 
 	// 식당 정보 추가
@@ -122,7 +126,7 @@ public class AdminController {
 		RestntDTO restnt = restntService.getRestntInfoById(restntDto
 				.getRestntId());
 		model.addAttribute("restnt", restnt);
-		return "restntInfo";
+		return "admin/restntInfo";
 	}
 
 	// 식당 정보 수정
@@ -132,14 +136,14 @@ public class AdminController {
 		RestntDTO restnt = restntService.getRestntInfoById(restntDto
 				.getRestntId());
 		model.addAttribute("restnt", restnt);
-		return "restntInfo";
+		return "admin/restntInfo";
 	}
 
 	// 식당 정보 삭제
 	@RequestMapping(value = "/restntInfoDelete.do", method = RequestMethod.POST)
 	String restntInfoDelete(Model model, String restntId) {
 		restntService.dropRestntById(restntId);
-		return "restntInfo";
+		return "admin/restntInfo";
 	}
 
 	// 메뉴 리스트
@@ -147,7 +151,7 @@ public class AdminController {
 	String menuListProc(Model model, MenuDTO menuDto) {
 		List<MenuDTO> menus = menuService.getMenuListByRestntId(menuDto);
 		model.addAttribute("menus", menus);
-		return "menuList";
+		return "admin/menuList";
 	}
 
 	// 메뉴 상세 정보표시
@@ -155,7 +159,7 @@ public class AdminController {
 	String menuManantProc(Model model,String menuId) {
 		MenuDTO menu = menuService.getMenuInfoByMenuId(menuId);
 		model.addAttribute("menu",  menu);
-		return "menuManant";
+		return "admin/menuManant";
 	}
 
 	// 메뉴 추가
@@ -164,7 +168,7 @@ public class AdminController {
 		menuService.putMenu(menuDto);
 		MenuDTO menu = menuService.getMenuInfoByMenuId(menuDto.getMenuId());
 		model.addAttribute("menu",  menu);
-		return "menuManant";
+		return "admin/menuManant";
 	}
 
 	// 메뉴 수정
@@ -173,13 +177,13 @@ public class AdminController {
 		menuService.setMenuByMenuId(menuDto);
 		MenuDTO menu = menuService.getMenuInfoByMenuId(menuDto.getMenuId());
 		model.addAttribute("menu",  menu);
-		return "menuManant";
+		return "admin/menuManant";
 	}
 
 	// 메뉴 삭제
 	@RequestMapping(value = "/menuInfoDelete.do", method = RequestMethod.POST)
 	String menuInfoDelete(Model model,String menuId){
 		menuService.dropMenuByMenuId(menuId);
-		return "menuManant";
+		return "admin/menuManant";
 	}
 }

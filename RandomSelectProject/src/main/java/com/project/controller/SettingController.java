@@ -3,9 +3,13 @@ package com.project.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+
 
 
 
@@ -16,6 +20,7 @@ import com.project.domain.SettingDTO;
 import com.project.service.MemberService;
 import com.project.service.SettingService;
 
+@Controller
 public class SettingController {
 	
 	@Autowired
@@ -24,7 +29,7 @@ public class SettingController {
 	@Autowired
 	private SettingService settingService;
 	
-	@RequestMapping(value = "/settingForm.do")
+	@RequestMapping(value = "/settingForm.do", method =RequestMethod.POST)
 	String settingForm(Model model){
 		List<SettingDTO> walkRanges = settingService.getWalkRange();
 		List<SettingDTO> carRanges = settingService.getCarRange();
