@@ -3,18 +3,54 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+html {
+	height: 100%
+}
+
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0
+}
+
+#map_canvas {
+	height: 100%
+}
+</style>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=true&language=ko">
 	
 </script>
 <script type="text/javascript">
 	var myLatitude, myLongitude;
+	var randomLatitude, randomLongitude;
+	var sDistance;
 	var map;
 	var sRadius = 1000;
+	
+	 function calcDistance(lat1, lon1, lat2, lon2){
+	        var EARTH_R, Rad, radLat1, radLat2, radDist; 
+	        var distance, ret;
 
+	        EARTH_R = 6371000.0;
+	        Rad = Math.PI/180;
+	        radLat1 = Rad * lat1;
+	        radLat2 = Rad * lat2;
+	        radDist = Rad * (lon1 - lon2);
+	        
+	        distance = Math.sin(radLat1) * Math.sin(radLat2);
+	        distance = distance + Math.cos(radLat1) * Math.cos(radLat2) * Math.cos(radDist);
+	        ret = EARTH_R * Math.acos(distance);
+
+	        return  Math.round(ret);
+	    }
+	
+	
 	function initialize() {
 		var myOptions = {
-			zoom : 12,
+			zoom : 15,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
 		map = new google.maps.Map(document.getElementById('map_canvas'),
@@ -52,6 +88,17 @@
 
 				// Add the circle for this city to the map.
 				searchCircle = new google.maps.Circle(searchRadius);
+				
+				
+				do{
+					randomLatitude = Math.random() + 37;
+					randomLongitude = Math.random() + 127;
+					sDistance = calcDistance(myLatitude, myLongitude, randomLatitude, randomLongitude);
+				} while(sDistance > sRadius);
+				
+				var pos2 = new google.maps.LatLng(randomLatitude, randomLongitude);
+				var infowindow = new google.maps.InfoWindow({map: map, position: pos2, content: '식당 위치'});
+				
 
 				map.setCenter(pos);
 			}, function() {
@@ -81,13 +128,13 @@
 		map.setCenter(options.position);
 	}
 
-	google.maps.event.addDomListener(window, 'load', initialize);
+	//google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 <script type="text/javascript">
 
 </script>
 </head>
-<body>
-	<div id="map_canvas" style="width: 600; height: 480"></div>
+<body onload="initialize()">
+	<div id="map_canvas" style="width: 100%; height: 100%"></div>
 </body>
 </html>

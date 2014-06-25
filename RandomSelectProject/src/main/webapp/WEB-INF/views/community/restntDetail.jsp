@@ -7,10 +7,10 @@
 <title>restntDetail</title>
 </head>
 <body>
-<h1>restnt</h1>
+<h1>restntDetail</h1>
 
-식당 상세정보
 
-<a href="restntListProc.do">리스트</a>
+
+<a href="restntListProc.do">리스트로</a>
 </body>
 </html>
