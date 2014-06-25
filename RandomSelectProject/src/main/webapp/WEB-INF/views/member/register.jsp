@@ -5,6 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>register.jsp</title>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 	${errmessage}
@@ -33,7 +36,16 @@
 			</tr>
 			<tr>
 				<td>전화번호</td>
-				<td><input type="text" name="memMobile"></td>
+				<td><select id="mM1">
+						<option value="010" selected>010</option>
+						<option value="011" selected>011</option>
+						<option value="016" selected>016</option>
+						<option value="017" selected>017</option>
+						<option value="018" selected>018</option>
+						<option value="019" selected>019</option>
+				</select> - <input type="text" id="mM2" size="4" maxlength="4"> - <input
+					type="text" id="mM3" size="4" maxlength="4"> <input
+					type="hidden" name="memMobile"></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="회원가입"></td>
