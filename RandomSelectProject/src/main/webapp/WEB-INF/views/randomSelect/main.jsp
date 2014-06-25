@@ -5,6 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인 페이지</title>
+<script type="text/javascript">
+	
+	function settingGo() {
+		
+		document.getElementById("setting").action = "settingForm.do";
+		document.getElementById("setting").submit();
+	}
+
+	
+</script>
 </head>
 <body>
 	<!-- 구성회를 매우 쳐라 -->
@@ -26,5 +36,8 @@
 	<a href="mateListProc.do">커뮤니티</a>
 	<a href="ladderMake.do">복불복</a>
 	<a href="settingForm.do">설정</a> 
+	<form id="setting" method="post">
+	<input type="button" onclick="settingGo()" value="설정 ">
+	</form>
 </body>
 </html>
