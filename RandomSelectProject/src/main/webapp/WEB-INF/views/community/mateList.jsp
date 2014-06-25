@@ -18,6 +18,7 @@
 
 <title>mateList</title>
 
+<<<<<<< HEAD
 
 </head>
 <body>
@@ -26,6 +27,11 @@
 	<input type="button" id="getMateInfoByMemId" onclick="mateDetail()" value="친구 상세보기" />
 	<input type="button" id="getRestntList" onclick="restntList()" value="식당 리스트" />
 	</form>
+=======
+<a href="mateDetailProc.do">친구 상세정보</a>
+	
+<a href="restntListProc.do">식당 리스트</a>
+>>>>>>> e4d9167483ebb3648af7703d8af045f1778a7b61
 
 </body>
 </html>

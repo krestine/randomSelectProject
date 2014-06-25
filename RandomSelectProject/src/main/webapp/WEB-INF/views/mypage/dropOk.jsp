@@ -7,6 +7,6 @@
 <title>dropCheck.jsp</title>
 </head>
 <body>
-
+탈퇴되었습니다.
 </body>
 </html>

@@ -1,5 +1,9 @@
 package com.project.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.eclipse.jetty.jndi.local.localContextRoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,12 +41,27 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "loginProc.do", method = RequestMethod.POST)
-	public String loginProc(Model model, MemberDTO memberDto) {
+	public String loginProc(Model model, MemberDTO memberDto,
+			HttpServletRequest request) {
 		System.out.println("loginProc()");
+
+		HttpSession session = request.getSession();
+
 		MemberDTO loginUser = memberService
 				.getMemberInfoByMemberTerms(memberDto);
-		model.addAttribute("loginUser", loginUser);
-		return "member/loginOk";
+
+		if (loginUser != null) {
+			if (!session.isNew()) {
+				session = request.getSession(true);
+			}
+			session.setAttribute("loginUser", loginUser);
+			//model.addAttribute("loginUser", loginUser);
+			return "member/loginOk";
+		} else {
+			request.setAttribute("error", "아이디와 비밀번호를 확인해주세요");
+			return "loginForm.do";
+		}
+
 	}
 
 	// 아이디찾기
@@ -77,7 +96,7 @@ public class MemberController {
 	}
 
 	// 내정보
-	@RequestMapping("myInfoForm.do")
+	@RequestMapping(value = "myInfoForm.do", method = RequestMethod.POST)
 	public String myInfoForm(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoForm()");
 		MemberDTO userInfo = memberService.getMyInfoByMemId(memberDto);
