@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.domain.MateDTO;
 import com.project.domain.MenuDTO;
 import com.project.domain.RestntDTO;
 import com.project.service.EvaluateService;
@@ -24,58 +25,41 @@ public class CommunityController {
 	@Autowired
 	private RestntService restntService;
 	
-	
-	
 	// 회원 : 친구 리스트
-	@RequestMapping(value = "/mateListProc.do")
-	public String mateListProc(){
+	@RequestMapping("/mateListProc.do")
+	public String mateListProc(Model model, MateDTO mateDto){
+		List<MateDTO> mates = mateService.getMateIdsByMemId(mateDto); 
+		model.addAttribute("mates", mates);
 		System.out.println("mateListProc()");
 		return "community/mateList";
 	}
 	
-	
 	// 회원 : 친구 상세정보
-	@RequestMapping(value = "/mateDetailProc.do")
-	public String mateDetailProc(){
-		
+	@RequestMapping("/mateDetailProc.do")
+	public String mateDetailProc(Model model, String mateDto){
+		MateDTO mate = mateService.getMateInfoByMemId(mateDto);
+		model.addAttribute("mate", mate);
 		System.out.println("mateDetailProc()");
 		return "community/mateDetail";
 	}
 	
-	/*//회원 : 식당 리스트
-	@RequestMapping("/restntListProc.do")
-	public ModelAndView restntListProc(Model model){
-		model.addAttribute("restntList", restntService.getRestntList());
-		System.out.println("restntListProc()");
-		return new ModelAndView("community/restntList");
-	}*/
-	
-	
+	// 회원 : 식당 리스트
 	@RequestMapping("/restntListProc.do")
 	public String restntListProc(Model model, RestntDTO restntDto){
 		List<RestntDTO> restnts = restntService.getRestntList();
 		model.addAttribute("restnts", restnts);
-		return "restntList";
+		System.out.println("restntListProc()");
+		return "community/restntList";
 	}
 		
-	
-	
-	
 	// 회원 : 식당 상세정보
 	@RequestMapping("/restntDetailProc.do")
 	public String restntDetailProc(Model model, String restntId){
 		RestntDTO restnt = restntService.getRestntInfoById(restntId);
-		
-		model.addAttribute("restnt",restnt);
+		model.addAttribute("restnt", restnt);
 		System.out.println("restntDetailProc()");
 		return "community/restntDetail";
 	
 	}
-	
-	/*@RequestMapping("/productContext.do")
-	public ModelAndView ProductContext(Model model, String productCode) {
-		  model.addAttribute("product",productService.getProduct(productCode));
-		return new ModelAndView("productContext");
-	}*/
 	
 }
