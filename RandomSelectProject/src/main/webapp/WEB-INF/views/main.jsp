@@ -22,6 +22,7 @@
 	<a href="ladderMake.do">복불복</a>
 	<a href="setting.do">설정</a>
 	<a href="myInfoForm.do">내정보</a>
+	<a href="evaluate.do">평가 </a>
 
 
 

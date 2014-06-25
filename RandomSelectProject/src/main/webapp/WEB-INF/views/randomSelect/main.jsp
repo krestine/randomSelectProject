@@ -26,5 +26,7 @@
 	<a href="mateListProc.do">커뮤니티</a>
 	<a href="ladderMake.do">복불복</a>
 	<a href="settingForm.do">설정</a> 
+	<a href="evaluate.do">평가 </a>
+
 </body>
 </html>
