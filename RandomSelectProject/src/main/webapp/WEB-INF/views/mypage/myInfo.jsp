@@ -18,8 +18,10 @@
 </head>
 <body>
 	<%
-		session.getAttribute("memId");
+		session.getAttribute("loginUser");
 	%>
+
+	${errmessage}
 	<table align="center" border="0" cellspacing="0" cellpadding="0"
 		bgcolor="white">
 
@@ -43,7 +45,10 @@
 	<form id="form" method="post">
 		<table align="center" border="0" cellspacing="0" cellpadding="0"
 			bgcolor="white">
-
+			<tr>
+				<td><input type="hidden" name="memId"
+					value="${loginUser.memId}"></td>
+			</tr>
 			<tr>
 				<td>현재비밀번호</td>
 				<td><input type="password" name="memPasswd"></td>
