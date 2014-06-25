@@ -32,6 +32,13 @@ public class RandomSelectController {
 		}
 		List<RestntDTO> restntList = restntService.getRestntList();
 		model.addAttribute("restntList", restntList);
-		return "selectResult";
+		return "randomSelect/selectResult";
 	}
+
+	@RequestMapping("/randomSelect/main.do")
+	String adminMainProc(Model model) {
+		
+		return "randomSelect/main";
+	}
+
 }

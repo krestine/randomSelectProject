@@ -6,7 +6,7 @@ import com.project.domain.MateDTO;
 
 public interface MateMapper {
 	// 회원 : 친구 리스트
-	List<MateDTO> getMateIdsByMemId(MateDTO mateDto);
+	List<MateDTO> getMateListByMateId();
 
 	// 회원 : 친구 아이디
 	MateDTO getMateIdByMemId(String mateDto);
