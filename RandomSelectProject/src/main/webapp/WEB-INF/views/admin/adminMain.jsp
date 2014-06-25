@@ -6,18 +6,18 @@
 <script type="text/javascript">
 	function memberGo() {
 
-		document.getElementById("GoSelect").action = "/memberSearchForm.do";
+		document.getElementById("GoSelect").action = "memberSearchForm.do";
 		document.getElementById("GoSelect").submit();
 	}
 
 	function restntGo() {
 
-		document.getElementById("GoSelect").action = "/restntManantProc.do";
+		document.getElementById("GoSelect").action = "restntManantProc.do";
 		document.getElementById("GoSelect").submit();
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>관리자</title>
 </head>
 <body>
 	<form id="GoSelect">

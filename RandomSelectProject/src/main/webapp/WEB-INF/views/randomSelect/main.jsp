@@ -8,8 +8,11 @@
 <script type="text/javascript">
 	
 	function settingGo() {
-		
 		document.getElementById("setting").action = "settingForm.do";
+		document.getElementById("setting").submit();
+	}
+	function adminGo() {
+		document.getElementById("setting").action = "adminMainProc.do";
 		document.getElementById("setting").submit();
 	}
 
@@ -38,6 +41,7 @@
 	<a href="settingForm.do">설정</a> 
 	<form id="setting" method="post">
 	<input type="button" onclick="settingGo()" value="설정 ">
+	<input type="button" onclick="adminGo()" value="관리">
 	</form>
 </body>
 </html>
