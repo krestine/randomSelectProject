@@ -102,36 +102,31 @@
 
 	<select id="getMemberListById" resultType="MemberDTO"
 		parameterType="String">
-<<<<<<< HEAD
 
-		select memid,memname,memgrade,black where memid
-		=
+
+		select memid,memname,memgrade,black where memid=
 		#{memId}
-=======
+		select memid,memname,memgrade,black from member where memid= #{memId}
 
 
-		select memid,memname,memgrade,black from member where memid
-		= #{memId}
-
->>>>>>> 2f5fbfd6a272b8074ee854b0a67dd755d0d095be
 	</select>
 
 	<!--관리자 : 이름으로 유저 검색 -->
 
 	<select id="getMemberListByName" resultType="MemberDTO"
 		parameterType="String">
-<<<<<<< HEAD
+
 
 		select memid,memname,memgrade,black where
 		memname =
 		#{memName}
-=======
+
 
 
 		select memid,memname,memgrade,black from member where
 		memname = #{memName}
 
->>>>>>> 2f5fbfd6a272b8074ee854b0a67dd755d0d095be
+
 	</select>
 
 
@@ -139,7 +134,7 @@
 
 	<select id="getMemberListByGrade" resultType="MemberDTO"
 		parameterType="String">
-<<<<<<< HEAD
+
 
 		select memid,memname,memgrade,black where
 		memgrade =
@@ -152,7 +147,7 @@
 		select memid,memname,memgrade,black where
 		black =
 		#{memBlack}
-=======
+
 
 
 		select memid,memname,memgrade,black from member where
@@ -164,7 +159,7 @@
 		select memid,memname,memgrade,black from member where
 		black = 1
 
->>>>>>> 2f5fbfd6a272b8074ee854b0a67dd755d0d095be
+
 	</select>
 
 	
