@@ -1,5 +1,11 @@
 package com.project.service;
 
-public interface SettingService {
+import java.util.List;
 
+import com.project.domain.SettingDTO;
+
+public interface SettingService {
+	List<SettingDTO> getWalkRange();
+	List<SettingDTO> getCarRange();
+	List<SettingDTO> getExcMenu();
 }
