@@ -28,7 +28,7 @@ public class CommunityController {
 	// 회원 : 친구 리스트
 	@RequestMapping("/mateListProc.do")
 	public String mateListProc(Model model, MateDTO mateDto){
-		List<MateDTO> mates = mateService.getMateIdsByMemId(mateDto); 
+		List<MateDTO> mates = mateService.getMateIdsByMemId(); 
 		model.addAttribute("mates", mates);
 		System.out.println("mateListProc()");
 		return "community/mateList";
