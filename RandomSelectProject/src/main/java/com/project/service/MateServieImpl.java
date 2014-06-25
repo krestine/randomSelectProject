@@ -16,9 +16,9 @@ public class MateServieImpl implements MateService {
 	
 	// 회원 : 친구 리스트
 	@Override
-	public List<MateDTO> getMateIdsByMemId() {
+	public List<MateDTO> getMateListByMateId() {
 		
-		return mateMapper.getMateIdsByMemId();
+		return mateMapper.getMateListByMateId();
 	}
 	
 	// 회원 : 친구아이디

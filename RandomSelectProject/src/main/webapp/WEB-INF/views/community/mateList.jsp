@@ -11,7 +11,7 @@
 
 
 
-<a href="mateDetailProc.do">mateList</a>
+<a href="mateDetailProc.do">친구 상세정보</a>
 	
 <a href="restntListProc.do">식당 리스트</a>
 
