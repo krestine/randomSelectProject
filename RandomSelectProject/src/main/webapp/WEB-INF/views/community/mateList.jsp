@@ -23,8 +23,8 @@
 <body>
 	<h1>mateList</h1> 
 	<form id="community" method="POST">
-	<input type="button" id="mateDetail" onclick="mateDetail()" value="친구 상세보기" />
-	<input type="button" id="restntList" onclick="restntList()" value="식당 리스트" />
+	<input type="button" id="getMateInfoByMemId" onclick="mateDetail()" value="친구 상세보기" />
+	<input type="button" id="getRestntList" onclick="restntList()" value="식당 리스트" />
 	</form>
 
 </body>
