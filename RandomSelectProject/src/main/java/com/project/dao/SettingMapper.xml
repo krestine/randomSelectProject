@@ -2,5 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.SettingMapper">
+	<select id="getWalkRange" resultType="SettingDTO">
+	select walkrange from walkoption 
+	</select>
+		
+	<select id="getCarRange" resultType="SettingDTO">
+	select carrange from caroption
+	</select>
+	
+	<select id="getExcMenu" resultType="SettingDTO">
+	select excmenu from menuoption
+	</select>
 	
 </mapper>
