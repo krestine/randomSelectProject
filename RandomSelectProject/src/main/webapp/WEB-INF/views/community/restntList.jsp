@@ -12,6 +12,7 @@
 
 
 <a href="restntDetailProc.do">식당 상세정보</a>
+<a href="mateListProc.do">친구 리스트</a>
 
 </body>
 </html>
