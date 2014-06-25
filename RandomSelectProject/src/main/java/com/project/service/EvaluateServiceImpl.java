@@ -29,7 +29,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	// 평가안한 방문리스트
 	public EvaluateDTO getnEvaluateListByMemId(String evaluateDto) {
-		return (EvaluateDTO) evaluateMapper.getNEvaluateListByMemId(evaluateDto);
+		return (EvaluateDTO) evaluateMapper.getnEvaluateListByMemId(evaluateDto);
 
 	}
 
@@ -75,7 +75,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	// 회원: 식당 평가 수정 ,입력
 	public void setScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
-		evaluateMapper.setScoreByEvaluateTerms(evaluateDTO);
+		((EvaluateServiceImpl) evaluateMapper).setScoreByEvaluateTerms(evaluateDTO);
 	}
 
 	@Override

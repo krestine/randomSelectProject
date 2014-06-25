@@ -6,12 +6,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>register.jsp</title>
 <script type="text/javascript">
-
+	function formCheck() {
+		var mM1 = document.getElementById('mM1');
+		var mM2 = document.getElementById('mM2');
+		var mM3 = document.getElementById('mM3');
+		var memMobile = mM1.value + "-" + mM2.value + "-" + mM3.value;
+		return join();
+	}
+	function join() {
+		var proc = document.getElementById('form');
+		proc.submit();
+	}
 </script>
 </head>
 <body>
 	${errmessage}
-	<form action="registerProc.do" method="post">
+	<form action="registerProc.do" id="form" method="post">
 		<table align="center" border="0" cellpadding="0" cellspacing="0"
 			bgcolor="white">
 			<tr>
@@ -38,17 +48,18 @@
 				<td>전화번호</td>
 				<td><select id="mM1">
 						<option value="010" selected>010</option>
-						<option value="011" selected>011</option>
-						<option value="016" selected>016</option>
-						<option value="017" selected>017</option>
-						<option value="018" selected>018</option>
-						<option value="019" selected>019</option>
+						<option value="011">011</option>
+						<option value="016">016</option>
+						<option value="017">017</option>
+						<option value="018">018</option>
+						<option value="019">019</option>
 				</select> - <input type="text" id="mM2" size="4" maxlength="4"> - <input
 					type="text" id="mM3" size="4" maxlength="4"> <input
-					type="hidden" name="memMobile"></td>
+					type="hidden" name="memMobile" id="memMobile"></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="회원가입"></td>
+				<td><input type="button" onclick="javascript:formCheck()"
+					value="회원가입"></td>
 			</tr>
 
 		</table>
