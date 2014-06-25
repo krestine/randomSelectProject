@@ -4,16 +4,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+	function mateDetail() {
+		document.getElementById("community").action = "mateDetailProc.do";
+		document.getElementById("community").submit();
+
+	}
+	function restntList() {
+		document.getElementById("community").action = "restntListProc.do";
+		document.getElementById("community").submit();
+	}
+</script>
+
 <title>mateList</title>
+
+
 </head>
 <body>
-	<h1>mateList</h1>
-
-
-
-<a href="mateDetailProc.do">친구 상세정보</a>
-	
-<a href="restntListProc.do">식당 리스트</a>
+	<h1>mateList</h1> 
+	<form id="community" method="POST">
+	<input type="button" id="mateDetail" onclick="mateDetail()" value="친구 상세보기" />
+	<input type="button" id="restntList" onclick="restntList()" value="식당 리스트" />
+	</form>
 
 </body>
 </html>
