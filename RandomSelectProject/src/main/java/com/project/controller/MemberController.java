@@ -47,10 +47,10 @@ public class MemberController {
 
 	@RequestMapping(value = "loginProc.do", method = RequestMethod.POST)
 	public String loginProc(Model model, MemberDTO memberDto,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpSession session) {
 		System.out.println("loginProc()");
 
-		HttpSession session = request.getSession();
+		session = request.getSession();
 
 		MemberDTO loginUser = memberService
 				.getMemberInfoByMemberTerms(memberDto);
@@ -114,7 +114,7 @@ public class MemberController {
 	public String myInfoForm(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoForm()");
 		MemberDTO userInfo = memberService.getMyInfoByMemId(memberDto);
-		model.addAttribute("userInfo", userInfo);
+		// model.addAttribute("userInfo", userInfo);
 		return "mypage/myInfo";
 	}
 
@@ -157,9 +157,9 @@ public class MemberController {
 
 	// 로그아웃
 	@RequestMapping("logoutForm.do")
-	public String logOutForm() {
+	public String logOutForm(HttpSession session) {
 		System.out.println("logOutForm()");
-
+		session.setAttribute("loginUser", null);
 		return "member/logout";
 	}
 
