@@ -8,4 +8,5 @@ public interface SettingService {
 	List<SettingDTO> getWalkRange();
 	List<SettingDTO> getCarRange();
 	List<SettingDTO> getExcMenu();
+	String getExcMenuById(String excMenuId); 
 }

@@ -23,7 +23,6 @@ public interface EvaluateMapper {
 
 	// 평가점수
 	List<EvaluateDTO> getScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
-	
 	// 회원:평가안한 방문리스트. 방문날짜 restntId
 	List<EvaluateDTO> getnEvaluateListByMemId(String memId);
 

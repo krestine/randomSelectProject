@@ -11,7 +11,14 @@
 	</select>
 	
 	<select id="getExcMenu" resultType="SettingDTO">
-	select excmenu from menuoption
+	select excmenu, excmenuid from menuoption
+	order by excmenuid
 	</select>
+	
+	<select id="getExcMenuById" parameterType="String" resultType="String">
+	select excmenu from menuoption where excmenuid=#{excMenuId}
+	</select>
+	
+	
 	
 </mapper>

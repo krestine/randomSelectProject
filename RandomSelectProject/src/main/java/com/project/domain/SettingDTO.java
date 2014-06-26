@@ -4,9 +4,15 @@ public class SettingDTO {
 	private int walkRange;
 	private int carRange;
 	private String excMenu;
+	private int excMenuId;
 	
 	
-	
+	public int getExcMenuId() {
+		return excMenuId;
+	}
+	public void setExcMenuId(int excMenuId) {
+		this.excMenuId = excMenuId;
+	}
 	public int getWalkRange() {
 		return walkRange;
 	}
@@ -31,6 +37,7 @@ public class SettingDTO {
 		int result = 1;
 		result = prime * result + carRange;
 		result = prime * result + ((excMenu == null) ? 0 : excMenu.hashCode());
+		result = prime * result + excMenuId;
 		result = prime * result + walkRange;
 		return result;
 	}
@@ -50,6 +57,8 @@ public class SettingDTO {
 				return false;
 		} else if (!excMenu.equals(other.excMenu))
 			return false;
+		if (excMenuId != other.excMenuId)
+			return false;
 		if (walkRange != other.walkRange)
 			return false;
 		return true;
@@ -57,7 +66,7 @@ public class SettingDTO {
 	@Override
 	public String toString() {
 		return "SettingDTO [walkRange=" + walkRange + ", carRange=" + carRange
-				+ ", excMenu=" + excMenu + "]";
+				+ ", excMenu=" + excMenu + ", excMenuId=" + excMenuId + "]";
 	}
 	
 }

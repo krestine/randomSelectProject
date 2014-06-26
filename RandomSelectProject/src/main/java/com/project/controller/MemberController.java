@@ -47,10 +47,10 @@ public class MemberController {
 
 	@RequestMapping(value = "loginProc.do", method = RequestMethod.POST)
 	public String loginProc(Model model, MemberDTO memberDto,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpSession session) {
 		System.out.println("loginProc()");
 
-		HttpSession session = request.getSession();
+		session = request.getSession();
 
 		MemberDTO loginUser = memberService
 				.getMemberInfoByMemberTerms(memberDto);
@@ -62,7 +62,7 @@ public class MemberController {
 			session.setAttribute("loginUser", loginUser);
 			// model.addAttribute("loginUser", loginUser);
 
-			return "member/loginOk";
+			return "forward:main.do";
 		} else {
 			request.setAttribute("errmessage", "아이디와 비밀번호를 확인해주세요");
 			return "forward:loginForm.do";
@@ -113,8 +113,8 @@ public class MemberController {
 	@RequestMapping(value = "myInfoForm.do", method = RequestMethod.POST)
 	public String myInfoForm(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoForm()");
-		MemberDTO userInfo = memberService.getMyInfoByMemId(memberDto);
-		model.addAttribute("userInfo", userInfo);
+		// MemberDTO userInfo = memberService.getMyInfoByMemId(memberDto);
+		// model.addAttribute("userInfo", userInfo);
 		return "mypage/myInfo";
 	}
 
@@ -157,10 +157,13 @@ public class MemberController {
 
 	// 로그아웃
 	@RequestMapping("logoutForm.do")
-	public String logOutForm() {
+	public String logOutForm(HttpSession session) {
 		System.out.println("logOutForm()");
 
-		return "member/logout";
+		session.removeAttribute("loginUser");
+		session.invalidate();
+
+		return "forward:main.do";
 	}
 
 }
