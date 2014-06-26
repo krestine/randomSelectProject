@@ -94,7 +94,7 @@ public class EvaluateController {
 		evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto);
 		EvaluateDTO evaluate=(EvaluateDTO) evaluateService.getEvaluateListByMemId(evaluateDto.getMemId());
 		model.addAttribute("evaluate", evaluate);
-		return "/evaluateListForm.do";
+		return "evaluateListForm.do";
 	}
 	
 	
@@ -111,8 +111,8 @@ public class EvaluateController {
 	@RequestMapping(value = "/nEvaluateListProc.do", method = RequestMethod.POST)
 	public String nEvaluateListProc(Model model, EvaluateDTO evaluateDTO) {
 		System.out.println("nEvaluateListProc()");
-		evaluateService.setScoreByEvaluateTerms(evaluateDTO);
-		return "/nEvaluateListForm.do";
+		evaluateService.putScoreByEvaluateTerms(evaluateDTO);
+		return "nEvaluateListForm.do";
 	}
 }
 

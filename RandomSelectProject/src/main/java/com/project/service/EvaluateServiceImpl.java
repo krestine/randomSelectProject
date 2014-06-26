@@ -28,8 +28,8 @@ public class EvaluateServiceImpl implements EvaluateService {
 	/* void setEvaluateInfoByEvaluateTerms(String evaluateDto); */
 
 	// 평가안한 방문리스트
-	public EvaluateDTO getnEvaluateListByMemId(String evaluateDto) {
-		return (EvaluateDTO) evaluateMapper.getnEvaluateListByMemId(evaluateDto);
+	public List<EvaluateDTO> getnEvaluateListByMemId(String evaluateDto) {
+		return (List<EvaluateDTO>) evaluateMapper.getnEvaluateListByMemId(evaluateDto);
 
 	}
 
@@ -106,6 +106,18 @@ public class EvaluateServiceImpl implements EvaluateService {
 	public EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void putnEvaluateByScore(EvaluateDTO evaluateDto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
