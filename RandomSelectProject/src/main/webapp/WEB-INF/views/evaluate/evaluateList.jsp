@@ -23,8 +23,8 @@
 						<td width="33%" align="right"><input type="button"
 							onclick="document.location='visitList.do'" value="방문목록"
 							class="redBtn"></td>
-							onclick="document.location='nEvaluateList.do'" value="평가안한"
-							class="redBtn"><input type="button"></c:when>
+							<input type="button" onclick="document.location='nEvaluateList.do'" value="평가안한"
+							class="redBtn"></c:when>
 					
 					<c:otherwise>
 	
