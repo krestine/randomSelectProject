@@ -10,6 +10,10 @@
 		document.getElementById("form").action = "myInfoProc.do";
 		document.getElementById("form").submit();
 	}
+	function main() {
+		document.getElementById("form").action = "main.do";
+		document.getElementById("form").submit();
+	}
 	function drop() {
 		document.getElementById("form").action = "dropForm.do";
 		document.getElementById("form").submit();
@@ -66,6 +70,7 @@
 			<tr>
 				<td><input type="button" onclick="modify()" value="정보수정"></td>
 				<td><input type="button" onclick="drop()" value="회원탈퇴"></td>
+				<td><input type="button" onclick="main()" value="메인으로"></td>
 			</tr>
 		</table>
 	</form>
