@@ -93,11 +93,13 @@
 		<input type="button" onclick="settingGo()" value="설정 ">
 	</form>
 
+	
 	<form id="community" method="post">
-		<input type="button" onclick="communityGo()" value="커뮤니티">
+	<input type="button" onclick="communityGo()" value="커뮤니티">
 	</form>
-
+	
 	<form id="evaluate" method="post">
+
 		<input type="button" onclick="evaluateGo()" value="평가">
 	</form>
 

@@ -24,12 +24,10 @@ public class EvaluateController {
 	private EvaluateService evaluateService;
 
 	// 식당평가한 목록
-
-
-
 	@RequestMapping(value="/evaluateListProc.do", method = RequestMethod.POST)
 	public String evaluateListProc(Model model, String memId, HttpServletRequest request) {
 		System.out.println("evaluateListProc()");
+
 		
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
 		try {
@@ -52,10 +50,10 @@ public class EvaluateController {
 		return "setting/error";
 		
 
+
+		
 	}
-	
-	
-	
+
 	// 식당 평가 수정
 	@RequestMapping(value = "/updateEvaluateListProc.do", method = RequestMethod.POST)
 	public String updateEvaluateListProc(Model model, EvaluateDTO evaluateDto) {

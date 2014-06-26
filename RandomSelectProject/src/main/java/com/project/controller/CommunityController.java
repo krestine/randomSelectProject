@@ -2,6 +2,8 @@ package com.project.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.domain.EvaluateDTO;
 import com.project.domain.MateDTO;
+import com.project.domain.MemberDTO;
 import com.project.domain.MenuDTO;
 import com.project.domain.RestntDTO;
 import com.project.service.EvaluateService;
@@ -27,11 +31,23 @@ public class CommunityController {
 
 	// 회원 : 친구 리스트
 	@RequestMapping(value="/mateListProc.do", method = RequestMethod.POST)
-	public String mateListProc(Model model, MateDTO mateDto) {
-		List<MateDTO> mates = mateService.getMateListByMateId();
-		model.addAttribute("mates", mates);
+	public String mateListProc(Model model, String memId, HttpServletRequest request) {
 		System.out.println("mateListProc()");
-		return "community/mateList";
+		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
+		try {
+			memId= loginUser.getMemId();
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", "로그인 해 주세요!");
+			return "setting/error";
+		}
+		try {
+			List<MateDTO> mates = mateService.getMateListByMateId();
+			model.addAttribute("mates", mates);
+			return "community/mateList";
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", "데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
+		}
+		return "setting/error";
 	}
 
 	// 회원 : 친구 상세정보
