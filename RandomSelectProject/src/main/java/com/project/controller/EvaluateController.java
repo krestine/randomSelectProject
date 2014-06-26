@@ -54,9 +54,6 @@ public class EvaluateController {
 		
 	}
 
-
-	
-	
 	// 식당 평가 수정
 	@RequestMapping(value = "/updateEvaluateListProc.do", method = RequestMethod.POST)
 	public String updateEvaluateListProc(Model model, EvaluateDTO evaluateDto) {
