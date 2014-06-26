@@ -29,7 +29,7 @@ body {
 	var sDistance;
 	var map;
 	var pos, pos2;
-	var sRadius = 1000;
+	var sRadius = 2000;
 	var geocoder = new google.maps.Geocoder();
 
 	function calcDistance(lat1, lon1, lat2, lon2) {
