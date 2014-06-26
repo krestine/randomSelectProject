@@ -19,7 +19,7 @@ import com.project.service.SettingService;
 
 @Controller
 public class SettingController {
-	
+
 	@Autowired
 	private MemberService memberService;
 
@@ -30,51 +30,55 @@ public class SettingController {
 	private int memWalkRange;
 	private int memCarRange;
 	private String memExcMenu;
-	
-	@RequestMapping(value = "/settingForm.do", method = RequestMethod.POST)
-	String settingForm(Model model,HttpServletRequest request) {
-		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
-		if(loginUser!=null){
-		List<SettingDTO> walkRanges = settingService.getWalkRange();
-		List<SettingDTO> carRanges = settingService.getCarRange();
-		List<SettingDTO> excMenus = settingService.getExcMenu();
-		model.addAttribute("walkRanges", walkRanges);
-		model.addAttribute("carRanges", carRanges);
-		model.addAttribute("excMenus", excMenus);
 
-		return "setting/setting";
+	@RequestMapping(value = "/settingForm.do", method = RequestMethod.POST)
+	String settingForm(Model model, HttpServletRequest request) {
+		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
+				"loginUser");
+		try {
+			if (loginUser.getMemId() != null || loginUser != null) {
+				List<SettingDTO> walkRanges = settingService.getWalkRange();
+				List<SettingDTO> carRanges = settingService.getCarRange();
+				List<SettingDTO> excMenus = settingService.getExcMenu();
+				model.addAttribute("walkRanges", walkRanges);
+				model.addAttribute("carRanges", carRanges);
+				model.addAttribute("excMenus", excMenus);
+
+				return "setting/setting";
+			}
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", "로그인 해주세요!");
+
 		}
-		model.addAttribute("errorMessage", "로그인 해주세요!");
 		return "setting/error";
-		
 	}
 
 	@RequestMapping(value = "/settingProc.do", method = RequestMethod.POST)
 	String settingProc(Model model, MemberDTO memberDto,
 			HttpServletRequest request) {
-		//세션에서 로그인 정보 가져옴
-		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
-		
-		
+		// 세션에서 로그인 정보 가져옴
+		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
+				"loginUser");
+
 		String[] menus = request.getParameterValues("menus");
 		for (String str : menus) {
 			System.out.println(str);
 			memExcMenu = menuCodeEncoder(str);
 		}
-		//로그인 정보의 아이디를 패러미터로 세팅
+		// 로그인 정보의 아이디를 패러미터로 세팅
 		memberDto.setMemId(loginUser.getMemId());
-		//생성된 제외메뉴 코드를 패러미터로 세팅
+		// 생성된 제외메뉴 코드를 패러미터로 세팅
 		memberDto.setMemExcMenu(memExcMenu);
-		
-		//설정 페이지에서 입력한 값을 숫자로 변환하여 패러미터로 세팅
+
+		// 설정 페이지에서 입력한 값을 숫자로 변환하여 패러미터로 세팅
 		memWalkRange = Integer.parseInt(request.getParameter("walkRange"));
 		memberDto.setMemWalkRange(memWalkRange);
-		
-		//설정 페이지에서 입력한 값을 숫자로 변환하여 패러미터로 세팅
-		memCarRange = Integer.parseInt(request.getParameter("carRange")) ;
+
+		// 설정 페이지에서 입력한 값을 숫자로 변환하여 패러미터로 세팅
+		memCarRange = Integer.parseInt(request.getParameter("carRange"));
 		memberDto.setMemCarRange(memCarRange);
-		//설정 정보 저장 쿼리 실행
-		memberService.setOptionInfoByMemId(memberDto); 
+		// 설정 정보 저장 쿼리 실행
+		memberService.setOptionInfoByMemId(memberDto);
 		return "randomSelect/main";
 	}
 
