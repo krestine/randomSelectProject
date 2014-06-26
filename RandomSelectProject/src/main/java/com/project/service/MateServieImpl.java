@@ -23,17 +23,17 @@ public class MateServieImpl implements MateService {
 	
 	// 회원 : 친구아이디
 	@Override
-	public MateDTO getMateIdByMemId(String mateId) {
+	public MateDTO getMateIdByMateId(String mateId) {
 		
-		return mateMapper.getMateIdByMemId(mateId);
+		return mateMapper.getMateIdByMateId(mateId);
 		 
 	}
 	
 	// 회원 : 친구정보
 	@Override
-	public MateDTO getMateInfoByMemId(String mateDto) {
+	public MateDTO getMateInfoByMateId(String mateDto) {
 		
-		return mateMapper.getMateInfoByMemId(mateDto);
+		return mateMapper.getMateInfoByMateId(mateDto);
 	}
 
 }
