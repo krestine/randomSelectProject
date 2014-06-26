@@ -29,9 +29,15 @@
 		var mM1 = document.getElementById('mM1');
 		var mM2 = document.getElementById('mM2');
 		var mM3 = document.getElementById('mM3');
+<<<<<<< .mine
 		var mMT = mM1.value + "-" + mM2.value + "-" + mM3.value;
 		document.form.memMobile.value = mMT.value;
 		join();
+=======
+		var mMT = mM1.value + "-" + mM2.value + "-" + mM3.value;
+		document.form.memMobile.value = mMT.value;
+		return join();
+>>>>>>> .theirs
 	}
 	function join() {
 		var proc = document.getElementById('form');

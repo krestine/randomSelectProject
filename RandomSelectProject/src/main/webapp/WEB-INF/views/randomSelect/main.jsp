@@ -15,6 +15,10 @@
 		document.getElementById("setting").action = "adminMainProc.do";
 		document.getElementById("setting").submit();
 	}
+	function communityGo(){
+		document.getElementById("community").action = "mateListProc.do";
+		document.getElementById("community").submit();
+	}
 
 	
 </script>
@@ -38,12 +42,17 @@
 	<a href="selectResult.do">아무거나</a>
 	<a href="mateListProc.do">커뮤니티</a>
 	<a href="ladderMake.do">복불복</a>
-	<a href="settingForm.do">설정</a> 
-	<a href="evaluate.do">평가 </a>
+	
 
 	<form id="setting" method="post">
 	<input type="button" onclick="settingGo()" value="설정 ">
 	<input type="button" onclick="adminGo()" value="관리">
 	</form>
+	
+	<form id="community" method="post">
+	<input type="button" onclick="communityGo()" value="커뮤니티">
+	</form>
+	
+	
 </body>
 </html>
