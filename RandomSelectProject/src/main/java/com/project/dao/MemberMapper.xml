@@ -104,10 +104,8 @@
 		parameterType="String">
 
 
-		select memid,memname,memgrade,black where memid=
-		#{memId}
-		select memid,memname,memgrade,black from member where memid= #{memId}
-
+		select memid,memname,memgrade,black from member where memid
+		= #{memId}
 
 	</select>
 
@@ -117,15 +115,8 @@
 		parameterType="String">
 
 
-		select memid,memname,memgrade,black where
-		memname =
-		#{memName}
-
-
-
 		select memid,memname,memgrade,black from member where
 		memname = #{memName}
-
 
 	</select>
 
@@ -136,20 +127,6 @@
 		parameterType="String">
 
 
-		select memid,memname,memgrade,black where
-		memgrade =
-		#{memGrade}
-	</select>
-
-	<!--관리자 : 블랙으로 유저 검색 -->
-	<select id="getMemberListByBlack" resultType="MemberDTO"
-		parameterType="String">
-		select memid,memname,memgrade,black where
-		black =
-		#{memBlack}
-
-
-
 		select memid,memname,memgrade,black from member where
 		memgrade = #{memGrade}
 	</select>
@@ -158,7 +135,6 @@
 	<select id="getMemberListByBlack" resultType="MemberDTO">
 		select memid,memname,memgrade,black from member where
 		black = 1
-
 
 	</select>
 

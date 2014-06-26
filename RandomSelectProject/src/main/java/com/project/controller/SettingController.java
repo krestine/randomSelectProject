@@ -11,6 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+
+
+
+
+
+
+
+
 import com.project.domain.MemberDTO;
 import com.project.domain.SettingDTO;
 import com.project.service.MemberService;
@@ -40,30 +49,15 @@ public class SettingController {
 	
 	@RequestMapping(value = "/settingProc.do", method = RequestMethod.POST)
 	String settingProc(Model model, MemberDTO memberDto, HttpServletRequest request){
-
 		System.out.println("왓수?");
-		/*stringBuffer.append(menuCode);*/
-
-		System.out.println("settingProc.do 실행");
-		System.out.println(menuCode);
-
+		stringBuffer.append(menuCode);
 		String[] menus = request.getParameterValues("menus");
 		for(String str:menus){
 		System.out.println(str);
-		menuCodeGenerater(str);
 		}
 		/*memberService.setOptionInfoByMemId(memberDto);*/
 		return "setting/setting";
 	}
 	
-	String menuCodeGenerater(String str){
-		int index =Integer.parseInt(str);
-		stringBuffer= new StringBuffer(menuCode);
-		stringBuffer.setCharAt(index, '1');
-		menuCode=stringBuffer.toString();
-		System.out.println(menuCode);
-		
-		return menuCode;
-	}
 
 }
