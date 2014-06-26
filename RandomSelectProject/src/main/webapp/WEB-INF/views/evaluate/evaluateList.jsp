@@ -18,7 +18,9 @@
 		</tr>
 					<!-- 쇼핑몰 로고 가운데에 나타나게 한 것   -->
 			
-			<c:choose>
+			
+			
+			<%-- <c:choose>
 					<c:when test="${users==null}">
 						<td width="33%" align="right">
 						<input type="button" onclick="document.location='visitList.do'" value="방문목록"
@@ -34,7 +36,7 @@
 							onclick="document.location='logout.do'" value="로그아웃"
 							class="redBtn"></td>
 					</c:otherwise>
-				</c:choose> 
+				</c:choose>  --%>
 								
 		</table>
 	</div>
