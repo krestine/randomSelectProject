@@ -37,6 +37,7 @@ public interface EvaluateService {
 	// 회원: 평가 안한 식당목록
 	// 방문날짜,restntId
 	List<EvaluateDTO> getnEvaluateListByMemId(String memId);
+
 	void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
 
 	
