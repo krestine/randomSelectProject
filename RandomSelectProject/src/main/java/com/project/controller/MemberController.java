@@ -113,7 +113,7 @@ public class MemberController {
 	@RequestMapping(value = "myInfoForm.do", method = RequestMethod.POST)
 	public String myInfoForm(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoForm()");
-		MemberDTO userInfo = memberService.getMyInfoByMemId(memberDto);
+		// MemberDTO userInfo = memberService.getMyInfoByMemId(memberDto);
 		// model.addAttribute("userInfo", userInfo);
 		return "mypage/myInfo";
 	}
