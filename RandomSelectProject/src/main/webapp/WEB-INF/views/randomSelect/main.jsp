@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인 페이지</title>
 <script type="text/javascript">
-	
 	function settingGo() {
 		document.getElementById("setting").action = "settingForm.do";
 		document.getElementById("setting").submit();
@@ -15,12 +15,17 @@
 		document.getElementById("setting").action = "adminMainProc.do";
 		document.getElementById("setting").submit();
 	}
-	function communityGo(){
+	function communityGo() {
 		document.getElementById("community").action = "mateListProc.do";
 		document.getElementById("community").submit();
 	}
 
+	function evaluateGo(){
+		document.getElementById("evaluate").action = "evaluateProc.do";
+		document.getElementById("evaluate").submit();
+	}
 	
+
 </script>
 </head>
 <body>
@@ -42,17 +47,22 @@
 	<a href="selectResult.do">아무거나</a>
 	<a href="mateListProc.do">커뮤니티</a>
 	<a href="ladderMake.do">복불복</a>
-	
+	<a href="evaluate.do">평가</a>
 
 	<form id="setting" method="post">
-	<input type="button" onclick="settingGo()" value="설정 ">
-	<input type="button" onclick="adminGo()" value="관리">
+		<input type="button" onclick="settingGo()" value="설정 "> 
+		<input type="button" onclick="adminGo()" value="관리">
 	</form>
-	
+
 	<form id="community" method="post">
+
 	<input type="button" onclick="communityGo()" value="커뮤니티">
+	
 	</form>
-	
-	
+	<form id="evalute" method="post">
+	<input type="button" onclick="evaluateGo()" value="평가">
+	</form>
+
+
 </body>
 </html>
