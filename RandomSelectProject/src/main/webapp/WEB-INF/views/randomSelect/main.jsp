@@ -41,8 +41,8 @@
 
 	
 	function evaluateGo() {
-		document.getElementById("evaluate").action = "evaluateProc.do";
-
+		document.getElementById("evaluate").action = "evaluateListProc.do";
+		
 		document.getElementById("evaluate").submit();
 	}
 </script>
@@ -92,11 +92,9 @@
 	<input type="button" onclick="communityGo()" value="커뮤니티">
 	</form>
 	
-<<<<<<< HEAD
-	<form id="evalute" method="post">
-=======
+
 	<form id="evaluate" method="post">
->>>>>>> branch 'master' of https://github.com/krestine/randomSelectProject.git
+
 		<input type="button" onclick="evaluateGo()" value="평가">
 	</form>
 
