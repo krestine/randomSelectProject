@@ -35,7 +35,7 @@ public class RandomSelectController {
 		return "randomSelect/selectResult";
 	}
 
-	@RequestMapping("/main.do")
+	@RequestMapping("main.do")
 	String adminMainProc(Model model,HttpServletRequest request) {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
 		model.addAttribute("loginUser",loginUser);
