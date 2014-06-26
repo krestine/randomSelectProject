@@ -15,8 +15,8 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	// 평가한 방문 리스트
 	@Override
-	public EvaluateDTO getEvaluateListByMemId(EvaluateDTO evaluateDto) {
-		return (EvaluateDTO) evaluateMapper.getEvaluateListByMemId(evaluateDto);
+	public List<EvaluateDTO> getEvaluateListByMemId(String evaluateDto) {
+		return (List<EvaluateDTO>) evaluateMapper.getEvaluateListByMemId(evaluateDto);
 
 	}
 
@@ -78,11 +78,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 				.setScoreByEvaluateTerms(evaluateDTO);
 	}
 
-	@Override
-	public List<EvaluateDTO> getEvaluateListByMemId(String memId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public EvaluateDTO getEvaluateListByMemId(Object evalScore, Object getMemId) {
@@ -125,5 +121,13 @@ public class EvaluateServiceImpl implements EvaluateService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public EvaluateDTO getEvaluateListByMemId(EvaluateDTO evaluateDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

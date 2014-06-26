@@ -23,7 +23,7 @@ public class EvaluateController {
 	// 식당평가한 목록
 	@RequestMapping(value="/evaluateListProc.do", method=RequestMethod.POST)
 	public String evaluateListProc(Model model, EvaluateDTO evaluateDto ) {
-		List<EvaluateDTO> evaluates=evaluateService.getEvaluateListByMemId(evaluateDto);
+		List<EvaluateDTO> evaluates=(List<EvaluateDTO>) evaluateService.getEvaluateListByMemId(evaluateDto);
 		Model.addAttribute("evaluates", evaluates);
 				System.out.println("evaluateListProc()");
 		return "evaluate/evaluateList";
