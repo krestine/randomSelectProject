@@ -111,7 +111,7 @@ public class EvaluateController {
 	@RequestMapping(value = "/nEvaluateListProc.do", method = RequestMethod.POST)
 	public String nEvaluateListProc(Model model, EvaluateDTO evaluateDTO) {
 		System.out.println("nEvaluateListProc()");
-		evaluateService.setScoreByEvaluateTerms(evaluateDTO);
+		evaluateService.putScoreByEvaluateTerms(evaluateDTO);
 		return "nEvaluateListForm.do";
 	}
 }

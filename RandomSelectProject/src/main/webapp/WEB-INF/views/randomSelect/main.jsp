@@ -19,7 +19,10 @@
 		document.getElementById("community").action = "mateListProc.do";
 		document.getElementById("community").submit();
 	}
-
+	function evaluateGo(){
+		document.getElementById("evaluate").action = "evaluateProc.do";
+		document.getElementById("evaluate").submit();
+	}
 	
 </script>
 </head>
@@ -42,7 +45,7 @@
 	<a href="selectResult.do">아무거나</a>
 	<a href="mateListProc.do">커뮤니티</a>
 	<a href="ladderMake.do">복불복</a>
-	
+	<a href="evaluate.do">평가</a>
 
 	<form id="setting" method="post">
 	<input type="button" onclick="settingGo()" value="설정 ">
@@ -51,6 +54,7 @@
 	
 	<form id="community" method="post">
 	<input type="button" onclick="communityGo()" value="커뮤니티">
+	<input type="button" onclick="evaluateGo()" value="평가">
 	</form>
 	
 	
