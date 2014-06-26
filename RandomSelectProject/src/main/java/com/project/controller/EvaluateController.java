@@ -20,10 +20,12 @@ public class EvaluateController {
 	private EvaluateService evaluateService;
 
 	// 식당평가한 목록
-	@RequestMapping("/evaluateListProc.do")
-	public String evaluateListProc() {
+	@RequestMapping(value="/evaluateListProc.do", method = RequestMethod.POST)
+	public String evaluateListProc(Model model, String memId) {
+		List<EvaluateDTO> evaluates = evaluateService.getEvaluateListByMemId(memId);
+		model.addAttribute("evaluates", evaluates);
 		System.out.println("evaluateListProc()");
-		return "history/visitList ";
+		return "evaluate/evaluateList ";
 	}
 
 	

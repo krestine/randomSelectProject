@@ -14,10 +14,12 @@ public class EvaluateServiceImpl implements EvaluateService {
 	EvaluateMapper evaluateMapper;
 
 	// 평가한 방문 리스트
-	public EvaluateDTO getEvaluateListByMemId(EvaluateDTO evaluateDto) {
-		return (EvaluateDTO) evaluateMapper.getEvaluateListByMemId(evaluateDto);
+	public List<EvaluateDTO> getEvaluateListByMemId(String memId) {
+		return evaluateMapper.getEvaluateListByMemId(memId);
 
 	}
+	
+	
 
 	// 평가한 방문리스트 수정
 
@@ -38,16 +40,6 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	}
 
-	@Override
-	public List<EvaluateDTO> getEvaluateListByMemId1(String memId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public EvaluateDTO getEvaluateListByMemId(Object evalScore) {
-		// TODO Auto-generated method stub
-		return null;
-	};
 
 	// //////////////////////////////////////////////////
 
@@ -78,17 +70,6 @@ public class EvaluateServiceImpl implements EvaluateService {
 		((EvaluateServiceImpl) evaluateMapper).setScoreByEvaluateTerms(evaluateDTO);
 	}
 
-	@Override
-	public List<EvaluateDTO> getEvaluateListByMemId(String memId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public EvaluateDTO getEvaluateListByMemId(Object evalScore, Object getMemId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto) {
