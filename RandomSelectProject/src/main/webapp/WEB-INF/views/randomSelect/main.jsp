@@ -41,8 +41,8 @@
 
 	
 	function evaluateGo() {
-		document.getElementById("evaluate").action = "evaluateProc.do";
-
+		document.getElementById("evaluate").action = "evaluateListProc.do";
+		
 		document.getElementById("evaluate").submit();
 	}
 </script>
