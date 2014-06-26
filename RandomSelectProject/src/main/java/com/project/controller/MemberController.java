@@ -62,7 +62,7 @@ public class MemberController {
 			session.setAttribute("loginUser", loginUser);
 			// model.addAttribute("loginUser", loginUser);
 
-			return "member/loginOk";
+			return "forward:main.do";
 		} else {
 			request.setAttribute("errmessage", "아이디와 비밀번호를 확인해주세요");
 			return "forward:loginForm.do";
@@ -163,7 +163,7 @@ public class MemberController {
 		session.removeAttribute("loginUser");
 		session.invalidate();
 
-		return "member/logout";
+		return "forward:main.do";
 	}
 
 }
