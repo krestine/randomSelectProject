@@ -37,14 +37,21 @@ public class SettingController {
 				"loginUser");
 		try {
 			if (loginUser.getMemId() != null || loginUser != null) {
-				List<SettingDTO> walkRanges = settingService.getWalkRange();
-				List<SettingDTO> carRanges = settingService.getCarRange();
-				List<SettingDTO> excMenus = settingService.getExcMenu();
-				model.addAttribute("walkRanges", walkRanges);
-				model.addAttribute("carRanges", carRanges);
-				model.addAttribute("excMenus", excMenus);
+				try {
+					List<SettingDTO> walkRanges = settingService.getWalkRange();
+					List<SettingDTO> carRanges = settingService.getCarRange();
+					List<SettingDTO> excMenus = settingService.getExcMenu();
+					model.addAttribute("walkRanges", walkRanges);
+					model.addAttribute("carRanges", carRanges);
+					model.addAttribute("excMenus", excMenus);
 
-				return "setting/setting";
+					return "setting/setting";
+				} catch (Exception e) {
+					model.addAttribute("errorMessage",
+							"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
+					return "setting/error";
+				}
+
 			}
 		} catch (Exception e) {
 			model.addAttribute("errorMessage", "로그인 해주세요!");
@@ -78,8 +85,15 @@ public class SettingController {
 		memCarRange = Integer.parseInt(request.getParameter("carRange"));
 		memberDto.setMemCarRange(memCarRange);
 		// 설정 정보 저장 쿼리 실행
-		memberService.setOptionInfoByMemId(memberDto);
-		return "randomSelect/main";
+		try {
+			memberService.setOptionInfoByMemId(memberDto);
+			return "randomSelect/main";
+		} catch (Exception e) {
+			model.addAttribute("errorMessage",
+					"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
+		}
+		return "setting/error";
+
 	}
 
 	public String menuCodeEncoder(String str) {
