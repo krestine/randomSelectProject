@@ -76,9 +76,9 @@
 		</c:otherwise>
 	</c:choose>
 	<a href="selectResult.do">아무거나</a>
-	<a href="mateListProc.do">커뮤니티</a>
+	
 	<a href="ladderMake.do">복불복</a>
-	<a href="evaluate.do">평가</a>
+	
 
 
 
