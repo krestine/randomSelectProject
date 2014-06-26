@@ -5,7 +5,7 @@
 
 	<display-name>RandomSelectProject</display-name>
 	<welcome-file-list>
-		<welcome-file>/randomSelect/main.do</welcome-file>
+		<welcome-file>/main.do</welcome-file>
 	</welcome-file-list>
 
 	<!-- The definition of the Root Spring Container shared by all Servlets 
