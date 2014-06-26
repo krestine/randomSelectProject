@@ -30,7 +30,7 @@ public class SettingController {
 
 	@RequestMapping(value = "/settingForm.do", method = RequestMethod.POST)
 	String settingForm(Model model,HttpServletRequest request) {
-		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute("member");
+		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
 		if(loginUser!=null){
 		List<SettingDTO> walkRanges = settingService.getWalkRange();
 		List<SettingDTO> carRanges = settingService.getCarRange();
