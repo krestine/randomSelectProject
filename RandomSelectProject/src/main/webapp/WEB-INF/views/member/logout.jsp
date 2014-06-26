@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>logout.jsp</title>
 </head>
-<body>로그아웃 되었습니다.
+<body>
+	로그아웃 되었습니다.
+	<input type="button" onclick="main.do" value="메인으로">
 </body>
 </html>

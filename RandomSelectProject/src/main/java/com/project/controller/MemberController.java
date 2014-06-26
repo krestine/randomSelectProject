@@ -159,7 +159,10 @@ public class MemberController {
 	@RequestMapping("logoutForm.do")
 	public String logOutForm(HttpSession session) {
 		System.out.println("logOutForm()");
-		session.setAttribute("loginUser", null);
+
+		session.removeAttribute("loginUser");
+		session.invalidate();
+
 		return "member/logout";
 	}
 
