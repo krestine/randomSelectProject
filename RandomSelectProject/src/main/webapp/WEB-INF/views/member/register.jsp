@@ -24,62 +24,56 @@
 							'12월(DEC)' ]
 				});
 	});
-
-	function formCheck() {
-		var mM1 = document.getElementById('mM1');
-		var mM2 = document.getElementById('mM2');
-		var mM3 = document.getElementById('mM3');
-		var mMT = mM1.value + "-" + mM2.value + "-" + mM3.value;
-		document.form.memMobile.value = mMT.value;
-		join();
+	function main() {
+		document.getElementById("form").action = "main.do";
+		document.getElementById("form").submit();
 	}
-	function join() {
-		var proc = document.getElementById('form');
-		proc.submit();
+	function register() {
+		document.getElementById("form").action = "registerProc.do";
+		document.getElementById("form").submit();
 	}
 </script>
 </head>
 <body>
 	${errmessage}
-	<form action="registerProc.do" id="form" method="post">
+	<form id="form" method="post">
 		<table align="center" border="0" cellpadding="0" cellspacing="0"
 			bgcolor="white">
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" name="memId"></td>
+				<td><input type="text" name="memId" /></td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" name="memName"></td>
+				<td><input type="text" name="memName" /></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="password" name="memPasswd"></td>
+				<td><input type="password" name="memPasswd" /></td>
 			</tr>
 			<tr>
 				<td>비밀번호확인</td>
-				<td><input type="password" name="memPasswdCheck"></td>
+				<td><input type="password" name="memPasswdCheck" /></td>
 			</tr>
 			<tr>
 				<td>생년월일</td>
-				<td><input type="text" id="memBirth" name="memBirth"></td>
+				<td><input type="text" id="memBirth" name="memBirth" /></td>
 			</tr>
 			<tr>
 				<td>전화번호</td>
-				<td><select id="mM1">
+				<td><select name="mPhoneCode">
 						<option value="010" selected>010</option>
 						<option value="011">011</option>
 						<option value="016">016</option>
 						<option value="017">017</option>
 						<option value="018">018</option>
 						<option value="019">019</option>
-				</select> - <input type="text" id="mM2" size="4" maxlength="4"> - <input
-					type="text" id="mM3" size="4" maxlength="4"> <input
-					type="hidden" name="memMobile" id="memMobile" value="${mMT}"></td>
+				</select> - <input type="text" name="mPhoneMid" size="4" maxlength="4" /> -
+					<input type="text" name="mPhoneEnd" size="4" maxlength="4" /></td>
 			</tr>
 			<tr>
-				<td><input type="button" onclick="javascript:formCheck()"
-					value="회원가입"></td>
+				<td><input type="button" onclick="register()" value="회원가입"></td>
+				<td><input type="button" onclick="main()" value="메인으로"></td>
 			</tr>
 
 		</table>

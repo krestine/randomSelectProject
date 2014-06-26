@@ -3,6 +3,8 @@ package com.project.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import net.wimpi.telnetd.io.terminal.ansi;
+
 import org.eclipse.jetty.jndi.local.localContextRoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,8 @@ public class MemberController {
 			model.addAttribute("errmessage", "이미 사용하고 있는 아이디입니다.");
 			return "forward:registerForm.do";
 		}
+		memberDto.setMemMobile(memberDto.getmPhoneCode() + "-"
+				+ memberDto.getmPhoneMid() + "-" + memberDto.getmPhoneEnd());
 		memberService.putMember(memberDto);
 		return "member/registerOk";
 	}
