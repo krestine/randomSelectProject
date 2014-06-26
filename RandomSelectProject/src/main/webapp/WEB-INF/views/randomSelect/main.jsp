@@ -38,13 +38,11 @@
 		document.getElementById("community").submit();
 	}
 
-<<<<<<< HEAD
-	function evaluateGo(){
-		document.getElementById("evaluate").action = "evaluateListProc.do";
-=======
+
+	
 	function evaluateGo() {
 		document.getElementById("evaluate").action = "evaluateProc.do";
->>>>>>> 5aa90fb4537c7027f71fbb5e021ad235a9a28e5c
+
 		document.getElementById("evaluate").submit();
 	}
 </script>
@@ -93,7 +91,7 @@
 		<input type="button" onclick="communityGo()" value="커뮤니티">
 	</form>
 	
-	<form id="evalute" method="post">
+	<form id="evaluate" method="post">
 		<input type="button" onclick="evaluateGo()" value="평가">
 	</form>
 
