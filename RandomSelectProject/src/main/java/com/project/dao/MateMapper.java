@@ -9,8 +9,8 @@ public interface MateMapper {
 	List<MateDTO> getMateListByMateId();
 
 	// 회원 : 친구 아이디
-	MateDTO getMateIdByMemId(String mateDto);
+	MateDTO getMateIdByMateId(String mateDto);
 	
 	// 회원 : 친구 정보
-	MateDTO getMateInfoByMemId(String mateDto);
+	MateDTO getMateInfoByMateId(String mateDto);
 }

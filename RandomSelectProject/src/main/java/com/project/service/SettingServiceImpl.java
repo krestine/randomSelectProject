@@ -29,4 +29,9 @@ public class SettingServiceImpl implements SettingService{
 		return settingMapper.getExcMenu();
 	}
 
+	@Override
+	public String getExcMenuById(String excMenuId) {
+		return settingMapper.getExcMenuById(excMenuId);
+	}
+
 }

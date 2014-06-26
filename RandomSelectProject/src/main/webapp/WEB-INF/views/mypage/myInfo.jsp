@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,27 +18,23 @@
 <title>myInfo.jsp</title>
 </head>
 <body>
-	<%
-		session.getAttribute("loginUser");
-	%>
-
 	${errmessage}
 	<table align="center" border="0" cellspacing="0" cellpadding="0"
 		bgcolor="white">
 
 		<tr>
 			<td>아이디 :</td>
-			<td>${userInfo.memId}</td>
+			<td>${sessionScope.loginUser.memId}</td>
 		</tr>
 
 		<tr>
 			<td>이름 :</td>
-			<td>${userInfo.memName}</td>
+			<td>${sessionScope.loginUser.memName}</td>
 		</tr>
 
 		<tr>
 			<td>등급 :</td>
-			<td>${userInfo.memGrade}</td>
+			<td>${sessionScope.loginUser.memGrade}</td>
 		</tr>
 
 	</table>
@@ -47,7 +44,7 @@
 			bgcolor="white">
 			<tr>
 				<td><input type="hidden" name="memId"
-					value="${loginUser.memId}"></td>
+					value="	${sessionScope.loginUser.memId}"></td>
 			</tr>
 			<tr>
 				<td>현재비밀번호</td>
@@ -64,7 +61,7 @@
 			</tr>
 			<tr>
 				<td>전화번호</td>
-				<td><input type="text" name="memMobile"></td>
+				<td><input type="text" name="memMobile">${sessionScope.loginUser.memMobile}</td>
 			</tr>
 			<tr>
 				<td><input type="button" onclick="modify()" value="정보수정"></td>
