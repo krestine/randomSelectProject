@@ -75,8 +75,8 @@
 		</c:when>
 		<c:when test="${sessionScope.loginUser.memGrade>=7}">
 			<form id="myPage" method="post">
-				<input type="button" onclick="logoutGo()" value="로그아웃"> 
-				<input type="button" onclick="adminGo()" value="관리">
+				<input type="button" onclick="logoutGo()" value="로그아웃"> <input
+					type="button" onclick="adminGo()" value="관리">
 			</form>
 		</c:when>
 
@@ -93,11 +93,11 @@
 		<input type="button" onclick="settingGo()" value="설정 ">
 	</form>
 
-	
+
 	<form id="community" method="post">
-	<input type="button" onclick="communityGo()" value="커뮤니티">
+		<input type="button" onclick="communityGo()" value="커뮤니티">
 	</form>
-	
+
 	<form id="evaluate" method="post">
 
 		<input type="button" onclick="evaluateGo()" value="평가">
