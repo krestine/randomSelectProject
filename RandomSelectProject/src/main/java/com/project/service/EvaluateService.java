@@ -13,9 +13,6 @@ public interface EvaluateService {
 	
 	// 평가한 방문리스트 점수 수정
 
-	/* EvaluateDTO setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto); */
-	/* void setEvaluateInfoByEvaluateTerms(String evaluateDto);*/ 
-
 	void setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto);
 
 	// 평가안한 방문리스트
@@ -40,19 +37,8 @@ public interface EvaluateService {
 	// 회원: 평가 안한 식당목록
 	// 방문날짜,restntId
 	List<EvaluateDTO> getnEvaluateListByMemId(String memId);
-
-<<<<<<< HEAD
-	EvaluateDTO getEvaluateListByMemId(Object evalScore, Object getMemId);
-
-	
-=======
-
->>>>>>> 5b7c2b25d5a72ec13c19c3f5c989a3e0d957d109
 	void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
 
-	List<EvaluateDTO> getEvaluateListByMemId();
-
-	EvaluateDTO getEvaluateListByMemId(EvaluateDTO evaluateDto);
-
+	
 
 }
