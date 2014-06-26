@@ -9,8 +9,7 @@
 <title>loginOk.jsp</title>
 </head>
 <body>
-	${sessionScope.userLoginInfo.userName}
-	<%--  ${loginUser.memName}회원님 환영합니다. --%>
+	${sessionScope.loginUser.memName}회원님 환영합니다.
 	<form action="myInfoForm.do" method="post">
 		<input type="hidden" name="memId" value="${loginUser.memId}">
 		<input type="submit" value="내정보">
