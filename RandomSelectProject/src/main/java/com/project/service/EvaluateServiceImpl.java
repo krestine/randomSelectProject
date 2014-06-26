@@ -17,7 +17,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 	public List<EvaluateDTO> getEvaluateListByMemId(String memId) {
 		return evaluateMapper.getEvaluateListByMemId(memId);
 	}
-	
+
 	// 평가한 방문리스트 수정
 
 	public void setEvaluateInfoByEvaluateTerms(String string) {
@@ -104,16 +104,5 @@ public class EvaluateServiceImpl implements EvaluateService {
 		// TODO Auto-generated method stub
 
 	}
-
-
-
-	
-
-
-	
-
-
-
-	
 
 }

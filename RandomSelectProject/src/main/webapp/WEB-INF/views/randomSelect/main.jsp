@@ -9,45 +9,39 @@
 <title>메인 페이지</title>
 <script type="text/javascript">
 	function loginGo() {
-		document.getElementById("select1").action = "loginForm.do";
-		document.getElementById("select1").submit();
+		document.getElementById("member").action = "loginForm.do";
+		document.getElementById("member").submit();
 	}
 	function registerGo() {
-		document.getElementById("select1").action = "registerForm.do";
-		document.getElementById("select1").submit();
+		document.getElementById("member").action = "registerForm.do";
+		document.getElementById("member").submit();
 	}
 	function myInfoGo() {
-		document.getElementById("select1").action = "myInfoForm.do";
-		document.getElementById("select1").submit();
+		document.getElementById("myPage").action = "myInfoForm.do";
+		document.getElementById("myPage").submit();
 	}
 	function logoutGo() {
-		document.getElementById("select1").action = "logoutForm.do";
-		document.getElementById("select1").submit();
-	}
-	function adminGo() {
-		document.getElementById("select1").action = "adminMainProc.do";
-		document.getElementById("select1").submit();
+		document.getElementById("myPage").action = "logoutForm.do";
+		document.getElementById("myPage").submit();
 	}
 
-	function communityGo() {
-		document.getElementById("select2").action = "mateListProc.do";
-		document.getElementById("select2").submit();
-	}
 	function settingGo() {
-		document.getElementById("select2").action = "settingForm.do";
-		document.getElementById("select2").submit();
+		document.getElementById("setting").action = "settingForm.do";
+		document.getElementById("setting").submit();
 	}
+	function adminGo() {
+		document.getElementById("setting").action = "adminMainProc.do";
+		document.getElementById("setting").submit();
+	}
+	function communityGo() {
+		document.getElementById("community").action = "mateListProc.do";
+		document.getElementById("community").submit();
+	}
+
 	function evaluateGo() {
-		document.getElementById("select2").action = "evaluateListProc.do";
-		document.getElementById("select2").submit();
-	}
-	function selectResult() {
-		document.getElementById("select3").action = "selectResult.do";
-		document.getElementById("select3").submit();
-	}
-	function ladderMake() {
-		document.getElementById("select3").action = "ladderMake.do";
-		document.getElementById("select3").submit();
+		document.getElementById("evaluate").action = "evaluateListProc.do";
+
+		document.getElementById("evaluate").submit();
 	}
 </script>
 </head>
@@ -64,53 +58,50 @@
 
 
 
-	<h1>밥 먹자!!!!!!</h1>
+	<h1>Hello world!</h1>
 	<c:choose>
 		<c:when test="${sessionScope.loginUser==null}">
-			<form id="select1" method="post">
+			<form id="member" method="post">
 				<input type="button" onclick="loginGo()" value="로그인"> <input
 					type="button" onclick="registerGo()" value="회원가입">
-			</form>
-			<form id="select3">
-				<input type="button" onclick="selectResult()" value="아무거나">
-				<input type="button" onclick="ladderMake()" value="복불복">
 			</form>
 		</c:when>
 
 		<c:when test="${sessionScope.loginUser.memGrade<7}">
-			<form id="select1" method="post">
+			<form id="myPage" method="post">
 				<input type="button" onclick="logoutGo()" value="로그아웃"> <input
 					type="button" onclick="myInfoGo()" value="내정보">
 			</form>
-			<form id="select3">
-				<input type="button" onclick="selectResult()" value="아무거나">
-				<input type="button" onclick="ladderMake()" value="복불복">
-			</form>
 		</c:when>
-		<c:when test="${sessionScope.loginUser.memGrade==666}">
-			<form id="select1" method="post">
-				<input type="button" onclick="logoutGo()" value="로그아웃"> <input
-					type="button" onclick="adminGo()" value="관리">
-			</form>
-			<form id="select3">
-				<input type="button" onclick="selectResult()" value="아무거나">
-				<input type="button" onclick="ladderMake()" value="복불복">
+		<c:when test="${sessionScope.loginUser.memGrade>=7}">
+			<form id="myPage" method="post">
+				<input type="button" onclick="logoutGo()" value="로그아웃"> 
+				<input type="button" onclick="adminGo()" value="관리">
 			</form>
 		</c:when>
 
 
 	</c:choose>
+	<a href="selectResult.do">아무거나</a>
+
+	<a href="ladderMake.do">복불복</a>
 
 
 
-	<form id="select2" method="post">
-		<input type="button" onclick="settingGo()" value="설정 "> <input
-			type="button" onclick="communityGo()" value="커뮤니티"> <input
-			type="button" onclick="evaluateGo()" value="평가"> <input
-			type="button" onclick="" value="통계">
+
+	<form id="setting" method="post">
+		<input type="button" onclick="settingGo()" value="설정 ">
 	</form>
 
+	
+	<form id="community" method="post">
+	<input type="button" onclick="communityGo()" value="커뮤니티">
+	</form>
+	
+	<form id="evaluate" method="post">
 
+		<input type="button" onclick="evaluateGo()" value="평가">
+	</form>
 
 
 </body>
