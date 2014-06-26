@@ -17,18 +17,20 @@
 					</td> -->
 		</tr>
 					<!-- 쇼핑몰 로고 가운데에 나타나게 한 것   -->
-				
+			
 			<c:choose>
 					<c:when test="${users==null}">
-						<td width="33%" align="right"><input type="button"
-							onclick="document.location='visitList.do'" value="방문목록"
+						<td width="33%" align="right">
+						<input type="button" onclick="document.location='visitList.do'" value="방문목록"
 							class="redBtn"></td>
+							</c:when>
+						<c:when test="${users==null}">
+							<td width="33%" align="right">
 							<input type="button" onclick="document.location='nEvaluateList.do'" value="평가안한"
-							class="redBtn"></c:when>
-					
+							class="redBtn"></td>
+							</c:when>
 					<c:otherwise>
-	
-						<td width="33%" align="right"><b>${users.name}</b>${welcome }<input type="button"
+							<td width="33%" align="right"><b>${users.name}</b>${welcome }<input type="button"
 							onclick="document.location='logout.do'" value="로그아웃"
 							class="redBtn"></td>
 					</c:otherwise>
