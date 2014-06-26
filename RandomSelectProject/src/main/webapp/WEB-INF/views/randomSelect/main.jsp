@@ -38,11 +38,9 @@
 		document.getElementById("community").submit();
 	}
 
-
-	
 	function evaluateGo() {
 		document.getElementById("evaluate").action = "evaluateListProc.do";
-		
+
 		document.getElementById("evaluate").submit();
 	}
 </script>
@@ -68,23 +66,31 @@
 					type="button" onclick="registerGo()" value="회원가입">
 			</form>
 		</c:when>
-		<c:otherwise>
+
+		<c:when test="${sessionScope.loginUser.memGrade<7}">
 			<form id="myPage" method="post">
 				<input type="button" onclick="logoutGo()" value="로그아웃"> <input
 					type="button" onclick="myInfoGo()" value="내정보">
 			</form>
-		</c:otherwise>
+		</c:when>
+		<c:when test="${sessionScope.loginUser.memGrade>=7}">
+			<form id="myPage" method="post">
+				<input type="button" onclick="logoutGo()" value="로그아웃"> 
+				<input type="button" onclick="adminGo()" value="관리">
+			</form>
+		</c:when>
+
+
 	</c:choose>
 	<a href="selectResult.do">아무거나</a>
-	<a href="mateListProc.do">커뮤니티</a>
+
 	<a href="ladderMake.do">복불복</a>
-	<a href="evaluate.do">평가</a>
+
 
 
 
 	<form id="setting" method="post">
-		<input type="button" onclick="settingGo()" value="설정 "> <input
-			type="button" onclick="adminGo()" value="관리">
+		<input type="button" onclick="settingGo()" value="설정 ">
 	</form>
 
 	
@@ -92,7 +98,6 @@
 	<input type="button" onclick="communityGo()" value="커뮤니티">
 	</form>
 	
-
 	<form id="evaluate" method="post">
 
 		<input type="button" onclick="evaluateGo()" value="평가">
