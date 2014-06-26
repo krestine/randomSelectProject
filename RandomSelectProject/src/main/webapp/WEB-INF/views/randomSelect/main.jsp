@@ -53,12 +53,11 @@
 		<input type="button" onclick="settingGo()" value="설정 "> 
 		<input type="button" onclick="adminGo()" value="관리">
 	</form>
-
-	<form id="community" method="post">
-
-	<input type="button" onclick="communityGo()" value="커뮤니티">
 	
+	<form id="community" method="post">
+	<input type="button" onclick="communityGo()" value="커뮤니티">
 	</form>
+	
 	<form id="evalute" method="post">
 	<input type="button" onclick="evaluateGo()" value="평가">
 	</form>
