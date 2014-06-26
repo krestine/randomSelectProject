@@ -12,7 +12,7 @@
 		document.getElementById("form").submit();
 	}
 	function main() {
-		document.getElementById("form").action = "randomSelect/main.do";
+		document.getElementById("form").action = "main.do";
 		document.getElementById("form").submit();
 	}
 </script>
