@@ -21,14 +21,16 @@ body {
 </style>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=true&language=ko">
-	
+
 </script>
 <script type="text/javascript">
 	var myLatitude, myLongitude;
 	var randomLatitude, randomLongitude;
 	var sDistance;
 	var map;
+	var pos, pos2;
 	var sRadius = 1000;
+	var geocoder = new google.maps.Geocoder();
 
 	function calcDistance(lat1, lon1, lat2, lon2) {
 		var EARTH_R, Rad, radLat1, radLat2, radDist;
@@ -48,15 +50,37 @@ body {
 		return Math.round(ret);
 	}
 
+	function setMyCenter(){
+		map.setCenter(pos);
+		map.setZoom(16);
+	}
+	function setRestntCenter(){
+		map.setCenter(pos2);
+		map.setZoom(16);
+	}
+	
+	function findLocation(){
+		var tempAddress = document.getElementById('tempAddress').value;
+		  geocoder.geocode( { 'address': tempAddress}, function(results, status) {
+		    if (status == google.maps.GeocoderStatus.OK) {
+		      map.setCenter(results[0].geometry.location);
+		      var tempMarker = new google.maps.Marker({
+		          map: map,
+		          position: results[0].geometry.location
+		      });
+		    } else {
+		      alert('Geocode was not successful for the following reason: ' + status);
+		    }
+		  });
+	}
+	
 	function initialize() {
-		geocoder = new google.maps.Geocoder();
 		var myOptions = {
 			zoom : 14,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
 		map = new google.maps.Map(document.getElementById('map_canvas'),
 				myOptions);
-
 		if (navigator.geolocation) {
 			//alert('navigator.geolocation: ' + navigator.geolocation);
 
@@ -69,7 +93,7 @@ body {
 
 								myLatitude = position.coords.latitude;
 								myLongitude = position.coords.longitude;
-								var pos = new google.maps.LatLng(myLatitude,
+								pos = new google.maps.LatLng(myLatitude,
 										myLongitude);
 
 								//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: '내 위치'});
@@ -126,7 +150,7 @@ body {
 											randomLongitude);
 								} while (sDistance > sRadius);
 
-								var pos2 = new google.maps.LatLng(
+								pos2 = new google.maps.LatLng(
 										randomLatitude, randomLongitude);
 
 								var restntMarker = new google.maps.Marker({
@@ -194,6 +218,14 @@ body {
 </script>
 </head>
 <body onload="initialize()">
-	<div id="map_canvas" style="width: 100%; height: 100%"></div>
+	<div id="map_canvas" style="width: 100%; height: 70%"></div>
+	<input type=button id=moveToMyLocation value="내 위치로 이동"
+		onclick=setMyCenter()></input>
+	<input type=button id=moveToRestntLocation value="식당 위치로 이동"
+		onclick=setRestntCenter()></input>
+	<br>
+	<input type=text id=tempAddress value=""></input>
+	<input type=button id=geocodeTempAddress value="해당 주소 지도에 표시"
+		onclick=findLocation()></input>
 </body>
 </html>
