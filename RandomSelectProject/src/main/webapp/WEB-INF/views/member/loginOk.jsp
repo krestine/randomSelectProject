@@ -6,14 +6,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+	function modify() {
+		document.getElementById("form").action = "myInfoForm.do";
+		document.getElementById("form").submit();
+	}
+	function main() {
+		document.getElementById("form").action = "randomSelect/main.do";
+		document.getElementById("form").submit();
+	}
+</script>
 <title>loginOk.jsp</title>
 </head>
 <body>
 	${sessionScope.loginUser.memName}회원님 환영합니다.
-	<form action="myInfoForm.do" method="post">
-		<input type="hidden" name="memId" value="${loginUser.memId}">
-		<input type="submit" value="내정보">
+	<form id="form" method="post">
+		<%-- 		<input type="hidden" name="memId" value="${loginUser.memId}"> --%>
+		<tr>
+			<td><input type="button" onclick="modify()" value="내정보"></td>
+			<td><input type="button" onclick="main()" value="메인으로"></td>
+		</tr>
 	</form>
-	<%-- <a href="<c:url value="/myInfoForm.do?memId=${loginUser.memId}"/>">내정보</a> --%>
 </body>
 </html>
