@@ -31,7 +31,7 @@ public class CommunityController {
 		List<MateDTO> mates = mateService.getMateListByMateId();
 		model.addAttribute("mates", mates);
 		System.out.println("mateListProc()");
-		return "mateList";
+		return "community/mateList";
 	}
 
 	// 회원 : 친구 상세정보
@@ -40,7 +40,7 @@ public class CommunityController {
 		MateDTO mate = mateService.getMateInfoByMateId(mateDto);
 		model.addAttribute("mate", mate);
 		System.out.println("mateDetailProc()");
-		return "mateDetail";
+		return "community/mateDetail";
 	}
 
 	// 회원 : 식당 리스트
@@ -49,7 +49,7 @@ public class CommunityController {
 		List<RestntDTO> restnts = restntService.getRestntList();
 		model.addAttribute("restnts", restnts);
 		System.out.println("restntListProc()");
-		return "restntList";
+		return "community/restntList";
 	}
 
 	// 회원 : 식당 상세정보
@@ -58,7 +58,7 @@ public class CommunityController {
 		RestntDTO restnt = restntService.getRestntInfoById(restntId);
 		model.addAttribute("restnt", restnt);
 		System.out.println("restntDetailProc()");
-		return "restntDetail";
+		return "community/restntDetail";
 
 	}
 
