@@ -16,7 +16,7 @@
 		document.getElementById("setting").submit();
 	}
 	function communityGo(){
-		document.getElementById("commuity").action = "mateListProc.do";
+		document.getElementById("community").action = "mateListProc.do";
 		document.getElementById("community").submit();
 	}
 
