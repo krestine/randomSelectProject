@@ -10,6 +10,7 @@ public interface EvaluateService {
 	// 평가한 방문 리스트
 	List<EvaluateDTO> getEvaluateListByMemId(String memId);
 
+	
 	// 평가한 방문리스트 점수 수정
 
 	/* EvaluateDTO setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto); */
@@ -40,9 +41,13 @@ public interface EvaluateService {
 	// 방문날짜,restntId
 	List<EvaluateDTO> getnEvaluateListByMemId(String memId);
 
+<<<<<<< HEAD
 	EvaluateDTO getEvaluateListByMemId(Object evalScore, Object getMemId);
 
 	
+=======
+
+>>>>>>> 5b7c2b25d5a72ec13c19c3f5c989a3e0d957d109
 	void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
 
 	List<EvaluateDTO> getEvaluateListByMemId();

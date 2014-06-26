@@ -21,12 +21,21 @@ public class EvaluateController {
 	private EvaluateService evaluateService;
 
 	// 식당평가한 목록
+<<<<<<< HEAD
 	@RequestMapping(value="/evaluateListProc.do", method=RequestMethod.POST)
 	public String evaluateListProc(Model model, EvaluateDTO evaluateDto ) {
 		List<EvaluateDTO> evaluates=(List<EvaluateDTO>) evaluateService.getEvaluateListByMemId(evaluateDto);
 		Model.addAttribute("evaluates", evaluates);
 				System.out.println("evaluateListProc()");
 		return "evaluate/evaluateList";
+=======
+	@RequestMapping(value="/evaluateListProc.do", method = RequestMethod.POST)
+	public String evaluateListProc(Model model, String memId) {
+		List<EvaluateDTO> evaluates = evaluateService.getEvaluateListByMemId(memId);
+		model.addAttribute("evaluates", evaluates);
+		System.out.println("evaluateListProc()");
+		return "evaluate/evaluateList ";
+>>>>>>> 5b7c2b25d5a72ec13c19c3f5c989a3e0d957d109
 	}
 	
 	
