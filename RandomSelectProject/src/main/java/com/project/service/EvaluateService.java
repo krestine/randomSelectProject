@@ -42,9 +42,12 @@ public interface EvaluateService {
 
 	EvaluateDTO getEvaluateListByMemId(Object evalScore, Object getMemId);
 
-	List<EvaluateDTO> getEvaluateListByMemId1(String memId);
-
+	
 	void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
+
+	List<EvaluateDTO> getEvaluateListByMemId();
+
+	EvaluateDTO getEvaluateListByMemId(EvaluateDTO evaluateDto);
 
 
 }

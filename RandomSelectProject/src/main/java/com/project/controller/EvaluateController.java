@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.domain.EvaluateDTO;
 import com.project.domain.MenuDTO;
+import com.project.domain.RestntDTO;
 import com.project.service.EvaluateService;
 
 @Controller
@@ -20,21 +21,25 @@ public class EvaluateController {
 	private EvaluateService evaluateService;
 
 	// 식당평가한 목록
-	@RequestMapping("/evaluateListProc.do")
-	public String evaluateListProc() {
-		System.out.println("evaluateListProc()");
-		return "history/visitList ";
+	@RequestMapping(value="/evaluateListProc.do", method=RequestMethod.POST)
+	public String evaluateListProc(Model model, EvaluateDTO evaluateDto ) {
+		List<EvaluateDTO> evaluates=evaluateService.getEvaluateListByMemId(evaluateDto);
+		Model.addAttribute("evaluates", evaluates);
+				System.out.println("evaluateListProc()");
+		return "evaluate/evaluateList";
 	}
-
+	
 	
 	// 식당 평점정보 수정
 	/*
 	 * @RequestMapping(value = "/EvaluateList.do", method = RequestMethod.POST)
 	 * void evaluateInfoUpdate(Model model, String evaluateDto, Object evaluate)
 	 * { evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto);
-	 * List<EvaluateDTO> evaluate =
-	 * evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto
-	 * .getRestntId()); model.addAttribute("evaluate", evaluate);
+	 * List<EvaluateDTO> evaluate = evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto
+	 * .getRestntId()); 
+	 * model.addAttribute("evaluate", evaluate);
+	 * System.out.println("evaluateListProc()");
+	 * 
 	 * 
 	 * }
 	 */

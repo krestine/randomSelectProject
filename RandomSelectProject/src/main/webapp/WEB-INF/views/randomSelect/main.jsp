@@ -21,7 +21,7 @@
 	}
 
 	function evaluateGo(){
-		document.getElementById("evaluate").action = "evaluateProc.do";
+		document.getElementById("evaluate").action = "evaluateListProc.do";
 		document.getElementById("evaluate").submit();
 	}
 	
@@ -59,6 +59,7 @@
 	<input type="button" onclick="communityGo()" value="커뮤니티">
 	
 	</form>
+	
 	<form id="evalute" method="post">
 	<input type="button" onclick="evaluateGo()" value="평가">
 	</form>
