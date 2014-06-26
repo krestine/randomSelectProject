@@ -114,7 +114,7 @@ public class MemberController {
 	public String myInfoForm(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoForm()");
 		MemberDTO userInfo = memberService.getMyInfoByMemId(memberDto);
-		model.addAttribute("userInfo", userInfo);
+		// model.addAttribute("userInfo", userInfo);
 		return "mypage/myInfo";
 	}
 

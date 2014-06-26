@@ -15,7 +15,7 @@
 	<!-- 회원:로그인 -->
 	<select id="getMemberInfoByMemberTerms" parameterType="MemberDTO"
 		resultType="MemberDTO">
-		select memid, memname from member
+		select memid, memname, memgrade,memmobile from member
 		where memid=#{memId} and
 		mempasswd=#{memPasswd} and leave != '1'
 	</select>
