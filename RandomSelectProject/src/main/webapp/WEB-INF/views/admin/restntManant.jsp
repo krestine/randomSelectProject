@@ -7,6 +7,6 @@
 <title>식당 관리</title>
 </head>
 <body>
-
+<select></select>>
 </body>
 </html>
