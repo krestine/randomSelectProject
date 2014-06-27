@@ -29,7 +29,7 @@ body {
 	var sDistance;
 	var map;
 	var pos, pos2;
-	var sRadius = 1000;
+	var sRadius = 2000;
 	var geocoder = new google.maps.Geocoder();
 
 	function calcDistance(lat1, lon1, lat2, lon2) {
@@ -142,14 +142,17 @@ body {
 								searchCircle = new google.maps.Circle(
 										searchRadius);
 
-								do {
+								/* do {
 									randomLatitude = Math.random() + 37;
 									randomLongitude = Math.random() + 127;
+
 									sDistance = calcDistance(myLatitude,
 											myLongitude, randomLatitude,
 											randomLongitude);
-								} while (sDistance > sRadius);
-
+								} while (sDistance > sRadius); */
+								randomLatitude = 37.5051264143489;
+								randomLongitude = 127.02609446644783;
+								
 								pos2 = new google.maps.LatLng(
 										randomLatitude, randomLongitude);
 
