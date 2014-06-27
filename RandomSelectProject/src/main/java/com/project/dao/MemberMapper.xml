@@ -143,7 +143,7 @@
 	<!--관리자 : 회원 정보 수정 -->
 	<update id="setMemberInfo" parameterType="MemberDTO">
 		update member set
-		membgrade=#{memGrade},
+		memgrade=#{memGrade},
 		black = #{black}
 		where memid=#{memId}
 	</update>
