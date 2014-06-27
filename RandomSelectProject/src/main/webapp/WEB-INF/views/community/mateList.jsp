@@ -32,8 +32,8 @@
 				<table align="center" border="0" cellpadding="0" cellspacing="0"
 					bgcolor="white">
 					<tr>
-						<td rowspan="2"><a href="mateDetail.do?mateId=${mate.mateId}"/a></td>
-						<td><a href="mateDetail.do?mateId=${mate.memId}"<h1>${product.productName}</h1>/a></td>
+						<td><a href="mateDetail.do?mateId=${mate.mateId}"/a></td>
+						<td><a href="mateDetail.do?memId=${mate.memId}" /a></td>
 					</tr>
 					<tr>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -42,8 +42,8 @@
 			</div>
 			<br>
 
-       <a href="mateDetail.do?mateId=${mate.mateId}"></a><br>
-       <a href="mateDetail.do?memId=${mate.memId}"></a><br>
+       ${mate.mateId}
+       ${mate.memId}
         <hr>
     </c:forEach>
 
