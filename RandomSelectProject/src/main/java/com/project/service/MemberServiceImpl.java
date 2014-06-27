@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.dao.MemberMapper;
 import com.project.domain.MemberDTO;
@@ -52,18 +53,21 @@ public class MemberServiceImpl implements MemberService {
 
 	// 회원:비밀번호만 변경
 	@Override
+	@Transactional
 	public void setMemPasswdByMemberTerms(MemberDTO memberDto) {
 		memberMapper.setMemPasswdByMemberTerms(memberDto);
 	}
 
 	// 회원:정보수정
 	@Override
+	@Transactional
 	public void setMemberInfoByMemberTerms(MemberDTO memberDto) {
 		memberMapper.setMemberInfoByMemberTerms(memberDto);
 	}
 
 	// 회원:탈퇴
 	@Override
+	@Transactional
 	public void setLeave(MemberDTO memberDto) {
 		memberMapper.setLeave(memberDto);
 	}
@@ -71,6 +75,7 @@ public class MemberServiceImpl implements MemberService {
 	// admin
 
 	// 회원 : 검색 설정
+	@Transactional
 	public void setOptionInfoByMemId(MemberDTO memberDto) {
 		memberMapper.setOptionInfoByMemId(memberDto);
 	}
@@ -105,6 +110,7 @@ public class MemberServiceImpl implements MemberService {
 
 	// 관리자 : 회원 정보 수정
 	@Override
+	@Transactional
 	public void setMemberInfo(MemberDTO memberDto) {
 		memberMapper.setMemberInfo(memberDto);
 
