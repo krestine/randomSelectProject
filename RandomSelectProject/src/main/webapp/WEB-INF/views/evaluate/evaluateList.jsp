@@ -8,45 +8,58 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>evaluateList.jsp</title>
-
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/board.css">
-
+<style>
+      a:link {color: blue; text-decoration: none;}
+      a:visited {color: purple; text-decoration: none;}
+      a:hover {color: red; text-decoration: underline;}
+      a:active {color: white; background-color: green;}
+    </style>
+    
+    
 <script type="text/javascript">
-	$(function() {
-		$("dd").css("display", "none");
-		$("dl dt,dl dt.selected").click(function() {
-			if ($("+dd", this).css("display") == "none") {
-				$("+dd", this).slideDown("fast");
-				$("dt").removeClass("selected");
-				$(this).addClass("selected");
-			} else {
-				$("+dd", this).slideUp("fast");
-				$(this).removeClass("selected");
-			}
-		});
-	});
+	function memberGo() {
+
+		document.getElementById("GoSelect").action = "evaluateListForm.do";
+		document.getElementById("GoSelect").submit();
+	}
+
+	function restntGo() {
+
+		document.getElementById("GoSelect").action = "evaluateListProc.do";
+		document.getElementById("GoSelect").submit();
+	}
 </script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>평가</title>
 
 
 </head>
 <body>
 
+<form id="select2" method="post">
+		<input type="button" onclick="evaluateGo()" value="평가한 페이지 "> <input
+			type="button" onclick="nEvaluateGo()" value="평가 안한 페이지"> <input
+			type="button" onclick="edit" value="수정">
+	</form>
+
+
+
 <div id="wrap">
 		<div class="menu">
 			<ul>
-				<li class="boardMenu"><a class="EvaluateList" href="#" OnClick="window.location='evaluateList.do'">평가한 페이지</a></li>
-				<li class="boardMenu"><a class="friendBoard" href="#" OnClick="window.location='nEvaluateList.do'">평가안한페이지</a></li>
-				<li class="boardMenu"><a class="mainBoard" href="#" OnClick="window.location='edit.do'">평점수정</a></li>
+				<li class="board"><a class="EvaluateList" href="evaluate/evaluateList.jsp" OnClick="window.location='evaluateList.do'">평가한 페이지</a></li>
+				<li class="board"><a class="nEvaluateList" href="evaluat/nEvaluateList.jsp" OnClick="window.location='nEvaluateList.do'">평가안한페이지</a></li>
+				<li class="board"><a class="edit" href="edit.jsp" OnClick="window.location='edit.do'">평점수정</a></li>
 			</ul>
 		</div>
+		
 		<div class="clear"></div>
 
 
 		<div class="boardList">
 			<dl>
+			
+			
 			<c:forEach var="notice" items="${add}" varStatus="cnt">
 				<dt class="listHead">
 					<h3>${notice.title}</h3>
@@ -60,12 +73,28 @@
 			
 			</dl>
 		</div>
+		
+		
+		
 		<a href="#" class="listMore">지난 공지사항 더보기</a>
 	</div>
 	<div>
 
 	</div>
+	<ul>
+<c:forEach var="studentName" items="list" end="4">
+    <li>${studentName }</li>
+</c:forEach>
+</ul>
 	
+ <h3>Navigation</h3>
+    <ul>
+      <li><a href="loginProc.do" OnClick="window.location='loginProc.do'">Home</a></li>
+      <li><a href="#">HTML</a></li>
+      <li><a href="#">CSS</a></li>
+    </ul>
+
+
 
 <div align="center">
 		<table align="center" border="0" width="90%">
