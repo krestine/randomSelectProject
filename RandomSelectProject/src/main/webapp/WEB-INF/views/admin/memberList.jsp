@@ -10,7 +10,7 @@
 <body>
 
 	<!--꾸에에에에에에에엑  -->
-
+	
 	<table border="2">
 		<caption></caption>
 		<thead>
