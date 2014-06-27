@@ -41,8 +41,8 @@ public class CommunityController {
 			return "setting/error";
 		}
 		try {
-			List<MateDTO> mates = mateService.getMateListByMateId();
-			model.addAttribute("mates", mates);
+			List<MateDTO> mateList = mateService.getMates();
+			model.addAttribute("mateList", mateList);
 			return "community/mateList";
 		} catch (Exception e) {
 			model.addAttribute("errorMessage", "데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
@@ -52,8 +52,8 @@ public class CommunityController {
 
 	// 회원 : 친구 상세정보
 	@RequestMapping(value = "/mateDetailProc.do", method = RequestMethod.POST)
-	public String mateDetailProc(Model model, String mateDto) {
-		MateDTO mate = mateService.getMateInfoByMateId(mateDto);
+	public String mateDetailProc(Model model, String memName) {
+		String mate = mateService.getMateInfo(memName);
 		model.addAttribute("mate", mate);
 		System.out.println("mateDetailProc()");
 		return "community/mateDetail";

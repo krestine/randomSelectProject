@@ -42,8 +42,6 @@
 			</div>
 			<br>
 
-       ${mate.mateId}
-       ${mate.memId}
         <hr>
     </c:forEach>
 
