@@ -17,16 +17,16 @@
     
     
 <script type="text/javascript">
-	function memberGo() {
+	function evaluateGo() {
 
-		document.getElementById("GoSelect").action = "evaluateListForm.do";
-		document.getElementById("GoSelect").submit();
+		document.getElementById("select2").action = "evaluateListForm.do";
+		document.getElementById("select2").submit();
 	}
 
-	function restntGo() {
+	function nEvaluateGo() {
 
-		document.getElementById("GoSelect").action = "evaluateListProc.do";
-		document.getElementById("GoSelect").submit();
+		document.getElementById("select2").action = "nEvaluateListForm.do";
+		document.getElementById("select2").submit();
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -47,7 +47,7 @@
 <div id="wrap">
 		<div class="menu">
 			<ul>
-				<li class="board"><a class="EvaluateList" href="evaluate/evaluateList.jsp" OnClick="window.location='evaluateList.do'">평가한 페이지</a></li>
+				<li class="board"><a class="EvaluateList"  OnClick="restntGo()'">평가한 페이지</a></li>
 				<li class="board"><a class="nEvaluateList" href="evaluat/nEvaluateList.jsp" OnClick="window.location='nEvaluateList.do'">평가안한페이지</a></li>
 				<li class="board"><a class="edit" href="edit.jsp" OnClick="window.location='edit.do'">평점수정</a></li>
 			</ul>
