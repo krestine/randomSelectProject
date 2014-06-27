@@ -15,6 +15,10 @@
 		document.getElementById("community").action = "mateListProc.do";
 		document.getElementById("community").submit();
 	}
+	function main(){
+		document.getElementById("community").action = "main.do";
+		document.getElementById("community").submit();
+		}
 </script>
 <title>restntList</title>
 </head>
@@ -28,12 +32,13 @@
         <hr>
     </c:forEach>
 
-<form id="community" method="POST">
+	<form id="community" method="POST">
 		<input type="button" onclick="restntDetail()" value="식당 상세보기" />
 		<input type="button" onclick="mateList()" value="친구 리스트" />
+		<input type="button" onclick="main()" value="메인" />
 	</form>
 
-	<a href=randomSelect/main.do>메인으로</a>
+
 
 
 

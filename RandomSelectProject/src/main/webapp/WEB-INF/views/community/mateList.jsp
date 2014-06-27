@@ -25,9 +25,8 @@
 <body>
 	<h1>mateList</h1>
 
-${mate.mateId } ${mate.memId}
 
-<c:forEach var="mate" items="${mates}" >
+<c:forEach var="mate" items="${mateList}" >
         ${mate.mateId} <a href="mateDetail.do?mateId=${mate.mateId}"></a><br>
         ${mate.memId } <a href="mateDetail.do?memId=${mate.memId}"></a><br>
         <hr>
