@@ -5,7 +5,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+	function restntList() {
+		document.getElementById("community").action = "restntList.do";
+		document.getElementById("community").submit();
+
+	}
+	function mateList() {
+		document.getElementById("community").action = "mateListProc.do";
+		document.getElementById("community").submit();
+	}
+	function main(){
+		document.getElementById("community").action = "main.do";
+		document.getElementById("community").submit();
+		}
+</script>
 <title>restntDetail</title>
+
 </head>
 <body>
 <h1>restntDetail</h1>
@@ -19,8 +35,11 @@ ${restnt.restntTel } ${restnt.restntAddr }
         <hr>
     </c:forEach>
 
-<a href="restntDetail.do?restntId=${restnt.restntId}">식당상세</a>
+<form id="community" method="POST">
+		<input type="button" onclick="restntList()" value="식당 리스트" />
+		<input type="button" onclick="mateList()" value="친구 리스트" />
+		<input type="button" onclick="main()" value="메인" />
+	</form>
 
-<a href="restntListProc.do">리스트로</a>
 </body>
 </html>

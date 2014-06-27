@@ -29,7 +29,7 @@ body {
 	var sDistance;
 	var map;
 	var pos, pos2;
-	var sRadius = 1000;
+	var sRadius = 2000;
 	var geocoder = new google.maps.Geocoder();
 
 	function calcDistance(lat1, lon1, lat2, lon2) {
@@ -142,14 +142,17 @@ body {
 								searchCircle = new google.maps.Circle(
 										searchRadius);
 
-								do {
+								/* do {
 									randomLatitude = Math.random() + 37;
 									randomLongitude = Math.random() + 127;
+
 									sDistance = calcDistance(myLatitude,
 											myLongitude, randomLatitude,
 											randomLongitude);
-								} while (sDistance > sRadius);
-
+								} while (sDistance > sRadius); */
+								randomLatitude = 37.5051264143489;
+								randomLongitude = 127.02609446644783;
+								
 								pos2 = new google.maps.LatLng(
 										randomLatitude, randomLongitude);
 
@@ -214,11 +217,12 @@ body {
 		map.setCenter(options.position);
 	}
 
-	//google.maps.event.addDomListener(window, 'load', initialize);
+	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 </head>
-<body onload="initialize()">
+<body>
 	<div id="map_canvas" style="width: 100%; height: 70%"></div>
+	<input type=button id=randomSelectInitialize value="아무거나!" onclick=initialize()></input>
 	<input type=button id=moveToMyLocation value="내 위치로 이동"
 		onclick=setMyCenter()></input>
 	<input type=button id=moveToRestntLocation value="식당 위치로 이동"

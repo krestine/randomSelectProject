@@ -5,19 +5,19 @@
 	
 	<!-- 회원 : 친구 리스트 -->
 	<select id="getMateListByMateId" parameterType="MateDTO" resultType="MateDTO">
-		select * from mate 	
+		select * from mate 	where memid=#{abc@gmail.com}
 	</select>
 	
 	<!-- 회원: 친구 아이디 -->
 	<select id="getMateIdByMateId" parameterType="MateDTO" resultType="MateDTO">
-		select from mate where
-		memid=#{mateId}
+		select memId from mate where
+		memid=#{abc@gmail.com}
 	</select>
 	
 	<!-- 회원: 친구정보 -->
 	<select id="getMateInfoByMateId" parameterType="MateDTO" resultType="MateDTO">
-		select mateid, memid, matestatus, infostatus from mate
-		where memid=#{Mallory@gmail.com}
+		select matestatus, infostatus from mate
+		where memid=#{abc@gmail.com}
 	</select>
 	
 	
