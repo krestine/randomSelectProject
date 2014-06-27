@@ -25,10 +25,25 @@
 <body>
 	<h1>mateList</h1>
 
+<br>
+			<c:forEach var="mate" items="${mateList}" >	
+			<br>
+			<div>
+				<table align="center" border="0" cellpadding="0" cellspacing="0"
+					bgcolor="white">
+					<tr>
+						<td rowspan="2"><a href="mateDetail.do?mateId=${mate.mateId}"/a></td>
+						<td><a href="mateDetail.do?mateId=${mate.memId}"<h1>${product.productName}</h1>/a></td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</tr>
+				</table>
+			</div>
+			<br>
 
-<c:forEach var="mate" items="${mateList}" >
-        ${mate.mateId} <a href="mateDetail.do?mateId=${mate.mateId}"></a><br>
-        ${mate.memId } <a href="mateDetail.do?memId=${mate.memId}"></a><br>
+       <a href="mateDetail.do?mateId=${mate.mateId}"></a><br>
+       <a href="mateDetail.do?memId=${mate.memId}"></a><br>
         <hr>
     </c:forEach>
 
