@@ -221,8 +221,8 @@ body {
 </script>
 </head>
 <body>
-	<!-- <div id="map_canvas" style="width: 100%; height: 70%"></div> -->
-	<div id="map_canvas"  width=1024 height=768></div>
+	<div id="map_canvas" style="width: 100%; height: 70%"></div>
+	<input type=button id=randomSelectInitialize value="아무거나!" onclick=initialize()></input>
 	<input type=button id=moveToMyLocation value="내 위치로 이동"
 		onclick=setMyCenter()></input>
 	<input type=button id=moveToRestntLocation value="식당 위치로 이동"
