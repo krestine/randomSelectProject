@@ -28,6 +28,16 @@
 		document.getElementById("select2").action = "nEvaluateListForm.do";
 		document.getElementById("select2").submit();
 	}
+	function editGo() {
+
+		document.getElementById("select2").action = "edit.do";
+		document.getElementById("select2").submit();
+	}
+
+	function myInfoGo() {
+		document.getElementById("select1").action = "myInfoForm.do";
+		document.getElementById("select1").submit();
+	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>평가</title>
@@ -36,20 +46,21 @@
 </head>
 <body>
 
+
 <form id="select2" method="post">
 		<input type="button" onclick="evaluateGo()" value="평가한 페이지 "> <input
 			type="button" onclick="nEvaluateGo()" value="평가 안한 페이지"> <input
-			type="button" onclick="edit" value="수정">
+			type="button" onclick="editGo()" value="수정">
 	</form>
 
 
 
-<div id="wrap">
+<!-- <div id="wrap">
 		<div class="menu">
 			<ul>
-				<li class="board"><a class="EvaluateList"  OnClick="restntGo()'">평가한 페이지</a></li>
-				<li class="board"><a class="nEvaluateList" href="evaluat/nEvaluateList.jsp" OnClick="window.location='nEvaluateList.do'">평가안한페이지</a></li>
-				<li class="board"><a class="edit" href="edit.jsp" OnClick="window.location='edit.do'">평점수정</a></li>
+				<li class="board"><a class="EvaluateList"  href="WEB-INF/evaluate/evaluateList.jsp"OnClick="evaluateGo()">평가한 페이지</a></li>
+				<li class="board"><a class="nEvaluateList" href="WEB-INF/evaluate/nEvaluateList.jsp" OnClick="nEvaluateGo()">평가안한페이지</a></li>
+				<li class="board"><a class="edit" href="WEB-INF/evaluate/edit.jsp" OnClick="editGo()">평점수정</a></li>
 			</ul>
 		</div>
 		
@@ -58,7 +69,7 @@
 
 		<div class="boardList">
 			<dl>
-			
+			 -->
 			
 			<c:forEach var="notice" items="${add}" varStatus="cnt">
 				<dt class="listHead">
@@ -66,7 +77,7 @@
 					<h4>${notice.regidate}</h4>
 				</dt>
 				<dd class="listContent">${notice.issue}
-				<a class="mainBoard" href="#" OnClick="window.location='edit.do?notCD=${notice.notCD}'">글수정</a>
+				<a class="mainBoard" href="WEB-INF/evaluate/edit.do" OnClick="editgo()">글수정</a>
 				<a class="mainBoard" href="#" OnClick="window.location='delete.do?notCD=${notice.notCD}'">삭제</a></dd>
 			</c:forEach>
 	
@@ -87,11 +98,10 @@
 </c:forEach>
 </ul>
 	
- <h3>Navigation</h3>
+ <h3>메인으로 </h3>
     <ul>
-      <li><a href="loginProc.do" OnClick="window.location='loginProc.do'">Home</a></li>
-      <li><a href="#">HTML</a></li>
-      <li><a href="#">CSS</a></li>
+      <li><a href="main.do" OnClick="window.location='main.do'">메인으로</a></li>
+     <li><a href="myInfoForm.do" OnClick="window.location='myInfoForm.do'">정보수정</a></li>
     </ul>
 
 
