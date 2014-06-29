@@ -44,7 +44,17 @@ public class AdminController {
 	String memberSearchForm(Model model) {
 		return "admin/memberSearch";
 	}
-
+	@RequestMapping(value = "/memberSearchProc.do", method = RequestMethod.POST)
+	String memberSearchProc(String caseCode,String param){
+		return "admin/memberList";
+		
+	}
+	
+	
+	
+	
+	
+	
 	// Id로 회원검색
 	@RequestMapping(value = "/memberSearchByIdProc.do", method = RequestMethod.POST)
 	String memberSearchByIdProc(Model model, String memId) {
