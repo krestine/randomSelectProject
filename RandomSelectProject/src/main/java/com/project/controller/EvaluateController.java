@@ -27,12 +27,21 @@ public class EvaluateController {
 	// 식당평가한 목록
 	
 		@RequestMapping(value = "/evaluateListForm.do", method = RequestMethod.POST)
-		public String EvaluateListForm(Model model, String memId) {
+		public String EvaluateListForm(Model model, String box, String memId) {
 			System.out.println("evaluateListForm()");
-
+		
 			return "evaluate/edit";
 		}
 	
+		
+		//평가 수정editOk
+		@RequestMapping(value="editOk.do", method = RequestMethod.POST)
+		public String editOk(Model model, HttpServletRequest request) {
+		//저장해줘..(쿼리문으로 xml에 쓰면돼)
+			
+			return "evaluate/editOk";
+			}
+		
 	@RequestMapping(value="/evaluateListProc.do", method = RequestMethod.POST)
 	public String evaluateListProc(Model model, String memId, HttpServletRequest request) {
 		System.out.println("evaluateListProc()");
@@ -87,7 +96,7 @@ public class EvaluateController {
 	public String nEvaluateListProc(Model model, EvaluateDTO evaluateDTO) {
 		System.out.println("nEvaluateListProc()");
 		evaluateService.putScoreByEvaluateTerms(evaluateDTO);
-		return "nEvaluateListForm.do";
+		return "evaluate/nEvaluateListForm.do";
 	}
 }
 

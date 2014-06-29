@@ -34,6 +34,10 @@
 		document.getElementById("select2").submit();
 	}
 
+	function mainGo() {
+		document.getElementById("select1").action = "main.do";
+		document.getElementById("select1").submit();
+	}
 	function myInfoGo() {
 		document.getElementById("select1").action = "myInfoForm.do";
 		document.getElementById("select1").submit();
@@ -99,11 +103,17 @@
 </ul>
 	
  <h3>메인으로 </h3>
-    <ul>
+ 
+ <form id="select1" method="post">
+		<input type="button" onclick="mainGo()" value="메인으로 "> <input
+			type="button" onclick="myInfoFormGo()" value="내정보수정"> 
+	</form>
+ 
+   <!--  <ul>
       <li><a href="main.do" OnClick="window.location='main.do'">메인으로</a></li>
      <li><a href="myInfoForm.do" OnClick="window.location='myInfoForm.do'">정보수정</a></li>
     </ul>
-
+ -->
 
 
 <div align="center">
@@ -117,24 +127,19 @@
 			
 			
 			
-			<%-- <c:choose>
+		<%-- 	<c:choose>
 					<c:when test="${users==null}">
 						<td width="33%" align="right">
 						<input type="button" onclick="document.location='visitList.do'" value="방문목록"
 							class="redBtn"></td>
 							</c:when>
-						<c:when test="${users==null}">
-							<td width="33%" align="right">
-							<input type="button" onclick="document.location='nEvaluateList.do'" value="평가안한"
-							class="redBtn"></td>
-							</c:when>
 					<c:otherwise>
-							<td width="33%" align="right"><b>${users.name}</b>${welcome }<input type="button"
+							<td width="33%" align="right"><b>${users.name}</b>${welcome}<input type="button"
 							onclick="document.location='logout.do'" value="로그아웃"
 							class="redBtn"></td>
 					</c:otherwise>
-				</c:choose>  --%>
-								
+				</c:choose> 
+								 --%>
 		</table>
 	</div>
 
