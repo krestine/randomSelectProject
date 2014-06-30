@@ -35,16 +35,18 @@ public class SettingController {
 
 	@RequestMapping(value = "/settingForm.do", method = RequestMethod.POST)
 	String settingForm(Model model, HttpServletRequest request) {
+
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		try {
 			if (loginUser.getMemId() != null || loginUser != null) {
 				try {
-					
+
 					MemberDTO userInfo = memberService
 							.getOptionInfoByMemId(loginUser.getMemId());
 					System.out.println(userInfo);
-					String[] userSettings = menuCodeDecoder(userInfo.getMemExcMenu());
+					String[] userSettings = menuCodeDecoder(userInfo
+							.getMemExcMenu());
 					/*
 					 * System.out.println("디코더 테스트"); for (String str :
 					 * userSettings) { System.out.println(str); }
@@ -96,7 +98,7 @@ public class SettingController {
 		memCarRange = Integer.parseInt(request.getParameter("carRange"));
 		memberDto.setMemCarRange(memCarRange);
 		// 설정 정보 저장 쿼리 실행
-		
+
 		try {
 			memberService.setOptionInfoByMemId(memberDto);
 			return settingForm(model, request);
@@ -137,4 +139,5 @@ public class SettingController {
 		}
 		return menuArray;
 	}
+
 }

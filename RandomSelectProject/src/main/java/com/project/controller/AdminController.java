@@ -12,6 +12,7 @@ import com.project.domain.EvaluateDTO;
 import com.project.domain.MemberDTO;
 import com.project.domain.MenuDTO;
 import com.project.domain.RestntDTO;
+import com.project.domain.SettingDTO;
 import com.project.service.EvaluateService;
 import com.project.service.MemberService;
 import com.project.service.MenuService;
@@ -39,6 +40,9 @@ public class AdminController {
 	private MenuDTO menu;
 	private List<EvaluateDTO> memberEvaluates;
 	List<String> grades;
+	private List<String> adress1;
+	private List<String> adress2;
+	private List<String> adress3;
 
 	// 관리자 메인 페이지
 	@RequestMapping(value = "/adminMainProc.do")
@@ -115,7 +119,50 @@ public class AdminController {
 
 	// 식당 관리 페이지
 	@RequestMapping(value = "/restntManantProc.do")
-	String restntManantProc(Model model) {
+	String restntManantProc(Model model, Integer caseCode, SettingDTO settingDto) {
+		if (caseCode == null) {
+			caseCode = 0;
+		}
+		switch (caseCode) {
+		case 0:
+			adress1 = settingService.getAdress1();
+			model.addAttribute("adress1", adress1);
+
+			break;
+
+		case 1:
+			adress1 = settingService.getAdress1();
+			adress2 = settingService.getAdress2(settingDto);
+			model.addAttribute("adress1", adress1);
+			model.addAttribute("adress2", adress2);
+			break;
+
+		case 2:
+			adress1 = settingService.getAdress1();
+			adress2 = settingService.getAdress2(settingDto);
+			adress3 = settingService.getAdress3(settingDto);
+			model.addAttribute("adress1", adress1);
+			model.addAttribute("adress2", adress2);
+			model.addAttribute("adress3", adress3);
+			break;
+
+		case 3:
+			System.out.println(settingDto);
+			adress1 = settingService.getAdress1();
+			adress2 = settingService.getAdress2(settingDto);
+			adress3 = settingService.getAdress3(settingDto);
+			restnts = restntService.getRestntListByAddr(settingDto);
+			model.addAttribute("adress1", adress1);
+			model.addAttribute("adress2", adress2);
+			model.addAttribute("adress3", adress3);
+			model.addAttribute("restnts", restnts);
+			break;
+		default:
+			model.addAttribute("errorMessage", "검색 오류 발생");
+			return "setting/error";
+		}
+
+		model.addAttribute("choice", settingDto);
 		return "admin/restntManant";
 	}
 

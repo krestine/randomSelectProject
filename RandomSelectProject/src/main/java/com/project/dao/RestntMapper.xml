@@ -7,10 +7,10 @@
 		property="id" column="id" javaType="string" /> <result property="name" column="name" 
 		javaType="string" /> <result property="latitude" column="latitude" javaType="string" 
 		/> <result property="longitude" column="longitude" javaType="string" /> <result 
-		property="phone" column="phone" javaType="string" /> <result property="address1" 
-		column="address1" javaType="string" /> <result property="address2" column="address2" 
-		javaType="string" /> <result property="address3" column="address3" javaType="string" 
-		/> <result property="address4" column="address4" javaType="string" /> <result 
+		property="phone" column="phone" javaType="string" /> <result property="adress1" 
+		column="adress1" javaType="string" /> <result property="adress2" column="adress2" 
+		javaType="string" /> <result property="adress3" column="adress3" javaType="string" 
+		/> <result property="adress4" column="adress4" javaType="string" /> <result 
 		property="type" column="type" javaType="string" /> </resultMap> -->
 
 
@@ -32,59 +32,66 @@
 
 	<update id="setRestntById" parameterType="String">
 		update restnt set
-		restntname = #{restntname}, restntlatitude = #{restntlatitude},
-		restntlongitude=#{restntlongitude}, restntphone=#{restntphone},
-		restnttype=#{restnttype}, restntaddress1=#{restntaddress1},
-		restntaddress2=#{restntaddress2}, restntaddress3=#{restntaddress3},
-		restntaddress4=#{restntaddress4} where restntid = #{restntid}
+		restntname = #{restntname},
+		restntphone=#{restntphone},
+		restnttype=#{restnttype}, adress1=#{adress1},
+		adress2=#{adress2},
+		adress3=#{adress3},
+		adress4=#{adress4} where restntid = #{restntid}
 	</update>
 
 	<!--관리자 : 식당정보 추가 -->
 
 	<insert id="putRestnt" parameterType="RestntDTO">
 		insert into restnt
-		(restntId, restntName, restntLatitude, restntLonogitude,
-		restntAddress1, restntAddress2, restntAddress3, restntAddress4,
-		restntPhone, restntType), values (#{restntId}, #{restntname},
-		#{restntlatitude}, #{restntlongitude}, #{restntaddress1},
-		#{restntaddress2}, #{restntaddress3}, #{restntaddress4},
-		#{restntPhone}, #{restntType})
+		(restntId, restntName,
+		adress1,
+		adress2, adress3, adress4,
+		restntPhone,
+		restntType), values
+		(#{restntId}, #{restntname},
+
+		#{adress1},
+		#{adress2},
+		#{adress3}, #{adress4},
+		#{restntPhone},
+		#{restntType})
 	</insert>
 
 	<!-- 관리자: 주소 필터 생성에 필요한 값 -->
 	<!-- 광역시, 도 필터 -->
-	<select id="getAdress1" resultType="SettingDTO">
-		select adress1 from ADDRESSSIDO
-	</select>
+	<!-- <select id="get1" resultType="SettingDTO"> select 1 from addressSIDO 
+		</select> -->
 	<!-- 시/군/구 필터 -->
-	<select id="getAdress2" parameterType="String" resultType="SettingDTO">
-		select adress2 from ADDRESSSIGUNGU where adress1=#{adress1}
-	</select>
+	<!-- <select id="get2" parameterType="String" resultType="SettingDTO"> select 
+		2 from adressSIGUNGU where 1=#{1} </select> -->
 	<!-- 도로명 주소 필터 -->
-	<select id="getAdress3" parameterType="String" resultType="SettingDTO">
-		select adress3 from adress where adress2=#{adress2}
-	</select>
+	<!-- <select id="get3" parameterType="String" resultType="SettingDTO"> select 
+		3 from where 2=#{2} </select> -->
 
 	<!--관리자: 식당관리 - 주소필터 적용 - 식당 리스트 표시 -->
-	<select id="getRestntListByAddr" parameterType="RestntDTO">
+	<select id="getRestntListByAddr" parameterType="SettingDTO"
+		resultType="RestntDTO">
 		select restntid,
 		restntname from restnt
-		where restntAddress1=#{restntAddress1},
-		restntAddress2=#{restntAddress2},
-		restntAddress3={restntAddress3},
-		restntAddress4=#{restntAddress4}
+		where
+		adress1=#{adress1}and
+		adress2=#{adress2}and
+		adress3=#{adress3}
+
 	</select>
 
 
 
 	<!--관리자, 회원 : 식당관리 - 식당리스트에서 식당선택 - 상세정보 표시 -->
 	<select id="getRestntInfoById" parameterType="RestntDTO"
-		resultType="String">
+		resultType="RestntDTO">
 		select restntname,
-		restntLatitude,restntLongitude,
-		restntAddress1,restntAddress2,
-		restntAddress3,restntAddress4;
-		restntPhone,restntType where restntid=#{restntId}
+
+		adress1,adress2,
+		adress3,adress4;
+		restntPhone,restntType where
+		restntid=#{restntId}
 	</select>
 
 
