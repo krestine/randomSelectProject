@@ -23,7 +23,33 @@ public class EvaluateController {
 
 	@Autowired
 	private EvaluateService evaluateService;
+	
+	// 회원 리스트에서 아이디 클릭 -> 회원의 평가 정보 리스트 표시 페이지
+			@RequestMapping(value = "/memberEvaluateListProc.do", method = RequestMethod.POST)
+			String memberEvaluateListProc(Model model, String memId, List<EvaluateDTO> RestntEvaluates) {
+				RestntEvaluates = evaluateService.getEvaluateListByMemId(memId);
+				model.addAttribute("RestntEvaluates", RestntEvaluates);
+				return "admin/memberEvaluateListAdmin";
+			}
 
+		/*	// 회원 리스트에서 등급, 블랙 수정내용 입력후 수정 버튼 클릭
+			@RequestMapping(value = "/setMemberInfoProc.do", method = RequestMethod.POST)
+			String setMemberInfo(MemberDTO memberDto, Model model) {
+				System.out.println("수정 버튼 클릭");
+				if (memberDto.getBlack() == null) {
+					memberDto.setBlack("0");
+				}
+				System.out.println(memberDto);
+				String memId = memberDto.getMemId();
+				memberService.setMemberInfo(memberDto);
+				members = memberService.getMemberListById(memId);
+				model.addAttribute("members", members);
+				return "admin/memberList";
+			}
+		*/
+
+	
+	
 	// 식당평가한 목록
 	
 		@RequestMapping(value = "/evaluateListForm.do", method = RequestMethod.POST)
