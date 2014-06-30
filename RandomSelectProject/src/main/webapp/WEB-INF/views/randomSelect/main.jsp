@@ -38,7 +38,7 @@
 		document.getElementById("select2").submit();
 	}
 	function evaluateGo() {
-		document.getElementById("select2").action = "evaluateListProc.do";
+		document.getElementById("select2").action = "evaluatemain.do";
 		document.getElementById("select2").submit();
 	}
 	function selectResult() {

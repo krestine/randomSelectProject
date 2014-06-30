@@ -9,7 +9,7 @@
 	
 	<!--구성회:회원:식당평가한 목록 -->
 	<select id="getEvaluateListByMemId" parameterType="String" resultType="EvaluateDTO">
-		select evalId, Score, evalDate, restntName
+		select evalId, score, evalDate, restntName
 		from Evaluate e, restnt r
 		where
 		e.memId=#{memId}
