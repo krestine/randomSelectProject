@@ -3,25 +3,51 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.SettingMapper">
 	<select id="getWalkRange" resultType="SettingDTO">
-	select walkrange from walkoption 
+		select walkrange from
+		walkoption
 	</select>
-		
+
 	<select id="getCarRange" resultType="SettingDTO">
-	select carrange from caroption
+		select carrange from
+		caroption
 	</select>
-	
+
 	<select id="getExcMenu" resultType="SettingDTO">
-	select excmenu, excmenuid from menuoption
-	order by excmenuid
+		select excmenu, excmenuid
+		from menuoption
+		order by excmenuid
 	</select>
-	
+
 	<select id="getExcMenuById" parameterType="String" resultType="String">
-	select excmenu from menuoption where excmenuid=#{excMenuId}
+		select excmenu from menuoption where excmenuid=#{excMenuId}
 	</select>
-	
+
 	<select id="getGradeValue" resultType="String">
-	select gradevalue from mgrade
+		select gradevalue from
+		mgrade
 	</select>
-	
-	
+
+	<!-- 시/도 필터 -->
+	<select id="getAdress1" resultType="String">
+		select adress1 from
+		addresssido order by sidocode
+	</select>
+
+	<!-- 시/군/구 필터 -->
+	<select id="getAdress2" resultType="String" parameterType="SettingDTO">
+		select adress2 from
+		addresssigungu WHERE adress1= #{adress1}
+		order by sigungucode
+	</select>
+
+	<!-- 도로명 필터 -->
+	<select id="getAdress3" parameterType="SettingDTO" resultType="String">
+		select adress3 from adress
+		where adress1 = #{adress1} and adress2 = #{adress2}
+		order by adresscode
+	</select>
+
+
+
+
 </mapper>

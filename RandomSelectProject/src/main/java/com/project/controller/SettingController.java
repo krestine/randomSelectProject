@@ -25,27 +25,33 @@ public class SettingController {
 
 	@Autowired
 	private SettingService settingService;
+
 	private String menuCode = "00000000000000";
 	private StringBuffer stringBuffer;
 	private int memWalkRange;
 	private int memCarRange;
 	private String memExcMenu;
-	private MemberDTO loginUser;
-	private String userInfo;
-	
+	private RandomSelectController main;
+
 	@RequestMapping(value = "/settingForm.do", method = RequestMethod.POST)
 	String settingForm(Model model, HttpServletRequest request) {
-		loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
+
+		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
+				"loginUser");
 		try {
 			if (loginUser.getMemId() != null || loginUser != null) {
 				try {
-					userInfo = memberService.getOptionInfoByMemId(loginUser.getMemId());
-					String[] userSettings =menuCodeDecoder(userInfo);
-					System.out.println("디코더 테스트");
-					for(String str : userSettings){
-						System.out.println(str);
-					}
-					
+
+					MemberDTO userInfo = memberService
+							.getOptionInfoByMemId(loginUser.getMemId());
+					System.out.println(userInfo);
+					String[] userSettings = menuCodeDecoder(userInfo
+							.getMemExcMenu());
+					/*
+					 * System.out.println("디코더 테스트"); for (String str :
+					 * userSettings) { System.out.println(str); }
+					 */
+					model.addAttribute("userInfo", userInfo);
 					model.addAttribute("userSettings", userSettings);
 					List<SettingDTO> walkRanges = settingService.getWalkRange();
 					List<SettingDTO> carRanges = settingService.getCarRange();
@@ -54,7 +60,7 @@ public class SettingController {
 					model.addAttribute("carRanges", carRanges);
 					model.addAttribute("excMenus", excMenus);
 
-					return settingForm(model, request);
+					return "setting/setting";
 				} catch (Exception e) {
 					model.addAttribute("errorMessage",
 							"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
@@ -77,10 +83,8 @@ public class SettingController {
 				"loginUser");
 
 		String[] menus = request.getParameterValues("menus");
-		for (String str : menus) {
-			System.out.println(str);
-			memExcMenu = menuCodeEncoder(str);
-		}
+		memExcMenu = menuCodeEncoder(menus);
+
 		// 로그인 정보의 아이디를 패러미터로 세팅
 		memberDto.setMemId(loginUser.getMemId());
 		// 생성된 제외메뉴 코드를 패러미터로 세팅
@@ -94,9 +98,10 @@ public class SettingController {
 		memCarRange = Integer.parseInt(request.getParameter("carRange"));
 		memberDto.setMemCarRange(memCarRange);
 		// 설정 정보 저장 쿼리 실행
+
 		try {
 			memberService.setOptionInfoByMemId(memberDto);
-			return "setting/error";
+			return settingForm(model, request);
 		} catch (Exception e) {
 			model.addAttribute("errorMessage",
 					"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
@@ -105,13 +110,19 @@ public class SettingController {
 
 	}
 
-	public String menuCodeEncoder(String str) {
-		int index = Integer.parseInt(str);
-		stringBuffer = new StringBuffer(menuCode);
-		stringBuffer.setCharAt(index, '1');
-		menuCode = stringBuffer.toString();
-		System.out.println(menuCode);
+	public String menuCodeEncoder(String[] menus) {
+		if (menus != null) {
+			for (String str : menus) {
+				int index = Integer.parseInt(str);
+				stringBuffer = new StringBuffer(menuCode);
+				stringBuffer.setCharAt(index, '1');
+				menuCode = stringBuffer.toString();
+				System.out.println(menuCode);
+			}
 
+		}
+		System.out.println("메뉴코드 테스트");
+		System.out.println(menuCode);
 		return menuCode;
 	}
 
@@ -128,4 +139,5 @@ public class SettingController {
 		}
 		return menuArray;
 	}
+
 }
