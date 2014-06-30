@@ -16,7 +16,7 @@ public interface RestntMapper {
 	RestntDTO getRestntId(String restntId);
 
 	// 관리자 : 식당 삭제
-	RestntDTO dropRestntById(String restntId);
+	void dropRestntById(String restntId);
 
 	// 관리자 : 식당정보 수정
 	void setRestntById(RestntDTO restntdto);
@@ -40,5 +40,9 @@ public interface RestntMapper {
 
 	// 도로명 주소 필터
 	List<SettingDTO> getAdress3();
+	
+	//관리자: 식당관리 - 주소필터 적용 - 식당 리스트 표시
+	List<RestntDTO> getRestntListByAddr(SettingDTO settingDto);
+		
 
 }
