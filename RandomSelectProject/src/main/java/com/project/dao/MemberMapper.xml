@@ -89,8 +89,8 @@
 
 
 	<!-- 회원 : 설정 정보 불러오기 -->
-	<select id="getOptionInfoByMemId" parameterType="String" resultType="String">
-	select memexcmenu from member where where memid=#{memId}
+	<select id="getOptionInfoByMemId" parameterType="String" resultType="MemberDTO">
+	select memexcmenu, memwalkrange, memcarrange from member where memid=#{memId}
 	</select>
 	
 	

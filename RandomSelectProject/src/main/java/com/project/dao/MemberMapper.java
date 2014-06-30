@@ -54,7 +54,7 @@ public interface MemberMapper {
 	void setMemberInfo(MemberDTO memberDto);
 	
 	//회원 : 설정 정보 불러오기 /
-	String getOptionInfoByMemId(String memId);
+	MemberDTO getOptionInfoByMemId(String memId);
 	
 	
 }
