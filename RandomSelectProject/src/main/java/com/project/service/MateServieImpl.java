@@ -1,3 +1,46 @@
+
+package com.project.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.project.dao.MateMapper;
+import com.project.dao.MemberMapper;
+import com.project.domain.MateDTO;
+
+@Service
+public class MateServieImpl implements MateService {
+	
+	@Autowired
+	private MateMapper mateMapper;
+	
+	@Autowired
+	private MemberMapper memberMapper;
+
+	@Override
+	public List<MateDTO> getMateListByMemId() {
+		// TODO Auto-generated method stub
+		return mateMapper.getMateListByMemId();
+	}
+
+	@Override
+	public MateDTO getMateIdByMateId(String mateId) {
+		// TODO Auto-generated method stub
+		return mateMapper.getMateIdByMateId(mateId);
+	}
+
+	@Override
+	public String getMateInfoByMateId(String mateId) {
+		// TODO Auto-generated method stub
+		return mateMapper.getMateInfoByMateId(mateId);
+	}
+
+}
+
+
+/*
 package com.project.service;
 
 import java.util.List;
@@ -37,3 +80,4 @@ public class MateServieImpl implements MateService {
 	}
 
 }
+*/

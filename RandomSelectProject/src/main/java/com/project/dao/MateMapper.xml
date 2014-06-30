@@ -4,21 +4,25 @@
 <mapper namespace="com.project.dao.MateMapper">
 	
 	<!-- 회원 : 친구 리스트 -->
-	<select id="getMateListByMateId" parameterType="MateDTO" resultType="MateDTO">
+	<select id="getMates" parameterType="MateDTO" resultType="MateDTO">
+	<!-- <select id="getMateListByMemId" parameterType="MateDTO" resultType="MateDTO">  -->
 		select * from mate 	where memid=#{abc@gmail.com}
 	</select>
 	
 	<!-- 회원: 친구 아이디 -->
-	<select id="getMateIdByMateId" parameterType="MateDTO" resultType="MateDTO">
+	<select id="getMateId" resultType="MateDTO">
+	<!-- <select id="getMateIdByMateId" parameterType="MateDTO" resultType="MateDTO"> -->
 		select memId from mate where
 		memid=#{abc@gmail.com}
 	</select>
 	
 	<!-- 회원: 친구정보 -->
-	<select id="getMateInfoByMateId" parameterType="MateDTO" resultType="MateDTO">
+	<select id="getMateInfo" resultType="String">
+	<!-- <select id="getMateInfoByMateId" parameterType="MateDTO" resultType="MateDTO"> -->
 		select matestatus, infostatus from mate
 		where memid=#{abc@gmail.com}
 	</select>
 	
 	
 </mapper>
+
