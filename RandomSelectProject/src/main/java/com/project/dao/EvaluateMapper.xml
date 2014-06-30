@@ -32,7 +32,6 @@
 	<!-- 회원: 식당 평가 -->
 	<update id="setEvaluateInfoByEvaluateTerms" parameterType="EvaluateDTO">
 
-		update Evaluate set evalScore =#{evalScore},
 
 		update Evaluate set
 		evalScore =#{evalScore}

@@ -34,4 +34,9 @@ public class SettingServiceImpl implements SettingService{
 		return settingMapper.getExcMenuById(excMenuId);
 	}
 
+	@Override
+	public List<String> getGradeValue() {
+		return settingMapper.getGradeValue();
+	}
+
 }

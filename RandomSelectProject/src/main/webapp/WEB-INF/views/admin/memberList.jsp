@@ -10,7 +10,7 @@
 <body>
 
 	<!--꾸에에에에에에에엑  -->
-	
+
 	<table border="2">
 		<caption></caption>
 		<thead>
@@ -28,60 +28,31 @@
 							value="${member.memId}" name="memId"></td>
 						<td>${member.memName}</td>
 						<td><select name="memGrade">
-								<c:choose>
-									<c:when test="${member.memGrade=='1'}">
-										<option value="1" selected="selected">1</option>
-									</c:when>
-									<c:otherwise>
-										<option value="1">1</option>
-									</c:otherwise>
-								</c:choose>
 
-								<c:choose>
-									<c:when test="${member.memGrade=='2'}">
-										<option value="2" selected="selected">2</option>
-									</c:when>
-									<c:otherwise>
-										<option value="2">2</option>
-									</c:otherwise>
-								</c:choose>
+								<c:forEach items="${grades}" var="grade" varStatus="gradeValue">
+									<c:choose>
+										<c:when test="${member.memGrade==grade}">
+											<option value="${grade}" selected="selected">${grade}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${grade}">${grade}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 
 
-								<c:choose>
-									<c:when test="${member.memGrade=='3'}">
-										<option value="3" selected="selected">3</option>
-									</c:when>
-									<c:otherwise>
-										<option value="3">3</option>
-									</c:otherwise>
-								</c:choose>
 
-								<c:choose>
-									<c:when test="${member.memGrade=='4'}">
-										<option value="4" selected="selected">4</option>
-									</c:when>
-									<c:otherwise>
-										<option value="4">4</option>
-									</c:otherwise>
-								</c:choose>
-								
-								<c:choose>
-									<c:when test="${member.memGrade=='5'}">
-										<option value="5" selected="selected">5</option>
-									</c:when>
-									<c:otherwise>
-										<option value="5">5</option>
-									</c:otherwise>
-								</c:choose>
+
+
 						</select></td>
-						<td>
-						
-						<c:choose>
+						<td><c:choose>
 								<c:when test="${member.black=='1'}">
-								<input type="checkbox" name="black" value="1" checked="checked">
+									<input type="checkbox" name="black" value="1" checked="checked">
 								</c:when>
-								
-								<c:otherwise><input type="checkbox" name="black" value="1" ></c:otherwise>
+
+								<c:otherwise>
+									<input type="checkbox" name="black" value="1">
+								</c:otherwise>
 							</c:choose></td>
 						<td><input type="submit" value="수정"></td>
 					</form>

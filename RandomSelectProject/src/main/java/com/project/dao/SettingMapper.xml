@@ -19,6 +19,9 @@
 	select excmenu from menuoption where excmenuid=#{excMenuId}
 	</select>
 	
+	<select id="getGradeValue" resultType="String">
+	select gradevalue from mgrade
+	</select>
 	
 	
 </mapper>

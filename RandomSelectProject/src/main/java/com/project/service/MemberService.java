@@ -23,7 +23,7 @@ public interface MemberService {
 
 	// 회원:현재비밀번호확인
 	String getMemPasswdByMemId(MemberDTO memberDto);
-	
+
 	// 회원:비밀번호만 변경
 	void setMemPasswdByMemberTerms(MemberDTO memberDto);
 
@@ -52,5 +52,8 @@ public interface MemberService {
 
 	// 관리자 : 회원 정보 수정
 	void setMemberInfo(MemberDTO memberDto);
+
+	// 회원 : 설정 정보 불러오기 /
+	String getOptionInfoByMemId(String memId);
 
 }
