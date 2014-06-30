@@ -3,14 +3,15 @@ package com.project.dao;
 import java.util.List;
 
 import com.project.domain.RestntDTO;
+import com.project.domain.SettingDTO;
 
 public interface RestntMapper {
 	// 관리자, 회원 : 전체 식당 리스트
 	List<RestntDTO> getRestntList();
-	
+
 	// 회원 : 식당 하나
 	RestntDTO getRestnt(String restntId);
-	
+
 	// 회원 : 식당 코드
 	RestntDTO getRestntId(String restntId);
 
@@ -30,4 +31,14 @@ public interface RestntMapper {
 	RestntDTO getRestntInfoById(String restntId);
 
 	List<RestntDTO> getRestntListByAddr(String addressCode);
+
+	// 광역시, 도 필터
+	List<SettingDTO> getAdress1();
+
+	// 시/군/구 필터
+	List<SettingDTO> getAdress2();
+
+	// 도로명 주소 필터
+	List<SettingDTO> getAdress3();
+
 }

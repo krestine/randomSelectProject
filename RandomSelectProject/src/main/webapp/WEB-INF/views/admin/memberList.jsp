@@ -10,7 +10,7 @@
 <body>
 
 	<!--꾸에에에에에에에엑  -->
-	
+
 	<table border="2">
 		<caption></caption>
 		<thead>
@@ -28,6 +28,12 @@
 							value="${member.memId}" name="memId"></td>
 						<td>${member.memName}</td>
 						<td><select name="memGrade">
+								
+									
+								
+
+
+
 								<c:choose>
 									<c:when test="${member.memGrade=='1'}">
 										<option value="1" selected="selected">1</option>
@@ -64,7 +70,7 @@
 										<option value="4">4</option>
 									</c:otherwise>
 								</c:choose>
-								
+
 								<c:choose>
 									<c:when test="${member.memGrade=='5'}">
 										<option value="5" selected="selected">5</option>
@@ -74,14 +80,14 @@
 									</c:otherwise>
 								</c:choose>
 						</select></td>
-						<td>
-						
-						<c:choose>
+						<td><c:choose>
 								<c:when test="${member.black=='1'}">
-								<input type="checkbox" name="black" value="1" checked="checked">
+									<input type="checkbox" name="black" value="1" checked="checked">
 								</c:when>
-								
-								<c:otherwise><input type="checkbox" name="black" value="1" ></c:otherwise>
+
+								<c:otherwise>
+									<input type="checkbox" name="black" value="1">
+								</c:otherwise>
 							</c:choose></td>
 						<td><input type="submit" value="수정"></td>
 					</form>

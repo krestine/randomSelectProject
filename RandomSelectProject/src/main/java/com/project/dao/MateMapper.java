@@ -1,3 +1,4 @@
+
 package com.project.dao;
 
 import java.util.List;
@@ -16,3 +17,4 @@ public interface MateMapper {
 	String getMateInfo(String mateId);
 
 }
+

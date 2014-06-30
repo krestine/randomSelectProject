@@ -12,7 +12,7 @@ public interface EvaluateMapper {
 	List<EvaluateDTO> getEvaluateListByMemId(Object evalScore);
 	
 	// 식당이름
-	List<EvaluateDTO> getRestntnameByRestId1(String restntId);
+	List<EvaluateDTO> getRestntnameByRestId(String restntId);
 
 	// 평가한 방문리스트 수정
 
@@ -36,7 +36,7 @@ public interface EvaluateMapper {
 	List<EvaluateDTO> getVisitsByMemid(String memId);
 
 	// 식당이름
-	List<EvaluateDTO> getRestntnameByRestId(String restntId);
+	/*List<EvaluateDTO> getRestntnameByRestId(String restntId);*/
 
 	
 

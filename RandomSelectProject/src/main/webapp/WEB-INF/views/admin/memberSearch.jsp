@@ -35,28 +35,32 @@
 </head>
 <body>
 	<form action="memberSearchByIdProc.do" method="post">
-		아이디 입력<input type="text" name="memId">
+		아이디 입력<input type="text" name="param">
+		<input type="hidden" value="ID" name="caseCode">
 		<input type="submit" value="검색">
 	</form>
 		<br>
 	<form action="memberSearchByNameProc.do" method="post">	
-		이름 입력<input type="text" name="memName">
+		이름 입력<input type="text" name="param">
+		<input type="hidden" value="NAME" name="caseCode">
 		<input type="submit" value="검색">
 	</form>
 		<br>
 	<form action="memberSearchByGradeProc.do" method="post">	
 		등급 선택
-		<select name="memGrade">
+		<select name="param">
 		<option value="1">1</option>
 		<option value="2">2</option>
 		<option value="3">3</option>
 		<option value="4">4</option>
 		<option value="5">5</option>
 		</select>
+		<input type="hidden" value="GRADE" name="caseCode">
 		<input type="submit" value="검색">
 	</form>	
 		<br>
 		<form action="memberSearchByBlackProc.do" method="post">
+		<input type="hidden" value="BLACK" name="caseCode">
 		블랙 리스트<input type="submit" value="검색">
 		</form>
 </body>
