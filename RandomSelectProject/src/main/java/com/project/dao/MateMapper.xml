@@ -17,21 +17,30 @@
 	</select>
 	
 	<!-- 회원: 친구정보 -->
-	<select id="getMateInfoByMateId" resultType="MateDTO" parameterType="String">
+	<select id="getMateInfoByMateId" parameterType="MateDTO" resultType="MateDTO" >
 	<!-- <select id="getMateInfoByMateId" parameterType="MateDTO" resultType="MateDTO"> -->
 		select matestatus, infostatus from mate
-		where memid=#{memId} and mateId=#{mateId}
+		where mateid=#{mateId} and memid=#{memId}
 	</select>
 	
-	
+	<select id = "getMemberInfoByMemId" parameterType="MemberDTO" resultType="MemberDTO">
+		select memid, memname, memgrade from  
+		select r.memname, r.memgrade, r.memid e.mateid
+		from member r, mate e
+		where r.memid=#{memId} and r.memid=e.memid
+		
+	</select>
 	
 	
 	<!-- 회원: 정보 -->
-	<select id="getMateInfoByMemId" parameterType="MemberDTO"
-		resultType="MemberDTO">
+	<select id="getMateInfoByMemId" parameterType="MateDTO"
+		resultType="MateDTO">
 		select memid, memname, memgrade from member where
 		memid=#{memId}
 	</select>
+	
+	
+	
 	
 	
 </mapper>

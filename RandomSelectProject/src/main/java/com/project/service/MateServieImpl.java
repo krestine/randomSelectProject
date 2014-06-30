@@ -33,11 +33,18 @@ public class MateServieImpl implements MateService {
 	}
 
 	@Override
-	public MateDTO getMateInfoByMateId(String mateId) {
+	public MateDTO getMateInfoByMateId(MateDTO mateId) {
 		// TODO Auto-generated method stub
 		return mateMapper.getMateInfoByMateId(mateId);
 	}
 
+	@Override
+	public MemberDTO getMemInfoByMemId(MemberDTO memId) {
+		// TODO Auto-generated method stub
+		return memberMapper.getMyInfoByMemId(memId);
+	}
+
+	
 
 	
 	
