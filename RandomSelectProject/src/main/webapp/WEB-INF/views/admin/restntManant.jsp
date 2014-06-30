@@ -90,7 +90,7 @@
 
 
 	<table border="2">
-		<caption></caption>
+		<caption>검색 결과</caption>
 		<thead>
 
 			<tr>
@@ -100,23 +100,35 @@
 		</thead>
 		<tbody>
 			<c:choose>
-				<c:when test="${restnts==null}">
+				<c:when test="${code.adress3==null}">
 					<tr>
-						<td>"주소 필터를 적용해주세요"</td>
+						<td>"상세정보 필터를 적용해 주세요."</td>
 					</tr>
 				</c:when>
-				<c:otherwise>
-					<c:forEach items="${restnts }" var="restnt">
-						<form action="">
+
+
+
+
+				<c:when test="${code.adress3!=null}">
+					<c:forEach items="${restnts}" var="restnt">
+						<form action="restntInfoForm.do" method="post">
 							<tr>
 
-								<td><input type="hidden" value="${restnt.restntId }">
-									${restnt.restntName } <input type="submit" value="검색"></td>
+								<td><c:choose>
+										<c:when test="${restnt.restntId!=null}">
+											<input type="hidden" value="${restnt.restntId }" name="restntId">
+										${restnt.restntName } <input type="submit" value="상세정보">
+										</c:when>
+										<c:when test="${restnt.restntId==null}">
+											없어
+										</c:when>
+									</c:choose></td>
 
 							</tr>
 						</form>
 					</c:forEach>
-				</c:otherwise>
+				</c:when>
+
 			</c:choose>
 
 		</tbody>

@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>식당 상세 정보</title>
 </head>
 <body>
-
+어서와 여기까지 구현하느라 수고했어
+${restnt}
 </body>
 </html>
