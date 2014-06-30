@@ -17,16 +17,30 @@
     
     
 <script type="text/javascript">
-	function memberGo() {
+	function evaluateGo() {
 
-		document.getElementById("GoSelect").action = "evaluateListForm.do";
-		document.getElementById("GoSelect").submit();
+		document.getElementById("select2").action = "evaluateListForm.do";
+		document.getElementById("select2").submit();
 	}
 
-	function restntGo() {
+	function nEvaluateGo() {
 
-		document.getElementById("GoSelect").action = "evaluateListProc.do";
-		document.getElementById("GoSelect").submit();
+		document.getElementById("select2").action = "nEvaluateListForm.do";
+		document.getElementById("select2").submit();
+	}
+	function editGo() {
+
+		document.getElementById("select2").action = "edit.do";
+		document.getElementById("select2").submit();
+	}
+
+	function mainGo() {
+		document.getElementById("select1").action = "main.do";
+		document.getElementById("select1").submit();
+	}
+	function myInfoGo() {
+		document.getElementById("select1").action = "myInfoForm.do";
+		document.getElementById("select1").submit();
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -36,20 +50,21 @@
 </head>
 <body>
 
+
 <form id="select2" method="post">
 		<input type="button" onclick="evaluateGo()" value="평가한 페이지 "> <input
 			type="button" onclick="nEvaluateGo()" value="평가 안한 페이지"> <input
-			type="button" onclick="edit" value="수정">
+			type="button" onclick="editGo()" value="수정">
 	</form>
 
 
 
-<div id="wrap">
+<!-- <div id="wrap">
 		<div class="menu">
 			<ul>
-				<li class="board"><a class="EvaluateList" href="evaluate/evaluateList.jsp" OnClick="window.location='evaluateList.do'">평가한 페이지</a></li>
-				<li class="board"><a class="nEvaluateList" href="evaluat/nEvaluateList.jsp" OnClick="window.location='nEvaluateList.do'">평가안한페이지</a></li>
-				<li class="board"><a class="edit" href="edit.jsp" OnClick="window.location='edit.do'">평점수정</a></li>
+				<li class="board"><a class="EvaluateList"  href="WEB-INF/evaluate/evaluateList.jsp"OnClick="evaluateGo()">평가한 페이지</a></li>
+				<li class="board"><a class="nEvaluateList" href="WEB-INF/evaluate/nEvaluateList.jsp" OnClick="nEvaluateGo()">평가안한페이지</a></li>
+				<li class="board"><a class="edit" href="WEB-INF/evaluate/edit.jsp" OnClick="editGo()">평점수정</a></li>
 			</ul>
 		</div>
 		
@@ -58,7 +73,7 @@
 
 		<div class="boardList">
 			<dl>
-			
+			 -->
 			
 			<c:forEach var="notice" items="${add}" varStatus="cnt">
 				<dt class="listHead">
@@ -66,7 +81,7 @@
 					<h4>${notice.regidate}</h4>
 				</dt>
 				<dd class="listContent">${notice.issue}
-				<a class="mainBoard" href="#" OnClick="window.location='edit.do?notCD=${notice.notCD}'">글수정</a>
+				<a class="mainBoard" href="WEB-INF/evaluate/edit.do" OnClick="editgo()">글수정</a>
 				<a class="mainBoard" href="#" OnClick="window.location='delete.do?notCD=${notice.notCD}'">삭제</a></dd>
 			</c:forEach>
 	
@@ -87,13 +102,18 @@
 </c:forEach>
 </ul>
 	
- <h3>Navigation</h3>
-    <ul>
-      <li><a href="loginProc.do" OnClick="window.location='loginProc.do'">Home</a></li>
-      <li><a href="#">HTML</a></li>
-      <li><a href="#">CSS</a></li>
+ <h3>메인으로 </h3>
+ 
+ <form id="select1" method="post">
+		<input type="button" onclick="mainGo()" value="메인으로 "> <input
+			type="button" onclick="myInfoFormGo()" value="내정보수정"> 
+	</form>
+ 
+   <!--  <ul>
+      <li><a href="main.do" OnClick="window.location='main.do'">메인으로</a></li>
+     <li><a href="myInfoForm.do" OnClick="window.location='myInfoForm.do'">정보수정</a></li>
     </ul>
-
+ -->
 
 
 <div align="center">
@@ -107,24 +127,19 @@
 			
 			
 			
-			<%-- <c:choose>
+		<%-- 	<c:choose>
 					<c:when test="${users==null}">
 						<td width="33%" align="right">
 						<input type="button" onclick="document.location='visitList.do'" value="방문목록"
 							class="redBtn"></td>
 							</c:when>
-						<c:when test="${users==null}">
-							<td width="33%" align="right">
-							<input type="button" onclick="document.location='nEvaluateList.do'" value="평가안한"
-							class="redBtn"></td>
-							</c:when>
 					<c:otherwise>
-							<td width="33%" align="right"><b>${users.name}</b>${welcome }<input type="button"
+							<td width="33%" align="right"><b>${users.name}</b>${welcome}<input type="button"
 							onclick="document.location='logout.do'" value="로그아웃"
 							class="redBtn"></td>
 					</c:otherwise>
-				</c:choose>  --%>
-								
+				</c:choose> 
+								 --%>
 		</table>
 	</div>
 

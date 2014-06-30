@@ -77,7 +77,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	@Override
 	public void setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto) {
-		// TODO Auto-generated method stub
+		
 
 	}
 

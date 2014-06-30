@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.domain.EvaluateDTO;
 import com.project.domain.MemberDTO;
@@ -24,6 +25,23 @@ public class EvaluateController {
 	private EvaluateService evaluateService;
 
 	// 식당평가한 목록
+	
+		@RequestMapping(value = "/evaluateListForm.do", method = RequestMethod.POST)
+		public String EvaluateListForm(Model model, String box, String memId) {
+			System.out.println("evaluateListForm()");
+		
+			return "evaluate/edit";
+		}
+	
+		
+		//평가 수정editOk
+		@RequestMapping(value="editOk.do", method = RequestMethod.POST)
+		public String editOk(Model model, HttpServletRequest request) {
+		//저장해줘..(쿼리문으로 xml에 쓰면돼)
+			
+			return "evaluate/editOk";
+			}
+		
 	@RequestMapping(value="/evaluateListProc.do", method = RequestMethod.POST)
 	public String evaluateListProc(Model model, String memId, HttpServletRequest request) {
 		System.out.println("evaluateListProc()");
@@ -38,12 +56,12 @@ public class EvaluateController {
 			return "setting/error";
 		}
 		
-		
 		System.out.println("평가 리스트 실행");
 		try {
 			List<EvaluateDTO> evaluates = evaluateService.getEvaluateListByMemId(memId);
 			model.addAttribute("evaluates", evaluates);
 			return "evaluate/evaluateList";
+		
 		} catch (Exception e) {
 			model.addAttribute("errorMessage", "데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
 		}
@@ -78,7 +96,7 @@ public class EvaluateController {
 	public String nEvaluateListProc(Model model, EvaluateDTO evaluateDTO) {
 		System.out.println("nEvaluateListProc()");
 		evaluateService.putScoreByEvaluateTerms(evaluateDTO);
-		return "nEvaluateListForm.do";
+		return "evaluate/nEvaluateListForm.do";
 	}
 }
 
