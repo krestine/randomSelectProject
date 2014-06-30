@@ -20,9 +20,23 @@
 			</c:forEach>
 		</select> <br> <br> 검색 설정 : 제외메뉴 <br>
 		<c:forEach items="${excMenus}" var="excMenu" varStatus="num">
-			<input type="checkbox" value="${num.index}" name="menus">${excMenu.excMenu}
+
+			<c:choose>
+				<c:when test="${excMenu.excMenu==userSettings[num.index]}">
+
+					<input type="checkbox" value="${num.index}" name="menus"
+						checked="checked">${excMenu.excMenu}
 				<br>
+				</c:when>
+				<c:otherwise>
+
+					<input type="checkbox" value="${num.index}" name="menus">${excMenu.excMenu}
+				<br>
+				</c:otherwise>
+
+			</c:choose>
 		</c:forEach>
+
 		<br> <input type="submit" value="저장">
 	</form>
 

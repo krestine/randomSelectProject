@@ -116,4 +116,10 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+	@Override
+	public String getOptionInfoByMemId(String memId) {
+		// TODO Auto-generated method stub
+		return memberMapper.getOptionInfoByMemId(memId);
+	}
+
 }

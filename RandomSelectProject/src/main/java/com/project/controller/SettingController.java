@@ -30,14 +30,23 @@ public class SettingController {
 	private int memWalkRange;
 	private int memCarRange;
 	private String memExcMenu;
-
+	private MemberDTO loginUser;
+	private String userInfo;
+	
 	@RequestMapping(value = "/settingForm.do", method = RequestMethod.POST)
 	String settingForm(Model model, HttpServletRequest request) {
-		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
-				"loginUser");
+		loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
 		try {
 			if (loginUser.getMemId() != null || loginUser != null) {
 				try {
+					userInfo = memberService.getOptionInfoByMemId(loginUser.getMemId());
+					String[] userSettings =menuCodeDecoder(userInfo);
+					System.out.println("디코더 테스트");
+					for(String str : userSettings){
+						System.out.println(str);
+					}
+					
+					model.addAttribute("userSettings", userSettings);
 					List<SettingDTO> walkRanges = settingService.getWalkRange();
 					List<SettingDTO> carRanges = settingService.getCarRange();
 					List<SettingDTO> excMenus = settingService.getExcMenu();
@@ -45,7 +54,7 @@ public class SettingController {
 					model.addAttribute("carRanges", carRanges);
 					model.addAttribute("excMenus", excMenus);
 
-					return "setting/setting";
+					return settingForm(model, request);
 				} catch (Exception e) {
 					model.addAttribute("errorMessage",
 							"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
@@ -87,7 +96,7 @@ public class SettingController {
 		// 설정 정보 저장 쿼리 실행
 		try {
 			memberService.setOptionInfoByMemId(memberDto);
-			return "randomSelect/main";
+			return "setting/error";
 		} catch (Exception e) {
 			model.addAttribute("errorMessage",
 					"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
