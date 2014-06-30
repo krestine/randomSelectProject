@@ -39,7 +39,7 @@ public class CommunityController {
 		try {
 			if (loginUser.getMemId() != null || loginUser != null) {
 				try {
-					List<MateDTO> mates = mateService.getMates();
+					List<MateDTO> mates = mateService.getMateListByMemId();
 					model.addAttribute("mates", mates);
 					return "community/mateList";
 					
@@ -61,7 +61,7 @@ public class CommunityController {
 	// 회원 : 친구 상세정보
 	@RequestMapping(value = "/mateDetailProc.do", method = RequestMethod.POST)
 	public String mateDetailProc(Model model, String mateId) {
-		String mate = mateService.getMateInfo(mateId);
+		String mate = mateService.getMateInfoByMateId(mateId);
 		model.addAttribute("mate", mate);
 		System.out.println("mateDetailProc()");
 		return "community/mateDetail";

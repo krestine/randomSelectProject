@@ -33,8 +33,9 @@
 				<table align="center" border="0" cellpadding="0" cellspacing="0"
 					bgcolor="white">
 					<tr>
-						<!--  a href="mateDetail.do?mateId=${mateDto.mateId}"/a>
-						<a href="mateDetail.do?memId=${mateDto.memId}"/a> -->
+						<a href="mateDetail.do?mateId=${mate.mateId}" ></a>
+						<a href="mateDetail.do?memId=${mate.memId}" ></a>
+						
 					</tr>
 					<tr>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

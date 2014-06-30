@@ -20,22 +20,23 @@ public class MateServieImpl implements MateService {
 	private MemberMapper memberMapper;
 
 	@Override
-	public List<MateDTO> getMates() {
+	public List<MateDTO> getMateListByMemId() {
 		// TODO Auto-generated method stub
-		return mateMapper.getMates();
+		return mateMapper.getMateListByMemId();
 	}
 
 	@Override
-	public MateDTO getMateId(String mateId) {
+	public MateDTO getMateIdByMateId(String mateId) {
 		// TODO Auto-generated method stub
-		return mateMapper.getMateId(mateId);
+		return mateMapper.getMateIdByMateId(mateId);
 	}
 
 	@Override
-	public String getMateInfo(String mateId) {
+	public String getMateInfoByMateId(String mateId) {
 		// TODO Auto-generated method stub
-		return mateMapper.getMateInfo(mateId);
+		return mateMapper.getMateInfoByMateId(mateId);
 	}
+
 }
 
 
