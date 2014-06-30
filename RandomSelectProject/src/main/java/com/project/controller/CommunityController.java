@@ -29,12 +29,16 @@ public class CommunityController {
 	private MateService mateService;
 	@Autowired
 	private RestntService restntService;
+	@Autowired
+	private MenuService menuService;
 	
 	private MemberDTO loginUser;
 	private MateDTO mate;
 	private List<MateDTO> mates;
 	private List<RestntDTO> restnts;
 	private MemberDTO memInfo;
+	private RestntDTO restnt;
+	private MenuDTO menuInfo;
 	
 	// 회원 : 친구 리스트
 	@RequestMapping(value = "/mateListProc.do", method = RequestMethod.POST)
@@ -84,7 +88,7 @@ public class CommunityController {
 	@RequestMapping(value = "/restntListProc.do", method = RequestMethod.POST)
 	public String restntListProc(Model model, RestntDTO restntDto) {
 	
-		List<RestntDTO> restnts = restntService.getRestntList();
+		restnts = restntService.getRestntList();
 		model.addAttribute("restnts", restnts);
 		System.out.println("restntListProc()");
 		return "community/restntList";
@@ -94,9 +98,13 @@ public class CommunityController {
 	
 	// 회원 : 식당 상세정보
 	@RequestMapping(value = "/restntDetailProc.do", method = RequestMethod.POST)
-	public String restntDetailProc(Model model, String restntId) {
-		RestntDTO restnt = restntService.getRestntInfoById(restntId);
+	public String restntDetailProc(Model model, String menuId, RestntDTO restntDto) {
+		restnt = restntService.getRestntInfoByName(restntDto);
 		model.addAttribute("restnt", restnt);
+		
+		menuInfo=menuService.getMenuInfoByMenuId(menuId);
+		model.addAttribute("menuInfo", menuInfo);
+		
 		System.out.println("restntDetailProc()");
 		return "community/restntDetail";
 

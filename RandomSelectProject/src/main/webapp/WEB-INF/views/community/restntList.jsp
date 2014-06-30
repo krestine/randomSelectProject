@@ -36,8 +36,8 @@
 					<form action="restntDetailProc.do" method="POST">
 				 		<input type="hidden" value=" ${restnt.restntName}" name="restntName"> 
 						<input type="hidden" value=" ${restnt.restntEval}" name="restntEval">
-						${restnt.restntName} <input type="submit" value="보기" name="restntId"> 
-
+						${restnt.restntName} <input type="submit" value="보기" > 
+						
 					</form>
 
 				</tr>

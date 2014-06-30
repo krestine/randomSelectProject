@@ -35,18 +35,21 @@
 				
 				<tr>
 						
-					<form action="mateDetailProc.do" method="post">
-						<input value="친구이름">
-						<input value="친구아이디">
-						<input value="친구등급"><br>
+					<form action="restntDetailProc.do" method="POST">
+						
 						<input type="" value="${restnt.restntName}" name="restntName"><br>
 						<input type="" value="${restnt.restntEval}" name="restntEval"><br>
-						<input type="" value="${restnt.restntMenu}" name="restntMenu"><br>
-						<input type="" value="${restnt.restntCate} " name="restntCate"><br>
-						<input type="" value="${restnt.restntTel} " name="restntTel"><br>
-						<input type="" value="${restnt.restntAddr }" name="restntAddr"><br>
+						<input type="" value="${restnt.restntCate}" name="restntCate"><br>
+						<input type="" value="${restnt.restntTel}" name="restntTel"><br>
 						
-					
+						
+						<input type="" value="${menu.menuId}" name="menuId"><br>
+						<input type="" value="${menu.menuName}" name="menuName"><br>
+						<input type="" value="${menu.restntId}" name="restntId"><br>
+						<input type="" value="${menu.menuPrice}" name="menuPrice"><br>
+						<input type="" value="${menu.menuCalorie}" name="menuCalorie"><br>
+						<input type="" value="${menu.menuNote}" name="menuNote"><br>
+						
 					</form>
 				</tr>
 			</table>
