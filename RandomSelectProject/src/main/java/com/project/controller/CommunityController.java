@@ -29,18 +29,24 @@ public class CommunityController {
 	private MateService mateService;
 	@Autowired
 	private RestntService restntService;
-
+	
+	private MemberDTO loginUser;
+	private MateDTO mate;
+	private List<MateDTO> mates;
+	private List<RestntDTO> restnts;
+	
+	
 	// 회원 : 친구 리스트
 	@RequestMapping(value = "/mateListProc.do", method = RequestMethod.POST)
 	public String mateListProc(Model model, HttpServletRequest request) {
 		System.out.println("mateListProc()");
-		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
+		loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		try {
 			if (loginUser.getMemId() != null || loginUser != null) {
 
 				try {
-					List<MateDTO> mates = mateService
+					mates = mateService
 							.getMateListByMemId(loginUser.getMemId());
 
 					model.addAttribute("mates", mates);
@@ -63,11 +69,9 @@ public class CommunityController {
 	// 회원 : 친구 상세정보
 	@RequestMapping(value = "/mateDetailProc.do", method = RequestMethod.POST)
 	public String mateDetailProc(Model model, String mateId) {
-		System.out.println("/mateDetailProc.do");
-		MateDTO mate = mateService.getMateInfoByMateId(mateId);
+		mate = mateService.getMateInfoByMateId(loginUser.getMemId());
 		System.out.println(mate);
 		model.addAttribute("mate", mate);
-		System.out.println("mateDetailProc()");
 		return "community/mateDetail";
 	}
 

@@ -10,17 +10,27 @@
 	</select>
 	
 	<!-- 회원: 친구 아이디 -->
-	<select id="getMateId" resultType="MateDTO">
+	<select id="getMateIdByMateId" resultType="MateDTO">
 	<!-- <select id="getMateIdByMateId" parameterType="MateDTO" resultType="MateDTO"> -->
 		select memId from mate where
-		memid=#{abc@gmail.com}
+		memid=#{mateId}
 	</select>
 	
 	<!-- 회원: 친구정보 -->
 	<select id="getMateInfoByMateId" resultType="MateDTO" parameterType="String">
 	<!-- <select id="getMateInfoByMateId" parameterType="MateDTO" resultType="MateDTO"> -->
 		select matestatus, infostatus from mate
-		where memid=#{mateId}
+		where memid=#{memId} and mateId=#{mateId}
+	</select>
+	
+	
+	
+	
+	<!-- 회원: 정보 -->
+	<select id="getMateInfoByMemId" parameterType="MemberDTO"
+		resultType="MemberDTO">
+		select memid, memname, memgrade from member where
+		memid=#{memId}
 	</select>
 	
 	

@@ -18,7 +18,7 @@
 <title>mateDetail</title>
 </head>
 <body>
-	${mate.mateId } ${mate.memId}
+
 
 	<h1>mateDetail</h1>
 	<a href="mateListProc.do">친구리스트</a>

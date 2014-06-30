@@ -38,7 +38,7 @@
 					<form action="mateDetailProc.do" method="post">
 						<input type="hidden" value="${mate.memId}" name="memId">
 						<input type="hidden" value="${mate.mateId}" name="mateId">
-						${mate.mateId} <input type="submit" value="검색">
+						${mate.mateId} <input type="submit" value="보기">
 					</form>
 
 				</tr>

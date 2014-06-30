@@ -38,6 +38,11 @@ public class MateServieImpl implements MateService {
 		return mateMapper.getMateInfoByMateId(mateId);
 	}
 
+
+	
+	
+	
+
 }
 
 
