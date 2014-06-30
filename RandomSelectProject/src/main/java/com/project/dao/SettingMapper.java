@@ -9,4 +9,6 @@ public interface SettingMapper {
 	List<SettingDTO> getCarRange();
 	List<SettingDTO> getExcMenu();
 	String getExcMenuById(String excMenuId);
+	List<String> getGradeValue();
+	
 }

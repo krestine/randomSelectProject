@@ -34,19 +34,19 @@
 <title>회원 검색</title>
 </head>
 <body>
-	<form action="memberSearchByIdProc.do" method="post">
+	<form action="memberSearchProc.do" method="post">
 		아이디 입력<input type="text" name="param">
-		<input type="hidden" value="ID" name="caseCode">
+		<input type="hidden" value="1" name="caseCode">
 		<input type="submit" value="검색">
 	</form>
 		<br>
-	<form action="memberSearchByNameProc.do" method="post">	
+	<form action="memberSearchProc.do" method="post">	
 		이름 입력<input type="text" name="param">
-		<input type="hidden" value="NAME" name="caseCode">
+		<input type="hidden" value="2" name="caseCode">
 		<input type="submit" value="검색">
 	</form>
 		<br>
-	<form action="memberSearchByGradeProc.do" method="post">	
+	<form action="memberSearchProc.do" method="post">	
 		등급 선택
 		<select name="param">
 		<option value="1">1</option>
@@ -55,12 +55,12 @@
 		<option value="4">4</option>
 		<option value="5">5</option>
 		</select>
-		<input type="hidden" value="GRADE" name="caseCode">
+		<input type="hidden" value="3" name="caseCode">
 		<input type="submit" value="검색">
 	</form>	
 		<br>
-		<form action="memberSearchByBlackProc.do" method="post">
-		<input type="hidden" value="BLACK" name="caseCode">
+		<form action="memberSearchProc.do" method="post">
+		<input type="hidden" value="4" name="caseCode">
 		블랙 리스트<input type="submit" value="검색">
 		</form>
 </body>

@@ -9,8 +9,16 @@ public class SettingDTO {
 	private String adress1;
 	private String adress2;
 	private String adress3;
+	private String gradeValue;
 	
 	
+	
+	public String getGradeValue() {
+		return gradeValue;
+	}
+	public void setGradeValue(String gradeValue) {
+		this.gradeValue = gradeValue;
+	}
 	public String getAdress1() {
 		return adress1;
 	}
@@ -53,6 +61,7 @@ public class SettingDTO {
 	public void setExcMenu(String excMenu) {
 		this.excMenu = excMenu;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -63,6 +72,8 @@ public class SettingDTO {
 		result = prime * result + carRange;
 		result = prime * result + ((excMenu == null) ? 0 : excMenu.hashCode());
 		result = prime * result + excMenuId;
+		result = prime * result
+				+ ((gradeValue == null) ? 0 : gradeValue.hashCode());
 		result = prime * result + walkRange;
 		return result;
 	}
@@ -99,6 +110,11 @@ public class SettingDTO {
 			return false;
 		if (excMenuId != other.excMenuId)
 			return false;
+		if (gradeValue == null) {
+			if (other.gradeValue != null)
+				return false;
+		} else if (!gradeValue.equals(other.gradeValue))
+			return false;
 		if (walkRange != other.walkRange)
 			return false;
 		return true;
@@ -108,7 +124,7 @@ public class SettingDTO {
 		return "SettingDTO [walkRange=" + walkRange + ", carRange=" + carRange
 				+ ", excMenu=" + excMenu + ", excMenuId=" + excMenuId
 				+ ", adress1=" + adress1 + ", adress2=" + adress2
-				+ ", adress3=" + adress3 + "]";
+				+ ", adress3=" + adress3 + ", gradeValue=" + gradeValue + "]";
 	}
 	
 }
