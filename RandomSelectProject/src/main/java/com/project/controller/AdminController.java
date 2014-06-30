@@ -90,40 +90,6 @@ public class AdminController {
 
 	}
 
-	/*
-	 * // Id로 회원검색
-	 * 
-	 * @RequestMapping(value = "/memberSearchByIdProc.do", method =
-	 * RequestMethod.POST) String memberSearchByIdProc(Model model, String
-	 * memId) { List<MemberDTO> members =
-	 * memberService.getMemberListById(memId); model.addAttribute("members",
-	 * members); return "admin/memberList"; }
-	 * 
-	 * // 이름으로 회원검색
-	 * 
-	 * @RequestMapping(value = "/memberSearchByNameProc.do", method =
-	 * RequestMethod.POST) String memberSearchByNameProc(Model model, String
-	 * memName) { System.out.println(memName); List<MemberDTO> members =
-	 * memberService.getMemberListByName(memName); model.addAttribute("members",
-	 * members); return "admin/memberList"; }
-	 * 
-	 * // 등급으로 회원 검색
-	 * 
-	 * @RequestMapping(value = "/memberSearchByGradeProc.do", method =
-	 * RequestMethod.POST) String memberSearchByGradeProc(Model model, String
-	 * memGrade) { System.out.println(memGrade); List<MemberDTO> members =
-	 * memberService.getMemberListByGrade(memGrade);
-	 * model.addAttribute("members", members); return "admin/memberList"; }
-	 * 
-	 * // 블랙 으로 회원 검색
-	 * 
-	 * @RequestMapping(value = "/memberSearchByBlackProc.do", method =
-	 * RequestMethod.POST) String memberSearchByBlackProc(Model model, String
-	 * black) { System.out.println(black); List<MemberDTO> members =
-	 * memberService.getMemberListByBlack(black); model.addAttribute("members",
-	 * members); return "admin/memberList"; }
-	 */
-
 	// 회원 리스트에서 아이디 클릭 -> 회원의 평가 정보 리스트 표시 페이지
 	@RequestMapping(value = "/memberEvaluateListProc.do", method = RequestMethod.POST)
 	String memberEvaluateListProc(Model model, String memId) {

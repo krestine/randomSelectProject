@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.dao.MateMapper;
 import com.project.dao.MemberMapper;
 import com.project.domain.MateDTO;
+import com.project.domain.MemberDTO;
 
 @Service
 public class MateServieImpl implements MateService {
@@ -20,9 +21,9 @@ public class MateServieImpl implements MateService {
 	private MemberMapper memberMapper;
 
 	@Override
-	public List<MateDTO> getMateListByMemId() {
+	public List<MateDTO> getMateListByMemId(String memId) {
 		// TODO Auto-generated method stub
-		return mateMapper.getMateListByMemId();
+		return mateMapper.getMateListByMemId(memId);
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class MateServieImpl implements MateService {
 	}
 
 	@Override
-	public String getMateInfoByMateId(String mateId) {
+	public MateDTO getMateInfoByMateId(String mateId) {
 		// TODO Auto-generated method stub
 		return mateMapper.getMateInfoByMateId(mateId);
 	}
