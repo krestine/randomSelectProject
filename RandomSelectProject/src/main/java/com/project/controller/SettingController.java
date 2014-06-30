@@ -31,6 +31,7 @@ public class SettingController {
 	private int memWalkRange;
 	private int memCarRange;
 	private String memExcMenu;
+	private RandomSelectController main;
 
 	@RequestMapping(value = "/settingForm.do", method = RequestMethod.POST)
 	String settingForm(Model model, HttpServletRequest request) {
@@ -39,15 +40,16 @@ public class SettingController {
 		try {
 			if (loginUser.getMemId() != null || loginUser != null) {
 				try {
-
-					String userInfo = memberService
+					
+					MemberDTO userInfo = memberService
 							.getOptionInfoByMemId(loginUser.getMemId());
 					System.out.println(userInfo);
-					String[] userSettings = menuCodeDecoder(userInfo);
+					String[] userSettings = menuCodeDecoder(userInfo.getMemExcMenu());
 					/*
 					 * System.out.println("디코더 테스트"); for (String str :
 					 * userSettings) { System.out.println(str); }
 					 */
+					model.addAttribute("userInfo", userInfo);
 					model.addAttribute("userSettings", userSettings);
 					List<SettingDTO> walkRanges = settingService.getWalkRange();
 					List<SettingDTO> carRanges = settingService.getCarRange();
@@ -94,6 +96,7 @@ public class SettingController {
 		memCarRange = Integer.parseInt(request.getParameter("carRange"));
 		memberDto.setMemCarRange(memCarRange);
 		// 설정 정보 저장 쿼리 실행
+		
 		try {
 			memberService.setOptionInfoByMemId(memberDto);
 			return settingForm(model, request);
