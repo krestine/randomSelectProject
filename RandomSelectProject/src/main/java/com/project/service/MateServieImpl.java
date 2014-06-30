@@ -25,15 +25,15 @@ public class MateServieImpl implements MateService {
 	}
 
 	@Override
-	public MateDTO getMateId(String mateDto) {
+	public MateDTO getMateId(String mateId) {
 		// TODO Auto-generated method stub
-		return mateMapper.getMateId(mateDto);
+		return mateMapper.getMateId(mateId);
 	}
 
 	@Override
-	public String getMateInfo(String memName) {
+	public String getMateInfo(String mateId) {
 		// TODO Auto-generated method stub
-		return mateMapper.getMateInfo(memName);
+		return mateMapper.getMateInfo(mateId);
 	}
 
 

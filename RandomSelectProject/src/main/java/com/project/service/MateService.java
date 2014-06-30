@@ -9,10 +9,10 @@ public interface MateService {
 	List<MateDTO> getMates();
 
 	// 회원 : 친구 아이디
-	MateDTO getMateId(String mateDto);
+	MateDTO getMateId(String mateId);
 	
 	// 회원 : 친구 정보
 	//String getMateId(String mateDto);
-	String getMateInfo(String memName);
+	String getMateInfo(String mateId);
 
 }

@@ -16,6 +16,7 @@ import com.project.domain.MateDTO;
 import com.project.domain.MemberDTO;
 import com.project.domain.MenuDTO;
 import com.project.domain.RestntDTO;
+import com.project.domain.SettingDTO;
 import com.project.service.EvaluateService;
 import com.project.service.MateService;
 import com.project.service.MenuService;
@@ -28,32 +29,38 @@ public class CommunityController {
 	private MateService mateService;
 	@Autowired
 	private RestntService restntService;
-
+	
 	// 회원 : 친구 리스트
 	@RequestMapping(value="/mateListProc.do", method = RequestMethod.POST)
-	public String mateListProc(Model model, String memId, HttpServletRequest request) {
+	public String mateListProc(Model model, HttpServletRequest request) {
 		System.out.println("mateListProc()");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
 		try {
-			memId= loginUser.getMemId();
+			if (loginUser.getMemId() != null || loginUser != null) {
+				try {
+					
+					model.addAttribute("mates", mateService.getMates());
+					return "community/mateList";
+					
+				} catch (Exception e) {
+					model.addAttribute("errorMessage",
+							"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
+				return "setting/error";
+				}
+
+			}
 		} catch (Exception e) {
-			model.addAttribute("errorMessage", "로그인 해 주세요!");
-			return "setting/error";
-		}
-		try {
-			List<MateDTO> mateList = mateService.getMates();
-			model.addAttribute("mateList", mateList);
-			return "community/mateList";
-		} catch (Exception e) {
-			model.addAttribute("errorMessage", "데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
+			model.addAttribute("errorMessage", "로그인 해주세요!");
+
 		}
 		return "setting/error";
 	}
-
+			
+		
 	// 회원 : 친구 상세정보
 	@RequestMapping(value = "/mateDetailProc.do", method = RequestMethod.POST)
-	public String mateDetailProc(Model model, String memName) {
-		String mate = mateService.getMateInfo(memName);
+	public String mateDetailProc(Model model, String mateId) {
+		String mate = mateService.getMateInfo(mateId);
 		model.addAttribute("mate", mate);
 		System.out.println("mateDetailProc()");
 		return "community/mateDetail";

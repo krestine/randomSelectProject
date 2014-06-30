@@ -4,12 +4,12 @@
 <mapper namespace="com.project.dao.MateMapper">
 	
 	<!-- 회원 : 친구 리스트 -->
-	<select id="getMates" resultType="Mate">
+	<select id="getMates" resultType="MateDTO">
 		select * from mate 	where memid=#{abc@gmail.com}
 	</select>
 	
 	<!-- 회원: 친구 아이디 -->
-	<select id="getMateId" resultType="Mate">
+	<select id="getMateId" resultType="MateDTO">
 		select memId from mate where
 		memid=#{abc@gmail.com}
 	</select>
