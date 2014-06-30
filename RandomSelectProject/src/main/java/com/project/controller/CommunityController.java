@@ -39,8 +39,8 @@ public class CommunityController {
 		try {
 			if (loginUser.getMemId() != null || loginUser != null) {
 				try {
-					
-					model.addAttribute("mates", mateService.getMates());
+					List<MateDTO> mates = mateService.getMates();
+					model.addAttribute("mates", mates);
 					return "community/mateList";
 					
 				} catch (Exception e) {

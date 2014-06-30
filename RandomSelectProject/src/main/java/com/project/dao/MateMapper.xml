@@ -4,7 +4,7 @@
 <mapper namespace="com.project.dao.MateMapper">
 	
 	<!-- 회원 : 친구 리스트 -->
-	<select id="getMates" resultType="MateDTO">
+	<select id="getMates" parameterType="MateDTO" resultType="MateDTO">
 	<!-- <select id="getMateListByMateId" parameterType="MateDTO" resultType="MateDTO">  -->
 		select * from mate 	where memid=#{abc@gmail.com}
 	</select>
