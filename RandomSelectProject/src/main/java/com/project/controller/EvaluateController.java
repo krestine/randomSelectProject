@@ -81,8 +81,6 @@ public class EvaluateController {
 		return "evaluateListForm.do";
 	}
 	
-	
-
 	// 평가 안한 식당목록
 	@RequestMapping(value = "/nEvaluateListForm.do", method = RequestMethod.POST)
 	public String nEvaluateListForm(Model model, String memId) {
