@@ -40,6 +40,7 @@ public interface EvaluateService {
 
 	void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
 
-	
+	//회원 : 평가한 친구의 식당목록
+	List<EvaluateDTO> getEvaluateListByMateId(String mateId);
 
 }

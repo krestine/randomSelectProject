@@ -27,24 +27,24 @@
 	</form>
 
 
-	<c:forEach var="restnt" items="${memberEvaluates}">
+	<c:forEach var="evaluate" items="${evaluates}">
 		<br>
 		<div>
 			<table align="center" border="0" cellpadding="0" cellspacing="0"
 				bgcolor="white">
 				<tr>
 					<form action="restntDetailProc.do" method="POST">
-				 		<input type="hidden" value=" ${memberEvaluate.restntId}" name="restntId"> 						
-						${memberEvaluate.restntName} ${memberEvaluate.restntEval}<input type="submit" value="보기" > 
-						
+				 		<input type="hidden" value=" ${evaluate.restntId}" name="restntId">
+				 		<input type="hidden" value="${evaluate.mateId }" name="mateId">
+				 		<input type="" value="${evaluate.restntName}" name="restntName">
+				 		<input type="" value="${evaluate.score}" name="score">
+				 		<input type="hidden" value="${evaluate.mateId }" name="mateId"> 
+				 		${evaluate.mateId }<input type="submit" value="보기" > 
 					</form>
-
 				</tr>
-
 			</table>
 		</div>
 		<br>
-
 	</c:forEach>
 
 

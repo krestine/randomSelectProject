@@ -8,10 +8,20 @@ public class EvaluateDTO {
 	private String restntName;
 	private String evalId;
 	private String score;
+	private String mateId;
+ 
 
 	// memberField end
 
 	// getter & setter
+
+	public String getMateId() {
+		return mateId;
+	}
+
+	public void setMateId(String mateId) {
+		this.mateId = mateId;
+	}
 
 	public String getMemId() {
 		return memId;
@@ -70,6 +80,7 @@ public class EvaluateDTO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((evalId == null) ? 0 : evalId.hashCode());
+		result = prime * result + ((mateId == null) ? 0 : mateId.hashCode());
 		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
 		result = prime * result
 				+ ((restntId == null) ? 0 : restntId.hashCode());
@@ -94,6 +105,11 @@ public class EvaluateDTO {
 			if (other.evalId != null)
 				return false;
 		} else if (!evalId.equals(other.evalId))
+			return false;
+		if (mateId == null) {
+			if (other.mateId != null)
+				return false;
+		} else if (!mateId.equals(other.mateId))
 			return false;
 		if (memId == null) {
 			if (other.memId != null)
@@ -131,7 +147,8 @@ public class EvaluateDTO {
 	public String toString() {
 		return "EvaluateDTO [memId=" + memId + ", restntId=" + restntId
 				+ ", visitDate=" + visitDate + ", restntName=" + restntName
-				+ ", evalId=" + evalId + ", score=" + score + "]";
+				+ ", evalId=" + evalId + ", score=" + score + ", mateId="
+				+ mateId + "]";
 	}
 
 	// toString end

@@ -56,6 +56,14 @@
 		evaluate set score=#{score} where evalid =#{evalid} and
 		memid=#{memid}
 	</update>
-
+	
+	<!-- 회원: 평가한 친구의 식당목록 -->
+		<select id="getEvaluateListByMateId" parameterType="String"  resultType="EvaluateDTO">
+		select evalid, score, restntname, mateid
+		from evaluate e, restnt r, mate m
+		where m.mate=#{mateId}
+		and e.restntid = r.restntid
+		and e.memid = m.mateid and Score != -1;
+		</select>
 
 </mapper>

@@ -36,8 +36,9 @@ public interface EvaluateMapper {
 	// 식당이름
 	/*List<EvaluateDTO> getRestntnameByRestId(String restntId);*/
 
+	// 회원 : 친구의 평가한 식당
+	List<EvaluateDTO> getEvaluateListByMateId(String mateId);
 	
-
 	
 
 	

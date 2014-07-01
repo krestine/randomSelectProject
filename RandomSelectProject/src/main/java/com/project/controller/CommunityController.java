@@ -46,7 +46,7 @@ public class CommunityController {
 	private RestntDTO restnt;
 	private MenuDTO menuInfo;
 	private MateDTO mateInfo;
-	private List<EvaluateDTO> memberEvaluates;
+	private List<EvaluateDTO> evaluates;
 	
 	// 회원 : 친구 리스트
 	@RequestMapping(value = "/mateListProc.do", method = RequestMethod.POST)
@@ -96,10 +96,15 @@ public class CommunityController {
 
 	// 회원 : 식당 리스트
 		@RequestMapping(value =  "/restntListProc.do", method = RequestMethod.POST)
-		String restntListProc(Model model, String memId) {
+		public String restntListProc(Model model, String mateId, HttpServletRequest request) {
+			mates=mateService.getMateListByMemId(loginUser.getMemId());
+			model.addAttribute("mates",mates);
+			System.out.println(mates);
 			
-			memberEvaluates= evaluateService.getEvaluateListByMemId(memId);
-			model.addAttribute("memberEvaluates", memberEvaluates);
+			evaluates= evaluateService.getEvaluateListByMateId(mateId);
+			model.addAttribute("evaluates", evaluates);
+			System.out.println(evaluates);
+			
 			
 			
 			return "community/restntList";
