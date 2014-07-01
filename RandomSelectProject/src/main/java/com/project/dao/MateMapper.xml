@@ -32,7 +32,7 @@
 		select memname, e.MEMID
 		from member r, mate e
 		where e.memid=#{r.memid}
-		and r.memid=e.memid;
+		and r.memid=e.memid
 
 		
 	</select>
