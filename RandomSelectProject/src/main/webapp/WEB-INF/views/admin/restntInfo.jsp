@@ -9,7 +9,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	$(document).ready(function() {
-		// 				input type="button"
+
 		$('input[type=button]').click(function() {
 
 			formHanddler(this);
@@ -18,8 +18,9 @@
 		function formHanddler(obj) {
 			var objID = obj.id;
 			var actionStr;
+
 			if (objID === "addBtn") {
-				actionStr = "restntInfoInsert.do";
+				actionStr = "restntInfoInsertForm.do";
 			} else if (objID === "modBtn") {
 				actionStr = "restntInfoUpdate.do";
 			} else if (objID === "delBtn") {
@@ -78,27 +79,27 @@
 
 					<td><input type="hidden" value="${restnt.restntId}"
 						name="restntId"><input type="text"
-						value="${restnt.restntName}" name="restntName"></td>
+						value="${restnt.restntName}" name="restntName" id="restntName"></td>
 				</tr>
 				<tr>
 					<th>주소1</th>
 					<td><input type="text" value="${restnt.adress1}"
-						name="adress1"></td>
+						name="adress1" id="adress1"></td>
 				</tr>
 				<tr>
 					<th>주소2</th>
 					<td><input type="text" value="${restnt.adress2}"
-						name="adress2"></td>
+						name="adress2" id="adress2"></td>
 				</tr>
 				<tr>
 					<th>주소3</th>
 					<td><input type="text" value="${restnt.adress3}"
-						name="adress3"></td>
+						name="adress3" id="adress3"></td>
 				</tr>
 				<tr>
 					<th>주소4</th>
 					<td><input type="text" value="${restnt.adress4}"
-						name="adress4"></td>
+						name="adress4" id="adress4"></td>
 				</tr>
 
 				<tr>
@@ -132,7 +133,7 @@
 					<th>평균 별점</th>
 
 					<td><input type="text" disabled="disabled"
-						value="${restnt.restntEval}"></td>
+						value="${restnt.restntEval}" name="restntEval" id="restntEval"></td>
 				</tr>
 
 				<tr>
