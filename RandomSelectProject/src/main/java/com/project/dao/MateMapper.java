@@ -15,10 +15,10 @@ public interface MateMapper {
 	
 	// 회원 : 친구 정보
 	//String getMateId(String mateDto);
-	MateDTO getMateInfoByMateId(MateDTO mateId);
+	MateDTO getMateInfoByMateId(MateDTO mateDto);
 	
 	// 회원 : 친구의 회원정보
-	MemberDTO getMemInfoByMemId(MemberDTO memId);
+	MateDTO getMemInfoByMemId(String param);
 	
 	
 	

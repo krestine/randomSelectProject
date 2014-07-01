@@ -21,7 +21,7 @@
 <title>mateList</title>
 </head>
 <body>
-	<h1>mateList</h1>
+	<h1>친구리스트</h1>
 	<form id="community" method="POST">
 		 <input type="button" onclick="restntList()" value="식당 리스트" /> 
 		 <input type="button" onclick="main()" value="메인" />
@@ -38,7 +38,9 @@
 					<form action="mateDetailProc.do" method="post">
 						<input type="hidden" value="${mate.memId}" name="memId">
 						<input type="hidden" value="${mate.mateId}" name="mateId">
-						${mate.mateId} <input type="submit" value="보기">
+						<input type="hidden" value="${mate.mateId}" name="param">
+						${mate.mateId} 
+						<input type="submit" value="보기">
 					</form>
 
 				</tr>
