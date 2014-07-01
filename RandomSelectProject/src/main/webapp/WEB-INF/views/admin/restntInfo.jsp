@@ -81,7 +81,7 @@
 						<%-- <input type="text" value="${restnt.restntCate}"
 						name="restntCate">  --%>
 						<select name="restntCate">
-							<c:forEach items="excMenus" var="menu">
+							<c:forEach items="${excMenus}" var="menu">
 								<c:choose>
 									<c:when test="${restnt.restntCate==menu.excMenu}">
 										<option selected="selected">${menu.excMenu}</option>
