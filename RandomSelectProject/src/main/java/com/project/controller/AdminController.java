@@ -59,7 +59,7 @@ public class AdminController {
 	String memberSearchForm(Model model) {
 		return "admin/memberSearch";
 	}
-
+	
 	@RequestMapping(value = "/memberSearchProc.do", method = RequestMethod.POST)
 	String memberSearchProc(int caseCode, String param, Model model) {
 		switch (caseCode) {
