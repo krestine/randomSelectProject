@@ -35,8 +35,8 @@
 					<form action="restntDetailProc.do" method="post">
 				 		<input type="hidden" value="${evaluate.restntId}" name="restntId">
 				 		<input type="hidden" value="${evaluate.mateId }" name="mateId">
-				 		<input type="hidden" value="${evaluate.restntName}" name="restntName">
-				 		<input type="hidden" value="${evaluate.score}" name="score">
+				 		<input type="" value="${evaluate.restntName}" name="restntName">
+				 		<input type="" value="${evaluate.score}" name="score">
 				 		<input type="hidden" value="${evaluate.mateId }" name="mateId"> 
 				 		${evaluate.mateId }<input type="submit" value="보기" > 
 					</form>

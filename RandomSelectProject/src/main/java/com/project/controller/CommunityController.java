@@ -98,14 +98,12 @@ public class CommunityController {
 		@RequestMapping(value =  "/restntListProc.do", method = RequestMethod.POST)
 		public String restntListProc(Model model, String mateId, HttpServletRequest request) {
 			mates=mateService.getMateListByMemId(loginUser.getMemId());
-			model.addAttribute("mates",mates);
+			model.addAttribute("mates", mates);
 			System.out.println(mates);
 			
 			evaluates= evaluateService.getEvaluateListByMateId(mateId);
 			model.addAttribute("evaluates", evaluates);
 			System.out.println(evaluates);
-			
-			
 			
 			return "community/restntList";
 		
