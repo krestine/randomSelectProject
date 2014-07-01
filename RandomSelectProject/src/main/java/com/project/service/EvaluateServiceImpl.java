@@ -34,15 +34,10 @@ public class EvaluateServiceImpl implements EvaluateService {
 	}
 
 	// 식당평가 안한 점수 입력
-	public void putEvaluateByScore(EvaluateDTO evaluateDto) {
+	public void putEvaluateByScore(String evaluateDto) {
 		evaluateMapper.putEvaluateByScore(evaluateDto);
 
 	}
-
-	public EvaluateDTO getEvaluateListByMemId(Object evalScore) {
-		// TODO Auto-generated method stub
-		return null;
-	};
 
 	// //////////////////////////////////////////////////
 
@@ -74,10 +69,8 @@ public class EvaluateServiceImpl implements EvaluateService {
 				.setScoreByEvaluateTerms(evaluateDTO);
 	}
 
-
 	@Override
 	public void setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto) {
-		
 
 	}
 
