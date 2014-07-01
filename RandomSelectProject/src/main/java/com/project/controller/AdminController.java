@@ -2,6 +2,8 @@ package com.project.controller;
 
 import java.util.List;
 
+import net.wimpi.telnetd.io.terminal.ansi;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +45,7 @@ public class AdminController {
 	private List<String> adress1;
 	private List<String> adress2;
 	private List<String> adress3;
+	private SettingDTO settingDto;
 
 	// 관리자 메인 페이지
 	@RequestMapping(value = "/adminMainProc.do")
@@ -133,7 +136,7 @@ public class AdminController {
 		case 1:
 			adress1 = settingService.getAdress1();
 			adress2 = settingService.getAdress2(settingDto);
-			
+
 			model.addAttribute("adress1", adress1);
 			model.addAttribute("adress2", adress2);
 			model.addAttribute("code", settingDto);
@@ -150,19 +153,19 @@ public class AdminController {
 			break;
 
 		case 3:
-			
+
 			adress1 = settingService.getAdress1();
 			adress2 = settingService.getAdress2(settingDto);
 			adress3 = settingService.getAdress3(settingDto);
 			System.out.println("////////세팅 디티오//////////");
 			System.out.println(settingDto);
-			
+
 			restnts = restntService.getRestntListByAddr(settingDto);
 			System.out.println("/////////쿼리 결과 테스트//////////");
-			for(RestntDTO restnt: restnts){
-				System.out.println(restnt);	
+			for (RestntDTO restnt : restnts) {
+				System.out.println(restnt);
 			}
-			
+
 			model.addAttribute("adress1", adress1);
 			model.addAttribute("adress2", adress2);
 			model.addAttribute("adress3", adress3);
@@ -173,7 +176,7 @@ public class AdminController {
 			model.addAttribute("errorMessage", "검색 오류 발생");
 			return "setting/error";
 		}
-		
+
 		model.addAttribute("choice", settingDto);
 		return "admin/restntManant";
 	}
@@ -197,17 +200,24 @@ public class AdminController {
 	@RequestMapping(value = "/restntInfoForm.do", method = RequestMethod.POST)
 	String restntInfoForm(Model model, String restntId) {
 		restnt = restntService.getRestntInfoById(restntId);
+		List<SettingDTO> excMenus = settingService.getExcMenu();
+
 		model.addAttribute("restnt", restnt);
+		model.addAttribute("excMenus", excMenus);
 		return "admin/restntInfo";
 	}
 
 	// 식당 정보 추가
 	@RequestMapping(value = "/restntInfoInsert.do", method = RequestMethod.POST)
 	String restntInfoInsert(Model model, RestntDTO restntDto) {
-		restntService.putRestnt(restntDto);
-		restnt = restntService.getRestntInfoById(restntDto.getRestntId());
-		model.addAttribute("restnt", restnt);
-		return "admin/restntInfo";
+		/*
+		 * restntService.putRestnt(restntDto); restnt =
+		 * restntService.getRestntInfoById(restntDto.getRestntId());
+		 * model.addAttribute("restnt", restnt);
+		 */
+		/* return "admin/restntInfo"; */
+		model.addAttribute("test", "추가");
+		return "admin/restntSelect";
 	}
 
 	// 식당 정보 수정
@@ -216,6 +226,9 @@ public class AdminController {
 		restntService.setRestntById(restntDto);
 		restnt = restntService.getRestntInfoById(restntDto.getRestntId());
 		model.addAttribute("restnt", restnt);
+		model.addAttribute("test", "수정");
+		List<SettingDTO> excMenus = settingService.getExcMenu();
+		model.addAttribute("excMenus", excMenus);
 		return "admin/restntInfo";
 	}
 
@@ -223,7 +236,10 @@ public class AdminController {
 	@RequestMapping(value = "/restntInfoDelete.do", method = RequestMethod.POST)
 	String restntInfoDelete(Model model, String restntId) {
 		restntService.dropRestntById(restntId);
-		return "admin/restntInfo";
+		model.addAttribute("test", "삭제");
+		Integer caseCode = null;
+
+		return restntManantProc(model, caseCode, settingDto);
 	}
 
 	// 메뉴 리스트
@@ -257,6 +273,7 @@ public class AdminController {
 		menuService.setMenuByMenuId(menuDto);
 		menu = menuService.getMenuInfoByMenuId(menuDto.getMenuId());
 		model.addAttribute("menu", menu);
+
 		return "admin/menuManant";
 	}
 

@@ -8,7 +8,7 @@
 <title>식당 관리</title>
 </head>
 <body>
-	${message}
+	
 	<br>
 	<table border="2">
 		<caption>식당 필터</caption>

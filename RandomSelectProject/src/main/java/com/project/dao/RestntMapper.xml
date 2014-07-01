@@ -7,7 +7,7 @@
 		property="id" column="id" javaType="string" /> <result property="name" column="name" 
 		javaType="string" /> <result property="latitude" column="latitude" javaType="string" 
 		/> <result property="longitude" column="longitude" javaType="string" /> <result 
-		property="phone" column="phone" javaType="string" /> <result property="adress1" 
+		property="Tel" column="Tel" javaType="string" /> <result property="adress1" 
 		column="adress1" javaType="string" /> <result property="adress2" column="adress2" 
 		javaType="string" /> <result property="adress3" column="adress3" javaType="string" 
 		/> <result property="adress4" column="adress4" javaType="string" /> <result 
@@ -24,7 +24,7 @@
 
 	<delete id="dropRestntById" parameterType="String">
 		delete from restnt
-		where id = #{restntid}
+		where restntId = #{restntId}
 	</delete>
 
 
@@ -32,48 +32,44 @@
 
 	<update id="setRestntById" parameterType="String">
 		update restnt set
-		restntname = #{restntname},
-		restntphone=#{restntphone},
-		restnttype=#{restnttype}, adress1=#{adress1},
+		restntName = #{restntName},
+		restntTel=#{restntTel},
+		restntCate=#{restntCate}, adress1=#{adress1},
 		adress2=#{adress2},
 		adress3=#{adress3},
-		adress4=#{adress4} where restntid = #{restntid}
+		adress4=#{adress4} where restntId = #{restntId}
 	</update>
 
 	<!--관리자 : 식당정보 추가 -->
 
 	<insert id="putRestnt" parameterType="RestntDTO">
 		insert into restnt
-		(restntId, restntName,
+		(restntId,
+		restntName,
 		adress1,
-		adress2, adress3, adress4,
-		restntPhone,
-		restntType), values
-		(#{restntId}, #{restntname},
-
+		adress2,
+		adress3,
+		adress4,
+		restntTel,
+		restntCate)
+		values
+		(#{restntId},
+		#{restntName},
 		#{adress1},
 		#{adress2},
-		#{adress3}, #{adress4},
-		#{restntPhone},
-		#{restntType})
+		#{adress3},
+		#{adress4},
+		#{restntTel},
+		#{restntCate})
 	</insert>
 
-	<!-- 관리자: 주소 필터 생성에 필요한 값 -->
-	<!-- 광역시, 도 필터 -->
-	<!-- <select id="get1" resultType="SettingDTO"> select 1 from addressSIDO 
-		</select> -->
-	<!-- 시/군/구 필터 -->
-	<!-- <select id="get2" parameterType="String" resultType="SettingDTO"> select 
-		2 from adressSIGUNGU where 1=#{1} </select> -->
-	<!-- 도로명 주소 필터 -->
-	<!-- <select id="get3" parameterType="String" resultType="SettingDTO"> select 
-		3 from where 2=#{2} </select> -->
+
 
 	<!--관리자: 식당관리 - 주소필터 적용 - 식당 리스트 표시 -->
 	<select id="getRestntListByAddr" parameterType="SettingDTO"
 		resultType="RestntDTO">
-		select restntid,
-		restntname from restnt
+		select restntId,
+		restntName from restnt
 		where
 		adress1=#{adress1}and
 		adress2=#{adress2}and
@@ -86,19 +82,22 @@
 	<!--관리자, 회원 : 식당관리 - 식당리스트에서 식당선택 - 상세정보 표시 -->
 	<select id="getRestntInfoById" parameterType="RestntDTO"
 		resultType="RestntDTO">
-		select restntid,restntname,
-
+		select
+		restntId,restntName,
 		adress1,adress2,
 		adress3,adress4,
-		restnttel,restntcate,RESTNTEVAL from restnt where
-		restntid=#{restntId}
+		restnttel,restntcate,RESTNTEVAL from
+		restnt where
+		restntId=#{restntId}
 	</select>
 
-	<select id="getRestntInfoByName" parameterType="RestntDTO" resultType="RestntDTO">
-	select restntname, restnteval, 
-	restntcate, restnttel
-	from restnt 
+	<select id="getRestntInfoByName" parameterType="RestntDTO"
+		resultType="RestntDTO">
+		select restntname, restnteval,
+		restntcate, restnttel
+		from
+		restnt
 	</select>
-	
+
 
 </mapper>
