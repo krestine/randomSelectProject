@@ -95,7 +95,11 @@
 		restntId=#{restntId}
 	</select>
 
-
-
+	<select id="getRestntInfoByName" parameterType="RestntDTO" resultType="RestntDTO">
+	select restntname, restnteval, 
+	restntcate, restnttel
+	from restnt 
+	</select>
+	
 
 </mapper>

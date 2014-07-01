@@ -18,10 +18,37 @@
 <title>mateDetail</title>
 </head>
 <body>
-	${mate.mateId } ${mate.memId}
+		<h1>${mateInfo.memName }님의 정보입니다.</h1>
+		<br>
+		<div>
+			<table align="center" border="0" cellpadding="0" cellspacing="0"
+				bgcolor="white">
+				
+				<tr>
+						
+					<form action="mateDetailProc.do" method="post">
+						<input value="친구이름">
+						<input value="친구아이디">
+						<input value="친구등급"><br>
+						<input type="" value="${mateInfo.memName }" name="memName">
+						<input type="" value="${mateInfo.memId}" name="memId">
+						<input type="" value="${mateInfo.memGrade}" name="memGrade"><br>
+						<input value="공유상태">
+						<input value="친구관계"><br>	
+						<input type="" value="${mate.infoStatus}" name="infoStatus">
+						<input type="" value="${mate.mateStatus}" name="mateStatus">
+					
+					</form>
+				</tr>
+			</table>
+		</div>
+		<br>
 
-	<h1>mateDetail</h1>
-	<a href="mateListProc.do">친구리스트</a>
+		<hr>
+	
+
+
+	
 
 
 	<form id="community" method="POST">
