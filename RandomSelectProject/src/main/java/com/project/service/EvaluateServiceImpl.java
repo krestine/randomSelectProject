@@ -76,26 +76,38 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	@Override
 	public List<EvaluateDTO> getRestntnameByRestId(List<String> restntId) {
-		// TODO Auto-generated method stub
+		// 
 		return null;
 	}
 
 	@Override
 	public EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public void putnEvaluateByScore(EvaluateDTO evaluateDto) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
-		// TODO Auto-generated method stub
+		
 
+	}
+
+	@Override
+	public List<EvaluateDTO> getEvaluateListByMemId() {
+
+		return null;
+	}
+
+	@Override
+	public List<EvaluateDTO> getevaluateListByMemId(String memId) {
+		
+		return null;
 	}
 
 }

@@ -6,9 +6,10 @@ import com.project.domain.EvaluateDTO;
 
 public interface EvaluateService {
 	
+
 	
 	// 평가한 방문 리스트
-	List<EvaluateDTO> getEvaluateListByMemId(String memId);
+	List<EvaluateDTO> getEvaluateListByMemId();
 
 	
 	// 평가한 방문리스트 점수 수정
@@ -39,6 +40,9 @@ public interface EvaluateService {
 	List<EvaluateDTO> getnEvaluateListByMemId(String memId);
 
 	void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
+
+
+	List<EvaluateDTO> getevaluateListByMemId(String memId);
 
 	
 

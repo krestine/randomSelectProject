@@ -48,7 +48,7 @@ public class EvaluateController {
 		// 로그인 정보의 아이디를 패러미터로 세팅
 
 		List<EvaluateDTO> evaluates = evaluateService
-				.getEvaluateListByMemId(loginUser.getMemId());
+				.getevaluateListByMemId(loginUser.getMemId());
 		model.addAttribute("evaluates", evaluates);
 		return "evaluate/evaluate";
 	}
@@ -65,7 +65,7 @@ public class EvaluateController {
 		memId = loginUser.getMemId();
 		System.out.println(memId);
 		model.addAttribute("getEvaluateListByMemId",
-				evaluateService.getEvaluateListByMemId(memId));
+				evaluateService.getevaluateListByMemId(memId));
 		return "evaluate/evaluateList";
 	}
 
@@ -102,7 +102,7 @@ public class EvaluateController {
 		System.out.println("평가 리스트 실행");
 		try {
 			List<EvaluateDTO> evaluates = evaluateService
-					.getEvaluateListByMemId(memId);
+					.getevaluateListByMemId(memId);
 			model.addAttribute("evaluates", evaluates);
 			return "evaluate/evaluateList";
 
@@ -119,7 +119,7 @@ public class EvaluateController {
 	public String updateEvaluateListProc(Model model, EvaluateDTO evaluateDto) {
 		evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto);
 		EvaluateDTO evaluate = (EvaluateDTO) evaluateService
-				.getEvaluateListByMemId(evaluateDto.getMemId());
+				.getevaluateListByMemId(evaluateDto.getMemId());
 		model.addAttribute("evaluate", evaluate);
 		return "evaluateListForm.do";
 	}
