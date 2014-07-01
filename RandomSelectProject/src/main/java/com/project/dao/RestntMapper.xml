@@ -90,7 +90,7 @@
 
 		adress1,adress2,
 		adress3,adress4,
-		restnttel,restntcate from restnt where
+		restnttel,restntcate,RESTNTEVAL from restnt where
 		restntid=#{restntId}
 	</select>
 

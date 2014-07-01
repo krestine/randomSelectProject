@@ -18,6 +18,7 @@
 				<th>시/도</th>
 				<th>시/군/구</th>
 				<th>도로</th>
+			</tr>
 		</thead>
 		<tbody>
 			<tr>
@@ -116,7 +117,8 @@
 
 								<td><c:choose>
 										<c:when test="${restnt.restntId!=null}">
-											<input type="hidden" value="${restnt.restntId }" name="restntId">
+											<input type="hidden" value="${restnt.restntId }"
+												name="restntId">
 										${restnt.restntName } <input type="submit" value="상세정보">
 										</c:when>
 										<c:when test="${restnt.restntId==null}">
