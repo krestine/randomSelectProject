@@ -8,26 +8,52 @@
 <title>식당 상세 정보</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-	$(document).ready(
-			function() {
-				$('#addBtn').click(
-						function(event) {
-							$('form[name=management]').attr('action',
-									'restntInfoInsert.do').submit();
-						});
+	$(document).ready(function() {
+		// 				input type="button"
+		$('input[type=button]').click(function() {
 
-				$('#modBtn').click(
-						function(event) {
-							$('form[name=management]').attr('action',
-									'restntInfoUpdate.do').submit();
-						});
+			formHanddler(this);
+		});
 
-				$('#delBtn').click(
-						function(event) {
-							$('form[name=management]').attr('action',
-									'restntInfoDelete.do').submit();
-						});
-			});
+		function formHanddler(obj) {
+			var objID = obj.id;
+			var actionStr;
+			if (objID === "addBtn") {
+				actionStr = "restntInfoInsert.do";
+			} else if (objID === "modBtn") {
+				actionStr = "restntInfoUpdate.do";
+			} else if (objID === "delBtn") {
+				actionStr = "restntInfoDelete.do";
+			}
+			$('#management').attr("action", actionStr).submit();
+
+		}
+	});
+
+	// 				$('#addBtn').click(
+	// 						function(event) {
+	// 							$('form[name=management]').attr('action','restntInfoInsert.do').submit();
+	// 						});
+
+	// 				$('#modBtn').click(
+	// 						function(event) {
+	// 							$('form[name=management]').attr('action',
+	// 									'restntInfoUpdate.do').submit();
+	// 						});
+
+	// 				$('#delBtn').click(
+	// 						function(event) {
+	// 							$('form[name=management]').attr('action',
+	// 									'restntInfoDelete.do').submit();
+	// 						});
+
+	// 	function formHanddler(button, action) {
+	// 		button.click(
+	// 				function(event) {
+	// 					$('form[name=management]').attr('action',
+	// 							action).submit();
+	// 				});	
+	// 	);
 
 	/* $("#addBtn").bind(
 			"click",
@@ -39,7 +65,7 @@
 </head>
 <body>
 
-	<form name="management" method="post">
+	<form id="management" method="post">
 		<table border="2">
 
 			<caption>식당 상세 정보</caption>
@@ -79,8 +105,7 @@
 					<th>분류</th>
 					<td>
 						<%-- <input type="text" value="${restnt.restntCate}"
-						name="restntCate">  --%>
-						<select name="restntCate">
+						name="restntCate">  --%> <select name="restntCate">
 							<c:forEach items="${excMenus}" var="menu">
 								<c:choose>
 									<c:when test="${restnt.restntCate==menu.excMenu}">
@@ -91,7 +116,8 @@
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
-					</select></td>
+					</select>
+					</td>
 				</tr>
 
 				<tr>
