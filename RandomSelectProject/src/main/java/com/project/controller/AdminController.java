@@ -2,6 +2,8 @@ package com.project.controller;
 
 import java.util.List;
 
+import net.wimpi.telnetd.io.terminal.ansi;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -197,17 +199,22 @@ public class AdminController {
 	@RequestMapping(value = "/restntInfoForm.do", method = RequestMethod.POST)
 	String restntInfoForm(Model model, String restntId) {
 		restnt = restntService.getRestntInfoById(restntId);
+		List<SettingDTO> excMenus = settingService.getExcMenu();
+		System.out.println(excMenus.get(0).getExcMenu());
 		model.addAttribute("restnt", restnt);
+		model.addAttribute("excMenus",excMenus);
 		return "admin/restntInfo";
 	}
 
 	// 식당 정보 추가
 	@RequestMapping(value = "/restntInfoInsert.do", method = RequestMethod.POST)
 	String restntInfoInsert(Model model, RestntDTO restntDto) {
-		restntService.putRestnt(restntDto);
+		/*restntService.putRestnt(restntDto);
 		restnt = restntService.getRestntInfoById(restntDto.getRestntId());
-		model.addAttribute("restnt", restnt);
-		return "admin/restntInfo";
+		model.addAttribute("restnt", restnt);*/
+		/*return "admin/restntInfo";*/
+		model.addAttribute("test", "추가");
+		return "admin/restntSelect";
 	}
 
 	// 식당 정보 수정
@@ -216,14 +223,16 @@ public class AdminController {
 		restntService.setRestntById(restntDto);
 		restnt = restntService.getRestntInfoById(restntDto.getRestntId());
 		model.addAttribute("restnt", restnt);
+		model.addAttribute("test", "수정");
 		return "admin/restntInfo";
 	}
 
 	// 식당 정보 삭제
 	@RequestMapping(value = "/restntInfoDelete.do", method = RequestMethod.POST)
 	String restntInfoDelete(Model model, String restntId) {
-		restntService.dropRestntById(restntId);
-		return "admin/restntInfo";
+		/*restntService.dropRestntById(restntId);*/
+		model.addAttribute("test", "삭제");
+		return "admin/restntSelect";
 	}
 
 	// 메뉴 리스트

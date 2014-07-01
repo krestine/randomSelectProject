@@ -7,7 +7,7 @@
 		property="id" column="id" javaType="string" /> <result property="name" column="name" 
 		javaType="string" /> <result property="latitude" column="latitude" javaType="string" 
 		/> <result property="longitude" column="longitude" javaType="string" /> <result 
-		property="phone" column="phone" javaType="string" /> <result property="adress1" 
+		property="Tel" column="Tel" javaType="string" /> <result property="adress1" 
 		column="adress1" javaType="string" /> <result property="adress2" column="adress2" 
 		javaType="string" /> <result property="adress3" column="adress3" javaType="string" 
 		/> <result property="adress4" column="adress4" javaType="string" /> <result 
@@ -24,7 +24,7 @@
 
 	<delete id="dropRestntById" parameterType="String">
 		delete from restnt
-		where id = #{restntid}
+		where id = #{restntId}
 	</delete>
 
 
@@ -32,12 +32,12 @@
 
 	<update id="setRestntById" parameterType="String">
 		update restnt set
-		restntname = #{restntname},
-		restntphone=#{restntphone},
-		restnttype=#{restnttype}, adress1=#{adress1},
+		restntName = #{restntName},
+		restntTel=#{restntTel},
+		restntCate=#{restntCate}, adress1=#{adress1},
 		adress2=#{adress2},
 		adress3=#{adress3},
-		adress4=#{adress4} where restntid = #{restntid}
+		adress4=#{adress4} where restntId = #{restntId}
 	</update>
 
 	<!--관리자 : 식당정보 추가 -->
@@ -47,15 +47,15 @@
 		(restntId, restntName,
 		adress1,
 		adress2, adress3, adress4,
-		restntPhone,
-		restntType), values
-		(#{restntId}, #{restntname},
+		restntTel,
+		restntCate), values
+		(#{restntId}, #{restntName},
 
 		#{adress1},
 		#{adress2},
 		#{adress3}, #{adress4},
-		#{restntPhone},
-		#{restntType})
+		#{restntTel},
+		#{restntCate})
 	</insert>
 
 	<!-- 관리자: 주소 필터 생성에 필요한 값 -->
@@ -72,8 +72,8 @@
 	<!--관리자: 식당관리 - 주소필터 적용 - 식당 리스트 표시 -->
 	<select id="getRestntListByAddr" parameterType="SettingDTO"
 		resultType="RestntDTO">
-		select restntid,
-		restntname from restnt
+		select restntId,
+		restntName from restnt
 		where
 		adress1=#{adress1}and
 		adress2=#{adress2}and
@@ -86,12 +86,13 @@
 	<!--관리자, 회원 : 식당관리 - 식당리스트에서 식당선택 - 상세정보 표시 -->
 	<select id="getRestntInfoById" parameterType="RestntDTO"
 		resultType="RestntDTO">
-		select restntid,restntname,
-
+		select
+		restntId,restntName,
 		adress1,adress2,
 		adress3,adress4,
-		restnttel,restntcate,RESTNTEVAL from restnt where
-		restntid=#{restntId}
+		restnttel,restntcate,RESTNTEVAL from
+		restnt where
+		restntId=#{restntId}
 	</select>
 
 
