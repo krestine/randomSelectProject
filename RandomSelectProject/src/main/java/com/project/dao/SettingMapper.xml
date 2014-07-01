@@ -44,7 +44,7 @@
 	<select id="getAdress3" parameterType="SettingDTO" resultType="String">
 		select adress3 from adress
 		where adress1 = #{adress1} and adress2 = #{adress2}
-		order by adresscode
+		order by adress3
 	</select>
 
 

@@ -86,11 +86,11 @@
 	<!--관리자, 회원 : 식당관리 - 식당리스트에서 식당선택 - 상세정보 표시 -->
 	<select id="getRestntInfoById" parameterType="RestntDTO"
 		resultType="RestntDTO">
-		select restntname,
+		select restntid,restntname,
 
 		adress1,adress2,
-		adress3,adress4;
-		restntPhone,restntType where
+		adress3,adress4,
+		restnttel,restntcate,RESTNTEVAL from restnt where
 		restntid=#{restntId}
 	</select>
 
