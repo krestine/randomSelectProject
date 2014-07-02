@@ -33,6 +33,7 @@
 				bgcolor="white">
 				<tr>
 					<form action="restntDetailProc.do" method="post">
+						
 				 		<input type="hidden" value="${evaluate.restntId}" name="restntId">
 				 		<input type="hidden" value="${evaluate.mateId }" name="mateId">
 				 		<input type="" value="${evaluate.restntName}" name="restntName">
