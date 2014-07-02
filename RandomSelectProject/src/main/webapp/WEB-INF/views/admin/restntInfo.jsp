@@ -64,26 +64,11 @@
 </script>
 </head>
 <body>
-	<c:choose>
-		<c:when test="${restnt==null}">
-		식당 정보가 없다 = 추가할 식당 정보 입력창
-	</c:when>
-	</c:choose>
+
 	<form id="management" method="post">
 		<table border="2">
 
-			<caption>
-				<c:choose>
-					<c:when test="${restnt==null}">
-						 식당 정보 입력
-					</c:when>
-					<c:otherwise>
-				식당 상세 정보
-				</c:otherwise>
-
-				</c:choose>
-
-			</caption>
+			<caption>식당 상세 정보</caption>
 
 			<tbody>
 

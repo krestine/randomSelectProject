@@ -26,13 +26,10 @@ public interface RestntService {
 
 	// 관리자: 식당관리 - 주소필터 적용 - 식당 리스트
 	List<RestntDTO> getRestntListByAddressCode(String addressCode);
-
+	
 	// 관리자: 식당관리 - 주소필터 적용 - 식당 리스트
 	List<RestntDTO> getRestntListByAddr(SettingDTO settingDto);
-
+	
 	// 회원 : 식당 상세정보
 	RestntDTO getRestntInfoByName(RestntDTO restntDto);
-
-	// 식당 추가 : id 지정 로직에 필요: 해당 지역의 마지막으로 등록된 식당의 아이디 값 가져오기
-	String getLastRestntId(RestntDTO restntDto);
 }
