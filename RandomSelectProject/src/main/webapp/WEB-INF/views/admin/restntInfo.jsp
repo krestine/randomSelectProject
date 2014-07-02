@@ -8,26 +8,53 @@
 <title>식당 상세 정보</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-	$(document).ready(
-			function() {
-				$('#addBtn').click(
-						function(event) {
-							$('form[name=management]').attr('action',
-									'restntInfoInsert.do').submit();
-						});
+	$(document).ready(function() {
 
-				$('#modBtn').click(
-						function(event) {
-							$('form[name=management]').attr('action',
-									'restntInfoUpdate.do').submit();
-						});
+		$('input[type=button]').click(function() {
 
-				$('#delBtn').click(
-						function(event) {
-							$('form[name=management]').attr('action',
-									'restntInfoDelete.do').submit();
-						});
-			});
+			formHanddler(this);
+		});
+
+		function formHanddler(obj) {
+			var objID = obj.id;
+			var actionStr;
+
+			if (objID === "addBtn") {
+				actionStr = "restntInfoInsertForm.do";
+			} else if (objID === "modBtn") {
+				actionStr = "restntInfoUpdate.do";
+			} else if (objID === "delBtn") {
+				actionStr = "restntInfoDelete.do";
+			}
+			$('#management').attr("action", actionStr).submit();
+
+		}
+	});
+
+	// 				$('#addBtn').click(
+	// 						function(event) {
+	// 							$('form[name=management]').attr('action','restntInfoInsert.do').submit();
+	// 						});
+
+	// 				$('#modBtn').click(
+	// 						function(event) {
+	// 							$('form[name=management]').attr('action',
+	// 									'restntInfoUpdate.do').submit();
+	// 						});
+
+	// 				$('#delBtn').click(
+	// 						function(event) {
+	// 							$('form[name=management]').attr('action',
+	// 									'restntInfoDelete.do').submit();
+	// 						});
+
+	// 	function formHanddler(button, action) {
+	// 		button.click(
+	// 				function(event) {
+	// 					$('form[name=management]').attr('action',
+	// 							action).submit();
+	// 				});	
+	// 	);
 
 	/* $("#addBtn").bind(
 			"click",
@@ -38,11 +65,26 @@
 </script>
 </head>
 <body>
-
-	<form name="management" method="post">
+	<c:choose>
+		<c:when test="${restnt==null}">
+		식당 정보가 없다 = 추가할 식당 정보 입력창
+	</c:when>
+	</c:choose>
+	<form id="management" method="post">
 		<table border="2">
 
-			<caption>식당 상세 정보</caption>
+			<caption>
+				<c:choose>
+					<c:when test="${restnt==null}">
+						 식당 정보 입력
+					</c:when>
+					<c:otherwise>
+				식당 상세 정보
+				</c:otherwise>
+
+				</c:choose>
+
+			</caption>
 
 			<tbody>
 
@@ -52,35 +94,34 @@
 
 					<td><input type="hidden" value="${restnt.restntId}"
 						name="restntId"><input type="text"
-						value="${restnt.restntName}" name="restntName"></td>
+						value="${restnt.restntName}" name="restntName" id="restntName"></td>
 				</tr>
 				<tr>
 					<th>주소1</th>
 					<td><input type="text" value="${restnt.adress1}"
-						name="adress1"></td>
+						name="adress1" id="adress1"></td>
 				</tr>
 				<tr>
 					<th>주소2</th>
 					<td><input type="text" value="${restnt.adress2}"
-						name="adress2"></td>
+						name="adress2" id="adress2"></td>
 				</tr>
 				<tr>
 					<th>주소3</th>
 					<td><input type="text" value="${restnt.adress3}"
-						name="adress3"></td>
+						name="adress3" id="adress3"></td>
 				</tr>
 				<tr>
 					<th>주소4</th>
 					<td><input type="text" value="${restnt.adress4}"
-						name="adress4"></td>
+						name="adress4" id="adress4"></td>
 				</tr>
 
 				<tr>
 					<th>분류</th>
 					<td>
 						<%-- <input type="text" value="${restnt.restntCate}"
-						name="restntCate">  --%>
-						<select name="restntCate">
+						name="restntCate">  --%> <select name="restntCate">
 							<c:forEach items="${excMenus}" var="menu">
 								<c:choose>
 									<c:when test="${restnt.restntCate==menu.excMenu}">
@@ -91,7 +132,8 @@
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
-					</select></td>
+					</select>
+					</td>
 				</tr>
 
 				<tr>
@@ -106,7 +148,7 @@
 					<th>평균 별점</th>
 
 					<td><input type="text" disabled="disabled"
-						value="${restnt.restntEval}"></td>
+						value="${restnt.restntEval}" name="restntEval" id="restntEval"></td>
 				</tr>
 
 				<tr>

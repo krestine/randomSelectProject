@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.dao.RestntMapper;
 import com.project.domain.RestntDTO;
@@ -21,18 +22,21 @@ public class RestntServiceImpl implements RestntService {
 		return restntMapper.getRestntList();
 	}
 
+	@Transactional
 	@Override
 	public void dropRestntById(String restntId) {
 		restntMapper.dropRestntById(restntId);
 
 	}
 
+	@Transactional
 	@Override
 	public void setRestntById(RestntDTO restntDto) {
 		restntMapper.setRestntById(restntDto);
 
 	}
 
+	@Transactional
 	@Override
 	public void putRestnt(RestntDTO restntDto) {
 		restntMapper.putRestnt(restntDto);
@@ -63,14 +67,19 @@ public class RestntServiceImpl implements RestntService {
 		// TODO Auto-generated method stub
 		return restntMapper.getRestntListByAddr(settingDto);
 	}
-	
+
 	// 회원: 식당 상세정보
 	@Override
 	public RestntDTO getRestntInfoByName(RestntDTO restntDto) {
 		// TODO Auto-generated method stub
 		return restntMapper.getRestntInfoByName(restntDto);
 	}
-	
-	
+
+	// 식당 추가 : id 지정 로직에 필요: 해당 지역의 마지막으로 등록된 식당의 아이디 값 가져오기
+	@Override
+	public String getLastRestntId(RestntDTO restntDto) {
+		// TODO Auto-generated method stub
+		return restntMapper.getLastRestntId(restntDto);
+	}
 
 }

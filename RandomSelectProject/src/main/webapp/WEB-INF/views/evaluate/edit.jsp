@@ -52,7 +52,7 @@
 							<tr>
 							<td>&nbsp;</td>
 							<td align="center">예제 박스</td>
-							<td><input type="hidden" name="box" value="box1111" size="50" maxlength="50" ></td>
+							<td><input type="text" name="box" value="box1111" size="50" maxlength="50" ></td>
 							<td>&nbsp;</td>
 						</tr>
 					<%-- 	<form:select path="code" name="code" items="${code}" itemValue="code" 						

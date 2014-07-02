@@ -26,6 +26,10 @@ public class EvaluateController {
 	@Autowired
 	private EvaluateService evaluateService;
 
+	
+	
+	
+	private List<EvaluateDTO> memberEvaluates;
 	/*
 	 * @Autowired
 	 * 
@@ -55,17 +59,18 @@ public class EvaluateController {
 
 	// 식당평가한 목록
 
-	@RequestMapping(value = "/evaluateListForm.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/evaluateList.do", method = RequestMethod.POST)
 	public String EvaluateListForm(HttpServletRequest request, Model model,
 			String memId) {
-		System.out.println("evaluateListForm()");
+		System.out.println("evaluateList()");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		System.out.println(loginUser.toString());
 		memId = loginUser.getMemId();
 		System.out.println(memId);
-		model.addAttribute("getEvaluateListByMemId",
-				evaluateService.getEvaluateListByMemId(memId));
+		memberEvaluates = evaluateService.getEvaluateListByMemId(memId);
+		model.addAttribute("memberEvaluates", memberEvaluates);
+	System.out.println(memberEvaluates);
 		return "evaluate/evaluateList";
 	}
 

@@ -7,6 +7,7 @@
 <title>findPassword.jsp</title>
 </head>
 <body>
+	${errmessage }
 	<form action="findPasswordProc.do" method="post">
 		<table align="center" border="0" cellspacing="0" cellpadding="0"
 			bgcolor="white">
@@ -22,7 +23,7 @@
 				<td>전화번호</td>
 				<td><input type="text" name="memMobile"></td>
 			</tr>
-				<tr>
+			<tr>
 				<td><input type="submit" value="비밀번호찾기"></td>
 			</tr>
 		</table>
