@@ -1,6 +1,8 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,25 +24,43 @@ body {
 </style>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=true&language=ko">
+	
 </script>
 <script
-   src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
-   type="text/javascript"></script>
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"
-   type="text/javascript"></script>
+	type="text/javascript"></script>
 <script type="text/javascript">
 	var myLatitude, myLongitude;
 	var randomLatitude, randomLongitude;
 	var sDistance;
 	var map;
+	var restntList;
 	var pos, pos2;
 	var sRadius = 2000;
 	var geocoder = new google.maps.Geocoder();
 
-	function showCurrentLocation(Lat, Lon){
+	function restntList() {
+		var restntId = "";
+		var restntName = "";
+		var address = "";
+		var restntTel = "";
+		var restntCate = "";
+		var restntEval = "";
+	}
+
+	function showCurrentLocation(Lat, Lon) {
 		$("#currentLocation").html(Lat + ' ' + Lon);
 	}
-		
+	function showCurrentLocation2(Location) {
+		$("#currentLocation").html(Loation);
+	}
+
+	function showRestntInRange(restntList) {
+
+	}
+
 	function calcDistance(lat1, lon1, lat2, lon2) {
 		var EARTH_R, Rad, radLat1, radLat2, radDist;
 		var distance, ret;
@@ -59,34 +79,50 @@ body {
 		return Math.round(ret);
 	}
 
-	function setMyCenter(){
+	function setMyCenter() {
 		map.setCenter(pos);
 		map.setZoom(16);
 	}
-	function setRestntCenter(){
+	function setRestntCenter() {
 		map.setCenter(pos2);
 		map.setZoom(16);
 	}
-	
-	function findLocation(){
+
+	function findLocation() {
 		var tempAddress = document.getElementById('tempAddress').value;
-		  geocoder.geocode( { 'address': tempAddress}, function(results, status) {
-		    if (status == google.maps.GeocoderStatus.OK) {
-		      map.setCenter(results[0].geometry.location);
-		      var tempMarker = new google.maps.Marker({
-		          map: map,
-		          position: results[0].geometry.location
-		      });
-		    } else {
-		      alert('Geocode was not successful for the following reason: ' + status);
-		    }
-		  });
+		geocoder.geocode({
+			'address' : tempAddress
+		}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				map.setCenter(results[0].geometry.location);
+				var tempMarker = new google.maps.Marker({
+					map : map,
+					position : results[0].geometry.location
+				});
+				tempMarker.setMap(map);
+				google.maps.event.addListener(tempMarker, 'click', function() {
+					map.setCenter(tempMarker.getPosition());
+					showCurrentLocation2(results[0].geometry.location);
+				});
+			} else {
+				alert('Geocode was not successful for the following reason: '
+						+ status);
+			}
+		});
 	}
-	
+
+	function setSRadius() {
+		var tempSRadius = "<c:out value="${loginUser.memWalkRange}" />";
+		tempSRadius = Number(tempSRadius);
+		if (tempSRadius == 0) {
+			tempSRadius = 1000;
+		}
+		sRadius = tempSRadius;
+	}
+
 	function initialize() {
-		
-		
-		
+
+		setSRadius();
 		var myOptions = {
 			zoom : 14,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
@@ -115,7 +151,7 @@ body {
 									title : '내 위치'
 								});
 								myMarker.setMap(map);
-								
+
 								geocoder
 										.geocode(
 												{
@@ -151,23 +187,14 @@ body {
 									radius : sRadius
 								};
 
-								// Add the circle for this city to the map.
 								searchCircle = new google.maps.Circle(
 										searchRadius);
 
-								/* do {
-									randomLatitude = Math.random() + 37;
-									randomLongitude = Math.random() + 127;
-
-									sDistance = calcDistance(myLatitude,
-											myLongitude, randomLatitude,
-											randomLongitude);
-								} while (sDistance > sRadius); */
 								randomLatitude = 37.5051264143489;
 								randomLongitude = 127.02609446644783;
-								
-								pos2 = new google.maps.LatLng(
-										randomLatitude, randomLongitude);
+
+								pos2 = new google.maps.LatLng(randomLatitude,
+										randomLongitude);
 
 								var restntMarker = new google.maps.Marker({
 									position : pos2,
@@ -202,18 +229,21 @@ body {
 
 								//var restntInfoWindow = new google.maps.InfoWindow({map: map, position: pos2, content: '식당 위치'});
 
-								
-								google.maps.event.addListener(myMarker, 'click', function() {
-									map.setCenter(myMarker.getPosition());
-		   							 showCurrentLocation(myLatitude, myLongitude);
-		 						 });
-								google.maps.event.addListener(restntMarker, 'click', function() {
-								    map.setCenter(restntMarker.getPosition());
-								    showCurrentLocation(randomLatitude, randomLongitude);
-								  });
-								
-								
-								
+								google.maps.event.addListener(myMarker,
+										'click', function() {
+											map.setCenter(myMarker
+													.getPosition());
+											showCurrentLocation(myLatitude,
+													myLongitude);
+										});
+								google.maps.event.addListener(restntMarker,
+										'click', function() {
+											map.setCenter(restntMarker
+													.getPosition());
+											showCurrentLocation(randomLatitude,
+													randomLongitude);
+										});
+
 								map.setCenter(pos);
 							}, function() {
 								handleNoGeolocation(true);
@@ -247,18 +277,27 @@ body {
 </script>
 </head>
 <body>
-	<div id="map_canvas" style="width: 100%; height: 70%"></div>
+	<div id="map_canvas" style="width: 100%; height: 60%"></div>
+	<div id="restnt_list" style="width: 100%; height: 15%">
+		<c:forEach items="${restntList}" var="restnt">
+		${restnt.restntName}
+		</c:forEach>
+		${loginUser.memId } ${loginUser.memName } ${loginUser.memGrade }
+	</div>
 	<input type=button id=randomSelectInitialize value="아무거나!"
-		onclick=initialize()></input>
+		onclick="initialize()">
 	<input type=button id=moveToMyLocation value="내 위치로 이동"
-		onclick=setMyCenter()>
-	</inputn>
+		onclick="setMyCenter()">
 	<input type=button id=moveToRestntLocation value="식당 위치로 이동"
-		onclick=setRestntCenter()></input>
+		onclick="setRestntCenter()">
 	<br>
-	<input type=text id=tempAddress value=""></input>
+	<input type=text id=tempAddress value="">
 	<input type=button id=geocodeTempAddress value="해당 주소 지도에 표시"
-		onclick=findLocation()></input><br>
-	선택한 마커의 좌표 : <div id=currentLocation></div>
+		onclick="findLocation()">
+	<br> 선택한 마커의 좌표 :
+	<div id=currentLocation></div>
+	<br>
+	<input type=button id=showRestntInRange value="범위 안 식당 표시"></input>
+
 </body>
 </html>
