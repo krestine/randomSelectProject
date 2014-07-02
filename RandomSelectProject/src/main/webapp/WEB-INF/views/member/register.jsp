@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="net.tanesha.recaptcha.ReCaptcha"%>
+<%@ page import="net.tanesha.recaptcha.ReCaptchaFactory"%>
+<%@ taglib prefix="captcha" uri="/WEB-INF/properties/captcha.tld"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,6 +12,7 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
+<!-- <script src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script> -->
 <script type="text/javascript">
 	$(function() {
 		$("#memBirth").datepicker(
@@ -23,7 +26,9 @@
 							'8월(AUG)', '9월(SEP)', '10월(OCT)', '11월(NOV)',
 							'12월(DEC)' ]
 				});
+
 	});
+
 	function main() {
 		document.getElementById("form").action = "main.do";
 		document.getElementById("form").submit();
@@ -72,11 +77,16 @@
 					<input type="text" name="mPhoneEnd" size="4" maxlength="4" /></td>
 			</tr>
 			<tr>
+				<td colspan="2"><script type="text/javascript"
+						src="${captchajs}?theme=clean&key=${captchaPublicKey}"></script></td>
+			</tr>
+			<tr>
 				<td><input type="button" onclick="register()" value="회원가입"></td>
 				<td><input type="button" onclick="main()" value="메인으로"></td>
 			</tr>
 
 		</table>
+
 	</form>
 </body>
 </html>

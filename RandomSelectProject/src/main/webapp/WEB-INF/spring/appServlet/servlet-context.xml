@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<util:properties id="mail"
+		location="/WEB-INF/properties/mail.properties" />
+
+
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+
 	<context:annotation-config />
 	<context:component-scan base-package="com.project.myapp" />
 	<context:component-scan base-package="com.project.config" />
@@ -43,7 +53,7 @@
 		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
 
-	
+
 	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="mapperLocations" value="classpath:com/project/dao/*.xml" />
@@ -58,5 +68,30 @@
 	<beans:bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<beans:property name="basePackage" value="com.project.dao" />
 	</beans:bean>
-	
+
+
+	<!--maiSender -->
+	<beans:bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="#{mail['mail.host']}" />
+		<beans:property name="port" value="#{mail['mail.port']}" />
+		<beans:property name="username" value="#{mail['mail.username']}" />
+		<beans:property name="password" value="#{mail['mail.password']}" />
+
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.transport.protocol">#{mail['mail.transport.protocol']}
+				</beans:prop>
+				<beans:prop key="mail.smtp.auth">#{mail['mail.smtp.auth']}
+				</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">#{mail['mail.smtp.starttls.enable']}
+				</beans:prop>
+				<beans:prop key="mail.smtp.starttls.required">#{mail['mail.smtp.starttls.required']}
+				</beans:prop>
+				<beans:prop key="mail.debug">#{mail['mail.debug']}
+				</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+
 </beans:beans>
