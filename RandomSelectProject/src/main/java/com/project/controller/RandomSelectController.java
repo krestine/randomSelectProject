@@ -31,7 +31,9 @@ public class RandomSelectController {
 				"loginUser");
 		model.addAttribute("loginUser", loginUser);
 		restntList = restntService.getRestntList();
-		
+		for(RestntDTO restnt : restntList){
+			System.out.println(restnt.getRestntId());
+		}
 		model.addAttribute("restntList", restntList);
 		return "randomSelect/selectResult";
 	}
