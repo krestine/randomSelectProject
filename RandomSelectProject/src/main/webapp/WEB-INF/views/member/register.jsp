@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="net.tanesha.recaptcha.ReCaptcha"%>
 <%@ page import="net.tanesha.recaptcha.ReCaptchaFactory"%>
-<%@ taglib prefix="captcha" uri="/WEB-INF/properties/captcha.tld"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
