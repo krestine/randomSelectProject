@@ -56,7 +56,7 @@ public class CommunityController {
 				"loginUser");
 		try {
 			if (loginUser.getMemId() != null || loginUser != null) {
-
+				
 				try {
 					mates = mateService
 							.getMateListByMemId(loginUser.getMemId());
@@ -93,6 +93,9 @@ public class CommunityController {
 		System.out.println(mateDto);
 		return "community/mateDetail";
 	}
+	
+	
+	
 
 	// 회원 : 식당 리스트
 		@RequestMapping(value =  "/restntListProc.do", method = RequestMethod.POST)
