@@ -16,8 +16,9 @@
 
 	<!-- 회원, 관리자 : 식당 리스트 -->
 	<select id="getRestntList" resultType="RestntDTO">
-		select * from restnt where
-		active = 1
+		select
+		restntId,RESTNTNAME,RESTNTTEL,RESTNTCATE,RESTNTEVAL,ADRESS1,ADRESS2,
+		ADRESS3,ADRESS4 from restnt where active = '1'
 	</select>
 
 
@@ -39,7 +40,7 @@
 		adress2=#{adress2},
 		adress3=#{adress3},
 		adress4=#{adress4} where restntId = #{restntId} and
-		active = 1
+		active = '1'
 	</update>
 
 	<!--관리자 : 식당정보 추가 -->
@@ -76,7 +77,7 @@
 		adress1=#{adress1}and
 		adress2=#{adress2}and
 		adress3=#{adress3}and active
-		= 1
+		= '1'
 
 	</select>
 
@@ -92,7 +93,7 @@
 		restnttel,restntcate,RESTNTEVAL from
 		restnt where
 		restntId=#{restntId}
-		and active = 1
+		and active = '1'
 	</select>
 
 	<select id="getRestntInfoByName" parameterType="RestntDTO"
