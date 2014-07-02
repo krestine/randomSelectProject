@@ -232,8 +232,7 @@ public class AdminController {
 		return "admin/restntInfo";
 	}
 
-<<<<<<< HEAD
-=======
+
 	// 식당 정보 추가 작성 폼
 	@RequestMapping(value = "/restntInfoInsertForm.do", method = RequestMethod.POST)
 	String restntInfoInsertForm(Model model, RestntDTO restntDTO,
@@ -299,7 +298,7 @@ public class AdminController {
 		return "admin/restntInfo";
 	}
 
->>>>>>> 9b4fbdd3728a0deb4e14ca084c2c4f72a0be4c5d
+
 	// 식당 정보 추가
 	@RequestMapping(value = "/restntInfoInsert.do", method = RequestMethod.POST)
 	String restntInfoInsert(Model model, RestntDTO restntDto) {

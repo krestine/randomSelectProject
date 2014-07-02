@@ -71,10 +71,7 @@ public class RestntServiceImpl implements RestntService {
 		// TODO Auto-generated method stub
 		return restntMapper.getRestntInfoByName(restntDto);
 	}
-<<<<<<< HEAD
-	
-	
-=======
+
 
 	// 식당 추가 : id 지정 로직에 필요: 해당 지역의 마지막으로 등록된 식당의 아이디 값 가져오기
 	@Override
@@ -89,6 +86,6 @@ public class RestntServiceImpl implements RestntService {
 		// TODO Auto-generated method stub
 		return restntMapper.getAdressCode(restntDto);
 	}
->>>>>>> 9b4fbdd3728a0deb4e14ca084c2c4f72a0be4c5d
+
 
 }
