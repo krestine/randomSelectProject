@@ -101,7 +101,7 @@ public class CommunityController {
 	// 회원 : 식당 리스트
 		@RequestMapping(value =  "/restntListProc.do", method = RequestMethod.POST)
 		public String restntListProc(Model model, String memId, HttpServletRequest request) {
-			evaluates= evaluateService.getEvaluateListByMateId(memId);
+			evaluates= evaluateService.getEvaluateListByMateId(loginUser.getMemId());
 			model.addAttribute("evaluates", evaluates);
 			System.out.println(evaluates);
 			System.out.println("evaluates여기?");

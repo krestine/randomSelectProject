@@ -27,10 +27,11 @@
 	</form>
 	<form action="restntDetailProc.do" method="post">
 	<c:forEach var="evaluate" items="${evaluates}">
-			<!-- 	<input type="" value="${evaluate.score }" name="score">
-				<input type="" value="${restnt.restntName} " name="restntName">
-				<input type="" value="${mate.mateId }" name="mateId">  -->
-				
+		<tr>
+			<td>${evaluates.score }</td>
+			<td>${evaluates.restntName}</td>
+			<td>${evaluates.mateId }</td>
+		</tr>		
 	</c:forEach>
 		</form>
 </body>
