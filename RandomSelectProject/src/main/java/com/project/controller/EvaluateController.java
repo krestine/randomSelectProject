@@ -26,6 +26,10 @@ public class EvaluateController {
 	@Autowired
 	private EvaluateService evaluateService;
 
+	
+	
+	
+	private List<EvaluateDTO> memberEvaluates;
 	/*
 	 * @Autowired
 	 * 
@@ -48,24 +52,25 @@ public class EvaluateController {
 		// 로그인 정보의 아이디를 패러미터로 세팅
 
 		List<EvaluateDTO> evaluates = evaluateService
-				.getevaluateListByMemId(loginUser.getMemId());
+				.getEvaluateListByMemId(loginUser.getMemId());
 		model.addAttribute("evaluates", evaluates);
 		return "evaluate/evaluate";
 	}
 
 	// 식당평가한 목록
 
-	@RequestMapping(value = "/evaluateListForm.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/evaluateList.do", method = RequestMethod.POST)
 	public String EvaluateListForm(HttpServletRequest request, Model model,
 			String memId) {
-		System.out.println("evaluateListForm()");
+		System.out.println("evaluateList()");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		System.out.println(loginUser.toString());
 		memId = loginUser.getMemId();
 		System.out.println(memId);
-		model.addAttribute("getEvaluateListByMemId",
-				evaluateService.getevaluateListByMemId(memId));
+		memberEvaluates = evaluateService.getEvaluateListByMemId(memId);
+		model.addAttribute("memberEvaluates", memberEvaluates);
+	System.out.println(memberEvaluates);
 		return "evaluate/evaluateList";
 	}
 
@@ -102,7 +107,7 @@ public class EvaluateController {
 		System.out.println("평가 리스트 실행");
 		try {
 			List<EvaluateDTO> evaluates = evaluateService
-					.getevaluateListByMemId(memId);
+					.getEvaluateListByMemId(memId);
 			model.addAttribute("evaluates", evaluates);
 			return "evaluate/evaluateList";
 
@@ -119,7 +124,7 @@ public class EvaluateController {
 	public String updateEvaluateListProc(Model model, EvaluateDTO evaluateDto) {
 		evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto);
 		EvaluateDTO evaluate = (EvaluateDTO) evaluateService
-				.getevaluateListByMemId(evaluateDto.getMemId());
+				.getEvaluateListByMemId(evaluateDto.getMemId());
 		model.addAttribute("evaluate", evaluate);
 		return "evaluateListForm.do";
 	}

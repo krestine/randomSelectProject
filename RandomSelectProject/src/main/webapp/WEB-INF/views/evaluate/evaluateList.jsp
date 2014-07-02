@@ -37,6 +37,9 @@
 
 
 
+
+${memberEvaluates}<br>
+
 <form id="f" name="f">
 	<label> 아이템 아이디<input id="itemId" name="itemId"
 		value="${itemList[ind].itemId}">
@@ -94,12 +97,12 @@
 				</c:choose>
 			</tr>
 
-			<c:forEach var="evaluate" items="${evalutes}">
+			<c:forEach var="evaluate" items="${memberEvaluates}">
 			
 				i++;
 			
 			<tr height="35px">
-					<td align="center">${evaluate.evaluateId}</td>
+					<td align="center">${evaluate.evalId}</td>
 					<td align="center"><c:choose>
 							<c:when test="${evaluate.score ==5}">
 						★★★★★
@@ -117,15 +120,16 @@
 						★☆☆☆☆
 			</c:when>
 						</c:choose></td>
-					<td>${board.restntId }</td>
-					<td></td>
-					<td align="center"><fmt:formatDate
-							value="${evaluate.evalDate}" pattern="yyyy-MM-dd" /></td>
+					<td>${evaluate.evalId }</td>
+					<td>${evaluate.evalDate}</td>
+					<%-- <td align="center"><fmt:formatDate
+							value="${evaluate.evalDate}" pattern="yyyy-MM-dd" /></td> --%>
+					
 				</tr>
 
 			</c:forEach>
 
-		<%-- 	<tr>
+		 <%-- 	<tr>
 				<td colspan="5" align="center"><c:if test="${page <= 1 }">[이전]&nbsp; </c:if>
 					<c:if test="${page > 1 }">
 						<a href="menuInfo.do?page=${page-1}">이전</a>&nbsp;</c:if> <c:forEach
@@ -136,9 +140,8 @@
 						test="${page<maxpage }">
 						<a href="menuInfo.do?page=${page+1}">[다음]</a>
 					</c:if></td>
-			</tr>
- --%>
-
+			</tr> --%>
+ 
 
 
 		</table>

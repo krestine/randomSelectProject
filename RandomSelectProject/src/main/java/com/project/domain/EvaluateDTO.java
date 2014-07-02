@@ -2,12 +2,24 @@ package com.project.domain;
 
 public class EvaluateDTO {
 	// memberField
+	private String evalId;
+	private String score;
 	private String memId;
 	private String restntId;
 	private String evalDate;
 	private String restntName;
-	private String evalId;
-	private String score;
+	public String getEvalId() {
+		return evalId;
+	}
+	public void setEvalId(String evalId) {
+		this.evalId = evalId;
+	}
+	public String getScore() {
+		return score;
+	}
+	public void setScore(String score) {
+		this.score = score;
+	}
 	public String getMemId() {
 		return memId;
 	}
@@ -31,18 +43,6 @@ public class EvaluateDTO {
 	}
 	public void setRestntName(String restntName) {
 		this.restntName = restntName;
-	}
-	public String getEvalId() {
-		return evalId;
-	}
-	public void setEvalId(String evalId) {
-		this.evalId = evalId;
-	}
-	public String getScore() {
-		return score;
-	}
-	public void setScore(String score) {
-		this.score = score;
 	}
 	@Override
 	public int hashCode() {
@@ -102,10 +102,11 @@ public class EvaluateDTO {
 	}
 	@Override
 	public String toString() {
-		return "EvaluateDTO [memId=" + memId + ", restntId=" + restntId
-				+ ", evalDate=" + evalDate + ", restntName=" + restntName
-				+ ", evalId=" + evalId + ", score=" + score + "]";
+		return "EvaluateDTO [evalId=" + evalId + ", score=" + score
+				+ ", memId=" + memId + ", restntId=" + restntId + ", evalDate="
+				+ evalDate + ", restntName=" + restntName + "]";
 	}
+	
+	
 
 }
-	
