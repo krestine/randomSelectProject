@@ -16,7 +16,12 @@
 
 	<!-- 회원, 관리자 : 식당 리스트 -->
 	<select id="getRestntList" resultType="RestntDTO">
+<<<<<<< HEAD
 		select * from restnt
+=======
+		select * from restnt where
+		active = 1
+>>>>>>> ef210890dd88fc72b64571835acbd60e929a0862
 	</select>
 
 
@@ -37,7 +42,12 @@
 		restntCate=#{restntCate}, adress1=#{adress1},
 		adress2=#{adress2},
 		adress3=#{adress3},
+<<<<<<< HEAD
 		adress4=#{adress4} where restntId = #{restntId}
+=======
+		adress4=#{adress4} where restntId = #{restntId} and
+		active = 1
+>>>>>>> ef210890dd88fc72b64571835acbd60e929a0862
 	</update>
 
 	<!--관리자 : 식당정보 추가 -->
@@ -73,7 +83,12 @@
 		where
 		adress1=#{adress1}and
 		adress2=#{adress2}and
+<<<<<<< HEAD
 		adress3=#{adress3}
+=======
+		adress3=#{adress3}and active
+		= 1
+>>>>>>> ef210890dd88fc72b64571835acbd60e929a0862
 
 	</select>
 
@@ -89,6 +104,10 @@
 		restnttel,restntcate,RESTNTEVAL from
 		restnt where
 		restntId=#{restntId}
+<<<<<<< HEAD
+=======
+		and active = 1
+>>>>>>> ef210890dd88fc72b64571835acbd60e929a0862
 	</select>
 
 	<select id="getRestntInfoByName" parameterType="RestntDTO"
@@ -97,6 +116,14 @@
 		restntcate, restnttel
 		from
 		restnt
+	</select>
+
+	<!-- 식당 추가 : id 지정 로직에 필요: 해당 지역의 마지막으로 등록된 식당의 아이디 값 가져오기 -->
+	<select id="getLastRestntId" parameterType="RestntDTO" resultType="String">
+		select max(restntId) from restnt where
+		adress1=#{adress1} and
+		adress2=#{adress2} and
+		adress3=#{adress3};
 	</select>
 
 

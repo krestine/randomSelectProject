@@ -8,6 +8,9 @@ public class MemberDTO {
 	private String memName;
 	private String memBirth;
 	private String memMobile;
+	private String mPhoneCode;
+	private String mPhoneMid;
+	private String mPhoneEnd;
 	private String memGrade;
 	private String black;
 	private String leave;
@@ -20,41 +23,9 @@ public class MemberDTO {
 	// member Field end
 
 	// getter & setter
-	
+
 	public String getMemId() {
 		return memId;
-	}
-
-	public String getTempPw() {
-		return tempPw;
-	}
-
-	public void setTempPw(String tempPw) {
-		this.tempPw = tempPw;
-	}
-
-	public int getMemWalkRange() {
-		return memWalkRange;
-	}
-
-	public void setMemWalkRange(int memWalkRange) {
-		this.memWalkRange = memWalkRange;
-	}
-
-	public int getMemCarRange() {
-		return memCarRange;
-	}
-
-	public void setMemCarRange(int memCarRange) {
-		this.memCarRange = memCarRange;
-	}
-
-	public String getMemExcMenu() {
-		return memExcMenu;
-	}
-
-	public void setMemExcMenu(String memExcMenu) {
-		this.memExcMenu = memExcMenu;
 	}
 
 	public void setMemId(String memId) {
@@ -93,6 +64,30 @@ public class MemberDTO {
 		this.memMobile = memMobile;
 	}
 
+	public String getmPhoneCode() {
+		return mPhoneCode;
+	}
+
+	public void setmPhoneCode(String mPhoneCode) {
+		this.mPhoneCode = mPhoneCode;
+	}
+
+	public String getmPhoneMid() {
+		return mPhoneMid;
+	}
+
+	public void setmPhoneMid(String mPhoneMid) {
+		this.mPhoneMid = mPhoneMid;
+	}
+
+	public String getmPhoneEnd() {
+		return mPhoneEnd;
+	}
+
+	public void setmPhoneEnd(String mPhoneEnd) {
+		this.mPhoneEnd = mPhoneEnd;
+	}
+
 	public String getMemGrade() {
 		return memGrade;
 	}
@@ -125,6 +120,38 @@ public class MemberDTO {
 		this.leaveReason = leaveReason;
 	}
 
+	public int getMemWalkRange() {
+		return memWalkRange;
+	}
+
+	public void setMemWalkRange(int memWalkRange) {
+		this.memWalkRange = memWalkRange;
+	}
+
+	public int getMemCarRange() {
+		return memCarRange;
+	}
+
+	public void setMemCarRange(int memCarRange) {
+		this.memCarRange = memCarRange;
+	}
+
+	public String getMemExcMenu() {
+		return memExcMenu;
+	}
+
+	public void setMemExcMenu(String memExcMenu) {
+		this.memExcMenu = memExcMenu;
+	}
+
+	public String getTempPw() {
+		return tempPw;
+	}
+
+	public void setTempPw(String tempPw) {
+		this.tempPw = tempPw;
+	}
+
 	// getter & setter end
 
 	// hashCode & equals
@@ -137,6 +164,12 @@ public class MemberDTO {
 		result = prime * result + ((leave == null) ? 0 : leave.hashCode());
 		result = prime * result
 				+ ((leaveReason == null) ? 0 : leaveReason.hashCode());
+		result = prime * result
+				+ ((mPhoneCode == null) ? 0 : mPhoneCode.hashCode());
+		result = prime * result
+				+ ((mPhoneEnd == null) ? 0 : mPhoneEnd.hashCode());
+		result = prime * result
+				+ ((mPhoneMid == null) ? 0 : mPhoneMid.hashCode());
 		result = prime * result
 				+ ((memBirth == null) ? 0 : memBirth.hashCode());
 		result = prime * result + memCarRange;
@@ -178,6 +211,21 @@ public class MemberDTO {
 			if (other.leaveReason != null)
 				return false;
 		} else if (!leaveReason.equals(other.leaveReason))
+			return false;
+		if (mPhoneCode == null) {
+			if (other.mPhoneCode != null)
+				return false;
+		} else if (!mPhoneCode.equals(other.mPhoneCode))
+			return false;
+		if (mPhoneEnd == null) {
+			if (other.mPhoneEnd != null)
+				return false;
+		} else if (!mPhoneEnd.equals(other.mPhoneEnd))
+			return false;
+		if (mPhoneMid == null) {
+			if (other.mPhoneMid != null)
+				return false;
+		} else if (!mPhoneMid.equals(other.mPhoneMid))
 			return false;
 		if (memBirth == null) {
 			if (other.memBirth != null)
@@ -234,11 +282,12 @@ public class MemberDTO {
 	public String toString() {
 		return "MemberDTO [memId=" + memId + ", memPasswd=" + memPasswd
 				+ ", memName=" + memName + ", memBirth=" + memBirth
-				+ ", memMobile=" + memMobile + ", memGrade=" + memGrade
-				+ ", black=" + black + ", leave=" + leave + ", leaveReason="
-				+ leaveReason + ", memWalkRange=" + memWalkRange
-				+ ", memCarRange=" + memCarRange + ", memExcMenu=" + memExcMenu
-				+ ", tempPw=" + tempPw + "]";
+				+ ", memMobile=" + memMobile + ", mPhoneCode=" + mPhoneCode
+				+ ", mPhoneMid=" + mPhoneMid + ", mPhoneEnd=" + mPhoneEnd
+				+ ", memGrade=" + memGrade + ", black=" + black + ", leave="
+				+ leave + ", leaveReason=" + leaveReason + ", memWalkRange="
+				+ memWalkRange + ", memCarRange=" + memCarRange
+				+ ", memExcMenu=" + memExcMenu + ", tempPw=" + tempPw + "]";
 	}
 
 	// toString end
