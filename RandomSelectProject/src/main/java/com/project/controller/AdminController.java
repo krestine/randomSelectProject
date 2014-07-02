@@ -62,7 +62,7 @@ public class AdminController {
 	String memberSearchForm(Model model) {
 		return "admin/memberSearch";
 	}
-
+	
 	@RequestMapping(value = "/memberSearchProc.do", method = RequestMethod.POST)
 	String memberSearchProc(int caseCode, String param, Model model) {
 		switch (caseCode) {
@@ -232,6 +232,7 @@ public class AdminController {
 		return "admin/restntInfo";
 	}
 
+	
 	// 식당 정보 추가 작성 폼
 	@RequestMapping(value = "/restntInfoInsertForm.do", method = RequestMethod.POST)
 	String restntInfoInsertForm(Model model, RestntDTO restntDTO,
@@ -297,6 +298,7 @@ public class AdminController {
 		return "admin/restntInfo";
 	}
 
+
 	// 식당 정보 추가
 	@RequestMapping(value = "/restntInfoInsert.do", method = RequestMethod.POST)
 	String restntInfoInsert(Model model, RestntDTO restntDto) {
@@ -318,14 +320,26 @@ public class AdminController {
 
 	}
 
+	
+	
+	
+	
+	
 	// 식당 정보 수정
 	@RequestMapping(value = "/restntInfoUpdate.do", method = RequestMethod.POST)
 	String restntInfoUpdate(Model model, RestntDTO restntDto) {
+		System.out.println("1");
+		System.out.println(restntDto);
 		restntService.setRestntById(restntDto);
+		System.out.println("2");
 		restnt = restntService.getRestntInfoById(restntDto.getRestntId());
+		System.out.println("3");
 		model.addAttribute("restnt", restnt);
+		System.out.println("4");
 		model.addAttribute("test", "수정");
+		System.out.println("5");
 		excMenus = settingService.getExcMenu();
+		System.out.println("6");
 		model.addAttribute("excMenus", excMenus);
 		return "admin/restntInfo";
 	}

@@ -17,7 +17,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	$(document).ready(function() {
-
+		// 				input type="button"
 		$('input[type=button]').click(function() {
 
 			formHanddler(this);
@@ -27,14 +27,16 @@
 			var objID = obj.id;
 			var actionStr;
 
+			if (objID === "addBtn") {
+				actionStr = "restntInfoInsert.do";
+
+			}
 			if (objID === "addFormBtn") {
 				actionStr = "restntInfoInsertForm.do";
+
 			} else if (objID === "modBtn") {
 				actionStr = "restntInfoUpdate.do";
-			} else if (objID === "addBtn") {
-				actionStr = "restntInfoInsert.do";
-			} else if (objID === "delBtn") {
-				actionStr = "restntInfoDelete.do";
+
 			}
 			$('#management').attr("action", actionStr).submit();
 
@@ -80,6 +82,11 @@
 	<form id="management" method="post">
 		<table border="2">
 
+
+
+
+
+
 			<caption>
 				<c:choose>
 					<c:when test="${restnt!=null}">
@@ -93,6 +100,7 @@
 
 			</caption>
 
+
 			<tbody>
 
 				<tr>
@@ -101,10 +109,13 @@
 
 					<td><input type="hidden" value="${restnt.restntId}"
 						name="restntId"><input type="text"
-						value="${restnt.restntName}" name="restntName" id="restntName"></td>
+						value="${restnt.restntName}" name="restntName"></td>
 				</tr>
+
+
 				<tr>
 					<th>주소1</th>
+
 					<td><form action="restntManantProc.do" method="post">
 							<input type="hidden" name="caseCode" value="1"> <select
 								name="adress1">
@@ -124,7 +135,7 @@
 				<tr>
 					<th>주소2</th>
 					<td><form action="restntManantProc.do" method="post">
-							<input type="hidden" name="adress1" value="${choice.adress1}">
+							<input type="hidden" name="adress2" value="${choice.adress1}">
 							<input type="hidden" name="caseCode" value="2"> <select
 								name="adress2">
 								<c:choose>
@@ -150,34 +161,34 @@
 				<tr>
 					<th>주소3</th>
 					<td><form action="restntManantProc.do" method="post">
-						<input type="hidden" name="adress1" value="${choice.adress1}">
-						<input type="hidden" name="adress2" value="${choice.adress2}">
-						<input type="hidden" name="caseCode" value="3"> <select
-							name="adress3">
-							<c:choose>
-								<c:when test="${adress3!=null}">
-									<c:forEach items="${adress3}" var="adress3">
-										<c:choose>
-											<c:when test="${adress3==restnt.adress3}">
-												<option selected="selected">${adress3}</option>
-											</c:when>
-											<c:otherwise>
-												<option>${adress3}</option>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<option selected="selected">시/군/구 를 선택하세요</option>
-								</c:otherwise>
-							</c:choose>
-						</select> <input type="submit" value="적용">
-					</form></td>
+							<input type="hidden" name="adress1" value="${choice.adress1}">
+							<input type="hidden" name="adress2" value="${choice.adress2}">
+							<input type="hidden" name="caseCode" value="3"> <select
+								name="adress3">
+								<c:choose>
+									<c:when test="${adress3!=null}">
+										<c:forEach items="${adress3}" var="adress3">
+											<c:choose>
+												<c:when test="${adress3==restnt.adress3}">
+													<option selected="selected">${adress3}</option>
+												</c:when>
+												<c:otherwise>
+													<option>${adress3}</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<option selected="selected">시/군/구 를 선택하세요</option>
+									</c:otherwise>
+								</c:choose>
+							</select> <input type="submit" value="적용">
+						</form></td>
 				</tr>
 				<tr>
 					<th>주소4</th>
 					<td><input type="text" value="${restnt.adress4}"
-						name="adress4" id="adress4"></td>
+						name="adress4"></td>
 				</tr>
 
 				<tr>
@@ -211,7 +222,7 @@
 					<th>평균 별점</th>
 
 					<td><input type="text" disabled="disabled"
-						value="${restnt.restntEval}" name="restntEval" id="restntEval"></td>
+						value="${restnt.restntEval}"></td>
 				</tr>
 
 				<tr>
@@ -241,7 +252,5 @@
 
 		</table>
 	</form>
-
-
 </body>
 </html>
