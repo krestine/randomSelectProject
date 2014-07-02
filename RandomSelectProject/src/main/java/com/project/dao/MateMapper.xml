@@ -2,23 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.MateMapper">
-	
+
 	<!-- 회원 : 친구 리스트 -->
-	<select id="getMateListByMateId" parameterType="MateDTO" resultType="MateDTO">
-		select * from mate 	
+	<select id="getMateListByMemId" parameterType="MateDTO"
+		resultType="MateDTO">
+
+		select * from mate where memid=#{memId}
+		
 	</select>
-	
+
 	<!-- 회원: 친구 아이디 -->
-	<select id="getMateIdByMateId" parameterType="MateDTO" resultType="MateDTO">
-		select from mate where
+	<select id="getMateIdByMateId" resultType="MateDTO">
+		<!-- <select id="getMateIdByMateId" parameterType="MateDTO" resultType="MateDTO"> -->
+		select memId from mate where
 		memid=#{mateId}
 	</select>
-	
-	<!-- 회원: 친구정보 -->
-	<select id="getMateInfoByMateId" parameterType="MateDTO" resultType="MateDTO">
-		select mateid, memid, matestatus, infostatus from mate
-		where memid=#{Mallory@gmail.com}
+
+	<!-- 회원: 친구상태정보 -->
+	<select id="getMateInfoByMateId" parameterType="MateDTO"
+		resultType="MateDTO">
+		<!-- <select id="getMateInfoByMateId" parameterType="MateDTO" resultType="MateDTO"> -->
+		select matestatus, infostatus from mate
+		where mateid=#{mateId} and
+		memid=#{memId}
 	</select>
 	
-	
+	<!-- 회원:친구의 정보-->
+	<select id="getMemInfoByMemId" parameterType="String"
+		resultType="MateDTO">
+		select memid, memname, memgrade from member where
+		memid=#{memId}
+		
+		<!--  select memname, e.MEMID
+		from member r, mate e
+		where e.memid=#{memId}
+		and r.memid=e.memid;-->
+
+		
+	</select>
+
+	<!-- 회원: 정보 -->
+	<select id="getMateInfoByMemId" parameterType="MateDTO"
+		resultType="MateDTO">
+		select memid, memname, memgrade from member where
+		memid=#{memId}
+	</select>
+
+
+
+
+
 </mapper>
+

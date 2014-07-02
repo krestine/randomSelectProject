@@ -3,67 +3,101 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.dao.RestntMapper">
-<!-- 	<resultMap type="com.project.domain.RestntDTO" id="RestntDTO">
-		<result property="id" column="id" javaType="string" />
-		<result property="name" column="name" javaType="string" />
-		<result property="latitude" column="latitude" javaType="string" />
-		<result property="longitude" column="longitude" javaType="string" />
-		<result property="phone" column="phone" javaType="string" />
-		<result property="address1" column="address1" javaType="string" />
-		<result property="address2" column="address2" javaType="string" />
-		<result property="address3" column="address3" javaType="string" />
-		<result property="address4" column="address4" javaType="string" />
-		<result property="type" column="type" javaType="string" />
-	</resultMap> -->
-	
-	
+	<!-- <resultMap type="com.project.domain.RestntDTO" id="RestntDTO"> <result 
+		property="id" column="id" javaType="string" /> <result property="name" column="name" 
+		javaType="string" /> <result property="latitude" column="latitude" javaType="string" 
+		/> <result property="longitude" column="longitude" javaType="string" /> <result 
+		property="Tel" column="Tel" javaType="string" /> <result property="adress1" 
+		column="adress1" javaType="string" /> <result property="adress2" column="adress2" 
+		javaType="string" /> <result property="adress3" column="adress3" javaType="string" 
+		/> <result property="adress4" column="adress4" javaType="string" /> <result 
+		property="type" column="type" javaType="string" /> </resultMap> -->
+
+
 	<!-- 회원, 관리자 : 식당 리스트 -->
 	<select id="getRestntList" resultType="RestntDTO">
-		select * from restnt
+		select * from restnt where active = 1
 	</select>
-	
 
-	<!--관리자 : 식당 정보 삭제  -->
-	
+
+	<!--관리자 : 식당 정보 삭제 -->
+
 	<delete id="dropRestntById" parameterType="String">
-		delete from restnt where id = #{restntid}
+		delete from restnt
+		where restntId = #{restntId}
 	</delete>
-	
 
-	<!--관리자 : 식당정보 수정  -->
 
-	<update id="setRestntById"  parameterType="String">
-		update restnt set restntname = #{restntname}, restntlatitude = #{restntlatitude}, restntlongitude=#{restntlongitude}, restntphone=#{restntphone}, restnttype=#{restnttype}, restntaddress1=#{restntaddress1}, restntaddress2=#{restntaddress2}, restntaddress3=#{restntaddress3}, restntaddress4=#{restntaddress4} where restntid = #{restntid}
+	<!--관리자 : 식당정보 수정 -->
+
+	<update id="setRestntById" parameterType="String">
+		update restnt set
+		restntName = #{restntName},
+		restntTel=#{restntTel},
+		restntCate=#{restntCate}, adress1=#{adress1},
+		adress2=#{adress2},
+		adress3=#{adress3},
+		adress4=#{adress4} where restntId = #{restntId} and active = 1
 	</update>
-	
-	<!--관리자 : 식당정보 추가  -->
+
+	<!--관리자 : 식당정보 추가 -->
 
 	<insert id="putRestnt" parameterType="RestntDTO">
-		insert into restnt (restntId, restntName, restntLatitude, restntLonogitude, restntAddress1, restntAddress2, restntAddress3, restntAddress4, restntPhone, restntType), values (#{restntId}, #{restntname}, #{restntlatitude}, #{restntlongitude}, #{restntaddress1}, #{restntaddress2}, #{restntaddress3}, #{restntaddress4}, #{restntPhone}, #{restntType})
+		insert into restnt
+		(restntId,
+		restntName,
+		adress1,
+		adress2,
+		adress3,
+		adress4,
+		restntTel,
+		restntCate)
+		values
+		(#{restntId},
+		#{restntName},
+		#{adress1},
+		#{adress2},
+		#{adress3},
+		#{adress4},
+		#{restntTel},
+		#{restntCate})
 	</insert>
-	
-	
-	<!--관리자: 식당관리 - 주소필터 적용 - 식당 리스트 표시  -->
-	<select id="getRestntListByAddr" parameterType="RestntDTO">
-	select restntid, restntname from restnt 
-	where restntAddress1=#{restntAddress1},
-	restntAddress2=#{restntAddress2},
-	restntAddress3={restntAddress3},
-	restntAddress4=#{restntAddress4}
+
+
+
+	<!--관리자: 식당관리 - 주소필터 적용 - 식당 리스트 표시 -->
+	<select id="getRestntListByAddr" parameterType="SettingDTO"
+		resultType="RestntDTO">
+		select restntId,
+		restntName from restnt
+		where
+		adress1=#{adress1}and
+		adress2=#{adress2}and
+		adress3=#{adress3}and active = 1
+
 	</select>
-	
-	
-	
-	<!--관리자, 회원 : 식당관리 - 식당리스트에서 식당선택 - 상세정보 표시  -->
-	<select id="getRestntInfoById" parameterType="RestntDTO" resultType="String">
-	select restntname,
-	restntLatitude,restntLongitude,
-	restntAddress1,restntAddress2,
-	restntAddress3,restntAddress4;
-	restntPhone,restntType where restntid=#{restntId}
+
+
+
+	<!--관리자, 회원 : 식당관리 - 식당리스트에서 식당선택 - 상세정보 표시 -->
+	<select id="getRestntInfoById" parameterType="RestntDTO"
+		resultType="RestntDTO">
+		select
+		restntId,restntName,
+		adress1,adress2,
+		adress3,adress4,
+		restnttel,restntcate,RESTNTEVAL from
+		restnt where
+		restntId=#{restntId} and active = 1
 	</select>
-	
-	
-	
-	
+
+	<select id="getRestntInfoByName" parameterType="RestntDTO"
+		resultType="RestntDTO">
+		select restntname, restnteval,
+		restntcate, restnttel
+		from
+		restnt
+	</select>
+
+
 </mapper>

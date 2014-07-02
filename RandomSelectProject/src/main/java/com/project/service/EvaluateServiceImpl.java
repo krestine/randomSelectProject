@@ -27,28 +27,70 @@ public class EvaluateServiceImpl implements EvaluateService {
 	/* void setEvaluateInfoByEvaluateTerms(String evaluateDto); */
 
 	// 평가안한 방문리스트
-	public List<EvaluateDTO> getnEvaluateListByMemId(String evaluateDto) {
-		return (List<EvaluateDTO>) evaluateMapper
-				.getnEvaluateListByMemId(evaluateDto);
-
-	}
+	public List<EvaluateDTO> getnEvaluateListByMemId(String memId) {
+					return evaluateMapper.getnEvaluateListByMemId(memId);
+		}
+	
 
 	// 식당평가 안한 점수 입력
-	public void putEvaluateByScore(EvaluateDTO evaluateDto) {
+	public void putEvaluateByScore(String evaluateDto) {
 		evaluateMapper.putEvaluateByScore(evaluateDto);
 
 	}
 
-	public EvaluateDTO getEvaluateListByMemId(Object evalScore) {
+	@Override
+	public List<EvaluateDTO> getEvaluateListByMemId() {
 		// TODO Auto-generated method stub
 		return null;
-	};
+	}
+
+	@Override
+	public void setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void putnEvaluateByScore(EvaluateDTO evaluateDto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<EvaluateDTO> getVisitsByMemid(String memId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EvaluateDTO> getRestntnameByRestId(List<String> restntId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EvaluateDTO> getScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	// //////////////////////////////////////////////////
 
-	// 회원: 평가한 식당목록
+	/*// 회원: 평가한 식당목록
 	// 방문날짜,restntId
-	public List<EvaluateDTO> getVisitsByMemid(String memId) {
+	public List<EvaluateDTO> getVisitsByMemId(String memId) {
 		return evaluateMapper.getVisitsByMemid(memId);
 	}
 
@@ -64,45 +106,57 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	// 회원: 평가 안한 식당목록
 	// 방문날짜,restntId
-	public List<EvaluateDTO> getNevaluateListByMemId(String memId) {
-		return evaluateMapper.getnEvaluateListByMemId(memId);
-	}
-
+	
 	// 회원: 식당 평가 수정 ,입력
 	public void setScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
 		((EvaluateServiceImpl) evaluateMapper)
 				.setScoreByEvaluateTerms(evaluateDTO);
 	}
 
-
 	@Override
 	public void setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public List<EvaluateDTO> getRestntnameByRestId(List<String> restntId) {
-		// TODO Auto-generated method stub
+		// 
 		return null;
 	}
 
 	@Override
 	public EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public void putnEvaluateByScore(EvaluateDTO evaluateDto) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
-		// TODO Auto-generated method stub
+		
 
 	}
+
+	@Override
+	public List<EvaluateDTO> getEvaluateListByMemId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EvaluateDTO> getVisitsByMemid(String memId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+*/
+	
+	
+	
+	
 
 }

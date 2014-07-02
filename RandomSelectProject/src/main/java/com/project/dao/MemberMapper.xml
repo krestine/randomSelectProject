@@ -67,7 +67,8 @@
 		mempasswd=#{memPasswd}
 	</update>
 
-
+	
+	
 	<!-- 회원:정보수정 -->
 	<update id="setMemberInfoByMemberTerms" parameterType="MemberDTO">
 		update
@@ -87,6 +88,12 @@
 	<!--admin -->
 
 
+	<!-- 회원 : 설정 정보 불러오기 -->
+	<select id="getOptionInfoByMemId" parameterType="String" resultType="MemberDTO">
+	select memexcmenu, memwalkrange, memcarrange from member where memid=#{memId}
+	</select>
+	
+	
 	<!--회원 : 검색 설정 -->
 	<update id="setOptionInfoByMemId" parameterType="MemberDTO">
 		update member

@@ -6,13 +6,11 @@ import com.project.domain.EvaluateDTO;
 
 public interface EvaluateMapper {
 	// 관리자 : 유저의 평가 목록 열람
-	List<EvaluateDTO> getEvaluateListByMemId(String memId);
-
 	// 회원: 평가한 식당목록. 평가한 방문 리스트
-	List<EvaluateDTO> getEvaluateListByMemId(Object evalScore);
-	
+	List<EvaluateDTO> getEvaluateListByMemId(String memId);
+		
 	// 식당이름
-	List<EvaluateDTO> getRestntnameByRestId1(String restntId);
+	List<EvaluateDTO> getRestntnameByRestId(String restntId);
 
 	// 평가한 방문리스트 수정
 
@@ -27,7 +25,7 @@ public interface EvaluateMapper {
 	List<EvaluateDTO> getnEvaluateListByMemId(String memId);
 
 	// 회원:식당평가 안한 점수 입력
-	public void putEvaluateByScore(EvaluateDTO evaluateDto);
+	public void putEvaluateByScore(String evaluateDto);
 
 	// ///////////////////////////////////////////////////////////////
 
@@ -36,7 +34,7 @@ public interface EvaluateMapper {
 	List<EvaluateDTO> getVisitsByMemid(String memId);
 
 	// 식당이름
-	List<EvaluateDTO> getRestntnameByRestId(String restntId);
+	/*List<EvaluateDTO> getRestntnameByRestId(String restntId);*/
 
 	
 

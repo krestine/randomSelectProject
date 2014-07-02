@@ -5,22 +5,62 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+	function restntList() {
+		document.getElementById("community").action = "restntList.do";
+		document.getElementById("community").submit();
+
+	}
+	function mateList() {
+		document.getElementById("community").action = "mateListProc.do";
+		document.getElementById("community").submit();
+	}
+	function main(){
+		document.getElementById("community").action = "main.do";
+		document.getElementById("community").submit();
+		}
+</script>
 <title>restntDetail</title>
+
 </head>
 <body>
 <h1>restntDetail</h1>
 
-${restnt.restntName } ${restnt.restntEval } ${restnt.restntMenu } ${restnt.restnt } ${restnt.restntCate }
-${restnt.restntTel } ${restnt.restntAddr }
-<c:forEach var="restnt" items="${restnts}" >
-        ${restnt.restntName} <a href="restntDetail.do?restntId=${restnt.restntName}"></a> <br>
-        ${restnt.restntEval} <a href="restntDetail.do?restntId=${restnt.restntEval}"></a>
-        
-        <hr>
-    </c:forEach>
 
-<a href="restntDetail.do?restntId=${restnt.restntId}">식당상세</a>
 
-<a href="restntListProc.do">리스트로</a>
+     
+ <div>
+			<table align="center" border="0" cellpadding="0" cellspacing="0"
+				bgcolor="white">
+				
+				<tr>
+						
+					<form action="restntDetailProc.do" method="POST">
+						
+						<input type="" value="${restnt.restntName}" name="restntName"><br>
+						<input type="" value="${restnt.restntEval}" name="restntEval"><br>
+						<input type="" value="${restnt.restntCate}" name="restntCate"><br>
+						<input type="" value="${restnt.restntTel}" name="restntTel"><br>
+						
+						
+						<input type="" value="${menu.menuId}" name="menuId"><br>
+						<input type="" value="${menu.menuName}" name="menuName"><br>
+						<input type="" value="${menu.restntId}" name="restntId"><br>
+						<input type="" value="${menu.menuPrice}" name="menuPrice"><br>
+						<input type="" value="${menu.menuCalorie}" name="menuCalorie"><br>
+						<input type="" value="${menu.menuNote}" name="menuNote"><br>
+						
+					</form>
+				</tr>
+			</table>
+		</div>       
+    
+
+<form id="community" method="POST">
+		<input type="button" onclick="restntList()" value="식당 리스트" />
+		<input type="button" onclick="mateList()" value="친구 리스트" />
+		<input type="button" onclick="main()" value="메인" />
+	</form>
+
 </body>
 </html>

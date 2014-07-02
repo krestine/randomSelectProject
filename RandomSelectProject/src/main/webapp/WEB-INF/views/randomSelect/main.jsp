@@ -38,7 +38,7 @@
 		document.getElementById("select2").submit();
 	}
 	function evaluateGo() {
-		document.getElementById("select2").action = "evaluateListProc.do";
+		document.getElementById("select2").action = "evaluatemain.do";
 		document.getElementById("select2").submit();
 	}
 	function selectResult() {
@@ -65,7 +65,10 @@
 
 
 	<h1>밥 먹자!!!!!!</h1>
-	<c:choose>
+
+
+
+	<%-- <c:choose>
 		<c:when test="${sessionScope.loginUser==null}">
 			<form id="select1" method="post">
 				<input type="button" onclick="loginGo()" value="로그인"> <input
@@ -100,15 +103,61 @@
 
 
 	</c:choose>
+ --%>
+
+	<table>
+		<caption></caption>
+		<thead>
+		<tbody>
+			<tr>
+				<c:choose>
+					<c:when test="${sessionScope.loginUser==null}">
+						<form id="select1" method="post">
+						<td><input type="button" onclick="loginGo()" value="로그인"></td>
+						<td><input type="button" onclick="registerGo()" value="회원가입"></td>
+						</form>
+					</c:when>
 
 
 
-	<form id="select2" method="post">
+					<c:when test="${sessionScope.loginUser.memGrade<7}">
+						<form id="select1" method="post">
+							<td><input type="button" onclick="logoutGo()" value="로그아웃"></td>
+							<td><input type="button" onclick="myInfoGo()" value="내정보"></td>
+						</form>
+					</c:when>
+
+					<c:when test="${sessionScope.loginUser.memGrade==666}">
+						<form id="select1" method="post">
+							<td><input type="button" onclick="logoutGo()" value="로그아웃">
+								<td><input type="button" onclick="adminGo()" value="관리"></td>
+						</form>
+					</c:when>
+				</c:choose>
+				<form id="select3">
+				<td><input type="button" onclick="selectResult()" value="아무거나"></td>
+				<td><input type="button" onclick="ladderMake()" value="복불복"></td>
+				</form>
+			</tr>
+			<tr>
+				<form id="select2" method="post">
+				<td><input type="button" onclick="settingGo()" value="설정 "></td>
+				<td><input type="button" onclick="communityGo()" value="커뮤니티"></td>
+				<td><input type="button" onclick="evaluateGo()" value="평가"></td>
+				<td><input type="button" onclick="" value="통계"></td>
+				</form>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<!-- <form id="select2" method="post">
 		<input type="button" onclick="settingGo()" value="설정 "> <input
 			type="button" onclick="communityGo()" value="커뮤니티"> <input
 			type="button" onclick="evaluateGo()" value="평가"> <input
 			type="button" onclick="" value="통계">
-	</form>
+	</form> -->
+
 
 
 

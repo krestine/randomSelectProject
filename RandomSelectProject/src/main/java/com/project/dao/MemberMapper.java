@@ -52,4 +52,9 @@ public interface MemberMapper {
 
 	// 관리자 : 회원 정보 수정
 	void setMemberInfo(MemberDTO memberDto);
+	
+	//회원 : 설정 정보 불러오기 /
+	MemberDTO getOptionInfoByMemId(String memId);
+	
+	
 }
