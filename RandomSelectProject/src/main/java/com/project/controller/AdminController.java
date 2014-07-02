@@ -59,7 +59,7 @@ public class AdminController {
 	String memberSearchForm(Model model) {
 		return "admin/memberSearch";
 	}
-	
+
 	@RequestMapping(value = "/memberSearchProc.do", method = RequestMethod.POST)
 	String memberSearchProc(int caseCode, String param, Model model) {
 		switch (caseCode) {
@@ -203,6 +203,15 @@ public class AdminController {
 		List<SettingDTO> excMenus = settingService.getExcMenu();
 
 		model.addAttribute("restnt", restnt);
+		model.addAttribute("excMenus", excMenus);
+		return "admin/restntInfo";
+	}
+
+	@RequestMapping(value = "/restntInfoInsertForm.do", method = RequestMethod.POST)
+	String restntInfoInsertForm(Model model) {
+
+		List<SettingDTO> excMenus = settingService.getExcMenu();
+
 		model.addAttribute("excMenus", excMenus);
 		return "admin/restntInfo";
 	}
