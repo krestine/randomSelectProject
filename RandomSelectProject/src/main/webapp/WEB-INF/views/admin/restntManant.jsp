@@ -8,7 +8,7 @@
 <title>식당 관리</title>
 </head>
 <body>
-	
+
 	<br>
 	<table border="2">
 		<caption>식당 필터</caption>
@@ -117,6 +117,9 @@
 
 								<td><c:choose>
 										<c:when test="${restnt.restntId!=null}">
+											<input type="hidden" name="adress1" value="${choice.adress1}">
+											<input type="hidden" name="adress2" value="${choice.adress2}">
+											<input type="hidden" name="adress3" value="${choice.adress3}">
 											<input type="hidden" value="${restnt.restntId }"
 												name="restntId">
 										${restnt.restntName } <input type="submit" value="상세정보">
