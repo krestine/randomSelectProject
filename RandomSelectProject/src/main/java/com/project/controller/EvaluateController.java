@@ -25,6 +25,10 @@ public class EvaluateController {
 
 	@Autowired
 	private EvaluateService evaluateService;
+
+	
+	
+	
 	private List<EvaluateDTO> memberEvaluates;
 	/*
 	 * @Autowired
