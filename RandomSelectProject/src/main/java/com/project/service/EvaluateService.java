@@ -43,7 +43,7 @@ public interface EvaluateService {
 
 
 	//회원 : 평가한 친구의 식당목록
-	List<EvaluateDTO> getEvaluateListByMateId(String mateId);
+	List<EvaluateDTO> getEvaluateListByMateId(String memId);
 
 
 	List<EvaluateDTO> getEvaluateListByMemId(String memId);

@@ -58,11 +58,16 @@
 	
 	<!-- 회원: 평가한 친구의 식당목록 -->
 		<select id="getEvaluateListByMateId" parameterType="String"  resultType="EvaluateDTO">
-		select evalid, score, restntname, mateid
-		from evaluate e, restnt r, mate m
-		where m.mate=#{mateId}
-		and e.restntid = r.restntid
-		and e.memid = m.mateid and Score != -1;
+			select r.restntname, e.score, m.mateid
+			from evaluate e
+  			inner join restnt r
+  			on e.RESTNTID= r.RESTNTID
+  			inner join mate m
+  			on e.MEMID = m.MATEID
+  			inner join member mm
+  			on mm.MEMID=m.MEMID
+			where mm.MEMID=#{mm.MEMID}
+			and Score != -1;
 		</select>
 
 </mapper>

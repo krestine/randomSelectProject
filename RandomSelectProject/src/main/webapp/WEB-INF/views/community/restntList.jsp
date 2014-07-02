@@ -25,27 +25,13 @@
 		<input type="button" onclick="mateList()" value="친구 리스트" /> 
 		<input type="button" onclick="main()" value="메인" />
 	</form>
-
+	<form action="restntDetailProc.do" method="post">
 	<c:forEach var="evaluate" items="${evaluates}">
-		<br>
-		<div>
-			<table align="center" border="0" cellpadding="0" cellspacing="0"
-				bgcolor="white">
-				<tr>
-					<form action="restntDetailProc.do" method="post">
-						
-				 		<input type="hidden" value="${evaluate.restntId}" name="restntId">
-				 		<input type="hidden" value="${evaluate.mateId }" name="mateId">
-				 		<input type="" value="${evaluate.restntName}" name="restntName">
-				 		<input type="" value="${evaluate.score}" name="score">
-				 		<input type="hidden" value="${evaluate.mateId }" name="mateId"> 
-				 		${evaluate.mateId }<input type="submit" value="보기" > 
-					</form>
-				</tr>
-			</table>
-		</div>
-		<br>
+			<!-- 	<input type="" value="${evaluate.score }" name="score">
+				<input type="" value="${restnt.restntName} " name="restntName">
+				<input type="" value="${mate.mateId }" name="mateId">  -->
+				
 	</c:forEach>
-
+		</form>
 </body>
 </html>

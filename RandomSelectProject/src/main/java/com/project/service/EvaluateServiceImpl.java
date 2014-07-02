@@ -87,9 +87,9 @@ public class EvaluateServiceImpl implements EvaluateService {
 	}
 
 	@Override
-	public List<EvaluateDTO> getEvaluateListByMateId(String mateId) {
+	public List<EvaluateDTO> getEvaluateListByMateId(String memId) {
 		// TODO Auto-generated method stub
-		return evaluateMapper.getEvaluateListByMateId(mateId);
+		return evaluateMapper.getEvaluateListByMateId(memId);
 	}
 
 	// //////////////////////////////////////////////////
