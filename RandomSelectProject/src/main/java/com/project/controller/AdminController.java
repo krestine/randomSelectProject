@@ -53,11 +53,7 @@ public class AdminController {
 	// 관리자 메인 페이지
 	@RequestMapping(value = "/adminMainProc.do")
 	String adminMainProc(Model model) {
-		restnts = restntService.getRestntList();
-		for (RestntDTO rest : restnts) {
-			System.out.println(rest.getRestntId());
-		}
-		model.addAttribute("restnts", restnts);
+
 		return "admin/adminMain";
 	}
 

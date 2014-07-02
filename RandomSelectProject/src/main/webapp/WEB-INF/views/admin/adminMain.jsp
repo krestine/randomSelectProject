@@ -21,9 +21,7 @@
 <title>관리자</title>
 </head>
 <body>
-	<c:forEach items="${restnts}" var="restnt">
-		${restnt.restntName}
-	</c:forEach>
+	
 	<form id="GoSelect">
 		<input type="button" value="회원관리" onclick="memberGo()"> <input
 			type="button" value="식당관리" onclick="restntGo()">
