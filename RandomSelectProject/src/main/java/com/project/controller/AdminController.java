@@ -207,6 +207,7 @@ public class AdminController {
 		return "admin/restntInfo";
 	}
 
+	//식당 정보 추가 작성 폼
 	@RequestMapping(value = "/restntInfoInsertForm.do", method = RequestMethod.POST)
 	String restntInfoInsertForm(Model model) {
 
