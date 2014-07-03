@@ -217,6 +217,9 @@ public class AdminController {
 		/* restnts = restntService.getRestntListByAddr(settingDto); */
 		/* System.out.println("/////////쿼리 결과 테스트//////////"); */
 
+		menus = menuService.getMenuListByRestntId(restntId);
+		model.addAttribute("menus", menus);
+		
 		model.addAttribute("adress1", adress1);
 		model.addAttribute("adress2", adress2);
 		model.addAttribute("adress3", adress3);
@@ -234,12 +237,19 @@ public class AdminController {
 
 	// 식당 정보 추가 작성 폼
 	@RequestMapping(value = "/restntInfoInsertForm.do", method = RequestMethod.POST)
-	String restntInfoInsertForm(Model model, RestntDTO restntDTO,
+	String restntInfoInsertForm(Model model, RestntDTO restntDto,
 			Integer caseCode, SettingDTO settingDto) {
 		System.out.println("////////세팅 디티오//////////");
-
+		
 		System.out.println(settingDto);
-
+		System.out.println("////레스토랑 디티오/////");
+		restntDto.setRestntId(null);
+		restntDto.setRestntCate(null);
+		restntDto.setRestntName(null);
+		restntDto.setRestntEval(null);
+		restntDto.setRestntTel(null);
+		restntDto.setAdress4(null);
+		
 		adress1 = settingService.getAdress1();
 		adress2 = settingService.getAdress2(settingDto);
 		adress3 = settingService.getAdress3(settingDto);
@@ -247,10 +257,7 @@ public class AdminController {
 		model.addAttribute("adress1", adress1);
 		model.addAttribute("adress2", adress2);
 		model.addAttribute("adress3", adress3);
-		model.addAttribute("restnts", restnts);
-		model.addAttribute("code", settingDto);
-
-		model.addAttribute("choice", settingDto);
+		model.addAttribute("restnt", restntDto);
 		excMenus = settingService.getExcMenu();
 
 		model.addAttribute("excMenus", excMenus);
@@ -260,7 +267,7 @@ public class AdminController {
 	// 식당 정보 추가
 	@RequestMapping(value = "/restntInfoInsert.do", method = RequestMethod.POST)
 	String restntInfoInsert(Model model, RestntDTO restntDto, SettingDTO settingDto) {
-		
+		System.out.println(restntDto);
 		adressCode = restntService.getAdressCode(restntDto);
 		System.out.println(adressCode);
 		lastId = restntService.getLastRestntId(restntDto);
@@ -271,6 +278,14 @@ public class AdminController {
 		System.out.println(restntDto);
 		restntService.putRestnt(restntDto);
 		restnt = restntService.getRestntInfoById(restntDto.getRestntId());
+		adress1 = settingService.getAdress1();
+		adress2 = settingService.getAdress2(settingDto);
+		adress3 = settingService.getAdress3(settingDto);
+
+		model.addAttribute("adress1", adress1);
+		model.addAttribute("adress2", adress2);
+		model.addAttribute("adress3", adress3);
+		model.addAttribute("restnt", restntDto);
 		model.addAttribute("restnt", restnt);
 		excMenus = settingService.getExcMenu();
 
@@ -297,7 +312,7 @@ public class AdminController {
 		adress1 = settingService.getAdress1();
 		adress2 = settingService.getAdress2(settingDto);
 		adress3 = settingService.getAdress3(settingDto);
-
+		
 		model.addAttribute("adress1", adress1);
 		model.addAttribute("adress2", adress2);
 		model.addAttribute("adress3", adress3);
@@ -319,8 +334,8 @@ public class AdminController {
 
 	// 메뉴 리스트
 	@RequestMapping(value = "/menuListProc.do", method = RequestMethod.POST)
-	String menuListProc(Model model, MenuDTO menuDto) {
-		menus = menuService.getMenuListByRestntId(menuDto);
+	String menuListProc(Model model, String restntId) {
+		menus = menuService.getMenuListByRestntId(restntId);
 		model.addAttribute("menus", menus);
 		return "admin/menuList";
 	}
@@ -362,6 +377,7 @@ public class AdminController {
 	// 새 식당 등록시 아이디 생성 메소드
 	String restntIdGen(String lastId, String adressCode) {
 		if (lastId != null) {
+			
 			stringBuffer = new StringBuffer(lastId);
 			String sequenceStr = stringBuffer.substring(17, 22);
 			System.out.println(sequenceStr);

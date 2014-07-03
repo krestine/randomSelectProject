@@ -4,24 +4,32 @@
 <mapper namespace="com.project.dao.MenuMapper">
 
 	<!-- 관리자, 회원 : 메뉴 리스트 불러오기 -->
-	<select id="getMenuListByRestntId" parameterType="MenuDTO" resultType="MenuDTO">
-		select menuid,menuname from menu where restntid=#{restntId}
+	<select id="getMenuListByRestntId" parameterType="String"
+		resultType="MenuDTO">
+		select
+		menuid,menuname,restntId,menuPrice,menuCalorie,menuNote from menu where
+		restntid=#{restntId}
 	</select>
 
 
 	<!-- 관리자 : 메뉴 상세 정보표시 -->
-	<select id="getMenuInfoByMenuId" parameterType="String" resultType="MenuDTO">
+	<select id="getMenuInfoByMenuId" parameterType="String"
+		resultType="MenuDTO">
 
-		select menuid,menuname,restntId,menuPrice,menuCalorie,menuNote
-		where menuid = #{menuId}
+		select
+		menuid,menuname,restntId,menuPrice,menuCalorie,menuNote
+		where menuid =
+		#{menuId}
 	</select>
 
 	<!--관리자 : 메뉴 추가 -->
 	<insert id="putMenu" parameterType="MenuDTO">
 		insert into menu
-		(menuId, restntId, menuName, menuPrice, menuCalorie,menuNote)
+		(menuId,
+		restntId, menuName, menuPrice, menuCalorie,menuNote)
 		values
-		(sq_menu.NEXTVAL, #{restntId},#{menuName},#{menuPrice},#{menuCalorie},#{menuNote})
+		(sq_menu.NEXTVAL,
+		#{restntId},#{menuName},#{menuPrice},#{menuCalorie},#{menuNote})
 
 	</insert>
 
