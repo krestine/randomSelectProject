@@ -141,7 +141,7 @@
 		</tbody>
 	</table>
 
-
+<input type="button" value="시 가져오기">
 
 </body>
 </html>
