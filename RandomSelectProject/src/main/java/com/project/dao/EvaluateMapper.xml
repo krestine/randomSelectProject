@@ -64,7 +64,7 @@
 	</update>
 	
 	<!-- 회원: 평가한 친구의 식당목록 -->
-	<select id="getEvaluateListByMateId" parameterType="String"  resultType="EvaluateDTO">
+	<select id="getEvaluateListByMateId" parameterType="EvaluateDTO"  resultType="EvaluateDTO">
  			select r.restntname, e.score, m.mateid
  			from evaluate e, restnt r, mate m, member mm
  			where mm.MEMID=#{mm.MEMID} 

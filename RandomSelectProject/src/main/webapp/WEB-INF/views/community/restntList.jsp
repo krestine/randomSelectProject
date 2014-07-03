@@ -26,19 +26,19 @@
 		<input type="button" onclick="main()" value="메인" />
 	</form>
 	<br>
-	<c:forEach var="restnt" items="${restnts}">
+	<c:forEach var="evaluate" items="${evaluates}">
 		
 						<form action="restntDetailProc.do" method="post">	
 				
 						<input value="식당이름">
 						<input value="평균별점">
 						<br>
-						<input type="hidden" value="${restnts.mateId }" name="mateId">
-						<input type="hidden" value="${restnts.restntId }" name="restntId">
+						<input type="hidden" value="${evaluate.mateId }" name="mateId">
+						<input type="hidden" value="${evaluate.restntId }" name="restntId">
 						
-						<input value="${restnts.restntName}" name="restntName">
-						<input value="${restnts.score }" name="score">
-						${restnts.restntId}<input type="submit" value="상세보기">
+						<input value="${evaluate.restntName}" name="restntName">
+						<input value="${evaluate.score }" name="score">
+						${evaluate.restntId}<input type="submit" value="상세보기">
 						
 					</form>
 						<br>

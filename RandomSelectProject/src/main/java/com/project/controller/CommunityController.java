@@ -99,6 +99,7 @@ public class CommunityController {
 	
 
 	// 회원 : 친구들이 평가한 식당 리스트
+	/*
 	@RequestMapping(value =  "/restntListProc.do", method = RequestMethod.POST)
 	public String restntListProc(Model model, String memId, HttpServletRequest request) {
 		loginUser = (MemberDTO) request.getSession().getAttribute(
@@ -109,7 +110,8 @@ public class CommunityController {
 		System.out.println("restnts여기?");
 		return "community/restntList";
 	}
-	/*
+	*/
+	
 		@RequestMapping(value =  "/restntListProc.do", method = RequestMethod.POST)
 		public String restntListProc(Model model, String memId, HttpServletRequest request) {
 			loginUser = (MemberDTO) request.getSession().getAttribute(
@@ -122,7 +124,6 @@ public class CommunityController {
 		
 		
 	}
-	*/
 	
 	
 	// 회원 : 식당 상세정보
