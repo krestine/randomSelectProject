@@ -103,7 +103,7 @@ public class CommunityController {
 		public String restntListProc(Model model, String memId, HttpServletRequest request) {
 			loginUser = (MemberDTO) request.getSession().getAttribute(
 					"loginUser");
-			evaluates= evaluateService.getEvaluateListByMateId(loginUser.getMemId());
+			evaluates= evaluateService.getEvaluateListByMemId(loginUser.getMemId());
 			model.addAttribute("evaluates", evaluates);
 			System.out.println(evaluates);
 			System.out.println("evaluates여기?");
