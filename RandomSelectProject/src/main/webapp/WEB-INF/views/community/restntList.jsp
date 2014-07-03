@@ -28,9 +28,9 @@
 	<form action="restntDetailProc.do" method="post">
 	<c:forEach var="evaluate" items="${evaluates}">
 		<tr>
-			<td>${evaluates.score }</td>
-			<td>${evaluates.restntName}</td>
-			<td>${evaluates.mateId }</td>
+			<td>${evaluates.SCORE }</td>
+			<td>${evaluates.RESTNTNAME}</td>
+			<td>${evaluates.MATEID }</td>
 		</tr>		
 	</c:forEach>
 		</form>

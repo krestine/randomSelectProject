@@ -52,7 +52,7 @@ public class CommunityController {
 	// 회원 : 친구 리스트
 	@RequestMapping(value = "/mateListProc.do", method = RequestMethod.POST)
 	public String mateListProc(Model model, HttpServletRequest request) {
-		System.out.println(mates);
+		
 		loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		try {
@@ -61,7 +61,7 @@ public class CommunityController {
 				try {
 					mates = mateService
 							.getMateListByMemId(loginUser.getMemId());
-
+					System.out.println(mates);
 					model.addAttribute("mates", mates);
 					return "community/mateList";
 
@@ -101,6 +101,8 @@ public class CommunityController {
 	// 회원 : 식당 리스트
 		@RequestMapping(value =  "/restntListProc.do", method = RequestMethod.POST)
 		public String restntListProc(Model model, String memId, HttpServletRequest request) {
+			loginUser = (MemberDTO) request.getSession().getAttribute(
+					"loginUser");
 			evaluates= evaluateService.getEvaluateListByMateId(loginUser.getMemId());
 			model.addAttribute("evaluates", evaluates);
 			System.out.println(evaluates);
