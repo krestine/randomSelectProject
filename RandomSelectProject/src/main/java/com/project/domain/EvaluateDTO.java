@@ -8,6 +8,14 @@ public class EvaluateDTO {
 	private String restntId;
 	private String evalDate;
 	private String restntName;
+	private String mateId;
+	
+	public String getMateId() {
+		return mateId;
+	}
+	public void setMateId(String mateId) {
+		this.mateId = mateId;
+	}
 	public String getEvalId() {
 		return evalId;
 	}
@@ -51,6 +59,7 @@ public class EvaluateDTO {
 		result = prime * result
 				+ ((evalDate == null) ? 0 : evalDate.hashCode());
 		result = prime * result + ((evalId == null) ? 0 : evalId.hashCode());
+		result = prime * result + ((mateId == null) ? 0 : mateId.hashCode());
 		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
 		result = prime * result
 				+ ((restntId == null) ? 0 : restntId.hashCode());
@@ -78,6 +87,11 @@ public class EvaluateDTO {
 				return false;
 		} else if (!evalId.equals(other.evalId))
 			return false;
+		if (mateId == null) {
+			if (other.mateId != null)
+				return false;
+		} else if (!mateId.equals(other.mateId))
+			return false;
 		if (memId == null) {
 			if (other.memId != null)
 				return false;
@@ -104,7 +118,8 @@ public class EvaluateDTO {
 	public String toString() {
 		return "EvaluateDTO [evalId=" + evalId + ", score=" + score
 				+ ", memId=" + memId + ", restntId=" + restntId + ", evalDate="
-				+ evalDate + ", restntName=" + restntName + "]";
+				+ evalDate + ", restntName=" + restntName + ", mateId="
+				+ mateId + "]";
 	}
 	
 	
