@@ -95,14 +95,6 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 	var sRadius = 2000;
 	var geocoder = new google.maps.Geocoder();
 
-	
-	
-	
-	
-	
-	
-	
-	
 	function showCurrentLocation(Lat, Lon) {
 		$("#currentLocation").html(Lat + ' ' + Lon);
 	}
@@ -172,7 +164,7 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 		sRadius = tempSRadius;
 	}
 
-	function onSuccess(Lat, Lon) {
+	function onSuccess(Lat, Lon, accuracy) {
 		
 		//alert('onSuccess');
 		
@@ -180,6 +172,10 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 		myLongitude = Lon;
 		pos = new google.maps.LatLng(myLatitude, myLongitude);
 
+		
+		$("#currentAccuracy").html("내 위치의 정확도 : " + accuracy + "m");
+		
+		
 		//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: '내 위치'});
 		var myMarker = new google.maps.Marker({
 			position : pos,
@@ -284,9 +280,9 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 			//alert('geoloation success');
 			
 			navigator.geolocation.getCurrentPosition(function(position) {
-				onSuccess(position.coords.latitude, position.coords.longitude);
+				onSuccess(position.coords.latitude, position.coords.longitude, position.coords.accuracy);
 			}, onError(), {enableHighAccuracy: true}); 
-			
+
 		} else {
 			alert('위치 추적 서비스 동작 실패');
 		}
@@ -310,9 +306,7 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 	<input type=text id=tempAddress value="">
 	<input type=button id=geocodeTempAddress value="해당 주소 지도에 표시"
 		onclick="findLocation()">
-	<br> 선택한 마커의 좌표 :
-	<div id=currentLocation></div>
-	<br>
-
+	<br> 선택한 마커의 좌표 : <div id=currentLocation></div>
+	<div id=currentAccuracy></div><br>
 </body>
 </html>
