@@ -86,6 +86,12 @@ public class RestntServiceImpl implements RestntService {
 		// TODO Auto-generated method stub
 		return restntMapper.getAdressCode(restntDto);
 	}
+	@Override
+	public List<RestntDTO> getEvalRestntListByMateId(String memId) {
+		// TODO Auto-generated method stub
+		return restntMapper.getEvalRestntListByMateId(memId);
+	}
+	
 
 
 }

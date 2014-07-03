@@ -129,5 +129,17 @@
 		
 	</select>
 	
+	<!-- 회원 : 친구가 평가한 식당리스트 -->
+	<select id="getEvalRestntListByMateId" parameterType="String"  resultType="EvaluateDTO">
+ 			select r.restntname, e.score, m.mateid
+ 			from evaluate e, restnt r, mate m, member mm
+ 			where mm.MEMID=#{mm.MEMID} 
+ 			and e.RESTNTID= r.RESTNTID
+ 			and e.MEMID = m.MATEID
+ 			and mm.MEMID=m.MEMID
+ 			and Score != -1
+ 	</select>
+	
+	
 	
 </mapper>

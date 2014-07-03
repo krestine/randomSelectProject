@@ -38,5 +38,8 @@ public interface RestntService {
 	
 	//식당 추가 : id 지정 로직에 필요: 해당 지역의 지역 코드 불러오기
 	String getAdressCode(RestntDTO restntDto);
-
+	
+	// 회원 : 친구가 평가한 식당 리스트
+	List<RestntDTO> getEvalRestntListByMateId(String memId);
+	
 }

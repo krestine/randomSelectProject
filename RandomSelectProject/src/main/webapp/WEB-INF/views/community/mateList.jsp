@@ -42,6 +42,7 @@
 						<input type="submit" value="상세보기">
 					
 					</form>
+					
 	</c:forEach>
 	
 </body>
