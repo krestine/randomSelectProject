@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>식당 관리</title>
+
+
 </head>
 <body>
 
