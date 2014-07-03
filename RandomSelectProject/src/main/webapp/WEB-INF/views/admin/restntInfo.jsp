@@ -240,25 +240,25 @@
 
 		</table>
 	</form>
-
-	<table border="2">
-		<caption>메뉴 정보</caption>
-		<tr>
-			<th>메뉴 이름</th>
-			<th>가격</th>
-			<th>칼로리</th>
-			<th>특이사항</th>
-		</tr>
-		<c:forEach items="${menus}" var="menu">
-		<tr>
-			<td>${menu.menuName}</td>
-			<td>${menu.menuPrice}</td>
-			<td>${menu.menuCalorie}</td>
-			<td>${menu.menuNote}</td>
-		</tr>
-		</c:forEach>
-	</table>
-
+	<form action="">
+		<table border="2">
+			<caption>메뉴 정보</caption>
+			<tr>
+				<th>메뉴 이름</th>
+				<th>가격</th>
+				<th>칼로리</th>
+				<th>특이사항</th>
+			</tr>
+			<c:forEach items="${menus}" var="menu">
+				<tr>
+					<td>${menu.menuName}</td>
+					<td>${menu.menuPrice}</td>
+					<td>${menu.menuCalorie}</td>
+					<td>${menu.menuNote}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</form>
 
 
 
