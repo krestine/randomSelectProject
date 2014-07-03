@@ -102,9 +102,7 @@
 		and active = '1'
 
 	</select>
-
 	
-
 	<!-- 식당 추가 : id 지정 로직에 필요: 해당 지역의 마지막으로 등록된 식당의 아이디 값 가져오기 -->
 	<select id="getLastRestntId" parameterType="RestntDTO"
 		resultType="String">

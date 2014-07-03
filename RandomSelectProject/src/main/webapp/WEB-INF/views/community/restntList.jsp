@@ -15,51 +15,30 @@
 		document.getElementById("community").submit();
 	}
 </script>
-<title>restntList</title>
+<title>식당리스트</title>
 </head>
 <body>
-	<h1>restntList</h1>
+	<h1>친구들이 평가한 식당리스트</h1>
 <body>
 	<form id="community" method="POST">
 
 		<input type="button" onclick="mateList()" value="친구 리스트" /> 
 		<input type="button" onclick="main()" value="메인" />
 	</form>
-
-
-	<c:forEach var="restnt" items="${restnts}">
-		<br>
+	<form action="restntDetailProc.do" method="post">
+	<c:forEach var="evaluate" items="${evaluates}">
 		<div>
 			<table align="center" border="0" cellpadding="0" cellspacing="0"
 				bgcolor="white">
-				<tr>
-					<form action="restntDetailProc.do" method="POST">
-				 		<input type="hidden" value=" ${restnt.restntId}" name="restntId"> 
-						<input type="hidden" value=" ${restnt.restntEval}" name="restntEval">
-						${restnt.restntName} <input type="submit" value="보기" > 
-						
-					</form>
-
+				<tr>	
+					<input type="" value="${evaluate.score }" name="score">
+					<input type="submit" value="${evaluate.restntName}" name="restntName">
+					<input type="" value="${evaluate.mateId }" name="mateId">
 				</tr>
-
-			</table>
-		</div>
-		<br>
-
+			</table>	
+		</div>		
+		
 	</c:forEach>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		</form>
 </body>
 </html>
