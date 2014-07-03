@@ -32,58 +32,51 @@ body {
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"
 	type="text/javascript"></script>
 <script type="text/javascript">
-navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess, geolocationError, options) {
-    var lastCheckedPosition;
-    var locationEventCount = 0;
+	navigator.geolocation.getAccurateCurrentPosition = function(
+			geolocationSuccess, geolocationError, options) {
+		var lastCheckedPosition;
+		var watchID, timerID;
 
-    options = options || {};
+		options = options || {};
 
+		var checkLocation = function(position) {
+			lastCheckedPosition = position;
+			if (position.coords.accuracy <= options.desiredAccuracy) {
+				clearTimeout(timerID);
+				navigator.geolocation.clearWatch(watchID);
+				foundPosition(position);
+			}
+		}
 
-    var checkLocation = function (position) {
-        lastCheckedPosition = position;
-        ++locationEventCount;
-        
-        if ((position.coords.accuracy <= options.desiredAccuracy) && (locationEventCount > 0)) {
-            clearTimeout(timerID);
-            navigator.geolocation.clearWatch(watchID);
-            foundPosition(position);
-        } else {
-            //geoprogress(position);
+		var stopTrying = function() {
+			navigator.geolocation.clearWatch(watchID);
+			foundPosition(lastCheckedPosition);
+		}
 
-        }
-    }
+		var onError = function(error) {
+			clearTimeout(timerID);
+			navigator.geolocation.clearWatch(watchID);
+			geolocationError(error);
+		}
 
+		var foundPosition = function(position) {
+			geolocationSuccess(position);
+		}
 
-    var stopTrying = function () {
-        navigator.geolocation.clearWatch(watchID);
-        foundPosition(lastCheckedPosition);
-    }
+		if (!options.maxWait)
+			options.maxWait = 10000; // Default 10 seconds
+		if (!options.desiredAccuracy)
+			options.desiredAccuracy = 20; // Default 20 meters
+		if (!options.timeout)
+			options.timeout = options.maxWait; // Default to maxWait
 
+		options.maximumAge = 0; // Force current locations only
+		options.enableHighAccuracy = true; // Force high accuracy (otherwise, why are you using this function?)
 
-    var onError = function (error) {
-        clearTimeout(timerID);
-        navigator.geolocation.clearWatch(watchID);
-        geolocationError(error);
-    }
-
-
-    var foundPosition = function (position) {
-        geolocationSuccess(position);
-    }
-
-
-    if (!options.maxWait) options.maxWait = 10000; // Default 10 seconds
-    if (!options.desiredAccuracy) options.desiredAccuracy = 20; // Default 20 meters
-    if (!options.timeout) options.timeout = options.maxWait; // Default to maxWait
-
-
-    options.maximumAge = 0; // Force current locations only
-    options.enableHighAccuracy = true; // Force high accuracy (otherwise, why are you using this function?)
-
-
-    var watchID = navigator.geolocation.watchPosition(checkLocation, onError, options);
-    var timerID = setTimeout(stopTrying, options.maxWait); // Set a timeout that will abandon the location loop
-}
+		watchID = navigator.geolocation.watchPosition(checkLocation,
+				onError, options);
+		timerID = setTimeout(stopTrying, options.maxWait); // Set a timeout that will abandon the location loop
+	}
 </script>
 <script type="text/javascript">
 	var myLatitude, myLongitude;
@@ -128,8 +121,27 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 		map.setCenter(pos2);
 		map.setZoom(16);
 	}
-	function redrawMap(){
+	function redrawMap() {
 		google.maps.event.trigger(map, 'resize');
+	}
+
+	function justShowLocation() {
+
+		var tempLatitude = document.getElementById('tempLatitude').value;
+		var tempLongitude = document.getElementById('tempLongitude').value;
+		var tempPos = new google.maps.LatLng(tempLatitude, tempLongitude);
+
+		var tempMarker2 = new google.maps.Marker({
+			map : map,
+			position : tempPos
+		});
+		tempMarker2.setMap(map);
+		map.setCenter(tempPos);
+		google.maps.event.addListener(tempMarker2, 'click', function() {
+			map.setCenter(tempMarker2.getPosition());
+			showCurrentLocation2(tempPos);
+		});
+
 	}
 
 	function findLocation() {
@@ -165,17 +177,15 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 	}
 
 	function onSuccess(Lat, Lon, accuracy) {
-		
+
 		//alert('onSuccess');
-		
+
 		myLatitude = Lat;
 		myLongitude = Lon;
 		pos = new google.maps.LatLng(myLatitude, myLongitude);
 
-		
 		$("#currentAccuracy").html("내 위치의 정확도 : " + accuracy + "m");
-		
-		
+
 		//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: '내 위치'});
 		var myMarker = new google.maps.Marker({
 			position : pos,
@@ -183,7 +193,7 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 			title : '내 위치'
 		});
 		myMarker.setMap(map);
-		
+
 		geocoder.geocode({
 			'latLng' : pos
 		}, function(results, status) {
@@ -201,63 +211,17 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 			}
 		});
 
-		var searchRadius = {
-			strokeColor : '#00FF00',
-			strokeOpacity : 0.8,
-			strokeWeight : 2,
-			fillColor : '#00FF00',
-			fillOpacity : 0.10,
-			map : map,
-			center : pos,
-			radius : sRadius
-		};
-
-		searchCircle = new google.maps.Circle(searchRadius);
-
-		randomLatitude = 37.5001264143489;
-		randomLongitude = 127.02009446644783;
-
-		pos2 = new google.maps.LatLng(randomLatitude, randomLongitude);
-
-		var restntMarker = new google.maps.Marker({
-			position : pos2,
-			map : map,
-			title : '식당 위치'
-		});
-		restntMarker.setMap(map);
-
-		geocoder.geocode({
-			'latLng' : pos2
-		}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-				if (results[0]) {
-					var restntInfoWindow = new google.maps.InfoWindow();
-					restntInfoWindow.setContent('식당 위치 : '
-							+ results[0].formatted_address);
-					restntInfoWindow.open(map, restntMarker);
-				} else {
-					alert('결과를 찾을 수 없습니다.');
-				}
-			} else {
-				alert('Geocoder failed due to: ' + status);
-			}
-		});
-
-		//var restntInfoWindow = new google.maps.InfoWindow({map: map, position: pos2, content: '식당 위치'});
-
+		
 		google.maps.event.addListener(myMarker, 'click', function() {
 			map.setCenter(myMarker.getPosition());
 			showCurrentLocation(myLatitude, myLongitude);
 		});
-		google.maps.event.addListener(restntMarker, 'click', function() {
-			map.setCenter(restntMarker.getPosition());
-			showCurrentLocation(randomLatitude, randomLongitude);
-		});
+
 
 		map.setCenter(pos);
 	}
 
-	function onError() {
+	function onError2() {
 		//alert('onError');
 	}
 
@@ -276,28 +240,32 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 		if (navigator.geolocation) {
 			//alert('navigator.geolocation: ' + navigator.geolocation);
 
-			
 			//alert('geoloation success');
-			
-			navigator.geolocation.getCurrentPosition(function(position) {
-				onSuccess(position.coords.latitude, position.coords.longitude, position.coords.accuracy);
-			}, onError(), {enableHighAccuracy: true}); 
+			var geolocationOption = {
+				enableHighAccuracy : true,
+				timeout : 5000,
+				maximumAge : 0
+			}
 
+			navigator.geolocation.watchPosition(function(position) {
+				onSuccess(position.coords.latitude, position.coords.longitude,
+						position.coords.accuracy);
+			}, onError2(), geolocationOption);
+			
 		} else {
 			alert('위치 추적 서비스 동작 실패');
 		}
 
 	}
-	
+
 	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 </head>
 <body>
-	<div id="map_canvas" style="width: 100%; height: 60%"></div>
+	<div id="map_canvas" style="width: 100%; height: 70%"></div>
 	<input type=button id=randomSelectInitialize value="아무거나!"
 		onclick="initialize()">
-	<input type=button id=redrawMap value="맵 다시 그리기"
-		onclick="redrawMap()">
+	<input type=button id=redrawMap value="맵 다시 그리기" onclick="redrawMap()">
 	<input type=button id=moveToMyLocation value="내 위치로 이동"
 		onclick="setMyCenter()">
 	<input type=button id=moveToRestntLocation value="식당 위치로 이동"
@@ -306,7 +274,13 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 	<input type=text id=tempAddress value="">
 	<input type=button id=geocodeTempAddress value="해당 주소 지도에 표시"
 		onclick="findLocation()">
-	<br> 선택한 마커의 좌표 : <div id=currentLocation></div>
-	<div id=currentAccuracy></div><br>
+	<input type=text id=tempLatitude value="">
+	<input type=text id=tempLongitude value="">
+	<input type=button id=justShowMarker value="해당 좌표 지도에 표시"
+		onclick="justShowLocation()">
+	<br> 선택한 마커의 좌표 :
+	<div id=currentLocation></div>
+	<div id=currentAccuracy></div>
+	<br>
 </body>
 </html>
