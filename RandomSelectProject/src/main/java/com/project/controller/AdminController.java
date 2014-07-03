@@ -62,7 +62,7 @@ public class AdminController {
 	String memberSearchForm(Model model) {
 		return "admin/memberSearch";
 	}
-	
+
 	@RequestMapping(value = "/memberSearchProc.do", method = RequestMethod.POST)
 	String memberSearchProc(int caseCode, String param, Model model) {
 		switch (caseCode) {
@@ -232,64 +232,23 @@ public class AdminController {
 		return "admin/restntInfo";
 	}
 
-	
 	// 식당 정보 추가 작성 폼
 	@RequestMapping(value = "/restntInfoInsertForm.do", method = RequestMethod.POST)
 	String restntInfoInsertForm(Model model, RestntDTO restntDTO,
-			Integer caseCode) {
-		if (caseCode == null) {
-			caseCode = 0;
-		}
-		switch (caseCode) {
-		case 0:
-			adress1 = settingService.getAdress1();
-			model.addAttribute("adress1", adress1);
+			Integer caseCode, SettingDTO settingDto) {
+		System.out.println("////////세팅 디티오//////////");
 
-			break;
+		System.out.println(settingDto);
 
-		case 1:
-			adress1 = settingService.getAdress1();
-			adress2 = settingService.getAdress2(settingDto);
+		adress1 = settingService.getAdress1();
+		adress2 = settingService.getAdress2(settingDto);
+		adress3 = settingService.getAdress3(settingDto);
 
-			model.addAttribute("adress1", adress1);
-			model.addAttribute("adress2", adress2);
-			model.addAttribute("code", settingDto);
-			break;
-
-		case 2:
-			adress1 = settingService.getAdress1();
-			adress2 = settingService.getAdress2(settingDto);
-			adress3 = settingService.getAdress3(settingDto);
-			model.addAttribute("adress1", adress1);
-			model.addAttribute("adress2", adress2);
-			model.addAttribute("adress3", adress3);
-			model.addAttribute("code", settingDto);
-			break;
-
-		case 3:
-
-			adress1 = settingService.getAdress1();
-			adress2 = settingService.getAdress2(settingDto);
-			adress3 = settingService.getAdress3(settingDto);
-			System.out.println("////////세팅 디티오//////////");
-			System.out.println(settingDto);
-
-			restnts = restntService.getRestntListByAddr(settingDto);
-			System.out.println("/////////쿼리 결과 테스트//////////");
-			for (RestntDTO restnt : restnts) {
-				System.out.println(restnt);
-			}
-
-			model.addAttribute("adress1", adress1);
-			model.addAttribute("adress2", adress2);
-			model.addAttribute("adress3", adress3);
-			model.addAttribute("restnts", restnts);
-			model.addAttribute("code", settingDto);
-			break;
-		default:
-			model.addAttribute("errorMessage", "검색 오류 발생");
-			return "setting/error";
-		}
+		model.addAttribute("adress1", adress1);
+		model.addAttribute("adress2", adress2);
+		model.addAttribute("adress3", adress3);
+		model.addAttribute("restnts", restnts);
+		model.addAttribute("code", settingDto);
 
 		model.addAttribute("choice", settingDto);
 		excMenus = settingService.getExcMenu();
@@ -298,10 +257,10 @@ public class AdminController {
 		return "admin/restntInfo";
 	}
 
-
 	// 식당 정보 추가
 	@RequestMapping(value = "/restntInfoInsert.do", method = RequestMethod.POST)
-	String restntInfoInsert(Model model, RestntDTO restntDto) {
+	String restntInfoInsert(Model model, RestntDTO restntDto, SettingDTO settingDto) {
+		
 		adressCode = restntService.getAdressCode(restntDto);
 		System.out.println(adressCode);
 		lastId = restntService.getLastRestntId(restntDto);
@@ -320,26 +279,30 @@ public class AdminController {
 
 	}
 
-	
-	
-	
-	
-	
 	// 식당 정보 수정
 	@RequestMapping(value = "/restntInfoUpdate.do", method = RequestMethod.POST)
-	String restntInfoUpdate(Model model, RestntDTO restntDto) {
-		System.out.println("1");
+	String restntInfoUpdate(Model model, RestntDTO restntDto,
+			SettingDTO settingDto) {
+
 		System.out.println(restntDto);
 		restntService.setRestntById(restntDto);
-		System.out.println("2");
+
 		restnt = restntService.getRestntInfoById(restntDto.getRestntId());
-		System.out.println("3");
+
 		model.addAttribute("restnt", restnt);
-		System.out.println("4");
+
 		model.addAttribute("test", "수정");
-		System.out.println("5");
+
 		excMenus = settingService.getExcMenu();
-		System.out.println("6");
+		adress1 = settingService.getAdress1();
+		adress2 = settingService.getAdress2(settingDto);
+		adress3 = settingService.getAdress3(settingDto);
+
+		model.addAttribute("adress1", adress1);
+		model.addAttribute("adress2", adress2);
+		model.addAttribute("adress3", adress3);
+		model.addAttribute("restnts", restnts);
+		model.addAttribute("code", settingDto);
 		model.addAttribute("excMenus", excMenus);
 		return "admin/restntInfo";
 	}

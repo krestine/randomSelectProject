@@ -116,74 +116,62 @@
 				<tr>
 					<th>주소1</th>
 
-					<td><form action="restntManantProc.do" method="post">
-							<input type="hidden" name="caseCode" value="1"> <select
-								name="adress1">
-								<c:forEach items="${adress1}" var="adress1">
-									<c:choose>
-										<c:when test="${adress1==restnt.adress1}">
-											<option selected="selected">${adress1}</option>
-										</c:when>
-										<c:otherwise>
-											<option>${adress1}</option>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							</select> <input type="submit" value="적용">
-						</form></td>
+					<td><select name="adress1">
+							<c:forEach items="${adress1}" var="adress1">
+								<c:choose>
+									<c:when test="${adress1==restnt.adress1}">
+										<option selected="selected">${adress1}</option>
+									</c:when>
+									<c:otherwise>
+										<option>${adress1}</option>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+					</select> <input type="submit" value="적용"></td>
 				</tr>
 				<tr>
 					<th>주소2</th>
-					<td><form action="restntManantProc.do" method="post">
-							<input type="hidden" name="adress2" value="${choice.adress1}">
-							<input type="hidden" name="caseCode" value="2"> <select
-								name="adress2">
-								<c:choose>
-									<c:when test="${adress2!=null}">
-										<c:forEach items="${adress2}" var="adress2">
-											<c:choose>
-												<c:when test="${adress2==restnt.adress2}">
-													<option selected="selected">${adress2}</option>
-												</c:when>
-												<c:otherwise>
-													<option>${adress2}</option>
-												</c:otherwise>
-											</c:choose>
-										</c:forEach>
-									</c:when>
-									<c:otherwise>
-										<option selected="selected">시/도를 선택하세요</option>
-									</c:otherwise>
-								</c:choose>
-							</select> <input type="submit" value="적용">
-						</form></td>
+					<td><select name="adress2">
+							<c:choose>
+								<c:when test="${adress2!=null}">
+									<c:forEach items="${adress2}" var="adress2">
+										<c:choose>
+											<c:when test="${adress2==restnt.adress2}">
+												<option selected="selected">${adress2}</option>
+											</c:when>
+											<c:otherwise>
+												<option>${adress2}</option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<option selected="selected">시/도를 선택하세요</option>
+								</c:otherwise>
+							</c:choose>
+					</select> <input type="submit" value="적용"></td>
 				</tr>
 				<tr>
 					<th>주소3</th>
-					<td><form action="restntManantProc.do" method="post">
-							<input type="hidden" name="adress1" value="${choice.adress1}">
-							<input type="hidden" name="adress2" value="${choice.adress2}">
-							<input type="hidden" name="caseCode" value="3"> <select
-								name="adress3">
-								<c:choose>
-									<c:when test="${adress3!=null}">
-										<c:forEach items="${adress3}" var="adress3">
-											<c:choose>
-												<c:when test="${adress3==restnt.adress3}">
-													<option selected="selected">${adress3}</option>
-												</c:when>
-												<c:otherwise>
-													<option>${adress3}</option>
-												</c:otherwise>
-											</c:choose>
-										</c:forEach>
-									</c:when>
-									<c:otherwise>
-										<option selected="selected">시/군/구 를 선택하세요</option>
-									</c:otherwise>
-								</c:choose>
-							</select> <input type="submit" value="적용">
-						</form></td>
+					<td><select name="adress3">
+							<c:choose>
+								<c:when test="${adress3!=null}">
+									<c:forEach items="${adress3}" var="adress3">
+										<c:choose>
+											<c:when test="${adress3==restnt.adress3}">
+												<option selected="selected">${adress3}</option>
+											</c:when>
+											<c:otherwise>
+												<option>${adress3}</option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<option selected="selected">시/군/구 를 선택하세요</option>
+								</c:otherwise>
+							</c:choose>
+					</select> <input type="submit" value="적용"></td>
 				</tr>
 				<tr>
 					<th>주소4</th>
