@@ -67,9 +67,9 @@ public class RestntServiceImpl implements RestntService {
 	
 	// 회원: 식당 상세정보
 	@Override
-	public RestntDTO getRestntInfoByName(RestntDTO restntDto) {
+	public RestntDTO getRestntInfoByRestntId(RestntDTO restntDto) {
 		// TODO Auto-generated method stub
-		return restntMapper.getRestntInfoByName(restntDto);
+		return restntMapper.getRestntInfoByRestntId(restntDto);
 	}
 
 
