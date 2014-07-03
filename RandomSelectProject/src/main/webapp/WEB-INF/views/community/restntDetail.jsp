@@ -45,7 +45,7 @@
 						
 						<input type="" value="${menu.menuId}" name="menuId"><br>
 						<input type="" value="${menu.menuName}" name="menuName"><br>
-						<input type="" value="${menu.restntId}" name="restntId"><br>
+						<input type="" value="${menu.r	estntId}" name="restntId"><br>
 						<input type="" value="${menu.menuPrice}" name="menuPrice"><br>
 						<input type="" value="${menu.menuCalorie}" name="menuCalorie"><br>
 						<input type="" value="${menu.menuNote}" name="menuNote"><br>
