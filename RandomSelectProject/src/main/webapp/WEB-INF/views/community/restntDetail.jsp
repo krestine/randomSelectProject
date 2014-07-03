@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 	function restntList() {
-		document.getElementById("community").action = "restntList.do";
+		document.getElementById("community").action = "restntListProc.do";
 		document.getElementById("community").submit();
 
 	}
@@ -26,41 +26,27 @@
 <body>
 <h1>restntDetail</h1>
 
+					<form id="community" method="POST">
+						<input type="button" onclick="restntList()" value="식당 리스트" />
+						<input type="button" onclick="mateList()" value="친구 리스트" />
+						<input type="button" onclick="main()" value="메인" />
+					</form>
 
-
-     
- <div>
-			<table align="center" border="0" cellpadding="0" cellspacing="0"
-				bgcolor="white">
-				
-				<tr>
-						
+     	
+			
 					<form action="restntDetailProc.do" method="POST">
-						
-						<input type="" value="${restnt.restntName}" name="restntName"><br>
-						<input type="" value="${restnt.restntEval}" name="restntEval"><br>
-						<input type="" value="${restnt.restntCate}" name="restntCate"><br>
-						<input type="" value="${restnt.restntTel}" name="restntTel"><br>
-						
-						
-						<input type="" value="${menu.menuId}" name="menuId"><br>
-						<input type="" value="${menu.menuName}" name="menuName"><br>
-						<input type="" value="${menu.r	estntId}" name="restntId"><br>
-						<input type="" value="${menu.menuPrice}" name="menuPrice"><br>
-						<input type="" value="${menu.menuCalorie}" name="menuCalorie"><br>
-						<input type="" value="${menu.menuNote}" name="menuNote"><br>
+						<input type="hidden" value="${restnt.restntId }" name="restntId"><br>
+						<input value="${restnt.restntName}" name="restntName"><br>
+						<input value="${restnt.restntEval}" name="restntEval"><br>
+						<input value="${restnt.restntCate}" name="restntCate"><br>
+						<input value="${restnt.restntTel}" name="restntTel"><br>	
 						
 					</form>
-				</tr>
-			</table>
-		</div>       
+		
+	      
     
 
-<form id="community" method="POST">
-		<input type="button" onclick="restntList()" value="식당 리스트" />
-		<input type="button" onclick="mateList()" value="친구 리스트" />
-		<input type="button" onclick="main()" value="메인" />
-	</form>
+
 
 </body>
 </html>

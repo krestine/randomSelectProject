@@ -116,12 +116,13 @@ public class CommunityController {
 	
 	// 회원 : 식당 상세정보
 	@RequestMapping(value = "/restntDetailProc.do", method = RequestMethod.POST)
-	public String restntDetailProc(Model model, RestntDTO restntDto) {
-		restnt = restntService.getRestntInfoByRestntId(restntDto);
+	public String restntDetailProc(Model model, String restntId, HttpServletRequest request) {
+		restnt = restntService.getRestntInfoByRestntId(restntId);
 		model.addAttribute("restnt", restnt);
 		
+		//menuInfo = menuService.getMenuListByRestntId(restntId);
 		System.out.println(restnt);
-		System.out.println(menuInfo);
+		System.out.println("restnt여기???");
 		return "community/restntDetail";
 
 	}

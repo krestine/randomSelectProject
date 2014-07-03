@@ -20,42 +20,30 @@
 <body>
 		<h1>${mateInfo.memName }님의 정보입니다.</h1>
 		<br>
-		<div>
-			<table align="center" border="0" cellpadding="0" cellspacing="0"
-				bgcolor="white">
-				
-				<tr>
-						
-					<form action="mateDetailProc.do" method="post">
-						<input value="친구이름">
-						<input value="친구아이디">
-						<input value="친구등급"><br>
-						<input type="" value="${mateInfo.memName }" name="memName">
-						<input type="" value="${mateInfo.memId}" name="memId">
-						<input type="" value="${mateInfo.memGrade}" name="memGrade"><br>
-						<input value="공유상태">
-						<input value="친구관계"><br>	
-						<input type="" value="${mate.infoStatus}" name="infoStatus">
-						
-						<input type="" value="${mate.mateStatus}" name="mateStatus">
-					
-					</form>
-				</tr>
-			</table>
-		</div>
+		<form id="community" method="POST">
+		<input type="button" onclick="mateList()" value="친구 리스트" />
+		<input type="button" onclick="main()" value="메인" />
+		</form>
 		<br>
+		
+		<form action="mateDetailProc.do" method="post">
+			<input value="친구이름">
+			<input value="친구아이디">
+			<input value="친구등급"><br>
+			<input value="${mateInfo.memName }" name="memName">
+			<input value="${mateInfo.memId}" name="memId">
+			<input value="${mateInfo.memGrade}" name="memGrade"><br>
+			<br>
+			<input value="공유상태">
+			<input value="친구관계"><br>	
+			<input value="${mate.infoStatus}" name="infoStatus">
+						
+			<input value="${mate.mateStatus}" name="mateStatus">
+					
+		</form>
+					<br>
 
-		<hr>
-	
 
-
-	
-
-
-	<form id="community" method="POST">
-	<input type="button" onclick="mateList()" value="친구 리스트" />
-	<input type="button" onclick="main()" value="메인" />
-	</form>
 	
 
 </body>

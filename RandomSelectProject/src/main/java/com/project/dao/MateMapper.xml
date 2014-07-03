@@ -7,7 +7,10 @@
 	<select id="getMateListByMemId" parameterType="MateDTO"
 		resultType="MateDTO">
 
-		select * from mate where memid=#{memId}
+		select e.mateid, e.memid, m.memname
+		from mate e, member m
+		where e.memid=#{e.memId}
+		and e.MATEID=m.MEMID
 		
 	</select>
 
@@ -23,8 +26,8 @@
 		resultType="MateDTO">
 		<!-- <select id="getMateInfoByMateId" parameterType="MateDTO" resultType="MateDTO"> -->
 		select matestatus, infostatus from mate
-		where mateid=#{mateId} and
-		memid=#{memId}
+		where mateid=#{mateId}
+		and memid=#{memId}
 	</select>
 	
 	<!-- 회원:친구의 정보-->
