@@ -86,6 +86,12 @@ public class EvaluateServiceImpl implements EvaluateService {
 		
 	}
 
+	@Override
+	public List<EvaluateDTO> getEvaluateListByMateId(String memId) {
+		// TODO Auto-generated method stub
+		return evaluateMapper.getEvaluateListByMateId(memId);
+	}
+
 	// //////////////////////////////////////////////////
 
 	/*// 회원: 평가한 식당목록
@@ -140,6 +146,13 @@ public class EvaluateServiceImpl implements EvaluateService {
 	public void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
 		
 
+	}
+	
+	// 회원 : 평가한 친구의 식당목록
+	@Override
+	public List<EvaluateDTO> getEvaluateListByMateId(String mateId) {
+		
+		return evaluateMapper.getEvaluateListByMateId(mateId);
 	}
 
 	@Override

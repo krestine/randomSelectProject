@@ -14,9 +14,9 @@ public class MenuServiceImpl implements MenuService {
 	
 	@Override
 	// 관리자, 회원 : 메뉴 리스트
-	public List<MenuDTO> getMenuListByRestntId(MenuDTO menuDto) {
+	public List<MenuDTO> getMenuListByRestntId(String restntId) {
 		// TODO Auto-generated method stub
-		return menuMapper.getMenuListByRestntId(menuDto);
+		return menuMapper.getMenuListByRestntId(restntId);
 	}
 	
 	// 관리자, 회원 : 메뉴 상세 정보표시

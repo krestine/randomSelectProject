@@ -7,7 +7,7 @@ import com.project.domain.MenuDTO;
 public interface MenuMapper {
 	
 	// 관리자: 메뉴 리스트
-	List<MenuDTO> getMenuListByRestntId(MenuDTO menuDto);
+	List<MenuDTO> getMenuListByRestntId(String restntId);
 
 	// 관리자, 회원 : 메뉴 상세 정보표시
 	MenuDTO getMenuInfoByMenuId(String menuId);
