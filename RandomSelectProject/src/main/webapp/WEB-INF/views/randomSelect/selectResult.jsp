@@ -31,53 +31,7 @@ body {
 	type="text/javascript"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"
 	type="text/javascript"></script>
-<script type="text/javascript">
-	navigator.geolocation.getAccurateCurrentPosition = function(
-			geolocationSuccess, geolocationError, options) {
-		var lastCheckedPosition;
-		var watchID, timerID;
 
-		options = options || {};
-
-		var checkLocation = function(position) {
-			lastCheckedPosition = position;
-			if (position.coords.accuracy <= options.desiredAccuracy) {
-				clearTimeout(timerID);
-				navigator.geolocation.clearWatch(watchID);
-				foundPosition(position);
-			}
-		}
-
-		var stopTrying = function() {
-			navigator.geolocation.clearWatch(watchID);
-			foundPosition(lastCheckedPosition);
-		}
-
-		var onError = function(error) {
-			clearTimeout(timerID);
-			navigator.geolocation.clearWatch(watchID);
-			geolocationError(error);
-		}
-
-		var foundPosition = function(position) {
-			geolocationSuccess(position);
-		}
-
-		if (!options.maxWait)
-			options.maxWait = 10000; // Default 10 seconds
-		if (!options.desiredAccuracy)
-			options.desiredAccuracy = 20; // Default 20 meters
-		if (!options.timeout)
-			options.timeout = options.maxWait; // Default to maxWait
-
-		options.maximumAge = 0; // Force current locations only
-		options.enableHighAccuracy = true; // Force high accuracy (otherwise, why are you using this function?)
-
-		watchID = navigator.geolocation.watchPosition(checkLocation,
-				onError, options);
-		timerID = setTimeout(stopTrying, options.maxWait); // Set a timeout that will abandon the location loop
-	}
-</script>
 <script type="text/javascript">
 	var myLatitude, myLongitude;
 	var randomLatitude, randomLongitude;
@@ -85,7 +39,7 @@ body {
 	var map;
 	var restntList;
 	var pos, pos2;
-	var sRadius = 2000;
+	var sRadius;
 	var geocoder = new google.maps.Geocoder();
 
 	function showCurrentLocation(Lat, Lon) {
@@ -167,6 +121,21 @@ body {
 		});
 	}
 
+	function newMyLocation() {
+		var newMyAddress = document.getElementById('newMyAddress').value;
+		$("#accuracyAlert").empty();
+		geocoder.geocode({
+			'address' : newMyAddress
+		}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				onSuccess(results[0].geometry.location.lat(), results[0].geometry.location.lng(), 10);
+			} else {
+				alert('Geocode was not successful for the following reason: '
+						+ status);
+			}
+		});
+	}
+	
 	function setSRadius() {
 		var tempSRadius = "<c:out value="${loginUser.memWalkRange}" />";
 		tempSRadius = Number(tempSRadius);
@@ -179,12 +148,22 @@ body {
 	function onSuccess(Lat, Lon, accuracy) {
 
 		//alert('onSuccess');
-
+		var objDiv = document.getElementById("newMyLocationForm");
+			
 		myLatitude = Lat;
 		myLongitude = Lon;
 		pos = new google.maps.LatLng(myLatitude, myLongitude);
 
 		$("#currentAccuracy").html("내 위치의 정확도 : " + accuracy + "m");
+		if(accuracy>200){
+			$("#accuracyAlert").html("<font color=red>단순IP기반의 위치추적 서비스는 정확하지 않습니다.<br>정확한 위치를 위해서 WI-FI 네트워크 또는 3G/4G 데이터 네트워크에 접속하시거나, 현재 주소를 수동으로 입력해 주세요.</font>");
+
+			objDiv.style.display="block";
+		}
+		else{
+			$("#accuracyAlert").empty;
+			objDiv.style.display="none";
+		}
 
 		//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: '내 위치'});
 		var myMarker = new google.maps.Marker({
@@ -247,7 +226,7 @@ body {
 				maximumAge : 0
 			}
 
-			navigator.geolocation.watchPosition(function(position) {
+			navigator.geolocation.getCurrentPosition(function(position) {
 				onSuccess(position.coords.latitude, position.coords.longitude,
 						position.coords.accuracy);
 			}, onError2(), geolocationOption);
@@ -281,6 +260,10 @@ body {
 	<br> 선택한 마커의 좌표 :
 	<div id=currentLocation></div>
 	<div id=currentAccuracy></div>
-	<br>
+	<div id=accuracyAlert></div>
+	<div id=newMyLocationForm style="display:none">
+	<input type=text id=newMyAddress value="">
+	<input type=button id=newMyLocation value="내 주소 수동으로 입력" onclick="newMyLocation()">	
+	</div>
 </body>
 </html>
