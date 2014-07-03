@@ -6,8 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.domain.EvaluateDTO;
@@ -221,7 +223,7 @@ public class AdminController {
 
 		menus = menuService.getMenuListByRestntId(restntId);
 		model.addAttribute("menus", menus);
-		
+
 		model.addAttribute("adress1", adress1);
 		model.addAttribute("adress2", adress2);
 		model.addAttribute("adress3", adress3);
@@ -242,7 +244,7 @@ public class AdminController {
 	String restntInfoInsertForm(Model model, RestntDTO restntDto,
 			Integer caseCode, SettingDTO settingDto) {
 		System.out.println("////////세팅 디티오//////////");
-		
+
 		System.out.println(settingDto);
 		System.out.println("////레스토랑 디티오/////");
 		restntDto.setRestntId(null);
@@ -251,7 +253,7 @@ public class AdminController {
 		restntDto.setRestntEval(null);
 		restntDto.setRestntTel(null);
 		restntDto.setAdress4(null);
-		
+
 		adress1 = settingService.getAdress1();
 		adress2 = settingService.getAdress2(settingDto);
 		adress3 = settingService.getAdress3(settingDto);
@@ -268,7 +270,8 @@ public class AdminController {
 
 	// 식당 정보 추가
 	@RequestMapping(value = "/restntInfoInsert.do", method = RequestMethod.POST)
-	String restntInfoInsert(Model model, RestntDTO restntDto, SettingDTO settingDto) {
+	String restntInfoInsert(Model model, RestntDTO restntDto,
+			SettingDTO settingDto) {
 		System.out.println(restntDto);
 		adressCode = restntService.getAdressCode(restntDto);
 		System.out.println(adressCode);
@@ -314,7 +317,7 @@ public class AdminController {
 		adress1 = settingService.getAdress1();
 		adress2 = settingService.getAdress2(settingDto);
 		adress3 = settingService.getAdress3(settingDto);
-		
+
 		model.addAttribute("adress1", adress1);
 		model.addAttribute("adress2", adress2);
 		model.addAttribute("adress3", adress3);
@@ -379,7 +382,7 @@ public class AdminController {
 	// 새 식당 등록시 아이디 생성 메소드
 	String restntIdGen(String lastId, String adressCode) {
 		if (lastId != null) {
-			
+
 			stringBuffer = new StringBuffer(lastId);
 			String sequenceStr = stringBuffer.substring(17, 22);
 			System.out.println(sequenceStr);
@@ -392,8 +395,12 @@ public class AdminController {
 		} else {
 			return adressCode + "," + "R00001";
 		}
-	/*@ResponseBody Map<?, ?> jsonTest(Map<String, Object>){
+
+	}
+	@RequestMapping(value = "/jsonTest.do")
+	@ResponseBody Map<?, ?> jsonTest(@RequestParam Map <String, Object> pramMap, ModelMap model){
+		model.put("restnts", restntService.getRestntList());
+		return model;
 		
-	}	*/
 	}
 }
