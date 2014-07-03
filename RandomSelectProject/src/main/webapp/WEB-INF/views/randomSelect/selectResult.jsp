@@ -41,24 +41,11 @@ body {
 	var sRadius = 2000;
 	var geocoder = new google.maps.Geocoder();
 
-	function restntList() {
-		var restntId = "";
-		var restntName = "";
-		var address = "";
-		var restntTel = "";
-		var restntCate = "";
-		var restntEval = "";
-	}
-
 	function showCurrentLocation(Lat, Lon) {
 		$("#currentLocation").html(Lat + ' ' + Lon);
 	}
 	function showCurrentLocation2(Location) {
 		$("#currentLocation").html(Loation);
-	}
-
-	function showRestntInRange(restntList) {
-
 	}
 
 	function calcDistance(lat1, lon1, lat2, lon2) {
@@ -122,6 +109,8 @@ body {
 
 	function initialize() {
 
+		alert('start init');
+		
 		setSRadius();
 		var myOptions = {
 			zoom : 14,
@@ -274,16 +263,11 @@ body {
 	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);
+
 </script>
 </head>
 <body>
 	<div id="map_canvas" style="width: 100%; height: 60%"></div>
-	<div id="restnt_list" style="width: 100%; height: 15%">
-		<c:forEach items="${restntList}" var="restnt">
-		${restnt.restntName}
-		</c:forEach>
-		${loginUser.memId } ${loginUser.memName } ${loginUser.memGrade }
-	</div>
 	<input type=button id=randomSelectInitialize value="아무거나!"
 		onclick="initialize()">
 	<input type=button id=moveToMyLocation value="내 위치로 이동"
@@ -297,7 +281,6 @@ body {
 	<br> 선택한 마커의 좌표 :
 	<div id=currentLocation></div>
 	<br>
-	<input type=button id=showRestntInRange value="범위 안 식당 표시"></input>
 
 </body>
 </html>
