@@ -36,6 +36,7 @@
 						<input value="공유상태">
 						<input value="친구관계"><br>	
 						<input type="" value="${mate.infoStatus}" name="infoStatus">
+						
 						<input type="" value="${mate.mateStatus}" name="mateStatus">
 					
 					</form>

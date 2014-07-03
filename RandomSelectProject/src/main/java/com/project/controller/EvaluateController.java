@@ -81,24 +81,7 @@ public class EvaluateController {
 	System.out.println(memberEvaluates);
 		return "evaluate/evaluateList";
 	}
-	// 평가 안한 식당목록
-		@RequestMapping(value = "/nEvaluateListForm.do", method = RequestMethod.POST)
-		public String nEvaluateListForm(HttpServletRequest request, Model model,
-				String memId) {
-			System.out.println("nEvaluateListForm()");
-			MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
-					"loginUser");
-			
-			System.out.println(loginUser.toString());
-			memId = loginUser.getMemId();
-			System.out.println(memId);
-			memberEvaluates = evaluateService.getnEvaluateListByMemId(memId);
-			model.addAttribute("memberEvaluates", memberEvaluates);
-		System.out.println(memberEvaluates);
-			return "evaluate/nEvaluateList";
-		}
-		
-	
+
 	// 평가 수정editOk
 	@RequestMapping(value = "edit.do", method = RequestMethod.POST)
 	public String edit(Model model, HttpServletRequest request) {
@@ -154,7 +137,13 @@ public class EvaluateController {
 		return "evaluateListForm.do";
 	}
 
-	
+	// 평가 안한 식당목록
+	@RequestMapping(value = "/nEvaluateListForm.do", method = RequestMethod.POST)
+	public String nEvaluateListForm(Model model, String memId) {
+		System.out.println("nEvaluateListForm()");
+
+		return "evaluate/nEvaluateList";
+	}
 
 	// 식당 평가 입력
 	@RequestMapping(value = "/nEvaluateListProc.do", method = RequestMethod.POST)

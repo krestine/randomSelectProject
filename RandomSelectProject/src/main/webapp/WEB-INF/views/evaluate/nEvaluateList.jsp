@@ -46,11 +46,13 @@ ${memberEvaluates}<br>
 						<option value="2">★★☆☆☆</option>
 						<option value="1">★☆☆☆☆</option>
 				</select></td>
-				
-				<td>방문 평가 안한 음식점</td>
+				<td><input type="text" name="evaluate" maxlength="300"
+					style="width: 300px" placeholder="의견을 140자 이내로 적어주세요"></td>
+				<td>방문 평가 날짜</td>
 				<c:choose>
 					<c:when test="${sessionScope.memberId == null }">
 						<td width="100px" colspan="5" align="center">
+						
 						<input type="button" onclick="editGo()" value="수정">
 							<!-- <a href="javascript:history.go(0)">[새로고침]</a> -->
 					</c:when>
@@ -59,8 +61,6 @@ ${memberEvaluates}<br>
 							<td colspan="5" align="right">
 							<a href="edit.do"
 								class="edite">의견등록</a></td>
-							<td><input type="text" name="evaluate" maxlength="300"
-					style="width: 300px" placeholder="의견을 140자 이내로 적어주세요"></td>
 						</tr>
 					</c:otherwise>
 				</c:choose>
