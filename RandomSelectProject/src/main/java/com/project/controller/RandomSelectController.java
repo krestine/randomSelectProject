@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.domain.MemberDTO;
 import com.project.domain.RestntDTO;
+import com.project.service.MemberService;
 import com.project.service.RestntService;
 
 @Controller
@@ -19,19 +20,21 @@ public class RandomSelectController {
 
 	@Autowired
 	private RestntService restntService;
+	@Autowired
+	private MemberService memberService;
+	
+	private List<RestntDTO> restntList;
 	
 	@RequestMapping("/selectResult.do")
 	public String randomSelectMain(Model model, HttpServletRequest request){
-		/*HttpSession session = request.getSession();
-		MemberDTO memberDto = (MemberDTO) session.getAttribute("memberDto");
-		if(memberDto==null){
-			model.addAttribute("loginMode", "0");
+		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
+				"loginUser");
+		model.addAttribute("loginUser", loginUser);
+		restntList = restntService.getRestntList();
+		for(RestntDTO restnt : restntList){
+			System.out.println(restnt.getRestntId());
 		}
-		else{
-			model.addAttribute("loginMode", memberDto.getMemGrade());
-		}
-		List<RestntDTO> restntList = restntService.getRestntList();
-		model.addAttribute("restntList", restntList);*/
+		model.addAttribute("restntList", restntList);
 		return "randomSelect/selectResult";
 	}
 

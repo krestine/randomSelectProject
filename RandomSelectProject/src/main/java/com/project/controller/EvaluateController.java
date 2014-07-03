@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.domain.EvaluateDTO;
+import com.project.domain.MateDTO;
 import com.project.domain.MemberDTO;
 import com.project.domain.MenuDTO;
 import com.project.domain.RestntDTO;
@@ -22,11 +23,17 @@ import com.project.service.RestntService;
 
 @Controller
 public class EvaluateController {
-
+	@Autowired
+	private RestntService restntService;
+	@Autowired
+	private MemberService memberService; 
 	@Autowired
 	private EvaluateService evaluateService;
 
-	
+	private List<RestntDTO> restnts;
+	private MemberDTO memInfo;
+	private RestntDTO restnt;
+	private MenuDTO menuInfo;
 	
 	
 	private List<EvaluateDTO> memberEvaluates;
@@ -65,6 +72,7 @@ public class EvaluateController {
 		System.out.println("evaluateList()");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
+		
 		System.out.println(loginUser.toString());
 		memId = loginUser.getMemId();
 		System.out.println(memId);
