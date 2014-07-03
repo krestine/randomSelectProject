@@ -30,16 +30,13 @@
 			if (objID === "addBtn") {
 				actionStr = "restntInfoInsert.do";
 
-
+			}
 			if (objID === "addFormBtn") {
 				actionStr = "restntInfoInsertForm.do";
 
 			} else if (objID === "modBtn") {
 				actionStr = "restntInfoUpdate.do";
-			} else if (objID === "addBtn") {
-				actionStr = "restntInfoInsert.do";
-			} else if (objID === "delBtn") {
-				actionStr = "restntInfoDelete.do";
+
 			}
 			$('#management').attr("action", actionStr).submit();
 
@@ -85,10 +82,10 @@
 	<form id="management" method="post">
 		<table border="2">
 
-			<caption>식당 상세 정보</caption>
 
-	<form id="management" method="post">
-		<table border="2">
+
+
+
 
 			<caption>
 				<c:choose>
@@ -114,70 +111,49 @@
 						name="restntId"><input type="text"
 						value="${restnt.restntName}" name="restntName"></td>
 				</tr>
+
+
 				<tr>
 					<th>주소1</th>
 
-					<td><input type="text" value="${restnt.adress1}"
-						name="adress1"></td>
-				</tr>
-				<tr>
-					<th>주소2</th>
-					<td><input type="text" value="${restnt.adress2}"
-						name="adress2"></td>
-				</tr>
-				<tr>
-					<th>주소3</th>
-					<td><input type="text" value="${restnt.adress3}"
-						name="adress3"></td>
-					<td><form action="restntManantProc.do" method="post">
-							<input type="hidden" name="caseCode" value="1"> <select
-								name="adress1">
-								<c:forEach items="${adress1}" var="adress1">
-									<c:choose>
-										<c:when test="${adress1==restnt.adress1}">
-											<option selected="selected">${adress1}</option>
-										</c:when>
-										<c:otherwise>
-											<option>${adress1}</option>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							</select> <input type="submit" value="적용">
-						</form></td>
-				</tr>
-				<tr>
-					<th>주소2</th>
-					<td><form action="restntManantProc.do" method="post">
-							<input type="hidden" name="adress1" value="${choice.adress1}">
-							<input type="hidden" name="caseCode" value="2"> <select
-								name="adress2">
+					<td><select name="adress1">
+							<c:forEach items="${adress1}" var="adress1">
 								<c:choose>
-									<c:when test="${adress2!=null}">
-										<c:forEach items="${adress2}" var="adress2">
-											<c:choose>
-												<c:when test="${adress2==restnt.adress2}">
-													<option selected="selected">${adress2}</option>
-												</c:when>
-												<c:otherwise>
-													<option>${adress2}</option>
-												</c:otherwise>
-											</c:choose>
-										</c:forEach>
+									<c:when test="${adress1==restnt.adress1}">
+										<option selected="selected">${adress1}</option>
 									</c:when>
 									<c:otherwise>
-										<option selected="selected">시/도를 선택하세요</option>
+										<option>${adress1}</option>
 									</c:otherwise>
 								</c:choose>
-							</select> <input type="submit" value="적용">
-						</form></td>
+							</c:forEach>
+					</select> <input type="submit" value="적용"></td>
+				</tr>
+				<tr>
+					<th>주소2</th>
+					<td><select name="adress2">
+							<c:choose>
+								<c:when test="${adress2!=null}">
+									<c:forEach items="${adress2}" var="adress2">
+										<c:choose>
+											<c:when test="${adress2==restnt.adress2}">
+												<option selected="selected">${adress2}</option>
+											</c:when>
+											<c:otherwise>
+												<option>${adress2}</option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<option selected="selected">시/도를 선택하세요</option>
+								</c:otherwise>
+							</c:choose>
+					</select> <input type="submit" value="적용"></td>
 				</tr>
 				<tr>
 					<th>주소3</th>
-					<td><form action="restntManantProc.do" method="post">
-						<input type="hidden" name="adress1" value="${choice.adress1}">
-						<input type="hidden" name="adress2" value="${choice.adress2}">
-						<input type="hidden" name="caseCode" value="3"> <select
-							name="adress3">
+					<td><select name="adress3">
 							<c:choose>
 								<c:when test="${adress3!=null}">
 									<c:forEach items="${adress3}" var="adress3">
@@ -195,9 +171,7 @@
 									<option selected="selected">시/군/구 를 선택하세요</option>
 								</c:otherwise>
 							</c:choose>
-						</select> <input type="submit" value="적용">
-					</form></td>
-
+					</select> <input type="submit" value="적용"></td>
 				</tr>
 				<tr>
 					<th>주소4</th>
@@ -247,7 +221,7 @@
 				</tr>
 
 				<c:choose>
-					<c:when test="${restnt!=null}">
+					<c:when test="${restnt.restntId!=null}">
 						<tr>
 							<td><input type="button" value="추가" id="addFormBtn"></td>
 							<td><input type="button" value="수정" id="modBtn"></td>
@@ -266,6 +240,26 @@
 
 		</table>
 	</form>
+	<form action="">
+		<table border="2">
+			<caption>메뉴 정보</caption>
+			<tr>
+				<th>메뉴 이름</th>
+				<th>가격</th>
+				<th>칼로리</th>
+				<th>특이사항</th>
+			</tr>
+			<c:forEach items="${menus}" var="menu">
+				<tr>
+					<td>${menu.menuName}</td>
+					<td>${menu.menuPrice}</td>
+					<td>${menu.menuCalorie}</td>
+					<td>${menu.menuNote}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</form>
+
 
 
 </body>
