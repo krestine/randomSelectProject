@@ -11,6 +11,12 @@ public class EvaluateDTO {
 	private String evalDate;
 	private String restntName;
 
+	public String getMateId() {
+		return mateId;
+	}
+	public void setMateId(String mateId) {
+		this.mateId = mateId;
+	}
 	public String getEvalId() {
 		return evalId;
 	}
@@ -61,6 +67,8 @@ public class EvaluateDTO {
 		result = prime * result
 				+ ((restntName == null) ? 0 : restntName.hashCode());
 		result = prime * result + ((score == null) ? 0 : score.hashCode());
+		result = prime * result
+				+ ((visitDate == null) ? 0 : visitDate.hashCode());
 		return result;
 	}
 	@Override
@@ -107,16 +115,19 @@ public class EvaluateDTO {
 				return false;
 		} else if (!score.equals(other.score))
 			return false;
+		if (visitDate == null) {
+			if (other.visitDate != null)
+				return false;
+		} else if (!visitDate.equals(other.visitDate))
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-
-		return "EvaluateDTO [memId=" + memId + ", restntId=" + restntId
-				+ ", visitDate=" + visitDate + ", restntName=" + restntName
-				+ ", evalId=" + evalId + ", score=" + score + ", mateId="
-				+ mateId + "]";
-
+		return "EvaluateDTO [evalId=" + evalId + ", score=" + score
+				+ ", visitDate=" + visitDate + ", mateId=" + mateId
+				+ ", memId=" + memId + ", restntId=" + restntId + ", evalDate="
+				+ evalDate + ", restntName=" + restntName + "]";
 	}
 	
 	
