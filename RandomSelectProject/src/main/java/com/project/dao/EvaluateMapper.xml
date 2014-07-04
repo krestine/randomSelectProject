@@ -73,6 +73,6 @@
  			and mm.MEMID=m.MEMID
  			and Score != -1
  	</select>
-
+ 	
 
 </mapper>

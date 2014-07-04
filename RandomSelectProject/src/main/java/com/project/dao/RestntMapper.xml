@@ -132,12 +132,12 @@
 	<!-- 회원 : 친구가 평가한 식당리스트 -->
 	<select id="getEvalRestntListByMateId" parameterType="RestntDTO"  resultType="RestntDTO">
  			select r.restntname, e.score, m.mateid
- 			from evaluate e, restnt r, mate m, member mm
- 			where mm.MEMID=#{mm.MEMID} 
- 			and e.RESTNTID= r.RESTNTID
- 			and e.MEMID = m.MATEID
- 			and mm.MEMID=m.MEMID
- 			and Score != -1
+			from restnt r, evaluate e, mate m, member mm
+			where mm.memid=#{mm.memid}
+			and r.restntid=e.restntid
+			and e.memid= m.mateid
+			and mm.memid=m.memid
+			and score != -1
  	</select>
 	
 	

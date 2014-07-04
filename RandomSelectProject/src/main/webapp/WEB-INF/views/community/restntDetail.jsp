@@ -25,25 +25,25 @@
 </head>
 <body>
 <h1>restntDetail</h1>
-
+				
+				
+					
 					<form id="community" method="POST">
 						<input type="button" onclick="restntList()" value="식당 리스트" />
 						<input type="button" onclick="mateList()" value="친구 리스트" />
 						<input type="button" onclick="main()" value="메인" />
 					</form>
 
-     	
-			
-					<form action="restntDetailProc.do" method="POST">
-						<input type="hidden" value="${restnt.restntId }" name="restntId"><br>
-						<input value="${restnt.restntName}" name="restntName"><br>
+     				<form action="restntDetailProc.do" method="POST">
+					<c:choose>
+					<c:when test ="${restnt.restntId==restnts.restntId }">
+						<input value="${restnt.restntId }" name="restntId"><br>
+						${restnt.restntName}
 						
-						<input value="${restnt.restntEval}" name="restntEval"><br>
-						<input value="${restnt.restntCate}" name="restntCate"><br>
-						<input value="${restnt.restntTel}" name="restntTel"><br>	
-						
+					</c:when>
+					</c:choose>
 					</form>
-		
+			
 	      
     
 

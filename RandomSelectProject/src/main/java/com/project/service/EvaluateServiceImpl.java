@@ -93,6 +93,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 	 		return evaluateMapper.getEvaluateListByMateId(memId);
 	 }
 
+	 
 	// //////////////////////////////////////////////////
 
 	/*// 회원: 평가한 식당목록
