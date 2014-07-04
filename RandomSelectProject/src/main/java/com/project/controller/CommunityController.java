@@ -128,12 +128,16 @@ public class CommunityController {
 	
 		@RequestMapping(value = "/restntDetailProc.do", method = RequestMethod.POST)
 		public String restntDetailProc(Model model, String restntId, HttpServletRequest request) {
+		System.out.println("/restntDetailProc.do");
+		System.out.println(restntId);
+		System.out.println("sql run");
 		restnt = restntService.getRestntInfoByRestntId(restntId);
+		System.out.println(restnt);
+		
 		model.addAttribute("restnt", restnt);
 		
 		//menuInfo = menuService.getMenuListByRestntId(restntId);
-		System.out.println(restnt);
-		System.out.println("restnt여기???");
+		
 		return "community/restntDetail";
 
 	}

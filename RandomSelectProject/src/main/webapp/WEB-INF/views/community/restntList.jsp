@@ -35,10 +35,9 @@
 						<br>
 						<input type="hidden" value="${restnt.mateId }" name="mateId">
 						<input type="hidden" value="${restnt.restntId }" name="restntId">
-						
 						<input value="${restnt.restntName}" name="restntName">
-						<input value="${restnt.score }" name="score">
-						${restnt.restntId}<input type="submit" value="상세보기">
+						<input value="${restnt.score}" name="score">
+						<input type="submit" value="상세보기">
 						
 					</form>
 						<br>

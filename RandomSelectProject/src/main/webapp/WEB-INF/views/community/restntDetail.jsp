@@ -35,13 +35,17 @@
 					</form>
 
      				<form action="restntDetailProc.do" method="POST">
-					<c:choose>
-					<c:when test ="${restnt.restntId==restnts.restntId }">
-						<input value="${restnt.restntId }" name="restntId"><br>
-						${restnt.restntName}
+					
+		
+						<input value="${restnt.restntName}" name="restntName"><br>
+						<input value="${restnt.restntEval}" name="restntEval"><br>
+						<input value="${restnt.restntCate}" name="restntCate"><br>
+						<input value="${restnt.restntTel}" name="restntTel"><br>
+
+
 						
-					</c:when>
-					</c:choose>
+						
+					
 					</form>
 			
 	      

@@ -7,7 +7,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>mateDetail</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('input[type=button]').click(function() {
+		formHanddler(this);
+	});
+	function formHanddler(obj) {
+		var objID = obj.id;
+		var actionStr;
 
+		if (objID === "mateListBtn") {
+			actionStr = "mateListProc.do";
+
+		}
+		if (objID === "mainBtn") {
+			actionStr = "main.do";
+
+		} 
+		$('#community').attr("action", actionStr).submit();
+	}
+});
+
+</script>	
 
 
 </head>
