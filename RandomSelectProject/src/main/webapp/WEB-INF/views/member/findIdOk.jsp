@@ -7,5 +7,6 @@
 <title>findIdOk.jsp</title>
 </head>
 <body>${userId}
+테스트 중
 </body>
 </html>
