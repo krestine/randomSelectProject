@@ -24,8 +24,8 @@
 
 </head>
 <body>
-<h1>restntDetail</h1>
-				
+<h1>${restnt.restntName}의 상세정보</h1>
+					
 				
 					
 					<form id="community" method="POST">
@@ -36,18 +36,29 @@
 
      				<form action="restntDetailProc.do" method="POST">
 					
-		
-						<input value="${restnt.restntName}" name="restntName"><br>
+						<input value="식당이름">
+						<input value="평균별점"><br>
+						<input value="${restnt.restntName}" name="restntName">
 						<input value="${restnt.restntEval}" name="restntEval"><br>
-						<input value="${restnt.restntCate}" name="restntCate"><br>
+						<br>
+						<input value="카테고리">
+						<input value="전화번호"><br>
+						<input value="${restnt.restntCate}" name="restntCate">
 						<input value="${restnt.restntTel}" name="restntTel"><br>
-
-
-						
-						
-					
+						<br>
+						${restnt.restntName }의 메뉴정보
+						<input value="메뉴이름">
+						<input value="가격">
+						<input value="칼로리">
+						<br>
+						<input type="hidden" value="${menuInfo.menuId}" name="menuId"><br>
+						<input type="" value="${menuInfo.menuName}" name="menuName"><br>
+						<input type="hidden" value="${menuInfo.restntId}" name="restntId"><br>
+						<input type="" value="${menuInfo.menuPrice}" name="menuPrice"><br>
+						<input type="" value="${menuInfo.menuCalorie}" name="menuCalorie"><br>
+									
 					</form>
-			
+					<br>
 	      
     
 
