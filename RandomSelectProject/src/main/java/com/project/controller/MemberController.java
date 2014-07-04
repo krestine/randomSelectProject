@@ -4,8 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.eclipse.jetty.jndi.local.localContextRoot;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +16,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dao.MemberMapper;
 import com.project.domain.MemberDTO;
+import com.project.service.MailService;
 import com.project.service.MemberService;
 
 @Controller
 public class MemberController {
+
+	@Value("#{mail['mail.urlPath']}")
+	private String urlPath;
+
+	@Autowired
+	private MailService mailService;
+
+	@Autowired
+	private JavaMailSender mailSender;
 
 	@Autowired
 	private MemberService memberService;
@@ -33,7 +44,7 @@ public class MemberController {
 		String memId = request.getParameter("memId");
 		System.out.println("memid=" + memId);
 
-		MemberDTO getId = memberService.getMemIdByMemId(memId);
+		String getId = memberService.getMemIdByMemId(memId);
 		System.out.println("getid=" + getId);
 
 		if (getId == null) {
@@ -53,14 +64,17 @@ public class MemberController {
 
 	@RequestMapping(value = "registerProc.do", method = RequestMethod.POST)
 	public String registerProc(Model model, MemberDTO memberDto) {
-		System.out.println("registerProc()");
+
 		/*
 		 * MemberDTO userId = memberService.getMyInfoByMemId(memberDto); if
 		 * (userId != null) { model.addAttribute("errmessage",
 		 * "이미 사용하고 있는 아이디입니다."); return "forward:registerForm.do"; }
 		 */
+		memberDto.setMemMobile(memberDto.getmPhoneCode() + "-"
+				+ memberDto.getmPhoneMid() + "-" + memberDto.getmPhoneEnd());
 		memberService.putMember(memberDto);
 		return "member/registerOk";
+
 	}
 
 	// 로그인
@@ -106,6 +120,7 @@ public class MemberController {
 	public String findIdProc(Model model, MemberDTO memberDto) {
 		System.out.println("findIdProc()");
 		String userId = memberService.getMemIdByMemberTerms(memberDto);
+
 		if (userId == null) {
 			model.addAttribute("errmessage", "정보를 다시 확인해주세요");
 			return "forward:findIdForm.do";
@@ -122,24 +137,48 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "findPasswordProc.do", method = RequestMethod.POST)
-	public String findPasswordProc(Model model, MemberDTO memberDto) {
+	public String findPasswordProc(Model model, MemberDTO memberDto,
+			HttpServletRequest request) {
 		System.out.println("findPasswordProc()");
 		String userPassword = memberService
 				.getMemPasswdByMemberTerms(memberDto);
+
 		if (userPassword == null) {
 			model.addAttribute("errmessage", "정보를 다시 확인해주세요");
 			return "forward:findPasswordForm.do";
 		}
-		model.addAttribute("userPassword", userPassword);
+
+		String fromUser = "6amugeona@gmail.com";
+		String toUser = (String) request.getParameter("memId");
+		String subject = "[6randomSelect] 요청하신 인증번호입니다.";
+		String CD = Math.round(Math.random() * 999999) / 1 + "";
+		String text = getEmailText(CD, toUser);
+
+		mailService.sendMail(fromUser, toUser, subject, text);
+
+		memberDto.setMemId(fromUser);
+		memberDto.setMemPasswd(userPassword);
+		memberDto.setTempPw(CD);
+		memberService.setMemberInfoByMemberTerms(memberDto);
+
+		model.addAttribute("userMail", toUser);
+		// model.addAttribute("userPassword", userPassword);
 		return "member/findPasswordOk";
+	}
+
+	protected String getEmailText(String CD, String toUser) {
+		StringBuilder text = new StringBuilder();
+		text.append("<h2>[6randomSelect] 인증번호입니다.</h2><br>");
+		text.append(CD);
+		text.append("<br><a href=" + urlPath + "loginForm.do"
+				+ ">인증번호로 로그인해주세요.</a>");
+		return text.toString();
 	}
 
 	// 내정보
 	@RequestMapping(value = "myInfoForm.do", method = RequestMethod.POST)
 	public String myInfoForm(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoForm()");
-		// MemberDTO userInfo = memberService.getMyInfoByMemId(memberDto);
-		// model.addAttribute("userInfo", userInfo);
 		return "mypage/myInfo";
 	}
 
