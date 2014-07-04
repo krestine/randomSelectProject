@@ -44,10 +44,10 @@ public class CommunityController {
 	private List<RestntDTO> restnts;
 	private MemberDTO memInfo;
 	private RestntDTO restnt;
-	private MenuDTO menuInfo;
 	private MateDTO mateInfo;
 	private List<EvaluateDTO> evaluates;
 	private EvaluateDTO evaluate;
+	private List<MenuDTO> menuInfo;
 	
 	// 회원 : 친구 리스트
 	@RequestMapping(value = "/mateListProc.do", method = RequestMethod.POST)
@@ -127,12 +127,15 @@ public class CommunityController {
 	
 	
 		@RequestMapping(value = "/restntDetailProc.do", method = RequestMethod.POST)
-		public String restntDetailProc(Model model, String restntId, String menuId, HttpServletRequest request) {
+		public String restntDetailProc(Model model, String restntId, HttpServletRequest request) {
 	
 		restnt = restntService.getRestntInfoByRestntId(restntId);
 		model.addAttribute("restnt", restnt);
-		menuInfo = (MenuDTO) menuService.getMenuListByRestntId(restntId);
+		
+		menuInfo = menuService.getMenuListByRestntId(restntId);
 		model.addAttribute("menuInfo", menuInfo);
+		System.out.println("menuInfo");
+		System.out.println(menuInfo);
 		
 		return "community/restntDetail";
 
