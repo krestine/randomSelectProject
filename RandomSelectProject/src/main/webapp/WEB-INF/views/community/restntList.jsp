@@ -5,15 +5,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript">
-	function mateList() {
-		document.getElementById("community").action = "mateListProc.do";
-		document.getElementById("community").submit();
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('input[type=button]').click(function() {
+		formHanddler(this);
+	});
+	function formHanddler(obj) {
+		var objID = obj.id;
+		var actionStr;
+
+		if (objID === "mateListBtn") {
+			actionStr = "mateListProc.do";
+		}
+		if (objID === "mainBtn") {
+			actionStr = "main.do";
+		} 
+		$('#community').attr("action", actionStr).submit();
 	}
-	function main() {
-		document.getElementById("community").action = "main.do";
-		document.getElementById("community").submit();
-	}
+});
+
 </script>
 <title>식당리스트</title>
 </head>
@@ -22,8 +33,8 @@
 <body>
 	<form id="community" method="POST">
 
-		<input type="button" onclick="mateList()" value="친구 리스트" /> 
-		<input type="button" onclick="main()" value="메인" />
+		<input type="button" value="친구 리스트" id="mateListBtn"/> 
+		<input type="button" value="메인" id="mainBtn" />
 	</form>
 	<br>
 	<c:forEach var="restnt" items="${restnts}">
@@ -39,7 +50,7 @@
 						<input value="${restnt.score}" name="score">
 						<input type="submit" value="상세보기">
 						
-					</form>
+						</form>
 						<br>
 		</c:forEach>
 	

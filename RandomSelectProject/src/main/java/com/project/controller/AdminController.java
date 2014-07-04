@@ -472,7 +472,7 @@ public class AdminController {
 
 		JSONArray jsonArray = JSONArray.fromObject(restnts);
 
-		System.out.println("mybeanList - " + jsonArray);
+		System.out.println("restnts - " + jsonArray);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("restnts", jsonArray);
