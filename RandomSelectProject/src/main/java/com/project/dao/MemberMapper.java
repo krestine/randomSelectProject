@@ -9,6 +9,9 @@ public interface MemberMapper {
 	// 공통:회원가입
 	void putMember(MemberDTO memberDto);
 
+	// 아이디체크 ajax
+	MemberDTO getMemIdByMemId(String memId);
+
 	// 회원:로그인
 	MemberDTO getMemberInfoByMemberTerms(MemberDTO memberDto);
 
@@ -52,9 +55,8 @@ public interface MemberMapper {
 
 	// 관리자 : 회원 정보 수정
 	void setMemberInfo(MemberDTO memberDto);
-	
-	//회원 : 설정 정보 불러오기 /
+
+	// 회원 : 설정 정보 불러오기 /
 	MemberDTO getOptionInfoByMemId(String memId);
-	
-	
+
 }

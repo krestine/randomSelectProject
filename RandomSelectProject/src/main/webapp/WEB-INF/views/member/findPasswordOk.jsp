@@ -7,7 +7,7 @@
 <title>findPasswordOk.jsp</title>
 </head>
 <body>
-	${userMail}·Î ÀÎÁõ¹øÈ£°¡ ¹ß¼ÛµÇ¾ú½À´Ï´Ù.
-	<br> ÀÎÁõ¹øÈ£·Î ·Î±×ÀÎÇØÁÖ¼¼¿ä.
+	${userMail}ë¡œ ì¸ì¦ë©”ì¼ì´ ë°œì†¡ë˜ì—ˆìŠµë‹ˆë‹¤.
+	<br> ë¡œê·¸ì¸í•´ì£¼ì„¸ìš”.
 </body>
 </html>
