@@ -6,13 +6,129 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>식당 관리</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+						$('#restntInfo').hide();
+						$('#adress1')
+								.click(
+										function() {
+											$('#restntInfo').hide();
+											$
+													.ajax({
+														cache : false,
+														async : false,
+														type : 'POST',
+														url : 'ajaxAdress2.do',
+														data : ('adress1=' + $(
+																'#adress1')
+																.val()),
+														dataType : 'json',
+														error : function() {
+															alert("에러 : 데이터가 안넘어갑니다.");
+														},
+														success : function(json) {
+															$('#adress2')
+																	.empty();
+															for (var idx = 0; idx < json.adress2.length; idx++) {
+																var adress2 = json.adress2[idx];
+																$('#adress2')
+																		.append(
+																				'<option value="'+adress2+'">'
+																						+ adress2
+																						+ '</option>');
+															}
 
+														}
+													});
+
+										});
+						$('#adress2')
+								.click(
+										function() {
+											var paramData = {
+												adress1 : $('#adress1').val(),
+												adress2 : $('#adress2').val()
+											};
+											$
+													.ajax({
+														cache : false,
+														async : false,
+														type : 'POST',
+														url : 'ajaxAdress3.do',
+														data : paramData,
+														dataType : 'json',
+														error : function() {
+															alert("에러 : 데이터가 안넘어갑니다.");
+														},
+														success : function(json) {
+															$('#adress3')
+																	.empty();
+															for (var idx = 0; idx < json.adress3.length; idx++) {
+																var adress3 = json.adress3[idx];
+																$('#adress3')
+																		.append(
+																				'<option value="'+adress3+'">'
+																						+ adress3
+																						+ '</option>');
+															}
+
+														}
+													});
+
+										});
+						$('#adress3').click(function() {
+							$('#restntInfo').show();
+							var paramData = {
+								adress1 : $('#adress1').val(),
+								adress2 : $('#adress2').val(),
+								adress3 : $('#adress3').val()
+							};
+							$.ajax({
+								cache : false,
+								async : false,
+								type : 'POST',
+								url : 'ajaxRestntList.do',
+								data : paramData,
+								dataType : 'json',
+								error : function() {
+									alert("에러 : 데이터가 안넘어갑니다.");
+								},
+								success : function(json) {
+									alert("통신 성공");
+									var restnts = json.restnts;
+									alert("restnts"+restnts);
+									var restntInfo = restnts[0].RestntDTO;
+									alert("restntInfo"+restntInfo);
+									var restntName = restntInfo.restntName;
+									alert("restntName"+restntName);
+									/* $.each(restnts, function(key){
+										var restntId = restnts[key].restntId;
+										var restntName = restnts[key].restntName;
+										$('#restntInfoResult').append('<tr>'+'<input type="hidden" value="'+restntId+'"name="restntId">'+'<input type="text" value="'+restntName+'"name="restntId">' + '</tr>');
+									}); */
+									
+									/* for (var idx = 0; idx < json.restnts.length; idx++) {
+									var restntName = json.adress3[idx];
+									$('#adress3').append(
+									'<option value="'+adress3+'">'+ adress3+'</option>');
+									} */
+
+								}
+							});
+							
+						});
+
+					});
+</script>
 
 </head>
 <body>
 
 	<br>
-	<table border="2">
+	<%-- <table border="2">
 		<caption>식당 필터</caption>
 		<thead>
 
@@ -139,9 +255,37 @@
 			</c:choose>
 
 		</tbody>
-	</table>
+	</table> --%>
+
+	<select id="adress1">
+		<c:forEach items="${adress1}" var="adress1">
+
+			<option value="${adress1}">${adress1}</option>
+
+		</c:forEach>
+	</select>
 
 
 
+	<select id="adress2">
+		<option>시/도 를 선택하세요</option>
+	</select>
+
+	<select id="adress3">
+		<option>시/군/구를 선택하세요</option>
+	</select>
+
+	<div id="restntInfo">
+		보이냐?
+		<table border="2">
+			<caption>식당 검색 결과</caption>
+
+			<tbody id="restntInfoResult">
+				
+				
+			</tbody>
+		</table>
+
+	</div>
 </body>
 </html>

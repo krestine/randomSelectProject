@@ -31,12 +31,15 @@ public interface RestntService {
 	List<RestntDTO> getRestntListByAddr(SettingDTO settingDto);
 	
 	// 회원 : 식당 상세정보
-	RestntDTO getRestntInfoByName(RestntDTO restntDto);
+	RestntDTO getRestntInfoByRestntId(String restntId);
 
 	// 식당 추가 : id 지정 로직에 필요: 해당 지역의 마지막으로 등록된 식당의 아이디 값 가져오기
 	String getLastRestntId(RestntDTO restntDto);
 	
 	//식당 추가 : id 지정 로직에 필요: 해당 지역의 지역 코드 불러오기
 	String getAdressCode(RestntDTO restntDto);
-
+	
+	// 회원 : 친구가 평가한 식당 리스트
+	List<RestntDTO> getEvalRestntListByMateId(String memId);
+	
 }

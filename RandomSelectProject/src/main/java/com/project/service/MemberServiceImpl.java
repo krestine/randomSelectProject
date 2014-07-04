@@ -21,6 +21,11 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.putMember(memberDto);
 	}
 
+	// 아이디체크 ajax
+	public String getMemIdByMemId(String memId) {
+		return memberMapper.getMemIdByMemId(memId);
+	}
+
 	// 회원:로그인
 	@Override
 	public MemberDTO getMemberInfoByMemberTerms(MemberDTO memberDto) {

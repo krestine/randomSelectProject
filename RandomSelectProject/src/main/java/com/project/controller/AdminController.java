@@ -1,7 +1,16 @@
 package com.project.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -397,10 +406,82 @@ public class AdminController {
 		}
 
 	}
-	@RequestMapping(value = "/jsonTest.do")
-	@ResponseBody Map<?, ?> jsonTest(@RequestParam Map <String, Object> pramMap, ModelMap model){
-		model.put("restnts", restntService.getRestntList());
-		return model;
-		
+
+	@RequestMapping(value = "/ajaxAdress2.do")
+	public void ajaxAdress2(HttpServletRequest request,
+			HttpServletResponse response, SettingDTO settingDto)
+			throws IOException {
+		String adress1 = request.getParameter("adress1");
+		System.out.println(adress1);
+
+		settingDto.setAdress1(adress1);
+		System.out.println(settingDto);
+		adress2 = settingService.getAdress2(settingDto);
+		System.out.println(adress2);
+
+		JSONObject json = new JSONObject();
+		json.put("adress2", adress2);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		System.out.println(json.toString());
+		out.print(json.toString());
+	}
+
+	@RequestMapping(value = "/ajaxAdress3.do")
+	public void ajaxAdress3(HttpServletRequest request,
+			HttpServletResponse response, SettingDTO settingDto)
+			throws IOException {
+		System.out.println("/ajaxAdress3.do");
+		String adress1 = request.getParameter("adress1");
+		String adress2 = request.getParameter("adress2");
+		System.out.println(adress1);
+		System.out.println(adress2);
+
+		settingDto.setAdress1(adress1);
+		settingDto.setAdress2(adress2);
+		System.out.println(settingDto);
+		adress3 = settingService.getAdress3(settingDto);
+		System.out.println(adress3);
+
+		JSONObject json = new JSONObject();
+		json.put("adress3", adress3);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		System.out.println(json.toString());
+		out.print(json.toString());
+	}
+
+	@RequestMapping(value = "/ajaxRestntList.do")
+	public void ajaxRestntList(HttpServletRequest request,
+			HttpServletResponse response, SettingDTO settingDto)
+			throws IOException {
+		System.out.println("/ajaxRestntList.do");
+		String adress1 = request.getParameter("adress1");
+		String adress2 = request.getParameter("adress2");
+		String adress3 = request.getParameter("adress3");
+		System.out.println(adress1);
+		System.out.println(adress2);
+		System.out.println(adress3);
+		settingDto.setAdress1(adress1);
+		settingDto.setAdress2(adress2);
+		settingDto.setAdress3(adress3);
+		System.out.println(settingDto);
+
+		restnts = restntService.getRestntListByAddr(settingDto);
+		System.out.println(restnts);
+
+		JSONArray jsonArray = JSONArray.fromObject(restnts);
+
+		System.out.println("mybeanList - " + jsonArray);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("restnts", jsonArray);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
 	}
 }

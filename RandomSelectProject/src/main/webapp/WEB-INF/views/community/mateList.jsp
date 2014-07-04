@@ -29,28 +29,22 @@
 	<br>
 	<c:forEach var="mate" items="${mates}">
 		<br>
-		<div>
-			<table align="center" border="0" cellpadding="0" cellspacing="0"
-				bgcolor="white">
-				<tr>
+		
+				
+					
 					<form action="mateDetailProc.do" method="post">
+				
 						<input type="hidden" value="${mate.memId}" name="memId">
 						<input type="hidden" value="${mate.mateId}" name="mateId">
 						<input type="hidden" value="${mate.mateId}" name="param">
-						${mate.mateId}<input type="submit" value="보기">
+						<input value="${mate.memName}" name="memName">
+						<input value="${mate.mateId}" name="mateId">
+						
+						<input type="submit" value="상세보기">
+					
 					</form>
-				</tr>
-			</table>
-		</div>
-		<br>
-		<hr>
+					
 	</c:forEach>
-
-
-
 	
-
-
 </body>
-
 </html>

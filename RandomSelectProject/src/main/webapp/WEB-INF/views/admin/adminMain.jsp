@@ -17,6 +17,8 @@
 		document.getElementById("GoSelect").submit();
 	}
 </script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자</title>
 </head>
@@ -26,5 +28,6 @@
 		<input type="button" value="회원관리" onclick="memberGo()"> <input
 			type="button" value="식당관리" onclick="restntGo()">
 	</form>
+
 </body>
 </html>

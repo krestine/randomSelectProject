@@ -12,9 +12,70 @@ public class RestntDTO {
 	private String restntTel;
 	private String restntCate;
 	private String restntEval;
+	private String menuName;
+	private String menuPrice;
+	private String menuCalorie;
+	private String evalId;
+	private String score;
+	private String memId;
+	private String mateId;
+
 	
-	private String latitude;
-	private String longitude;
+	public String getMateId() {
+		return mateId;
+	}
+
+	public void setMateId(String mateId) {
+		this.mateId = mateId;
+	}
+
+	public String getEvalId() {
+		return evalId;
+	}
+
+	public void setEvalId(String evalId) {
+		this.evalId = evalId;
+	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+
+	public String getMemId() {
+		return memId;
+	}
+
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+
+	public String getMenuName() {
+		return menuName;
+	}
+
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+
+	public String getMenuPrice() {
+		return menuPrice;
+	}
+
+	public void setMenuPrice(String menuPrice) {
+		this.menuPrice = menuPrice;
+	}
+
+	public String getMenuCalorie() {
+		return menuCalorie;
+	}
+
+	public void setMenuCalorie(String menuCalorie) {
+		this.menuCalorie = menuCalorie;
+	}
 
 	public String getRestntId() {
 		return restntId;
@@ -122,10 +183,15 @@ public class RestntDTO {
 		result = prime * result + ((adress2 == null) ? 0 : adress2.hashCode());
 		result = prime * result + ((adress3 == null) ? 0 : adress3.hashCode());
 		result = prime * result + ((adress4 == null) ? 0 : adress4.hashCode());
+		result = prime * result + ((evalId == null) ? 0 : evalId.hashCode());
+		result = prime * result + ((mateId == null) ? 0 : mateId.hashCode());
+		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
 		result = prime * result
-				+ ((latitude == null) ? 0 : latitude.hashCode());
+				+ ((menuCalorie == null) ? 0 : menuCalorie.hashCode());
 		result = prime * result
-				+ ((longitude == null) ? 0 : longitude.hashCode());
+				+ ((menuName == null) ? 0 : menuName.hashCode());
+		result = prime * result
+				+ ((menuPrice == null) ? 0 : menuPrice.hashCode());
 		result = prime * result
 				+ ((restntCate == null) ? 0 : restntCate.hashCode());
 		result = prime * result
@@ -136,6 +202,7 @@ public class RestntDTO {
 				+ ((restntName == null) ? 0 : restntName.hashCode());
 		result = prime * result
 				+ ((restntTel == null) ? 0 : restntTel.hashCode());
+		result = prime * result + ((score == null) ? 0 : score.hashCode());
 		return result;
 	}
 
@@ -168,15 +235,35 @@ public class RestntDTO {
 				return false;
 		} else if (!adress4.equals(other.adress4))
 			return false;
-		if (latitude == null) {
-			if (other.latitude != null)
+		if (evalId == null) {
+			if (other.evalId != null)
 				return false;
-		} else if (!latitude.equals(other.latitude))
+		} else if (!evalId.equals(other.evalId))
 			return false;
-		if (longitude == null) {
-			if (other.longitude != null)
+		if (mateId == null) {
+			if (other.mateId != null)
 				return false;
-		} else if (!longitude.equals(other.longitude))
+		} else if (!mateId.equals(other.mateId))
+			return false;
+		if (memId == null) {
+			if (other.memId != null)
+				return false;
+		} else if (!memId.equals(other.memId))
+			return false;
+		if (menuCalorie == null) {
+			if (other.menuCalorie != null)
+				return false;
+		} else if (!menuCalorie.equals(other.menuCalorie))
+			return false;
+		if (menuName == null) {
+			if (other.menuName != null)
+				return false;
+		} else if (!menuName.equals(other.menuName))
+			return false;
+		if (menuPrice == null) {
+			if (other.menuPrice != null)
+				return false;
+		} else if (!menuPrice.equals(other.menuPrice))
 			return false;
 		if (restntCate == null) {
 			if (other.restntCate != null)
@@ -203,7 +290,24 @@ public class RestntDTO {
 				return false;
 		} else if (!restntTel.equals(other.restntTel))
 			return false;
+		if (score == null) {
+			if (other.score != null)
+				return false;
+		} else if (!score.equals(other.score))
+			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "RestntDTO [restntId=" + restntId + ", restntName=" + restntName
+				+ ", adress1=" + adress1 + ", adress2=" + adress2
+				+ ", adress3=" + adress3 + ", adress4=" + adress4
+				+ ", restntTel=" + restntTel + ", restntCate=" + restntCate
+				+ ", restntEval=" + restntEval + ", menuName=" + menuName
+				+ ", menuPrice=" + menuPrice + ", menuCalorie=" + menuCalorie
+				+ ", evalId=" + evalId + ", score=" + score + ", memId="
+				+ memId + ", mateId=" + mateId + "]";
 	}
 
 }
