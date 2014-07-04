@@ -37,8 +37,9 @@
 						<input type="hidden" value="${mate.memId}" name="memId">
 						<input type="hidden" value="${mate.mateId}" name="mateId">
 						<input type="hidden" value="${mate.mateId}" name="param">
-						${mate.memName}
-						${mate.mateId}
+						<input value="${mate.memName}" name="memName">
+						<input value="${mate.mateId}" name="mateId">
+						
 						<input type="submit" value="상세보기">
 					
 					</form>

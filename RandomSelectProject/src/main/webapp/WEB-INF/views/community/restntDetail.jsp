@@ -46,17 +46,20 @@
 						<input value="${restnt.restntCate}" name="restntCate">
 						<input value="${restnt.restntTel}" name="restntTel"><br>
 						<br>
+						
 						${restnt.restntName }의 메뉴정보
 						<br>
+						
 						<input value="메뉴이름">
 						<input value="가격">
 						<input value="칼로리">
 						<br>
+						<c:forEach items="${menuInfo }" var="menuInfo">
 						<input type="hidden" value="${menuInfo.menuId}" name="menuId">
-						<input value="${menuInfo.menuName}" name="menuName"><br>
-						<input value="${menuInfo.menuPrice}" name="menuPrice"><br>
+						<input value="${menuInfo.menuName}" name="menuName">
+						<input value="${menuInfo.menuPrice}" name="menuPrice">
 						<input value="${menuInfo.menuCalorie}" name="menuCalorie"><br>
-						
+						</c:forEach>
 					</form>
 					<br>
 	      

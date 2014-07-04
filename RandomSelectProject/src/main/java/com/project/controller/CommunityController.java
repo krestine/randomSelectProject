@@ -37,7 +37,7 @@ public class CommunityController {
 	@Autowired
 	private EvaluateService evaluateService;
 	
-	
+		
 	private MemberDTO loginUser;
 	private MateDTO mate;
 	private List<MateDTO> mates;
