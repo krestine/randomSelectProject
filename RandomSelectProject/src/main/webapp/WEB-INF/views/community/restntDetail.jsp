@@ -47,16 +47,16 @@
 						<input value="${restnt.restntTel}" name="restntTel"><br>
 						<br>
 						${restnt.restntName }의 메뉴정보
+						<br>
 						<input value="메뉴이름">
 						<input value="가격">
 						<input value="칼로리">
 						<br>
-						<input type="hidden" value="${menuInfo.menuId}" name="menuId"><br>
-						<input type="" value="${menuInfo.menuName}" name="menuName"><br>
-						<input type="hidden" value="${menuInfo.restntId}" name="restntId"><br>
-						<input type="" value="${menuInfo.menuPrice}" name="menuPrice"><br>
-						<input type="" value="${menuInfo.menuCalorie}" name="menuCalorie"><br>
-									
+						<input type="hidden" value="${menuInfo.menuId}" name="menuId">
+						<input value="${menuInfo.menuName}" name="menuName"><br>
+						<input value="${menuInfo.menuPrice}" name="menuPrice"><br>
+						<input value="${menuInfo.menuCalorie}" name="menuCalorie"><br>
+						
 					</form>
 					<br>
 	      
