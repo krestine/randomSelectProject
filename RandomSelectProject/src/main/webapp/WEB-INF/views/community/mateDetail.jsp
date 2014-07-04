@@ -45,21 +45,20 @@ $(document).ready(function() {
 			<input value="친구이름">
 			<input value="친구아이디">
 			<input value="친구등급"><br>
+			
 			<input value="${mateInfo.memName }" name="memName">
 			<input value="${mateInfo.memId}" name="memId">
 			<input value="${mateInfo.memGrade}" name="memGrade"><br>
+			
+			
 			<br>
 			<input value="공유상태">
 			<input value="친구관계"><br>	
-			<input value="${mate.infoStatus}" name="infoStatus">
-						
+			<input value="${mate.infoStatus}" name="infoStatus">			
 			<input value="${mate.mateStatus}" name="mateStatus">
 					
 		</form>
-					<br>
-
-
-	
+					<br>	
 
 </body>
 </html>

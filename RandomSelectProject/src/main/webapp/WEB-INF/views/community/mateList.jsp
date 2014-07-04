@@ -6,25 +6,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript">
 
-	
-	function restntList() {
-		document.getElementById("community").action = "restntListProc.do";
-		document.getElementById("community").submit();
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('input[type=button]').click(function() {
+		formHanddler(this);
+	});
+	function formHanddler(obj) {
+		var objID = obj.id;
+		var actionStr;
+
+		if (objID === "restntListBtn") {
+			actionStr = "restntListProc.do";
+
+		}
+		if (objID === "mainBtn") {
+			actionStr = "main.do";
+
+		} 
+		$('#community').attr("action", actionStr).submit();
 	}
-	function main() {
-		document.getElementById("community").action = "main.do";
-		document.getElementById("community").submit();
-	}
+});
+
 </script>
 <title>mateList</title>
 </head>
 <body>
 	<h1>친구리스트</h1>
 	<form id="community" method="POST">
-		 <input type="button" onclick="restntList()" value="식당 리스트" /> 
-		 <input type="button" onclick="main()" value="메인" />
+		 <input type="button" value="식당 리스트" id="restntListBtn"/> 
+		 <input type="button" value="메인" id="mainBtn"/>
 	</form>
 	<br>
 	<c:forEach var="mate" items="${mates}">
@@ -35,8 +47,8 @@
 					<form action="mateDetailProc.do" method="post">
 				
 						<input type="hidden" value="${mate.memId}" name="memId">
-						<input type="hidden" value="${mate.mateId}" name="mateId">
-						<input type="hidden" value="${mate.mateId}" name="param">
+					
+				
 						<input value="${mate.memName}" name="memName">
 						<input value="${mate.mateId}" name="mateId">
 						
