@@ -33,14 +33,16 @@
 
 		});
 		$('#adress2').click(function() {
-			
+			var paramData = {
+					adress1 : $('#adress1').val(),
+					adress2 : $('#adress2').val()
+					};
 			$.ajax({
 				cache : false,
 				async : false,
 				type : 'POST',
 				url : 'ajaxAdress3.do',
-				data : 'adress1='+ $('#adress1').val()+('adress2='+ $('#adress2').val() ,
-				
+				data :  paramData,				
 				dataType : 'json',
 				error : function() {
 				alert("에러 : 데이터가 안넘어갑니다.");
@@ -208,7 +210,7 @@
 		<option>시/도 를 선택하세요</option>
 	</select>
 
-	<select id="adress2">
+	<select id="adress3">
 		<option>시/군/구를 선택하세요</option>
 	</select>
 

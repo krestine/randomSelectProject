@@ -93,7 +93,8 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-<!-- json --><beans:bean id="jsonView"
+	<!-- json -->
+	<beans:bean id="jsonView"
 		class="net.sf.json.spring.web.servlet.view.JsonView">
 		<beans:property name="contentType" value="application/json;charset=UTF-8"></beans:property>
 	</beans:bean>
