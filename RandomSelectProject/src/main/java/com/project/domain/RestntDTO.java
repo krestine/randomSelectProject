@@ -19,166 +19,136 @@ public class RestntDTO {
 	private String score;
 	private String memId;
 	private String mateId;
-
-	
-	public String getMateId() {
-		return mateId;
-	}
-
-	public void setMateId(String mateId) {
-		this.mateId = mateId;
-	}
-
-	public String getEvalId() {
-		return evalId;
-	}
-
-	public void setEvalId(String evalId) {
-		this.evalId = evalId;
-	}
-
-	public String getScore() {
-		return score;
-	}
-
-	public void setScore(String score) {
-		this.score = score;
-	}
-
-	public String getMemId() {
-		return memId;
-	}
-
-	public void setMemId(String memId) {
-		this.memId = memId;
-	}
-
-	public String getMenuName() {
-		return menuName;
-	}
-
-	public void setMenuName(String menuName) {
-		this.menuName = menuName;
-	}
-
-	public String getMenuPrice() {
-		return menuPrice;
-	}
-
-	public void setMenuPrice(String menuPrice) {
-		this.menuPrice = menuPrice;
-	}
-
-	public String getMenuCalorie() {
-		return menuCalorie;
-	}
-
-	public void setMenuCalorie(String menuCalorie) {
-		this.menuCalorie = menuCalorie;
-	}
-
+	private String Latitude;
+	private String Longitude;
 	public String getRestntId() {
 		return restntId;
 	}
-
 	public void setRestntId(String restntId) {
 		this.restntId = restntId;
 	}
-
 	public String getRestntName() {
 		return restntName;
 	}
-
 	public void setRestntName(String restntName) {
 		this.restntName = restntName;
 	}
-
 	public String getAdress1() {
 		return adress1;
 	}
-
 	public void setAdress1(String adress1) {
 		this.adress1 = adress1;
 	}
-
 	public String getAdress2() {
 		return adress2;
 	}
-
 	public void setAdress2(String adress2) {
 		this.adress2 = adress2;
 	}
-
 	public String getAdress3() {
 		return adress3;
 	}
-
 	public void setAdress3(String adress3) {
 		this.adress3 = adress3;
 	}
-
 	public String getAdress4() {
 		return adress4;
 	}
-
 	public void setAdress4(String adress4) {
 		this.adress4 = adress4;
 	}
-
 	public String getRestntTel() {
 		return restntTel;
 	}
-
 	public void setRestntTel(String restntTel) {
 		this.restntTel = restntTel;
 	}
-
 	public String getRestntCate() {
 		return restntCate;
 	}
-
 	public void setRestntCate(String restntCate) {
 		this.restntCate = restntCate;
 	}
-
 	public String getRestntEval() {
 		return restntEval;
 	}
-
 	public void setRestntEval(String restntEval) {
 		this.restntEval = restntEval;
 	}
-
+	public String getMenuName() {
+		return menuName;
+	}
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+	public String getMenuPrice() {
+		return menuPrice;
+	}
+	public void setMenuPrice(String menuPrice) {
+		this.menuPrice = menuPrice;
+	}
+	public String getMenuCalorie() {
+		return menuCalorie;
+	}
+	public void setMenuCalorie(String menuCalorie) {
+		this.menuCalorie = menuCalorie;
+	}
+	public String getEvalId() {
+		return evalId;
+	}
+	public void setEvalId(String evalId) {
+		this.evalId = evalId;
+	}
+	public String getScore() {
+		return score;
+	}
+	public void setScore(String score) {
+		this.score = score;
+	}
+	public String getMemId() {
+		return memId;
+	}
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+	public String getMateId() {
+		return mateId;
+	}
+	public void setMateId(String mateId) {
+		this.mateId = mateId;
+	}
 	public String getLatitude() {
-		return latitude;
+		return Latitude;
 	}
-
 	public void setLatitude(String latitude) {
-		this.latitude = latitude;
+		Latitude = latitude;
 	}
-
 	public String getLongitude() {
-		return longitude;
+		return Longitude;
 	}
-
 	public void setLongitude(String longitude) {
-		this.longitude = longitude;
+		Longitude = longitude;
 	}
-
 	@Override
 	public String toString() {
 		return "RestntDTO [restntId=" + restntId + ", restntName=" + restntName
 				+ ", adress1=" + adress1 + ", adress2=" + adress2
 				+ ", adress3=" + adress3 + ", adress4=" + adress4
 				+ ", restntTel=" + restntTel + ", restntCate=" + restntCate
-				+ ", restntEval=" + restntEval + ", latitude=" + latitude
-				+ ", longitude=" + longitude + "]";
+				+ ", restntEval=" + restntEval + ", menuName=" + menuName
+				+ ", menuPrice=" + menuPrice + ", menuCalorie=" + menuCalorie
+				+ ", evalId=" + evalId + ", score=" + score + ", memId="
+				+ memId + ", mateId=" + mateId + ", Latitude=" + Latitude
+				+ ", Longitude=" + Longitude + "]";
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((Latitude == null) ? 0 : Latitude.hashCode());
+		result = prime * result
+				+ ((Longitude == null) ? 0 : Longitude.hashCode());
 		result = prime * result + ((adress1 == null) ? 0 : adress1.hashCode());
 		result = prime * result + ((adress2 == null) ? 0 : adress2.hashCode());
 		result = prime * result + ((adress3 == null) ? 0 : adress3.hashCode());
@@ -205,7 +175,6 @@ public class RestntDTO {
 		result = prime * result + ((score == null) ? 0 : score.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -215,6 +184,16 @@ public class RestntDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		RestntDTO other = (RestntDTO) obj;
+		if (Latitude == null) {
+			if (other.Latitude != null)
+				return false;
+		} else if (!Latitude.equals(other.Latitude))
+			return false;
+		if (Longitude == null) {
+			if (other.Longitude != null)
+				return false;
+		} else if (!Longitude.equals(other.Longitude))
+			return false;
 		if (adress1 == null) {
 			if (other.adress1 != null)
 				return false;
@@ -297,17 +276,7 @@ public class RestntDTO {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "RestntDTO [restntId=" + restntId + ", restntName=" + restntName
-				+ ", adress1=" + adress1 + ", adress2=" + adress2
-				+ ", adress3=" + adress3 + ", adress4=" + adress4
-				+ ", restntTel=" + restntTel + ", restntCate=" + restntCate
-				+ ", restntEval=" + restntEval + ", menuName=" + menuName
-				+ ", menuPrice=" + menuPrice + ", menuCalorie=" + menuCalorie
-				+ ", evalId=" + evalId + ", score=" + score + ", memId="
-				+ memId + ", mateId=" + mateId + "]";
-	}
+	
+	
 
 }
