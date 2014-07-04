@@ -10,7 +10,7 @@ public interface MemberService {
 	void putMember(MemberDTO memberDto);
 
 	// 아이디체크 ajax
-	MemberDTO getMemIdByMemId(String memId);
+	String getMemIdByMemId(String memId);
 
 	// 회원:로그인
 	MemberDTO getMemberInfoByMemberTerms(MemberDTO memberDto);

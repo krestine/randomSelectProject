@@ -37,17 +37,17 @@ public class CommunityController {
 	@Autowired
 	private EvaluateService evaluateService;
 	
-	
+		
 	private MemberDTO loginUser;
 	private MateDTO mate;
 	private List<MateDTO> mates;
 	private List<RestntDTO> restnts;
 	private MemberDTO memInfo;
 	private RestntDTO restnt;
-	private MenuDTO menuInfo;
 	private MateDTO mateInfo;
 	private List<EvaluateDTO> evaluates;
 	private EvaluateDTO evaluate;
+	private List<MenuDTO> menuInfo;
 	
 	// 회원 : 친구 리스트
 	@RequestMapping(value = "/mateListProc.do", method = RequestMethod.POST)
@@ -98,12 +98,22 @@ public class CommunityController {
 	
 	
 
-	// 회원 : 식당 리스트
+	// 회원 : 친구들이 평가한 식당 리스트
+	
+	@RequestMapping(value =  "/restntListProc.do", method = RequestMethod.POST)
+	public String restntListProc(Model model, String memId, HttpServletRequest request) {
+		restnts= restntService.getEvalRestntListByMateId(loginUser.getMemId());
+		model.addAttribute("restnts", restnts);
+		System.out.println(restnts);
+		System.out.println("restnts여기?");
+		return "community/restntList";
+	}
+	
+	/*
 		@RequestMapping(value =  "/restntListProc.do", method = RequestMethod.POST)
 		public String restntListProc(Model model, String memId, HttpServletRequest request) {
-			loginUser = (MemberDTO) request.getSession().getAttribute(
-					"loginUser");
-			evaluates= evaluateService.getEvaluateListByMemId(loginUser.getMemId());
+			//loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
+			evaluates= evaluateService.getEvaluateListByMateId(loginUser.getMemId());
 			model.addAttribute("evaluates", evaluates);
 			System.out.println(evaluates);
 			System.out.println("evaluates여기?");
@@ -111,23 +121,25 @@ public class CommunityController {
 		
 		
 	}
-
-	
+	*/
 	
 	// 회원 : 식당 상세정보
-	@RequestMapping(value = "/restntDetailProc.do", method = RequestMethod.POST)
-	public String restntDetailProc(Model model, String menuId, RestntDTO restntDto) {
-		restnt = restntService.getRestntInfoByName(restntDto);
+	
+	
+		@RequestMapping(value = "/restntDetailProc.do", method = RequestMethod.POST)
+		public String restntDetailProc(Model model, String restntId, HttpServletRequest request) {
+	
+		restnt = restntService.getRestntInfoByRestntId(restntId);
 		model.addAttribute("restnt", restnt);
 		
-		menuInfo=menuService.getMenuInfoByMenuId(menuId);
+		menuInfo = menuService.getMenuListByRestntId(restntId);
 		model.addAttribute("menuInfo", menuInfo);
-		
-		System.out.println(restnt);
+		System.out.println("menuInfo");
 		System.out.println(menuInfo);
+		
 		return "community/restntDetail";
 
 	}
-
+	
 }
 

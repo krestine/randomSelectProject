@@ -5,57 +5,60 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript">
-	function mateList() {
-		document.getElementById("community").action = "mateListProc.do";
-		document.getElementById("community").submit();
-		}
-	function main(){
-		document.getElementById("community").action = "main.do";
-		document.getElementById("community").submit();
-		}
-</script>	
 <title>mateDetail</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('input[type=button]').click(function() {
+		formHanddler(this);
+	});
+	function formHanddler(obj) {
+		var objID = obj.id;
+		var actionStr;
+
+		if (objID === "mateListBtn") {
+			actionStr = "mateListProc.do";
+
+		}
+		if (objID === "mainBtn") {
+			actionStr = "main.do";
+
+		} 
+		$('#community').attr("action", actionStr).submit();
+	}
+});
+
+</script>	
+
+
 </head>
 <body>
 		<h1>${mateInfo.memName }님의 정보입니다.</h1>
 		<br>
-		<div>
-			<table align="center" border="0" cellpadding="0" cellspacing="0"
-				bgcolor="white">
-				
-				<tr>
-						
-					<form action="mateDetailProc.do" method="post">
-						<input value="친구이름">
-						<input value="친구아이디">
-						<input value="친구등급"><br>
-						<input type="" value="${mateInfo.memName }" name="memName">
-						<input type="" value="${mateInfo.memId}" name="memId">
-						<input type="" value="${mateInfo.memGrade}" name="memGrade"><br>
-						<input value="공유상태">
-						<input value="친구관계"><br>	
-						<input type="" value="${mate.infoStatus}" name="infoStatus">
-						
-						<input type="" value="${mate.mateStatus}" name="mateStatus">
-					
-					</form>
-				</tr>
-			</table>
-		</div>
+		<form id="community" method="POST">
+		<input type="button" value="친구 리스트" id="mateListBtn" />
+		<input type="button" value="메인" id="mainBtn"/>
+		</form>
 		<br>
+		
+		<form action="mateDetailProc.do" method="post">
+			<input value="친구이름">
+			<input value="친구아이디">
+			<input value="친구등급"><br>
+			<input value="${mateInfo.memName }" name="memName">
+			<input value="${mateInfo.memId}" name="memId">
+			<input value="${mateInfo.memGrade}" name="memGrade"><br>
+			<br>
+			<input value="공유상태">
+			<input value="친구관계"><br>	
+			<input value="${mate.infoStatus}" name="infoStatus">
+						
+			<input value="${mate.mateStatus}" name="mateStatus">
+					
+		</form>
+					<br>
 
-		<hr>
-	
 
-
-	
-
-
-	<form id="community" method="POST">
-	<input type="button" onclick="mateList()" value="친구 리스트" />
-	<input type="button" onclick="main()" value="메인" />
-	</form>
 	
 
 </body>
