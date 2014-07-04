@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 아이디체크 ajax
-	public MemberDTO getMemIdByMemId(String memId) {
+	public String getMemIdByMemId(String memId) {
 		return memberMapper.getMemIdByMemId(memId);
 	}
 
