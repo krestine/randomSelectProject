@@ -1,14 +1,16 @@
 package com.project.controller;
 
 import java.util.List;
-
-import net.wimpi.telnetd.io.terminal.ansi;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.domain.EvaluateDTO;
 import com.project.domain.MemberDTO;
@@ -46,6 +48,11 @@ public class AdminController {
 	private List<String> adress2;
 	private List<String> adress3;
 	private SettingDTO settingDto;
+	private StringBuffer stringBuffer;
+	private List<SettingDTO> excMenus;
+	private String lastId;
+	private String newId;
+	private String adressCode;
 
 	// 관리자 메인 페이지
 	@RequestMapping(value = "/adminMainProc.do")
@@ -181,24 +188,49 @@ public class AdminController {
 		return "admin/restntManant";
 	}
 
-	// 식당 선택 페이지 주소 필터 : 패러미터, 셀렉트 박스와 관련된 query 문 추가 해야함
-	@RequestMapping(value = "/restntSelectForm.do")
-	String restntSelectForm(Model model) {
-		return "admin/restntSelect";
-	}
+	/*
+	 * // 식당 선택 페이지 주소 필터 : 패러미터, 셀렉트 박스와 관련된 query 문 추가 해야함
+	 * 
+	 * @RequestMapping(value = "/restntSelectForm.do") String
+	 * restntSelectForm(Model model) { return "admin/restntSelect"; }
+	 */
 
-	// 주소 필터 적용-> 검색 결과 : 식당 리스트
-	@RequestMapping(value = "/restntSelectProc.do", method = RequestMethod.POST)
-	String restntSelectProc(Model model, String addressCode) {
-		restnts = restntService.getRestntListByAddressCode(addressCode);
-		model.addAttribute("restnts", restnts);
-		return "admin/restntListAdmin";
-
-	}
+	/*
+	 * // 주소 필터 적용-> 검색 결과 : 식당 리스트
+	 * 
+	 * @RequestMapping(value = "/restntSelectProc.do", method =
+	 * RequestMethod.POST) String restntSelectProc(Model model, String
+	 * addressCode) { restnts =
+	 * restntService.getRestntListByAddressCode(addressCode);
+	 * model.addAttribute("restnts", restnts); return "admin/restntListAdmin";
+	 * 
+	 * }
+	 */
 
 	// 식당 리스트에서 식당 이름 선택 -> 식당 상세 정보 표시
 	@RequestMapping(value = "/restntInfoForm.do", method = RequestMethod.POST)
-	String restntInfoForm(Model model, String restntId) {
+	String restntInfoForm(Model model, String restntId, Integer caseCode,
+			SettingDTO settingDto) {
+		System.out.println("/restntInfoForm.do");
+		System.out.println(settingDto);
+		System.out.println(restntId);
+		adress1 = settingService.getAdress1();
+		adress2 = settingService.getAdress2(settingDto);
+		adress3 = settingService.getAdress3(settingDto);
+
+		/* restnts = restntService.getRestntListByAddr(settingDto); */
+		/* System.out.println("/////////쿼리 결과 테스트//////////"); */
+
+		menus = menuService.getMenuListByRestntId(restntId);
+		model.addAttribute("menus", menus);
+
+		model.addAttribute("adress1", adress1);
+		model.addAttribute("adress2", adress2);
+		model.addAttribute("adress3", adress3);
+		/* model.addAttribute("restnts", restnts); */
+		/* model.addAttribute("code", settingDto); */
+
+		/* model.addAttribute("choice", settingDto); */
 		restnt = restntService.getRestntInfoById(restntId);
 		List<SettingDTO> excMenus = settingService.getExcMenu();
 
@@ -207,11 +239,30 @@ public class AdminController {
 		return "admin/restntInfo";
 	}
 
-	//식당 정보 추가 작성 폼
+	// 식당 정보 추가 작성 폼
 	@RequestMapping(value = "/restntInfoInsertForm.do", method = RequestMethod.POST)
-	String restntInfoInsertForm(Model model) {
+	String restntInfoInsertForm(Model model, RestntDTO restntDto,
+			Integer caseCode, SettingDTO settingDto) {
+		System.out.println("////////세팅 디티오//////////");
 
-		List<SettingDTO> excMenus = settingService.getExcMenu();
+		System.out.println(settingDto);
+		System.out.println("////레스토랑 디티오/////");
+		restntDto.setRestntId(null);
+		restntDto.setRestntCate(null);
+		restntDto.setRestntName(null);
+		restntDto.setRestntEval(null);
+		restntDto.setRestntTel(null);
+		restntDto.setAdress4(null);
+
+		adress1 = settingService.getAdress1();
+		adress2 = settingService.getAdress2(settingDto);
+		adress3 = settingService.getAdress3(settingDto);
+
+		model.addAttribute("adress1", adress1);
+		model.addAttribute("adress2", adress2);
+		model.addAttribute("adress3", adress3);
+		model.addAttribute("restnt", restntDto);
+		excMenus = settingService.getExcMenu();
 
 		model.addAttribute("excMenus", excMenus);
 		return "admin/restntInfo";
@@ -219,25 +270,59 @@ public class AdminController {
 
 	// 식당 정보 추가
 	@RequestMapping(value = "/restntInfoInsert.do", method = RequestMethod.POST)
-	String restntInfoInsert(Model model, RestntDTO restntDto) {
-		/*
-		 * restntService.putRestnt(restntDto); restnt =
-		 * restntService.getRestntInfoById(restntDto.getRestntId());
-		 * model.addAttribute("restnt", restnt);
-		 */
-		/* return "admin/restntInfo"; */
-		model.addAttribute("test", "추가");
-		return "admin/restntSelect";
+	String restntInfoInsert(Model model, RestntDTO restntDto,
+			SettingDTO settingDto) {
+		System.out.println(restntDto);
+		adressCode = restntService.getAdressCode(restntDto);
+		System.out.println(adressCode);
+		lastId = restntService.getLastRestntId(restntDto);
+		System.out.println(lastId);
+
+		newId = restntIdGen(lastId, adressCode);
+		restntDto.setRestntId(newId);
+		System.out.println(restntDto);
+		restntService.putRestnt(restntDto);
+		restnt = restntService.getRestntInfoById(restntDto.getRestntId());
+		adress1 = settingService.getAdress1();
+		adress2 = settingService.getAdress2(settingDto);
+		adress3 = settingService.getAdress3(settingDto);
+
+		model.addAttribute("adress1", adress1);
+		model.addAttribute("adress2", adress2);
+		model.addAttribute("adress3", adress3);
+		model.addAttribute("restnt", restntDto);
+		model.addAttribute("restnt", restnt);
+		excMenus = settingService.getExcMenu();
+
+		model.addAttribute("excMenus", excMenus);
+		return "admin/restntInfo";
+
 	}
 
 	// 식당 정보 수정
 	@RequestMapping(value = "/restntInfoUpdate.do", method = RequestMethod.POST)
-	String restntInfoUpdate(Model model, RestntDTO restntDto) {
+	String restntInfoUpdate(Model model, RestntDTO restntDto,
+			SettingDTO settingDto) {
+
+		System.out.println(restntDto);
 		restntService.setRestntById(restntDto);
+
 		restnt = restntService.getRestntInfoById(restntDto.getRestntId());
+
 		model.addAttribute("restnt", restnt);
+
 		model.addAttribute("test", "수정");
-		List<SettingDTO> excMenus = settingService.getExcMenu();
+
+		excMenus = settingService.getExcMenu();
+		adress1 = settingService.getAdress1();
+		adress2 = settingService.getAdress2(settingDto);
+		adress3 = settingService.getAdress3(settingDto);
+
+		model.addAttribute("adress1", adress1);
+		model.addAttribute("adress2", adress2);
+		model.addAttribute("adress3", adress3);
+		model.addAttribute("restnts", restnts);
+		model.addAttribute("code", settingDto);
 		model.addAttribute("excMenus", excMenus);
 		return "admin/restntInfo";
 	}
@@ -254,8 +339,8 @@ public class AdminController {
 
 	// 메뉴 리스트
 	@RequestMapping(value = "/menuListProc.do", method = RequestMethod.POST)
-	String menuListProc(Model model, MenuDTO menuDto) {
-		menus = menuService.getMenuListByRestntId(menuDto);
+	String menuListProc(Model model, String restntId) {
+		menus = menuService.getMenuListByRestntId(restntId);
 		model.addAttribute("menus", menus);
 		return "admin/menuList";
 	}
@@ -292,5 +377,30 @@ public class AdminController {
 	String menuInfoDelete(Model model, String menuId) {
 		menuService.dropMenuByMenuId(menuId);
 		return "admin/menuManant";
+	}
+
+	// 새 식당 등록시 아이디 생성 메소드
+	String restntIdGen(String lastId, String adressCode) {
+		if (lastId != null) {
+
+			stringBuffer = new StringBuffer(lastId);
+			String sequenceStr = stringBuffer.substring(17, 22);
+			System.out.println(sequenceStr);
+			Integer sequenceNum = Integer.parseInt(sequenceStr) + 1;
+			System.out.println(sequenceNum);
+			String sequenceFormat = String.format("%05d", sequenceNum);
+			System.out.println(sequenceFormat);
+
+			return stringBuffer.replace(17, 22, sequenceFormat).toString();
+		} else {
+			return adressCode + "," + "R00001";
+		}
+
+	}
+	@RequestMapping(value = "/jsonTest.do")
+	@ResponseBody Map<?, ?> jsonTest(@RequestParam Map <String, Object> pramMap, ModelMap model){
+		model.put("restnts", restntService.getRestntList());
+		return model;
+		
 	}
 }

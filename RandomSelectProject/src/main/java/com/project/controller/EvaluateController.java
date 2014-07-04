@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.domain.EvaluateDTO;
+import com.project.domain.MateDTO;
 import com.project.domain.MemberDTO;
 import com.project.domain.MenuDTO;
 import com.project.domain.RestntDTO;
@@ -22,11 +23,17 @@ import com.project.service.RestntService;
 
 @Controller
 public class EvaluateController {
-
+	@Autowired
+	private RestntService restntService;
+	@Autowired
+	private MemberService memberService; 
 	@Autowired
 	private EvaluateService evaluateService;
 
-	
+	private List<RestntDTO> restnts;
+	private MemberDTO memInfo;
+	private RestntDTO restnt;
+	private MenuDTO menuInfo;
 	
 	
 	private List<EvaluateDTO> memberEvaluates;
@@ -65,6 +72,7 @@ public class EvaluateController {
 		System.out.println("evaluateList()");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
+		
 		System.out.println(loginUser.toString());
 		memId = loginUser.getMemId();
 		System.out.println(memId);
@@ -73,7 +81,24 @@ public class EvaluateController {
 	System.out.println(memberEvaluates);
 		return "evaluate/evaluateList";
 	}
-
+	// 평가 안한 식당목록
+		@RequestMapping(value = "/nEvaluateListForm.do", method = RequestMethod.POST)
+		public String nEvaluateListForm(HttpServletRequest request, Model model,
+				String memId) {
+			System.out.println("nEvaluateListForm()");
+			MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
+					"loginUser");
+			
+			System.out.println(loginUser.toString());
+			memId = loginUser.getMemId();
+			System.out.println(memId);
+			memberEvaluates = evaluateService.getnEvaluateListByMemId(memId);
+			model.addAttribute("memberEvaluates", memberEvaluates);
+		System.out.println(memberEvaluates);
+			return "evaluate/nEvaluateList";
+		}
+		
+	
 	// 평가 수정editOk
 	@RequestMapping(value = "edit.do", method = RequestMethod.POST)
 	public String edit(Model model, HttpServletRequest request) {
@@ -129,13 +154,7 @@ public class EvaluateController {
 		return "evaluateListForm.do";
 	}
 
-	// 평가 안한 식당목록
-	@RequestMapping(value = "/nEvaluateListForm.do", method = RequestMethod.POST)
-	public String nEvaluateListForm(Model model, String memId) {
-		System.out.println("nEvaluateListForm()");
-
-		return "evaluate/nEvaluateList";
-	}
+	
 
 	// 식당 평가 입력
 	@RequestMapping(value = "/nEvaluateListProc.do", method = RequestMethod.POST)

@@ -5,11 +5,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>식당 상세 정보</title>
+<title><c:choose>
+		<c:when test="${restnt!=null}">
+						식당 상세 정보 
+					</c:when>
+		<c:otherwise>
+						식당 정보 입력
+				</c:otherwise>
+
+	</c:choose></title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	$(document).ready(function() {
-
+		// 				input type="button"
 		$('input[type=button]').click(function() {
 
 			formHanddler(this);
@@ -20,11 +28,15 @@
 			var actionStr;
 
 			if (objID === "addBtn") {
+				actionStr = "restntInfoInsert.do";
+
+			}
+			if (objID === "addFormBtn") {
 				actionStr = "restntInfoInsertForm.do";
+
 			} else if (objID === "modBtn") {
 				actionStr = "restntInfoUpdate.do";
-			} else if (objID === "delBtn") {
-				actionStr = "restntInfoDelete.do";
+
 			}
 			$('#management').attr("action", actionStr).submit();
 
@@ -65,26 +77,29 @@
 </script>
 </head>
 <body>
-	<c:choose>
-		<c:when test="${restnt==null}">
-		식당 정보가 없다 = 추가할 식당 정보 입력창
-	</c:when>
-	</c:choose>
+
+
 	<form id="management" method="post">
 		<table border="2">
 
+
+
+
+
+
 			<caption>
 				<c:choose>
-					<c:when test="${restnt==null}">
-						 식당 정보 입력
+					<c:when test="${restnt!=null}">
+						식당 상세 정보 
 					</c:when>
 					<c:otherwise>
-				식당 상세 정보
+						식당 정보 입력
 				</c:otherwise>
 
 				</c:choose>
 
 			</caption>
+
 
 			<tbody>
 
@@ -94,27 +109,74 @@
 
 					<td><input type="hidden" value="${restnt.restntId}"
 						name="restntId"><input type="text"
-						value="${restnt.restntName}" name="restntName" id="restntName"></td>
+						value="${restnt.restntName}" name="restntName"></td>
 				</tr>
+
+
 				<tr>
 					<th>주소1</th>
-					<td><input type="text" value="${restnt.adress1}"
-						name="adress1" id="adress1"></td>
+
+					<td><select name="adress1">
+							<c:forEach items="${adress1}" var="adress1">
+								<c:choose>
+									<c:when test="${adress1==restnt.adress1}">
+										<option selected="selected">${adress1}</option>
+									</c:when>
+									<c:otherwise>
+										<option>${adress1}</option>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+					</select> <input type="submit" value="적용"></td>
 				</tr>
 				<tr>
 					<th>주소2</th>
-					<td><input type="text" value="${restnt.adress2}"
-						name="adress2" id="adress2"></td>
+					<td><select name="adress2">
+							<c:choose>
+								<c:when test="${adress2!=null}">
+									<c:forEach items="${adress2}" var="adress2">
+										<c:choose>
+											<c:when test="${adress2==restnt.adress2}">
+												<option selected="selected">${adress2}</option>
+											</c:when>
+											<c:otherwise>
+												<option>${adress2}</option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<option selected="selected">시/도를 선택하세요</option>
+								</c:otherwise>
+							</c:choose>
+					</select> <input type="submit" value="적용"></td>
 				</tr>
 				<tr>
 					<th>주소3</th>
-					<td><input type="text" value="${restnt.adress3}"
-						name="adress3" id="adress3"></td>
+					<td><select name="adress3">
+							<c:choose>
+								<c:when test="${adress3!=null}">
+									<c:forEach items="${adress3}" var="adress3">
+										<c:choose>
+											<c:when test="${adress3==restnt.adress3}">
+												<option selected="selected">${adress3}</option>
+											</c:when>
+											<c:otherwise>
+												<option>${adress3}</option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<option selected="selected">시/군/구 를 선택하세요</option>
+								</c:otherwise>
+							</c:choose>
+					</select> <input type="submit" value="적용"></td>
 				</tr>
 				<tr>
 					<th>주소4</th>
 					<td><input type="text" value="${restnt.adress4}"
-						name="adress4" id="adress4"></td>
+						name="adress4"></td>
 				</tr>
 
 				<tr>
@@ -148,7 +210,7 @@
 					<th>평균 별점</th>
 
 					<td><input type="text" disabled="disabled"
-						value="${restnt.restntEval}" name="restntEval" id="restntEval"></td>
+						value="${restnt.restntEval}"></td>
 				</tr>
 
 				<tr>
@@ -158,20 +220,46 @@
 
 				</tr>
 
-				<tr>
-					<td><input type="button" value="추가" id="addBtn"></td>
-					<td><input type="button" value="수정" id="modBtn"></td>
-				</tr>
-				<tr>
-					<td><input type="button" value="삭제" id="delBtn"></td>
-					<td><input type="reset" value="초기화" id="resBtn"></td>
-				</tr>
+				<c:choose>
+					<c:when test="${restnt.restntId!=null}">
+						<tr>
+							<td><input type="button" value="추가" id="addFormBtn"></td>
+							<td><input type="button" value="수정" id="modBtn"></td>
+						</tr>
+						<tr>
+							<td><input type="button" value="삭제" id="delBtn"></td>
 
-
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<td><input type="button" value="확인" id="addBtn"></td>
+						<td><input type="reset" value="초기화" id="resBtn"></td>
+					</c:otherwise>
+				</c:choose>
 			</tbody>
 
 		</table>
 	</form>
+	<form action="">
+		<table border="2">
+			<caption>메뉴 정보</caption>
+			<tr>
+				<th>메뉴 이름</th>
+				<th>가격</th>
+				<th>칼로리</th>
+				<th>특이사항</th>
+			</tr>
+			<c:forEach items="${menus}" var="menu">
+				<tr>
+					<td>${menu.menuName}</td>
+					<td>${menu.menuPrice}</td>
+					<td>${menu.menuCalorie}</td>
+					<td>${menu.menuNote}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</form>
+
 
 
 </body>

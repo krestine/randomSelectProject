@@ -9,12 +9,6 @@ public class MateDTO {
 	private String memName;
 	private String memGrade;
 	
-	//memberFiled end
-	
-	//getter & setter
-	public String getMemId() {
-		return memId;
-	}
 	public String getMemName() {
 		return memName;
 	}
@@ -26,6 +20,9 @@ public class MateDTO {
 	}
 	public void setMemGrade(String memGrade) {
 		this.memGrade = memGrade;
+	}
+	public String getMemId() {
+		return memId;
 	}
 	public void setMemId(String memId) {
 		this.memId = memId;
@@ -48,8 +45,6 @@ public class MateDTO {
 	public void setInfoStatus(String infoStatus) {
 		this.infoStatus = infoStatus;
 	}
-	//getter & setter end
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -65,7 +60,6 @@ public class MateDTO {
 		result = prime * result + ((memName == null) ? 0 : memName.hashCode());
 		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -107,14 +101,15 @@ public class MateDTO {
 			return false;
 		return true;
 	}
-	
-	
 	@Override
 	public String toString() {
 		return "MateDTO [memId=" + memId + ", mateId=" + mateId
 				+ ", mateStatus=" + mateStatus + ", infoStatus=" + infoStatus
 				+ ", memName=" + memName + ", memGrade=" + memGrade + "]";
 	}
+	
+	
+	
 	
 	
 

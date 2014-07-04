@@ -27,8 +27,6 @@
 		 <input type="button" onclick="main()" value="메인" />
 	</form>
 	<br>
-
-
 	<c:forEach var="mate" items="${mates}">
 		<br>
 		<div>
@@ -39,16 +37,12 @@
 						<input type="hidden" value="${mate.memId}" name="memId">
 						<input type="hidden" value="${mate.mateId}" name="mateId">
 						<input type="hidden" value="${mate.mateId}" name="param">
-						${mate.mateId} 
-						<input type="submit" value="보기">
+						${mate.mateId}<input type="submit" value="보기">
 					</form>
-
 				</tr>
-				
 			</table>
 		</div>
 		<br>
-
 		<hr>
 	</c:forEach>
 
