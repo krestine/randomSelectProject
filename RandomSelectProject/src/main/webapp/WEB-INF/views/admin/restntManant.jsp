@@ -11,11 +11,11 @@
 	$(document)
 			.ready(
 					function() {
-						$('#restntInfo').hide();
+						$('#restntList').hide();
 						$('#adress1')
 								.click(
 										function() {
-											$('#restntInfo').hide();
+											$('#restntList').hide();
 											$
 													.ajax({
 														cache : false,
@@ -80,7 +80,9 @@
 
 										});
 						$('#adress3').click(function() {
-							$('#restntInfo').show();
+							$('#restntList').show();
+							
+							$("#restntTable > tbody").html("");
 							var paramData = {
 								adress1 : $('#adress1').val(),
 								adress2 : $('#adress2').val(),
@@ -97,18 +99,19 @@
 									alert("에러 : 데이터가 안넘어갑니다.");
 								},
 								success : function(json) {
-									alert("통신 성공");
+									
 									var restnts = json.restnts;
-									alert("restnts"+restnts);
-									var restntInfo = restnts[0].RestntDTO;
-									alert("restntInfo"+restntInfo);
-									var restntName = restntInfo.restntName;
-									alert("restntName"+restntName);
-									/* $.each(restnts, function(key){
-										var restntId = restnts[key].restntId;
+									
+									
+																		
+									 $.each(restnts, function(key){
 										var restntName = restnts[key].restntName;
-										$('#restntInfoResult').append('<tr>'+'<input type="hidden" value="'+restntId+'"name="restntId">'+'<input type="text" value="'+restntName+'"name="restntId">' + '</tr>');
-									}); */
+										var restntId = restnts[key].restntId;
+										var html ="<tr>";
+										html += '<tbody id="restntListResult"><td>'+'<input type="hidden" name="restntId" value="'+restntId+'">';
+										html += restntName+"</td></tr></tbody>";
+										$('#restntTable').append(html);
+									 }); 
 									
 									/* for (var idx = 0; idx < json.restnts.length; idx++) {
 									var restntName = json.adress3[idx];
@@ -230,7 +233,7 @@
 
 				<c:when test="${code.adress3!=null}">
 					<c:forEach items="${restnts}" var="restnt">
-						<form action="restntInfoForm.do" method="post">
+						<form action="restntListForm.do" method="post">
 							<tr>
 
 								<td><c:choose>
@@ -275,17 +278,17 @@
 		<option>시/군/구를 선택하세요</option>
 	</select>
 
-	<div id="restntInfo">
-		보이냐?
-		<table border="2">
-			<caption>식당 검색 결과</caption>
-
-			<tbody id="restntInfoResult">
-				
-				
-			</tbody>
+	<div id="restntList">
+		
+		<table border="2" id="restntTable">
+			<caption>식당 리스트</caption>
+			
+			
 		</table>
 
 	</div>
+
+
+
 </body>
 </html>
