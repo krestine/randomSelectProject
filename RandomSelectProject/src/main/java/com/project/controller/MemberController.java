@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.eclipse.jetty.jndi.local.localContextRoot;
@@ -9,7 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.project.dao.MemberMapper;
 import com.project.domain.MemberDTO;
 import com.project.service.MemberService;
 
@@ -18,6 +22,27 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+
+	// 아이디체크 ajax
+	@RequestMapping("idCheck.do")
+	public ModelAndView idCheckAjax(HttpServletRequest request,
+			HttpServletResponse response) {
+		System.out.println("idCheckAjax");
+		ModelAndView view = new ModelAndView("member/memIdAjax");
+
+		String memId = request.getParameter("memId");
+		System.out.println("memid=" + memId);
+
+		MemberDTO getId = memberService.getMemIdByMemId(memId);
+		System.out.println("getid=" + getId);
+
+		if (getId == null) {
+			view.addObject("result", "true");
+		} else {
+			view.addObject("result", "false");
+		}
+		return view;
+	}
 
 	// 회원가입
 	@RequestMapping("registerForm.do")
@@ -29,11 +54,11 @@ public class MemberController {
 	@RequestMapping(value = "registerProc.do", method = RequestMethod.POST)
 	public String registerProc(Model model, MemberDTO memberDto) {
 		System.out.println("registerProc()");
-		MemberDTO userId = memberService.getMyInfoByMemId(memberDto);
-		if (userId != null) {
-			model.addAttribute("errmessage", "이미 사용하고 있는 아이디입니다.");
-			return "forward:registerForm.do";
-		}
+		/*
+		 * MemberDTO userId = memberService.getMyInfoByMemId(memberDto); if
+		 * (userId != null) { model.addAttribute("errmessage",
+		 * "이미 사용하고 있는 아이디입니다."); return "forward:registerForm.do"; }
+		 */
 		memberService.putMember(memberDto);
 		return "member/registerOk";
 	}
