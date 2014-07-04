@@ -2,12 +2,14 @@ package com.project.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -424,7 +426,7 @@ public class AdminController {
 		System.out.println(json.toString());
 		out.print(json.toString());
 	}
-	
+
 	@RequestMapping(value = "/ajaxAdress3.do")
 	public void ajaxAdress3(HttpServletRequest request,
 			HttpServletResponse response, SettingDTO settingDto)
@@ -447,5 +449,39 @@ public class AdminController {
 		PrintWriter out = response.getWriter();
 		System.out.println(json.toString());
 		out.print(json.toString());
+	}
+
+	@RequestMapping(value = "/ajaxRestntList.do")
+	public void ajaxRestntList(HttpServletRequest request,
+			HttpServletResponse response, SettingDTO settingDto)
+			throws IOException {
+		System.out.println("/ajaxRestntList.do");
+		String adress1 = request.getParameter("adress1");
+		String adress2 = request.getParameter("adress2");
+		String adress3 = request.getParameter("adress3");
+		System.out.println(adress1);
+		System.out.println(adress2);
+		System.out.println(adress3);
+		settingDto.setAdress1(adress1);
+		settingDto.setAdress2(adress2);
+		settingDto.setAdress3(adress3);
+		System.out.println(settingDto);
+
+		restnts = restntService.getRestntListByAddr(settingDto);
+		System.out.println(restnts);
+
+		JSONArray jsonArray = JSONArray.fromObject(restnts);
+
+		System.out.println("restnts - " + jsonArray);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("restnts", jsonArray);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
 	}
 }

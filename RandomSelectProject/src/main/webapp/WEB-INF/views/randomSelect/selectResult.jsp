@@ -45,10 +45,7 @@ body {
 	function showCurrentLocation(Lat, Lon) {
 		$("#currentLocation").html(Lat + ' ' + Lon);
 	}
-	function showCurrentLocation2(Location) {
-		$("#currentLocation").html(Loation);
-	}
-
+	
 	function calcDistance(lat1, lon1, lat2, lon2) {
 		var EARTH_R, Rad, radLat1, radLat2, radDist;
 		var distance, ret;
@@ -67,6 +64,23 @@ body {
 		return Math.round(ret);
 	}
 
+	
+	function getAllRestntList(){
+		var tempRestntLatitude, tempRestntLongitude, tempRestntPos;
+		var tempRestntMarker;
+		<c:forEach items="${restntList}" var="item" varStatus="counter">
+			tempRestntLatitude = "${item.latitude}";
+			tempRestntLongitude = "${item.longitude}";
+			alert(tempRestntLatitude + ' ' + tempRestntLongitde);
+			tempRestntPos = new google.maps.LatLng(tempRestntLatitude, tempRestntLongitude);
+			tempRestntMarker = new google.maps.Marker({
+				position : tempRestntpos,
+				map : map,
+			});
+			tempRestntMarker.setMap(map);
+		</c:forEach>
+	}
+	
 	function setMyCenter() {
 		map.setCenter(pos);
 		map.setZoom(16);
@@ -110,10 +124,7 @@ body {
 					position : results[0].geometry.location
 				});
 				tempMarker.setMap(map);
-				google.maps.event.addListener(tempMarker, 'click', function() {
-					map.setCenter(tempMarker.getPosition());
-					showCurrentLocation2(results[0].geometry.location);
-				});
+				$("#currentLocation").html(results[0].geometry.location.lat() + ' ' + results[0].geometry.location.lng());
 			} else {
 				alert('Geocode was not successful for the following reason: '
 						+ status);
@@ -190,6 +201,7 @@ body {
 			}
 		});
 
+		getAllRestntList();
 		
 		google.maps.event.addListener(myMarker, 'click', function() {
 			map.setCenter(myMarker.getPosition());
@@ -206,7 +218,7 @@ body {
 
 	function initialize() {
 
-		//alert('start init');
+		alert('start init');
 
 		setSRadius();
 		var myOptions = {
@@ -215,11 +227,11 @@ body {
 		};
 		map = new google.maps.Map(document.getElementById('map_canvas'),
 				myOptions);
-		//alert('before geoloation');
+		alert('before geoloation');
 		if (navigator.geolocation) {
-			//alert('navigator.geolocation: ' + navigator.geolocation);
+			alert('navigator.geolocation: ' + navigator.geolocation);
 
-			//alert('geoloation success');
+			alert('geoloation success');
 			var geolocationOption = {
 				enableHighAccuracy : true,
 				timeout : 5000,
@@ -264,6 +276,11 @@ body {
 	<div id=newMyLocationForm style="display:none">
 	<input type=text id=newMyAddress value="">
 	<input type=button id=newMyLocation value="내 주소 수동으로 입력" onclick="newMyLocation()">	
+	</div>
+	<div id="restnt_list">
+		<c:forEach items="${restntList}" var="item">
+			${item.adress1} ${item.adress2} ${item.adress3} ${item.adress4} <br>
+		</c:forEach>
 	</div>
 </body>
 </html>
