@@ -12,6 +12,9 @@ public class RestntDTO {
 	private String restntTel;
 	private String restntCate;
 	private String restntEval;
+	
+	private String latitude;
+	private String longitude;
 
 	public String getRestntId() {
 		return restntId;
@@ -85,6 +88,32 @@ public class RestntDTO {
 		this.restntEval = restntEval;
 	}
 
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	@Override
+	public String toString() {
+		return "RestntDTO [restntId=" + restntId + ", restntName=" + restntName
+				+ ", adress1=" + adress1 + ", adress2=" + adress2
+				+ ", adress3=" + adress3 + ", adress4=" + adress4
+				+ ", restntTel=" + restntTel + ", restntCate=" + restntCate
+				+ ", restntEval=" + restntEval + ", latitude=" + latitude
+				+ ", longitude=" + longitude + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -93,6 +122,10 @@ public class RestntDTO {
 		result = prime * result + ((adress2 == null) ? 0 : adress2.hashCode());
 		result = prime * result + ((adress3 == null) ? 0 : adress3.hashCode());
 		result = prime * result + ((adress4 == null) ? 0 : adress4.hashCode());
+		result = prime * result
+				+ ((latitude == null) ? 0 : latitude.hashCode());
+		result = prime * result
+				+ ((longitude == null) ? 0 : longitude.hashCode());
 		result = prime * result
 				+ ((restntCate == null) ? 0 : restntCate.hashCode());
 		result = prime * result
@@ -135,6 +168,16 @@ public class RestntDTO {
 				return false;
 		} else if (!adress4.equals(other.adress4))
 			return false;
+		if (latitude == null) {
+			if (other.latitude != null)
+				return false;
+		} else if (!latitude.equals(other.latitude))
+			return false;
+		if (longitude == null) {
+			if (other.longitude != null)
+				return false;
+		} else if (!longitude.equals(other.longitude))
+			return false;
 		if (restntCate == null) {
 			if (other.restntCate != null)
 				return false;
@@ -161,15 +204,6 @@ public class RestntDTO {
 		} else if (!restntTel.equals(other.restntTel))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "RestntDTO [restntId=" + restntId + ", restntName=" + restntName
-				+ ", adress1=" + adress1 + ", adress2=" + adress2
-				+ ", adress3=" + adress3 + ", adress4=" + adress4
-				+ ", restntTel=" + restntTel + ", restntCate=" + restntCate
-				+ ", restntEval=" + restntEval + "]";
 	}
 
 }
