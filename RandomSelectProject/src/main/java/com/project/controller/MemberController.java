@@ -156,7 +156,7 @@ public class MemberController {
 
 		mailService.sendMail(fromUser, toUser, subject, text);
 
-		memberDto.setMemId(fromUser);
+		memberDto.setMemId(toUser);
 		memberDto.setMemPasswd(userPassword);
 		memberDto.setTempPw(CD);
 		memberService.setMemberInfoByMemberTerms(memberDto);
@@ -213,9 +213,11 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "dropProc.do", method = RequestMethod.POST)
-	public String dropProc(Model model, MemberDTO memberDto) {
+	public String dropProc(Model model, MemberDTO memberDto, HttpSession session) {
 		System.out.println("dropProc()");
 		memberService.setLeave(memberDto);
+		session.removeAttribute("loginUser");
+		session.invalidate();
 		return "mypage/dropOk";
 	}
 

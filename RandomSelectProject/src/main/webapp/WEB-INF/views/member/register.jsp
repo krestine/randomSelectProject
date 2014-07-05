@@ -128,19 +128,26 @@ label.error {
 
 						// 회원가입 체크
 						$("#registerForm").validate({
+							onkeyup : false,
+							onfocusout : false,
+							//focusInvalid : false,
+							//focusCleanup:true,
+							groups : {
+								phoneGroup : "mPhoneCode mPhoneMid mPhoneEnd"
+							},
 							rules : {
 								memId : {
 									required : true,
-									email : true,
-									remote : {
-										url : "idCheck.do",
-										type : "POST",
-										data : {
-											memId : function() {
-												return $("#memId").val();
-											}
-										}
-									}
+									email : true
+								/* remote : {
+											url : "idCheck.do",
+											type : "POST",
+											data : {
+												memId : function() {
+													return $("#memId").val();
+												}
+											} 
+										}*/
 								},
 								memName : {
 									required : true,
@@ -155,11 +162,21 @@ label.error {
 									equalTo : "#memPasswd"
 								},
 								memBirth : "required",
-								mPhoneTotal : {
+								mPhoneCode : {
+									required : true,
+									number : true
+								},
+								mPhoneMid : {
+									required : true,
+									number : true
+								},
+								mPhoneEnd : {
 									required : true,
 									number : true
 								}
+
 							},
+
 							messages : {
 								memId : {
 									required : "아이디를 입력해주세요",
@@ -179,7 +196,15 @@ label.error {
 									equalTo : "비밀번호가 일치하지 않습니다."
 								},
 								memBirth : "생일을 입력해주세요.",
-								mPhoneTotal : {
+								mPhoneCode : {
+									required : "전화번호를 입력해주세요.",
+									number : "숫자를 입력해주세요."
+								},
+								mPhoneMid : {
+									required : "전화번호를 입력해주세요.",
+									number : "숫자를 입력해주세요."
+								},
+								mPhoneEnd : {
 									required : "전화번호를 입력해주세요.",
 									number : "숫자를 입력해주세요."
 								}
@@ -192,6 +217,8 @@ label.error {
 						});
 					});
 
+	 
+	 
 	function action() {
 		document.getElementById("form").action = "main.do";
 		document.getElementById("form").submit();
@@ -203,47 +230,44 @@ label.error {
 
 
 	<form id="registerForm" method="post" action="registerProc.do">
-		<p>
+
+		<div>
 			아이디 <input type="text" id="memId" name="memId" required="required" />
 			<button type="button" id="idCheck">중복체크</button>
 			<span id="check"></span>
-
-		</p>
-		<p>
+		</div>
+		<div>
 			이름 <input type="text" name="memName" />
-
-		</p>
-		<p>
+		</div>
+		<div>
 			비밀번호 <input type="password" id="memPasswd" name="memPasswd" />
-		</p>
-		<p>
-
+		</div>
+		<div>
 			비밀번호확인 <input type="password" name="memPasswdCheck" />
-
-		</p>
-		<p>
+		</div>
+		<div>
 			생년월일 <input type="text" id="memBirth" name="memBirth" />
-		</p>
-		<p>
-			전화번호 <select name="mPhoneCode">
+		</div>
+		<div>
+			전화번호 <select id="mPhoneCode" name="mPhoneCode">
 				<option value="010" selected>010</option>
 				<option value="011">011</option>
 				<option value="016">016</option>
 				<option value="017">017</option>
 				<option value="018">018</option>
 				<option value="019">019</option>
-			</select> - <input type="text" name="mPhoneMid" size="4" maxlength="4" /> - <input
-				type="text" name="mPhoneEnd" size="4" maxlength="4" />
-		</p>
-		<p>
-
+			</select> - <input type="text" id="mPhoneMid" name="mPhoneMid" size="4"
+				maxlength="4" /> - <input type="text" id="mPhoneEnd"
+				name="mPhoneEnd" size="4" maxlength="4" />
+		</div>
+		<div>
 			<script type="text/javascript"
 				src="${captchajs}?theme=clean&key=${captchaPublicKey}"></script>
-		</p>
-		<p>
-
+		</div>
+		<div>
 			<input type="submit" id="register" value="회원가입"> <input
 				type="button" onclick="action()" value="메인으로">
+		</div>
 	</form>
 
 

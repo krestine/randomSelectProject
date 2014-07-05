@@ -19,8 +19,8 @@ public class RestntDTO {
 	private String score;
 	private String memId;
 	private String mateId;
-	private String Latitude;
-	private String Longitude;
+	private String latitude;
+	private String longitude;
 	public String getRestntId() {
 		return restntId;
 	}
@@ -118,16 +118,16 @@ public class RestntDTO {
 		this.mateId = mateId;
 	}
 	public String getLatitude() {
-		return Latitude;
+		return latitude;
 	}
 	public void setLatitude(String latitude) {
-		Latitude = latitude;
+		this.latitude = latitude;
 	}
 	public String getLongitude() {
-		return Longitude;
+		return longitude;
 	}
 	public void setLongitude(String longitude) {
-		Longitude = longitude;
+		this.longitude = longitude;
 	}
 	@Override
 	public String toString() {
@@ -138,22 +138,22 @@ public class RestntDTO {
 				+ ", restntEval=" + restntEval + ", menuName=" + menuName
 				+ ", menuPrice=" + menuPrice + ", menuCalorie=" + menuCalorie
 				+ ", evalId=" + evalId + ", score=" + score + ", memId="
-				+ memId + ", mateId=" + mateId + ", Latitude=" + Latitude
-				+ ", Longitude=" + Longitude + "]";
+				+ memId + ", mateId=" + mateId + ", latitude=" + latitude
+				+ ", longitude=" + longitude + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((Latitude == null) ? 0 : Latitude.hashCode());
-		result = prime * result
-				+ ((Longitude == null) ? 0 : Longitude.hashCode());
 		result = prime * result + ((adress1 == null) ? 0 : adress1.hashCode());
 		result = prime * result + ((adress2 == null) ? 0 : adress2.hashCode());
 		result = prime * result + ((adress3 == null) ? 0 : adress3.hashCode());
 		result = prime * result + ((adress4 == null) ? 0 : adress4.hashCode());
 		result = prime * result + ((evalId == null) ? 0 : evalId.hashCode());
+		result = prime * result
+				+ ((latitude == null) ? 0 : latitude.hashCode());
+		result = prime * result
+				+ ((longitude == null) ? 0 : longitude.hashCode());
 		result = prime * result + ((mateId == null) ? 0 : mateId.hashCode());
 		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
 		result = prime * result
@@ -184,16 +184,6 @@ public class RestntDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		RestntDTO other = (RestntDTO) obj;
-		if (Latitude == null) {
-			if (other.Latitude != null)
-				return false;
-		} else if (!Latitude.equals(other.Latitude))
-			return false;
-		if (Longitude == null) {
-			if (other.Longitude != null)
-				return false;
-		} else if (!Longitude.equals(other.Longitude))
-			return false;
 		if (adress1 == null) {
 			if (other.adress1 != null)
 				return false;
@@ -218,6 +208,16 @@ public class RestntDTO {
 			if (other.evalId != null)
 				return false;
 		} else if (!evalId.equals(other.evalId))
+			return false;
+		if (latitude == null) {
+			if (other.latitude != null)
+				return false;
+		} else if (!latitude.equals(other.latitude))
+			return false;
+		if (longitude == null) {
+			if (other.longitude != null)
+				return false;
+		} else if (!longitude.equals(other.longitude))
 			return false;
 		if (mateId == null) {
 			if (other.mateId != null)
@@ -278,5 +278,4 @@ public class RestntDTO {
 	}
 	
 	
-
 }

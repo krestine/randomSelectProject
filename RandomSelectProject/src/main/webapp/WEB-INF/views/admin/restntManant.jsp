@@ -8,43 +8,31 @@
 <title>식당 관리</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-	$(document)
-			.ready(
-					function() {
-						$('#restntList').hide();
-						$('#adress1')
-								.click(
-										function() {
-											$('#restntList').hide();
-											$
-													.ajax({
-														cache : false,
-														async : false,
-														type : 'POST',
-														url : 'ajaxAdress2.do',
-														data : ('adress1=' + $(
-																'#adress1')
-																.val()),
-														dataType : 'json',
-														error : function() {
-															alert("에러 : 데이터가 안넘어갑니다.");
-														},
-														success : function(json) {
-															$('#adress2')
-																	.empty();
-															for (var idx = 0; idx < json.adress2.length; idx++) {
-																var adress2 = json.adress2[idx];
-																$('#adress2')
-																		.append(
-																				'<option value="'+adress2+'">'
-																						+ adress2
-																						+ '</option>');
-															}
+	$(document).ready(function() {
+		$('#restntList').hide();
+		$('#adress1').click(function() {
+		$('#restntList').hide();
+		$.ajax({
+			cache : false,
+			async : false,
+			type : 'POST',
+			url : 'ajaxAdress2.do',
+			data : ('adress1=' + $('#adress1').val()),
+			dataType : 'json',
+			error : function() {
+			alert("에러 : 데이터가 안넘어갑니다.");
+		},
+			success : function(json) {
+			$('#adress2').empty();
+					for (var idx = 0; idx < json.adress2.length; idx++) {
+						var adress2 = json.adress2[idx];
+						$('#adress2').append('<option value="'+adress2+'">'+ adress2+ '</option>');
+					}
 
-														}
-													});
+				}
+			});
 
-										});
+		});
 						$('#adress2')
 								.click(
 										function() {
@@ -272,6 +260,7 @@
 
 	<select id="adress2">
 		<option>시/도 를 선택하세요</option>
+			
 	</select>
 
 	<select id="adress3">
