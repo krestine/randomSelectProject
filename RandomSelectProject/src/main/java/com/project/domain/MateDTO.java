@@ -9,6 +9,14 @@ public class MateDTO {
 	private String memName;
 	private String memGrade;
 	
+	public MateDTO(String memId2, String mateId2) {
+		memId=memId2;
+		mateId=mateId2;
+		
+	}
+	public MateDTO() {
+	
+	}
 	public String getMemName() {
 		return memName;
 	}

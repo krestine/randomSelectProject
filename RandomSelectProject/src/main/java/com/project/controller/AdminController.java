@@ -411,14 +411,20 @@ public class AdminController {
 	public void ajaxAdress2(HttpServletRequest request,
 			HttpServletResponse response, SettingDTO settingDto)
 			throws IOException {
+		//값 받아오는 부분
 		String adress1 = request.getParameter("adress1");
 		System.out.println(adress1);
 
+		
 		settingDto.setAdress1(adress1);
 		System.out.println(settingDto);
+		
+		//쿼리 실행부분
 		adress2 = settingService.getAdress2(settingDto);
+		
 		System.out.println(adress2);
 
+		//쿼리 실행 결과를 JSON 형식으로 변환하는 부분
 		JSONObject json = new JSONObject();
 		json.put("adress2", adress2);
 		response.setContentType("text/html; charset=utf-8");
@@ -456,20 +462,27 @@ public class AdminController {
 			HttpServletResponse response, SettingDTO settingDto)
 			throws IOException {
 		System.out.println("/ajaxRestntList.do");
+		
+		//패러미터 설정
 		String adress1 = request.getParameter("adress1");
 		String adress2 = request.getParameter("adress2");
 		String adress3 = request.getParameter("adress3");
+		
+		//확인
 		System.out.println(adress1);
 		System.out.println(adress2);
 		System.out.println(adress3);
+		
 		settingDto.setAdress1(adress1);
 		settingDto.setAdress2(adress2);
 		settingDto.setAdress3(adress3);
 		System.out.println(settingDto);
 
+		//쿼리 실행
 		restnts = restntService.getRestntListByAddr(settingDto);
 		System.out.println(restnts);
 
+		//제이슨으로 변환
 		JSONArray jsonArray = JSONArray.fromObject(restnts);
 
 		System.out.println("restnts - " + jsonArray);
