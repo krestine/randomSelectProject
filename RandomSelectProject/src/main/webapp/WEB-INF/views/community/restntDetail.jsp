@@ -5,20 +5,32 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript">
-	function restntList() {
-		document.getElementById("community").action = "restntListProc.do";
-		document.getElementById("community").submit();
 
-	}
-	function mateList() {
-		document.getElementById("community").action = "mateListProc.do";
-		document.getElementById("community").submit();
-	}
-	function main(){
-		document.getElementById("community").action = "main.do";
-		document.getElementById("community").submit();
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('input[type=button]').click(function() {
+		formHanddler(this);
+	});
+	function formHanddler(obj) {
+		var objID = obj.id;
+		var actionStr;
+
+		if (objID === "restntListBtn") {
+			actionStr = "restntListProc.do";
+
 		}
+		if(objID === "mateListBtn"){
+			actionStr = "mateListProc.do";
+		}
+		if (objID === "mainBtn") {
+			actionStr = "main.do";
+
+		} 
+		$('#community').attr("action", actionStr).submit();
+	}
+});
+
 </script>
 <title>restntDetail</title>
 
@@ -27,13 +39,13 @@
 <h1>${restnt.restntName}의 상세정보</h1>
 					
 				
-					
+					<br>
 					<form id="community" method="POST">
-						<input type="button" onclick="restntList()" value="식당 리스트" />
-						<input type="button" onclick="mateList()" value="친구 리스트" />
+						<input type="button" value="식당 리스트" id="restntListBtn"/>
+						<input type="button" value="친구 리스트" id="mateListBtn"/>
 						<input type="button" onclick="main()" value="메인" />
 					</form>
-
+					<br>
      				<form action="restntDetailProc.do" method="POST">
 					
 						<input value="식당이름">

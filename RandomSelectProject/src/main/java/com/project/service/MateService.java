@@ -13,15 +13,13 @@ public interface MateService {
 	// 회원 : 친구 아이디
 	MateDTO getMateIdByMateId(String mateId);
 	
-	// 회원 : 친구 정보
+	// 회원 : 친구의 상태정보
 	//String getMateId(String mateDto);
-	MateDTO getMateInfoByMateId(MateDTO mateDto);
+	MateDTO getMateInfoByMateId(String mateId);
 	
 	// 회원 : 친구의 회원정보
-	MateDTO getMemInfoByMemId(String param);
+	MateDTO getMemInfoByMemId(String mateId);
 	
-	
-
 }
 	
 

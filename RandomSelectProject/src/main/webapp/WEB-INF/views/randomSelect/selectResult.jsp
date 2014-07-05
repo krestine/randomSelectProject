@@ -66,18 +66,18 @@ body {
 
 	
 	function getAllRestntList(){
-		var tempRestntLatitude, tempRestntLongitude, tempRestntPos;
-		var tempRestntMarker;
 		<c:forEach items="${restntList}" var="item" varStatus="counter">
-			tempRestntLatitude = "${item.latitude}";
-			tempRestntLongitude = "${item.longitude}";
-			alert(tempRestntLatitude + ' ' + tempRestntLongitde);
-			tempRestntPos = new google.maps.LatLng(tempRestntLatitude, tempRestntLongitude);
-			tempRestntMarker = new google.maps.Marker({
-				position : tempRestntpos,
+			var tempRestntLatitude = "<c:out value="${item.latitude}" />";
+			var tempRestntLongitude = "<c:out value="${item.longitude}" />";
+			var tempRestntPos = new google.maps.LatLng(tempRestntLatitude, tempRestntLongitude);
+			var tempRestntMarker = new google.maps.Marker({
+				position : tempRestntPos,
 				map : map,
 			});
 			tempRestntMarker.setMap(map);
+			var tempRestntInfo = new google.maps.InfoWindow();
+			tempRestntInfo.setContent("<c:out value="${item.restntName}" />");
+			tempRestntInfo.open(map, tempRestntMarker);
 		</c:forEach>
 	}
 	
@@ -175,7 +175,7 @@ body {
 			$("#accuracyAlert").empty;
 			objDiv.style.display="none";
 		}
-
+		
 		//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: '내 위치'});
 		var myMarker = new google.maps.Marker({
 			position : pos,
@@ -201,7 +201,7 @@ body {
 			}
 		});
 
-		getAllRestntList();
+		
 		
 		google.maps.event.addListener(myMarker, 'click', function() {
 			map.setCenter(myMarker.getPosition());
@@ -218,7 +218,7 @@ body {
 
 	function initialize() {
 
-		alert('start init');
+		//alert('start init');
 
 		setSRadius();
 		var myOptions = {
@@ -227,11 +227,11 @@ body {
 		};
 		map = new google.maps.Map(document.getElementById('map_canvas'),
 				myOptions);
-		alert('before geoloation');
+		//alert('before geoloation');
 		if (navigator.geolocation) {
-			alert('navigator.geolocation: ' + navigator.geolocation);
+			//alert('navigator.geolocation: ' + navigator.geolocation);
 
-			alert('geoloation success');
+			//alert('geoloation success');
 			var geolocationOption = {
 				enableHighAccuracy : true,
 				timeout : 5000,
@@ -261,6 +261,7 @@ body {
 		onclick="setMyCenter()">
 	<input type=button id=moveToRestntLocation value="식당 위치로 이동"
 		onclick="setRestntCenter()">
+	<input type=button id=getAllRestnt value="식당 정보 가져오기" onclick="getAllRestntList()">
 	<br>
 	<input type=text id=tempAddress value="">
 	<input type=button id=geocodeTempAddress value="해당 주소 지도에 표시"
@@ -279,7 +280,7 @@ body {
 	</div>
 	<div id="restnt_list">
 		<c:forEach items="${restntList}" var="item">
-			${item.adress1} ${item.adress2} ${item.adress3} ${item.adress4} <br>
+			 ${item.restntName} ${item.latitude} ${item.longitude}<br>
 		</c:forEach>
 	</div>
 </body>

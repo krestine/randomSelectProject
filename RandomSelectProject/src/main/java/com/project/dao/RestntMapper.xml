@@ -18,7 +18,7 @@
 	<select id="getRestntList" resultType="RestntDTO">
 		select
 		restntId,RESTNTNAME,RESTNTTEL,RESTNTCATE,RESTNTEVAL,ADRESS1,ADRESS2,
-		ADRESS3,ADRESS4 from restnt where active = '1'
+		ADRESS3,ADRESS4, LATITUDE, LONGITUDE from restnt where active = '1'
 
 
 	</select>
