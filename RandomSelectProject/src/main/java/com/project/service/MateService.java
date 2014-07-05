@@ -15,7 +15,7 @@ public interface MateService {
 	
 	// 회원 : 친구의 상태정보
 	//String getMateId(String mateDto);
-	MateDTO getMateInfoByMateId(String mateId);
+	MateDTO getMateInfoByMateId(String memId, String mateId);
 	
 	// 회원 : 친구의 회원정보
 	MateDTO getMemInfoByMemId(String mateId);

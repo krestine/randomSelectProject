@@ -22,13 +22,13 @@
 	</select>
 
 	<!-- 회원: 친구상태정보 -->
-	<select id="getMateInfoByMateId" parameterType="String"
+	<select id="getMateInfoByMateId" parameterType="MateDTO"
 		resultType="MateDTO">
 		
 		select matestatus, infostatus from mate
-		where mateid=#{mateId}
-		memid=#{memId}
-	
+		where memid=#{memId}
+		and mateid=#{mateId}
+		
 	</select>
 	
 	<!-- 회원:친구의 정보-->
@@ -39,13 +39,10 @@
 		where e.mateid=#{e.mateId}
     	and e.mateid=r.memid
 		
-		
-	
-		
-		<!--  select memname, e.MEMID
+		<!-- select memname, e.MEMID
 		from member r, mate e
 		where e.memid=#{memId}
-		and r.memid=e.memid;-->
+		and r.memid=e.memid -->
 
 		
 	</select>

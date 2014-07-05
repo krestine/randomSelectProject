@@ -56,7 +56,7 @@ $(document).ready(function() {
 			<input value="친구관계"><br>	
 			<input value="${mate.infoStatus}" name="infoStatus">			
 			<input value="${mate.mateStatus}" name="mateStatus">
-					
+			
 		</form>
 					<br>	
 

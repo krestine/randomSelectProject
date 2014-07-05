@@ -43,7 +43,7 @@ $(document).ready(function() {
 					<form id="community" method="POST">
 						<input type="button" value="식당 리스트" id="restntListBtn"/>
 						<input type="button" value="친구 리스트" id="mateListBtn"/>
-						<input type="button" onclick="main()" value="메인" />
+						<input type="button" value="메인" id="mainBtn"/>
 					</form>
 					<br>
      				<form action="restntDetailProc.do" method="POST">

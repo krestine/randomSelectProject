@@ -81,7 +81,7 @@ public class CommunityController {
 
 	// 회원 : 친구 상세정보
 	@RequestMapping(value = "/mateDetailProc.do", method = RequestMethod.POST)
-	public String mateDetailProc(Model model, String mateId, HttpServletRequest request) {
+	public String mateDetailProc(Model model, String mateId, String memId, HttpServletRequest request) {
 		// 친구의 상세정보		
 		System.out.println("???"+request.getParameter("memId")+" "+request.getParameter("mateId"));
 		System.out.println("????"+mateId+"asdasd");
@@ -93,11 +93,13 @@ public class CommunityController {
 		
 		// 친구의 상태정보		
 		System.out.println("???"+request.getParameter("memId")+" "+request.getParameter("mateId"));
-		mate = mateService.getMateInfoByMateId(mateId);
+		System.out.println("????"+mateId+"asdasd");
+		mate = mateService.getMateInfoByMateId(memId, mateId);
 		System.out.println(mate);
 		model.addAttribute("mate", mate);
+		System.out.println(memId);
 		System.out.println(mateId);
-		
+		System.out.println("mate 확인");
 		return "community/mateDetail";
 	}
 	
