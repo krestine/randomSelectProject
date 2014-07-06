@@ -85,15 +85,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	// 회원 : 평가한 친구의 식당목록
-	 @Override
-	 public List<EvaluateDTO> getEvaluateListByMateId(String memId) {
-	 		
-	 		return evaluateMapper.getEvaluateListByMateId(memId);
-	 }
 
-	 
 	// //////////////////////////////////////////////////
 
 	/*// 회원: 평가한 식당목록

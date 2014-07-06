@@ -8,21 +8,6 @@ public class EvaluateDTO {
 	private String restntId;
 	private String evalDate;
 	private String restntName;
-	private String mateId;
-	private String visitDate;
-	
-	public String getVisitDate() {
-		return visitDate;
-	}
-	public void setVisitDate(String visitDate) {
-		this.visitDate = visitDate;
-	}
-	public String getMateId() {
-		return mateId;
-	}
-	public void setMateId(String mateId) {
-		this.mateId = mateId;
-	}
 	public String getEvalId() {
 		return evalId;
 	}
@@ -66,15 +51,12 @@ public class EvaluateDTO {
 		result = prime * result
 				+ ((evalDate == null) ? 0 : evalDate.hashCode());
 		result = prime * result + ((evalId == null) ? 0 : evalId.hashCode());
-		result = prime * result + ((mateId == null) ? 0 : mateId.hashCode());
 		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
 		result = prime * result
 				+ ((restntId == null) ? 0 : restntId.hashCode());
 		result = prime * result
 				+ ((restntName == null) ? 0 : restntName.hashCode());
 		result = prime * result + ((score == null) ? 0 : score.hashCode());
-		result = prime * result
-				+ ((visitDate == null) ? 0 : visitDate.hashCode());
 		return result;
 	}
 	@Override
@@ -96,11 +78,6 @@ public class EvaluateDTO {
 				return false;
 		} else if (!evalId.equals(other.evalId))
 			return false;
-		if (mateId == null) {
-			if (other.mateId != null)
-				return false;
-		} else if (!mateId.equals(other.mateId))
-			return false;
 		if (memId == null) {
 			if (other.memId != null)
 				return false;
@@ -121,19 +98,13 @@ public class EvaluateDTO {
 				return false;
 		} else if (!score.equals(other.score))
 			return false;
-		if (visitDate == null) {
-			if (other.visitDate != null)
-				return false;
-		} else if (!visitDate.equals(other.visitDate))
-			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
 		return "EvaluateDTO [evalId=" + evalId + ", score=" + score
 				+ ", memId=" + memId + ", restntId=" + restntId + ", evalDate="
-				+ evalDate + ", restntName=" + restntName + ", mateId="
-				+ mateId + ", visitDate=" + visitDate + "]";
+				+ evalDate + ", restntName=" + restntName + "]";
 	}
 	
 	

@@ -44,8 +44,6 @@ public interface EvaluateService {
 
 	List<EvaluateDTO> getEvaluateListByMemId(String memId);
 
-	// 회원 : 친구의 평가한 식당
-	 List<EvaluateDTO> getEvaluateListByMateId(String memId);
-	 
+	
 
 }
