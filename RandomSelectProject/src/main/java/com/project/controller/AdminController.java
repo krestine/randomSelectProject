@@ -473,6 +473,7 @@ public class AdminController {
 		System.out.println(adress2);
 		System.out.println(adress3);
 		
+		
 		settingDto.setAdress1(adress1);
 		settingDto.setAdress2(adress2);
 		settingDto.setAdress3(adress3);
