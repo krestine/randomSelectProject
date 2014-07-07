@@ -173,6 +173,16 @@
 			<version>1.0.2</version>
 		</dependency>
 
+		<!-- tiles2 추가 -->
+		<!-- The complete Tiles dependency with all supported technologies is achievable 
+			with the following dependency declaration -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-extras</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		
+		
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

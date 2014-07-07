@@ -14,111 +14,26 @@
 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
 	</definition>
 
-	<!-- Index.java -->
+	<!-- 메인 -->
 	<definition name="main" extends="home">
 		<put-attribute name="main" value="/WEB-INF/views/main.jsp" />
 	</definition>
 
-
-	<!-- UserController.java -->
-	<definition name="login" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/login/loginRes.jsp" />
+	<!-- 관리자 -->
+	<definition name="adminMain" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/admin/adminMain.jsp" />
 	</definition>
 	
-		<definition name="logout" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/logout/logout.jsp" />
+	<definition name="memberSearch" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/admin/memberSearch.jsp" />
 	</definition>
 	
-		<definition name="loginError" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/login/loginError.jsp" />
-	</definition>
-	
-
-	<definition name="loginForm" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/login/loginForm.jsp" />
-	</definition>
-
-	<definition name="register" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/main.jsp" />
-	</definition>
-
-	<definition name="registerForm" extends="home">
-		<put-attribute name="main"
-			value="/WEB-INF/views/register/registerForm.jsp" />
+	<definition name="restntManant" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/admin/restntManant.jsp" />
 	</definition>
 	
 	
-
-
-	<!-- BoardController -->
-	<definition name="boardWrite" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/board/boardList.jsp" />
-	</definition>
-
-	<definition name="boardWriteForm" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/board/boardWriteForm.jsp" />
-	</definition>
-
-	<definition name="boardUpdate" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/board/boardContext.jsp" />
-	</definition>
 	
-	<definition name="boardUpdateForm" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/board/boardUpdateForm.jsp" />
-	</definition>
-
-	<definition name="boardDelete" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/board/boardList.jsp" />
-	</definition>
-
-	<definition name="boardList" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/board/boardList.jsp" />
-	</definition>
-
-	<definition name="boardContext" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/board/boardContext.jsp" />
-	</definition>
-	<definition name="boardError" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/board/boardError.jsp" />
-	</definition>
-	
-	
-	<!-- ProductController -->
-	<definition name="productList" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/product/productList.jsp" />
-	</definition>
-	
-	<definition name="productContext" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/product/productContext.jsp" />
-	</definition>
-	
-	
-	<!-- CartController -->
-	<definition name="cartContext" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/cart/cartContext.jsp" />
-	</definition>
-	
-		<!-- CartController -->
-	<definition name="cartSuccess" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/cart/cartSuccess.jsp" />
-	</definition>
-	<definition name="cartRes" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/cart/cartRes.jsp" />
-	</definition>
-	
-	
-	<!-- OrderController -->
-	<definition name="order" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/order/orderRes.jsp" />
-	</definition>
-	
-	<definition name="orderList" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/order/orderList.jsp" />
-	</definition>
-	
-	<definition name="orderContext" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/order/orderContext.jsp" />
-	</definition>
 	
 	
 </tiles-definitions>
