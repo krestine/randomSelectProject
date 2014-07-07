@@ -69,12 +69,11 @@ language=구글 맵 언어
 
 	function getAllRestntList() {
 		//javascript에서도 c태그 및 EL태그 사용 가능.
-
-		alert("getAllRestntList");
 		
-		var tempOK = new Array();
+		var tempOKLatitude = new Array(100);
+		var tempOKLongitude = new Array(100);
+		var tempOKName = new Array(100);
 		
-		alert("tempOK");
 		
 		var tempDistance=0;
 		var tempCnt=0;
@@ -86,34 +85,31 @@ language=구글 맵 언어
 		
 		<c:forEach items="${restntList}" var="item" varStatus="counter">
 		
-		alert("start forEach");
-		
 		//javascript 변수에 EL태그의 값을 직접 넣을 때는 직접 넣을 수 없고
 		//<c:out value=""/> 태그를 통해 view를 거쳐서 넣을 수 있음.
 		tempRestntLatitude = "<c:out value="${item.latitude}" />";
 		tempRestntLongitude = "<c:out value="${item.longitude}" />";
 		tempRestntName = "<c:out value="${item.restntName}" />";
-	
-		alert(tempCnt + "번째");
-		alert(tempRestntName + " " + tempRestntLatitude + " " + tempRestntLongitude);
+
 		tempDistance=calcDistance(myLatitude, myLongitude, tempRestntLatitude, tempRestntLongitude);
-		alert("거리 : " + tempDistance);
 		
 		if(tempDistance<sRadius){
 			
-			tempOK[tempCnt]=new RestntDTO();
-			tempOK[tempCnt].latitude = tempRestntLatitude;
-			tempOK[tempCnt].longitude = tempRestntLongitude;
-			tempOK[tempCnt].restntName = tempRestntName;
+			tempOKLatitude[tempCnt] = tempRestntLatitude;
+			tempOKLongitude[tempCnt] = tempRestntLongitude;
+			tempOKName[tempCnt] = tempRestntName;
 			tempCnt = tempCnt + 1;
+			alert("added to tempOK");
+			
 		}
 		
 		</c:forEach>
 		
 		var selection= Math.floor(Math.random() * tempCnt+1);
-		tempRestntLatitude = tempOK[selection].latitude;
-		tempRestntLongitude = tempOK[selection].longitude;
-		tempRestntName = tempOK[selection].restnName;
+		
+		tempRestntLatitude = tempOKLatitude[selection];
+		tempRestntLongitude = tempOKLongitude[selection];
+		tempRestntName = tempOKName[selection];
 		
 		//google.maps.LatLng(latitude, longitude) = 위도와 경도 값을 '위치'개체로 바꾸는 것
 		var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
@@ -283,7 +279,7 @@ language=구글 맵 언어
 
 	function initialize() {
 
-		alert('start init');
+		//alert('start init');
 
 		setSRadius();
 
@@ -332,7 +328,7 @@ language=구글 맵 언어
 		onclick="setMyCenter()">
 	<input type=button id=moveToRestntLocation value="식당 위치로 이동"
 		onclick="setRestntCenter()">
-	<input type=button id=getAllRestnt value="식당 정보 전부 가져오기"
+	<input type=button id=getAllRestnt value="식당 골라주기"
 		onclick="getAllRestntList()">
 	<br>
 	<input type=text id=tempAddress value="">
