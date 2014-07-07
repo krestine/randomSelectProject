@@ -8,109 +8,148 @@
 <title>식당 관리</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-	$(document).ready(function() {
-		$('#restntList').hide();
-		
-		$('#adress1').click(function() {
-		$('#restntList').hide();
-		$.ajax({
-			cache : false,
-			async : false,
-			type : 'POST',
-			url : 'ajaxAdress2.do',
-			data : ('adress1=' + $('#adress1').val()),
-			dataType : 'json',
-			error : function() {
-			alert("에러 : 데이터가 안넘어갑니다.");
-			},
-			success : function(json) {
-			$('#adress2').empty();
-					for (var idx = 0; idx < json.adress2.length; idx++) {
-						var adress2 = json.adress2[idx];
-						$('#adress2').append('<option value="'+adress2+'">'+ adress2+ '</option>');
-					}
+	$(document)
+			.ready(
+					function() {
 
-				}
-			});
+						$('#restntList').hide();
 
-		});
-		$('#adress2').click(function() {
-			var value =$('#adress2').val();
-			
-			if(value != '시/도 를 선택하세요'){
-				var paramData = {
-				adress1 : $('#adress1').val(),
-				adress2 : $('#adress2').val()
-				};
-				$.ajax({
-					cache : false,
-					async : false,
-					type : 'POST',
-					url : 'ajaxAdress3.do',
-					data : paramData,
-					dataType : 'json',
-					error : function() {
-						alert("에러 : 데이터가 안넘어갑니다.");
-					},
-					success : function(json) {
+						$('#adress1')
+								.click(
+										function() {
+
+											$('#restntList').hide();
+
+											$
+													.ajax({
+														cache : false,
+														async : false,
+														type : 'POST',
+														url : 'ajaxAdress2.do',
+														data : ('adress1=' + $(
+																'#adress1')
+																.val()),
+														dataType : 'json',
+														error : function() {
+															alert("에러 : 데이터가 안넘어갑니다.");
+														},
+														success : function(json) {
+															$('#adress2')
+																	.empty();
+															for (var idx = 0; idx < json.adress2.length; idx++) {
+																var adress2 = json.adress2[idx];
+																$('#adress2')
+																		.append(
+																				'<option value="'+adress2+'">'
+																						+ adress2
+																						+ '</option>');
+															}
+
+														}
+													});
+
+										});
+						$('#adress2')
+								.click(
+										function() {
+											var paramData = {
+												adress1 : $('#adress1').val(),
+												adress2 : $('#adress2').val()
+											};
+
+											if ($('#adress2').val() != '시/도 를 선택하세요') {
+
+												$
+														.ajax({
+															cache : false,
+															async : false,
+															type : 'POST',
+															url : 'ajaxAdress3.do',
+															data : paramData,
+															dataType : 'json',
+															error : function() {
+																alert("에러 : 데이터가 안넘어갑니다.");
+															},
+															success : function(
+																	json) {
+																$('#adress3')
+																		.empty();
+																for (var idx = 0; idx < json.adress3.length; idx++) {
+																	var adress3 = json.adress3[idx];
+																	$(
+																			'#adress3')
+																			.append(
+																					'<option value="'+adress3+'">'
+																							+ adress3
+																							+ '</option>');
+																}
+
+															}
+														});
+											}
+										});
 						$('#adress3')
-								.empty();
-						for (var idx = 0; idx < json.adress3.length; idx++) {
-							var adress3 = json.adress3[idx];
-							$('#adress3').append('<option value="'+adress3+'">'+ adress3+ '</option>');
-						}
-	
-					}
-				});
-			}
-		});
-		$('#adress3').click(function() {
-			var value =$('#adress3').val();
-			if(value != '시/군/구를 선택하세요')
-			
-			
-			$("#restntTable > tbody").html("");
-			var paramData = {
-				adress1 : $('#adress1').val(),
-				adress2 : $('#adress2').val(),
-				adress3 : $('#adress3').val()
-			};
-			
-				$.ajax({
-					cache : false,
-					async : false,
-					type : 'POST',
-					url : 'ajaxRestntList.do',
-					data : paramData,
-					dataType : 'json',
-					error : function() {
-						alert("에러 : 데이터가 안넘어갑니다.");
-					},
-					success : function(json) {
-						
-						var restnts = json.restnts;
-						if(restnts[0].restntId != ''){
-							$('#restntList').show();
-							$.each(restnts, function(key){
-								var restntName = restnts[key].restntName;
-								var restntId = restnts[key].restntId;
-								
-								var html ="<tr>";
-								html += '<tbody id="restntListResult"><td>'+'<input type="hidden" name="restntId" value="'+restntId+'">';
-								html += restntName+"</td></tr></tbody>";
-								$('#restntTable').append(html);
-								
-							}); 
-						}
-						
-					}
-					
-				});
-				
-		
-	});
+								.click(
+										function() {
 
-	});
+											$('#restntList').hide();
+											$("#restntTable > tbody").html("");
+											var paramData = {
+												adress1 : $('#adress1').val(),
+												adress2 : $('#adress2').val(),
+												adress3 : $('#adress3').val()
+											};
+											if ($('#adress3').val() != '시/군/구를 선택하세요') {
+
+												$
+														.ajax({
+															cache : false,
+															async : false,
+															type : 'POST',
+															url : 'ajaxRestntList.do',
+															data : paramData,
+															dataType : 'json',
+															error : function() {
+																alert("에러 : 데이터가 안넘어갑니다.");
+															},
+															success : function(
+																	json) {
+
+																var restnts = json.restnts;
+
+																if (restnts[0].restntId != '') {
+																	$(
+																			'#restntList')
+																			.show();
+																	$
+																			.each(
+																					restnts,
+																					function(
+																							key) {
+																						var restntName = restnts[key].restntName;
+																						var restntId = restnts[key].restntId;
+																						var html = "<tr>";
+																						html += '<tbody id="restntListResult"><td>'
+																								+ '<input type="hidden" name="restntId" value="'+restntId+'" class="restntId">';
+																						html += restntName
+																								+ '<button class="restntInfo">관리</button></td></tr></tbody>';
+																						$(
+																								'#restntTable')
+																								.append(
+																										html);
+																					});
+
+																}
+															}
+														});
+											}
+										});
+						/* var table = $('#restntList').DataTable();
+						$(table).on('click', '.restntInfo', function() {
+							alret('씨발');
+						}); */
+
+					});
 </script>
 
 </head>
@@ -245,36 +284,33 @@
 
 		</tbody>
 	</table> --%>
+	<div id="selectBox" align="center">
+		<select id="adress1">
+			<c:forEach items="${adress1}" var="adress1">
 
-	<select id="adress1">
-		<c:forEach items="${adress1}" var="adress1">
+				<option value="${adress1}">${adress1}</option>
 
-			<option value="${adress1}">${adress1}</option>
+			</c:forEach>
+		</select> <select id="adress2">
+			<option>시/도 를 선택하세요</option>
 
-		</c:forEach>
-	</select>
+		</select> <select id="adress3">
+			<option>시/군/구를 선택하세요</option>
+		</select>
+	</div>
 
 
+	<div id="restntList" align="center">
 
-	<select id="adress2">
-		<option>시/도 를 선택하세요</option>
-			
-	</select>
-
-	<select id="adress3">
-		<option>시/군/구를 선택하세요</option>
-	</select>
-
-	<div id="restntList">
-		
 		<table border="2" id="restntTable">
 			<caption>식당 리스트</caption>
-			
-			
+
+
 		</table>
 
 	</div>
 
+	<div id="test">아 버튼 좀 제발</div>
 
 
 </body>

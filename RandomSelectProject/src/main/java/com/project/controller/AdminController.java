@@ -62,7 +62,9 @@ public class AdminController {
 	private String lastId;
 	private String newId;
 	private String adressCode;
-
+	JSONArray jsonArray;
+	
+	
 	// 관리자 메인 페이지
 	@RequestMapping(value = "/adminMainProc.do")
 	String adminMainProc(Model model) {
@@ -498,4 +500,32 @@ public class AdminController {
 		PrintWriter out = response.getWriter();
 		out.print(jsonObject.toString());
 	}
+	@RequestMapping(value = "/ajaxMenuList.do")
+	public void ajaxMenuList(HttpServletRequest request,
+			HttpServletResponse response, SettingDTO settingDto)
+			throws IOException {
+		System.out.println("/ajaxMenuList.do");
+		
+		String restntId = request.getParameter("restntId");
+		System.out.println(restntId);
+		menus = menuService.getMenuListByRestntId(restntId);
+		System.out.println(menus);
+
+		//제이슨으로 변환
+		JSONArray jsonArray = JSONArray.fromObject(menus);
+
+		System.out.println("menus - " + jsonArray);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("menus", jsonArray);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+	}
+	
+
 }
