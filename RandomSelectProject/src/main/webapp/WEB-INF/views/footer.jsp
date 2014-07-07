@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div align="right">
 6amugeona@gmail.com 로 연락해~
+</div>
 </body>
 </html>
