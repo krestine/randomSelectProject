@@ -8,10 +8,13 @@
  <script src="//code.jquery.com/jquery.js"></script>
  <script src="/controller/resources/js/bootstrap.min.js"></script>
  <script src="/controller/resources/js/respond.js"></script>
- 
+ <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+
 <h1 align="center">어서 옵쇼!!</h1>
 <div class="container">
         <div class="row">
