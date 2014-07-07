@@ -23,17 +23,61 @@
 	<definition name="adminMain" extends="home">
 		<put-attribute name="main" value="/WEB-INF/views/admin/adminMain.jsp" />
 	</definition>
-	
+
 	<definition name="memberSearch" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/admin/memberSearch.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/views/admin/memberSearch.jsp" />
 	</definition>
-	
+
 	<definition name="restntManant" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/admin/restntManant.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/views/admin/restntManant.jsp" />
 	</definition>
-	
-	
-	
-	
-	
+
+	<!--공통: 회원가입 -->
+	<definition name="register" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/member/register.jsp" />
+	</definition>
+
+	<!-- 회원:로그인 -->
+	<definition name="login" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/member/login.jsp" />
+	</definition>
+
+	<!-- 회원:아이디찾기 -->
+	<definition name="findId" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/member/findId.jsp" />
+	</definition>
+
+	<!-- 회원:아이디찾기 확인 -->
+	<definition name="findIdOk" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/member/findIdOk.jsp" />
+	</definition>
+
+	<!-- 회원:비밀번호찾기 -->
+	<definition name="findPassword" extends="home">
+		<put-attribute name="main"
+			value="/WEB-INF/views/member/findPassword.jsp" />
+	</definition>
+
+	<!-- 회원:비밀번호찾기 확인 -->
+	<definition name="findPasswordOk" extends="home">
+		<put-attribute name="main"
+			value="/WEB-INF/views/member/findPasswordOk.jsp" />
+	</definition>
+
+	<!-- 회원:내정보 -->
+	<definition name="myInfo" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/mypage/myInfo.jsp" />
+	</definition>
+
+	<!-- 회원:탈퇴 -->
+	<definition name="drop" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/mypage/drop.jsp" />
+	</definition>
+
+	<!-- 회원:탈퇴 확인 -->
+	<definition name="dropOk" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/mypage/dropOk.jsp" />
+	</definition>
 </tiles-definitions>
