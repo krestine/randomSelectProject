@@ -83,12 +83,32 @@
 	
 	<!-- 아무거나 -->
 	<definition name="selectResult" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/randomSelect/selectResut.jsp" />
+		<put-attribute name="main" value="/WEB-INF/views/randomSelect/selectResurt.jsp" />
 	</definition>
 	
 	<!-- 사다리 -->
 	<definition name="ladderMake" extends="home">
 		<put-attribute name="main" value="/WEB-INF/views/ladder/ladderMake.jsp" />
+	</definition>
+	
+	 <!-- 회원 : 커뮤니티 친구 리스트-->
+	<definition name="mateList" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/community/mateList.jsp" />
+	</definition>
+
+	<!-- 회원 : 커뮤니티 친구 상세정보-->
+	<definition name="mateDetail" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/community/mateDetail.jsp" />
+	</definition>
+	
+	<!-- 회원 : 커뮤니티 식당 리스트-->
+	<definition name="restntList" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/community/restntList.jsp" />
+	</definition>
+
+	<!-- 회원 : 커뮤니티 식당 상세정보-->
+	<definition name="restntDetail" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/community/restntDetail.jsp" />
 	</definition>
 	
 </tiles-definitions>
