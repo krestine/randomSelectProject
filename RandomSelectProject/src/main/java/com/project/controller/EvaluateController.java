@@ -27,7 +27,7 @@ public class EvaluateController {
 	@Autowired
 	private RestntService restntService;
 	@Autowired
-	private MemberService memberService; 
+	private MemberService memberService;
 	@Autowired
 	private EvaluateService evaluateService;
 
@@ -35,10 +35,10 @@ public class EvaluateController {
 	private MemberDTO memInfo;
 	private RestntDTO restnt;
 	private MenuDTO menuInfo;
-	
-	
+
 	private List<EvaluateDTO> memberEvaluates;
 	private Object evaluateList;
+
 	/*
 	 * @Autowired
 	 * 
@@ -63,87 +63,79 @@ public class EvaluateController {
 		List<EvaluateDTO> evaluates = evaluateService
 				.getEvaluateListByMemId(loginUser.getMemId());
 		model.addAttribute("evaluates", evaluates);
-		return "evaluate/evaluate";
+		return "evaluate";
 	}
 
 	// 식당평가한 목록
 
 	@RequestMapping(value = "/evaluateList.do", method = RequestMethod.POST)
-	public ModelAndView EvaluateListForm(HttpServletRequest request, Model model,
-			String memId) {
+	public ModelAndView EvaluateListForm(HttpServletRequest request,
+			Model model, String memId) {
 		System.out.println("evaluateList()");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
-		ModelAndView view = new ModelAndView("evaluate/evaluateList");
+		ModelAndView view = new ModelAndView("evaluateList");
 		System.out.println(loginUser.toString());
 		memId = loginUser.getMemId();
-		System.out.println("회원아이디 :: 컨트롤러에서 멤아이디"+memId);
-//		memberEvaluates = evaluateService.getEvaluateListByMemId(memId);
-//		view.addObject("memberEvaluates", memberEvaluates);
-	
-	
-	
-	
-	int page = 1;
-	int limit = 10;
+		System.out.println("회원아이디 :: 컨트롤러에서 멤아이디" + memId);
+		// memberEvaluates = evaluateService.getEvaluateListByMemId(memId);
+		// view.addObject("memberEvaluates", memberEvaluates);
 
-	if (request.getParameter("page") != null) {
-		page = Integer.parseInt(request.getParameter("page"));
-	}
-	
-	// 총 리스트 수
-	int listcount = evaluateService.getListCount(); 
-	System.out.println("count는 " + listcount);
+		int page = 1;
+		int limit = 10;
 
-	//게시글 리스트
-	view.addObject("boardList", evaluateService.getEvaluateListByMemId(memId, page, limit)); 
-																	
-	// 총 페이지 수
-	// 0.95를 더해서 올림 처리
-	int maxpage = (int) ((double) listcount / limit + 0.95); 
-	// 현재 페이지에 보여줄 시작 페이지 수(1, 11, 21 등...)
-	int startpage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
-	// 현재 페이지에 보여줄 마지막 페이지 수(10, 20, 30 등...)
-	int endpage = startpage + 10 - 1;
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
 
-	if (endpage > maxpage)
-		endpage = maxpage;
-	
+		// 총 리스트 수
+		// int listcount = evaluateService.getListCount(memId);
+		// System.out.println("count는 " + listcount);
 
-	view.addObject("page", page); // 현재 페이지 수
-	view.addObject("maxpage", maxpage); // 최대 페이지 수
-	view.addObject("startpage", startpage); // 현재 페이지에 표시할 첫 페이지 수
-	view.addObject("endpage", endpage); // 현재 페이지에 표시할 끝 페이지 수
-	view.addObject("listcount", listcount); // 글 수
-	view.addObject("evaluateList", evaluateList); // 게시글 리스트
-	
-	
+		// 게시글 리스트
+		view.addObject("boardList",
+				evaluateService.getEvaluateListByMemId(memId, page, limit));
+		/*
+		 * // 총 페이지 수 // 0.95를 더해서 올림 처리 int maxpage = (int) ((double) listcount
+		 * / limit + 0.95); // 현재 페이지에 보여줄 시작 페이지 수(1, 11, 21 등...) int
+		 * startpage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1; // 현재
+		 * 페이지에 보여줄 마지막 페이지 수(10, 20, 30 등...) int endpage = startpage + 10 - 1;
+		 * 
+		 * if (endpage > maxpage) endpage = maxpage;
+		 * 
+		 * 
+		 * view.addObject("page", page); // 현재 페이지 수 view.addObject("maxpage",
+		 * maxpage); // 최대 페이지 수 view.addObject("startpage", startpage); // 현재
+		 * 페이지에 표시할 첫 페이지 수 view.addObject("endpage", endpage); // 현재 페이지에 표시할 끝
+		 * 페이지 수 view.addObject("listcount", listcount); // 글 수
+		 * view.addObject("evaluateList", evaluateList); // 게시글 리스트
+		 */
 		return view;
 	}
+
 	// 평가 안한 식당목록
-		@RequestMapping(value = "/nEvaluateListForm.do", method = RequestMethod.POST)
-		public String nEvaluateListForm(HttpServletRequest request, Model model,
-				String memId) {
-			System.out.println("nEvaluateListForm()");
-			MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
-					"loginUser");
-			
-			System.out.println(loginUser.toString());
-			memId = loginUser.getMemId();
-			System.out.println(memId);
-			memberEvaluates = evaluateService.getnEvaluateListByMemId(memId);
-			model.addAttribute("memberEvaluates", memberEvaluates);
+	@RequestMapping(value = "/nEvaluateListForm.do", method = RequestMethod.POST)
+	public String nEvaluateListForm(HttpServletRequest request, Model model,
+			String memId) {
+		System.out.println("nEvaluateListForm()");
+		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
+				"loginUser");
+
+		System.out.println(loginUser.toString());
+		memId = loginUser.getMemId();
+		System.out.println(memId);
+		memberEvaluates = evaluateService.getnEvaluateListByMemId(memId);
+		model.addAttribute("memberEvaluates", memberEvaluates);
 		System.out.println(memberEvaluates);
-			return "evaluate/nEvaluateList";
-		}
-		
-	
+		return "nEvaluateList";
+	}
+
 	// 평가 수정editOk
 	@RequestMapping(value = "edit.do", method = RequestMethod.POST)
 	public String edit(Model model, HttpServletRequest request) {
 		// 저장해줘..(쿼리문으로 xml에 쓰면돼)
 
-		return "evaluate/edit";
+		return "edit";
 	}
 
 	// 평가 수정editOk
@@ -151,7 +143,7 @@ public class EvaluateController {
 	public String editOk(Model model, HttpServletRequest request) {
 		// 저장해줘..(쿼리문으로 xml에 쓰면돼)
 
-		return "evaluate/editOk";
+		return "editOk";
 	}
 
 	@RequestMapping(value = "/evaluateListProc.do", method = RequestMethod.POST)
@@ -165,7 +157,7 @@ public class EvaluateController {
 			memId = loginUser.getMemId();
 		} catch (Exception e) {
 			model.addAttribute("errorMessage", "로그인 해 주세요!");
-			return "setting/error";
+			return "error";
 		}
 
 		System.out.println("평가 리스트 실행");
@@ -173,13 +165,13 @@ public class EvaluateController {
 			List<EvaluateDTO> evaluates = evaluateService
 					.getEvaluateListByMemId(memId);
 			model.addAttribute("evaluates", evaluates);
-			return "evaluate/evaluateList";
+			return "evaluateList";
 
 		} catch (Exception e) {
 			model.addAttribute("errorMessage",
 					"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
 		}
-		return "setting/error";
+		return "error";
 
 	}
 
@@ -190,57 +182,47 @@ public class EvaluateController {
 		EvaluateDTO evaluate = (EvaluateDTO) evaluateService
 				.getEvaluateListByMemId(evaluateDto.getMemId());
 		model.addAttribute("evaluate", evaluate);
-		return "evaluateListForm.do";
+		return "edit";
 	}
-
-	
 
 	// 식당 평가 입력
 	@RequestMapping(value = "/nEvaluateListProc.do", method = RequestMethod.POST)
 	public String nEvaluateListProc(Model model, EvaluateDTO evaluateDTO) {
 		System.out.println("nEvaluateListProc()");
 		evaluateService.putScoreByEvaluateTerms(evaluateDTO);
-		return "evaluate/nEvaluateListForm.do";
+		return "nEvaluateList";
 	}
-	
-	
-	//페이징구현 ㅋㅋ
 
-		@RequestMapping("evaluate/evaluateList.do")
-		public ModelAndView board_list(HttpServletRequest request,
-				HttpServletResponse response, String memId) {
-			ModelAndView view = new ModelAndView("evaluate/evaluateList");
-			int page = 1;
-			int limit = 10;
-
-			if (request.getParameter("page") != null) {
-				page = Integer.parseInt(request.getParameter("page"));
-			}
-			
-			// 총 리스트 수
-			int listcount = evaluateService.getListCount(); 
-			System.out.println("count는 " + listcount);
-
-			//게시글 리스트
-			view.addObject("boardList", evaluateService.getEvaluateListByMemId(memId, page, limit)); 
-																			
-			// 총 페이지 수
-			// 0.95를 더해서 올림 처리
-			int maxpage = (int) ((double) listcount / limit + 0.95); 
-			// 현재 페이지에 보여줄 시작 페이지 수(1, 11, 21 등...)
-			int startpage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
-			// 현재 페이지에 보여줄 마지막 페이지 수(10, 20, 30 등...)
-			int endpage = startpage + 10 - 1;
-
-			if (endpage > maxpage)
-				endpage = maxpage;
-			
-
-			view.addObject("page", page); // 현재 페이지 수
-			view.addObject("maxpage", maxpage); // 최대 페이지 수
-			view.addObject("startpage", startpage); // 현재 페이지에 표시할 첫 페이지 수
-			view.addObject("endpage", endpage); // 현재 페이지에 표시할 끝 페이지 수
-			view.addObject("evaluateList", evaluateList); // 게시글 리스트
-			return view;
-		}
+	// 페이징구현 ㅋㅋ
+	/*
+	 * @RequestMapping("evaluate/evaluateList.do") public ModelAndView
+	 * board_list(HttpServletRequest request, HttpServletResponse response,
+	 * String memId) { ModelAndView view = new
+	 * ModelAndView("evaluate/evaluateList"); int page = 1; int limit = 10;
+	 * 
+	 * if (request.getParameter("page") != null) { page =
+	 * Integer.parseInt(request.getParameter("page")); }
+	 * 
+	 * // 총 리스트 수
+	 * 
+	 * nt listcount = evaluateService.getListCount(memId);
+	 * System.out.println("count는 " + listcount);
+	 * 
+	 * // 게시글 리스트 view.addObject("boardList",
+	 * evaluateService.getEvaluateListByMemId(memId, page, limit));
+	 * 
+	 * // 총 페이지 수 // 0.95를 더해서 올림 처리 int maxpage = (int) ((double) listcount /
+	 * limit + 0.95); // 현재 페이지에 보여줄 시작 페이지 수(1, 11, 21 등...) int startpage =
+	 * (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1; // 현재 페이지에 보여줄 마지막 페이지
+	 * 수(10, 20, 30 등...) int endpage = startpage + 10 - 1;
+	 * 
+	 * if (endpage > maxpage) endpage = maxpage;
+	 * 
+	 * view.addObject("page", page); // 현재 페이지 수 view.addObject("maxpage",
+	 * maxpage); // 최대 페이지 수 view.addObject("startpage", startpage); // 현재 페이지에
+	 * 표시할 첫 페이지 수 view.addObject("endpage", endpage); // 현재 페이지에 표시할 끝 페이지 수
+	 * view.addObject("evaluateList", evaluateList); // 게시글 리스트 return view;
+	 * 
+	 * }
+	 */
 }
