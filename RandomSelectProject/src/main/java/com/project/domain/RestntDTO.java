@@ -276,6 +276,33 @@ public class RestntDTO {
 			return false;
 		return true;
 	}
-	
+	public RestntDTO(String restntId, String restntName, String adress1,
+			String adress2, String adress3, String adress4, String restntTel,
+			String restntCate, String restntEval, String menuName,
+			String menuPrice, String menuCalorie, String evalId, String score,
+			String memId, String mateId, String latitude, String longitude) {
+		super();
+		this.restntId = restntId;
+		this.restntName = restntName;
+		this.adress1 = adress1;
+		this.adress2 = adress2;
+		this.adress3 = adress3;
+		this.adress4 = adress4;
+		this.restntTel = restntTel;
+		this.restntCate = restntCate;
+		this.restntEval = restntEval;
+		this.menuName = menuName;
+		this.menuPrice = menuPrice;
+		this.menuCalorie = menuCalorie;
+		this.evalId = evalId;
+		this.score = score;
+		this.memId = memId;
+		this.mateId = mateId;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+	public RestntDTO(){
+		
+	}
 	
 }
