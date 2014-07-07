@@ -96,19 +96,16 @@ language=구글 맵 언어
 		
 		var tempOk[];
 		var tempCnt=0;
+		
+		alert('selectRandomRestnt');
+		
 		<c:forEach items="${restntList}" var="item" varStatus="counter">
 		
 		var tempRestntLatitude = "<c:out value="${item.latitude}" />";
 		var tempRestntLongitude = "<c:out value="${item.longitude}" />";
 		
 		if(calcDistance(myLatitude, myLongitude, tempRestntLatitude, tempRestntLongitude)<sRadius){
-			tempOk[tempCnt++]=new RestntDTO("<c:out value="${item.restntId}" />", "<c:out value="${item.restnTName}" />",
-					"<c:out value="${item.address1}" />", "<c:out value="${item.address2}" />", "<c:out value="${item.address3}" />",
-					"<c:out value="${item.address4}" />", "<c:out value="${item.restntTel}" />", "<c:out value="${item.restntCate}" />",
-					"<c:out value="${item.restntEval}" />", "<c:out value="${item.menName}" />", "<c:out value="${item.menuPrice}" />",
-					"<c:out value="${item.menuCalorie}" />", "<c:out value="${item.evalId}" />", "<c:out value="${item.score}" />",
-					"<c:out value="${item.memId}" />", "<c:out value="${item.mateId}" />", "<c:out value="${item.latitude}" />",
-					"<c:out value="${item.longitude}" />");
+			tempOk[tempCnt++]=new RestntDTO();
 		}
 		
 		//google.maps.LatLng(latitude, longitude) = 위도와 경도 값을 '위치'개체로 바꾸는 것
@@ -329,8 +326,10 @@ language=구글 맵 언어
 		onclick="setMyCenter()">
 	<input type=button id=moveToRestntLocation value="식당 위치로 이동"
 		onclick="setRestntCenter()">
-	<input type=button id=getAllRestnt value="식당 정보 가져오기"
+	<input type=button id=getAllRestnt value="식당 정보 전부 가져오기"
 		onclick="getAllRestntList()">
+	<input type=button id=selectRandomRestnt value="하나만 랜덤으로 골라주기"
+		onclick="selectRandomRestnt()">
 	<br>
 	<input type=text id=tempAddress value="">
 	<input type=button id=geocodeTempAddress value="해당 주소 지도에 표시"

@@ -5,6 +5,8 @@
 <html>
 <head>
 
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
 <script type="text/javascript">
 	function loginGo() {
 		document.getElementById("select1").action = "loginForm.do";
