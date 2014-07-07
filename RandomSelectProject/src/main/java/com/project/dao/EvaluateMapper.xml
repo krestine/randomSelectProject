@@ -3,36 +3,51 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.EvaluateMapper">
 	<!--관리자, 회원 : 유저 아이디로 평가 목록 열람 -->
-	<select id="getEvaluateListByUserId" parameterType="String" resultType="EvaluateDTO">
-		select * from evaluate where userId = #{userId} and score != -1
+	<select id="getEvaluateListByUserId" parameterType="String"
+		resultType="EvaluateDTO">
+		select * from evaluate where userId = #{userId} and score
+		!= -1
 	</select>
-	
+	<!-- select evalId, score, evalDate, restntName from Evaluate e, restnt 
+		r where e.memId=#{memId} and e.restntId = r.restntId and score != -1 -->
+
+	<select id="getListCount" parameterType="String" resultType="int">
+		select count(*) from evaluate where memId= #{memId}
+	</select>
+
+
 	<!--구성회:회원:식당평가한 목록 -->
-	<select id="getEvaluateListByMemId" parameterType="String" resultType="EvaluateDTO">
-		select evalId, score, evalDate, restntName
-		from Evaluate e, restnt r
-		where
-		e.memId=#{memId}
-		and e.restntId = r.restntId
-		and score != -1	
-	
-	<!-- 	select *
-		from Evaluate
-		where
-		memId=#{memId} -->
-		
+	<select id="getEvaluateListByMemId" parameterType="String"
+		resultType="EvaluateDTO">
+		SELECT B.* , C.* FROM (
+		SELECT A.*, row_number() over (ORDER BY
+		EVALDATE DESC) number_of_row
+		FROM evaluate A
+		WHERE A.memId=#{memId}
+		ORDER BY EVALDATE DESC
+		) B,
+		restnt C
+		WHERE B.restntId = C.restntId
+		and
+		score != -1
+		AND B.number_of_row between #{startrow} and #{endrow}
+
+		<!-- select * from Evaluate where memId=#{memId} -->
+
 	</select>
 
 	<!--구성회:회원:평가하지 않은 목록 -->
 
-	<select id="getnEvaluateListByMemId" parameterType="String" resultType="EvaluateDTO">
+	<select id="getnEvaluateListByMemId" parameterType="String"
+		resultType="EvaluateDTO">
 
 		select evalId, score, evalDate, restntName
-		from Evaluate e, restnt r
+		from Evaluate e,
+		restnt r
 		where
 		e.memId=#{memId}
 		and e.restntId = r.restntId
-		and score = -1	
+		and score = -1
 	</select>
 
 	<!-- 회원: 식당 평가 -->
@@ -45,7 +60,7 @@
 		where evalId=#{evalId}
 	</update>
 
-	
+
 	<!-- 회원: 평가안한 방문리스트 입력 <update id="setEvaluateInfoByEvaluateTerms" parameterType="EvaluateDTO"> 
 		update Evaluate set evalScore =#{evalScore}, where evalId=#{evalId} </update> -->
 
@@ -54,7 +69,7 @@
 
 
 	<!--회원: 평가한 식당목록 -->
-	
+
 
 	<!-- 회원: 식당 평가 수정 ,입력 -->
 	<update id="setScoreByEvaluateTerms" parameterType="EvaluateDTO">
@@ -62,17 +77,6 @@
 		evaluate set score=#{score} where evalId =#{evalId} and
 		memId=#{memId}
 	</update>
-	
-	<!-- 회원: 평가한 친구의 식당목록 -->
-	<select id="getEvaluateListByMateId" parameterType="EvaluateDTO"  resultType="EvaluateDTO">
- 			select r.restntname, e.score, m.mateid
- 			from evaluate e, restnt r, mate m, member mm
- 			where mm.MEMID=#{mm.MEMID} 
- 			and e.RESTNTID= r.RESTNTID
- 			and e.MEMID = m.MATEID
- 			and mm.MEMID=m.MEMID
- 			and Score != -1
- 	</select>
- 	
+
 
 </mapper>

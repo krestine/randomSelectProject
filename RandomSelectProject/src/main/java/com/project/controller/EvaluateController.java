@@ -3,6 +3,7 @@ package com.project.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class EvaluateController {
 	
 	
 	private List<EvaluateDTO> memberEvaluates;
+	private Object evaluateList;
 	/*
 	 * @Autowired
 	 * 
@@ -67,19 +69,56 @@ public class EvaluateController {
 	// 식당평가한 목록
 
 	@RequestMapping(value = "/evaluateList.do", method = RequestMethod.POST)
-	public String EvaluateListForm(HttpServletRequest request, Model model,
+	public ModelAndView EvaluateListForm(HttpServletRequest request, Model model,
 			String memId) {
 		System.out.println("evaluateList()");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
-		
+		ModelAndView view = new ModelAndView("evaluate/evaluateList");
 		System.out.println(loginUser.toString());
 		memId = loginUser.getMemId();
-		System.out.println(memId);
-		memberEvaluates = evaluateService.getEvaluateListByMemId(memId);
-		model.addAttribute("memberEvaluates", memberEvaluates);
-	System.out.println(memberEvaluates);
-		return "evaluate/evaluateList";
+		System.out.println("회원아이디 :: 컨트롤러에서 멤아이디"+memId);
+//		memberEvaluates = evaluateService.getEvaluateListByMemId(memId);
+//		view.addObject("memberEvaluates", memberEvaluates);
+	
+	
+	
+	
+	int page = 1;
+	int limit = 10;
+
+	if (request.getParameter("page") != null) {
+		page = Integer.parseInt(request.getParameter("page"));
+	}
+	
+	// 총 리스트 수
+	int listcount = evaluateService.getListCount(); 
+	System.out.println("count는 " + listcount);
+
+	//게시글 리스트
+	view.addObject("boardList", evaluateService.getEvaluateListByMemId(memId, page, limit)); 
+																	
+	// 총 페이지 수
+	// 0.95를 더해서 올림 처리
+	int maxpage = (int) ((double) listcount / limit + 0.95); 
+	// 현재 페이지에 보여줄 시작 페이지 수(1, 11, 21 등...)
+	int startpage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
+	// 현재 페이지에 보여줄 마지막 페이지 수(10, 20, 30 등...)
+	int endpage = startpage + 10 - 1;
+
+	if (endpage > maxpage)
+		endpage = maxpage;
+	
+
+	view.addObject("page", page); // 현재 페이지 수
+	view.addObject("maxpage", maxpage); // 최대 페이지 수
+	view.addObject("startpage", startpage); // 현재 페이지에 표시할 첫 페이지 수
+	view.addObject("endpage", endpage); // 현재 페이지에 표시할 끝 페이지 수
+	view.addObject("listcount", listcount); // 글 수
+	view.addObject("evaluateList", evaluateList); // 게시글 리스트
+	
+	
+		return view;
 	}
 	// 평가 안한 식당목록
 		@RequestMapping(value = "/nEvaluateListForm.do", method = RequestMethod.POST)
@@ -163,4 +202,45 @@ public class EvaluateController {
 		evaluateService.putScoreByEvaluateTerms(evaluateDTO);
 		return "evaluate/nEvaluateListForm.do";
 	}
+	
+	
+	//페이징구현 ㅋㅋ
+
+		@RequestMapping("evaluate/evaluateList.do")
+		public ModelAndView board_list(HttpServletRequest request,
+				HttpServletResponse response, String memId) {
+			ModelAndView view = new ModelAndView("evaluate/evaluateList");
+			int page = 1;
+			int limit = 10;
+
+			if (request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+			
+			// 총 리스트 수
+			int listcount = evaluateService.getListCount(); 
+			System.out.println("count는 " + listcount);
+
+			//게시글 리스트
+			view.addObject("boardList", evaluateService.getEvaluateListByMemId(memId, page, limit)); 
+																			
+			// 총 페이지 수
+			// 0.95를 더해서 올림 처리
+			int maxpage = (int) ((double) listcount / limit + 0.95); 
+			// 현재 페이지에 보여줄 시작 페이지 수(1, 11, 21 등...)
+			int startpage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
+			// 현재 페이지에 보여줄 마지막 페이지 수(10, 20, 30 등...)
+			int endpage = startpage + 10 - 1;
+
+			if (endpage > maxpage)
+				endpage = maxpage;
+			
+
+			view.addObject("page", page); // 현재 페이지 수
+			view.addObject("maxpage", maxpage); // 최대 페이지 수
+			view.addObject("startpage", startpage); // 현재 페이지에 표시할 첫 페이지 수
+			view.addObject("endpage", endpage); // 현재 페이지에 표시할 끝 페이지 수
+			view.addObject("evaluateList", evaluateList); // 게시글 리스트
+			return view;
+		}
 }

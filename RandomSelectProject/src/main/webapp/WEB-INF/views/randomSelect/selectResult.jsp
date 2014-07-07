@@ -22,6 +22,9 @@ body {
 	height: 100%
 }
 </style>
+<!-- sensor=해당 단말기에 맵 성능 향상을 위한 센서가 있을 경우 강제로 사용
+language=구글 맵 언어
+-->
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=true&language=ko">
 	
@@ -45,7 +48,7 @@ body {
 	function showCurrentLocation(Lat, Lon) {
 		$("#currentLocation").html(Lat + ' ' + Lon);
 	}
-	
+
 	function calcDistance(lat1, lon1, lat2, lon2) {
 		var EARTH_R, Rad, radLat1, radLat2, radDist;
 		var distance, ret;
@@ -64,32 +67,38 @@ body {
 		return Math.round(ret);
 	}
 
-	
-	function getAllRestntList(){
+	function getAllRestntList() {
+		//javascript에서도 c태그 및 EL태그 사용 가능.
+		
 		<c:forEach items="${restntList}" var="item" varStatus="counter">
-			var tempRestntLatitude = "<c:out value="${item.latitude}" />";
-			var tempRestntLongitude = "<c:out value="${item.longitude}" />";
-			var tempRestntPos = new google.maps.LatLng(tempRestntLatitude, tempRestntLongitude);
-			var tempRestntMarker = new google.maps.Marker({
-				position : tempRestntPos,
-				map : map,
-			});
-			tempRestntMarker.setMap(map);
-			var tempRestntInfo = new google.maps.InfoWindow();
-			tempRestntInfo.setContent("<c:out value="${item.restntName}" />");
-			tempRestntInfo.open(map, tempRestntMarker);
+		
+		//javascript 변수에 EL태그의 값을 직접 넣을 때는 직접 넣을 수 없고
+		//<c:out value=""/> 태그를 통해 view를 거쳐서 넣을 수 있음.
+		var tempRestntLatitude = "<c:out value="${item.latitude}" />";
+		var tempRestntLongitude = "<c:out value="${item.longitude}" />";
+		
+		//google.maps.LatLng(latitude, longitude) = 위도와 경도 값을 '위치'개체로 바꾸는 것
+		var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
+				tempRestntLongitude);
+		var tempRestntMarker = new google.maps.Marker({
+			position : tempRestntPos,
+			map : map,
+		});
+		tempRestntMarker.setMap(map);
+		var tempRestntInfo = new google.maps.InfoWindow();
+		tempRestntInfo.setContent("<c:out value="${item.restntName}" />");
+		tempRestntInfo.open(map, tempRestntMarker);
 		</c:forEach>
 	}
-	
+
 	function setMyCenter() {
+		//map.setCenter(latlng) = 설정된 위치로 맵 중심 이동
+		//map.setZoom(Int) = 설정된 숫자값으로 맵 확대율 조정
 		map.setCenter(pos);
-		map.setZoom(16);
-	}
-	function setRestntCenter() {
-		map.setCenter(pos2);
-		map.setZoom(16);
+		map.setZoom(18);
 	}
 	function redrawMap() {
+		//맵을 강제로 다시 그리고 싶을 때 사용함.
 		google.maps.event.trigger(map, 'resize');
 	}
 
@@ -113,6 +122,7 @@ body {
 	}
 
 	function findLocation() {
+		//docment.getElementById = view에서 해당 Id를 가진 컨트롤의 값을 가져옴
 		var tempAddress = document.getElementById('tempAddress').value;
 		geocoder.geocode({
 			'address' : tempAddress
@@ -124,7 +134,9 @@ body {
 					position : results[0].geometry.location
 				});
 				tempMarker.setMap(map);
-				$("#currentLocation").html(results[0].geometry.location.lat() + ' ' + results[0].geometry.location.lng());
+				$("#currentLocation").html(
+						results[0].geometry.location.lat() + ' '
+								+ results[0].geometry.location.lng());
 			} else {
 				alert('Geocode was not successful for the following reason: '
 						+ status);
@@ -139,19 +151,20 @@ body {
 			'address' : newMyAddress
 		}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
-				onSuccess(results[0].geometry.location.lat(), results[0].geometry.location.lng(), 10);
+				onSuccess(results[0].geometry.location.lat(),
+						results[0].geometry.location.lng(), 10);
 			} else {
 				alert('Geocode was not successful for the following reason: '
 						+ status);
 			}
 		});
 	}
-	
+
 	function setSRadius() {
 		var tempSRadius = "<c:out value="${loginUser.memWalkRange}" />";
 		tempSRadius = Number(tempSRadius);
 		if (tempSRadius == 0) {
-			tempSRadius = 1000;
+			tempSRadius = 500;
 		}
 		sRadius = tempSRadius;
 	}
@@ -160,23 +173,24 @@ body {
 
 		//alert('onSuccess');
 		var objDiv = document.getElementById("newMyLocationForm");
-			
+
 		myLatitude = Lat;
 		myLongitude = Lon;
 		pos = new google.maps.LatLng(myLatitude, myLongitude);
 
 		$("#currentAccuracy").html("내 위치의 정확도 : " + accuracy + "m");
-		if(accuracy>200){
-			$("#accuracyAlert").html("<font color=red>단순IP기반의 위치추적 서비스는 정확하지 않습니다.<br>정확한 위치를 위해서 WI-FI 네트워크 또는 3G/4G 데이터 네트워크에 접속하시거나, 현재 주소를 수동으로 입력해 주세요.</font>");
+		if (accuracy > 200) {
+			$("#accuracyAlert")
+					.html(
+							"<font color=red>단순IP기반의 위치추적 서비스는 정확하지 않습니다.<br>정확한 위치를 위해서 WI-FI 네트워크 또는 3G/4G 데이터 네트워크에 접속하시거나, 현재 주소를 수동으로 입력해 주세요.</font>");
 
-			objDiv.style.display="block";
-		}
-		else{
+			objDiv.style.display = "block";
+		} else {
 			$("#accuracyAlert").empty;
-			objDiv.style.display="none";
+			objDiv.style.display = "none";
 		}
-		
-		//var infowindow = new google.maps.InfoWindow({map: map, position: pos, content: '내 위치'});
+
+		//google.maps.Marker(option); = 맵 위에 마커를 표시
 		var myMarker = new google.maps.Marker({
 			position : pos,
 			map : map,
@@ -184,11 +198,28 @@ body {
 		});
 		myMarker.setMap(map);
 
+		setSRadius();
+
+		var searchRadius = {
+			strokeColor : '#00FF00',
+			strokeOpacity : 0.8,
+			strokeWeight : 2,
+			fillColor : '#00FF00',
+			fillOpacity : 0.10,
+			map : map,
+			center : pos,
+			radius : sRadius
+		};
+
+		//new google.maps.Circle(option) = 맵 위에 도형(이 경우엔 원)을 표시
+		searchCircle = new google.maps.Circle(searchRadius);
+
 		geocoder.geocode({
 			'latLng' : pos
 		}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				if (results[0]) {
+					//google.maps.InfoWindow = Marker 위에 네모나게 말풍선으로 뜨는 정보창
 					var myInfoWindow = new google.maps.InfoWindow();
 					myInfoWindow.setContent('내 위치 : '
 							+ results[0].formatted_address);
@@ -201,13 +232,10 @@ body {
 			}
 		});
 
-		
-		
 		google.maps.event.addListener(myMarker, 'click', function() {
 			map.setCenter(myMarker.getPosition());
 			showCurrentLocation(myLatitude, myLongitude);
 		});
-
 
 		map.setCenter(pos);
 	}
@@ -221,8 +249,13 @@ body {
 		//alert('start init');
 
 		setSRadius();
+
+		//myOptions = 구글 맵에 사용할 옵션
+		//zoom = 초기 맵 확대값. 0 입력하면 지구본이 됨
+		//center = 초기 맵 중심값
+		//mapTypeId = 맵 종류
 		var myOptions = {
-			zoom : 14,
+			zoom : 16,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
 		map = new google.maps.Map(document.getElementById('map_canvas'),
@@ -242,13 +275,14 @@ body {
 				onSuccess(position.coords.latitude, position.coords.longitude,
 						position.coords.accuracy);
 			}, onError2(), geolocationOption);
-			
+
 		} else {
 			alert('위치 추적 서비스 동작 실패');
 		}
 
 	}
 
+	//windows가 'load'될때 initalize()함수를 불러와라
 	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 </head>
@@ -261,7 +295,8 @@ body {
 		onclick="setMyCenter()">
 	<input type=button id=moveToRestntLocation value="식당 위치로 이동"
 		onclick="setRestntCenter()">
-	<input type=button id=getAllRestnt value="식당 정보 가져오기" onclick="getAllRestntList()">
+	<input type=button id=getAllRestnt value="식당 정보 가져오기"
+		onclick="getAllRestntList()">
 	<br>
 	<input type=text id=tempAddress value="">
 	<input type=button id=geocodeTempAddress value="해당 주소 지도에 표시"
@@ -274,14 +309,14 @@ body {
 	<div id=currentLocation></div>
 	<div id=currentAccuracy></div>
 	<div id=accuracyAlert></div>
-	<div id=newMyLocationForm style="display:none">
-	<input type=text id=newMyAddress value="">
-	<input type=button id=newMyLocation value="내 주소 수동으로 입력" onclick="newMyLocation()">	
+	<div id=newMyLocationForm style="display: none">
+		<input type=text id=newMyAddress value=""> <input type=button
+			id=newMyLocation value="내 주소 수동으로 입력" onclick="newMyLocation()">
 	</div>
-	<div id="restnt_list">
+	<%-- <div id="restnt_list">
 		<c:forEach items="${restntList}" var="item">
 			 ${item.restntName} ${item.latitude} ${item.longitude}<br>
 		</c:forEach>
-	</div>
+	</div> --%>
 </body>
 </html>
