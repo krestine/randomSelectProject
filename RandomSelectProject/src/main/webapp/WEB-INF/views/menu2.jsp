@@ -64,12 +64,10 @@
 </head>
 <body>
 
-	<div class="navbar-pills">
-		<a class="brand" href="#">아무거나</a>
-
+	<center>
 		<c:choose>
 			<c:when test="${sessionScope.loginUser==null}">
-				<form id="select1" method="post">
+				<form id="select1" method="post" style="display: inline;">
 					<input type="button" class="btn btn-info" onclick="loginGo()"
 						value="로그인"> <input type="button" class="btn btn-info"
 						onclick="registerGo()" value="회원가입">
@@ -79,7 +77,7 @@
 
 
 			<c:when test="${sessionScope.loginUser.memGrade<7}">
-				<form id="select1" method="post">
+				<form id="select1" method="post"  style="display: inline;">
 					<input type="button" class="btn btn-default" onclick="logoutGo()"
 						value="로그아웃"> <input type="button" class="btn btn-info"
 						onclick="myInfoGo()" value="내정보">
@@ -87,27 +85,27 @@
 			</c:when>
 
 			<c:when test="${sessionScope.loginUser.memGrade==666}">
-				<form id="select1" method="post">
+				<form id="select1" method="post"  style="display: inline;">
 					<input type="button" class="btn btn-default" onclick="logoutGo()"
 						value="로그아웃"> <input type="button" class="btn btn-danger"
 						onclick="adminGo()" value="관리">
 				</form>
 			</c:when>
 		</c:choose>
-		<form id="select3">
+		<form id="select3"  style="display: inline;">
 			<input type="button" class="btn btn-info" onclick="selectResult()"
 				value="아무거나"> <input type="button" class="btn btn-info"
 				onclick="ladderMake()" value="복불복">
 		</form>
 
-		<form id="select2" method="post">
+		<form id="select2" method="post"  style="display: inline;">
 			<input type="button" class="btn btn-default" onclick="settingGo()"
 				value="설정 "> <input type="button" class="btn btn-info"
 				onclick="communityGo()" value="커뮤니티"> <input type="button"
 				class="btn btn-info" onclick="evaluateGo()" value="평가"> <input
 				type="button" class="btn btn-info" onclick="" value="통계">
 		</form>
-	</div>
+	</center>
 
 </body>
 </html>

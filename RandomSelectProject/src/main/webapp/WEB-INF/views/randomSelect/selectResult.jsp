@@ -99,7 +99,6 @@ language=구글 맵 언어
 			tempOKLongitude[tempCnt] = tempRestntLongitude;
 			tempOKName[tempCnt] = tempRestntName;
 			tempCnt = tempCnt + 1;
-			alert("added to tempOK");
 			
 		}
 		
