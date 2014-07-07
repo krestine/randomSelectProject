@@ -67,13 +67,13 @@ public class AdminController {
 	@RequestMapping(value = "/adminMainProc.do")
 	String adminMainProc(Model model) {
 
-		return "admin/adminMain";
+		return "adminMain";
 	}
 
 	// 회원 검색 페이지
 	@RequestMapping(value = "/memberSearchForm.do")
 	String memberSearchForm(Model model) {
-		return "admin/memberSearch";
+		return "memberSearch";
 	}
 
 	@RequestMapping(value = "/memberSearchProc.do", method = RequestMethod.POST)
@@ -194,7 +194,7 @@ public class AdminController {
 		}
 
 		model.addAttribute("choice", settingDto);
-		return "admin/restntManant";
+		return "restntManant";
 	}
 
 	/*
@@ -472,6 +472,7 @@ public class AdminController {
 		System.out.println(adress1);
 		System.out.println(adress2);
 		System.out.println(adress3);
+		
 		
 		settingDto.setAdress1(adress1);
 		settingDto.setAdress2(adress2);

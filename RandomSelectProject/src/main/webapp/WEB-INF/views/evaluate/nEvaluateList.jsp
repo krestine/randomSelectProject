@@ -17,18 +17,6 @@ function editGo() {
 </head>
 
 <body>
-
-
-${memberEvaluates}<br>
-
-
-	<%-- ${evaluationList } 이미지, 이름, 가격, 칼로리, 상세정보, 썸네일이미지, 평점 및 댓글 --%>
-
-	<%
-		int i = 0;
-	%>
-	
-		
 	<form id="select2" method="post">
 
 		<table width="600" border="1" bordercolor="#777777">
@@ -57,8 +45,7 @@ ${memberEvaluates}<br>
 					<c:otherwise>
 						<tr>
 							<td colspan="5" align="right">
-							<a href="edit.do"
-								class="edite">의견등록</a></td>
+							<a href="edit.do" class="edite">의견등록</a></td>
 							<td><input type="text" name="evaluate" maxlength="300"
 					style="width: 300px" placeholder="의견을 140자 이내로 적어주세요"></td>
 						</tr>

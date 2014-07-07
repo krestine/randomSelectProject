@@ -29,6 +29,7 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2" />
 	</beans:bean>
 
 	<context:annotation-config />
@@ -101,4 +102,21 @@
 	<beans:bean id="beanNameResolver"
 		class="org.springframework.web.servlet.view.BeanNameViewResolver"
 		p:order="1" />
+
+	<beans:bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles/tiles-def.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles2.TilesView" />
+		<beans:property name="order" value="1" />
+	</beans:bean>
+
 </beans:beans>

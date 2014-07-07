@@ -51,7 +51,7 @@ public class RandomSelectController {
 		System.out.println("main.do");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
 		model.addAttribute("loginUser",loginUser);
-		return "randomSelect/main";
+		return "main";
 	}
 
 }
