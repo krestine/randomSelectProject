@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/controller/resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
+ <script src="/controller/resources/js/bootstrap.min.js"></script>
+ <script src="/controller/resources/js/respond.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -30,11 +33,11 @@ $(document).ready(function() {
 </head>
 <body>
 	<h1>친구들이 평가한 식당리스트</h1>
-<body>
-	<form id="community" method="POST">
 
-		<input type="button" value="친구 리스트" id="mateListBtn"/> 
-		<input type="button" value="메인" id="mainBtn" />
+	<form id="community" method="POST" class="nav nav-pills">
+
+		<input type="button" class="btn btn-success" value="친구 리스트" id="mateListBtn"/> 
+		<input type="button" class="btn btn-success" value="메인" id="mainBtn" />
 	</form>
 	<br>
 	<c:forEach var="restnt" items="${restnts}">
@@ -48,11 +51,11 @@ $(document).ready(function() {
 						<input type="hidden" value="${restnt.restntId }" name="restntId">
 						<input value="${restnt.restntName}" name="restntName">
 						<input value="${restnt.score}" name="score">
-						<input type="submit" value="상세보기">
+						<input type="submit" class="btn btn-success" value="상세보기">
 						
 						</form>
 						<br>
 		</c:forEach>
-	
+<body>	
 </body>
 </html>
