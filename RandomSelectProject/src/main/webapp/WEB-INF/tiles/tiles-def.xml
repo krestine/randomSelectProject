@@ -111,4 +111,30 @@
 		<put-attribute name="main" value="/WEB-INF/views/community/restntDetail.jsp" />
 	</definition>
 	
+	<!-- 회원: 평가 메인 -->
+   <definition name="evaluate" extends="home">
+      <put-attribute name="main"
+         value="/WEB-INF/views/evaluate/evaluate.jsp" />
+   </definition>
+   <!--회원: 평가한 목록  -->
+   <definition name="evaluateList" extends="home">
+      <put-attribute name="main"
+         value="/WEB-INF/views/evaluate/evaluateList.jsp" />
+   </definition>
+   <!--회원: 평가하지 않은 목록-->
+   <definition name="nEvaluateList" extends="home">
+      <put-attribute name="main"
+         value="/WEB-INF/views/evaluate/nEvaluateList.jsp" />
+   </definition>
+   <!--회원:목록 내용수정   -->
+   <definition name="edit" extends="home">
+      <put-attribute name="main"
+         value="/WEB-INF/views/evaluate/edit.jsp" />
+   </definition>
+   <!--회원:목록내용수정 확인  -->
+   <definition name="editOk" extends="home">
+      <put-attribute name="main"
+         value="/WEB-INF/views/evaluate/editOk.jsp" />
+   </definition>
+	
 </tiles-definitions>
