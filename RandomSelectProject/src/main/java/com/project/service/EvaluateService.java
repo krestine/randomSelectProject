@@ -5,13 +5,10 @@ import java.util.List;
 import com.project.domain.EvaluateDTO;
 
 public interface EvaluateService {
-	
 
-	
 	// 평가한 방문 리스트
 	List<EvaluateDTO> getEvaluateListByMemId(String memId, int page, int limit);
 
-	
 	// 평가한 방문리스트 점수 수정
 
 	void setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto);
@@ -19,10 +16,9 @@ public interface EvaluateService {
 	// 평가안한 방문리스트
 	EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto);
 
-	//회원:식당평가 안한 점수 입력
+	// 회원:식당평가 안한 점수 입력
 	public void putnEvaluateByScore(EvaluateDTO evaluateDto);
 
-		
 	// //////////////////////////////////////////////////////////////////////
 
 	// 회원: 평가한 식당목록
@@ -41,12 +37,8 @@ public interface EvaluateService {
 
 	void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
 
-
 	List<EvaluateDTO> getEvaluateListByMemId(String memId);
 
-
-	int getListCount();
-
-	
+	int getListCount(String memId);
 
 }

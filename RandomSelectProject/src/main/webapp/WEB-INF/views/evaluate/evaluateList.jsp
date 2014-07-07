@@ -8,18 +8,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>게시판</title>
 <script type="text/javascript">
-function editGo() {
+	function editGo() {
 
-	document.getElementById("select2").action = "edit.do";
-	document.getElementById("select2").submit();
-}
+		document.getElementById("select2").action = "edit.do";
+		document.getElementById("select2").submit();
+	}
 </script>
 <title>게시판</title>
 </head>
 <body>
 	<h3>평가한 식당 리스트</h3>
-	
-<input type="button" onclick="window.location='evaluatemain.do'" value="메인" />
+
+	<input type="button" onclick="window.location='evaluatemain.do'"
+		value="메인" />
 	<input type="button" onclick="javascript:history.back(-1)" value="메인" />
 	<form id="select2" method="post">
 
@@ -41,26 +42,23 @@ function editGo() {
 				</select></td>
 				<!-- 	<td><input type="text" name="evaluate" maxlength="300"
 					style="width: 300px" placeholder="의견을 140자 이내로 적어주세요"></td> -->
-				<td>방문 평가 한 음식점</td>
-			//여기서 부터 시험 
-			<!-- <tr>	<td colspan="5" align="right">
+				<td>방문 평가 한 음식점</td> //여기서 부터 시험
+				<!-- <tr>	<td colspan="5" align="right">
 							<input type="button" onclick="deleteGo()" value="삭제"> </a></td>
 						</td>
 						</tr> -->
-						<!--  이게 시험해보려고 하는 것 -->
-							<td>${sessionScope.memId!==null}</td>
-			
-			<td align="center">
-			
-					<input type="submit" id="ok" value="등록"${sessionScope.memId == null?" disabled":"" }></td>
-					<td width="40px">삭제</td>
-							// 아래는 같음 
-				
+				<!--  이게 시험해보려고 하는 것 -->
+				<%-- 		<td>${sessionScope.memId!==null}</td> --%>
+
+				<td align="center"><input type="submit" id="ok" value="등록"
+					${sessionScope.memId == null?" disabled":"" }></td>
+				<td width="40px">삭제</td> // 아래는 같음
+
 			</tr>
 
 			<c:forEach var="evaluate" items="${boardList}">
-							
-			<tr height="35px">
+
+				<tr height="35px">
 					<td align="center">${evaluate.evalId}</td>
 					<td align="center"><c:choose>
 							<c:when test="${evaluate.score ==5}">
@@ -79,9 +77,9 @@ function editGo() {
 						★☆☆☆☆
 			</c:when>
 						</c:choose></td>
-					<td>${evaluate.restntName}</td> 
+					<td>${evaluate.restntName}</td>
 					<td>${evaluate.evalDate}</td>
-									
+
 				</tr>
 
 			</c:forEach>
@@ -100,7 +98,7 @@ function editGo() {
 			</tr>
 		</table>
 	</form>
-		</table>
+	</table>
 	</form>
 
 
