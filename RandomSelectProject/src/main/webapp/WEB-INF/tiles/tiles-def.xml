@@ -80,4 +80,15 @@
 	<definition name="dropOk" extends="home">
 		<put-attribute name="main" value="/WEB-INF/views/mypage/dropOk.jsp" />
 	</definition>
+	
+	<!-- 아무거나 -->
+	<definition name="selectResult" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/randomSelect/selectResut.jsp" />
+	</definition>
+	
+	<!-- 사다리 -->
+	<definition name="ladderMake" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/ladder/ladderMake.jsp" />
+	</definition>
+	
 </tiles-definitions>

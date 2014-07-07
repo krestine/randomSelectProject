@@ -109,11 +109,6 @@ language=구글 맵 언어
 					"<c:out value="${item.menuCalorie}" />", "<c:out value="${item.evalId}" />", "<c:out value="${item.score}" />",
 					"<c:out value="${item.memId}" />", "<c:out value="${item.mateId}" />", "<c:out value="${item.latitude}" />",
 					"<c:out value="${item.longitude}" />");
-			RestntDTO(String restntId, String restntName, String adress1,
-					String adress2, String adress3, String adress4, String restntTel,
-					String restntCate, String restntEval, String menuName,
-					String menuPrice, String menuCalorie, String evalId, String score,
-					String memId, String mateId, String latitude, String longitude)
 		}
 		
 		//google.maps.LatLng(latitude, longitude) = 위도와 경도 값을 '위치'개체로 바꾸는 것
