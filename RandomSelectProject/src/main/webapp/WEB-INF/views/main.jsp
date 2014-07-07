@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1 align="center">main body!!</h1>
+<h1 align="center">어서 옵쇼!!</h1>
 </body>
 </html>
