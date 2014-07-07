@@ -9,7 +9,7 @@ public interface EvaluateService {
 
 	
 	// 평가한 방문 리스트
-	List<EvaluateDTO> getEvaluateListByMemId();
+	List<EvaluateDTO> getEvaluateListByMemId(String memId, int page, int limit);
 
 	
 	// 평가한 방문리스트 점수 수정
@@ -43,6 +43,9 @@ public interface EvaluateService {
 
 
 	List<EvaluateDTO> getEvaluateListByMemId(String memId);
+
+
+	int getListCount();
 
 	
 
