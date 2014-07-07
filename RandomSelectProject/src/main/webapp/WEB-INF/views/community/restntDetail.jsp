@@ -5,7 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<link href="/controller/resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
+ <script src="/controller/resources/js/bootstrap.min.js"></script>
+ <script src="/controller/resources/js/respond.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -41,9 +43,9 @@ $(document).ready(function() {
 				
 					<br>
 					<form id="community" method="POST">
-						<input type="button" value="식당 리스트" id="restntListBtn"/>
-						<input type="button" value="친구 리스트" id="mateListBtn"/>
-						<input type="button" value="메인" id="mainBtn"/>
+						<input type="button" class="btn btn-success" value="식당 리스트" id="restntListBtn"/>
+						<input type="button" class="btn btn-success" value="친구 리스트" id="mateListBtn"/>
+						<input type="button" class="btn btn-success" value="메인" id="mainBtn"/>
 					</form>
 					<br>
      				<form action="restntDetailProc.do" method="POST">
