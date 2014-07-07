@@ -127,98 +127,109 @@ label.error {
 										});
 
 						// 회원가입 체크
-						$("#registerForm").validate({
-							onkeyup : false,
-							onfocusout : false,
-							//focusInvalid : false,
-							//focusCleanup:true,
-							groups : {
-								phoneGroup : "mPhoneCode mPhoneMid mPhoneEnd"
-							},
-							rules : {
-								memId : {
-									required : true,
-									email : true
-								/* remote : {
-											url : "idCheck.do",
-											type : "POST",
-											data : {
-												memId : function() {
-													return $("#memId").val();
+						$("#registerForm")
+								.validate(
+										{
+											onkeyup : false,
+											onfocusout : false,
+											//focusInvalid : false,
+											//focusCleanup:true,
+											groups : {
+												phoneGroup : "mPhoneCode mPhoneMid mPhoneEnd"
+											},
+											errorPlacement : function(error,
+													element) {
+												if (element.attr("name") == "mPhoneCode"
+														|| element.attr("name") == "mPhoneMid"
+														|| element.attr("name") == "mPhoneEnd") {
+													error
+															.insertAfter("#mPhoneEnd");
+												} else {
+													error.insertAfter(element);
 												}
-											} 
-										}*/
-								},
-								memName : {
-									required : true,
-									minlength : 2
-								},
-								memPasswd : {
-									required : true,
-									minlength : 4
-								},
-								memPasswdCheck : {
-									required : true,
-									equalTo : "#memPasswd"
-								},
-								memBirth : "required",
-								mPhoneCode : {
-									required : true,
-									number : true
-								},
-								mPhoneMid : {
-									required : true,
-									number : true
-								},
-								mPhoneEnd : {
-									required : true,
-									number : true
-								}
+											},
+											rules : {
+												memId : {
+													required : true,
+													email : true
+												/* remote : {
+															url : "idCheck.do",
+															type : "POST",
+															data : {
+																memId : function() {
+																	return $("#memId").val();
+																}
+															} 
+														}*/
+												},
+												memName : {
+													required : true,
+													minlength : 2
+												},
+												memPasswd : {
+													required : true,
+													minlength : 4
+												},
+												memPasswdCheck : {
+													required : true,
+													equalTo : "#memPasswd"
+												},
+												memBirth : "required",
+												mPhoneCode : {
+													required : true,
+													number : true
+												},
+												mPhoneMid : {
+													required : true,
+													number : true
+												},
+												mPhoneEnd : {
+													required : true,
+													number : true
+												}
 
-							},
+											},
 
-							messages : {
-								memId : {
-									required : "아이디를 입력해주세요",
-									email : "이메일 형식으로 써주세요.",
-									remote : "사용할수 없는 이메일입니다."
-								},
-								memName : {
-									required : "이름을 입력해주세요.",
-									minlength : "2자이상 입력해주세요."
-								},
-								memPasswd : {
-									required : "비밀번호를 입력해주세요.",
-									minlength : "4자이상 입력해주세요."
-								},
-								memPasswdCheck : {
-									required : "비밀번호 확인을 입력해주세요.",
-									equalTo : "비밀번호가 일치하지 않습니다."
-								},
-								memBirth : "생일을 입력해주세요.",
-								mPhoneCode : {
-									required : "전화번호를 입력해주세요.",
-									number : "숫자를 입력해주세요."
-								},
-								mPhoneMid : {
-									required : "전화번호를 입력해주세요.",
-									number : "숫자를 입력해주세요."
-								},
-								mPhoneEnd : {
-									required : "전화번호를 입력해주세요.",
-									number : "숫자를 입력해주세요."
-								}
-							},
-							submitHandler : function(form) {
-								$(form).ajaxSubmit();
-							},
-							success : function(xml) {
-							}
-						});
+											messages : {
+												memId : {
+													required : "아이디를 입력해주세요",
+													email : "이메일 형식으로 써주세요.",
+													remote : "사용할수 없는 이메일입니다."
+												},
+												memName : {
+													required : "이름을 입력해주세요.",
+													minlength : "2자이상 입력해주세요."
+												},
+												memPasswd : {
+													required : "비밀번호를 입력해주세요.",
+													minlength : "4자이상 입력해주세요."
+												},
+												memPasswdCheck : {
+													required : "비밀번호 확인을 입력해주세요.",
+													equalTo : "비밀번호가 일치하지 않습니다."
+												},
+												memBirth : "생일을 입력해주세요.",
+												mPhoneCode : {
+													required : "전화번호를 입력해주세요.",
+													number : "숫자를 입력해주세요."
+												},
+												mPhoneMid : {
+													required : "전화번호를 입력해주세요.",
+													number : "숫자를 입력해주세요."
+												},
+												mPhoneEnd : {
+													required : "전화번호를 입력해주세요.",
+													number : "숫자를 입력해주세요."
+												}
+											},
+											submitHandler : function(form) {
+												$(form).ajaxSubmit();
+											},
+											success : function(xml) {
+											}
+										});
 					});
 
-	 
-	 
 	function action() {
 		document.getElementById("form").action = "main.do";
 		document.getElementById("form").submit();
