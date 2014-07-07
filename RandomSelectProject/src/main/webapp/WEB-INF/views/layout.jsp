@@ -60,7 +60,7 @@
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 <body
-	background="http://cfile29.uf.tistory.com/image/2535543C537C56032F19A7">
+	background ="/controller/resources/img/bg.png">
 	<br>
 	<br>
 	<div align="center">
