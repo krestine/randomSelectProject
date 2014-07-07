@@ -35,74 +35,80 @@
 
 		});
 		$('#adress2').click(function() {
-				alret($('#adress2').value);
+			var value =$('#adress2').val();
+			
+			if(value != '시/도 를 선택하세요'){
 				var paramData = {
-					adress1 : $('#adress1').val(),
-					adress2 : $('#adress2').val()
+				adress1 : $('#adress1').val(),
+				adress2 : $('#adress2').val()
 				};
 				$.ajax({
-							cache : false,
-							async : false,
-							type : 'POST',
-							url : 'ajaxAdress3.do',
-							data : paramData,
-							dataType : 'json',
-							error : function() {
-								alert("에러 : 데이터가 안넘어갑니다.");
-							},
-							success : function(json) {
-								$('#adress3')
-										.empty();
-								for (var idx = 0; idx < json.adress3.length; idx++) {
-									var adress3 = json.adress3[idx];
-									$('#adress3').append('<option value="'+adress3+'">'+ adress3+ '</option>');
-								}
-
-							}
+					cache : false,
+					async : false,
+					type : 'POST',
+					url : 'ajaxAdress3.do',
+					data : paramData,
+					dataType : 'json',
+					error : function() {
+						alert("에러 : 데이터가 안넘어갑니다.");
+					},
+					success : function(json) {
+						$('#adress3')
+								.empty();
+						for (var idx = 0; idx < json.adress3.length; idx++) {
+							var adress3 = json.adress3[idx];
+							$('#adress3').append('<option value="'+adress3+'">'+ adress3+ '</option>');
+						}
+	
+					}
 				});
-			
+			}
 		});
 		$('#adress3').click(function() {
-			if($('#adress2').value!=0){
-				$('#restntList').show();
-				
-				$("#restntTable > tbody").html("");
-				var paramData = {
-					adress1 : $('#adress1').val(),
-					adress2 : $('#adress2').val(),
-					adress3 : $('#adress3').val()
-				};
-				if($('#adress3').value!=0){
-					$.ajax({
-						cache : false,
-						async : false,
-						type : 'POST',
-						url : 'ajaxRestntList.do',
-						data : paramData,
-						dataType : 'json',
-						error : function() {
-							alert("에러 : 데이터가 안넘어갑니다.");
-						},
-						success : function(json) {
-							
-							var restnts = json.restnts;
+			var value =$('#adress3').val();
+			if(value != '시/군/구를 선택하세요')
 			
-							 $.each(restnts, function(key){
+			
+			$("#restntTable > tbody").html("");
+			var paramData = {
+				adress1 : $('#adress1').val(),
+				adress2 : $('#adress2').val(),
+				adress3 : $('#adress3').val()
+			};
+			
+				$.ajax({
+					cache : false,
+					async : false,
+					type : 'POST',
+					url : 'ajaxRestntList.do',
+					data : paramData,
+					dataType : 'json',
+					error : function() {
+						alert("에러 : 데이터가 안넘어갑니다.");
+					},
+					success : function(json) {
+						
+						var restnts = json.restnts;
+						if(restnts[0].restntId != ''){
+							$('#restntList').show();
+							$.each(restnts, function(key){
 								var restntName = restnts[key].restntName;
 								var restntId = restnts[key].restntId;
+								
 								var html ="<tr>";
 								html += '<tbody id="restntListResult"><td>'+'<input type="hidden" name="restntId" value="'+restntId+'">';
 								html += restntName+"</td></tr></tbody>";
 								$('#restntTable').append(html);
-							 }); 
-							
-							
-		
+								
+							}); 
 						}
-					});
-				}
-			}
-		});
+						
+					}
+					
+				});
+				
+		
+	});
 
 	});
 </script>
