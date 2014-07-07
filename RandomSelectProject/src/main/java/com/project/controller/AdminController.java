@@ -542,7 +542,14 @@ public class AdminController {
 
 	
 
-		JSONObject jsonObject = JSONObject.fromObject(menus);
+		JSONArray jsonArray = JSONArray.fromObject(menus);
+
+		System.out.println("menus - " + jsonArray);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("menus", jsonArray);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
 		System.out.println("json - " + jsonObject);
 
 		response.setContentType("text/html; charset=utf-8");
