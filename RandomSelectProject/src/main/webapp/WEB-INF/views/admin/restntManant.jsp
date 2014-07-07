@@ -129,10 +129,10 @@
 																						var restntName = restnts[key].restntName;
 																						var restntId = restnts[key].restntId;
 																						var html = "<tr>";
-																						html += '<tbody id="restntListResult"><td><form>'
+																						html += '<tbody id="restntListResult"><td>'
 																								+ '<input type="hidden" name="restntId" value="'+restntId+'" class="restntId">';
 																						html += restntName
-																								+ '<button class="restntInfo">관리</button></form></td></tr></tbody>';
+																								+ '<button class="restntInfo">관리</button></td></tr></tbody>';
 																						$(
 																								'#restntTable')
 																								.append(
@@ -144,7 +144,10 @@
 														});
 											}
 										});
-						
+						/* var table = $('#restntList').DataTable();
+						$(table).on('click', '.restntInfo', function() {
+							alret('씨발');
+						}); */
 
 					});
 </script>
@@ -306,7 +309,7 @@
 		</table>
 
 	</div>
-	
+
 	<div id="test">아 버튼 좀 제발</div>
 
 
