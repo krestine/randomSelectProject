@@ -124,15 +124,15 @@
 																	$
 																			.each(
 																					restnts,
-																					function(
-																							key) {
+																					function(key) {
 																						var restntName = restnts[key].restntName;
 																						var restntId = restnts[key].restntId;
+																						var cnt = 0;
 																						var html = "<tr>";
 																						html += '<tbody id="restntListResult"><td>'
-																								+ '<input type="hidden" name="restntId" value="'+restntId+'" class="restntId">';
+																								+ '<input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId">';
 																						html += restntName
-																								+ '<button class="restntInfo">관리</button></td></tr></tbody>';
+																								+ '<button id="restntInfo'+key+'" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr></tbody>';
 																						$(
 																								'#restntTable')
 																								.append(
@@ -140,16 +140,75 @@
 																					});
 
 																}
+																
 															}
 														});
+														
+														
+// 												$('#restntInfo').click(function() {
+// 													alert('씨발');
+// 												});
+												
+	
 											}
 										});
-						/* var table = $('#restntList').DataTable();
-						$(table).on('click', '.restntInfo', function() {
-							alret('씨발');
-						}); */
-
+						
+						
 					});
+	function clickBtn(obj) {
+ 		var restntId = $(obj).prev().attr("value");
+ 		$.ajax({
+			cache : false,
+			async : false,
+			type : 'POST',
+			url : 'ajaxRestntList.do',
+			data : restntId,
+			dataType : 'json',
+			error : function() {
+				alert("에러 : 데이터가 안넘어갑니다.");
+			},
+			success : function(
+					json) {
+				
+				for (var idx = 0; idx < json.adress3.length; idx++) {
+					var adress3 = json.adress3[idx];
+					$(
+							'#adress3')
+							.append(
+									'<option value="'+adress3+'">'
+											+ adress3
+											+ '</option>');
+				}
+
+			}
+		});
+ 		$.ajax({
+			cache : false,
+			async : false,
+			type : 'POST',
+			url : 'ajaxRestntList.do',
+			data : restntId,
+			dataType : 'json',
+			error : function() {
+				alert("에러 : 데이터가 안넘어갑니다.");
+			},
+			success : function(
+					json) {
+				
+				for (var idx = 0; idx < json.adress3.length; idx++) {
+					var adress3 = json.adress3[idx];
+					$(
+							'#adress3')
+							.append(
+									'<option value="'+adress3+'">'
+											+ adress3
+											+ '</option>');
+				}
+
+			}
+		});
+	
+	} 
 </script>
 
 </head>
@@ -310,7 +369,7 @@
 
 	</div>
 
-	<div id="test">아 버튼 좀 제발</div>
+	
 
 
 </body>
