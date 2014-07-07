@@ -509,18 +509,13 @@ public class AdminController {
 		
 		String restntId = request.getParameter("restntId");
 		System.out.println(restntId);
-		menus = menuService.getMenuListByRestntId(restntId);
-		System.out.println(menus);
+		restnt= restntService.getRestntInfoById(restntId);
+		System.out.println(restnt);
 
 		//제이슨으로 변환
-		JSONArray jsonArray = JSONArray.fromObject(menus);
-
-		System.out.println("menus - " + jsonArray);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("menus", jsonArray);
-
-		JSONObject jsonObject = JSONObject.fromObject(map);
+		
+		
+		JSONObject jsonObject = JSONObject.fromObject(restnt);
 		System.out.println("json - " + jsonObject);
 
 		response.setContentType("text/html; charset=utf-8");
@@ -543,14 +538,11 @@ public class AdminController {
 		System.out.println(menus);
 
 		//제이슨으로 변환
-		JSONArray jsonArray = JSONArray.fromObject(menus);
+		
 
-		System.out.println("menus - " + jsonArray);
+	
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("menus", jsonArray);
-
-		JSONObject jsonObject = JSONObject.fromObject(map);
+		JSONObject jsonObject = JSONObject.fromObject(menus);
 		System.out.println("json - " + jsonObject);
 
 		response.setContentType("text/html; charset=utf-8");
