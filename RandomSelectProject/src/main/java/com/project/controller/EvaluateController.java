@@ -68,7 +68,7 @@ public class EvaluateController {
 
 	// 식당평가한 목록
 
-	@RequestMapping(value = "/evaluateList.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/evaluateList.do", method = RequestMethod.GET)
 	public ModelAndView EvaluateListForm(HttpServletRequest request,
 			Model model, String memId) {
 		System.out.println("evaluateList()");
@@ -176,7 +176,7 @@ public class EvaluateController {
 	}
 
 	// 식당 평가 수정
-	@RequestMapping(value = "/updateEvaluateListProc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateEvaluateListProc.do", method = RequestMethod.GET)
 	public String updateEvaluateListProc(Model model, EvaluateDTO evaluateDto) {
 		evaluateService.setEvaluateInfoByEvaluateTerms(evaluateDto);
 		EvaluateDTO evaluate = (EvaluateDTO) evaluateService
