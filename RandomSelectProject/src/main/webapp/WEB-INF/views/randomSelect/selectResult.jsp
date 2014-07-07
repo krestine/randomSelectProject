@@ -39,7 +39,6 @@ language=구글 맵 언어
 <script type="text/javascript">
 	var myLatitude, myLongitude;
 	var randomLatitude, randomLongitude;
-	var sDistance;
 	var map;
 	var restntList;
 	var pos, pos2;
@@ -70,44 +69,52 @@ language=구글 맵 언어
 
 	function getAllRestntList() {
 		//javascript에서도 c태그 및 EL태그 사용 가능.
+
+		alert("getAllRestntList");
+		
+		var tempOK = new Array();
+		
+		alert("tempOK");
+		
+		var tempDistance=0;
+		var tempCnt=0;
+		var tempRestntLatitude;
+		var tempRestntLongitude
+		var tempRestntName;
+		
+
 		
 		<c:forEach items="${restntList}" var="item" varStatus="counter">
+		
+		alert("start forEach");
 		
 		//javascript 변수에 EL태그의 값을 직접 넣을 때는 직접 넣을 수 없고
 		//<c:out value=""/> 태그를 통해 view를 거쳐서 넣을 수 있음.
-		var tempRestntLatitude = "<c:out value="${item.latitude}" />";
-		var tempRestntLongitude = "<c:out value="${item.longitude}" />";
-		
-		//google.maps.LatLng(latitude, longitude) = 위도와 경도 값을 '위치'개체로 바꾸는 것
-		var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
-				tempRestntLongitude);
-		var tempRestntMarker = new google.maps.Marker({
-			position : tempRestntPos,
-			map : map,
-		});
-		tempRestntMarker.setMap(map);
-		var tempRestntInfo = new google.maps.InfoWindow();
-		tempRestntInfo.setContent("<c:out value="${item.restntName}" />");
-		tempRestntInfo.open(map, tempRestntMarker);
-		</c:forEach>
-	}
+		tempRestntLatitude = "<c:out value="${item.latitude}" />";
+		tempRestntLongitude = "<c:out value="${item.longitude}" />";
+		tempRestntName = "<c:out value="${item.restntName}" />";
 	
-	function selectRandomRestnt() {
+		alert(tempCnt + "번째");
+		alert(tempRestntName + " " + tempRestntLatitude + " " + tempRestntLongitude);
+		tempDistance=calcDistance(myLatitude, myLongitude, tempRestntLatitude, tempRestntLongitude);
+		alert("거리 : " + tempDistance);
 		
-		var tempOk[];
-		var tempCnt=0;
-		
-		alert('selectRandomRestnt');
-		
-		<c:forEach items="${restntList}" var="item" varStatus="counter">
-		
-		var tempRestntLatitude = "<c:out value="${item.latitude}" />";
-		var tempRestntLongitude = "<c:out value="${item.longitude}" />";
-		
-		if(calcDistance(myLatitude, myLongitude, tempRestntLatitude, tempRestntLongitude)<sRadius){
-			tempOk[tempCnt++]=new RestntDTO();
+		if(tempDistance<sRadius){
+			
+			tempOK[tempCnt]=new RestntDTO();
+			tempOK[tempCnt].latitude = tempRestntLatitude;
+			tempOK[tempCnt].longitude = tempRestntLongitude;
+			tempOK[tempCnt].restntName = tempRestntName;
+			tempCnt = tempCnt + 1;
 		}
 		
+		</c:forEach>
+		
+		var selection= Math.floor(Math.random() * tempCnt+1);
+		tempRestntLatitude = tempOK[selection].latitude;
+		tempRestntLongitude = tempOK[selection].longitude;
+		tempRestntName = tempOK[selection].restnName;
+		
 		//google.maps.LatLng(latitude, longitude) = 위도와 경도 값을 '위치'개체로 바꾸는 것
 		var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
 				tempRestntLongitude);
@@ -117,11 +124,10 @@ language=구글 맵 언어
 		});
 		tempRestntMarker.setMap(map);
 		var tempRestntInfo = new google.maps.InfoWindow();
-		tempRestntInfo.setContent("<c:out value="${item.restntName}" />");
+		tempRestntInfo.setContent(tempRestntName);
 		tempRestntInfo.open(map, tempRestntMarker);
-		</c:forEach>
 	}
-
+	
 	function setMyCenter() {
 		//map.setCenter(latlng) = 설정된 위치로 맵 중심 이동
 		//map.setZoom(Int) = 설정된 숫자값으로 맵 확대율 조정
@@ -277,7 +283,7 @@ language=구글 맵 언어
 
 	function initialize() {
 
-		//alert('start init');
+		alert('start init');
 
 		setSRadius();
 
@@ -328,8 +334,6 @@ language=구글 맵 언어
 		onclick="setRestntCenter()">
 	<input type=button id=getAllRestnt value="식당 정보 전부 가져오기"
 		onclick="getAllRestntList()">
-	<input type=button id=selectRandomRestnt value="하나만 랜덤으로 골라주기"
-		onclick="selectRandomRestnt()">
 	<br>
 	<input type=text id=tempAddress value="">
 	<input type=button id=geocodeTempAddress value="해당 주소 지도에 표시"
