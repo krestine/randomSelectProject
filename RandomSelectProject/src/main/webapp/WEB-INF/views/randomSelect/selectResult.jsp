@@ -1,4 +1,5 @@
 <%@page import="java.util.List"%>
+<%@page import="com.project.domain.RestntDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -76,6 +77,44 @@ language=구글 맵 언어
 		//<c:out value=""/> 태그를 통해 view를 거쳐서 넣을 수 있음.
 		var tempRestntLatitude = "<c:out value="${item.latitude}" />";
 		var tempRestntLongitude = "<c:out value="${item.longitude}" />";
+		
+		//google.maps.LatLng(latitude, longitude) = 위도와 경도 값을 '위치'개체로 바꾸는 것
+		var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
+				tempRestntLongitude);
+		var tempRestntMarker = new google.maps.Marker({
+			position : tempRestntPos,
+			map : map,
+		});
+		tempRestntMarker.setMap(map);
+		var tempRestntInfo = new google.maps.InfoWindow();
+		tempRestntInfo.setContent("<c:out value="${item.restntName}" />");
+		tempRestntInfo.open(map, tempRestntMarker);
+		</c:forEach>
+	}
+	
+	function selectRandomRestnt() {
+		
+		var tempOk[];
+		var tempCnt=0;
+		<c:forEach items="${restntList}" var="item" varStatus="counter">
+		
+		var tempRestntLatitude = "<c:out value="${item.latitude}" />";
+		var tempRestntLongitude = "<c:out value="${item.longitude}" />";
+		
+		if(calcDistance(myLatitude, myLongitude, tempRestntLatitude, tempRestntLongitude)<sRadius){
+			tempOk[tempCnt++]=new RestntDTO("<c:out value="${item.restntId}" />", "<c:out value="${item.restnTName}" />",
+					"<c:out value="${item.address1}" />", "<c:out value="${item.address2}" />", "<c:out value="${item.address3}" />",
+					"<c:out value="${item.address4}" />", "<c:out value="${item.restntTel}" />", "<c:out value="${item.restntCate}" />",
+					"<c:out value="${item.restntEval}" />", "<c:out value="${item.menName}" />", "<c:out value="${item.menuPrice}" />",
+					"<c:out value="${item.menuCalorie}" />", "<c:out value="${item.evalId}" />", "<c:out value="${item.score}" />",
+					"<c:out value="${item.memId}" />", "<c:out value="${item.mateId}" />", "<c:out value="${item.latitude}" />",
+					"<c:out value="${item.longitude}" />");
+			RestntDTO(String restntId, String restntName, String adress1,
+					String adress2, String adress3, String adress4, String restntTel,
+					String restntCate, String restntEval, String menuName,
+					String menuPrice, String menuCalorie, String evalId, String score,
+					String memId, String mateId, String latitude, String longitude)
+		}
 		
 		//google.maps.LatLng(latitude, longitude) = 위도와 경도 값을 '위치'개체로 바꾸는 것
 		var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
