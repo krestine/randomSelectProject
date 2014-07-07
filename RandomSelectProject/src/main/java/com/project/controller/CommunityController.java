@@ -63,7 +63,7 @@ public class CommunityController {
 							.getMateListByMemId(loginUser.getMemId());
 					System.out.println(mates);
 					model.addAttribute("mates", mates);
-					return "community/mateList";
+					return "mateList";
 
 				} catch (Exception e) {
 					model.addAttribute("errorMessage",
@@ -100,7 +100,7 @@ public class CommunityController {
 		System.out.println(memId);
 		System.out.println(mateId);
 		System.out.println("mate 확인");
-		return "community/mateDetail";
+		return "mateDetail";
 	}
 	
 	
@@ -114,7 +114,7 @@ public class CommunityController {
 		model.addAttribute("restnts", restnts);
 		System.out.println(restnts);
 		System.out.println("restnts여기?");
-		return "community/restntList";
+		return "restntList";
 	}
 	
 	/*
@@ -145,7 +145,7 @@ public class CommunityController {
 		System.out.println("menuInfo");
 		System.out.println(menuInfo);
 		
-		return "community/restntDetail";
+		return "restntDetail";
 
 	}
 	

@@ -7,6 +7,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-6amugeona@gmail.com 로 연락해~
+<div align="right">
+<div>
+		
+		
+		| <a href="/front/php/com_intro.php"><font style="color:#555555;font-size:12;font-family:굴림;">회사소개</font></a> 
+		| <a href="/front/php/member_agree.php"><font style="color:#555555;font-size:12;font-family:굴림;">이용약관</font></a> 
+		| <a href="/front/php/privacy_agree.php"><font style="color:#555555;font-size:12;font-family:굴림;">개인정보취급방침</font></a> 
+		| <a href="/front/php/faq.php"><font style="color:#555555;font-size:12;font-family:굴림;">이용안내</font></a> 
+		
+	</div>
+	<div>
+		<small>
+			Copyright ⓒ 2014 <b><font color="#FF8C0A">C#</font></b> 
+			All rights reserved.<br>
+			전화 : 070-8902-1766 <br>
+			Contact <b><a href="6amugeona@gmail.com"><font color="#FF8C0A">7575@daum.net</font></a></b> 
+			for more information.<br>
+			법인명(상호):이파트너 주소:420-864 경기도 부천시 원미구 상2동 544-5 그랜드프라자 7층  705     소분업 부천 제552호    고객센터: 오전 10:00 ~ 오후 05:00 
+			<br>
+			사업자 등록번호 안내 [130-42-29900] / 통신판매업 신고 제 2010-경기부천-1257호 <a target="_blank" href="http://www.ftc.go.kr/info/bizinfo/communicationList.jsp">[사업자정보확인]</a><br>
+		</small>
+	</div>
+
+</div>
 </body>
 </html>
