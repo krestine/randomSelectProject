@@ -59,7 +59,7 @@ public class MemberController {
 	@RequestMapping("registerForm.do")
 	public String registerForm(Model model) {
 		System.out.println("registerForm()");
-		return "member/register";
+		return "register";
 	}
 
 	@RequestMapping(value = "registerProc.do", method = RequestMethod.POST)
@@ -73,7 +73,7 @@ public class MemberController {
 		memberDto.setMemMobile(memberDto.getmPhoneCode() + "-"
 				+ memberDto.getmPhoneMid() + "-" + memberDto.getmPhoneEnd());
 		memberService.putMember(memberDto);
-		return "member/registerOk";
+		return "registerOk";
 
 	}
 
@@ -81,7 +81,7 @@ public class MemberController {
 	@RequestMapping("loginForm.do")
 	public String loginForm() {
 		System.out.println("loginForm()");
-		return "member/login";
+		return "login";
 	}
 
 	@RequestMapping(value = "loginProc.do", method = RequestMethod.POST)
@@ -113,7 +113,7 @@ public class MemberController {
 	@RequestMapping("findIdForm.do")
 	public String findIdForm() {
 		System.out.println("findIdForm()");
-		return "member/findId";
+		return "findId";
 	}
 
 	@RequestMapping(value = "findIdProc.do", method = RequestMethod.POST)
@@ -126,14 +126,14 @@ public class MemberController {
 			return "forward:findIdForm.do";
 		}
 		model.addAttribute("userId", userId);
-		return "member/findIdOk";
+		return "findIdOk";
 	}
 
 	// 비밀번호찾기
 	@RequestMapping("findPasswordForm.do")
 	public String findPasswordForm() {
 		System.out.println("findPasswordForm()");
-		return "member/findPassword";
+		return "findPassword";
 	}
 
 	@RequestMapping(value = "findPasswordProc.do", method = RequestMethod.POST)
@@ -163,7 +163,7 @@ public class MemberController {
 
 		model.addAttribute("userMail", toUser);
 		// model.addAttribute("userPassword", userPassword);
-		return "member/findPasswordOk";
+		return "findPasswordOk";
 	}
 
 	protected String getEmailText(String CD, String toUser) {
@@ -179,7 +179,7 @@ public class MemberController {
 	@RequestMapping(value = "myInfoForm.do", method = RequestMethod.POST)
 	public String myInfoForm(Model model, MemberDTO memberDto) {
 		System.out.println("myInfoForm()");
-		return "mypage/myInfo";
+		return "myInfo";
 	}
 
 	// 현재 비밀번호 확인 , 정보수정
@@ -191,10 +191,10 @@ public class MemberController {
 		String nowPasswd = memberService.getMemPasswdByMemId(memberDto);
 		if (nowPasswd == null) {
 			model.addAttribute("errmessage", "아이디,비밀번호 불일치");
-			return "mypage/myInfo";
+			return "myInfo";
 		} else if (Integer.parseInt(nowPasswd) == 1) {
 			model.addAttribute("errmessage", "탈퇴한 회원");
-			return "mypage/myInfo";
+			return "myInfo";
 		}
 
 		// 탈퇴하지 않았고 현재비밀번호 일치할때 비밀번호만 변경
@@ -209,7 +209,7 @@ public class MemberController {
 	@RequestMapping("dropForm.do")
 	public String dropForm() {
 		System.out.println("dropForm()");
-		return "mypage/drop";
+		return "drop";
 	}
 
 	@RequestMapping(value = "dropProc.do", method = RequestMethod.POST)
@@ -218,7 +218,7 @@ public class MemberController {
 		memberService.setLeave(memberDto);
 		session.removeAttribute("loginUser");
 		session.invalidate();
-		return "mypage/dropOk";
+		return "dropOk";
 	}
 
 	// 로그아웃
