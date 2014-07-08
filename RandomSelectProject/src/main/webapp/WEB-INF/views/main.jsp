@@ -13,7 +13,11 @@
 </head>
 <body>
 
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap-theme.min.css" />
+<script type="text/javascript" src="/myapp/resources/js/bootstrap.min.js"></script>
+<script src="/myapp/resources/js/respond.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <h1 align="center">어서 옵쇼!!</h1>
 <div class="container">
