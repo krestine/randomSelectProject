@@ -14,15 +14,19 @@
 
 						$('#restntList').hide();
 						$('#restntInfo').hide();
-
+						$('#serch').click(function() {
+							$('#restntInfo').hide();
+							$('#selectBox').show();
+							$('#restntList').show();
+							
+						});
 						$('#adress1')
 								.click(
 										function() {
 
 											$('#restntList').hide();
 
-											$
-													.ajax({
+											$.ajax({
 														cache : false,
 														async : false,
 														type : 'POST',
@@ -77,6 +81,7 @@
 																		.empty();
 																for (var idx = 0; idx < json.adress3.length; idx++) {
 																	var adress3 = json.adress3[idx];
+																	
 																	$(
 																			'#adress3')
 																			.append(
@@ -171,11 +176,13 @@
 					},
 					success : function(json) {
 						$("#restntInfoTable > tbody").html("");
+						$("#menuTable > tbody").html("");
 						$('#selectBox').hide();
 						$('#restntList').hide();
 						$('#restntInfo').show();
 
 						if (json.restntId != '') {
+							
 							var restntName = json.restntName;
 							var restntId = json.restntId;
 							var adress1 = json.adress1;
@@ -215,10 +222,11 @@
 					},
 					success : function(json) {
 
+						
 						var menus = json.menus;
-						var html1 = '<tbody><tr><th>메뉴 이름</th><th>가격</th><th>칼로리</th><th>특이사항</th></tr>';
-						$('#menuTable').append(html1);
-
+						
+						
+						var html = '<tbody><tr><th>메뉴 이름</th><th>가격</th><th>칼로리</th><th>특이사항</th></tr>';
 						$.each(menus, function(key) {
 
 							var menuName = menus[key].menuName;
@@ -226,13 +234,15 @@
 							var menuPrice = menus[key].menuPrice;
 							var menuCalorie = menus[key].menuCalorie;
 							var menuNote = menus[key].menuNote;
-							var html2 = 
-								'<tr><form id="menuForm'+key+'"><td><input type="text" value="'+menuName+'"name="menuName"></td>'
-								+'<td><input type="text" value="'+menuPrice +'"name="menuPrice"></td>'
-								+'<td><input type="text" value="'+menuCalorie +'"name="menuCalorie"></td>'
-								+'<td><input type="text" value="'+menuNote +'"name="menuNote"></td></form></tr>';
-							$('#menuTable').append(html2);
+							
+								
+							html+='<tr><form id="menuForm'+key+'"><td><input type="text" value="'+menuName+'"name="menuName"></td>';
+							html+='<td><input type="text" value="'+menuPrice +'"name="menuPrice"></td>';
+							html+='<td><input type="text" value="'+menuCalorie +'"name="menuCalorie"></td>';
+							html+='<td><input type="text" value="'+menuNote +'"name="menuNote"></td></form></tr>';
+							
 						});
+						$('#menuTable').append(html);
 						$('#menuTable').append('</tbody>');
 					}
 				});
@@ -277,13 +287,16 @@
 
 
 		</table>
-
+	<button id="addRestnt">추가 </button>
+	<button id="modRestnt">수정</button>
+	<button id="removeRestnt">삭제 </button>
+	
 		<table border="2" id="menuTable">
 			<caption>메뉴 정보</caption>
 
 
 		</table>
-
+		<button id="serch">검색 </button>
 	</div>
 
 

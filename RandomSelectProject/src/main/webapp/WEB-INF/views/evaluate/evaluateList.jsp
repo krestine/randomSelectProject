@@ -13,51 +13,66 @@
 		document.getElementById("select2").action = "edit.do";
 		document.getElementById("select2").submit();
 	}
+	function deleteGo() {
+
+		document.getElementById("select2").action = "delete.do";
+		document.getElementById("select2").submit();
+	}
+	function mainGo() {
+		document.getElementById("select1").action = "main.do";
+		document.getElementById("select1").submit();
+	}
+	function evaluateMainGo() {
+		document.getElementById("select2").action = "evaluatemain.do";
+		document.getElementById("select2").submit();
+	}
 </script>
 <title>게시판</title>
 </head>
+
 <body>
+	포 이치 테스트
+	<c:forEach items="${evaluates}" var="evaluate">
+	${evaluate.evalId}<br> ${evaluate.score}<br> 
+	${evaluate.restntName}<br>
+	</c:forEach>
+
+
 	<h3>평가한 식당 리스트</h3>
 
-	<input type="button" onclick="window.location='evaluatemain.do'"
-		value="메인" />
-	<input type="button" onclick="javascript:history.back(-1)" value="메인" />
+	<form id="select1" method="post">
+		<input type="button" onclick="mainGo()" value="메인으로 ">
+	</form>
 	<form id="select2" method="post">
+		<input type="button" onclick="evaluateMainGo()" value="평가메인으로">
+	</form>
 
-		<table width="600" border="1" bordercolor="#00A5FF">
+	<!-- <input type="button" onclick="javascript:history.back(-1)" value="뒤로" /> -->
 
-			<tr align="center" valign="middle">
-				<td colspan="5">평가한 목록</td>
 
-			</tr>
-			<tr align="center" valign="middle" bgcolor="#00A5FF">
-				<td width="66px">번호</td>
-				<td width="100px"><label>평점</label> <select name="score"
-					id="score">
-						<option value="5">★★★★★</option>
-						<option value="4">★★★★☆</option>
-						<option value="3">★★★☆☆</option>
-						<option value="2">★★☆☆☆</option>
-						<option value="1">★☆☆☆☆</option>
-				</select></td>
-				<!-- 	<td><input type="text" name="evaluate" maxlength="300"
+	<table width="600" border="1" bordercolor="#00A5FF">
+
+		<tr align="center" valign="middle">
+			<td colspan="5">평가한 목록</td>
+
+		</tr>
+		<tr align="center" valign="middle" bgcolor="#00A5FF">
+			<td width="66px">번호</td>
+			<td width="100px"><label>평점</label> <select name="score"
+				id="score">
+					<option value="5">★★★★★</option>
+					<option value="4">★★★★☆</option>
+					<option value="3">★★★☆☆</option>
+					<option value="2">★★☆☆☆</option>
+					<option value="1">★☆☆☆☆</option>
+			</select></td>
+			<!-- 	<td><input type="text" name="evaluate" maxlength="300"
 					style="width: 300px" placeholder="의견을 140자 이내로 적어주세요"></td> -->
-				<td>방문 평가 한 음식점</td> //여기서 부터 시험
-				<!-- <tr>	<td colspan="5" align="right">
-							<input type="button" onclick="deleteGo()" value="삭제"> </a></td>
-						</td>
-						</tr> -->
-				<!--  이게 시험해보려고 하는 것 -->
-				<%-- 		<td>${sessionScope.memId!==null}</td> --%>
+			<td>방문 평가 한 음식점</td>
 
-				<td align="center"><input type="submit" id="ok" value="등록"
-					${sessionScope.memId == null?" disabled":"" }></td>
-				<td width="40px">삭제</td> // 아래는 같음
-
-			</tr>
-
+			<td>방문한 날짜</td>
+			<td> </td>
 			<c:forEach var="evaluate" items="${boardList}">
-
 				<tr height="35px">
 					<td align="center">${evaluate.evalId}</td>
 					<td align="center"><c:choose>
@@ -79,27 +94,31 @@
 						</c:choose></td>
 					<td>${evaluate.restntName}</td>
 					<td>${evaluate.evalDate}</td>
-
+					<td>
+						<form id="select2" method="POST">
+							<input type="button" onclick="editGo()" value="수정">
+						</form> <!-- <td colspan="5" align="right"> -->
+						<form id="select2" method="POST">
+							<input type="button" onclick="deleteGo()" value="삭제">
+						</form>
+					</td>
 				</tr>
-
 			</c:forEach>
-			<tr>
-				<td colspan="5" align="center"><c:if test="${page <= 1 }">[이전]&nbsp; </c:if>
-					<c:if test="${page > 1 }">
-						<a href="evaluateList.do?memId=${memId }&page=${page-1}">이전</a>&nbsp;</c:if>
-					<c:forEach begin="${startpage }" end="${endpage }" var="a">
-						<c:if test="${a==page }">[${a}]</c:if>
-						<c:if test="${a!=page }">
-							<a href="evaluateList.do?memId=${memId}&page=${a}">[${a}]</a>&nbsp;</c:if>
-					</c:forEach> <c:if test="${page>=maxpage }">[다음]</c:if> <c:if
-						test="${page<maxpage }">
-						<a href="evaluateList.do?memId=${memId}&page=${page+1}">[다음]</a>
-					</c:if></td>
-			</tr>
-		</table>
-	</form>
+		<tr>
+			<td colspan="5" align="center"><c:if test="${page <= 1 }">[이전]&nbsp; </c:if>
+				<c:if test="${page > 1 }">
+					<a href="/evaluateList.do?memId=${memId }&page=${page-1}">이전</a>&nbsp;</c:if>
+				<c:forEach begin="${startpage }" end="${endpage }" var="a">
+					<c:if test="${a==page }">[${a}]</c:if>
+					<c:if test="${a!=page }">
+						<a href="/evaluateList.do?memId=${memId}&page=${a}">[${a}]</a>&nbsp;</c:if>
+				</c:forEach> <c:if test="${page>=maxpage }">[다음]</c:if> <c:if
+					test="${page<maxpage }">
+					<a href="/evaluateList.do?memId=${memId}&page=${page+1}">[다음]</a>
+				</c:if></td>
+		</tr>
+
 	</table>
-	</form>
 
 
 </body>
