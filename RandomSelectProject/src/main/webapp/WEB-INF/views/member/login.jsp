@@ -5,33 +5,67 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>login.jsp</title>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$('#login').click(
+						function() {
+							if ($('#memId').val() == ""
+									|| $('#memPasswd').val() == "") {
+								$('#inputCheck').text("아이디와 비밀번호를 입력해주세요.");
+								return false;
+							} else {
+								$.ajax({
+									cache : false,
+									async : false,
+									type : 'POST',
+									url : "loginCheck.do",
+									data : 'memId=' + $('#memId').val()
+											+ '&memPasswd='
+											+ $('#memPasswd').val(),
+									dataType : 'xml',
+									error : function() {
+										$('#inputCheck').text("데이터 안넘어감");
+									},
+									success : function(xml) {
+										var result = $(xml).find('check')
+												.text();
+										if (result.trim() == 'true') {
+											$('#loginForm').submit();
+											result = 'false';
+										} else {
+											$('#inputCheck').text(
+													"다시 확인 후 입력해주세요.");
+											result = 'true';
+										}
+									}
+								});
+							}
+						});
+			});
+</script>
 </head>
 <body>
 	${errmessage}
-	<form action="loginProc.do" method="post">
-		<table align="center" border="0" cellspacing="0" cellpadding="0"
-			bgcolor="white">
+	<form id="loginForm" action="loginProc.do" method="post">
+		<div>
+			아이디 <input type="text" id="memId" name="memId">
+		</div>
 
-			<tr>
-				<td>아이디</td>
-				<td><input type="text" name="memId"></td>
-			</tr>
+		<div>
+			비밀번호 <input type="password" id="memPasswd" name="memPasswd">
+		</div>
 
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name="memPasswd"></td>
-			</tr>
-
-			<tr>
-				<td><input type="checkbox" name="rememId">아이디기억</td>
-				<td><input type="submit" value="로그인"></td>
-			</tr>
-
-			<tr>
-				<td><a href="findIdForm.do">아이디/비밀번호 찾기</a></td>
-			</tr>
-
-		</table>
+		<div>
+			<input type="checkbox" name="rememId">아이디기억 <input
+				type="submit" id="login" value="로그인">
+		</div>
+		<div>
+			<label id="inputCheck" style="color: red"></label>
+		</div>
+		<div>
+			<a href="findIdForm.do">아이디/비밀번호 찾기</a>
+		</div>
 	</form>
 
 </body>

@@ -34,12 +34,16 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	// 아이디체크 ajax
+	/*
+	 * 회원가입, 로그인, 아이디/비번 찾기 ajax
+	 */
+
+	// 회원가입: 아이디 체크 ajax
 	@RequestMapping("idCheck.do")
 	public ModelAndView idCheckAjax(HttpServletRequest request,
 			HttpServletResponse response) {
 		System.out.println("idCheckAjax");
-		ModelAndView view = new ModelAndView("member/memIdAjax");
+		ModelAndView view = new ModelAndView("member/memAjax");
 
 		String memId = request.getParameter("memId");
 		System.out.println("memid=" + memId);
@@ -54,6 +58,47 @@ public class MemberController {
 		}
 		return view;
 	}
+
+	// 로그인: 아이디, 비밀번호 체크 ajax
+	@RequestMapping("loginCheck.do")
+	public ModelAndView loginCheckAjax(HttpServletRequest request,
+			HttpServletResponse response, MemberDTO memberDto) {
+		System.out.println("loginCheckAjax");
+
+		ModelAndView view = new ModelAndView("member/memAjax");
+
+		String memId = request.getParameter("memId");
+		System.out.println("memid=" + memId);
+
+		String memPasswd = request.getParameter("memPasswd");
+		System.out.println("memPasswd=" + memPasswd);
+
+		memberDto.setMemId(memId);
+		memberDto.setMemPasswd(memPasswd);
+
+		System.out.println(memberDto);
+
+		String leave = memberService.getMemPasswdByMemId(memberDto);
+		System.out.println("leave=" + leave);
+
+		if (leave != null) {
+			if (leave.trim() == "0") {
+				view.addObject("result", "true");
+				System.out.println("아이디,패스워드 일치");
+			} else {
+				view.addObject("result", "false");
+				System.out.println("탈퇴회원");
+			}
+		} else {
+			view.addObject("result", "false");
+			System.out.println("일치값없음");
+		}
+		return view;
+	}
+
+	/*
+	 * form->view & view->proc
+	 */
 
 	// 회원가입
 	@RequestMapping("registerForm.do")
