@@ -3,6 +3,8 @@ package com.project.service;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.validation.OverridesAttribute;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,67 +16,10 @@ public class EvaluateServiceImpl implements EvaluateService {
 	@Autowired
 	EvaluateMapper evaluateMapper;
 
-	private static HashMap<String, String> param = new HashMap<String, String>();
-
-	// 평가한 방문리스트 수정
-
-	public void setEvaluateInfoByEvaluateTerms(String string) {
-		return;
-	};
-
-	/* void setEvaluateInfoByEvaluateTerms(String evaluateDto); */
-
-	// 평가안한 방문리스트
-	public List<EvaluateDTO> getnEvaluateListByMemId(String memId) {
-		return evaluateMapper.getnEvaluateListByMemId(memId);
-	}
-
-	// 식당평가 안한 점수 입력
-	public void putEvaluateByScore(String evaluateDto) {
-		evaluateMapper.putEvaluateByScore(evaluateDto);
-
-	}
-
+	// 평가 한 방문리스트
 	@Override
-	public void setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void putnEvaluateByScore(EvaluateDTO evaluateDto) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<EvaluateDTO> getVisitsByMemid(String memId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<EvaluateDTO> getRestntnameByRestId(List<String> restntId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<EvaluateDTO> getScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
-		// TODO Auto-generated method stub
-
+	public List<EvaluateDTO> getEvaluateListByMemId(String memId) {
+		return evaluateMapper.getEvaluateListByMemId(memId);
 	}
 
 	@Override
@@ -89,20 +34,62 @@ public class EvaluateServiceImpl implements EvaluateService {
 		List<EvaluateDTO> ev = evaluateMapper.getEvaluateListByMemId(param);
 		System.out.println("imp:e");
 		return ev;
-
-		// return evaluateMapper.getEvaluateListByMemId(memId, page, limit);
 	}
 
+	private static HashMap<String, String> param = new HashMap<String, String>();
+
+	@Override
+	public List<EvaluateDTO> getEvaluateListByMemId(
+			HashMap<String, String> param) {
+		// TODO Auto-generated method stub
+		return getEvaluateListByMemId(param);
+	}
+
+	// 식당이름
+	@Override
+	public List<EvaluateDTO> getRestntnameByRestId(String restntId) {
+		// TODO Auto-generated method stub
+		return getRestntnameByRestId(restntId);
+	}
+
+	// 평가점수
+	@Override
+	public List<EvaluateDTO> getScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
+		// TODO Auto-generated method stub
+		return getScoreByEvaluateTerms(evaluateDTO);
+	}
+
+	// 평가안한 방문리스트
+	public List<EvaluateDTO> getnEvaluateListByMemId(String memId) {
+		return evaluateMapper.getnEvaluateListByMemId(memId);
+	}
+
+	// 평가한 방문리스트 수정
+	@Override
+	public void setScoreByEvaluateTerms(EvaluateDTO evaluateDto) {
+		return;
+		// TODO Auto-generated method stub
+
+	}
+
+	// 식당평가 안한 점수 입력
+	@Override
+	public void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
+		return;
+	}
+
+	//리스트 개수 
 	@Override
 	public int getListCount(String memId) {
 		// TODO Auto-generated method stub
 		return evaluateMapper.getListCount(memId);
 	}
 
+	// 데이터 삭제
 	@Override
-	public List<EvaluateDTO> getEvaluateListByMemId(String memId) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteData(String memId, String evalId) {
+		return;
+
 	}
 
 }

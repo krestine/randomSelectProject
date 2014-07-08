@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -82,20 +81,7 @@ a:active {
 	</form>
 
 
-
-	<!-- <div id="wrap">
-		<div class="menu">
-			<ul>
-				<li class="board"><a class="EvaluateList"  href="WEB-INF/evaluate/evaluateList.jsp"OnClick="evaluateGo()">평가한 페이지</a></li>
-				<li class="board"><a class="nEvaluateList" href="WEB-INF/evaluate/nEvaluateList.jsp" OnClick="nEvaluateGo()">평가안한페이지</a></li>
-				<li class="board"><a class="edit" href="WEB-INF/evaluate/edit.jsp" OnClick="editGo()">평점수정</a></li>
-			</ul>
-		</div>
-		
-		<div class="clear"></div>
-
-
-		<div class="boardList">
+			<div class="boardList">
 			<dl>
 			 -->
 
@@ -110,16 +96,6 @@ a:active {
 				OnClick="window.location='delete.do?notCD=${notice.notCD}'">삭제</a>
 		</dd>
 	</c:forEach>
-
-
-	<!-- </dl> -->
-	<!-- </div> -->
-
-
-
-<!-- 	<a href="#" class="listMore">지난 공지사항 더보기</a>
-	</div> -->
-	<div></div>
 	<ul>
 		<c:forEach var="studentName" items="list" end="4">
 			<li>${studentName }</li>

@@ -20,8 +20,7 @@
 
 											$('#restntList').hide();
 
-											$
-													.ajax({
+											$.ajax({
 														cache : false,
 														async : false,
 														type : 'POST',
@@ -76,6 +75,7 @@
 																		.empty();
 																for (var idx = 0; idx < json.adress3.length; idx++) {
 																	var adress3 = json.adress3[idx];
+																	
 																	$(
 																			'#adress3')
 																			.append(
@@ -121,11 +121,7 @@
 																	$(
 																			'#restntList')
 																			.show();
-																	$
-																			.each(
-																					restnts,
-																					function(
-																							key) {
+																	$.each(restnts,function(key) {
 																						var restntName = restnts[key].restntName;
 																						var restntId = restnts[key].restntId;
 																						var html = "<tr>";
