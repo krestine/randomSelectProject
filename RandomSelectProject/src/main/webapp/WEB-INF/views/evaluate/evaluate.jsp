@@ -69,23 +69,15 @@ a:active {
 
 </head>
 <body>
-	포 이치 테스트
-	<c:forEach items="${evaluates}" var="evaluate">
-	${evaluate.evalId}<br> ${evaluate.score}<br> 
-	${evaluate.restntName}<br>
-	</c:forEach>
+	
 	<form id="select2" method="post">
 		<input type="button" onclick="evaluateGo()" value="평가한 페이지 ">
 		<input type="button" onclick="nEvaluateGo()" value="평가 안한 페이지">
 		<input type="button" onclick="editGo()" value="수정">
 	</form>
-
-
-			<div class="boardList">
-			<dl>
-			 -->
-
-	<c:forEach var="notice" items="${add}" varStatus="cnt">
+			<div class="evaluateList">
+			
+	<c:forEach var="notice" items="${add}" varStatus="evaluate">
 		<dt class="listHead">
 			<h3>${notice.title}</h3>
 			<h4>${notice.regidate}</h4>
@@ -96,17 +88,13 @@ a:active {
 				OnClick="window.location='delete.do?notCD=${notice.notCD}'">삭제</a>
 		</dd>
 	</c:forEach>
-	<ul>
-		<c:forEach var="studentName" items="list" end="4">
-			<li>${studentName }</li>
-		</c:forEach>
-	</ul>
-
 	<h3>메인으로</h3>
 
 	<form id="select1" method="post">
-		<input type="button" onclick="mainGo()" value="메인으로 "> <input
-			type="button" onclick="myInfoFormGo()" value="내정보수정">
+		<input type="button" onclick="mainGo()" value="메인으로 "> 
+		</form>
+		<form id="select1" method="POST">
+		<input type="button" onclick="myInfoGo()" value="내정보수정">
 	</form>
 
 	<!--  <ul>
