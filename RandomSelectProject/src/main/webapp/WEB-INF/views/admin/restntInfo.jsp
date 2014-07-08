@@ -206,12 +206,7 @@
 
 
 
-				<tr>
-					<th>평균 별점</th>
-
-					<td><input type="text" disabled="disabled"
-						value="${restnt.restntEval}"></td>
-				</tr>
+				<tr><th>평균 별점</th><td><input type="text" disabled="disabled"value="${restnt.restntEval}"></td></tr>
 
 				<tr>
 
@@ -220,47 +215,28 @@
 
 				</tr>
 
-				<c:choose>
-					<c:when test="${restnt.restntId!=null}">
-						<tr>
-							<td><input type="button" value="추가" id="addFormBtn"></td>
-							<td><input type="button" value="수정" id="modBtn"></td>
-						</tr>
-						<tr>
-							<td><input type="button" value="삭제" id="delBtn"></td>
 
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<td><input type="button" value="확인" id="addBtn"></td>
-						<td><input type="reset" value="초기화" id="resBtn"></td>
-					</c:otherwise>
-				</c:choose>
+				<tr>
+					<td><input type="button" value="추가" id="addFormBtn"></td>
+					<td><input type="button" value="수정" id="modBtn"></td>
+					<td><input type="button" value="삭제" id="delBtn"></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="확인" id="addBtn"></td>
+					<td><input type="reset" value="초기화" id="resBtn"></td>
+				</tr>
 			</tbody>
 
 		</table>
 	</form>
-	<form action="">
-		<table border="2">
-			<caption>메뉴 정보</caption>
-			<tr>
-				<th>메뉴 이름</th>
-				<th>가격</th>
-				<th>칼로리</th>
-				<th>특이사항</th>
-			</tr>
-			<c:forEach items="${menus}" var="menu">
-				<tr>
-					<td>${menu.menuName}</td>
-					<td>${menu.menuPrice}</td>
-					<td>${menu.menuCalorie}</td>
-					<td>${menu.menuNote}</td>
-				</tr>
-			</c:forEach>
+	<form><table border="2"><caption>메뉴 정보</caption><tr><th>메뉴 이름</th><th>가격</th><th>칼로리</th><th>특이사항</th></tr>
+			
+	<tr><td>'+menuName+'</td><td>'+menu.menuPrice+'</td><td>'+menu.menuCalorie+'</td><td>'+menu.menuNote+'</td></tr>
+			
 		</table>
 	</form>
 
-
+	
 
 </body>
 </html>

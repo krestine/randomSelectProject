@@ -13,6 +13,7 @@
 					function() {
 
 						$('#restntList').hide();
+						$('#restntInfo').hide();
 
 						$('#adress1')
 								.click(
@@ -93,6 +94,7 @@
 										function() {
 
 											$('#restntList').hide();
+											$('#restntInfo').hide();
 											$("#restntTable > tbody").html("");
 											var paramData = {
 												adress1 : $('#adress1').val(),
@@ -121,180 +123,135 @@
 																	$(
 																			'#restntList')
 																			.show();
-																	$
-																			.each(
-																					restnts,
-																					function(
-																							key) {
+																	$.each(restnts,function(key) {
 																						var restntName = restnts[key].restntName;
 																						var restntId = restnts[key].restntId;
-																						var html = "<tr>";
-																						html += '<tbody id="restntListResult"><td>'
-																								+ '<input type="hidden" name="restntId" value="'+restntId+'" class="restntId">';
+
+																						var html = '<tbody id="restntListResult"><tr>';
+																						html += '<td>'
+																								+ '<input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId">';
 																						html += restntName
-																								+ '<button class="restntInfo">관리</button></td></tr></tbody>';
-																						$(
-																								'#restntTable')
+																								+ '<button id="restntInfo'
+																								+ key
+																								+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr></tbody>';
+																						$('#restntTable')
 																								.append(
 																										html);
 																					});
 
 																}
+
 															}
 														});
+
+												// 												$('#restntInfo').click(function() {
+												// 													alert('씨발');
+												// 												});
+
 											}
 										});
-						/* var table = $('#restntList').DataTable();
-						$(table).on('click', '.restntInfo', function() {
-							alret('씨발');
-						}); */
 
 					});
+	function clickBtn(obj) {
+
+		var paramData = {
+			restntId : $(obj).prev().attr("value")
+		};
+
+		$.ajax({
+					cache : false,
+					async : false,
+					type : 'POST',
+					url : 'ajaxRestntInfo.do',
+					data : paramData,
+					dataType : 'json',
+					error : function() {
+						alert("에러 : 데이터가 안넘어갑니다.");
+
+					},
+					success : function(json) {
+						$("#restntInfoTable > tbody").html("");
+						$('#selectBox').hide();
+						$('#restntList').hide();
+						$('#restntInfo').show();
+
+						if (json.restntId != '') {
+							var restntName = json.restntName;
+							var restntId = json.restntId;
+							var adress1 = json.adress1;
+							var adress2 = json.adress2;
+							var adress3 = json.adress3;
+							var adress4 = json.adress4;
+							var restntCate = json.restntCate;
+							var restntTel = json.restntTel;
+							var restntEval = json.restntEval;
+							var html = '<tr><th>식당명</th><td><input type="hidden" value="'+restntId+'"name="restntId"><input type="text"value="'+restntName+'" name="restntName"></td></tr>';
+							html += '<tr><th>시/도</th><td><input type="text" value="'+adress1+'"name="adress1"></td></tr>';
+							html += '<tr><th>시/군/구</th><td><input type="text" value="'+adress2+'"name="adress2"></td></tr>';
+							html += '<tr><th>도로 명</th><td><input type="text" value="'+adress3+'"name="adress3"></td></tr>';
+							html += '<tr><th>상세주소</th><td><input type="text" value="'+adress4+'"name="adress4"></td></tr>';
+							html += '<tr><th>분류</th><td><input type="text" value="'+restntCate+'"name="restntCate"></td></tr>';
+							html += '<tr><th>연락처</th><td><input type="text" value="'+restntTel+'"name="restntTel"></td></tr>';
+							html += '<tr><th>평균 별점</th><td><input type="text" disabled="disabled"value="'+restntEval+'"></td></tr>';
+							/* html += '<td>'
+									+ '<input type="hidden" id="restntId" name="restntId" value="'+restntId+'" class="restntId">';
+							html += restntName
+									+ '<button id="restntInfo" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr></tbody>'; */
+							$('#restntInfoTable').append(html);
+						}
+
+					}
+				});
+
+		$.ajax({
+					cache : false,
+					async : false,
+					type : 'POST',
+					url : 'ajaxMenuList.do',
+					data : paramData,
+					dataType : 'json',
+					error : function() {
+						alert("에러 : 데이터가 안넘어갑니다.");
+					},
+					success : function(json) {
+
+						var menus = json.menus;
+						var html1 = '<tr><th>메뉴 이름</th><th>가격</th><th>칼로리</th><th>특이사항</th></tr>';
+						$('#menuTable').append(html1);
+
+						$.each(menus, function(key) {
+
+							var menuName = menus[key].menuName;
+							var menuId = menus[key].menuId;
+							var menuPrice = menus[key].menuPrice;
+							var menuCalorie = menus[key].menuCalorie;
+							var menuNote = menus[key].menuNote;
+							var html2 = '<tr><td>' + menuName + '</td><td>'
+									+ menuPrice + '</td><td>' + menuCalorie
+									+ '</td><td>' + menuNote + '</td></tr>';
+							$('#menuTable').append(html2);
+						});
+					}
+				});
+
+	}
 </script>
 
 </head>
 <body>
 
-	<br>
-	<%-- <table border="2">
-		<caption>식당 필터</caption>
-		<thead>
 
-			<tr>
-				<th>시/도</th>
-				<th>시/군/구</th>
-				<th>도로</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><form action="restntManantProc.do" method="post">
-						<input type="hidden" name="caseCode" value="1"> <select
-							name="adress1">
-							<c:forEach items="${adress1}" var="adress1">
-								<c:choose>
-									<c:when test="${adress1==choice.adress1}">
-										<option selected="selected">${adress1}</option>
-									</c:when>
-									<c:otherwise>
-										<option>${adress1}</option>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-						</select> <input type="submit" value="적용">
-					</form></td>
-				<td><form action="restntManantProc.do" method="post">
-						<input type="hidden" name="adress1" value="${choice.adress1}">
-						<input type="hidden" name="caseCode" value="2"> <select
-							name="adress2">
-							<c:choose>
-								<c:when test="${adress2!=null}">
-									<c:forEach items="${adress2}" var="adress2">
-										<c:choose>
-											<c:when test="${adress2==choice.adress2}">
-												<option selected="selected">${adress2}</option>
-											</c:when>
-											<c:otherwise>
-												<option>${adress2}</option>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<option selected="selected">시/도를 선택하세요</option>
-								</c:otherwise>
-							</c:choose>
-						</select> <input type="submit" value="적용">
-					</form></td>
-				<td><form action="restntManantProc.do" method="post">
-						<input type="hidden" name="adress1" value="${choice.adress1}">
-						<input type="hidden" name="adress2" value="${choice.adress2}">
-						<input type="hidden" name="caseCode" value="3"> <select
-							name="adress3">
-							<c:choose>
-								<c:when test="${adress3!=null}">
-									<c:forEach items="${adress3}" var="adress3">
-										<c:choose>
-											<c:when test="${adress3==choice.adress3}">
-												<option selected="selected">${adress3}</option>
-											</c:when>
-											<c:otherwise>
-												<option>${adress3}</option>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<option selected="selected">시/군/구 를 선택하세요</option>
-								</c:otherwise>
-							</c:choose>
-						</select> <input type="submit" value="적용">
-					</form></td>
-			</tr>
-		</tbody>
-	</table>
-
-
-
-	<table border="2">
-		<caption>검색 결과</caption>
-		<thead>
-
-			<tr>
-				<th>식당명</th>
-
-			</tr>
-		</thead>
-		<tbody>
-			<c:choose>
-				<c:when test="${code.adress3==null}">
-					<tr>
-						<td>"상세정보 필터를 적용해 주세요."</td>
-					</tr>
-				</c:when>
-
-
-
-
-				<c:when test="${code.adress3!=null}">
-					<c:forEach items="${restnts}" var="restnt">
-						<form action="restntListForm.do" method="post">
-							<tr>
-
-								<td><c:choose>
-										<c:when test="${restnt.restntId!=null}">
-											<input type="hidden" name="adress1" value="${choice.adress1}">
-											<input type="hidden" name="adress2" value="${choice.adress2}">
-											<input type="hidden" name="adress3" value="${choice.adress3}">
-											<input type="hidden" value="${restnt.restntId }"
-												name="restntId">
-										${restnt.restntName } <input type="submit" value="상세정보">
-										</c:when>
-										<c:when test="${restnt.restntId==null}">
-											없어
-										</c:when>
-									</c:choose></td>
-
-							</tr>
-						</form>
-					</c:forEach>
-				</c:when>
-
-			</c:choose>
-
-		</tbody>
-	</table> --%>
 	<div id="selectBox" align="center">
-		<select id="adress1">
+		<select id="adress1" class="adress1">
 			<c:forEach items="${adress1}" var="adress1">
 
 				<option value="${adress1}">${adress1}</option>
 
 			</c:forEach>
-		</select> <select id="adress2">
+		</select> <select id="adress2" class="adress2">
 			<option>시/도 를 선택하세요</option>
 
-		</select> <select id="adress3">
+		</select> <select id="adress3" class="adress3">
 			<option>시/군/구를 선택하세요</option>
 		</select>
 	</div>
@@ -310,7 +267,23 @@
 
 	</div>
 
-	<div id="test">아 버튼 좀 제발</div>
+	<div id="restntInfo" align="center">
+
+		<table border="2" id="restntInfoTable">
+			<caption>식당 정보</caption>
+
+
+		</table>
+
+		<table border="2" id="menuTable">
+			<caption>메뉴 정보</caption>
+
+
+		</table>
+
+	</div>
+
+
 
 
 </body>

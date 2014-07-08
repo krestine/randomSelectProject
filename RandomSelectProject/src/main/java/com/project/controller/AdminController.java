@@ -500,6 +500,32 @@ public class AdminController {
 		PrintWriter out = response.getWriter();
 		out.print(jsonObject.toString());
 	}
+	
+	@RequestMapping(value = "/ajaxRestntInfo.do")
+	public void ajaxRestntInfo(HttpServletRequest request,
+			HttpServletResponse response, SettingDTO settingDto)
+			throws IOException {
+		System.out.println("/ajaxRestntInfo.do");
+		
+		String restntId = request.getParameter("restntId");
+		System.out.println(restntId);
+		restnt= restntService.getRestntInfoById(restntId);
+		System.out.println(restnt);
+
+		//제이슨으로 변환
+		
+		
+		JSONObject jsonObject = JSONObject.fromObject(restnt);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+	}
+	
+	
+	
+	
 	@RequestMapping(value = "/ajaxMenuList.do")
 	public void ajaxMenuList(HttpServletRequest request,
 			HttpServletResponse response, SettingDTO settingDto)
@@ -512,6 +538,10 @@ public class AdminController {
 		System.out.println(menus);
 
 		//제이슨으로 변환
+		
+
+	
+
 		JSONArray jsonArray = JSONArray.fromObject(menus);
 
 		System.out.println("menus - " + jsonArray);
