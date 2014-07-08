@@ -62,9 +62,8 @@ public class AdminController {
 	private String lastId;
 	private String newId;
 	private String adressCode;
-	JSONArray jsonArray;
-	
-	
+	private RestntDTO restntDto;
+
 	// 관리자 메인 페이지
 	@RequestMapping(value = "/adminMainProc.do")
 	String adminMainProc(Model model) {
@@ -111,7 +110,7 @@ public class AdminController {
 		}
 		grades = settingService.getGradeValue();
 		model.addAttribute("grades", grades);
-		return "admin/memberList";
+		return "memberList";
 
 	}
 
@@ -135,7 +134,7 @@ public class AdminController {
 		memberService.setMemberInfo(memberDto);
 		members = memberService.getMemberListById(memId);
 		model.addAttribute("members", members);
-		return "admin/memberList";
+		return "memberList";
 	}
 
 	// 식당 관리 페이지
@@ -411,22 +410,24 @@ public class AdminController {
 
 	@RequestMapping(value = "/ajaxAdress2.do")
 	public void ajaxAdress2(HttpServletRequest request,
-			HttpServletResponse response, SettingDTO settingDto)
+			HttpServletResponse response, SettingDTO settingDto, String adress1)
 			throws IOException {
-		//값 받아오는 부분
-		String adress1 = request.getParameter("adress1");
+		// 값 받아오는 부분
+		/*
+		 * String adress1 = request.getParameter("adress1");
+		 */
+		System.out.println("/ajaxAdress2.do");
 		System.out.println(adress1);
-
-		
 		settingDto.setAdress1(adress1);
+
 		System.out.println(settingDto);
-		
-		//쿼리 실행부분
+
+		// 쿼리 실행부분
 		adress2 = settingService.getAdress2(settingDto);
-		
+
 		System.out.println(adress2);
 
-		//쿼리 실행 결과를 JSON 형식으로 변환하는 부분
+		// 쿼리 실행 결과를 JSON 형식으로 변환하는 부분
 		JSONObject json = new JSONObject();
 		json.put("adress2", adress2);
 		response.setContentType("text/html; charset=utf-8");
@@ -464,28 +465,27 @@ public class AdminController {
 			HttpServletResponse response, SettingDTO settingDto)
 			throws IOException {
 		System.out.println("/ajaxRestntList.do");
-		
-		//패러미터 설정
+
+		// 패러미터 설정
 		String adress1 = request.getParameter("adress1");
 		String adress2 = request.getParameter("adress2");
 		String adress3 = request.getParameter("adress3");
-		
-		//확인
+
+		// 확인
 		System.out.println(adress1);
 		System.out.println(adress2);
 		System.out.println(adress3);
-		
-		
+
 		settingDto.setAdress1(adress1);
 		settingDto.setAdress2(adress2);
 		settingDto.setAdress3(adress3);
 		System.out.println(settingDto);
 
-		//쿼리 실행
+		// 쿼리 실행
 		restnts = restntService.getRestntListByAddr(settingDto);
 		System.out.println(restnts);
 
-		//제이슨으로 변환
+		// 제이슨으로 변환
 		JSONArray jsonArray = JSONArray.fromObject(restnts);
 
 		System.out.println("restnts - " + jsonArray);
@@ -500,21 +500,20 @@ public class AdminController {
 		PrintWriter out = response.getWriter();
 		out.print(jsonObject.toString());
 	}
-	
+
 	@RequestMapping(value = "/ajaxRestntInfo.do")
 	public void ajaxRestntInfo(HttpServletRequest request,
 			HttpServletResponse response, SettingDTO settingDto)
 			throws IOException {
 		System.out.println("/ajaxRestntInfo.do");
-		
+
 		String restntId = request.getParameter("restntId");
 		System.out.println(restntId);
-		restnt= restntService.getRestntInfoById(restntId);
+		restnt = restntService.getRestntInfoById(restntId);
 		System.out.println(restnt);
 
-		//제이슨으로 변환
-		
-		
+		// 제이슨으로 변환
+
 		JSONObject jsonObject = JSONObject.fromObject(restnt);
 		System.out.println("json - " + jsonObject);
 
@@ -522,25 +521,19 @@ public class AdminController {
 		PrintWriter out = response.getWriter();
 		out.print(jsonObject.toString());
 	}
-	
-	
-	
-	
+
 	@RequestMapping(value = "/ajaxMenuList.do")
 	public void ajaxMenuList(HttpServletRequest request,
 			HttpServletResponse response, SettingDTO settingDto)
 			throws IOException {
 		System.out.println("/ajaxMenuList.do");
-		
+
 		String restntId = request.getParameter("restntId");
 		System.out.println(restntId);
 		menus = menuService.getMenuListByRestntId(restntId);
 		System.out.println(menus);
 
-		//제이슨으로 변환
-		
-
-	
+		// 제이슨으로 변환
 
 		JSONArray jsonArray = JSONArray.fromObject(menus);
 
@@ -556,6 +549,44 @@ public class AdminController {
 		PrintWriter out = response.getWriter();
 		out.print(jsonObject.toString());
 	}
-	
 
+	@RequestMapping(value = "/ajaxRestntInfoUpdate.do", method = RequestMethod.POST)
+	void ajaxRestntInfoUpdate(HttpServletRequest request,
+			HttpServletResponse response, RestntDTO restntDto) throws IOException {
+		System.out.println("/ajaxRestntInfoUpdate.do");
+		/*String restntId = request.getParameter("restntId");
+		String restntName = request.getParameter("restntName");
+		String adress1 = request.getParameter("adress1");
+		String adress2 = request.getParameter("adress2");
+		String adress3 = request.getParameter("adress3");
+		String adress4 = request.getParameter("adress4");
+		String restntCate = request.getParameter("restntCate");
+		String restntTel = request.getParameter("restntTel");
+		
+		System.out.println(restntId);
+		
+		restntDto.setRestntId(restntId);
+		restntDto.setRestntName(restntName);
+		restntDto.setAdress1(adress1);
+		restntDto.setAdress2(adress2);
+		restntDto.setAdress3(adress3);
+		restntDto.setAdress4(adress4);
+		restntDto.setRestntCate(restntCate);
+		restntDto.setRestntTel(restntTel);*/
+		System.out.println(restntDto);
+		restntService.setRestntById(restntDto);
+
+		restnt = restntService.getRestntInfoById(restntDto.getRestntId());
+		System.out.println(restnt);
+
+		// 제이슨으로 변환
+
+		JSONObject jsonObject = JSONObject.fromObject(restnt);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+
+	}
 }

@@ -193,13 +193,13 @@
 							var restntTel = json.restntTel;
 							var restntEval = json.restntEval;
 							var html = '<tbody><form id="restntForm"><tr><th>식당명</th><td><input type="hidden" value="'+restntId+'"name="restntId"><input type="text"value="'+restntName+'" name="restntName"></td></tr>';
-							html += '<tr><th>시/도</th><td><input type="text" value="'+adress1+'"name="adress1"></td></tr>';
-							html += '<tr><th>시/군/구</th><td><input type="text" value="'+adress2+'"name="adress2"></td></tr>';
-							html += '<tr><th>도로 명</th><td><input type="text" value="'+adress3+'"name="adress3"></td></tr>';
-							html += '<tr><th>상세주소</th><td><input type="text" value="'+adress4+'"name="adress4"></td></tr>';
+							html += '<tr><th>시/도</th><td><label>'+adress1+'</label></td></tr>';
+							html += '<tr><th>시/군/구</th><td><label>'+adress2+'</label></td></tr>';
+							html += '<tr><th>도로 명</th><td><label>'+adress3+'</label></td></tr>';
+							html += '<tr><th>상세주소</th><td><label>'+adress4+'</label></td></tr>';
 							html += '<tr><th>분류</th><td><input type="text" value="'+restntCate+'"name="restntCate"></td></tr>';
 							html += '<tr><th>연락처</th><td><input type="text" value="'+restntTel+'"name="restntTel"></td></tr>';
-							html += '<tr><th>평균 별점</th><td><input type="text" disabled="disabled"value="'+restntEval+'"></td></tr></form></tbody>';
+							html += '<tr><th>평균 별점</th><td><label>'+restntEval+'</label></td></tr></form></tbody>';
 							/* html += '<td>'
 									+ '<input type="hidden" id="restntId" name="restntId" value="'+restntId+'" class="restntId">';
 							html += restntName
@@ -248,7 +248,69 @@
 				});
 
 	}
-</script>
+
+	function modRestnt() {
+		var paramData = $('#restInfoForm').serialize();
+			
+		
+			$.ajax({
+				cache : false,
+				async : false,
+				type : 'POST',
+				url : 'ajaxRestntInfoUpdate.do',
+				data : paramData,
+				dataType : 'json',
+				error : function() {
+					alert("에러 : 데이터가 안넘어갑니다.");
+				},
+				success : function(json) {
+					$("#restntInfoTable > tbody").html("");
+					
+					$('#selectBox').hide();
+					$('#restntList').hide();
+					$('#restntInfo').show();
+
+					if (json.restntId != '') {
+						
+						var restntName = json.restntName;
+						var restntId = json.restntId;
+						var adress1 = json.adress1;
+						var adress2 = json.adress2;
+						var adress3 = json.adress3;
+						var adress4 = json.adress4;
+						var restntCate = json.restntCate;
+						var restntTel = json.restntTel;
+						var restntEval = json.restntEval;
+						var html = '<tbody><form id="restntForm"><tr><th>식당명</th><td><input type="hidden" value="'+restntId+'"name="restntId"><input type="text"value="'+restntName+'" name="restntName"></td></tr>';
+						html += '<tr><th>시/도</th><td><label>'+adress1+'</label></td></tr>';
+						html += '<tr><th>시/군/구</th><td><label>'+adress2+'</label></td></tr>';
+						html += '<tr><th>도로 명</th><td><label>'+adress3+'</label></td></tr>';
+						html += '<tr><th>상세주소</th><td><label>'+adress4+'</label></td></tr>';
+						html += '<tr><th>분류</th><td><input type="text" value="'+restntCate+'"name="restntCate"></td></tr>';
+						html += '<tr><th>연락처</th><td><input type="text" value="'+restntTel+'"name="restntTel"></td></tr>';
+						html += '<tr><th>평균 별점</th><td><label>'+restntEval+'</label></td></tr></form></tbody>';
+						/* html += '<td>'
+								+ '<input type="hidden" id="restntId" name="restntId" value="'+restntId+'" class="restntId">';
+						html += restntName
+								+ '<button id="restntInfo" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr></tbody>'; */
+						$('#restntInfoTable').append(html);
+					}	
+					
+					
+					
+					
+					
+				}
+			});
+	
+	
+	
+	}
+	function delRestnt() {
+		
+	}
+	
+	</script>
 
 </head>
 <body>
@@ -281,16 +343,19 @@
 	</div>
 
 	<div id="restntInfo" align="center">
-
+		<form id="restInfoForm">
 		<table border="2" id="restntInfoTable">
 			<caption>식당 정보</caption>
 
 
 		</table>
+		</form>
+	<div id="infoButton" align="center">
 	<button id="addRestnt">추가 </button>
-	<button id="modRestnt">수정</button>
-	<button id="removeRestnt">삭제 </button>
-	
+	<button id="modRestnt" onclick="modRestnt()">수정</button>
+	<button id="delRestnt" onclick="delRestnt()">삭제 </button>
+	</div>
+	<br><br>
 		<table border="2" id="menuTable">
 			<caption>메뉴 정보</caption>
 

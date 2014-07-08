@@ -34,6 +34,16 @@
 			value="/WEB-INF/views/admin/restntManant.jsp" />
 	</definition>
 
+	
+	<definition name="memberList" extends="home">
+		<put-attribute name="main"
+			value="/WEB-INF/views/admin/memberList.jsp" />
+	</definition>
+	
+	
+	
+	
+	
 	<!--공통: 회원가입 -->
 	<definition name="register" extends="home">
 		<put-attribute name="main" value="/WEB-INF/views/member/register.jsp" />
@@ -140,6 +150,12 @@
 	 <definition name="delete" extends="home">
       <put-attribute name="main"
          value="/WEB-INF/views/evaluate/delete.jsp" />
+   </definition>
+   
+   <!--회원:검색 설정   -->
+	 <definition name="setting" extends="home">
+      <put-attribute name="main"
+         value="/WEB-INF/views/setting/setting.jsp" />
    </definition>
 	
 	
