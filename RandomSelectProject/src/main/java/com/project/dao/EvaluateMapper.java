@@ -38,7 +38,7 @@ public interface EvaluateMapper {
 	        //  리스트 개수 
 			int getListCount(String memId);
 			// 게시물 삭제 
-			void deleteData(String memId, String evalId);
+			public void deleteData(String memId, String evalId);
 		
 		
 

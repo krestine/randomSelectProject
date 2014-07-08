@@ -68,5 +68,4 @@
 		='-1', where memId= #{memId},evalId=#(evalId);
 	</update>
 
-
 </mapper>
