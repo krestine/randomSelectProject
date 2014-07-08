@@ -60,7 +60,7 @@
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 <body
-	background ="/controller/resources/img/bg.png">
+	background ="">
 	<br>
 	<br>
 	<div align="center">

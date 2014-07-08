@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="/controller/resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
- <script src="/controller/resources/js/bootstrap.min.js"></script>
- <script src="/controller/resources/js/respond.js"></script>
+<link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap-theme.min.css" />
+<script type="text/javascript" src="/myapp/resources/js/bootstrap.min.js"></script>
+<script src="/myapp/resources/js/respond.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -32,9 +34,10 @@ $(document).ready(function() {
 <title>식당리스트</title>
 </head>
 <body>
+
 	<h1>친구들이 평가한 식당리스트</h1>
 
-	<form id="community" method="POST" class="nav nav-pills">
+	<form id="community" method="post" >
 
 		<input type="button" class="btn btn-success" value="친구 리스트" id="mateListBtn"/> 
 		<input type="button" class="btn btn-success" value="메인" id="mainBtn" />
@@ -52,10 +55,9 @@ $(document).ready(function() {
 						<input value="${restnt.restntName}" name="restntName">
 						<input value="${restnt.score}" name="score">
 						<input type="submit" class="btn btn-success" value="상세보기">
-						
 						</form>
 						<br>
 		</c:forEach>
-<body>	
+
 </body>
 </html>

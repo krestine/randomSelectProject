@@ -66,9 +66,8 @@
 		<c:choose>
 			<c:when test="${sessionScope.loginUser==null}">
 				<form id="select1" method="post" style="display: inline;">
-					<input type="button" class="btn btn-primary btn-lg" onclick="loginGo()"
-						value="로그인"> <input type="button" class="btn btn-default btn-lg"
-						onclick="registerGo()" value="회원가입">
+					<input type="button" class="btn btn-primary btn-lg" onclick="loginGo()" value="로그인"> 
+						<input type="button" class="btn btn-default btn-lg" onclick="registerGo()" value="회원가입">
 				</form>
 			</c:when>
 
@@ -83,23 +82,21 @@
 
 			<c:when test="${sessionScope.loginUser.memGrade==666}">
 				<form id="select1" method="post" style="display: inline;">
-					<input type="button" class="btn btn-warning btn-lg" onclick="logoutGo()"
-						value="로그아웃"> <input type="button" class="btn btn-danger btn-lg"
-						onclick="adminGo()" value="관리">
+					<input type="button" class="btn btn-warning btn-lg" onclick="logoutGo()" value="로그아웃"> 
+					<input type="button" class="btn btn-danger btn-lg" onclick="adminGo()" value="관리">
 				</form>
 			</c:when>
 		</c:choose>
 		
 		<form id="select3" style="display: inline;">
-			<input type="button" class="btn btn-primary btn-lg" onclick="selectResult()"
-				value="아무거나"> 
-				<input type="button" class="btn btn-info btn-lg"
-				onclick="ladderMake()" value="복불복">
+			<input type="button" class="btn btn-primary btn-lg" onclick="selectResult()" value="아무거나"> 
+			<input type="button" class="btn btn-info btn-lg" onclick="ladderMake()" value="복불복">
 		</form>
-
+		
+		
 		<form id="select2" method="post" style="display: inline;">
-				<input type="button" class="btn btn-default btn-lg" onclick="settingGo()" value="설정 "> 
-				<input type="button" class="btn btn-success btn-lg" onclick="mateListGo()"value="커뮤니티"> 
+				<input type="button" class="btn btn-primary btn-lg" onclick="settingGo()" value="설정 "> 
+				<input type="button" class="btn btn-success btn-lg"  onclick="mateListGo()"value="커뮤니티로간다"> 
 					
  
 				<input type="button" class="btn btn-primary btn-lg" onclick="evaluateGo()" value="평가"> 
