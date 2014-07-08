@@ -40,7 +40,7 @@
 		update restnt set
 		restntName = #{restntName},
 		restntTel=#{restntTel},
-		restntCate=#{restntCate},
+		restntCate=#{restntCate}
 		where restntId = #{restntId} and
 		active = '1'
 

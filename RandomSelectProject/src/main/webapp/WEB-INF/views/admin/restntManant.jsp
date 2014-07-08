@@ -251,7 +251,7 @@
 
 	function modRestnt() {
 		var paramData = $('#restInfoForm').serialize();
-			alert(paramData);
+			
 		
 			$.ajax({
 				cache : false,
