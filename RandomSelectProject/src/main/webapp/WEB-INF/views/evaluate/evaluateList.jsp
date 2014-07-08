@@ -23,11 +23,9 @@
 		document.getElementById("select1").submit();
 	}
 	function evaluateMainGo() {
-		document.getElementById("select2").action = "evaluateMain.do";
+		document.getElementById("select2").action = "evaluatemain.do";
 		document.getElementById("select2").submit();
 	}
-	
-	
 </script>
 <title>게시판</title>
 </head>
@@ -43,12 +41,12 @@
 	<h3>평가한 식당 리스트</h3>
 
 	<form id="select1" method="post">
-		<input type="button" onclick="mainGo()" value="메인으로 "> 
-		</form>
-	<form id="select2" method="post">
-	<input type="button" onclick="evaluateMainGo()"	value="평가메인으로" >
+		<input type="button" onclick="mainGo()" value="메인으로 ">
 	</form>
-	
+	<form id="select2" method="post">
+		<input type="button" onclick="evaluateMainGo()" value="평가메인으로">
+	</form>
+
 	<!-- <input type="button" onclick="javascript:history.back(-1)" value="뒤로" /> -->
 
 
@@ -72,8 +70,8 @@
 					style="width: 300px" placeholder="의견을 140자 이내로 적어주세요"></td> -->
 			<td>방문 평가 한 음식점</td>
 
-			<td>비고</td>
-
+			<td>방문한 날짜</td>
+			<td> </td>
 			<c:forEach var="evaluate" items="${boardList}">
 				<tr height="35px">
 					<td align="center">${evaluate.evalId}</td>
@@ -106,23 +104,21 @@
 					</td>
 				</tr>
 			</c:forEach>
-	
-	<tr>
-		<td colspan="5" align="center"><c:if test="${page <= 1 }">[이전]&nbsp; </c:if>
-			<c:if test="${page > 1 }">
-				<a href="/evaluateList.do?memId=${memId }&page=${page-1}">이전</a>&nbsp;</c:if>
-			<c:forEach begin="${startpage }" end="${endpage }" var="a">
-				<c:if test="${a==page }">[${a}]</c:if>
-				<c:if test="${a!=page }">
-					<a href="/evaluateList.do?memId=${memId}&page=${a}">[${a}]</a>&nbsp;</c:if>
-			</c:forEach> 
-			<c:if test="${page>=maxpage }">[다음]</c:if>
-			 <c:if test="${page<maxpage }">
-				<a href="/evaluateList.do?memId=${memId}&page=${page+1}">[다음]</a>
-			</c:if></td>
-	</tr>
+		<tr>
+			<td colspan="5" align="center"><c:if test="${page <= 1 }">[이전]&nbsp; </c:if>
+				<c:if test="${page > 1 }">
+					<a href="/evaluateList.do?memId=${memId }&page=${page-1}">이전</a>&nbsp;</c:if>
+				<c:forEach begin="${startpage }" end="${endpage }" var="a">
+					<c:if test="${a==page }">[${a}]</c:if>
+					<c:if test="${a!=page }">
+						<a href="/evaluateList.do?memId=${memId}&page=${a}">[${a}]</a>&nbsp;</c:if>
+				</c:forEach> <c:if test="${page>=maxpage }">[다음]</c:if> <c:if
+					test="${page<maxpage }">
+					<a href="/evaluateList.do?memId=${memId}&page=${page+1}">[다음]</a>
+				</c:if></td>
+		</tr>
 
-</table>
+	</table>
 
 
 </body>

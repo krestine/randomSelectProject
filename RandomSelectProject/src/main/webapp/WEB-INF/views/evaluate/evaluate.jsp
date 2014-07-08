@@ -56,10 +56,6 @@ a:active {
 		document.getElementById("select1").action = "myInfoForm.do";
 		document.getElementById("select1").submit();
 	}
-	function restntList() {
-		document.getElementById("community").action = "restntListProc.do";
-		document.getElementById("community").submit();
-	}
 
 	
 </script>
@@ -92,8 +88,6 @@ a:active {
 
 	<form id="select1" method="post">
 		<input type="button" onclick="mainGo()" value="메인으로 "> 
-		</form>
-		<form id="select1" method="POST">
 		<input type="button" onclick="myInfoGo()" value="내정보수정">
 	</form>
 
