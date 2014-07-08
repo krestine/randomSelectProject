@@ -110,7 +110,7 @@ public class AdminController {
 		}
 		grades = settingService.getGradeValue();
 		model.addAttribute("grades", grades);
-		return "admin/memberList";
+		return "memberList";
 
 	}
 
@@ -134,7 +134,7 @@ public class AdminController {
 		memberService.setMemberInfo(memberDto);
 		members = memberService.getMemberListById(memId);
 		model.addAttribute("members", members);
-		return "admin/memberList";
+		return "memberList";
 	}
 
 	// 식당 관리 페이지
