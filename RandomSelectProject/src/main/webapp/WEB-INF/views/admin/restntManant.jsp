@@ -185,14 +185,14 @@
 							var restntCate = json.restntCate;
 							var restntTel = json.restntTel;
 							var restntEval = json.restntEval;
-							var html = '<tr><th>식당명</th><td><input type="hidden" value="'+restntId+'"name="restntId"><input type="text"value="'+restntName+'" name="restntName"></td></tr>';
+							var html = '<tbody><form id="restntForm"><tr><th>식당명</th><td><input type="hidden" value="'+restntId+'"name="restntId"><input type="text"value="'+restntName+'" name="restntName"></td></tr>';
 							html += '<tr><th>시/도</th><td><input type="text" value="'+adress1+'"name="adress1"></td></tr>';
 							html += '<tr><th>시/군/구</th><td><input type="text" value="'+adress2+'"name="adress2"></td></tr>';
 							html += '<tr><th>도로 명</th><td><input type="text" value="'+adress3+'"name="adress3"></td></tr>';
 							html += '<tr><th>상세주소</th><td><input type="text" value="'+adress4+'"name="adress4"></td></tr>';
 							html += '<tr><th>분류</th><td><input type="text" value="'+restntCate+'"name="restntCate"></td></tr>';
 							html += '<tr><th>연락처</th><td><input type="text" value="'+restntTel+'"name="restntTel"></td></tr>';
-							html += '<tr><th>평균 별점</th><td><input type="text" disabled="disabled"value="'+restntEval+'"></td></tr>';
+							html += '<tr><th>평균 별점</th><td><input type="text" disabled="disabled"value="'+restntEval+'"></td></tr></form></tbody>';
 							/* html += '<td>'
 									+ '<input type="hidden" id="restntId" name="restntId" value="'+restntId+'" class="restntId">';
 							html += restntName
@@ -216,7 +216,7 @@
 					success : function(json) {
 
 						var menus = json.menus;
-						var html1 = '<tr><th>메뉴 이름</th><th>가격</th><th>칼로리</th><th>특이사항</th></tr>';
+						var html1 = '<tbody><tr><th>메뉴 이름</th><th>가격</th><th>칼로리</th><th>특이사항</th></tr>';
 						$('#menuTable').append(html1);
 
 						$.each(menus, function(key) {
@@ -226,11 +226,14 @@
 							var menuPrice = menus[key].menuPrice;
 							var menuCalorie = menus[key].menuCalorie;
 							var menuNote = menus[key].menuNote;
-							var html2 = '<tr><td>' + menuName + '</td><td>'
-									+ menuPrice + '</td><td>' + menuCalorie
-									+ '</td><td>' + menuNote + '</td></tr>';
+							var html2 = 
+								'<tr><form id="menuForm'+key+'"><td><input type="text" value="'+menuName+'"name="menuName"></td>'
+								+'<td><input type="text" value="'+menuPrice +'"name="menuPrice"></td>'
+								+'<td><input type="text" value="'+menuCalorie +'"name="menuCalorie"></td>'
+								+'<td><input type="text" value="'+menuNote +'"name="menuNote"></td></form></tr>';
 							$('#menuTable').append(html2);
 						});
+						$('#menuTable').append('</tbody>');
 					}
 				});
 
