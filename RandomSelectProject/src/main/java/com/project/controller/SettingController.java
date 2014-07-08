@@ -60,7 +60,7 @@ public class SettingController {
 					model.addAttribute("carRanges", carRanges);
 					model.addAttribute("excMenus", excMenus);
 
-					return "setting/setting";
+					return "setting";
 				} catch (Exception e) {
 					model.addAttribute("errorMessage",
 							"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");

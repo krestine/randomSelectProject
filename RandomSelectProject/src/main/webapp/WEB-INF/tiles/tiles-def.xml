@@ -141,6 +141,12 @@
       <put-attribute name="main"
          value="/WEB-INF/views/evaluate/delete.jsp" />
    </definition>
+   
+   <!--회원:검색 설정   -->
+	 <definition name="setting" extends="home">
+      <put-attribute name="main"
+         value="/WEB-INF/views/setting/setting.jsp" />
+   </definition>
 	
 	
 </tiles-definitions>
