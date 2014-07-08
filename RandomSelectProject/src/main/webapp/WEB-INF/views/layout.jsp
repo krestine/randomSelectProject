@@ -64,7 +64,7 @@
 	<br>
 	<br>
 	<div align="center">
-		<table width="90%" border="1" >
+		<table width="90%" border="0" >
 			<tr>
 				<td height="80"><tiles:insertAttribute name="header" /></td>
 			</tr>
