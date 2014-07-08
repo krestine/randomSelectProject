@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div align="center">
-		<h1>밥 먹자!!!!!!</h1>
+<div align="center">
+		<h1> <a class="brand" href="#">The Random Select Project</a></h1>
 	</div>
 </body>
 </html>
