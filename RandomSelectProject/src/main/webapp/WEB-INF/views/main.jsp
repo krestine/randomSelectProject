@@ -4,13 +4,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+
+<link href="/controller/resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
+ <script src="//code.jquery.com/jquery.js"></script>
+ <script src="/controller/resources/js/bootstrap.min.js"></script>
+ <script src="/controller/resources/js/respond.js"></script>
+ <!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+
 <link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap-theme.min.css" />
 <script type="text/javascript" src="/myapp/resources/js/bootstrap.min.js"></script>
 <script src="/myapp/resources/js/respond.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
- 
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+
+
 </head>
 <body>
 <h1 align="center"></h1>
