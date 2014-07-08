@@ -43,7 +43,7 @@ public class RandomSelectController {
 		model.addAttribute("walkRange", walkRange);
 		
 		model.addAttribute("restntList", restntList);
-		return "randomSelect/selectResult";
+		return "selectResult";
 	}
 
 	@RequestMapping("/main.do")
@@ -52,6 +52,12 @@ public class RandomSelectController {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
 		model.addAttribute("loginUser",loginUser);
 		return "main";
+	}
+	
+	@RequestMapping("ladderMake.do")
+	String adminMainProc(Model model) {
+
+		return "ladderMake";
 	}
 
 }
