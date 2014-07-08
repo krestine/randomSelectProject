@@ -146,8 +146,9 @@ public class AdminController {
 		switch (caseCode) {
 		case 0:
 			adress1 = settingService.getAdress1();
+			List<SettingDTO> restntCates = settingService.getExcMenu();
 			model.addAttribute("adress1", adress1);
-
+			model.addAttribute("restntCates", restntCates);
 			break;
 
 		case 1:
@@ -554,25 +555,7 @@ public class AdminController {
 	void ajaxRestntInfoUpdate(HttpServletRequest request,
 			HttpServletResponse response, RestntDTO restntDto) throws IOException {
 		System.out.println("/ajaxRestntInfoUpdate.do");
-		/*String restntId = request.getParameter("restntId");
-		String restntName = request.getParameter("restntName");
-		String adress1 = request.getParameter("adress1");
-		String adress2 = request.getParameter("adress2");
-		String adress3 = request.getParameter("adress3");
-		String adress4 = request.getParameter("adress4");
-		String restntCate = request.getParameter("restntCate");
-		String restntTel = request.getParameter("restntTel");
 		
-		System.out.println(restntId);
-		
-		restntDto.setRestntId(restntId);
-		restntDto.setRestntName(restntName);
-		restntDto.setAdress1(adress1);
-		restntDto.setAdress2(adress2);
-		restntDto.setAdress3(adress3);
-		restntDto.setAdress4(adress4);
-		restntDto.setRestntCate(restntCate);
-		restntDto.setRestntTel(restntTel);*/
 		System.out.println(restntDto);
 		restntService.setRestntById(restntDto);
 
@@ -589,4 +572,46 @@ public class AdminController {
 		out.print(jsonObject.toString());
 
 	}
+	
+	@RequestMapping(value = "/ajaxRestntInfoDelete.do", method = RequestMethod.POST)
+	void ajaxRestntInfoDelete(HttpServletRequest request,
+			HttpServletResponse response, RestntDTO restntDto, SettingDTO settingDto) throws IOException {
+		System.out.println("/ajaxRestntInfoUpdate.do");
+		
+		System.out.println(restntDto);
+		
+		settingDto.setAdress1(restntDto.getAdress1());
+		settingDto.setAdress2(restntDto.getAdress2());
+		settingDto.setAdress3(restntDto.getAdress3());
+		
+		System.out.println(settingDto);
+		
+		System.out.println("쿼리 실행");
+		restntService.dropRestntById(restntDto.getRestntId());
+		
+		System.out.println("주소 정보");
+		
+		
+		System.out.println("쿼리 실행 후 식당 리스트 쿼리");
+		restnts = restntService.getRestntListByAddr(settingDto);
+		System.out.println(restnts);
+
+		// 제이슨으로 변환
+		JSONArray jsonArray = JSONArray.fromObject(restnts);
+
+		System.out.println("restnts - " + jsonArray);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("restnts", jsonArray);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+
+	}
+	
+
 }
