@@ -14,11 +14,8 @@
 
 <script>
 $(document).ready(function() {
-	$('mateListBtn').click(function() {
-		$('#community').attr("action", "mateListProc.do").submit();
-	});
-	$('mateDetailBtn').click(function(){
-		$('#community').attr("action","mateDetailProc.do").submit();
+	$('#restntListBtn').click(function() {
+		$('#community').attr("action", "restntListProc.do").submit();
 	});
 
 });
@@ -30,10 +27,12 @@ $(document).ready(function() {
 
 
 	<h1>친구리스트</h1>
+<div>	
 	<form id="community" method="post" >
-		 <input type="button" class="btn btn-success" value="식당 리스트" id="restntListBtn"/> 
-		 <input type="button" class="btn btn-success" value="메인" id="mainBtn"/>
+		 <input type="button" class="btn btn-success" value="식당 리스트" id="restntListBtn"/>
 	</form>
+	
+
 
 	<c:forEach var="mate" items="${mates}">		
 					<form action="mateDetailProc.do" method="post">
@@ -44,6 +43,6 @@ $(document).ready(function() {
 					</form>
 					<br>
 	</c:forEach>
-			
+</div>		
 </body>
 </html>

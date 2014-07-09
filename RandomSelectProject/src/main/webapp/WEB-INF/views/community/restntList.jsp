@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -14,13 +14,9 @@
 
 <script>
 $(document).ready(function() {
-	$('mateListBtn').click(function() {
+	$('#mateListBtn').click(function() {
 		$('#community').attr("action", "mateListProc.do").submit();
 	});
-	$('mateDetailBtn').click(function(){
-		$('#community').attr("action","mateDetailProc.do").submit();
-	});
-
 });
 
 </script>
@@ -29,11 +25,9 @@ $(document).ready(function() {
 <body>
 
 	<h1>친구들이 평가한 식당리스트</h1>
-
+<div>
 	<form id="community" method="post" >
-
 		<input type="button" class="btn btn-success" value="친구 리스트" id="mateListBtn"/> 
-		<input type="button" class="btn btn-success" value="메인" id="mainBtn" />
 	</form>
 	<br>
 	<c:forEach var="restnt" items="${restnts}">
@@ -51,7 +45,7 @@ $(document).ready(function() {
 						</form>
 						<br>
 		</c:forEach>
-
+</div>
 </body>
 
 </html>

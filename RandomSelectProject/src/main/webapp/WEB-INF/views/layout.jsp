@@ -56,6 +56,8 @@
 	top: 1px;
 }
 
+body { padding-top: 70px; }
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:insertAttribute name="title" ignore="true" /></title>

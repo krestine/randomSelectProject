@@ -14,25 +14,30 @@
 <script src="/myapp/resources/js/respond.js"></script>
 
 <script>
+function loginGo() {
+	document.getElementById("select1").action = "loginForm.do";
+	document.getElementById("select1").submit();
+}
+
+
 $(document).ready(function() {
-	$('mateListBtn').click(function() {
+	$('#mateListBtn').click(function() {
 		$('#community').attr("action", "mateListProc.do").submit();
 	});
-	$('mateDetailBtn').click(function(){
-		$('#community').attr("action","mateDetailProc.do").submit();
+	$('#restntListBtn').click(function(){
+		$('#community').attr("action","restntListProc.do").submit();
 	});
 
 });
 </script>	
 </head>
 <body>
-
-
+<div>
 		<h1>${mateInfo.memName }님의 정보입니다.</h1>
 		<br>
 		<form id="community" method="post">
 		<input type="button" class="btn btn-success" value="친구 리스트" id="mateListBtn" />
-		<input type="button" class="btn btn-success" value="메인" id="mainBtn"/>
+		<input type="button" class="btn btn-success" value="식당 리스트" id="restntListBtn"/>
 		</form>
 		<br>
 		
@@ -50,11 +55,10 @@ $(document).ready(function() {
 			<input value="공유상태">
 			<input value="친구관계"><br>	
 			<input value="${mate.infoStatus}" name="infoStatus">			
-			<input value="${mate.mateStatus}" name="mateStatus">
-			
+			<input value="${mate.mateStatus}" name="mateStatus">	
 		</form>
-					<br>	
-
+			<br>	
+</div>
 </body>
 
 </html>

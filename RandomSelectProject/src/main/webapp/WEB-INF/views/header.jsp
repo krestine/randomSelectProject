@@ -55,16 +55,7 @@
             <li>
               <a href="http://news.bootswatch.com">Blog</a>
             </li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Download <span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="download">
-                <li><a href="./bootstrap.min.css">bootstrap.min.css</a></li>
-                <li><a href="./bootstrap.css">bootstrap.css</a></li>
-                <li class="divider"></li>
-                <li><a href="./variables.less">variables.less</a></li>
-                <li><a href="./bootswatch.less">bootswatch.less</a></li>
-              </ul>
-            </li>
+          
           </ul>
 
           <ul class="nav navbar-nav navbar-right">

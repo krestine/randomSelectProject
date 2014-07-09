@@ -13,7 +13,6 @@
 </style>
 <title>Insert title here</title>
 
-
 </head>
 <body>
 <h1 align="center"></h1>
