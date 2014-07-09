@@ -8,13 +8,12 @@
 <title>식당 관리</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-	$(document)
-			.ready(
+	$(document).ready(
 					function() {
 
 						$('#restntList').hide();
 						$('#restntInfo').hide();
-						$('#newRestnt').hide();
+						$('#newRestnt').hide(); 
 
 						$('#serch').click(function() {
 							serchMode();
@@ -26,7 +25,7 @@
 										function() {
 
 											$('#restntList').hide();
-											$('#newRestnt').hide();
+											$('#newRestnt').hide(); 
 											$
 													.ajax({
 														cache : false,
@@ -104,7 +103,7 @@
 										function() {
 											$('#newRestnt').hide();
 											$('#restntList').hide();
-											$('#restntInfo').hide();
+											$('#restntInfo').hide(); 
 											$("#restntTable > tbody").html("");
 											var paramData = {
 												adress1 : $('#adress1').val(),
@@ -130,9 +129,7 @@
 																var restnts = json.restnts;
 
 																if (restnts[0].restntId != '') {
-																	$(
-																			'#restntList')
-																			.show();
+																	$('#restntList').show();
 																	var html = '<tbody id="restntListResult"><tr>';
 																	$
 																			.each(
@@ -171,8 +168,7 @@
 			restntId : $(obj).prev().attr("value")
 		};
 
-		$
-				.ajax({
+		$.ajax({
 					cache : false,
 					async : false,
 					type : 'POST',
@@ -231,8 +227,7 @@
 
 				});
 
-		$
-				.ajax({
+		$.ajax({
 					cache : false,
 					async : false,
 					type : 'POST',
@@ -274,8 +269,7 @@
 	function modRestnt() {
 		var paramData = $('#restInfoForm').serialize();
 
-		$
-				.ajax({
+		$.ajax({
 					cache : false,
 					async : false,
 					type : 'POST',
@@ -346,12 +340,12 @@
 					},
 					success : function(json) {
 						$('#restntInfo').hide();
-						$('#selectBox').show();
+						$('#selectBox').show(); 
 
 						var restnts = json.restnts;
-
+						$('#restntList').show();
 						if (restnts[0].restntId != null) {
-							$('#restntList').show();
+							 
 							$
 									.each(
 											restnts,
@@ -366,9 +360,10 @@
 														+ '<button id="restntInfo'
 														+ key
 														+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr></tbody>';
-												$('#restntTable').append(html);
+														
 											});
-
+							html += '<tr><td><button id="addMode" onclick="addMode()">추가</button></td></tr></tbody>';
+							$('#restntTable').append(html);
 						}
 
 					}
@@ -379,7 +374,7 @@
 		$('#selectBox').hide();
 		$('#restntList').hide();
 		
-		$('#newRestnt').show();
+		$('#newRestnt').show(); 
 		$('#adress1Input').attr("value",$('#adress1').val());
 		$('#adress2Input').attr("value",$('#adress2').val());
 		$('#adress3Input').attr("value",$('#adress3').val());
@@ -387,7 +382,6 @@
 
 	function serchMode() {
 		$('#newRestnt').hide();
-
 		$('#restntInfo').hide();
 		$('#selectBox').show();
 		$('#restntList').show();
@@ -395,7 +389,51 @@
 	}
 	
 	function addRestnt(){
+		var paramData = $('#newRestntInfoForm').serialize();	
 		
+		$('#newRestnt').hide();
+		$('#restntList').hide();
+		$('#restntInfo').hide();
+		$("#restntTable > tbody").html("");
+		$.ajax({
+					cache : false,
+					async : false,
+					type : 'POST',
+					url : 'ajaxRestntInfoInsert.do',
+					data : paramData,
+					dataType : 'json',
+					error : function() {
+						alert("에러 : 데이터가 안넘어갑니다.");
+					},
+					success : function(json) {
+						$('#restntList').show();
+
+						var restnts = json.restnts;
+
+						if (restnts[0].restntId != null) {
+							
+							$.each(
+											restnts,
+											function(key) {
+												var restntName = restnts[key].restntName;
+												var restntId = restnts[key].restntId;
+
+												var html = '<tbody id="restntListResult"><tr>';
+												html += '<td>'
+														+ '<input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId">';
+												html += restntName
+														+ '<button id="restntInfo'
+														+ key
+														+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr></tbody>';
+												
+											});
+							html += '<tr><td><button id="addMode" onclick="addMode()">추가</button></td></tr></tbody>';
+							$('#restntTable').append(html);
+							
+						}
+
+					}
+				});
 	}
 </script>
 
@@ -437,6 +475,7 @@
 
 			</table>
 		</form>
+		
 		<div id="infoButton" align="center">
 
 			<button id="modRestnt" onclick="modRestnt()">수정</button>
@@ -455,37 +494,39 @@
 	<div id="newRestnt" align="center">
 
 		식당 정보 입력
+		<form id="newRestntInfoForm">
 		<table border="2">
+			
 			<tbody>
-
+				
 				<tr>
 					<th>식당명</th>
 
 
 					<td><input type="text"
-						value="${restnt.restntName}" name="restntName"></td>
+						value="${restnt.restntName}" name="restntName" id="restntNameInput"></td>
 				</tr>
 
 
 				<tr>
 					<th>주소1</th>
 
-					<td><input type="text" disabled="disabled" id="adress1Input"
+					<td><input type="text" id="adress1Input"
 						name="adress1"></td>
 				</tr>
 				<tr>
 					<th>주소2</th>
-					<td><input type="text" disabled="disabled" id="adress2Input"
+					<td><input type="text"  id="adress2Input"
 						name="adress2"></td>
 				</tr>
 				<tr>
 					<th>주소3</th>
-					<td><input type="text" disabled="disabled" id="adress3Input"
+					<td><input type="text"  id="adress3Input"
 						name="adress3"></td>
 				</tr>
 				<tr>
 					<th>주소4</th>
-					<td><input type="text" name="adress4"></td>
+					<td><input type="text" name="adress4" id="adress4Input"></td>
 				</tr>
 
 				<tr>
@@ -509,7 +550,7 @@
 				<tr>
 					<th>연락처</th>
 					<td><input type="text" value="${restnt.restntTel}"
-						name="restntTel"></td>
+						name="restntTel" id="restntTelInput"></td>
 				</tr>
 
 				
@@ -519,8 +560,9 @@
 
 
 			</tbody>
+			
 		</table>
-		
+		</form>
 		<br>
 		<br>
 		<button onclick="serchMode()">주소 검색</button>
