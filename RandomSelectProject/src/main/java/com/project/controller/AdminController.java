@@ -112,7 +112,7 @@ public class AdminController {
 		model.addAttribute("grades", grades);
 		return "memberList";
 
-	}
+	} 
 
 	// 회원 리스트에서 아이디 클릭 -> 회원의 평가 정보 리스트 표시 페이지
 	@RequestMapping(value = "/memberEvaluateListProc.do", method = RequestMethod.POST)
