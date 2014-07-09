@@ -97,67 +97,64 @@
 														});
 											}
 										});
-						$('#adress3')
-								.click(
-										function() {
-											$('#newRestnt').hide();
-											$('#restntList').hide();
-											$('#restntInfo').hide(); 
-											$("#restntTable > tbody").html("");
-											var paramData = {
-												adress1 : $('#adress1').val(),
-												adress2 : $('#adress2').val(),
-												adress3 : $('#adress3').val()
-											};
-											if ($('#adress3').val() != '시/군/구를 선택하세요') {
-
-												$
-														.ajax({
-															cache : false,
-															async : false,
-															type : 'POST',
-															url : 'ajaxRestntList.do',
-															data : paramData,
-															dataType : 'json',
-															error : function() {
-																alert("에러 : 데이터가 안넘어갑니다.");
-															},
-															success : function(
-																	json) {
-
-																var restnts = json.restnts;
-
-																if (restnts != null) {
-																	$('#restntList').show();
-																	var html = '<tbody id="restntListResult"><tr>';
-																	$.each(
-																					restnts,
-																					function(
-																							key) {
-																						var restntName = restnts[key].restntName;
-																						var restntId = restnts[key].restntId;
-
-																						html += '<td>'
-																								+ '<input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId">';
-																						html += restntName
-																								+ '<button id="restntInfo'
-																								+ key
-																								+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr>';
-
-																					});
-																	html += '<tr><td><button id="addMode" onclick="addMode()">추가</button></td></tr></tbody>';
-																	$(
-																			'#restntTable')
-																			.append(
-																					html);
-
-																}
-
-															}
-														});
-
+						$('#adress3').click(function() {
+							$('#newRestnt').hide();
+							$('#restntList').hide();
+							$('#restntInfo').hide(); 
+							$("#restntTable > tbody").html("");
+							var paramData = {
+								adress1 : $('#adress1').val(),
+								adress2 : $('#adress2').val(),
+								adress3 : $('#adress3').val()
+							};
+							if ($('#adress3').val() != '시/군/구를 선택하세요') {
+	
+								$.ajax({
+											cache : false,
+											async : false,
+											type : 'POST',
+											url : 'ajaxRestntList.do',
+											data : paramData,
+											dataType : 'json',
+											error : function() {
+												alert("에러 : 데이터가 안넘어갑니다.");
+											},
+											success : function(
+													json) {
+	
+												var restnts = json.restnts;
+	
+												if (restnts != null) {
+													$('#restntList').show();
+													var html = '<tbody id="restntListResult"><tr>';
+													$.each(
+																	restnts,
+																	function(
+																			key) {
+																		var restntName = restnts[key].restntName;
+																		var restntId = restnts[key].restntId;
+	
+																		html += '<td>'
+																				+ '<input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId">';
+																		html += restntName
+																				+ '<button id="restntInfo'
+																				+ key
+																				+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr>';
+	
+																	});
+													html += '<tr><td><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr></tbody>';
+													$(
+															'#restntTable')
+															.append(
+																	html);
+	
+												}
+	
 											}
 										});
+	
+							}
+						});
 
 					});
 	function clickBtn(obj) {
@@ -359,7 +356,7 @@
 														+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr></tbody>';
 														
 											});
-							html += '<tr><td><button id="addMode" onclick="addMode()">추가</button></td></tr></tbody>';
+							html += '<tr><td><button id="addMode"  type="button" onclick="addMode()">추가</button></td></tr></tbody>';
 							
 							$('#restntTable').append(html);
 							
@@ -368,7 +365,7 @@
 					}
 				});
 	}
-
+	
 	function addMode() {
 		$('#selectBox').hide();
 		$('#restntList').hide();
@@ -410,12 +407,12 @@
 					},
 					success : function(json) {
 						
-						alert("리스트 보여주기");
+						
 						$('#restntList').show();
 						
-						alert("데이터 받아서 변수에 넣어주기");
+						
 						var restnts = json.restnts;
-						alert("반복문 시작");	
+						
 						if (restnts!= null) {
 							var html = '<tbody id="restntListResult"><tr>';
 							$.each(restnts,function(key) {
@@ -431,11 +428,11 @@
 														+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr></tbody>';
 												
 											});
-							alert("반복문 끝");
-							html += '<tr><td><button id="addMode" onclick="addMode()">추가</button></td></tr></tbody>';
-							alert("테이블에 코드 추가해주기");
+							
+							html += '<tr><td><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr></tbody>';
+							
 							$('#restntTable').append(html);
-							alert("테이블에 코드 추가 끝");
+							
 						}
 
 					}
