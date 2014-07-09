@@ -2,5 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dao.VisitMapper">
-
+<insert id="putVisit" parameterType="VisitDTO">
+		insert into visit
+		(visitId,
+		visitDate,
+		menuId,
+		memId,
+		restntId)
+		values
+		(#{visitId},
+		#{visitDate},
+		#{menuId},
+		#{memId},
+		#{restntId})
+	</insert>
+	<select id="getLastVisitId" resultType="String">
+		select max(visitId) from visit
+	</select>
 </mapper>

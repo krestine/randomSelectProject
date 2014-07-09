@@ -1,5 +1,8 @@
 package com.project.dao;
 
-public interface VisitMapper {
+import com.project.domain.VisitDTO;
 
+public interface VisitMapper {
+	void putVisit(VisitDTO visitDto);
+	String getLastVisitId();
 }

@@ -1,5 +1,8 @@
 package com.project.service;
 
-public interface VisitService {
+import com.project.domain.VisitDTO;
 
+public interface VisitService {
+	void putVisit(VisitDTO visitDto);
+	String getLastVisitId();
 }
