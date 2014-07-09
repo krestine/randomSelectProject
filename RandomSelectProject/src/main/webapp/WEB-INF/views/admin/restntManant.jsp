@@ -14,11 +14,11 @@
 
 						$('#restntList').hide();
 						$('#restntInfo').hide();
+						$('#newRestnt').hide();
 
 						$('#serch').click(function() {
-							$('#restntInfo').hide();
-							$('#selectBox').show();
-							$('#restntList').show();
+							serchMode();
+
 						});
 
 						$('#adress1')
@@ -26,7 +26,7 @@
 										function() {
 
 											$('#restntList').hide();
-
+											$('#newRestnt').hide();
 											$
 													.ajax({
 														cache : false,
@@ -61,7 +61,7 @@
 										function() {
 
 											$('#restntList').hide();
-
+											$('#newRestnt').hide();
 											var paramData = {
 												adress1 : $('#adress1').val(),
 												adress2 : $('#adress2').val()
@@ -102,7 +102,7 @@
 						$('#adress3')
 								.click(
 										function() {
-
+											$('#newRestnt').hide();
 											$('#restntList').hide();
 											$('#restntInfo').hide();
 											$("#restntTable > tbody").html("");
@@ -150,7 +150,7 @@
 																								+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr>';
 
 																					});
-																	html += '<tr><td><button id="addRestnt" onclick="addRestnt()">추가</button></td></tr></tbody>';
+																	html += '<tr><td><button id="addMode" onclick="addMode()">추가</button></td></tr></tbody>';
 																	$(
 																			'#restntTable')
 																			.append(
@@ -375,8 +375,27 @@
 				});
 	}
 
-	function addRestnt() {
-		alert("뭐 임마");
+	function addMode() {
+		$('#selectBox').hide();
+		$('#restntList').hide();
+		
+		$('#newRestnt').show();
+		$('#adress1Input').attr("value",$('#adress1').val());
+		$('#adress2Input').attr("value",$('#adress2').val());
+		$('#adress3Input').attr("value",$('#adress3').val());
+	}
+
+	function serchMode() {
+		$('#newRestnt').hide();
+
+		$('#restntInfo').hide();
+		$('#selectBox').show();
+		$('#restntList').show();
+		
+	}
+	
+	function addRestnt(){
+		
 	}
 </script>
 
@@ -385,7 +404,7 @@
 
 
 	<div id="selectBox" align="center">
-		<select id="adress1" class="adress1">
+		주소 선택<br> <select id="adress1" class="adress1">
 			<c:forEach items="${adress1}" var="adress1">
 
 				<option value="${adress1}">${adress1}</option>
@@ -430,10 +449,12 @@
 
 
 		</table>
-		<button id="serch">검색</button>
+		<button id="serch">주소 검색</button>
 	</div>
 
-	<%-- <div align="center">
+	<div id="newRestnt" align="center">
+
+		식당 정보 입력
 		<table border="2">
 			<tbody>
 
@@ -441,8 +462,7 @@
 					<th>식당명</th>
 
 
-					<td><input type="hidden" value="${restnt.restntId}"
-						name="restntId"><input type="text"
+					<td><input type="text"
 						value="${restnt.restntName}" name="restntName"></td>
 				</tr>
 
@@ -450,38 +470,28 @@
 				<tr>
 					<th>주소1</th>
 
-					<td><select id="adress1" class="adress1">
-							<c:forEach items="${adress1}" var="adress1">
-
-								<option value="${adress1}">${adress1}</option>
-
-							</c:forEach>
-					</select></td>
+					<td><input type="text" disabled="disabled" id="adress1Input"
+						name="adress1"></td>
 				</tr>
 				<tr>
 					<th>주소2</th>
-					<td><select id="adress2" class="adress2">
-							<option>시/도 를 선택하세요</option>
-
-					</select></td>
+					<td><input type="text" disabled="disabled" id="adress2Input"
+						name="adress2"></td>
 				</tr>
 				<tr>
 					<th>주소3</th>
-					<td><select id="adress3" class="adress3">
-							<option>시/군/구를 선택하세요</option>
-					</select></td>
+					<td><input type="text" disabled="disabled" id="adress3Input"
+						name="adress3"></td>
 				</tr>
 				<tr>
 					<th>주소4</th>
-					<td><input type="text" value="${restnt.adress4}"
-						name="adress4"></td>
+					<td><input type="text" name="adress4"></td>
 				</tr>
 
 				<tr>
 					<th>분류</th>
 					<td>
-						<input type="text" value="${restnt.restntCate}"
-						name="restntCate">  <select name="restntCate">
+						 <select name="restntCate">
 							<c:forEach items="${restntCates}" var="menu">
 								<c:choose>
 									<c:when test="${restnt.restntCate==menu.excMenu}">
@@ -502,16 +512,20 @@
 						name="restntTel"></td>
 				</tr>
 
-
-
+				
+				<tr><td><button onclick="addRestnt()">확인</button></td></tr>
 
 
 
 
 			</tbody>
 		</table>
+		
+		<br>
+		<br>
+		<button onclick="serchMode()">주소 검색</button>
 	</div>
- --%>
+
 
 
 
