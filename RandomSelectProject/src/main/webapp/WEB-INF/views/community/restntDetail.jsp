@@ -1,36 +1,26 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="/controller/resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
- <script src="/controller/resources/js/bootstrap.min.js"></script>
- <script src="/controller/resources/js/respond.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap.min.css" />
+<script type="text/javascript" src="/myapp/resources/js/bootstrap.min.js"></script>
+<script src="/myapp/resources/js/respond.js"></script>
+
 <script>
 $(document).ready(function() {
-	$('input[type=button]').click(function() {
-		formHanddler(this);
+	$('mateListBtn').click(function() {
+		$('#community').attr("action", "mateListProc.do").submit();
 	});
-	function formHanddler(obj) {
-		var objID = obj.id;
-		var actionStr;
+	$('mateDetailBtn').click(function(){
+		$('#community').attr("action","mateDetailProc.do").submit();
+	});
 
-		if (objID === "restntListBtn") {
-			actionStr = "restntListProc.do";
-
-		}
-		if(objID === "mateListBtn"){
-			actionStr = "mateListProc.do";
-		}
-		if (objID === "mainBtn") {
-			actionStr = "main.do";
-
-		} 
-		$('#community').attr("action", actionStr).submit();
-	}
 });
 
 </script>
@@ -38,17 +28,18 @@ $(document).ready(function() {
 
 </head>
 <body>
+
 <h1>${restnt.restntName}의 상세정보</h1>
 					
 				
 					<br>
-					<form id="community" method="POST">
+					<form id="community" method="post">
 						<input type="button" class="btn btn-success" value="식당 리스트" id="restntListBtn"/>
 						<input type="button" class="btn btn-success" value="친구 리스트" id="mateListBtn"/>
 						<input type="button" class="btn btn-success" value="메인" id="mainBtn"/>
 					</form>
 					<br>
-     				<form action="restntDetailProc.do" method="POST">
+     				<form action="restntDetailProc.do" method="post">
 					
 						<input value="식당이름">
 						<input value="평균별점"><br>
@@ -76,10 +67,7 @@ $(document).ready(function() {
 						</c:forEach>
 					</form>
 					<br>
-	      
-    
-
-
 
 </body>
+
 </html>

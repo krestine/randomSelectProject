@@ -37,18 +37,64 @@ language=구글 맵 언어
 	type="text/javascript"></script>
 
 <script type="text/javascript">
-	var myLatitude, myLongitude;
+	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId;
 	var randomLatitude, randomLongitude;
 	var map;
 	var restntList;
 	var pos, pos2;
 	var sRadius;
 	var geocoder = new google.maps.Geocoder();
+	var directionsDisplay;
+	var directionsService = new google.maps.DirectionsService();
 
+	
+	function confirmRestnt() {
+		var paramData = {
+				restntId : myRestntId
+		}
+
+		$.ajax({
+					cache : false,
+					async : false,
+					type : 'POST',
+					url : 'ajaxConfirmRestnt.do',
+					data : paramData,
+					dataType : 'json',
+					error : function() {
+						alert("에러 : 데이터가 안넘어갑니다.");
+					},
+					success : function(json) {
+						
+						if (json.restntId != '') {
+
+							var html = 
+							$('#restntConfirmed').append(html);
+						}
+
+					}
+				});
+	}
+	
 	function showCurrentLocation(Lat, Lon) {
 		$("#currentLocation").html(Lat + ' ' + Lon);
 	}
 
+	function calcRoute(tempRestntLatitude, tempRestntLongitude) {
+		  var start = new google.maps.LatLng(myLatitude, myLongitude);
+		  var end = new google.maps.LatLng(tempRestntLatitude, tempRestntLongitude);
+		  var request = {
+		      origin:start,
+		      destination:end,
+		      travelMode: google.maps.TravelMode.WALKING
+		  };
+		  directionsService.route(request, function(response, status) {
+		    if (status == google.maps.DirectionsStatus.OK) {
+		    	alert("direction service success");
+		      directionsDisplay.setDirections(response);
+		    }
+		  });
+		}
+	
 	function calcDistance(lat1, lon1, lat2, lon2) {
 		var EARTH_R, Rad, radLat1, radLat2, radDist;
 		var distance, ret;
@@ -121,6 +167,10 @@ language=구글 맵 언어
 		var tempRestntInfo = new google.maps.InfoWindow();
 		tempRestntInfo.setContent(tempRestntName);
 		tempRestntInfo.open(map, tempRestntMarker);
+		
+		myRestntName = tempRestntName;
+		
+		calcRoute(tempRestntLatitude, tempRestntLongitude);
 	}
 	
 	function setMyCenter() {
@@ -196,7 +246,7 @@ language=구글 맵 언어
 		var tempSRadius = "<c:out value="${loginUser.memWalkRange}" />";
 		tempSRadius = Number(tempSRadius);
 		if (tempSRadius == 0) {
-			tempSRadius = 500;
+			tempSRadius = 1000;
 		}
 		sRadius = tempSRadius;
 	}
@@ -253,8 +303,9 @@ language=구글 맵 언어
 				if (results[0]) {
 					//google.maps.InfoWindow = Marker 위에 네모나게 말풍선으로 뜨는 정보창
 					var myInfoWindow = new google.maps.InfoWindow();
+					myLocation = results[0].formatted_address;
 					myInfoWindow.setContent('내 위치 : '
-							+ results[0].formatted_address);
+							+ myLocation);
 					myInfoWindow.open(map, myMarker);
 				} else {
 					alert('결과를 찾을 수 없습니다.');
@@ -281,7 +332,7 @@ language=구글 맵 언어
 		//alert('start init');
 
 		setSRadius();
-
+		directionsDisplay = new google.maps.DirectionsRenderer();
 		//myOptions = 구글 맵에 사용할 옵션
 		//zoom = 초기 맵 확대값. 0 입력하면 지구본이 됨
 		//center = 초기 맵 중심값
@@ -292,6 +343,7 @@ language=구글 맵 언어
 		};
 		map = new google.maps.Map(document.getElementById('map_canvas'),
 				myOptions);
+		directionsDisplay.setMap(map);
 		//alert('before geoloation');
 		if (navigator.geolocation) {
 			//alert('navigator.geolocation: ' + navigator.geolocation);
@@ -345,6 +397,8 @@ language=구글 맵 언어
 		<input type=text id=newMyAddress value=""> <input type=button
 			id=newMyLocation value="내 주소 수동으로 입력" onclick="newMyLocation()">
 	</div>
+	<button id="confirmRestnt" onclick="confirmRestnt()">식당 확정</button>
+	<div id="restntConfirmed"></div>
 	<%-- <div id="restnt_list">
 		<c:forEach items="${restntList}" var="item">
 			 ${item.restntName} ${item.latitude} ${item.longitude}<br>

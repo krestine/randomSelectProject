@@ -4,17 +4,17 @@ import java.sql.Date;
 
 public class VisitDTO {
 	//memberField
-	private String MemId;
+	private String visitId;
 	private Date visitDate;
-	private String visitRestntId;
+	private String menuId;
+	private String memId;
+	private String restntId;
 	//memberField end
-	
-	//getter & setter
-	public String getMemId() {
-		return MemId;
+	public String getVisitId() {
+		return visitId;
 	}
-	public void setMemId(String MemId) {
-		this.MemId = MemId;
+	public void setVisitId(String visitId) {
+		this.visitId = visitId;
 	}
 	public Date getVisitDate() {
 		return visitDate;
@@ -22,24 +22,41 @@ public class VisitDTO {
 	public void setVisitDate(Date visitDate) {
 		this.visitDate = visitDate;
 	}
-	public String getVisitRestntId() {
-		return visitRestntId;
+	public String getMenuId() {
+		return menuId;
 	}
-	public void setVisitRestntId(String visitRestntId) {
-		this.visitRestntId = visitRestntId;
+	public void setMenuId(String menuId) {
+		this.menuId = menuId;
 	}
-	//getter & setter end
-	
-	//hashCode & equals
+	public String getMemId() {
+		return memId;
+	}
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+	public String getRestntId() {
+		return restntId;
+	}
+	public void setRestntId(String restntId) {
+		this.restntId = restntId;
+	}
+	@Override
+	public String toString() {
+		return "VisitDTO [visitId=" + visitId + ", visitDate=" + visitDate
+				+ ", menuId=" + menuId + ", memId=" + memId + ", restntId="
+				+ restntId + "]";
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((MemId == null) ? 0 : MemId.hashCode());
+		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
+		result = prime * result + ((menuId == null) ? 0 : menuId.hashCode());
+		result = prime * result
+				+ ((restntId == null) ? 0 : restntId.hashCode());
 		result = prime * result
 				+ ((visitDate == null) ? 0 : visitDate.hashCode());
-		result = prime * result
-				+ ((visitRestntId == null) ? 0 : visitRestntId.hashCode());
+		result = prime * result + ((visitId == null) ? 0 : visitId.hashCode());
 		return result;
 	}
 	@Override
@@ -51,30 +68,43 @@ public class VisitDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		VisitDTO other = (VisitDTO) obj;
-		if (MemId == null) {
-			if (other.MemId != null)
+		if (memId == null) {
+			if (other.memId != null)
 				return false;
-		} else if (!MemId.equals(other.MemId))
+		} else if (!memId.equals(other.memId))
+			return false;
+		if (menuId == null) {
+			if (other.menuId != null)
+				return false;
+		} else if (!menuId.equals(other.menuId))
+			return false;
+		if (restntId == null) {
+			if (other.restntId != null)
+				return false;
+		} else if (!restntId.equals(other.restntId))
 			return false;
 		if (visitDate == null) {
 			if (other.visitDate != null)
 				return false;
 		} else if (!visitDate.equals(other.visitDate))
 			return false;
-		if (visitRestntId == null) {
-			if (other.visitRestntId != null)
+		if (visitId == null) {
+			if (other.visitId != null)
 				return false;
-		} else if (!visitRestntId.equals(other.visitRestntId))
+		} else if (!visitId.equals(other.visitId))
 			return false;
 		return true;
 	}
-	//hashCode & equals end
-	
-	//toString
-	@Override
-	public String toString() {
-		return "VisitDTO [MemId=" + MemId + ", visitDate=" + visitDate
-				+ ", visitRestntId=" + visitRestntId + "]";
+	public VisitDTO(String visitId, Date visitDate, String menuId,
+			String memId, String restntId) {
+		super();
+		this.visitId = visitId;
+		this.visitDate = visitDate;
+		this.menuId = menuId;
+		this.memId = memId;
+		this.restntId = restntId;
 	}
-	//toString end
+	public VisitDTO(){
+		
+	}
 }
