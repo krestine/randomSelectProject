@@ -59,39 +59,44 @@ public class MemberController {
 		return view;
 	}
 
-	// 로그인: 아이디, 비밀번호 체크 ajax
-	@RequestMapping("loginCheck.do")
-	public ModelAndView loginCheckAjax(HttpServletRequest request,
+	// 비밀번호 찾기 ajax
+	@RequestMapping("pwCheck.do")
+	public ModelAndView pwCheckAjax(HttpServletRequest request,
 			HttpServletResponse response, MemberDTO memberDto) {
-		System.out.println("loginCheckAjax");
+		System.out.println("pwCheckAjax");
 
 		ModelAndView view = new ModelAndView("member/memAjax");
 
 		String memId = request.getParameter("memId");
 		System.out.println("memid=" + memId);
 
-		String memPasswd = request.getParameter("memPasswd");
-		System.out.println("memPasswd=" + memPasswd);
+		String memBirth = request.getParameter("memBirth");
+		System.out.println("memBirth=" + memBirth);
+
+		String memMobile = request.getParameter("memMobile");
+		System.out.println("memMobile=" + memBirth);
 
 		memberDto.setMemId(memId);
-		memberDto.setMemPasswd(memPasswd);
+		memberDto.setMemBirth(memBirth);
+		memberDto.setMemMobile(memMobile);
 
 		System.out.println(memberDto);
 
-		String leave = memberService.getMemPasswdByMemId(memberDto);
-		System.out.println("leave=" + leave);
+		String userId = memberService.getMemIdByMemId(memId);
+		String userPassword = memberService
+				.getMemPasswdByMemberTerms(memberDto);
 
-		if (leave != null) {
-			if (leave.trim() == "0") {
-				view.addObject("result", "true");
-				System.out.println("아이디,패스워드 일치");
+		if (userId != null) {
+			if (userPassword.trim() != null) {
+				view.addObject("pwResult", "true");
+				System.out.println("회원정보 일치");
 			} else {
-				view.addObject("result", "false");
-				System.out.println("탈퇴회원");
+				view.addObject("pwResult", "incorrectInfo");
+				System.out.println("회원정보 불일치");
 			}
 		} else {
-			view.addObject("result", "false");
-			System.out.println("일치값없음");
+			view.addObject("pwResult", "incorrectId");
+			System.out.println("아이디 없음");
 		}
 		return view;
 	}
@@ -147,6 +152,7 @@ public class MemberController {
 			// model.addAttribute("loginUser", loginUser);
 
 			return "forward:main.do";
+
 		} else {
 			request.setAttribute("errmessage", "아이디와 비밀번호를 확인해주세요");
 			return "forward:loginForm.do";
@@ -174,12 +180,12 @@ public class MemberController {
 		return "findIdOk";
 	}
 
-	// 비밀번호찾기
-	@RequestMapping("findPasswordForm.do")
-	public String findPasswordForm() {
-		System.out.println("findPasswordForm()");
-		return "findPassword";
-	}
+	/*
+	 * // 비밀번호찾기
+	 * 
+	 * @RequestMapping("findPasswordForm.do") public String findPasswordForm() {
+	 * System.out.println("findPasswordForm()"); return "findPassword"; }
+	 */
 
 	@RequestMapping(value = "findPasswordProc.do", method = RequestMethod.POST)
 	public String findPasswordProc(Model model, MemberDTO memberDto,
@@ -190,7 +196,7 @@ public class MemberController {
 
 		if (userPassword == null) {
 			model.addAttribute("errmessage", "정보를 다시 확인해주세요");
-			return "forward:findPasswordForm.do";
+			return "forward:pwCheck.do";
 		}
 
 		String fromUser = "6amugeona@gmail.com";
