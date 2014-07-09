@@ -6,28 +6,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap-theme.min.css" />
 <script type="text/javascript" src="/myapp/resources/js/bootstrap.min.js"></script>
 <script src="/myapp/resources/js/respond.js"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script>
 $(document).ready(function() {
-	$('input[type=button]').click(function() {
-		formHanddler(this);
+	$('mateListBtn').click(function() {
+		$('#community').attr("action", "mateListProc.do").submit();
 	});
-	function formHanddler(obj) {
-		var objID = obj.id;
-		var actionStr;
+	$('mateDetailBtn').click(function(){
+		$('#community').attr("action","mateDetailProc.do").submit();
+	});
 
-		if (objID === "mateListBtn") {
-			actionStr = "mateListProc.do";
-		}
-		if (objID === "mainBtn") {
-			actionStr = "main.do";
-		} 
-		$('#community').attr("action", actionStr).submit();
-	}
 });
 
 </script>
