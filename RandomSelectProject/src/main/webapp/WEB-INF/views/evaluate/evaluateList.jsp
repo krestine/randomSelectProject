@@ -33,7 +33,7 @@
 <body>
 	포 이치 테스트
 	<c:forEach items="${evaluates}" var="evaluate">
-	${evaluate.evalId}<br> ${evaluate.score}<br> 
+	${evaluate.memId}<br> ${evaluate.score}<br> 
 	${evaluate.restntName}<br>
 	</c:forEach>
 
@@ -74,7 +74,7 @@
 			<td> </td>
 			<c:forEach var="evaluate" items="${boardList}">
 				<tr height="35px">
-					<td align="center">${evaluate.evalId}</td>
+					<td align="center">${evaluate.memId}</td>
 					<td align="center"><c:choose>
 							<c:when test="${evaluate.score ==5}">
 						★★★★★
@@ -97,17 +97,19 @@
 					<td>
 						<form id="select2" method="POST">
 							<input type="button" onclick="editGo()" value="수정">
-						</form> <!-- <td colspan="5" align="right"> -->
+						</form> 
 						<form id="select2" method="POST">
 							<input type="button" onclick="deleteGo()" value="삭제">
 						</form>
 					</td>
 				</tr>
+		
 			</c:forEach>
+		
 		<tr>
 			<td colspan="5" align="center"><c:if test="${page <= 1 }">[이전]&nbsp; </c:if>
 				<c:if test="${page > 1 }">
-					<a href="/evaluateList.do?memId=${memId }&page=${page-1}">이전</a>&nbsp;</c:if>
+					<a href="/evaluateList.do?memId=${memId}&page=${page-1}">이전</a>&nbsp;</c:if>
 				<c:forEach begin="${startpage }" end="${endpage }" var="a">
 					<c:if test="${a==page }">[${a}]</c:if>
 					<c:if test="${a!=page }">

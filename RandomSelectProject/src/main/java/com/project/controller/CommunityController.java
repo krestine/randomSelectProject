@@ -83,8 +83,7 @@ public class CommunityController {
 	@RequestMapping(value = "/mateDetailProc.do", method = RequestMethod.POST)
 	public String mateDetailProc(Model model, String mateId, String memId, HttpServletRequest request) {
 		// 친구의 상세정보		
-		System.out.println("???"+request.getParameter("memId")+" "+request.getParameter("mateId"));
-		System.out.println("????"+mateId+"asdasd");
+		
 		mateInfo=mateService.getMemInfoByMemId(mateId);
 		System.out.println("mateInfo");
 		System.out.println(mateInfo);
@@ -92,8 +91,8 @@ public class CommunityController {
 		model.addAttribute("mateInfo", mateInfo);
 		
 		// 친구의 상태정보		
-		System.out.println("???"+request.getParameter("memId")+" "+request.getParameter("mateId"));
-		System.out.println("????"+mateId+"asdasd");
+		
+		
 		mate = mateService.getMateInfoByMateId(memId, mateId);
 		System.out.println(mate);
 		model.addAttribute("mate", mate);
@@ -109,7 +108,7 @@ public class CommunityController {
 	// 회원 : 친구들이 평가한 식당 리스트
 	
 	@RequestMapping(value =  "/restntListProc.do", method = RequestMethod.POST)
-	public String restntListProc(Model model, String memId, HttpServletRequest request) {
+	public String restntListProc(Model model, String memId) {
 		restnts= restntService.getEvalRestntListByMateId(loginUser.getMemId());
 		model.addAttribute("restnts", restnts);
 		System.out.println(restnts);
@@ -135,7 +134,7 @@ public class CommunityController {
 	
 	
 		@RequestMapping(value = "/restntDetailProc.do", method = RequestMethod.POST)
-		public String restntDetailProc(Model model, String restntId, HttpServletRequest request) {
+		public String restntDetailProc(Model model, String restntId) {
 	
 		restnt = restntService.getRestntInfoByRestntId(restntId);
 		model.addAttribute("restnt", restnt);

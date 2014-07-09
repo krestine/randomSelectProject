@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -116,7 +117,7 @@ public class AdminController {
 
 	// 회원 리스트에서 아이디 클릭 -> 회원의 평가 정보 리스트 표시 페이지
 	@RequestMapping(value = "/memberEvaluateListProc.do", method = RequestMethod.POST)
-	String memberEvaluateListProc(Model model, String memId) {
+	String memberEvaluateListProc(Model model, HashMap<String, Object> memId) {
 		memberEvaluates = evaluateService.getEvaluateListByMemId(memId);
 		model.addAttribute("memberEvaluates", memberEvaluates);
 		return "admin/memberEvaluateListAdmin";
@@ -612,6 +613,61 @@ public class AdminController {
 		out.print(jsonObject.toString());
 
 	}
+	@RequestMapping(value = "/ajaxRestntInfoInsert.do", method = RequestMethod.POST)
+	void ajaxRestntInfoInsert(HttpServletRequest request,
+			HttpServletResponse response, RestntDTO restntDto,SettingDTO settingDto) throws IOException {
+		System.out.println("/ajaxRestntInfoInsert.do");
+		
+		System.out.println(restntDto);
+		
+		settingDto.setAdress1(restntDto.getAdress1());
+		settingDto.setAdress2(restntDto.getAdress2());
+		settingDto.setAdress3(restntDto.getAdress3());
+		
+		System.out.println(settingDto);
 	
+		
+		
+		
+		
+		adressCode = restntService.getAdressCode(restntDto);
+		System.out.println(adressCode);
+		lastId = restntService.getLastRestntId(restntDto);
+		System.out.println(lastId);
+
+		newId = restntIdGen(lastId, adressCode);
+		restntDto.setRestntId(newId);
+		System.out.println(restntDto);
+		
+		System.out.println("추가 쿼리 실행");
+		restntService.putRestnt(restntDto);
+		
+		
+		
+		
+		
+		
+		
+		
+		System.out.println("추가 쿼리 실행 후 식당 리스트 쿼리");
+		restnts = restntService.getRestntListByAddr(settingDto);
+		System.out.println(restnts);
+
+		// 제이슨으로 변환
+		JSONArray jsonArray = JSONArray.fromObject(restnts);
+
+		System.out.println("restnts - " + jsonArray);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("restnts", jsonArray);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+
+	}
 
 }

@@ -55,28 +55,29 @@
 	position: relative;
 	top: 1px;
 }
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 <body
-	background ="/controller/resources/img/bg.png">
+	background ="/myapp/resources/img/bg2.png" >
 	<br>
 	<br>
 	<div align="center">
-		<table width="90%" border="0" >
+		<table width="100%" border="0" >
 			<tr>
-				<td height="80"><tiles:insertAttribute name="header" /></td>
+				<td><tiles:insertAttribute name="header" /></td>
 			</tr>
 			<tr>
 				<td><tiles:insertAttribute name="menu" /></td>
 			</tr>
 			<tr>
 				<%-- <td width="180"><tiles:insertAttribute name="menu" /></td> --%>
-				<td height="600"><tiles:insertAttribute name="main" /></td>
+				<td height="300"><tiles:insertAttribute name="main" /></td>
 			</tr>
 			<tr>
-				<td height="80" colspan="2" bgcolor="#e2e2e2"><tiles:insertAttribute
+				<td height="0" colspan="0" bgcolor="#e2e2e2"><tiles:insertAttribute
 						name="footer" /></td>
 			</tr>
 		</table>
