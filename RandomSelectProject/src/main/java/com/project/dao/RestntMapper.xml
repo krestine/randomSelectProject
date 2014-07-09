@@ -39,8 +39,8 @@
 	<update id="setRestntById" parameterType="String">
 		update restnt set
 		restntName = #{restntName},
-		restntTel=#{restntTel},
-		restntCate=#{restntCate}
+		restntTel=#{restntTel}
+		
 		where restntId = #{restntId} and
 		active = '1'
 
