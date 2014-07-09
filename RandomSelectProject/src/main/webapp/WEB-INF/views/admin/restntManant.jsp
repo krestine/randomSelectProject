@@ -8,53 +8,52 @@
 <title>식당 관리</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-	$(document).ready(
-					function() {
+	$(document).ready(function() {
 
-						$('#restntList').hide();
-						$('#restntInfo').hide();
-						$('#newRestnt').hide(); 
-
-						$('#serch').click(function() {
-							serchMode();
-
+		$('#restntList').hide();
+		$('#restntInfo').hide();
+		$('#newRestnt').hide(); 
+	
+		$('#serch').click(function() {
+			serchMode();
+	
+		});
+	
+		$('#adress1')
+				.click(
+						function() {
+	
+							$('#restntList').hide();
+							$('#newRestnt').hide(); 
+							$
+									.ajax({
+										cache : false,
+										async : false,
+										type : 'POST',
+										url : 'ajaxAdress2.do',
+										data : ('adress1=' + $(
+												'#adress1')
+												.val()),
+										dataType : 'json',
+										error : function() {
+											alert("에러 : 데이터가 안넘어갑니다.");
+										},
+										success : function(json) {
+											$('#adress2')
+													.empty();
+											for (var idx = 0; idx < json.adress2.length; idx++) {
+												var adress2 = json.adress2[idx];
+												$('#adress2')
+														.append(
+																'<option value="'+adress2+'">'
+																		+ adress2
+																		+ '</option>');
+											}
+	
+										}
+									});
+	
 						});
-
-						$('#adress1')
-								.click(
-										function() {
-
-											$('#restntList').hide();
-											$('#newRestnt').hide(); 
-											$
-													.ajax({
-														cache : false,
-														async : false,
-														type : 'POST',
-														url : 'ajaxAdress2.do',
-														data : ('adress1=' + $(
-																'#adress1')
-																.val()),
-														dataType : 'json',
-														error : function() {
-															alert("에러 : 데이터가 안넘어갑니다.");
-														},
-														success : function(json) {
-															$('#adress2')
-																	.empty();
-															for (var idx = 0; idx < json.adress2.length; idx++) {
-																var adress2 = json.adress2[idx];
-																$('#adress2')
-																		.append(
-																				'<option value="'+adress2+'">'
-																						+ adress2
-																						+ '</option>');
-															}
-
-														}
-													});
-
-										});
 						$('#adress2')
 								.click(
 										function() {
@@ -128,11 +127,10 @@
 
 																var restnts = json.restnts;
 
-																if (restnts[0].restntId != '') {
+																if (restnts != null) {
 																	$('#restntList').show();
 																	var html = '<tbody id="restntListResult"><tr>';
-																	$
-																			.each(
+																	$.each(
 																					restnts,
 																					function(
 																							key) {
@@ -324,9 +322,7 @@
 	}
 	function delRestnt() {
 		var paramData = $('#restInfoForm').serialize();
-		$('#restntList').hide();
-		$('#restntInfo').hide();
-		$("#restntTable > tbody").html("");
+		
 		$
 				.ajax({
 					cache : false,
@@ -339,21 +335,22 @@
 						alert("에러 : 데이터가 안넘어갑니다.");
 					},
 					success : function(json) {
-						$('#restntInfo').hide();
+						
 						$('#selectBox').show(); 
-
-						var restnts = json.restnts;
 						$('#restntList').show();
+						$('#restntInfo').hide();
+						
+						var restnts = json.restnts;
+						
 						if (restnts[0].restntId != null) {
-							 
-							$
-									.each(
-											restnts,
-											function(key) {
+							
+							$("#restntTable > tbody").html("");
+							var html = '<tbody id="restntListResult"><tr>';
+							$.each(restnts,function(key) {
 												var restntName = restnts[key].restntName;
 												var restntId = restnts[key].restntId;
 
-												var html = '<tbody id="restntListResult"><tr>';
+												
 												html += '<td>'
 														+ '<input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId">';
 												html += restntName
@@ -363,7 +360,9 @@
 														
 											});
 							html += '<tr><td><button id="addMode" onclick="addMode()">추가</button></td></tr></tbody>';
+							
 							$('#restntTable').append(html);
+							
 						}
 
 					}
@@ -391,6 +390,10 @@
 	function addRestnt(){
 		var paramData = $('#newRestntInfoForm').serialize();	
 		
+		$('#selectBox').show(); 
+		
+		
+		
 		$('#newRestnt').hide();
 		$('#restntList').hide();
 		$('#restntInfo').hide();
@@ -406,19 +409,20 @@
 						alert("에러 : 데이터가 안넘어갑니다.");
 					},
 					success : function(json) {
+						
+						alert("리스트 보여주기");
 						$('#restntList').show();
-
+						
+						alert("데이터 받아서 변수에 넣어주기");
 						var restnts = json.restnts;
-
-						if (restnts[0].restntId != null) {
-							
-							$.each(
-											restnts,
-											function(key) {
+						alert("반복문 시작");	
+						if (restnts!= null) {
+							var html = '<tbody id="restntListResult"><tr>';
+							$.each(restnts,function(key) {
 												var restntName = restnts[key].restntName;
 												var restntId = restnts[key].restntId;
 
-												var html = '<tbody id="restntListResult"><tr>';
+												
 												html += '<td>'
 														+ '<input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId">';
 												html += restntName
@@ -427,13 +431,16 @@
 														+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr></tbody>';
 												
 											});
+							alert("반복문 끝");
 							html += '<tr><td><button id="addMode" onclick="addMode()">추가</button></td></tr></tbody>';
+							alert("테이블에 코드 추가해주기");
 							$('#restntTable').append(html);
-							
+							alert("테이블에 코드 추가 끝");
 						}
 
 					}
 				});
+					return false;
 	}
 </script>
 
@@ -554,7 +561,7 @@
 				</tr>
 
 				
-				<tr><td><button onclick="addRestnt()">확인</button></td></tr>
+				<tr><td><button type="button" onclick="addRestnt();">확인</button></td></tr>
 
 
 
@@ -568,7 +575,7 @@
 		<button onclick="serchMode()">주소 검색</button>
 	</div>
 
-
+	
 
 
 </body>

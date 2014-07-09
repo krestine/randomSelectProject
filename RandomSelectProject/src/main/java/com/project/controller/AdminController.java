@@ -577,7 +577,7 @@ public class AdminController {
 	@RequestMapping(value = "/ajaxRestntInfoDelete.do", method = RequestMethod.POST)
 	void ajaxRestntInfoDelete(HttpServletRequest request,
 			HttpServletResponse response, RestntDTO restntDto, SettingDTO settingDto) throws IOException {
-		System.out.println("/ajaxRestntInfoUpdate.do");
+		System.out.println("/ajaxRestntInfoDelete.do");
 		
 		System.out.println(restntDto);
 		
