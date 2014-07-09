@@ -69,10 +69,14 @@ label.error {
 											'12월(DEC)' ]
 								});
 						// 중복아이디체크
-						$('#idCheck')
-								.click(
+						jQuery.validator
+								.addMethod(
+										'idCheck',
 										function() {
+											//$('#idCheck')	.click(function() {
+
 											var memId = $('#memId').val();
+											var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 											if (memId == "") {
 												$('#check')
 														.html(
@@ -80,6 +84,10 @@ label.error {
 
 												$('#check').show();
 												$('#memId').focus();
+											} else if (!reg_email.test(memId)) {
+												$('#check')
+														.html(
+																'<font color=red>이메일 형식으로 입력해주세요.</font>');
 											} else {
 												$
 														.ajax({
@@ -103,7 +111,6 @@ label.error {
 																	$('#check')
 																			.show();
 																	result = 'false';
-
 																} else {
 																	$('#check')
 																			.html(
@@ -134,25 +141,17 @@ label.error {
 											onfocusout : false,
 											//focusInvalid : false,
 											//focusCleanup:true,
+											//ignore : '#memId',
 											groups : {
 												phoneGroup : "mPhoneCode mPhoneMid mPhoneEnd"
 											},
-											errorPlacement : function(error,
-													element) {
-												if (element.attr("name") == "mPhoneCode"
-														|| element.attr("name") == "mPhoneMid"
-														|| element.attr("name") == "mPhoneEnd") {
-													error
-															.insertAfter("#mPhoneEnd");
-												} else {
-													error.insertAfter(element);
-												}
-											},
+
 											rules : {
 												memId : {
 													required : true,
-													email : true
-												/* remote : {
+													email : true,
+													idCheck : true
+												/* ,remote : {
 															url : "idCheck.do",
 															type : "POST",
 															data : {
@@ -189,12 +188,23 @@ label.error {
 												}
 
 											},
+											errorPlacement : function(error,
+													element) {
+												if (element.attr("id") == "mPhoneCode"
+														|| element.attr("id") == "mPhoneMid"
+														|| element.attr("id") == "mPhoneEnd") {
+													error
+															.insertAfter("#mPhoneEnd");
+												} else {
+													error.insertAfter(element);
+												}
+											},
 
 											messages : {
 												memId : {
 													required : "아이디를 입력해주세요",
 													email : "이메일 형식으로 써주세요.",
-													remote : "사용할수 없는 이메일입니다."
+												//remote : "사용할수 없는 이메일입니다."
 												},
 												memName : {
 													required : "이름을 입력해주세요.",
@@ -229,11 +239,6 @@ label.error {
 											}
 										});
 					});
-
-	function action() {
-		document.getElementById("form").action = "main.do";
-		document.getElementById("form").submit();
-	}
 </script>
 </head>
 <body>
@@ -243,23 +248,24 @@ label.error {
 	<form id="registerForm" method="post" action="registerProc.do">
 
 		<div>
-			아이디 <input type="text" id="memId" name="memId" required="required" />
-			<button type="button" id="idCheck">중복체크</button>
+			아이디 <input type="text" id="memId" name="memId" class="signup" />
+			<!-- <button type="button" id="idCheck">중복체크</button> -->
 			<span id="check"></span>
 		</div>
 		<div>
-			이름 <input type="text" name="memName" />
+			이름 <input type="text" name="memName" class="signup" />
 		</div>
 		<div>
-			비밀번호 <input type="password" id="memPasswd" name="memPasswd" />
+			비밀번호 <input type="password" id="memPasswd" name="memPasswd"
+				class="signup" />
 		</div>
 		<div>
-			비밀번호확인 <input type="password" name="memPasswdCheck" />
+			비밀번호확인 <input type="password" name="memPasswdCheck" class="signup" />
 		</div>
 		<div>
-			생년월일 <input type="text" id="memBirth" name="memBirth" />
+			생년월일 <input type="text" id="memBirth" name="memBirth" class="signup" />
 		</div>
-		<div>
+		<div class="signup">
 			전화번호 <select id="mPhoneCode" name="mPhoneCode">
 				<option value="010" selected>010</option>
 				<option value="011">011</option>
@@ -276,8 +282,7 @@ label.error {
 				src="${captchajs}?theme=clean&key=${captchaPublicKey}"></script>
 		</div>
 		<div>
-			<input type="submit" id="register" value="회원가입"> <input
-				type="button" onclick="action()" value="메인으로">
+			<input type="submit" id="register" value="회원가입">
 		</div>
 	</form>
 
