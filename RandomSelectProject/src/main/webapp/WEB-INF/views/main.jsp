@@ -7,13 +7,13 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap.min.css" />
 <script type="text/javascript" src="/myapp/resources/js/bootstrap.min.js"></script>
-<script src="/myapp/resources/js/respond.js"></script>
 
 <style>
 
-
 </style>
 <title>Insert title here</title>
+
+
 </head>
 <body>
 <h1 align="center"></h1>

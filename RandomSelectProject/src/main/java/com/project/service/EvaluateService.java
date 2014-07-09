@@ -1,44 +1,51 @@
 package com.project.service;
 
+import java.util.HashMap;
 import java.util.List;
+
+import org.apache.velocity.runtime.directive.Evaluate;
 
 import com.project.domain.EvaluateDTO;
 
 public interface EvaluateService {
 
-	// 평가한 방문 리스트
-	List<EvaluateDTO> getEvaluateListByMemId(String memId, int page, int limit);
+	// 관리자 : 유저의 평가 목록 열람
+		// 회원: 평가한 식당목록. 평가한 방문 리스트
 
-	// 평가한 방문리스트 점수 수정
+	List<EvaluateDTO> getEvaluateListByMemId(HashMap<String,Object> param);
+	
+	
 
-	void setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto);
+		// 식당이름
+		List<EvaluateDTO> getRestntnameByRestId(String restntId);
 
-	// 평가안한 방문리스트
-	EvaluateDTO getnEvaluateListByMemId(EvaluateDTO evaluateDto);
+		
 
-	// 회원:식당평가 안한 점수 입력
-	public void putnEvaluateByScore(EvaluateDTO evaluateDto);
+		/* EvaluateDTO setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto); */
+		/* void setEvaluateInfoByEvaluateTerms(String evaluateDto); */
 
-	// //////////////////////////////////////////////////////////////////////
+		// 평가점수
+		List<EvaluateDTO> getScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
 
-	// 회원: 평가한 식당목록
-	// 방문날짜,restntId
-	List<EvaluateDTO> getVisitsByMemid(String memId);
+		// 회원:평가안한 방문리스트. 방문날짜 restntId
+		List<EvaluateDTO> getnEvaluateListByMemId(String memId);
+		
+		// 회원:평가한 방문리스트 수정,평가 안한 점수 입력
+		public void setScoreByEvaluateTerms(EvaluateDTO evaluateDto);
 
-	// 식당이름
-	List<EvaluateDTO> getRestntnameByRestId(List<String> restntId);
+		// ///////////////////////////////////////////////////////////////
 
-	// 평가점수
-	List<EvaluateDTO> getScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
+		// 회원: 평가한 식당목록
+		// 방문날짜,restntId
 
-	// 회원: 평가 안한 식당목록
-	// 방문날짜,restntId
-	List<EvaluateDTO> getnEvaluateListByMemId(String memId);
+		/*List<EvaluateDTO> getVisitsByMemid(String memId);*/
+        //  리스트 개수 
+		int getListCount(String memId);
+		// 게시물 삭제 
+		public void deleteData(String memId, String evalId);
+	
 
-	void putScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
 
-	List<EvaluateDTO> getEvaluateListByMemId(String memId);
+		}
 
-	int getListCount(String memId);
-
-}
+	
