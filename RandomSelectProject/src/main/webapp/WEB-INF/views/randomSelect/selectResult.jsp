@@ -49,6 +49,9 @@ language=구글 맵 언어
 
 	
 	function confirmRestnt() {
+		
+		alert(myRestntId);
+		
 		var paramData = {
 				restntId : myRestntId
 		}
@@ -119,6 +122,7 @@ language=구글 맵 언어
 		var tempOKLatitude = new Array(100);
 		var tempOKLongitude = new Array(100);
 		var tempOKName = new Array(100);
+		var tempOKId = new Array(100);
 		
 		
 		var tempDistance=0;
@@ -126,6 +130,7 @@ language=구글 맵 언어
 		var tempRestntLatitude;
 		var tempRestntLongitude
 		var tempRestntName;
+		var tempRestntId;
 		
 
 		
@@ -136,6 +141,7 @@ language=구글 맵 언어
 		tempRestntLatitude = "<c:out value="${item.latitude}" />";
 		tempRestntLongitude = "<c:out value="${item.longitude}" />";
 		tempRestntName = "<c:out value="${item.restntName}" />";
+		tempRestntId = "<c:out value="${item.restntId}" />";
 
 		tempDistance=calcDistance(myLatitude, myLongitude, tempRestntLatitude, tempRestntLongitude);
 		
@@ -144,6 +150,7 @@ language=구글 맵 언어
 			tempOKLatitude[tempCnt] = tempRestntLatitude;
 			tempOKLongitude[tempCnt] = tempRestntLongitude;
 			tempOKName[tempCnt] = tempRestntName;
+			tempOKId[tempCnt] = tempRestntId;
 			tempCnt = tempCnt + 1;
 			
 		}
@@ -155,6 +162,7 @@ language=구글 맵 언어
 		tempRestntLatitude = tempOKLatitude[selection];
 		tempRestntLongitude = tempOKLongitude[selection];
 		tempRestntName = tempOKName[selection];
+		tempRestntId = tempOKId[selection];
 		
 		//google.maps.LatLng(latitude, longitude) = 위도와 경도 값을 '위치'개체로 바꾸는 것
 		var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
@@ -169,6 +177,7 @@ language=구글 맵 언어
 		tempRestntInfo.open(map, tempRestntMarker);
 		
 		myRestntName = tempRestntName;
+		myRestntId = tempRestntId;
 		
 		calcRoute(tempRestntLatitude, tempRestntLongitude);
 	}

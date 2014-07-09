@@ -73,30 +73,22 @@ public class RandomSelectController {
 	}
 	
 	@RequestMapping(value = "/ajaxConfirmRestnt.do", method = RequestMethod.POST)
-	void ajaxRestntInfoUpdate(HttpServletRequest request,
+	void ajaxConfirmRestnt(HttpServletRequest request,
 			HttpServletResponse response, String restntId) throws IOException {
-		System.out.println("/ajaxRestntInfoUpdate.do");
-		
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		
 		Date timeNow = new Date(Calendar.getInstance().getTimeInMillis());
-		
+		System.out.println(timeNow);
 		int lastVisitId = Integer.parseInt(visitService.getLastVisitId());
-		
-		VisitDTO visitDto = new VisitDTO(lastVisitId+1+"", timeNow, "1", loginUser.getMemId(), restntId);
-
+		System.out.println(restntId);
+		VisitDTO visitDto = new VisitDTO((lastVisitId+1)+"", timeNow, "1", loginUser.getMemId(), restntId);
 		visitService.putVisit(visitDto);
-		
 		JSONObject json = new JSONObject();
 		json.put("restntId", restntId);
-		
-
-
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(json.toString());
-
 	}
 
 }
