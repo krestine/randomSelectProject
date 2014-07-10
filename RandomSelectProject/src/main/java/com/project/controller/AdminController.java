@@ -144,6 +144,7 @@ public class AdminController {
 		if (caseCode == null) {
 			caseCode = 0;
 		}
+		System.out.println(caseCode);
 		switch (caseCode) {
 		case 0:
 			adress1 = settingService.getAdress1();
@@ -577,7 +578,7 @@ public class AdminController {
 	@RequestMapping(value = "/ajaxRestntInfoDelete.do", method = RequestMethod.POST)
 	void ajaxRestntInfoDelete(HttpServletRequest request,
 			HttpServletResponse response, RestntDTO restntDto, SettingDTO settingDto) throws IOException {
-		System.out.println("/ajaxRestntInfoUpdate.do");
+		System.out.println("/ajaxRestntInfoDelete.do");
 		
 		System.out.println(restntDto);
 		
