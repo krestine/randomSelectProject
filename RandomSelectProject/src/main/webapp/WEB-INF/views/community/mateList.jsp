@@ -7,9 +7,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap.min.css" />
-<script type="text/javascript" src="/myapp/resources/js/bootstrap.min.js"></script>
 
 
 <script>
