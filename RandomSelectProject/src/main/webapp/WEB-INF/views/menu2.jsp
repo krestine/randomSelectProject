@@ -5,8 +5,6 @@
 <html>
 <head>
 
-
-
 <script type="text/javascript">
 	function loginGo() {
 		document.getElementById("select1").action = "loginForm.do";

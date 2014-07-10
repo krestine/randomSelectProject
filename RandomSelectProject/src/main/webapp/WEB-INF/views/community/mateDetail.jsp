@@ -9,7 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>mateDetail</title>
 
-
 <script>
 function loginGo() {
 	document.getElementById("select1").action = "loginForm.do";

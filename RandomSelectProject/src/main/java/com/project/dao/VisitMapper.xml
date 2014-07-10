@@ -10,11 +10,11 @@
 		memId,
 		restntId)
 		values
-		(#{visitId},
-		#{visitDate},
-		#{menuId},
-		#{memId},
-		#{restntId})
+		(#{visitId, jdbcType=VARCHAR},
+		#{visitDate, jdbcType=DATE},
+		#{menuId, jdbcType=VARCHAR},
+		#{memId, jdbcType=VARCHAR},
+		#{restntId, jdbcType=VARCHAR})
 	</insert>
 	<select id="getLastVisitId" resultType="String">
 		select max(visitId) from visit

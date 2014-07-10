@@ -5,7 +5,9 @@
 <html>
 <head>
 
-
+<link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap.min.css" />
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="/myapp/resources/js/bootstrap.min.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>

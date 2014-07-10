@@ -56,18 +56,23 @@
 	top: 1px;
 }
 
+
 body { padding-top: 5px; }
+
+
+body {
+	padding-top: 70px;
+}
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
-<body
-	background ="/myapp/resources/img/bg2.png" >
+<body background="/myapp/resources/img/bg2.png">
 	<br>
 	<br>
 	<div align="center">
-		<table width="100%" border="0" >
+		<table width="100%" border="0">
 			<tr>
 				<td><tiles:insertAttribute name="header" /></td>
 			</tr>
