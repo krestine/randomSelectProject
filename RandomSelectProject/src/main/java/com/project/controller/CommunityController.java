@@ -1,8 +1,16 @@
 package com.project.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,6 +86,40 @@ public class CommunityController {
 		}
 		return "setting/error";
 	}
+	
+	@RequestMapping(value="ajaxMateDetail.do")
+	public void ajaxMateDetail(HttpServletRequest request,
+			HttpServletResponse response, MateDTO mateDto) throws IOException{
+			
+			System.out.println("/ajaxMateList.do");
+			
+			String mateId = request.getParameter("mateId");
+			System.out.println(mateId);
+			mate = mateService.getMemInfoByMemId(mateId);
+			System.out.println(mate);
+			
+			// 제이슨으로 변환 
+			
+			JSONObject jsonObject  = JSONObject.fromObject(mate);
+			System.out.println("json - "+ jsonObject);
+			
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(jsonObject.toString());
+			
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 회원 : 친구 상세정보
 	@RequestMapping(value = "/mateDetailProc.do", method = RequestMethod.POST)

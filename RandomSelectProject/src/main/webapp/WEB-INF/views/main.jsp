@@ -6,12 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <style>
+body { padding-top: 1px; }
+
 </style>
 <title>Insert title here</title>
 
 </head>
 <body>
-	<h1 align="center"></h1>
 
 	<center>
 		<div class="container">

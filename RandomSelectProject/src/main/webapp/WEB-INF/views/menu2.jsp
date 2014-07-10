@@ -61,49 +61,41 @@
 </head>
 
 <body>
-<center>	
+<center>
+	<div class="btn-grout">	
       		<c:choose>
 			<c:when test="${sessionScope.loginUser==null}">
-				<form id="select1" method="post" style="display: inline;"class="form-group">
-				
-					<input type="button"  style="width:150px;height:100px;" class="btn btn-default" onclick="loginGo()" value="로그인" > 
-					<input type="button"  style="width:150px;height:100px;" class="btn btn-warning"  onclick="registerGo()" value="회원가입">
-			
+				<form id="select1" method="post" style="display: inline;">
+					<input type="button"  style="width:120px;height:50px;" class="btn btn-default " onclick="loginGo()" value="로그인" > 
+					<input type="button"  style="width:120px;height:50px;" class="btn btn-warning"  onclick="registerGo()" value="회원가입">
 				</form>
 			</c:when>
 			
 			<c:when test="${sessionScope.loginUser.memGrade<7}">
-				<form id="select1" method="post" style="display: inline;" class="form-group">
-					
-					<input type="button"  style="width:150;height:100px;" class="btn btn-danger" onclick="logoutGo()" value="로그아웃">
-					<input type="button"  style="width:150px;height:100px;" class="btn btn-info" onclick="myInfoGo()" value="내정보">
-					
+				<form id="select1" method="post" style="display: inline;">
+					<input type="button"  style="width:120px;height:50px;" class="btn btn-danger" onclick="logoutGo()" value="로그아웃">
+					<input type="button"  style="width:120px;height:50px;" class="btn btn-info" onclick="myInfoGo()" value="내정보">
 				</form>
 			</c:when>
 			
 			<c:when test="${sessionScope.loginUser.memGrade==666}">
-				<form id="select1" method="post" style="display: inline;"class="form-group">
-					
-					<input type="button"  style="width:150px; height:100px;"  class="btn btn-danger" onclick="logoutGo()" value="로그아웃"> 
-					<input type="button"   style="width:150px;height:100px;" class="btn btn-info" onclick="adminGo()" value="관   리" >
-					
+				<form id="select1" method="post" style="display: inline;">
+					<input type="button"  style="width:120px; height:50px;"  class="btn btn-danger" onclick="logoutGo()" value="로그아웃"> 
+					<input type="button"   style="width:120px;height:50px;" class="btn btn-info" onclick="adminGo()" value="관   리" >
 				</form>
 			</c:when>
 		</c:choose>
-	   		<form id="select3" style="display: inline;" class="form-group">
-			
-			<input type="button"  style="width:150px;height:100px;" class="btn btn-primary" onclick="selectResult()" value="아무거나"> 
+	   		<form id="select3" style="display: inline;">
+			<input type="button"  style="width:120px;height:50px;" class="btn btn-primary" onclick="selectResult()" value="아무거나"> 
 			<!-- <input type="button" class="btn btn-warning" onclick="ladderMake()" value="복 불 복"> -->
 			
 		</form>
-   		<form id="select2" method="post" style="display: inline;"class="form-group">
-				
-				<input type="button"  style="width:150px;height:100px;" class="btn btn-default" onclick="settingGo()" value="설   정"> 
-				<input type="button"  style="width:150px;height:100px;" class="btn btn-success" onclick="mateListGo()"value="커뮤니티" > 	
-				<input type="button"  style="width:150px;height:100px;" class="btn btn-info" onclick="evaluateGo()" value="평  가">
-				
+   		<form id="select2" method="post" style="display: inline;">
+				<input type="button"  style="width:120px;height:50px;" class="btn btn-default" onclick="settingGo()" value="설   정"> 
+				<input type="button"  style="width:120px;height:50px;" class="btn btn-success" onclick="mateListGo()"value="커뮤니티" > 	
+				<input type="button"  style="width:120px;height:50px;" class="btn btn-info" onclick="evaluateGo()" value="평  가">
 		</form>
-
+	</div>
 </center>
 </body>
 </html>

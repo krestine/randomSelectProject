@@ -20,13 +20,11 @@ $(document).ready(function() {
 <title>식당리스트</title>
 </head>
 <body>
-
-	<h1>친구들이 평가한 식당리스트</h1>
+	<h4>친구들이 평가한 식당리스트</h4>
 <div>
 	<form id="community" method="post" >
-		<input type="button" class="btn btn-success" value="친구 리스트" id="mateListBtn"/> 
+		<input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn"/> 
 	</form>
-	<br>
 	<c:forEach var="restnt" items="${restnts}">
 		
 						<form action="restntDetailProc.do" method="post">	
@@ -38,7 +36,7 @@ $(document).ready(function() {
 						<input type="hidden" value="${restnt.restntId }" name="restntId">
 						<input value="${restnt.restntName}" name="restntName">
 						<input value="${restnt.score}" name="score">
-						<input type="submit" class="btn btn-success" value="상세보기">
+						<input type="submit" class="btn btn-success btn-sm" value="상세보기">
 						</form>
 						<br>
 		</c:forEach>

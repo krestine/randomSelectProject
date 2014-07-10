@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -29,11 +29,11 @@ $(document).ready(function() {
 </head>
 <body>
 <div>
-		<h1>${mateInfo.memName }님의 정보입니다.</h1>
+		<h4>${mateInfo.memName }<small>님의 상세정보</small></h4>
 		<br>
 		<form id="community" method="post">
-		<input type="button" class="btn btn-success" value="친구 리스트" id="mateListBtn" />
-		<input type="button" class="btn btn-success" value="식당 리스트" id="restntListBtn"/>
+		<input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn" />
+		<input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
 		</form>
 		<br>
 		

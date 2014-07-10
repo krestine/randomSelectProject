@@ -28,39 +28,22 @@
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav">
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="themes">
-                <li><a href="../default/">Default</a></li>
-                <li class="divider"></li>
-                <li><a href="../amelia/">Amelia</a></li>
-                <li><a href="../cerulean/">Cerulean</a></li>
-                <li><a href="../cosmo/">Cosmo</a></li>
-                <li><a href="../cyborg/">Cyborg</a></li>
-                <li><a href="../darkly/">Darkly</a></li>
-                <li><a href="../flatly/">Flatly</a></li>
-                <li><a href="../journal/">Journal</a></li>
-                <li><a href="../lumen/">Lumen</a></li>
-                <li><a href="../readable/">Readable</a></li>
-                <li><a href="../simplex/">Simplex</a></li>
-                <li><a href="../slate/">Slate</a></li>
-                <li><a href="../spacelab/">Spacelab</a></li>
-                <li><a href="../superhero/">Superhero</a></li>
-                <li><a href="../united/">United</a></li>
-                <li><a href="../yeti/">Yeti</a></li>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Login<span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="">
+                <li><a href="loginForm.do">로그인</a></li>
+                <li><a href="findIdForm.do">아이디\패스워드 찾기</a></li>
+               
               </ul>
             </li>
             <li>
-              <a href="../help/">Help</a>
+              <a href="registerForm.do">Register</a>
             </li>
-            <li>
-              <a href="http://news.bootswatch.com">Blog</a>
-            </li>
+            
           
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>
-            <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>
+            <li><a href="logoutForm.do" target="_blank">Logout</a></li>
           </ul>
 
         </div>

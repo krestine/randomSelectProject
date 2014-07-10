@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -26,13 +26,11 @@ $(document).ready(function() {
 </head>
 <body>
 
-<h1>${restnt.restntName}의 상세정보</h1>
+<h4>${restnt.restntName}<small>의 상세정보</small></h4>
 <div>					
-				
-					<br>
 					<form id="community" method="post">
-						<input type="button" class="btn btn-success" value="식당 리스트" id="restntListBtn"/>
-						<input type="button" class="btn btn-success" value="친구 리스트" id="mateListBtn"/>
+						<input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
+						<input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn"/>
 						
 					</form>
 					<br>
@@ -49,7 +47,7 @@ $(document).ready(function() {
 						<input value="${restnt.restntTel}" name="restntTel"><br>
 						<br>
 						
-						${restnt.restntName }의 메뉴정보
+					<h4>	${restnt.restntName }<small>의 메뉴정보</small></h4>
 						<br>
 						
 						<input value="메뉴이름">
@@ -63,7 +61,6 @@ $(document).ready(function() {
 						<input value="${menuInfo.menuCalorie}" name="menuCalorie"><br>
 						</c:forEach>
 					</form>
-					<br>
 </div>
 </body>
 

@@ -35,7 +35,7 @@
 												'#adress1')
 												.val()),
 										dataType : 'json',
-										error : function() {
+										error : function() 
 											alert("에러 : 데이터가 안넘어갑니다.");
 										},
 										success : function(json) {

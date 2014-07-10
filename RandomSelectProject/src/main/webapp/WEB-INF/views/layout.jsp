@@ -57,12 +57,7 @@
 }
 
 
-body { padding-top: 5px; }
-
-
-body {
-	padding-top: 70px;
-}
+body { padding-top: 5px;}
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
