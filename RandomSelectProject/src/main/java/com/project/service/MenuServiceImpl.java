@@ -46,5 +46,24 @@ public class MenuServiceImpl implements MenuService {
 		menuMapper.dropMenuByMenuId(menuId);
 		
 	}
+	
+	// 관리자 : 메뉴 추가 취소
+	@Override
+	public void addMenuCancel(String menuId) {
+		menuMapper.addMenuCancel(menuId);
+		
+	}
+	// 관리자 : 마지막 메뉴 아이디 불러오기
+	@Override
+	public String getLastMenuId(String restntId) {
+		
+		return menuMapper.getLastMenuId(restntId);
+	}
+
+	@Override
+	public void addMenuForm(MenuDTO menuDto) {
+		menuMapper.addMenuForm(menuDto);
+		
+	}
 
 }

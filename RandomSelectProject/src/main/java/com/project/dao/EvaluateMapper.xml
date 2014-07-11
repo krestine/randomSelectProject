@@ -22,7 +22,7 @@
 			restnt C 
 		WHERE B.restntId = C.restntId and score != -1 AND B.number_of_row 
 			between #{startrow} and #{endrow}
-			
+
 	</select>
 
 	<!--구성회:회원:평가하지 않은 목록 -->

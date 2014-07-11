@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -8,31 +8,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>mateDetail</title>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap.min.css" />
-<script type="text/javascript" src="/myapp/resources/js/bootstrap.min.js"></script>
-<script src="/myapp/resources/js/respond.js"></script>
 
 <script>
+function loginGo() {
+	document.getElementById("select1").action = "loginForm.do";
+	document.getElementById("select1").submit();
+}
+
+
 $(document).ready(function() {
-	$('mateListBtn').click(function() {
+	$('#mateListBtn').click(function() {
 		$('#community').attr("action", "mateListProc.do").submit();
 	});
-	$('mateDetailBtn').click(function(){
-		$('#community').attr("action","mateDetailProc.do").submit();
+	$('#restntListBtn').click(function(){
+		$('#community').attr("action","restntListProc.do").submit();
 	});
 
 });
 </script>	
 </head>
 <body>
-
-
-		<h1>${mateInfo.memName }님의 정보입니다.</h1>
+<div>
+		<h4>${mateInfo.memName }<small>님의 상세정보</small></h4>
 		<br>
 		<form id="community" method="post">
-		<input type="button" class="btn btn-success" value="친구 리스트" id="mateListBtn" />
-		<input type="button" class="btn btn-success" value="메인" id="mainBtn"/>
+		<input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn" />
+		<input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
 		</form>
 		<br>
 		
@@ -50,11 +51,10 @@ $(document).ready(function() {
 			<input value="공유상태">
 			<input value="친구관계"><br>	
 			<input value="${mate.infoStatus}" name="infoStatus">			
-			<input value="${mate.mateStatus}" name="mateStatus">
-			
+			<input value="${mate.mateStatus}" name="mateStatus">	
 		</form>
-					<br>	
-
+			<br>	
+</div>
 </body>
 
 </html>

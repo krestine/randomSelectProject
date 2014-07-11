@@ -7,10 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>register.jsp</title>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -19,7 +17,7 @@
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
 
 <!-- <script src="./js/ajaxValidate.js" type="text/javascript"></script> -->
-<!-- <script src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script> -->
+<script src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
 <style type="text/css">
 input.error {
 	border: 1px dashed red;
@@ -134,7 +132,7 @@ label.error {
 										});
 
 						// 회원가입 체크
-						$("#registerForm")
+						$("#register_form")
 								.validate(
 										{
 											onkeyup : false,
@@ -245,7 +243,7 @@ label.error {
 	${errmessage}
 
 
-	<form id="registerForm" method="post" action="registerProc.do">
+	<form id="register_form" method="post" action="registerProc.do">
 
 		<div>
 			아이디 <input type="text" id="memId" name="memId" class="signup" />
