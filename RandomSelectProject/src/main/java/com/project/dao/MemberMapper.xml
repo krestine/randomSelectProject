@@ -20,13 +20,15 @@
 	</select>
 
 
-	<!-- 회원:로그인 -->
+	<!-- 회원:로그인 , loginUser -->
 	<select id="getMemberInfoByMemberTerms" parameterType="MemberDTO"
 		resultType="MemberDTO">
-		select memid, memname,
-		memgrade,memmobile,memWalkRange,memCarRange,memExcMenu from member
-		where memid=#{memId} and
-		mempasswd=#{memPasswd} and leave != '1'
+		select memid, memgrade,memWalkRange,memCarRange,memExcMenu
+		from member
+		where
+		memid=#{memId} and
+		mempasswd=#{memPasswd} and leave !=
+		'1'
 	</select>
 
 
@@ -49,9 +51,9 @@
 
 
 	<!-- 회원:내정보 -->
-	<select id="getMyInfoByMemId" parameterType="MemberDTO"
-		resultType="MemberDTO">
-		select memid, memname, memgrade from member where
+	<select id="getMyInfoByMemId" parameterType="String" resultType="MemberDTO">
+		select memid, memname, memmobile, memgrade from member
+		where
 		memid=#{memId}
 	</select>
 
