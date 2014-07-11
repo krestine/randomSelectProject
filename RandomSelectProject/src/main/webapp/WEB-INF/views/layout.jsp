@@ -56,8 +56,8 @@
 	top: 1px;
 }
 
-body {
-	padding-top: 70px;
+
+body { padding-top: 5px;}
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -76,7 +76,7 @@ body {
 			</tr>
 			<tr>
 				<%-- <td width="180"><tiles:insertAttribute name="menu" /></td> --%>
-				<td height="300"><tiles:insertAttribute name="main" /></td>
+				<td height="500"><tiles:insertAttribute name="main" /></td>
 			</tr>
 			<tr>
 				<td height="0" colspan="0" bgcolor="#e2e2e2"><tiles:insertAttribute

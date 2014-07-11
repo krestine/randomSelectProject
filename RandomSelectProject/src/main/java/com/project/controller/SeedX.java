@@ -17,6 +17,9 @@ import java.util.Scanner;
 
 public class SeedX
 {
+	private int pdwRoundKey[] = new int[32];
+	private byte pbUserKey[]  = {(byte)0xEC, (byte)0x5F, (byte)0x2B, (byte)0xAD, (byte)0xF0, (byte)0xD1, (byte)0xA4, (byte)0xB1,
+			(byte)0x30, (byte)0xA4, (byte)0x15, (byte)0x32, (byte)0xC5, (byte)0x96, (byte)0x6A, (byte)0x3F};
 	private static int SS0[] = {
 		0x2989a1a8, 0x05858184, 0x16c6d2d4, 0x13c3d3d0, 0x14445054, 0x1d0d111c, 0x2c8ca0ac, 0x25052124,
 		0x1d4d515c, 0x03434340, 0x18081018, 0x1e0e121c, 0x11415150, 0x3cccf0fc, 0x0acac2c8, 0x23436360,
@@ -513,6 +516,70 @@ public class SeedX
 		pdwRoundKey[nCount++] = K[0];	pdwRoundKey[nCount++] = K[1];
 	}
 
+	public String plainToString(byte plain[]){
+		StringBuffer stringBuffer= new StringBuffer();
+		for(int i=0;i<=15;i++){
+			stringBuffer.append(Character.toString((char)plain[i]));
+		}
+		String returnString = stringBuffer.toString();
+		return returnString;
+	}
+	
+	public byte[] stringToPlain(String plain){
+		byte returnPlain[] = new byte[16];
+		if(plain.length()>16){
+			return null;
+		}
+		else{
+			for(int i=0;i<=15;i++){
+				try{	
+					returnPlain[i]=(byte) plain.charAt(i);
+				}
+				catch(Exception e){
+					returnPlain[i]=0;
+				}
+			}
+		}
+		return returnPlain;
+	}
+	
+	public String cipherToString(byte cipher[]){
+		StringBuffer stringBuffer= new StringBuffer();
+		for(int i=0;i<=15;i++){
+			stringBuffer.append(Integer.toHexString(0xff&cipher[i]));
+			stringBuffer.append(" ");
+		}
+		String returnString = stringBuffer.toString();
+		return returnString;
+	}
+	
+	public byte[] stringToCipher(String cipherString){
+		byte[] returnCipher = new byte[16];
+		String[] tempReturnCipher = new String[16];
+		tempReturnCipher = cipherString.split(" ");
+		for(int i=0;i<=15;i++){
+			returnCipher[i]=(byte) (Integer.parseInt(tempReturnCipher[i],16) & 0xff);
+		}
+		return returnCipher;
+	}
+	
+	public byte[] getSeedEncrypt(byte plain[], int roundKey[]){
+		byte cipher[] = new byte[16];
+		SeedEncrypt(plain, roundKey, cipher);
+		return cipher; 
+	}
+	
+	public byte[] getSeedDecrypt(byte cipher[], int roundKey[]){
+		byte plain[] = new byte[16];
+		SeedDecrypt(cipher, pdwRoundKey, plain);
+		return plain;
+	}
+	
+	public int[] getSeedRoundKey(){
+		SeedRoundKey(pdwRoundKey, pbUserKey);
+		return pdwRoundKey;
+	}
+	
 /*	public static void main(String[] args)
 	{
 		Scanner scan = new Scanner(System.in);
@@ -551,10 +618,13 @@ public class SeedX
 		System.out.println();
 		System.out.print("평문 : ");
 		//for (int i=0; i<16; i++)	System.out.print(Integer.toHexString(0xff&pbData[i])+" ");
-		for (int i=0; i<16; i++)	System.out.printf("%c ", (pbData[i]));
-		System.out.println();
+		//for (int i=0; i<16; i++)	System.out.print(Character.toString((char)pbData[i]));
+		System.out.println(plainToString(pbData));
 		System.out.print("암호문 : ");
-		for (int i=0; i<16; i++)	System.out.print(Integer.toHexString(0xff&pbCipher[i])+" ");
+		//for (int i=0; i<16; i++)	System.out.print(Integer.toHexString(0xff&pbCipher[i])+" ");
+		String tempString = cipherToString(pbCipher);
+		pbCipher = stringTocipher(tempString);
+		System.out.print(cipherToString(pbCipher));
 		System.out.println("\n");
 
 		
@@ -569,7 +639,7 @@ public class SeedX
 		System.out.println("");
 		System.out.print("평문 : ");
 		//for (int i=0; i<16; i++)	System.out.print(Integer.toHexString(0xff&pbPlain[i])+" ");
-		for (int i=0; i<16; i++)	System.out.printf("%c ", (pbData[i]));
+		for (int i=0; i<16; i++)	System.out.print(Character.toString((char)pbData[i]));
 		System.out.println("\n");
 	}	*/
 }

@@ -80,25 +80,25 @@ public class EvaluateController {
 
 	@RequestMapping(value = "/evaluateList.do", method = RequestMethod.POST)
 	public ModelAndView evaluateListForm(HttpServletRequest request,
-			Model model, int page) {
+			Model model) {
 		System.out.println("evaluateList()");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
 		ModelAndView view = new ModelAndView("evaluateList");
 		System.out.println(loginUser.toString());
 		String memId = loginUser.getMemId();
 		System.out.println("회원아이디 :: 컨트롤러에서 멤아이디" + memId);
-		
-		int startrow = (page - 1) * 10;
-		int limit = 10;
-	
+
+		int startrow = 1;
+		int limit = 11;
+
 
 		HashMap<String, Object> param = new HashMap<String, Object>();
-		
+
 		param.put("memId", memId);
 		param.put("startrow", String.valueOf(startrow));
 		param.put("endrow", String.valueOf(startrow + limit));
 		List<EvaluateDTO> ev = evaluateService.getEvaluateListByMemId(param);
-		
+
 		// 총 리스트 수
 		int listcount = evaluateService.getListCount(memId);
 		System.out.println("count는 " + listcount);

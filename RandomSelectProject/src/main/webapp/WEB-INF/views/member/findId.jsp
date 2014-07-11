@@ -7,34 +7,33 @@
 <title>findId.jsp</title>
 <!--jquery  -->
 <!--datepicker  -->
-<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet"
+	href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/smoothness/jquery-ui.css" />
 <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <!-- <script type="text/javascript" -->
 <!-- 	src="http://code.jquery.com/jquery-latest.min.js"></script> -->
- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <!-- <script type="text/javascript"  src="//code.jquery.com/jquery-1.10.2.js"></script> -->
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+
 <script type="text/javascript">
 	$(document)
 			.ready(
 					function() {
 						// 달력 
-// 						$("#memBirth").click(function(){
-// 							alert("1111");
-// 						});
-						$("#memBirth").datepicker(
-// 								{
-// 									changeMonth : true,
-// 									changeYear : true,
-// 									dateFormat : 'yy-mm-dd',
-// 									yearRange : '1900:*',
-// 									monthNamesShort : [ '1월(JAN)', '2월(FEB)',
-// 											'3월(MAR)', '4월(APR)', '5월(MAY)',
-// 											'6월(JUN)', '7월(JUL)', '8월(AUG)',
-// 											'9월(SEP)', '10월(OCT)', '11월(NOV)',
-// 											'12월(DEC)' ]
-// 								}
-								);
+						$("#dateId,#datePw").datepicker(
+								{
+									changeMonth : true,
+									changeYear : true,
+									dateFormat : 'yy-mm-dd',
+									yearRange : '1900:*',
+									monthNamesShort : [ '1월(JAN)', '2월(FEB)',
+											'3월(MAR)', '4월(APR)', '5월(MAY)',
+											'6월(JUN)', '7월(JUL)', '8월(AUG)',
+											'9월(SEP)', '10월(OCT)', '11월(NOV)',
+											'12월(DEC)' ]
+								});
 
 						//toggle로 div나누기 
 						form_wrapper = $('.findBox');
@@ -59,28 +58,70 @@
 																					$(
 																							'.linkBox .linkform')
 																							.toggle();
+
 																				});
 															});
 
-	e.preventDefault();
+											e.preventDefault();
 										});
 
-						//비밀번호 찾기 
-						$('#findPwCheck')
+						//아이디폼 정규식
+						//$("#findId_btn").click(function() {
+						$("#findId_form")
+								.submit(
+										function() {
+											var name = $('#nameId').val();
+											var date = $('#dateId').val();
+											var mobile = $('#mobileId').val();
+											var regex_name = /^[가-힣]+$/;
+											var regex_mobile = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+											if (name == '' || date == ''
+													|| mobile == '') {
+												$(this).focus();
+												$('#idErrorMsg')
+														.html(
+																'<font color=red>모두 입력해주세요.</font>');
+												return false;
+											} else {
+												if (!regex_name.test(name)) {
+													$('#idErrorMsg')
+															.html(
+																	'<font color=red>이름은 한글로 입력해주세요.</font>');
+													return false;
+												} else if (!regex_mobile
+														.test(mobile)) {
+													$('#idErrorMsg')
+															.html(
+																	'<font color=red>전화번호는 -을 포함한 숫자로 입력해주세요.</font>');
+													return false;
+												}
+											}
+											return true;
+										});
+						//}
+
+						//비밀번호 찾기 ajax
+						$('#findPwCheck_btn')
 								.click(
 										function() {
-											var memId = $('#memId').val();
-											var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+											var memId = $('#idPw').val();
+											var regex_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+											var regex_mobile = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 											if (memId == ''
-													|| $('#memBirth').val() == ''
-													|| $('#memMobile').val() == '') {
+													|| $('#datePw').val() == ''
+													|| $('#mobilePw').val() == '') {
 												$('#pwErrorMsg')
 														.html(
 																'<font color=red>모두 입력해주세요.</font>');
-											} else if (!reg_email.test(memId)) {
+											} else if (!regex_email.test(memId)) {
 												$('#pwErrorMsg')
 														.html(
 																'<font color=red>아이디는 이메일 형식으로 입력해주세요.</font>');
+											} else if (!regex_mobile.test($(
+													'#mobilePw').val())) {
+												$('#pwErrorMsg')
+														.html(
+																'<font color=red>전화번호는 -을 포함한 숫자로 입력해주세요.</font>');
 											} else {
 												$
 														.ajax({
@@ -92,15 +133,15 @@
 																	+ memId
 																	+ '&memBirth='
 																	+ $(
-																			'#memBirth')
+																			'#datePw')
 																			.val()
 																	+ '&memMobile='
 																	+ $(
-																			'#memMobile')
+																			'#mobilePw')
 																			.val(),
 															dataType : 'xml',
 															error : function() {
-																alert("데이터가 안넘어감");
+																alert("error");
 															},
 															success : function(
 																	xml) {
@@ -111,6 +152,9 @@
 																		.text();
 																if (result
 																		.trim() == 'true') {
+																	$(
+																			'#findPassword_form')
+																			.submit();
 																} else {
 																	if (result
 																			.trim() == 'incorrectInfo') {
@@ -134,44 +178,51 @@
 </script>
 </head>
 <body>
-	${errmessage }
+
 	<div class="findBox">
 		<form id="findId_form" action="findIdProc.do" method="post">
 			<div>아이디 찾기</div>
 			<div>
-				이름 <input type="text" id="memName" name="memName">
+				이름 <input type="text" id="nameId" name="memName">
 			</div>
 			<div>
-				생년월일 <input type="text" id="memBirth" name="memBirth">
+				생년월일 <input type="text" id="dateId" name="memBirth"
+					readonly="readonly">
 			</div>
 			<div>
-				전화번호 <input type="text" id="memMobile" name="memMobile">
+				전화번호 <input type="text" id="mobileId" name="memMobile"
+					placeholder="010-1234-1234">
 			</div>
-
 			<div>
-				<input type="submit" value="아이디찾기">
+				<label id="idErrorMsg" style="color: red">${errmessage }</label>
+			</div>
+			<div>
+				<input type="submit" id="findId_btn" value="아이디찾기">
 			</div>
 		</form>
 
 
-		<form id="findPassword_form" action="" method="post"
-			style="display: none">
+		<form id="findPassword_form" action="findPasswordProc.do"
+			method="post" style="display: none">
 			<div>비밀번호 찾기</div>
 			<div>
-				아이디 <input type="text" id="memId" name="memId">
+				아이디 <input type="text" id="idPw" name="memId">
 			</div>
 			<div>
-				생년월일 <input type="text" id="memBirth" name="memBirth">
+				생년월일 <input type="text" id="datePw" name="memBirth"
+					readonly="readonly">
 			</div>
 			<div>
-				전화번호 <input type="text" id="memMobile" name="memMobile">
-			</div>
-			<div>
-				<input type="submit" id="findPwCheck" value="비밀번호찾기">
+				전화번호 <input type="text" id="mobilePw" name="memMobile"
+					placeholder="010-1234-1234">
 			</div>
 			<div>
 				<label id="pwErrorMsg" style="color: red"></label>
 			</div>
+			<div>
+				<input type="button" id="findPwCheck_btn" value="비밀번호찾기">
+			</div>
+
 		</form>
 
 	</div>

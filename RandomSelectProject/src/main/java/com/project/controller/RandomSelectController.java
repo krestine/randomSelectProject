@@ -2,8 +2,6 @@ package com.project.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,11 +76,9 @@ public class RandomSelectController {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		
-		Date timeNow = new Date(Calendar.getInstance().getTimeInMillis());
-		System.out.println(timeNow);
 		int lastVisitId = Integer.parseInt(visitService.getLastVisitId());
 		System.out.println(restntId);
-		VisitDTO visitDto = new VisitDTO((lastVisitId+1)+"", timeNow, "1", loginUser.getMemId(), restntId);
+		VisitDTO visitDto = new VisitDTO((lastVisitId+1)+"", "1", loginUser.getMemId(), restntId);
 		visitService.putVisit(visitDto);
 		JSONObject json = new JSONObject();
 		json.put("restntId", restntId);

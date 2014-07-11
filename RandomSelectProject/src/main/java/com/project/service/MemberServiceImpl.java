@@ -46,8 +46,8 @@ public class MemberServiceImpl implements MemberService {
 
 	// 회원:내정보
 	@Override
-	public MemberDTO getMyInfoByMemId(MemberDTO memberDto) {
-		return memberMapper.getMyInfoByMemId(memberDto);
+	public MemberDTO getMyInfoByMemId(String memId) {
+		return memberMapper.getMyInfoByMemId(memId);
 	}
 
 	// 회원:현재비밀번호확인
