@@ -8,8 +8,6 @@
 <html>
 <head>
 
-
-
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style type="text/css">
 html {
@@ -35,6 +33,7 @@ language=구글 맵 언어
 
 <script type="text/javascript">
 	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId;
+	var myInfoWindow;
 	var randomLatitude, randomLongitude;
 	var map;
 	var restntList;
@@ -44,6 +43,10 @@ language=구글 맵 언어
 	var geocoder = new google.maps.Geocoder();
 	var directionsDisplay;
 	var directionsService = new google.maps.DirectionsService();
+	
+	var restntImage1 = "http://www.googledrive.com/host/0B1_N1p_Ulcy_YV9sQldSU19ZLTQ";
+	var restntImage2 = "http://www.googledrive.com/host/0B1_N1p_Ulcy_RTJnQ09sY0hQLXM;"
+	var markerImage1 = "http://www.googledrive.com/host/0B1_N1p_Ulcy_Ni15YkJId3lxUTg";
 	
 	var tempOKLatitude = new Array(100);
 	var tempOKLongitude = new Array(100);
@@ -135,6 +138,7 @@ language=구글 맵 언어
 		var tempRestntName;
 		var tempRestntId;
 		
+		
 		<c:forEach items="${restntList}" var="item" varStatus="counter">
 		
 		//javascript 변수에 EL태그의 값을 직접 넣을 때는 직접 넣을 수 없고
@@ -158,7 +162,8 @@ language=구글 맵 언어
 			tempRestntMarker[tempCnt] = new google.maps.Marker({
 				position : tempRestntPos,
 				map : map,
-				animation: google.maps.Animation.DROP
+				animation: google.maps.Animation.DROP,
+				title : tempRestntName
 			});	
 			tempRestntMarker[tempCnt].setMap(map);
 
@@ -172,17 +177,19 @@ language=구글 맵 언어
 		
 		</c:forEach>
 		
-		var selection= Math.floor(Math.random() * tempCnt+1);
-		
+		var selection= Math.floor(Math.random() * tempCnt);
+
 		tempRestntLatitude = tempOKLatitude[selection];
 		tempRestntLongitude = tempOKLongitude[selection];
 		tempRestntName = tempOKName[selection];
 		tempRestntId = tempOKId[selection];
 		
+		tempRestntMarker[selection].setIcon(restntImage2);
 		tempRestntMarker[selection].setAnimation(google.maps.Animation.BOUNCE);
+		myInfoWindow.close();
 		
 		var tempRestntInfo = new google.maps.InfoWindow();
-		tempRestntInfo.setContent(tempRestntName);
+		tempRestntInfo.setContent("오늘의 식당 : " + tempRestntName);
 		tempRestntInfo.open(map, tempRestntMarker[selection]);
 		
 		//google.maps.LatLng(latitude, longitude) = 위도와 경도 값을 '위치'개체로 바꾸는 것
@@ -308,6 +315,7 @@ language=구글 맵 언어
 		var myMarker = new google.maps.Marker({
 			position : pos,
 			map : map,
+			icon : markerImage1,
 			title : '내 위치'
 		});
 		myMarker.setMap(map);
@@ -334,7 +342,7 @@ language=구글 맵 언어
 			if (status == google.maps.GeocoderStatus.OK) {
 				if (results[0]) {
 					//google.maps.InfoWindow = Marker 위에 네모나게 말풍선으로 뜨는 정보창
-					var myInfoWindow = new google.maps.InfoWindow();
+					myInfoWindow = new google.maps.InfoWindow();
 					myLocation = results[0].formatted_address;
 					myInfoWindow.setContent('내 위치 : '
 							+ myLocation);
