@@ -34,7 +34,6 @@ label.error {
 				}
 			},
 			messages : {
-
 				memId : {
 					required : "아이디를 입력해주세요",
 					email : "이메일 형식으로 써주세요."
@@ -103,8 +102,8 @@ label.error {
 				type="submit" id="loginbtn" value="로그인">
 		</div>
 		<div>
-			<label class="error" id="inputCheck" generated="true"
-				style="color: red"> ${errmessage}</label>
+			<label class="error" id="inputCheck" style="color: red">
+				${errmessage}</label>
 		</div>
 		<div>
 			<a href="findIdForm.do">아이디/비밀번호 찾기</a>

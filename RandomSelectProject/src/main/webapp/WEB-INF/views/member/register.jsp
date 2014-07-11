@@ -132,7 +132,7 @@ label.error {
 										});
 
 						// 회원가입 체크
-						$("#registerForm")
+						$("#register_form")
 								.validate(
 										{
 											onkeyup : false,
@@ -243,7 +243,7 @@ label.error {
 	${errmessage}
 
 
-	<form id="registerForm" method="post" action="registerProc.do">
+	<form id="register_form" method="post" action="registerProc.do">
 
 		<div>
 			아이디 <input type="text" id="memId" name="memId" class="signup" />
