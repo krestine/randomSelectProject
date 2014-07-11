@@ -13,13 +13,13 @@ public interface EvaluateService {
 		// 회원: 평가한 식당목록. 평가한 방문 리스트
 
 	List<EvaluateDTO> getEvaluateListByMemId(HashMap<String,Object> param);
-	
-	
+
+
 
 		// 식당이름
 		List<EvaluateDTO> getRestntnameByRestId(String restntId);
 
-		
+
 
 		/* EvaluateDTO setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto); */
 		/* void setEvaluateInfoByEvaluateTerms(String evaluateDto); */
@@ -29,7 +29,7 @@ public interface EvaluateService {
 
 		// 회원:평가안한 방문리스트. 방문날짜 restntId
 		List<EvaluateDTO> getnEvaluateListByMemId(String memId);
-		
+
 		// 회원:평가한 방문리스트 수정,평가 안한 점수 입력
 		public void setScoreByEvaluateTerms(EvaluateDTO evaluateDto);
 
@@ -43,9 +43,8 @@ public interface EvaluateService {
 		int getListCount(String memId);
 		// 게시물 삭제 
 		public void deleteData(String memId, String evalId);
-	
+
 
 
 		}
 
-	
