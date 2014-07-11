@@ -59,7 +59,7 @@ public class MemberController {
 		return view;
 	}
 
-	// 비밀번호 찾기 ajax
+	// 로그인 : 비밀번호 찾기 ajax
 	@RequestMapping("pwCheck.do")
 	public ModelAndView pwCheckAjax(HttpServletRequest request,
 			HttpServletResponse response, MemberDTO memberDto) {
@@ -100,6 +100,28 @@ public class MemberController {
 		} else {
 			view.addObject("pwResult", "incorrectId");
 			System.out.println("아이디 없음");
+		}
+		return view;
+	}
+
+	// 내정보 : 현재비밀번호 확인 ajax
+	@RequestMapping("pwInfoCheck.do")
+	public ModelAndView pwInfoCheckAjax(HttpServletRequest request,
+			HttpServletResponse response) {
+		System.out.println("pwInfoCheckAjax");
+		
+		ModelAndView view = new ModelAndView("member/memAjax");
+
+		String memId = request.getParameter("memId");
+		System.out.println("memid=" + memId);
+
+		String getId = memberService.getMemIdByMemId(memId);
+		System.out.println("getid=" + getId);
+
+		if (getId == null) {
+			view.addObject("result", "true");
+		} else {
+			view.addObject("result", "false");
 		}
 		return view;
 	}
