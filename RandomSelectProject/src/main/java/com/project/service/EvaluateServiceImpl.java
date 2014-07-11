@@ -21,7 +21,8 @@ public class EvaluateServiceImpl implements EvaluateService {
 	@Override
 	public List<EvaluateDTO> getEvaluateListByMemId(HashMap<String, Object> param) {
 		// TODO Auto-generated method stub
-		return getEvaluateListByMemId(param);
+	
+		return 	evaluateMapper.getEvaluateListByMemId(param);
 	}
 
 	// 식당이름
