@@ -62,7 +62,7 @@
 
 <body>
 <center>
-	<div class="btn-grout">	
+	<div class="btn-group">	
       		<c:choose>
 			<c:when test="${sessionScope.loginUser==null}">
 				<form id="select1" method="post" style="display: inline;">

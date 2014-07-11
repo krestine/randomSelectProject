@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <style>
-body { padding-top: 1px; }
+body { padding-top: 5px; }
 
 </style>
 <title>Insert title here</title>

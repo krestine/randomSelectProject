@@ -11,42 +11,43 @@
 
 
 <script>
-$('#mateDetail')
-.click(function(){
-	$('#mateDetail').hide();
-	$.ajax({
-	cache : false,
-	async : false,
-	type :'POST',
-	url : 'ajaxMateDetail.do', 
-	data : ('mateDetail='+ $('#mateDetail').val()),
-	dataType : 'json',
-	error : function(){
-		alert ("에러 : 데이터가 안넘어갑니다.");
-	},
-	success : function(json){
-		$('#mateDetail').show();
-	}
-})
-if (json.mateId != '') {
+	$('#mateDetail')
+			.click(
+					function() {
+						$('#mateDetail').hide();
+						$.ajax({
+							cache : false,
+							async : false,
+							type : 'POST',
+							url : 'ajaxMateDetail.do',
+							data : ('mateDetail=' + $('#mateDetail').val()),
+							dataType : 'json',
+							error : function() {
+								alert("에러 : 데이터가 안넘어갑니다.");
+							},
+							success : function(json) {
+								$('#mateDetail').show();
+							}
+						})
+						if (json.mateId != '') {
 
-	var memName = json.memName;
-	var memId = json.memId;
-	var memGrade = json.memGrade;
-	var infoStatus = json.infoStatus;
-	var mateStatus = json.mateStatus;
-	var html = 
-}); 
+							var memName = json.memName;
+							var memId = json.memId;
+							var memGrade = json.memGrade;
+							var infoStatus = json.infoStatus;
+							var mateStatus = json.mateStatus;
+							var html = '<tbody><form id="mateForm"><input value="'+memName+'"name="memName"><input value="'+memId+'"name="memId"><input value="'+memGrade+'"name="memGrade"><input value="'+mateStatus+'"name="mateStatus"><tr><th>상태</th><td><input value="'+infoStatus+'" name="infoStatus"></td></tr>';
+							$('#mateDetail').append(html);
 
+						}
+					});
 
-$(document).ready(function() {
-	$('#restntListBtn').click(function() {
-		$('#community').attr("action", "restntListProc.do").submit();
+	$(document).ready(function() {
+		$('#restntListBtn').click(function() {
+			$('#community').attr("action", "restntListProc.do").submit();
+		});
+
 	});
-
-});
-
-
 </script>
 <title>mateList</title>
 </head>
@@ -54,22 +55,23 @@ $(document).ready(function() {
 
 
 	<h4>친구리스트</h4>
-<div>	
-	<form id="community" method="post" >
-		 <input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
-	</form>
-	
+	<div>
+		<form id="community" method="post">
+			<input type="button" class="btn btn-success btn-sm" value="식당 리스트"
+				id="restntListBtn" />
+		</form>
 
 
-	<c:forEach var="mate" items="${mates}">		
-					<form action="mateDetailProc.do" method="post">
-						<input type="hidden" value="${mate.memId}" name="memId">			
-						<input value="${mate.memName}" name="memName">
-						<input value="${mate.mateId}" name="mateId">
-						<input type="submit" class="btn btn-success btn-sm" value="상세보기">
-					</form>
-					<br>
-	</c:forEach>
-</div>		
+
+		<c:forEach var="mate" items="${mates}">
+			<form action="mateDetailProc.do" method="post">
+				<input type="hidden" value="${mate.memId}" name="memId"> <input
+					value="${mate.memName}" name="memName"> <input
+					value="${mate.mateId}" name="mateId"> <input type="submit"
+					class="btn btn-success btn-sm" value="상세보기">
+			</form>
+			<br>
+		</c:forEach>
+	</div>
 </body>
 </html>

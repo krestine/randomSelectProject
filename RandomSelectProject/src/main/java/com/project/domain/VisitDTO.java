@@ -95,11 +95,10 @@ public class VisitDTO {
 			return false;
 		return true;
 	}
-	public VisitDTO(String visitId, Date visitDate, String menuId,
+	public VisitDTO(String visitId, String menuId,
 			String memId, String restntId) {
 		super();
 		this.visitId = visitId;
-		this.visitDate = visitDate;
 		this.menuId = menuId;
 		this.memId = memId;
 		this.restntId = restntId;

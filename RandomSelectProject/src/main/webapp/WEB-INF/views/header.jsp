@@ -17,40 +17,15 @@
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header" >
           <a href="main.do" class="navbar-brand">아무거나</a>
-          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
-          <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Login<span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="">
-                <li><a href="loginForm.do">로그인</a></li>
-                <li><a href="findIdForm.do">아이디\패스워드 찾기</a></li>
-               
-              </ul>
-            </li>
-            <li>
-              <a href="registerForm.do">Register</a>
-            </li>
-            
           
-          </ul>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="logoutForm.do" target="_blank">Logout</a></li>
-          </ul>
-
         </div>
       </div>
     </div>
-
-
+			
+			
+			
   
 
 

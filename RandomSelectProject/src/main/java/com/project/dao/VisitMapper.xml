@@ -11,7 +11,7 @@
 		restntId)
 		values
 		(#{visitId, jdbcType=VARCHAR},
-		#{visitDate, jdbcType=DATE},
+		SYSDATE,
 		#{menuId, jdbcType=VARCHAR},
 		#{memId, jdbcType=VARCHAR},
 		#{restntId, jdbcType=VARCHAR})
