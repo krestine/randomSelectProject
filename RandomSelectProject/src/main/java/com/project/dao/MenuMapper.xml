@@ -70,7 +70,7 @@
 	<select id="getLastMenuId" parameterType="String" resultType="String">
 		select max(menuid) from menu
 		where restntId=#{restntId}
-		and active = '1'
+		
 	</select>
 	
 	<insert id="addMenuForm" parameterType="MenuDTO">
