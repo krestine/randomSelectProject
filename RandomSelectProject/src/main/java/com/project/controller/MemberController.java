@@ -74,7 +74,7 @@ public class MemberController {
 		System.out.println("memBirth=" + memBirth);
 
 		String memMobile = request.getParameter("memMobile");
-		System.out.println("memMobile=" + memBirth);
+		System.out.println("memMobile=" + memMobile);
 
 		memberDto.setMemId(memId);
 		memberDto.setMemBirth(memBirth);
@@ -83,16 +83,19 @@ public class MemberController {
 		System.out.println(memberDto);
 
 		String userId = memberService.getMemIdByMemId(memId);
+		System.out.println("userId=" + userId);
+
 		String userPassword = memberService
 				.getMemPasswdByMemberTerms(memberDto);
+		System.out.println("userPassword=" + userPassword);
 
 		if (userId != null) {
-			if (userPassword.trim() != null) {
-				view.addObject("pwResult", "true");
-				System.out.println("회원정보 일치");
-			} else {
+			if (userPassword == null) {
 				view.addObject("pwResult", "incorrectInfo");
 				System.out.println("회원정보 불일치");
+			} else {
+				view.addObject("pwResult", "true");
+				System.out.println("회원정보 일치");
 			}
 		} else {
 			view.addObject("pwResult", "incorrectId");
@@ -160,7 +163,7 @@ public class MemberController {
 
 	}
 
-	// 아이디찾기
+	// 아이디 찾기&비밀번호 찾기 폼
 	@RequestMapping("findIdForm.do")
 	public String findIdForm() {
 		System.out.println("findIdForm()");
@@ -180,9 +183,8 @@ public class MemberController {
 		return "findIdOk";
 	}
 
+	// 비밀번호찾기
 	/*
-	 * // 비밀번호찾기
-	 * 
 	 * @RequestMapping("findPasswordForm.do") public String findPasswordForm() {
 	 * System.out.println("findPasswordForm()"); return "findPassword"; }
 	 */
@@ -228,8 +230,14 @@ public class MemberController {
 
 	// 내정보
 	@RequestMapping(value = "myInfoForm.do", method = RequestMethod.POST)
-	public String myInfoForm(Model model, MemberDTO memberDto) {
+	public String myInfoForm(Model model, MemberDTO memberDto,
+			HttpSession session) {
 		System.out.println("myInfoForm()");
+		MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
+		System.out.println("loginUser=" + loginUser);
+		MemberDTO myInfo = memberService.getMyInfoByMemId(loginUser.getMemId());
+		System.out.println("myInfo=" + myInfo);
+		model.addAttribute("myInfo", myInfo);
 		return "myInfo";
 	}
 

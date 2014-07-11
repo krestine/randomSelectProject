@@ -22,7 +22,7 @@ public interface MemberService {
 	String getMemPasswdByMemberTerms(MemberDTO memberDto);
 
 	// 회원:내정보
-	MemberDTO getMyInfoByMemId(MemberDTO memberDto);
+	MemberDTO getMyInfoByMemId(String memId);
 
 	// 회원:현재비밀번호확인
 	String getMemPasswdByMemId(MemberDTO memberDto);
