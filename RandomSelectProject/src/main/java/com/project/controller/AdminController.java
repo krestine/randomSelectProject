@@ -717,7 +717,40 @@ public class AdminController {
 		PrintWriter out = response.getWriter();
 		out.print(jsonObject.toString());
 	}
-	
+	@RequestMapping(value = "/ajaxDelMenu.do")
+	public void delMenu(HttpServletRequest request,
+			HttpServletResponse response, SettingDTO settingDto, MenuDTO menuDto)
+			throws IOException {
+		System.out.println("/ajaxDelMenu.do");
+		System.out.println("menuDto::"+ menuDto);
+		
+		String restntId = menuDto.getRestntId();
+		String menuId = menuDto.getMenuId();
+		System.out.println("소속 식당 아이디::" + restntId);
+		
+		System.out.println("입력 정보 반영 쿼리 실행");
+		menuService.dropMenuByMenuId(menuId);
+		
+		System.out.println("메뉴 리스트 가져오는 쿼리 실행");
+		menus = menuService.getMenuListByRestntId(restntId);
+		System.out.println(menus);
+
+		// 제이슨으로 변환
+
+		JSONArray jsonArray = JSONArray.fromObject(menus);
+
+		System.out.println("menus - " + jsonArray);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("menus", jsonArray);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+	}
 	// 새 식당 등록시 아이디 생성 메소드
 		String menuIdGen(String lastMenuId, String restntId) {
 			if (lastMenuId != null) {
