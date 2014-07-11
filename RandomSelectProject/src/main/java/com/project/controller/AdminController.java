@@ -144,6 +144,7 @@ public class AdminController {
 		if (caseCode == null) {
 			caseCode = 0;
 		}
+		System.out.println(caseCode);
 		switch (caseCode) {
 		case 0:
 			adress1 = settingService.getAdress1();

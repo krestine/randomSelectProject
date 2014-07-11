@@ -7,20 +7,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+
+
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style type="text/css">
 html {
-	height: 100%
+	height: 100%;
 }
 
-body {
+body,.container {
 	height: 100%;
 	margin: 0;
-	padding: 0
-}
-
-#map_canvas {
-	height: 100%
+	padding: 0;
 }
 </style>
 <!-- sensor=해당 단말기에 맵 성능 향상을 위한 센서가 있을 경우 강제로 사용
@@ -28,13 +27,11 @@ language=구글 맵 언어
 -->
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=true&language=ko">
-	
 </script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+<script src="http://code.jquery.com/jquery-latest.min.js"
 	type="text/javascript"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"
-	type="text/javascript"></script>
+
+
 
 <script type="text/javascript">
 	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId;
@@ -43,14 +40,21 @@ language=구글 맵 언어
 	var restntList;
 	var pos, pos2;
 	var sRadius;
+	var login=1;
 	var geocoder = new google.maps.Geocoder();
 	var directionsDisplay;
 	var directionsService = new google.maps.DirectionsService();
-
+	
+	var tempOKLatitude = new Array(100);
+	var tempOKLongitude = new Array(100);
+	var tempOKName = new Array(100);
+	var tempOKId = new Array(100);
+	
+	var tempRestntMarker = new Array(100);
 	
 	function confirmRestnt() {
 		
-		alert(myRestntId);
+		if(login==1){
 		
 		var paramData = {
 				restntId : myRestntId
@@ -70,12 +74,17 @@ language=구글 맵 언어
 						
 						if (json.restntId != '') {
 
-							var html = 
-							$('#restntConfirmed').append(html);
+							var html = '식당 방문정보가 추가되었습니다.';
+							$('#restntConfirmed').html(html);
+							
 						}
 
 					}
 				});
+		} else{
+			var html = '<font color=red>식당 방문정보 기능을 이용하시려면 로그인을 해 주세요.</font>';
+			$('#restntConfirmed').html(html);
+		}
 	}
 	
 	function showCurrentLocation(Lat, Lon) {
@@ -115,15 +124,9 @@ language=구글 맵 언어
 
 		return Math.round(ret);
 	}
-
+	
 	function getAllRestntList() {
 		//javascript에서도 c태그 및 EL태그 사용 가능.
-		
-		var tempOKLatitude = new Array(100);
-		var tempOKLongitude = new Array(100);
-		var tempOKName = new Array(100);
-		var tempOKId = new Array(100);
-		
 		
 		var tempDistance=0;
 		var tempCnt=0;
@@ -131,8 +134,6 @@ language=구글 맵 언어
 		var tempRestntLongitude
 		var tempRestntName;
 		var tempRestntId;
-		
-
 		
 		<c:forEach items="${restntList}" var="item" varStatus="counter">
 		
@@ -146,11 +147,25 @@ language=구글 맵 언어
 		tempDistance=calcDistance(myLatitude, myLongitude, tempRestntLatitude, tempRestntLongitude);
 		
 		if(tempDistance<sRadius){
-			
 			tempOKLatitude[tempCnt] = tempRestntLatitude;
 			tempOKLongitude[tempCnt] = tempRestntLongitude;
 			tempOKName[tempCnt] = tempRestntName;
 			tempOKId[tempCnt] = tempRestntId;
+			
+			
+			var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
+					tempRestntLongitude);
+			tempRestntMarker[tempCnt] = new google.maps.Marker({
+				position : tempRestntPos,
+				map : map,
+				animation: google.maps.Animation.DROP
+			});	
+			tempRestntMarker[tempCnt].setMap(map);
+
+			/* var tempRestntInfo = new google.maps.InfoWindow();
+			tempRestntInfo.setContent(tempRestntName);
+			tempRestntInfo.open(map, tempRestntMarker[tempCnt]); */
+			
 			tempCnt = tempCnt + 1;
 			
 		}
@@ -164,17 +179,24 @@ language=구글 맵 언어
 		tempRestntName = tempOKName[selection];
 		tempRestntId = tempOKId[selection];
 		
+		tempRestntMarker[selection].setAnimation(google.maps.Animation.BOUNCE);
+		
+		var tempRestntInfo = new google.maps.InfoWindow();
+		tempRestntInfo.setContent(tempRestntName);
+		tempRestntInfo.open(map, tempRestntMarker[selection]);
+		
 		//google.maps.LatLng(latitude, longitude) = 위도와 경도 값을 '위치'개체로 바꾸는 것
-		var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
+		/* var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
 				tempRestntLongitude);
 		var tempRestntMarker = new google.maps.Marker({
 			position : tempRestntPos,
 			map : map,
+			animation: google.maps.Animation.DROP
 		});
 		tempRestntMarker.setMap(map);
 		var tempRestntInfo = new google.maps.InfoWindow();
 		tempRestntInfo.setContent(tempRestntName);
-		tempRestntInfo.open(map, tempRestntMarker);
+		tempRestntInfo.open(map, tempRestntMarker); */
 		
 		myRestntName = tempRestntName;
 		myRestntId = tempRestntId;
@@ -256,6 +278,7 @@ language=구글 맵 언어
 		tempSRadius = Number(tempSRadius);
 		if (tempSRadius == 0) {
 			tempSRadius = 1000;
+			login=0;
 		}
 		sRadius = tempSRadius;
 	}
@@ -380,38 +403,35 @@ language=구글 맵 언어
 </script>
 </head>
 <body>
-	<div id="map_canvas" style="width: 100%; height: 70%"></div>
-	<input type=button id=randomSelectInitialize value="아무거나!"
-		onclick="initialize()">
-	<input type=button id=redrawMap value="맵 다시 그리기" onclick="redrawMap()">
-	<input type=button id=moveToMyLocation value="내 위치로 이동"
-		onclick="setMyCenter()">
-	<input type=button id=moveToRestntLocation value="식당 위치로 이동"
-		onclick="setRestntCenter()">
-	<input type=button id=getAllRestnt value="식당 골라주기"
-		onclick="getAllRestntList()">
-	<br>
-	<input type=text id=tempAddress value="">
-	<input type=button id=geocodeTempAddress value="해당 주소 지도에 표시"
-		onclick="findLocation()">
-	<input type=text id=tempLatitude value="">
-	<input type=text id=tempLongitude value="">
-	<input type=button id=justShowMarker value="해당 좌표 지도에 표시"
-		onclick="justShowLocation()">
-	<br> 선택한 마커의 좌표 :
-	<div id=currentLocation></div>
-	<div id=currentAccuracy></div>
-	<div id=accuracyAlert></div>
-	<div id=newMyLocationForm style="display: none">
-		<input type=text id=newMyAddress value=""> <input type=button
-			id=newMyLocation value="내 주소 수동으로 입력" onclick="newMyLocation()">
-	</div>
-	<button id="confirmRestnt" onclick="confirmRestnt()">식당 확정</button>
-	<div id="restntConfirmed"></div>
-	<%-- <div id="restnt_list">
+	<div class="container" id="container" style="width: 100%">
+		<div id="map_canvas" style="width: 100%; height: 600px"></div>
+		<input type=button id=randomSelectInitialize value="아무거나!"
+			onclick="initialize()"> <input type=button id=redrawMap
+			value="맵 다시 그리기" onclick="redrawMap()"> <input type=button
+			id=moveToMyLocation value="내 위치로 이동" onclick="setMyCenter()">
+		<input type=button id=moveToRestntLocation value="식당 위치로 이동"
+			onclick="setRestntCenter()"> <input type=button
+			id=getAllRestnt value="식당 골라주기" onclick="getAllRestntList()">
+		<br> <input type=text id=tempAddress value=""> <input
+			type=button id=geocodeTempAddress value="해당 주소 지도에 표시"
+			onclick="findLocation()"> <input type=text id=tempLatitude
+			value=""> <input type=text id=tempLongitude value="">
+		<input type=button id=justShowMarker value="해당 좌표 지도에 표시"
+			onclick="justShowLocation()"> <br> 선택한 마커의 좌표 :
+		<div id=currentLocation></div>
+		<div id=currentAccuracy></div>
+		<div id=accuracyAlert></div>
+		<div id=newMyLocationForm style="display: none">
+			<input type=text id=newMyAddress value=""> <input type=button
+				id=newMyLocation value="내 주소 수동으로 입력" onclick="newMyLocation()">
+		</div>
+		<button id="confirmRestnt" onclick="confirmRestnt()">식당 확정</button>
+		<div id="restntConfirmed"></div>
+		<%-- <div id="restnt_list">
 		<c:forEach items="${restntList}" var="item">
 			 ${item.restntName} ${item.latitude} ${item.longitude}<br>
 		</c:forEach>
 	</div> --%>
+	</div>
 </body>
 </html>
