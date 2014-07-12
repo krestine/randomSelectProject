@@ -9,49 +9,24 @@
 	$(document)
 			.ready(
 					function() {
-						//toggle로 div나누기 
-						form_wrapper = $('.modifyBox');
-						$('#pwCheck_btn')
-								.on(
-										'click',
-										function(e) {
 
-											$(form_wrapper.find('form:visible'))
-													.fadeOut(
-															400,
-															function() {
-																form_wrapper
-																		.stop()
-																		.animate(
-																				50,
-																				function() {
-																				});
-																$(
-																		'#myInfo_form')
-																		.toggle();
-															});
-											e.preventDefault();
-										});
+						form_wrapper = $('.modifyBox');
+						//비밀번호 변경폼보이기
+						$("#pwCheck_form").hide();
+						$("button.changeInfo").click(function() {
+							if ($("#pwChange_form").css("display") == "none") {
+								$("#pwCheck_form").toggle();
+							}
+						});
 
 						//현재비밀번호 확인 ajax
 						$('#pwCheck_btn')
 								.click(
 										function() {
-											if (memId == ''
-													|| $('#datePw').val() == ''
-													|| $('#mobilePw').val() == '') {
-												$('#pwErrorMsg')
+											if ($('#prePasswd').val() == '') {
+												$('#pwCheckMsg')
 														.html(
-																'<font color=red>모두 입력해주세요.</font>');
-											} else if (!regex_email.test(memId)) {
-												$('#pwErrorMsg')
-														.html(
-																'<font color=red>아이디는 이메일 형식으로 입력해주세요.</font>');
-											} else if (!regex_mobile.test($(
-													'#mobilePw').val())) {
-												$('#pwErrorMsg')
-														.html(
-																'<font color=red>전화번호는 -을 포함한 숫자로 입력해주세요.</font>');
+																'<font color=red>비밀번호를 입력해주세요.</font>');
 											} else {
 												$
 														.ajax({
@@ -59,15 +34,9 @@
 															async : false,
 															type : 'POST',
 															url : 'pwInfoCheck.do',
-															data : 'memId='
-																	+ memId
-																	+ '&memBirth='
+															data : 'memPasswd='
 																	+ $(
-																			'#datePw')
-																			.val()
-																	+ '&memMobile='
-																	+ $(
-																			'#mobilePw')
+																			'#prePasswd')
 																			.val(),
 															dataType : 'xml',
 															error : function() {
@@ -78,26 +47,33 @@
 																var result = $(
 																		xml)
 																		.find(
-																				'checkPw')
+																				'check')
 																		.text();
 																if (result
 																		.trim() == 'true') {
+																	//toggle로 div나누기 
 																	$(
-																			'#findPassword_form')
-																			.submit();
+																			form_wrapper
+																					.find('form:visible'))
+
+																			.fadeOut(
+																					400,
+																					function() {
+																						form_wrapper
+																								.stop()
+																								.animate(
+																										50,
+																										function() {
+																										});
+																						$(
+																								'#pwChange_form')
+																								.toggle();
+																					});
 																} else {
-																	if (result
-																			.trim() == 'incorrectInfo') {
-																		$(
-																				'#pwErrorMsg')
-																				.html(
-																						'<font color=red>아이디와 정보를 다시 확인해주세요.</font>');
-																	} else {
-																		$(
-																				'#pwErrorMsg')
-																				.html(
-																						'<font color=red>일치하는 아이디가 없습니다.</font>');
-																	}
+																	$(
+																			'#pwCheckMsg')
+																			.html(
+																					'<font color=red>비밀번호가 일치하지 않습니다.</font>');
 																}
 															}
 														});
@@ -116,52 +92,59 @@
 
 		<div>등급 :${myInfo.memGrade}</div>
 	</form>
-
-
+	<div>
+		<button class="changeInfo">내정보 변경</button>
+	</div>
 	<div class="modifyBox">
 		<form id="pwCheck_form" action="" method="post">
-			<div>
-				<input type="hidden" name="memId"
-					value="	${sessionScope.loginUser.memId}">
-			</div>
+			<!-- 			<div> -->
+			<!-- 				<input type="hidden" name="memId" -->
+			<%-- 					value="	${sessionScope.loginUser.memId}"> --%>
+			<!-- 			</div> -->
 			<div>현재비밀번호</div>
 			<div>
 				<input type="password" id="prePasswd" name="memPasswd">
 			</div>
 			<div>
-				<label id="pwMsg"></label>
+				<label id="pwCheckMsg"></label>
 			</div>
 			<div>
 				<input type="button" id="pwCheck_btn" value="비밀번호 확인">
 			</div>
 		</form>
-
-		<form id="myInfo_form" action="myInfoProc.do" method="post"
-			style="display: none">
-			<div>
-				<input type="hidden" name="memId"
-					value="	${sessionScope.loginUser.memId}">
-			</div>
-			<div>새 비밀번호</div>
-			<div>
-				<input type="password" name="tempPw">
-			</div>
-			<div>새 비밀번호 확인</div>
-			<div>
-				<input type="password" name="tempPw2">
-			</div>
-			<div>전화번호</div>
-			<div>
-				<input type="text" name="memMobile"
-					placeholder="${myInfo.memMobile}">
-			</div>
-			<div>
-				<label id="infoErrorMsg" style="color: red"></label>
-			</div>
-			<div>
-				<input type="submit" value="정보수정">
-			</div>
-		</form>
+		<div class="infoChangBox">
+			<form id="pwChange_form" action="myInfoProc.do" method="post"
+				style="display: none">
+				<div>새 비밀번호</div>
+				<div>
+					<input type="password" name="tempPw">
+				</div>
+				<div>새 비밀번호 확인</div>
+				<div>
+					<input type="password" name="tempPw2">
+				</div>
+				<div>
+					<label id="infoErrorMsg" style="color: red"></label>
+				</div>
+				<div>
+					<input type="submit" value="비밀번호 변경">
+				</div>
+			</form>
+			<form id="mobileChange_form" action="myInfoProc.do" method="post"
+				style="display: none">
+				<div>전화번호</div>
+				<div>
+					<input type="text" name="memMobile"
+						placeholder="${myInfo.memMobile}">
+				</div>
+				<div>
+					<label id="mobileErrorMsg" style="color: red"></label>
+				</div>
+				<div>
+					<input type="submit" value="전화번호 변경">
+				</div>
+			</form>
+		</div>
 	</div>
 
 
