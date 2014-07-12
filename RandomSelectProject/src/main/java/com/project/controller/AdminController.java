@@ -140,62 +140,15 @@ public class AdminController {
 
 	// 식당 관리 페이지
 	@RequestMapping(value = "/restntManantProc.do")
-	String restntManantProc(Model model, Integer caseCode, SettingDTO settingDto) {
-		if (caseCode == null) {
-			caseCode = 0;
-		}
-		System.out.println(caseCode);
-		switch (caseCode) {
-		case 0:
-			adress1 = settingService.getAdress1();
-			List<SettingDTO> restntCates = settingService.getExcMenu();
-			model.addAttribute("adress1", adress1);
-			model.addAttribute("restntCates", restntCates);
-			break;
-
-		case 1:
-			adress1 = settingService.getAdress1();
-			adress2 = settingService.getAdress2(settingDto);
-
-			model.addAttribute("adress1", adress1);
-			model.addAttribute("adress2", adress2);
-			model.addAttribute("code", settingDto);
-			break;
-
-		case 2:
-			adress1 = settingService.getAdress1();
-			adress2 = settingService.getAdress2(settingDto);
-			adress3 = settingService.getAdress3(settingDto);
-			model.addAttribute("adress1", adress1);
-			model.addAttribute("adress2", adress2);
-			model.addAttribute("adress3", adress3);
-			model.addAttribute("code", settingDto);
-			break;
-
-		case 3:
-
-			adress1 = settingService.getAdress1();
-			adress2 = settingService.getAdress2(settingDto);
-			adress3 = settingService.getAdress3(settingDto);
-			System.out.println("////////세팅 디티오//////////");
-			System.out.println(settingDto);
-
-			restnts = restntService.getRestntListByAddr(settingDto);
-			System.out.println("/////////쿼리 결과 테스트//////////");
-			for (RestntDTO restnt : restnts) {
-				System.out.println(restnt);
-			}
-
-			model.addAttribute("adress1", adress1);
-			model.addAttribute("adress2", adress2);
-			model.addAttribute("adress3", adress3);
-			model.addAttribute("restnts", restnts);
-			model.addAttribute("code", settingDto);
-			break;
-		default:
-			model.addAttribute("errorMessage", "검색 오류 발생");
-			return "setting/error";
-		}
+	String restntManantProc(Model model,SettingDTO settingDto) {
+		
+		
+		adress1 = settingService.getAdress1();
+		List<SettingDTO> restntCates = settingService.getExcMenu();
+		model.addAttribute("adress1", adress1);
+		model.addAttribute("restntCates", restntCates);
+		
+		
 
 		model.addAttribute("choice", settingDto);
 		return "restntManant";
@@ -221,7 +174,7 @@ public class AdminController {
 	 */
 
 	// 식당 리스트에서 식당 이름 선택 -> 식당 상세 정보 표시
-	@RequestMapping(value = "/restntInfoForm.do", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/restntInfoForm.do", method = RequestMethod.POST)
 	String restntInfoForm(Model model, String restntId, Integer caseCode,
 			SettingDTO settingDto) {
 		System.out.println("/restntInfoForm.do");
@@ -231,8 +184,8 @@ public class AdminController {
 		adress2 = settingService.getAdress2(settingDto);
 		adress3 = settingService.getAdress3(settingDto);
 
-		/* restnts = restntService.getRestntListByAddr(settingDto); */
-		/* System.out.println("/////////쿼리 결과 테스트//////////"); */
+		 restnts = restntService.getRestntListByAddr(settingDto); 
+		 System.out.println("/////////쿼리 결과 테스트//////////"); 
 
 		menus = menuService.getMenuListByRestntId(restntId);
 		model.addAttribute("menus", menus);
@@ -240,19 +193,19 @@ public class AdminController {
 		model.addAttribute("adress1", adress1);
 		model.addAttribute("adress2", adress2);
 		model.addAttribute("adress3", adress3);
-		/* model.addAttribute("restnts", restnts); */
-		/* model.addAttribute("code", settingDto); */
+		 model.addAttribute("restnts", restnts); 
+		 model.addAttribute("code", settingDto); 
 
-		/* model.addAttribute("choice", settingDto); */
+		 model.addAttribute("choice", settingDto); 
 		restnt = restntService.getRestntInfoById(restntId);
 		List<SettingDTO> excMenus = settingService.getExcMenu();
 
 		model.addAttribute("restnt", restnt);
 		model.addAttribute("excMenus", excMenus);
 		return "admin/restntInfo";
-	}
+	}*/
 
-	// 식당 정보 추가 작성 폼
+	/*// 식당 정보 추가 작성 폼
 	@RequestMapping(value = "/restntInfoInsertForm.do", method = RequestMethod.POST)
 	String restntInfoInsertForm(Model model, RestntDTO restntDto,
 			Integer caseCode, SettingDTO settingDto) {
@@ -279,10 +232,10 @@ public class AdminController {
 
 		model.addAttribute("excMenus", excMenus);
 		return "admin/restntInfo";
-	}
+	}*/
 
 	// 식당 정보 추가
-	@RequestMapping(value = "/restntInfoInsert.do", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/restntInfoInsert.do", method = RequestMethod.POST)
 	String restntInfoInsert(Model model, RestntDTO restntDto,
 			SettingDTO settingDto) {
 		System.out.println(restntDto);
@@ -310,9 +263,9 @@ public class AdminController {
 		model.addAttribute("excMenus", excMenus);
 		return "admin/restntInfo";
 
-	}
+	}*/
 
-	// 식당 정보 수정
+	/*// 식당 정보 수정
 	@RequestMapping(value = "/restntInfoUpdate.do", method = RequestMethod.POST)
 	String restntInfoUpdate(Model model, RestntDTO restntDto,
 			SettingDTO settingDto) {
@@ -338,33 +291,33 @@ public class AdminController {
 		model.addAttribute("code", settingDto);
 		model.addAttribute("excMenus", excMenus);
 		return "admin/restntInfo";
-	}
+	}*/
 
 	// 식당 정보 삭제
-	@RequestMapping(value = "/restntInfoDelete.do", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/restntInfoDelete.do", method = RequestMethod.POST)
 	String restntInfoDelete(Model model, String restntId) {
 		restntService.dropRestntById(restntId);
 		model.addAttribute("test", "삭제");
 		Integer caseCode = null;
 
 		return restntManantProc(model, caseCode, settingDto);
-	}
+	}*/
 
 	// 메뉴 리스트
-	@RequestMapping(value = "/menuListProc.do", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/menuListProc.do", method = RequestMethod.POST)
 	String menuListProc(Model model, String restntId) {
 		menus = menuService.getMenuListByRestntId(restntId);
 		model.addAttribute("menus", menus);
 		return "admin/menuList";
-	}
+	}*/
 
 	// 메뉴 상세 정보표시
-	@RequestMapping(value = "/menuManantProc.do", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/menuManantProc.do", method = RequestMethod.POST)
 	String menuManantProc(Model model, String menuId) {
 		menu = menuService.getMenuInfoByMenuId(menuId);
 		model.addAttribute("menu", menu);
 		return "admin/menuManant";
-	}
+	}*/
 
 	// 메뉴 추가
 	@RequestMapping(value = "/menuInfoInsert.do", method = RequestMethod.POST)
@@ -465,27 +418,16 @@ public class AdminController {
 
 	@RequestMapping(value = "/ajaxRestntList.do")
 	public void ajaxRestntList(HttpServletRequest request,
-			HttpServletResponse response, SettingDTO settingDto)
+			HttpServletResponse response, RestntDTO restntDto )
 			throws IOException {
 		System.out.println("/ajaxRestntList.do");
 
-		// 패러미터 설정
-		String adress1 = request.getParameter("adress1");
-		String adress2 = request.getParameter("adress2");
-		String adress3 = request.getParameter("adress3");
-
+		System.out.println(restntDto);
 		// 확인
-		System.out.println(adress1);
-		System.out.println(adress2);
-		System.out.println(adress3);
-
-		settingDto.setAdress1(adress1);
-		settingDto.setAdress2(adress2);
-		settingDto.setAdress3(adress3);
-		System.out.println(settingDto);
-
+		
+		
 		// 쿼리 실행
-		restnts = restntService.getRestntListByAddr(settingDto);
+		restnts = restntService.restntListPaging(restntDto);
 		System.out.println(restnts);
 
 		// 제이슨으로 변환
@@ -670,5 +612,174 @@ public class AdminController {
 		out.print(jsonObject.toString());
 
 	}
+	
+	@RequestMapping(value = "/ajaxAddMenuForm.do")
+	public void ajaxAddMenuForm(HttpServletRequest request,
+			HttpServletResponse response,String restntId ,MenuDTO menuDto)
+			throws IOException {
+		System.out.println("/ajaxAddMenuForm.do");
+		
+		System.out.println(restntId);
+		
+		
+		String lastMenuId = menuService.getLastMenuId(restntId);
+		String newMenuId = menuIdGen(lastMenuId, restntId);
+		
+		menuDto.setMenuId(newMenuId);
+		menuDto.setRestntId(restntId);
+		menuService.addMenuForm(menuDto);
+		
+		// 제이슨으로 변환
 
+		JSONObject jsonObject = JSONObject.fromObject(menuDto);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/ajaxAddMenuCancel.do")
+	public void ajaxAddMenuCancel(HttpServletRequest request,
+			HttpServletResponse response, MenuDTO menuDto)
+			throws IOException {
+		System.out.println("/ajaxAddMenuCancel.do");
+		System.out.println("menuDto::" + menuDto);
+		String restntId = menuDto.getRestntId();
+		String menuId = menuDto.getMenuId();
+		System.out.println("run Cancel Query");
+		menuService.addMenuCancel(menuId);
+		System.out.println(restntId);
+		System.out.println("run menuList Query");
+		menus = menuService.getMenuListByRestntId(restntId);
+		System.out.println(menus);
+
+		// 제이슨으로 변환
+
+		JSONArray jsonArray = JSONArray.fromObject(menus);
+
+		System.out.println("menus - " + jsonArray);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("menus", jsonArray);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+	}
+	@RequestMapping(value = "/ajaxAddMenuConfirm.do")
+	public void ajaxAddMenuConfirm(HttpServletRequest request,
+			HttpServletResponse response, SettingDTO settingDto, MenuDTO menuDto)
+			throws IOException {
+		System.out.println("/ajaxAddMenuConfirm.do");
+		System.out.println("menuDto::"+ menuDto);
+		
+		String restntId = menuDto.getRestntId();
+		System.out.println("소속 식당 아이디::" + restntId);
+		
+		System.out.println("입력 정보 반영 쿼리 실행");
+		menuService.setMenuByMenuId(menuDto);
+		
+		System.out.println("메뉴 리스트 가져오는 쿼리 실행");
+		menus = menuService.getMenuListByRestntId(restntId);
+		System.out.println(menus);
+
+		// 제이슨으로 변환
+
+		JSONArray jsonArray = JSONArray.fromObject(menus);
+
+		System.out.println("menus - " + jsonArray);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("menus", jsonArray);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+	}
+	@RequestMapping(value = "/ajaxDelMenu.do")
+	public void delMenu(HttpServletRequest request,
+			HttpServletResponse response, SettingDTO settingDto, MenuDTO menuDto)
+			throws IOException {
+		System.out.println("/ajaxDelMenu.do");
+		System.out.println("menuDto::"+ menuDto);
+		
+		String restntId = menuDto.getRestntId();
+		String menuId = menuDto.getMenuId();
+		System.out.println("소속 식당 아이디::" + restntId);
+		
+		System.out.println("입력 정보 반영 쿼리 실행");
+		menuService.dropMenuByMenuId(menuId);
+		
+		System.out.println("메뉴 리스트 가져오는 쿼리 실행");
+		menus = menuService.getMenuListByRestntId(restntId);
+		System.out.println(menus);
+
+		// 제이슨으로 변환
+
+		JSONArray jsonArray = JSONArray.fromObject(menus);
+
+		System.out.println("menus - " + jsonArray);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("menus", jsonArray);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+	}
+	// 새 식당 등록시 아이디 생성 메소드
+		String menuIdGen(String lastMenuId, String restntId) {
+			if (lastMenuId != null) {
+
+				stringBuffer = new StringBuffer(lastMenuId);
+				String sequenceStr = stringBuffer.substring(23, 27);
+				System.out.println(sequenceStr);
+				Integer sequenceNum = Integer.parseInt(sequenceStr) + 1;
+				System.out.println(sequenceNum);
+				String sequenceFormat = String.format("%04d", sequenceNum);
+				System.out.println(sequenceFormat);
+
+				return stringBuffer.replace(23, 27, sequenceFormat).toString();
+			} else {
+				return restntId + "M0001";
+			}
+
+		}	
+		@RequestMapping(value = "/ajaxRestntListPaging.do")
+		public void ajaxRestntListPaging(HttpServletRequest request,
+				HttpServletResponse response, RestntDTO restntDto)
+				throws IOException {
+			System.out.println("/ajaxRestntListPaging.do");
+			System.out.println(restntDto);
+			Integer totalCount = restntService.restntListTotalCount(restntDto);
+			System.out.println(totalCount);
+			
+
+			// 제이슨으로 변환
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("totalCount", totalCount);
+			
+			
+			JSONObject jsonObject = JSONObject.fromObject(map);
+			System.out.println("json - " + jsonObject);
+
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(jsonObject.toString());
+		}	
+		
 }

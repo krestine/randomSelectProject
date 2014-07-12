@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -7,18 +7,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap.min.css" />
-<script type="text/javascript" src="/myapp/resources/js/bootstrap.min.js"></script>
-<script src="/myapp/resources/js/respond.js"></script>
+
 
 <script>
 $(document).ready(function() {
-	$('mateListBtn').click(function() {
-		$('#community').attr("action", "mateListProc.do").submit();
+	$('#restntListBtn').click(function() {
+		$('#community').attr("action", "restntListProc.do").submit();
 	});
-	$('mateDetailBtn').click(function(){
-		$('#community').attr("action","mateDetailProc.do").submit();
+	$('#mateListBtn').click(function(){
+		$('#community').attr("action","mateListProc.do").submit();
 	});
 
 });
@@ -29,14 +26,12 @@ $(document).ready(function() {
 </head>
 <body>
 
-<h1>${restnt.restntName}의 상세정보</h1>
-					
-				
-					<br>
+<h4>${restnt.restntName}<small>의 상세정보</small></h4>
+<div>					
 					<form id="community" method="post">
-						<input type="button" class="btn btn-success" value="식당 리스트" id="restntListBtn"/>
-						<input type="button" class="btn btn-success" value="친구 리스트" id="mateListBtn"/>
-						<input type="button" class="btn btn-success" value="메인" id="mainBtn"/>
+						<input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
+						<input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn"/>
+						
 					</form>
 					<br>
      				<form action="restntDetailProc.do" method="post">
@@ -52,7 +47,7 @@ $(document).ready(function() {
 						<input value="${restnt.restntTel}" name="restntTel"><br>
 						<br>
 						
-						${restnt.restntName }의 메뉴정보
+					<h4>	${restnt.restntName }<small>의 메뉴정보</small></h4>
 						<br>
 						
 						<input value="메뉴이름">
@@ -66,8 +61,7 @@ $(document).ready(function() {
 						<input value="${menuInfo.menuCalorie}" name="menuCalorie"><br>
 						</c:forEach>
 					</form>
-					<br>
-
+</div>
 </body>
 
 </html>

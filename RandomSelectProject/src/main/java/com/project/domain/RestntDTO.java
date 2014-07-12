@@ -4,7 +4,10 @@ public class RestntDTO {
 	// memberField
 	private String restntId;
 	private String restntName;
-
+	private String longitude;
+	private Integer rowNum1;
+	private Integer rowNum2;
+	
 	private String adress1;
 	private String adress2;
 	private String adress3;
@@ -20,115 +23,167 @@ public class RestntDTO {
 	private String memId;
 	private String mateId;
 	private String latitude;
-	private String longitude;
+
+	public Integer getRowNum1() {
+		return rowNum1;
+	}
+
+	public void setRowNum1(Integer rowNum1) {
+		this.rowNum1 = rowNum1;
+	}
+
+	public Integer getRowNum2() {
+		return rowNum2;
+	}
+
+	public void setRowNum2(Integer rowNum2) {
+		this.rowNum2 = rowNum2;
+	}
+
 	public String getRestntId() {
 		return restntId;
 	}
+
 	public void setRestntId(String restntId) {
 		this.restntId = restntId;
 	}
+
 	public String getRestntName() {
 		return restntName;
 	}
+
 	public void setRestntName(String restntName) {
 		this.restntName = restntName;
 	}
+
 	public String getAdress1() {
 		return adress1;
 	}
+
 	public void setAdress1(String adress1) {
 		this.adress1 = adress1;
 	}
+
 	public String getAdress2() {
 		return adress2;
 	}
+
 	public void setAdress2(String adress2) {
 		this.adress2 = adress2;
 	}
+
 	public String getAdress3() {
 		return adress3;
 	}
+
 	public void setAdress3(String adress3) {
 		this.adress3 = adress3;
 	}
+
 	public String getAdress4() {
 		return adress4;
 	}
+
 	public void setAdress4(String adress4) {
 		this.adress4 = adress4;
 	}
+
 	public String getRestntTel() {
 		return restntTel;
 	}
+
 	public void setRestntTel(String restntTel) {
 		this.restntTel = restntTel;
 	}
+
 	public String getRestntCate() {
 		return restntCate;
 	}
+
 	public void setRestntCate(String restntCate) {
 		this.restntCate = restntCate;
 	}
+
 	public String getRestntEval() {
 		return restntEval;
 	}
+
 	public void setRestntEval(String restntEval) {
 		this.restntEval = restntEval;
 	}
+
 	public String getMenuName() {
 		return menuName;
 	}
+
 	public void setMenuName(String menuName) {
 		this.menuName = menuName;
 	}
+
 	public String getMenuPrice() {
 		return menuPrice;
 	}
+
 	public void setMenuPrice(String menuPrice) {
 		this.menuPrice = menuPrice;
 	}
+
 	public String getMenuCalorie() {
 		return menuCalorie;
 	}
+
 	public void setMenuCalorie(String menuCalorie) {
 		this.menuCalorie = menuCalorie;
 	}
+
 	public String getEvalId() {
 		return evalId;
 	}
+
 	public void setEvalId(String evalId) {
 		this.evalId = evalId;
 	}
+
 	public String getScore() {
 		return score;
 	}
+
 	public void setScore(String score) {
 		this.score = score;
 	}
+
 	public String getMemId() {
 		return memId;
 	}
+
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
+
 	public String getMateId() {
 		return mateId;
 	}
+
 	public void setMateId(String mateId) {
 		this.mateId = mateId;
 	}
+
 	public String getLatitude() {
 		return latitude;
 	}
+
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
+
 	public String getLongitude() {
 		return longitude;
 	}
+
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
+
 	@Override
 	public String toString() {
 		return "RestntDTO [restntId=" + restntId + ", restntName=" + restntName
@@ -139,8 +194,10 @@ public class RestntDTO {
 				+ ", menuPrice=" + menuPrice + ", menuCalorie=" + menuCalorie
 				+ ", evalId=" + evalId + ", score=" + score + ", memId="
 				+ memId + ", mateId=" + mateId + ", latitude=" + latitude
-				+ ", longitude=" + longitude + "]";
+				+ ", longitude=" + longitude + ", rowNum1=" + rowNum1
+				+ ", rowNum2=" + rowNum2 + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -172,9 +229,12 @@ public class RestntDTO {
 				+ ((restntName == null) ? 0 : restntName.hashCode());
 		result = prime * result
 				+ ((restntTel == null) ? 0 : restntTel.hashCode());
+		result = prime * result + ((rowNum1 == null) ? 0 : rowNum1.hashCode());
+		result = prime * result + ((rowNum2 == null) ? 0 : rowNum2.hashCode());
 		result = prime * result + ((score == null) ? 0 : score.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -269,6 +329,16 @@ public class RestntDTO {
 				return false;
 		} else if (!restntTel.equals(other.restntTel))
 			return false;
+		if (rowNum1 == null) {
+			if (other.rowNum1 != null)
+				return false;
+		} else if (!rowNum1.equals(other.rowNum1))
+			return false;
+		if (rowNum2 == null) {
+			if (other.rowNum2 != null)
+				return false;
+		} else if (!rowNum2.equals(other.rowNum2))
+			return false;
 		if (score == null) {
 			if (other.score != null)
 				return false;
@@ -276,6 +346,7 @@ public class RestntDTO {
 			return false;
 		return true;
 	}
+
 	public RestntDTO(String restntId, String restntName, String adress1,
 			String adress2, String adress3, String adress4, String restntTel,
 			String restntCate, String restntEval, String menuName,
@@ -301,8 +372,9 @@ public class RestntDTO {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
-	public RestntDTO(){
-		
+
+	public RestntDTO() {
+
 	}
-	
+
 }
