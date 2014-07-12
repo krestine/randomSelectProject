@@ -427,6 +427,8 @@ public class AdminController {
 		
 		
 		// 쿼리 실행
+		
+		
 		restnts = restntService.restntListPaging(restntDto);
 		System.out.println(restnts);
 
@@ -524,11 +526,9 @@ public class AdminController {
 		
 		System.out.println(restntDto);
 		
-		settingDto.setAdress1(restntDto.getAdress1());
-		settingDto.setAdress2(restntDto.getAdress2());
-		settingDto.setAdress3(restntDto.getAdress3());
 		
-		System.out.println(settingDto);
+		
+		
 		
 		System.out.println("쿼리 실행");
 		restntService.dropRestntById(restntDto.getRestntId());
@@ -537,7 +537,7 @@ public class AdminController {
 		
 		
 		System.out.println("쿼리 실행 후 식당 리스트 쿼리");
-		restnts = restntService.getRestntListByAddr(settingDto);
+		restnts = restntService.getRestntListByAddr(restntDto);
 		System.out.println(restnts);
 
 		// 제이슨으로 변환
@@ -563,11 +563,9 @@ public class AdminController {
 		
 		System.out.println(restntDto);
 		
-		settingDto.setAdress1(restntDto.getAdress1());
-		settingDto.setAdress2(restntDto.getAdress2());
-		settingDto.setAdress3(restntDto.getAdress3());
 		
-		System.out.println(settingDto);
+		
+		
 	
 		
 		
@@ -593,7 +591,7 @@ public class AdminController {
 		
 		
 		System.out.println("추가 쿼리 실행 후 식당 리스트 쿼리");
-		restnts = restntService.getRestntListByAddr(settingDto);
+		restnts = restntService.getRestntListByAddr(restntDto);
 		System.out.println(restnts);
 
 		// 제이슨으로 변환

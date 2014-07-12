@@ -28,7 +28,7 @@ public interface RestntService {
 	List<RestntDTO> getRestntListByAddressCode(String addressCode);
 
 	// 관리자: 식당관리 - 주소필터 적용 - 식당 리스트
-	List<RestntDTO> getRestntListByAddr(SettingDTO settingDto);
+	List<RestntDTO> getRestntListByAddr(RestntDTO restntDto);
 
 	// 회원 : 식당 상세정보
 	RestntDTO getRestntInfoByRestntId(String restntId);

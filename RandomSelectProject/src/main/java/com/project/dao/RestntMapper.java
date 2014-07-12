@@ -43,7 +43,7 @@ public interface RestntMapper {
 	List<SettingDTO> getAdress3();
 	
 	//관리자: 식당관리 - 주소필터 적용 - 식당 리스트 표시
-	List<RestntDTO> getRestntListByAddr(SettingDTO settingDto);
+	List<RestntDTO> getRestntListByAddr(RestntDTO restntDto);
 	
 	// 회원 : 식당 상세정보
 	RestntDTO getRestntInfoByRestntId(String restntId);

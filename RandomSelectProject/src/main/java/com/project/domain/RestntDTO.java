@@ -7,7 +7,9 @@ public class RestntDTO {
 	private String longitude;
 	private Integer rowNum1;
 	private Integer rowNum2;
-	
+	private Integer totalCount;
+	private Integer viewCount;
+	private Integer pageNum;
 	private String adress1;
 	private String adress2;
 	private String adress3;
@@ -24,6 +26,31 @@ public class RestntDTO {
 	private String mateId;
 	private String latitude;
 
+	public Integer getViewCount() {
+		return viewCount;
+	}
+
+	public void setViewCount(Integer viewCount) {
+		this.viewCount = viewCount;
+	}
+
+	public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public Integer getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	
 	public Integer getRowNum1() {
 		return rowNum1;
 	}
@@ -187,15 +214,16 @@ public class RestntDTO {
 	@Override
 	public String toString() {
 		return "RestntDTO [restntId=" + restntId + ", restntName=" + restntName
+				+ ", longitude=" + longitude + ", rowNum1=" + rowNum1
+				+ ", rowNum2=" + rowNum2 + ", totalCount=" + totalCount
+				+ ", viewCount=" + viewCount + ", pageNum=" + pageNum
 				+ ", adress1=" + adress1 + ", adress2=" + adress2
 				+ ", adress3=" + adress3 + ", adress4=" + adress4
 				+ ", restntTel=" + restntTel + ", restntCate=" + restntCate
 				+ ", restntEval=" + restntEval + ", menuName=" + menuName
 				+ ", menuPrice=" + menuPrice + ", menuCalorie=" + menuCalorie
 				+ ", evalId=" + evalId + ", score=" + score + ", memId="
-				+ memId + ", mateId=" + mateId + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", rowNum1=" + rowNum1
-				+ ", rowNum2=" + rowNum2 + "]";
+				+ memId + ", mateId=" + mateId + ", latitude=" + latitude + "]";
 	}
 
 	@Override
@@ -219,6 +247,7 @@ public class RestntDTO {
 				+ ((menuName == null) ? 0 : menuName.hashCode());
 		result = prime * result
 				+ ((menuPrice == null) ? 0 : menuPrice.hashCode());
+		result = prime * result + ((pageNum == null) ? 0 : pageNum.hashCode());
 		result = prime * result
 				+ ((restntCate == null) ? 0 : restntCate.hashCode());
 		result = prime * result
@@ -232,6 +261,10 @@ public class RestntDTO {
 		result = prime * result + ((rowNum1 == null) ? 0 : rowNum1.hashCode());
 		result = prime * result + ((rowNum2 == null) ? 0 : rowNum2.hashCode());
 		result = prime * result + ((score == null) ? 0 : score.hashCode());
+		result = prime * result
+				+ ((totalCount == null) ? 0 : totalCount.hashCode());
+		result = prime * result
+				+ ((viewCount == null) ? 0 : viewCount.hashCode());
 		return result;
 	}
 
@@ -304,6 +337,11 @@ public class RestntDTO {
 				return false;
 		} else if (!menuPrice.equals(other.menuPrice))
 			return false;
+		if (pageNum == null) {
+			if (other.pageNum != null)
+				return false;
+		} else if (!pageNum.equals(other.pageNum))
+			return false;
 		if (restntCate == null) {
 			if (other.restntCate != null)
 				return false;
@@ -344,37 +382,21 @@ public class RestntDTO {
 				return false;
 		} else if (!score.equals(other.score))
 			return false;
+		if (totalCount == null) {
+			if (other.totalCount != null)
+				return false;
+		} else if (!totalCount.equals(other.totalCount))
+			return false;
+		if (viewCount == null) {
+			if (other.viewCount != null)
+				return false;
+		} else if (!viewCount.equals(other.viewCount))
+			return false;
 		return true;
 	}
 
-	public RestntDTO(String restntId, String restntName, String adress1,
-			String adress2, String adress3, String adress4, String restntTel,
-			String restntCate, String restntEval, String menuName,
-			String menuPrice, String menuCalorie, String evalId, String score,
-			String memId, String mateId, String latitude, String longitude) {
-		super();
-		this.restntId = restntId;
-		this.restntName = restntName;
-		this.adress1 = adress1;
-		this.adress2 = adress2;
-		this.adress3 = adress3;
-		this.adress4 = adress4;
-		this.restntTel = restntTel;
-		this.restntCate = restntCate;
-		this.restntEval = restntEval;
-		this.menuName = menuName;
-		this.menuPrice = menuPrice;
-		this.menuCalorie = menuCalorie;
-		this.evalId = evalId;
-		this.score = score;
-		this.memId = memId;
-		this.mateId = mateId;
-		this.latitude = latitude;
-		this.longitude = longitude;
-	}
 
-	public RestntDTO() {
 
-	}
+	
 
 }
