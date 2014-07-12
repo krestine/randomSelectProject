@@ -6,11 +6,61 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
 <title>Insert title here</title>
+
+<script type="text/javascript" src="edit.js">
+
+var lnbElement;
+var contentElement;
+
+window.addEventListener("load", function () {
+	lnbElement = document.getElementById("lnb");
+	contentElement = document.getElementById("content");
+});
+
+function toggleLNB(target) {
+	if (lnbElement.style.display == "block") {
+		lnbElement.style.display = "none";
+		contentElement.style.paddingLeft = "20px";
+		target.innerHTML = "메뉴열기";
+	}else {
+		lnbElement.style.display = "block";
+		contentElement.style.paddingLeft = "216px";
+		target.innerHTML = "메뉴닫기";
+	}
+}
+</script>
+////
+<script type="text/javascript">
+function hideshow(which){
+if (!document.getElementById)
+return
+if (which.style.display=="block")
+which.style.display="none"
+else
+which.style.display="block"
+}
+</script>
+<a href="javascript:hideshow(document.getElementById('adiv'))">수정</a>
+
+<div id="adiv" style="font:15px bold; display: none">
+
+<select name="score" id="score">
+					<option value="5">★★★★★</option>
+					<option value="4">★★★★☆</option>
+					<option value="3">★★★☆☆</option>
+					<option value="2">★★☆☆☆</option>
+					<option value="1">★☆☆☆☆</option>
+			</select>
+			
+			</div>
 </head>
 <body>
-<form name=writeform method=POST action="editOk.do">
+
+<!--게시판 소스만 복사한 것  -->
+<%-- <form name=writeform method=POST action="editOk.do">
 		<table>
 
 			<tr>
@@ -55,32 +105,10 @@
 							<td><input type="text" name="box" value="box1111" size="50" maxlength="50" ></td>
 							<td>&nbsp;</td>
 						</tr>
-					<%-- 	<form:select path="code" name="code" items="${code}" itemValue="code" 						
+						<form:select path="code" name="code" items="${code}" itemValue="code" 						
 						itemLabel="codenm" />
 						 --%>
-					
-					
-		
-		
-		
-		
-						<%-- <tr>
-					<td width="96">공지사항코드</td>
-					<td width="172">
-					
-					<form:select path="code">
-							<c:forEach var="codenm" items="${code}">
-								<option value="${codenm.NO}">공지사항</option>
-								<option value="${codenm.SM}">시스템점검</option>
-								<option value="${codenm.EV}">이벤트</option>
-					</c:forEach>
-						</form:select></td>
-				<tr height="20">
-					<td width="96"></td>
-					<td width="172"></td>
-				</tr> --%>
-				
-						<tr height="1" bgcolor="#dddddd">
+		<%-- <tr height="1" bgcolor="#dddddd">
 							<td colspan="4"></td>
 						</tr>
 						<tr>
@@ -112,6 +140,7 @@
 			</tr>
 
 		</table>
-	</form>
+	</form> --%>
+	
 </body>
 </html>
