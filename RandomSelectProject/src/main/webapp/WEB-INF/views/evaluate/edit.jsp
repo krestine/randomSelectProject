@@ -59,6 +59,11 @@ which.style.display="block"
 </head>
 <body>
 
+
+
+
+
+
 <!--게시판 소스만 복사한 것  -->
 <%-- <form name=writeform method=POST action="editOk.do">
 		<table>

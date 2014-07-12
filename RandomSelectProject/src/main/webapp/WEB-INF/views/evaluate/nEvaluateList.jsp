@@ -93,9 +93,9 @@ which.style.display="none"
 else
 which.style.display="block"
 }
-</script> <a href="javascript:hideshow(document.getElementById('adiv'))">수정</a>
+</script> <a href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">수정</a>
 
-						<div id="adiv" style="display: none">
+						<div id="${evaluate.evalId}" style="display: none">
 
 							<select name="score" id="score">
 								<option value="5">★★★★★</option>
@@ -103,8 +103,8 @@ which.style.display="block"
 								<option value="3">★★★☆☆</option>
 								<option value="2">★★☆☆☆</option>
 								<option value="1">★☆☆☆☆</option>
-							</select> <a href="javascript:hideshow(document.getElementById('adiv'))">확인</a>
-						</div> <a href="javascript:hideshow(document.getElementById('adiv'))">삭제</a>
+							</select> <a href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">확인</a>
+						</div> <a href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">삭제</a>
 					</td>
 					<td>${evaluate.restntName}</td>
 					<td>${evaluate.evalDate}</td>

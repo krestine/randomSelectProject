@@ -31,11 +31,7 @@
 </head>
 
 <body>
-	포 이치 테스트
-	<c:forEach items="${evaluates}" var="evaluate">
-	${evaluate.memId}<br> ${evaluate.score}<br> 
-	${evaluate.restntName}<br>
-	</c:forEach>
+
 
 
 	<h3>평가한 식당 리스트</h3>
@@ -47,7 +43,6 @@
 		<input type="button" onclick="evaluateMainGo()" value="평가메인으로">
 	</form>
 
-	<!-- <input type="button" onclick="javascript:history.back(-1)" value="뒤로" /> -->
 
 
 	<table width="600" border="1" bordercolor="#00A5FF">
@@ -68,8 +63,7 @@
 			<c:forEach var="evaluate" items="${boardList}" varStatus="status">
 				<tr height="35px">
 					<td align="center">${evaluate.memId}</td>
-					<td align="center">
-					<c:choose>
+					<td align="center"><c:choose>
 							<c:when test="${evaluate.score ==5}">
 						★★★★★
 			</c:when>
@@ -85,9 +79,7 @@
 							<c:when test="${evaluate.score ==1}">
 						★☆☆☆☆
 			</c:when>
-						</c:choose> 
-						
-		<script type="text/javascript">
+						</c:choose> <script type="text/javascript">
 function hideshow(which){
 if (!document.getElementById)
 return
@@ -96,26 +88,24 @@ which.style.display="none"
 else
 which.style.display="block"
 }
-</script>
+</script> <a
+						href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">수정</a>
 
-<a href="javascript:hideshow(document.getElementById('adiv'))">수정</a>
 
-		
-<div id="adiv" style=" display: none">
+						<div id="${evaluate.evalId}" style="display: none">
 
-<select name="score" id="score">
+							<select name="score" id="score">
 								<option value="5">★★★★★</option>
 								<option value="4">★★★★☆</option>
 								<option value="3">★★★☆☆</option>
 								<option value="2">★★☆☆☆</option>
 								<option value="1">★☆☆☆☆</option>
-							</select>
-	<a href="javascript:hideshow(document.getElementById('adiv'))">확인</a>
-						</div> 
-	
-<a href="javascript:hideshow(document.getElementById('adiv'))">삭제</a>					
-						
-				</td>
+							</select> <a
+								href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">확인</a>
+						</div> <a
+						href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">삭제</a>
+
+					</td>
 					<td>${evaluate.restntName}</td>
 					<td>${evaluate.evalDate}</td>
 					<td>
