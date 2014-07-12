@@ -113,6 +113,9 @@
 			$("#restntTable > tbody").html("");
 			
 			var paramData = {
+				rowNum1 : 1,
+				rowNum2 : 10,
+					
 				adress1 : $('#adress1').val(),
 				adress2 : $('#adress2').val(),
 				adress3 : $('#adress3').val()
@@ -136,8 +139,9 @@
 		
 							if (restnts != null) {
 								$('#restntList').show();
-								var html = '<tbody id="restntListResult"><tr>';
-								$.each(restnts,function(key) {
+								 var html = '<tbody id="restntListResult"><tr>';
+								 
+								 $.each(restnts,function(key) {
 									var restntName = restnts[key].restntName;
 									var restntId = restnts[key].restntId;
 
@@ -149,15 +153,43 @@
 											+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr>';
 
 								});
-								html += '<tr><td><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr></tbody>';
+								 html += '<tr><td><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr></tbody>';
 								$('#restntTable').append(html);
 		
 							}
 		
 						}
 					});
-		
-				}	
+					 $.ajax({
+							cache : false,
+							async : false,
+							type : 'POST',
+							url : 'ajaxRestntListPaging.do',
+							data : paramData,
+							dataType : 'json',
+							error : function() {
+								alert("error : ajax 통신 실패.");
+							},
+							success : function(json){
+								$('#restntList').show();
+								$("#restntListPage").html("");
+								var totalCount = json.totalCount;
+								var viewCount = 10;
+								var pageCount = Math.ceil(totalCount / viewCount);
+								alert(pageCount);
+								var link = '';
+								
+								for(var idx = 1; idx <= pageCount; idx++){
+									link +=	'<a id="'+idx+'" onclick="restntListPage(this)" >['+idx+']</a>';
+								}
+								
+								
+								
+								$('#restntListPage').append(link);
+								
+							}
+					 });
+				 }	
 			}
 			
 		});
@@ -432,9 +464,12 @@
 				
 				
 				$('#restntList').show();
-				
+				$('#restntNameInput').val('');
+				$('#adress4Input').val('');
+				$('#restntTelInput').val('');
 				
 				var restnts = json.restnts;
+				
 				
 				if (restnts!= null) {
 					var html = '<tbody id="restntListResult"><tr>';
@@ -683,7 +718,68 @@
 			}
 		});
 	}
-</script>
+
+	function restntListPage(obj) {
+		
+		var viewCount = 10;
+		ParamRowNum1 = ((parseInt(obj.id)-1)*viewCount)+1;
+		ParamRowNum2 = (parseInt(obj.id)*viewCount);
+		ParamaAdress1 = $('#adress1').val();
+		ParamaAdress2 = $('#adress2').val();
+		ParamaAdress3 = $('#adress3').val();
+		var paramData = {
+				rowNum1 : ParamRowNum1,
+				rowNum2 : ParamRowNum2,
+				adress1 : ParamaAdress1,
+				adress2 : ParamaAdress2,
+				adress3 : ParamaAdress3
+		};
+		
+		
+		$.ajax({
+			cache : false,
+			async : false,
+			type : 'POST',
+			url : 'ajaxRestntList.do',
+			data : paramData,
+			dataType : 'json',
+			error : function() {
+				alert("error : ajax 통신 실패.");
+			},
+			success : function(json){
+				$("#restntTable > tbody").html("");
+				var restnts = json.restnts;
+
+				if (restnts != null) {
+					$('#restntList').show();
+					 var html = '<tbody id="restntListResult"><tr>';
+					 
+					 $.each(restnts,function(key) {
+						var restntName = restnts[key].restntName;
+						var restntId = restnts[key].restntId;
+
+						html += '<td>'
+								+ '<input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId">';
+						html += restntName
+								+ '<button id="restntInfo'
+								+ key
+								+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr>';
+
+					});
+					 html += '<tr><td><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr></tbody>';
+					$('#restntTable').append(html);
+
+				}
+
+			}
+		});
+	
+	}
+	
+	
+	
+	
+	</script>
 
 </head>
 <body>
@@ -712,7 +808,7 @@
 
 
 		</table>
-
+		<div id="restntListPage" align="center"></div>	
 	</div>
 
 	<div id="restntInfo" align="center">
@@ -824,7 +920,7 @@
 	</div>
 
 	
-
+	
 
 </body>
 </html>

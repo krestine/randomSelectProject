@@ -11,6 +11,7 @@
 		where
 		restntid=#{restntId}
 		and active = '1'
+		order by menuId
 	</select>
 
 
@@ -70,9 +71,9 @@
 	<select id="getLastMenuId" parameterType="String" resultType="String">
 		select max(menuid) from menu
 		where restntId=#{restntId}
-		
+
 	</select>
-	
+
 	<insert id="addMenuForm" parameterType="MenuDTO">
 		insert into menu
 		(menuId,
@@ -81,4 +82,10 @@
 		(#{menuId},#{restntId},'1')
 
 	</insert>
+
+	
+
+
+
+
 </mapper>

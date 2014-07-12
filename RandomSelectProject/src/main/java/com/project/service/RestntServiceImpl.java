@@ -92,6 +92,18 @@ public class RestntServiceImpl implements RestntService {
 		return restntMapper.getEvalRestntListByMateId(memId);
 	}
 	
+	@Override
+	public Integer restntListTotalCount(RestntDTO restntDto) {
+		// TODO Auto-generated method stub
+		return restntMapper.restntListTotalCount(restntDto);
+	}
+	
+	@Override
+	public List<RestntDTO> restntListPaging(RestntDTO restntDto) {
+		// TODO Auto-generated method stub
+		return restntMapper.restntListPaging(restntDto);
+	}
+	
 
 
 }

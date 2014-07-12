@@ -40,8 +40,9 @@
 		update restnt set
 		restntName = #{restntName},
 		restntTel=#{restntTel}
-		
-		where restntId = #{restntId} and
+
+		where restntId =
+		#{restntId} and
 		active = '1'
 
 	</update>
@@ -121,7 +122,8 @@
 	<select id="getRestntInfoByRestntId" parameterType="RestntDTO"
 		resultType="RestntDTO">
 		select restntname, restnteval, restntcate, restnttel
-		from restnt
+		from
+		restnt
 		where RESTNTID=#{RESTNTID}
 
 
@@ -131,14 +133,32 @@
 	<select id="getEvalRestntListByMateId" parameterType="RestntDTO"
 		resultType="RestntDTO">
 		select r.restntname, e.score, m.mateid, r.restntid
-		from restnt r, evaluate e, mate m, member mm
+		from
+		restnt r, evaluate e, mate m, member mm
 		where mm.memid=#{mm.memid}
-		and r.restntid=e.restntid
+		and
+		r.restntid=e.restntid
 		and e.memid= m.mateid
 		and mm.memid=m.memid
-		and score != -1
+		and
+		score != -1
 	</select>
 
+	<select id="restntListTotalCount" parameterType="RestntDTO"
+		resultType="java.lang.Integer">
+		SELECT COUNT(restntId) From
+		restnt WHERE
+		adress1=#{adress1}
+		and adress2 = #{adress2} and adress3 =#{adress3}
+		and active = '1'
+	</select>
 
+	<select id="restntListPaging" parameterType="RestntDTO" resultType="RestntDTO">
+		select * from (select rt.*, row_number() over(order by restntId asc) as num
+		from restnt rt)
+		where num between #{rowNum1} and #{rowNum2} and adress1=#{adress1} and adress2 = #{adress2} and
+		adress3 =#{adress3} and active = '1'
 
+	</select>
+    
 </mapper>
