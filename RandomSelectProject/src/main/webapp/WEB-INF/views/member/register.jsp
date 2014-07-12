@@ -74,20 +74,20 @@ label.error {
 										'idCheck',
 										function() {
 											//$('#idCheck')	.click(function() {
-
+											$('#check').html(
+													'<font color=blue></font>');
+											$('#check').hide();
+											var result = true;
 											var memId = $('#memId').val();
-											var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+											var reg_email = /^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i;
 											if (memId == "") {
-												$('#check')
-														.html(
-																'<font color=red>아이디를 입력해주세요.</font>');
-
-												$('#check').show();
+												alert("빈칸");
+												return result;
+											} else if (!(reg_email.test(memId))) {
+												alert("틀림");
+												$('#memId').val("");
 												$('#memId').focus();
-											} else if (!reg_email.test(memId)) {
-												$('#check')
-														.html(
-																'<font color=red>이메일 형식으로 입력해주세요.</font>');
+												return result;
 											} else {
 												$
 														.ajax({
@@ -105,24 +105,47 @@ label.error {
 																				'check')
 																		.text();
 																if (msg.trim() == 'true') {
-																	$('#check')
-																			.html(
-																					'<font color=blue>사용할 수 있는 아이디입니다.</font>');
-																	$('#check')
-																			.show();
-																	result = 'false';
+																	if ($(
+																			'#memId')
+																			.val() == '') {
+																		$(
+																				'#check')
+																				.hide();
+																	} else {
+
+																		$(
+																				'#check')
+																				.html(
+																						'<font color=blue>사용할 수 있는 아이디입니다.</font>');
+																		$(
+																				'#check')
+																				.show();
+																		result = 'false';
+																	}
 																} else {
-																	$('#check')
-																			.html(
-																					'<font color=red>사용할 수 없는 아이디입니다.</font>');
-																	$('#check')
-																			.show();
-																	$('#memId')
-																			.val(
-																					"");
-																	$('#memId')
-																			.focus();
-																	result = 'true';
+																	if ($(
+																			'#memId')
+																			.val() == '') {
+																		$(
+																				'#check')
+																				.hide();
+																	} else {
+																		$(
+																				'#check')
+																				.html(
+																						'<font color=red>사용할 수 없는 아이디입니다.</font>');
+																		$(
+																				'#check')
+																				.show();
+																		$(
+																				'#memId')
+																				.val(
+																						"");
+																		$(
+																				'#memId')
+																				.focus();
+																		result = 'true';
+																	}
 																}
 															},
 															error : function() {
@@ -137,8 +160,9 @@ label.error {
 						$("#register_form")
 								.validate(
 										{
-											onkeyup : false,
-											onfocusout : false,
+
+											//onkeyup : false,
+											//onfocusout : false,
 											//focusInvalid : false,
 											//focusCleanup:true,
 											//ignore : '#memId',
@@ -163,7 +187,8 @@ label.error {
 												},
 												memName : {
 													required : true,
-													minlength : 2
+													minlength : 2,
+													nameCheck : true
 												},
 												memPasswd : {
 													required : true,
@@ -174,17 +199,23 @@ label.error {
 													equalTo : "#memPasswd"
 												},
 												memBirth : "required",
-												mPhoneCode : {
+												// 												mPhoneCode : {
+												// 													required : true,
+												// 													number : true
+												// 												},
+												// 												mPhoneMid : {
+												// 													required : true,
+												// 													number : true
+												// 												},
+												// 												mPhoneEnd : {
+												// 													required : true,
+												// 													number : true
+												// 												}
+												// 												,
+												phoneGroup : {
 													required : true,
-													number : true
-												},
-												mPhoneMid : {
-													required : true,
-													number : true
-												},
-												mPhoneEnd : {
-													required : true,
-													number : true
+													number : true,
+													mobileCheck : true
 												}
 
 											},
@@ -204,11 +235,12 @@ label.error {
 												memId : {
 													required : "아이디를 입력해주세요",
 													email : "이메일 형식으로 써주세요.",
-												//remote : "사용할수 없는 이메일입니다."
+													idCheck : "이메일 형식으로 써주세요."
 												},
 												memName : {
 													required : "이름을 입력해주세요.",
-													minlength : "2자이상 입력해주세요."
+													minlength : "2자이상 입력해주세요.",
+													nameCheck : "한글로 써주세요."
 												},
 												memPasswd : {
 													required : "비밀번호를 입력해주세요.",
@@ -219,17 +251,22 @@ label.error {
 													equalTo : "비밀번호가 일치하지 않습니다."
 												},
 												memBirth : "생일을 입력해주세요.",
-												mPhoneCode : {
+												// 												mPhoneCode : {
+												// 													required : "전화번호를 입력해주세요.",
+												// 													number : "숫자를 입력해주세요."
+												// 												},
+												// 												mPhoneMid : {
+												// 													required : "전화번호를 입력해주세요.",
+												// 													number : "숫자를 입력해주세요."
+												// 												},
+												// 												mPhoneEnd : {
+												// 													required : "전화번호를 입력해주세요.",
+												// 													number : "숫자를 입력해주세요."
+												// 												},
+												phoneGroup : {
 													required : "전화번호를 입력해주세요.",
-													number : "숫자를 입력해주세요."
-												},
-												mPhoneMid : {
-													required : "전화번호를 입력해주세요.",
-													number : "숫자를 입력해주세요."
-												},
-												mPhoneEnd : {
-													required : "전화번호를 입력해주세요.",
-													number : "숫자를 입력해주세요."
+													number : "숫자를 입력해주세요.",
+													mobileCheck : ""
 												}
 											},
 											submitHandler : function(form) {
@@ -238,11 +275,36 @@ label.error {
 											success : function(xml) {
 											}
 										});
+						//이름 검사
+						jQuery.validator.addMethod('nameCheck',
+								function(value) {
+									var result = true;
+									var regex_name = /^[가-힣]+$/;
+									if (!(regex_name.test(value))) {
+										return false;
+									}
+									return result;
+								}, '');
+						//전화번호검사
+						jQuery.validator
+								.addMethod(
+										'mobileCheck',
+										function() {
+											var mobile = $('#mPhoneCode').val()
+													+ "-"
+													+ $('#mPhoneCode').val()
+													+ "-"
+													+ $('#mPhoneCode').val();
+											var regex_mobile = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+											if (!regex_mobile.test(mobile)) {
+												return false;
+											}
+										});
 					});
 </script>
 </head>
 <body>
-	${errmessage}
+
 
 
 	<form id="register_form" method="post" action="registerProc.do">
@@ -263,7 +325,8 @@ label.error {
 			비밀번호확인 <input type="password" name="memPasswdCheck" class="signup" />
 		</div>
 		<div>
-			생년월일 <input type="text" id="memBirth" name="memBirth" class="signup" />
+			생년월일 <input type="text" id="memBirth" name="memBirth" class="signup"
+				readonly="readonly" />
 		</div>
 		<div class="signup">
 			전화번호 <select id="mPhoneCode" name="mPhoneCode">
@@ -281,6 +344,9 @@ label.error {
 			<script type="text/javascript"
 				src="${captchajs}?theme=clean&key=${captchaPublicKey}"></script>
 		</div>
+
+		<div>${errmessage}</div>
+
 		<div>
 			<input type="submit" id="register" value="회원가입">
 		</div>
