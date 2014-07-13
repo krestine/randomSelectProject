@@ -43,17 +43,7 @@ public class EvaluateController {
 	private List<EvaluateDTO> memberEvaluates;
 	private Object evaluateList;
 
-	/*
-	 * @Autowired
-	 * 
-	 * /* // 회원 : 식당 리스트
-	 * 
-	 * @RequestMapping(value = "/evaluateListProc.do", method =
-	 * RequestMethod.POST) public String restntListProc(Model model, RestntDTO
-	 * restntDto) { List<RestntDTO> restnts = restntService.getRestntList();
-	 * model.addAttribute("restnts", restnts);
-	 * System.out.println("restntListProc()"); return "evaluate/evaluateList"; }
-	 */
+	
 	// 평가 페이지
 	@RequestMapping(value = "/evaluatemain.do", method = RequestMethod.POST)
 	public String evaluatemain(Model model, String memId,
@@ -70,14 +60,6 @@ public class EvaluateController {
 	}
 
 	// 식당평가한 목록
-
-	/*
-	 * @RequestMapping(value = "/evaluateList.do", method = RequestMethod.GET)
-	 * public String getEvaluateListForm(HttpServletRequest request, Model
-	 * model, String memId) { System.out.println("getEvaluateListForm"); return
-	 * "forward:evaluateListForm"; }
-	 */
-
 	@RequestMapping(value = "/evaluateList.do", method = RequestMethod.POST)
 	public ModelAndView evaluateListForm(HttpServletRequest request,
 			Model model) {
@@ -127,14 +109,17 @@ public class EvaluateController {
 		return "nEvaluateList";
 	}
 
-	// 평가 수정editOk
+	/*// 평가 수정editOk
 	@RequestMapping(value = "edit.do", method = RequestMethod.POST)
-	public String edit(Model model, HttpServletRequest request) {
+	public String edit(Model model, HttpServletRequest request, String memId) {
+		
+		System.out.println("edit()");
+		
 		// 저장해줘..(쿼리문으로 xml에 쓰면돼)
 
 		return "edit";
 	}
-
+*/
 	// 평가 수정editOk
 	@RequestMapping(value = "editOk.do", method = RequestMethod.POST)
 	public String editOk(Model model, HttpServletRequest request) {
@@ -172,71 +157,32 @@ public class EvaluateController {
 	}
 
 	// 식당 평가 수정
-	@RequestMapping(value = "/updateEvaluateListProc.do", method = RequestMethod.POST)
-	public String updateEvaluateListProc(Model model, EvaluateDTO evaluateDto) {
+	@RequestMapping(value = "edit.do", method = RequestMethod.POST)
+	public String setScoreByEvaluateTerms(Model model, EvaluateDTO evaluateDto) {
 		evaluateService.setScoreByEvaluateTerms(evaluateDto);
 	/*	EvaluateDTO evaluate = (EvaluateDTO) evaluateService
 				.getEvaluateListByMemId(evaluateDto.getMemId());
 		model.addAttribute("evaluate", evaluate);*/
+		System.out.println("edit()");
+		
 		return "edit";
 	}
 
-/*	// 식당 평가 입력
-	@RequestMapping(value = "/nEvaluateListProc.do", method = RequestMethod.POST)
-	public String nEvaluateListProc(Model model, EvaluateDTO evaluateDTO) {
-		System.out.println("nEvaluateListProc()");
-		evaluateService.putScoreByEvaluateTerms(evaluateDTO);
-		return "nEvaluateList";
-	}*/
 
 	// 삭제
-	@RequestMapping(value = "delete.do", method = RequestMethod.POST)
-	public String delete(HttpServletRequest request) {
-
-		Map<String, String[]> requestParams = request.getParameterMap();
-
-		/*
-		 * public String delete(@Valid Evaluate evaluate, Model model,
-		 * HttpServletRequest request) {
-		 */
-		/*
-		 * request.getParameter("memId");
-		 * evaluateService.deleteData(request.getParameter("memId"));
-		 */
-		for (Map.Entry<String, String[]> entry : requestParams.entrySet()) {
-			String key = entry.getKey(); // parameter name
-			String[] values = entry.getValue(); // parameter values as array of
-												// String
-
-			if (key.equals("deleteEvaluate")) {
-				for (int i = 0; i < values.length; i++) {
-					String deleteEvaluate = values[i];
-					System.out.println("삭제대상 => " + deleteEvaluate);
-
-				}
-			}
-		}
-
-		return "delete";
+	@RequestMapping(value = "delete.do")
+	public String deleteData(HttpServletRequest request, String memId, String evalId) {
+		System.out.println("memID 딜리트::"+memId);
+		System.out.println("evalId 딜리트::"+evalId);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("memId", memId);
+		map.put("evalId", evalId);
+		evaluateService.deleteData(map);
+		System.out.println("memID 딜리트::"+memId);
+		System.out.println("evalId 딜리트::"+evalId);
+		return "nEvaluateListForm.do";
+		
 	}
 
-	/*
-	 * //삭제
-	 * 
-	 * @RequestMapping(value="menuItemDelete.do", method=RequestMethod.POST)
-	 * public String menuItemDelete(HttpServletRequest request){
-	 * 
-	 * Map<String, String[]> requestParams = request.getParameterMap();
-	 * 
-	 * for (Map.Entry<String, String[]> entry : requestParams.entrySet()) {
-	 * String key = entry.getKey(); // parameter name String[] values =
-	 * entry.getValue(); // parameter values as array of String
-	 * 
-	 * 
-	 * if( key.equals("deleteItem")){ for (int i = 0; i < values.length; i++) {
-	 * String deleteItemId = values [i]; System.out.println("삭제대상 => " +
-	 * deleteItemId); // ItemService.deleteItem(deleteItemId); } } }
-	 * 
-	 * return "redirect:/menuListMng.do"; }
-	 */
+	
 }

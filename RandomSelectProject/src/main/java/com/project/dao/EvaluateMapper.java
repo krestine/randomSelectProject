@@ -2,6 +2,7 @@ package com.project.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.project.domain.EvaluateDTO;
 
@@ -39,7 +40,8 @@ public interface EvaluateMapper {
 	        //  리스트 개수 
 			int getListCount(String memId);
 			// 게시물 삭제 
-			public void deleteData(String memId, String evalId);
+//			public void deleteData(String memId, String evalId);
+			public void deleteData(Map<String, String> map);
 
 
 

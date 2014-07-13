@@ -49,18 +49,10 @@
 		evaluate set score=#{score} where evalId =#{evalId} and
 		memId=#{memId}
 	</update>
-<!-- 
-	회원: 식당평가 입력 (평가 안한부분) 
-	<update id="putScoreByEvaluateTerms" parameterType="EvaluateDTO">
-		update
-		evaluate set score
-		='-1', where memId= #{memId},evalId=#(evalId);
-	</update>
- -->
-	<!--회원: 삭제 -->
-	<update id="deleteData" parameterType="String">
-		update evaluate set score
-		='-1', where memId= #{memId},evalId=#(evalId);
+
+	<!--회원: 식당 평가 점수 삭제 -->
+	<update id="deleteData" parameterType="HashMap" >
+ 	update evaluate set score=-1 where memId=#{memId} and evalId=#{evalId}
 	</update>
 
 </mapper>

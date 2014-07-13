@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>게시판</title>
 <script type="text/javascript">
-	function editGo() {
+/* 	function editGo() {
 
 		document.getElementById("select2").action = "edit.do";
 		document.getElementById("select2").submit();
@@ -17,7 +17,7 @@
 
 		document.getElementById("select2").action = "delete.do";
 		document.getElementById("select2").submit();
-	}
+	} */
 	function mainGo() {
 		document.getElementById("select1").action = "main.do";
 		document.getElementById("select1").submit();
@@ -32,8 +32,6 @@
 
 <body>
 
-
-
 	<h3>평가한 식당 리스트</h3>
 
 	<form id="select1" method="post">
@@ -42,7 +40,6 @@
 	<form id="select2" method="post">
 		<input type="button" onclick="evaluateMainGo()" value="평가메인으로">
 	</form>
-
 
 
 	<table width="600" border="1" bordercolor="#00A5FF">
@@ -79,7 +76,9 @@
 							<c:when test="${evaluate.score ==1}">
 						★☆☆☆☆
 			</c:when>
-						</c:choose> <script type="text/javascript">
+						</c:choose> 
+						
+<script type="text/javascript">
 function hideshow(which){
 if (!document.getElementById)
 return
@@ -102,20 +101,18 @@ which.style.display="block"
 								<option value="1">★☆☆☆☆</option>
 							</select> <a
 								href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">확인</a>
-						</div> <a
-						href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">삭제</a>
+						</div> 
+						<a href = "delete.do?memId=${evaluate.memId}&evalId=${evaluate.evalId}">삭제</a>
 
 					</td>
 					<td>${evaluate.restntName}</td>
 					<td>${evaluate.evalDate}</td>
 					<td>
-						<form id="select2" method="POST">
-							<input type="button" onclick="editGo()" value="수정">
-						</form>
-						<form id="select2" method="POST">
-							<input type="button" onclick="deleteGo()" value="삭제">
-						</form>
-					</td>
+		
+	 1::${evaluate.memId }
+	 <br>
+	 2::${evaluate.evalId }
+	 </td>
 				</tr>
 
 			</c:forEach>
