@@ -140,6 +140,7 @@ public class MemberController {
 
 	/*
 	 * form->view & view->proc
+	 * //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 
 	// 회원가입
@@ -163,6 +164,8 @@ public class MemberController {
 		return "registerOk";
 
 	}
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	// 로그인
 	@RequestMapping("loginForm.do")
@@ -201,6 +204,8 @@ public class MemberController {
 
 	}
 
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 	// 아이디 찾기&비밀번호 찾기 폼
 	@RequestMapping("findIdForm.do")
 	public String findIdForm() {
@@ -221,7 +226,7 @@ public class MemberController {
 		return "findIdOk";
 	}
 
-	// 비밀번호찾기
+	// 비밀번호찾기, 임시비밀번호 변경
 	/*
 	 * @RequestMapping("findPasswordForm.do") public String findPasswordForm() {
 	 * System.out.println("findPasswordForm()"); return "findPassword"; }
@@ -248,7 +253,7 @@ public class MemberController {
 		mailService.sendMail(fromUser, toUser, subject, text);
 
 		memberDto.setMemId(toUser);
-		memberDto.setMemPasswd(userPassword);
+		// memberDto.setMemPasswd(userPassword);
 		memberDto.setTempPw(CD);
 		memberService.setMemberInfoByMemberTerms(memberDto);
 
@@ -257,14 +262,17 @@ public class MemberController {
 		return "findPasswordOk";
 	}
 
+	// 임시비밀번호 메일발송내용
 	protected String getEmailText(String CD, String toUser) {
 		StringBuilder text = new StringBuilder();
-		text.append("<h2>[6randomSelect] 인증번호입니다.</h2><br>");
+		text.append("<h2>[6randomSelect] 임시 비밀번호입니다.</h2><br>");
 		text.append(CD);
 		text.append("<br><a href=" + urlPath + "loginForm.do"
-				+ ">인증번호로 로그인해주세요.</a>");
+				+ ">임시번호로 로그인후 비밀번호를 변경해주세요.</a>");
 		return text.toString();
 	}
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	// 내정보
 	@RequestMapping(value = "myInfoForm.do", method = RequestMethod.POST)
@@ -279,28 +287,54 @@ public class MemberController {
 		return "myInfo";
 	}
 
-	// 현재 비밀번호 확인 , 정보수정
-	@RequestMapping(value = "myInfoProc.do", method = RequestMethod.POST)
-	public String myInfoProc(Model model, MemberDTO memberDto) {
-		System.out.println("myInfoProc()");
+	// 비밀번호 변경
+	@RequestMapping(value = "passwordProc.do", method = RequestMethod.POST)
+	public String passwordProc(Model model, MemberDTO memberDto,
+			HttpSession session) {
+		System.out.println("passwordProc()");
 
-		// 현재비밀번호 확인
-		String nowPasswd = memberService.getMemPasswdByMemId(memberDto);
-		if (nowPasswd == null) {
-			model.addAttribute("errmessage", "아이디,비밀번호 불일치");
-			return "myInfo";
-		} else if (Integer.parseInt(nowPasswd) == 1) {
-			model.addAttribute("errmessage", "탈퇴한 회원");
-			return "myInfo";
-		}
+		MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
+		System.out.println("loginUser.getMemId()=" + loginUser.getMemId());
 
-		// 탈퇴하지 않았고 현재비밀번호 일치할때 비밀번호만 변경
-		if (memberDto.getMemMobile() == null) {
+		String temp = memberDto.getTempPw();
+		System.out.println("새비밀번호" + temp);
+
+		memberDto.setMemId(loginUser.getMemId());
+		memberDto.setTempPw(temp);
+		System.out.println(memberDto);
+
+		if (memberDto != null) {
 			memberService.setMemPasswdByMemberTerms(memberDto);
+			model.addAttribute("sMsg", "비밀번호가 변경되었습니다. 변경된 번호로 로그인 해주세요.");
+			session.removeAttribute("loginUser");
+			session.invalidate();
+			return "forward:loginForm.do";
 		}
-		memberService.setMemberInfoByMemberTerms(memberDto);
 		return "forward:myInfoForm.do";
 	}
+
+	// 전화번호 변경
+	@RequestMapping(value = "mobileProc.do", method = RequestMethod.POST)
+	public String mobileProc(Model model, MemberDTO memberDto,
+			HttpSession session, HttpServletRequest request) {
+		System.out.println("mobileProc()");
+
+		MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
+		System.out.println("loginUser.getMemId()=" + loginUser.getMemId());
+
+		String memMobile = request.getParameter("memMobile");
+		System.out.println("새 전화번호" + memMobile);
+
+		memberDto.setMemId(loginUser.getMemId());
+		memberDto.setMemMobile(memMobile);
+		System.out.println(memberDto);
+
+		memberService.setMemberInfoByMemberTerms(memberDto);
+
+		return "forward:myInfoForm.do";
+	}
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	// 탈퇴
 	@RequestMapping("dropForm.do")
@@ -317,6 +351,8 @@ public class MemberController {
 		session.invalidate();
 		return "dropOk";
 	}
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	// 로그아웃
 	@RequestMapping("logoutForm.do")
