@@ -54,5 +54,7 @@
 	<update id="deleteData" parameterType="HashMap" >
  	update evaluate set score=-1 where memId=#{memId} and evalId=#{evalId}
 	</update>
+	
+
 
 </mapper>

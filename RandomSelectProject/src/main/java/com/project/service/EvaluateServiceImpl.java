@@ -47,8 +47,8 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	// 평가한 방문리스트 수정,평가안한 방문리스트 입력
 	@Override
-	public void setScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
-		evaluateMapper.setScoreByEvaluateTerms(evaluateDTO);
+	public void setScoreByEvaluateTerms(EvaluateDTO evaluateDto) {
+		evaluateMapper.setScoreByEvaluateTerms(evaluateDto);
 		// TODO Auto-generated method stub
 	}
 
