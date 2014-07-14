@@ -30,12 +30,12 @@ language=구글 맵 언어
 	type="text/javascript"></script>
 
 
-
+  
 <script type="text/javascript">
 	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId;
 	var myInfoWindow;
 	var randomLatitude, randomLongitude;
-	var map;
+	var map, mapResized;
 	var restntList;
 	var pos, pos2;
 	var sRadius;
@@ -54,6 +54,18 @@ language=구글 맵 언어
 	var tempOKId = new Array(100);
 	
 	var tempRestntMarker = new Array(100);
+	
+	
+/* 	google.maps.event.addListener(map, 'bounds_changed', function(){
+		map.setCenter(pos);
+	}); */
+	
+	function visitList(){
+		if(login==1){
+			document.getElementById("visitList").action = "visitList.do";
+			document.getElementById("visitList").submit();
+		}
+	}
 	
 	function confirmRestnt() {
 		
@@ -139,6 +151,8 @@ language=구글 맵 언어
 		var tempRestntId;
 		
 		
+		//$('#getAllRestnt').attr('disabled',true);
+		
 		<c:forEach items="${restntList}" var="item" varStatus="counter">
 		
 		//javascript 변수에 EL태그의 값을 직접 넣을 때는 직접 넣을 수 없고
@@ -214,7 +228,7 @@ language=구글 맵 언어
 	function setMyCenter() {
 		//map.setCenter(latlng) = 설정된 위치로 맵 중심 이동
 		//map.setZoom(Int) = 설정된 숫자값으로 맵 확대율 조정
-		map.setCenter(pos);
+		//map.setCenter(pos);
 		map.setZoom(18);
 	}
 	function redrawMap() {
@@ -371,8 +385,16 @@ language=구글 맵 언어
 
 		//alert('start init');
 
+	
+		google.maps.event.addDomListener(window, 'resize', function() {
+			map.setCenter(pos);
+		});
+
 		setSRadius();
 		directionsDisplay = new google.maps.DirectionsRenderer();
+
+		//$('#getAllRestnt').removeAttr('disabled');
+
 		//myOptions = 구글 맵에 사용할 옵션
 		//zoom = 초기 맵 확대값. 0 입력하면 지구본이 됨
 		//center = 초기 맵 중심값
@@ -405,14 +427,13 @@ language=구글 맵 언어
 		}
 
 	}
-
 	//windows가 'load'될때 initalize()함수를 불러와라
 	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 </head>
 <body>
 	<div class="container" id="container" style="width: 100%">
-		<div id="map_canvas" style="width: 100%; height: 600px"></div>
+		<div id="map_canvas" style="width: 80%; height: 600px"></div>
 		<input type=button id=randomSelectInitialize value="아무거나!"
 			onclick="initialize()"> <input type=button id=redrawMap
 			value="맵 다시 그리기" onclick="redrawMap()"> <input type=button
@@ -440,6 +461,7 @@ language=구글 맵 언어
 			 ${item.restntName} ${item.latitude} ${item.longitude}<br>
 		</c:forEach>
 	</div> --%>
-	</div>
+		<button id="visitList" onclick="visitList()">방문 정보</button>
+	</div>	
 </body>
 </html>

@@ -44,10 +44,10 @@ public class RandomSelectController {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		model.addAttribute("loginUser", loginUser);
-		restntList = restntService.getRestntList();
+		/*restntList = restntService.getRestntList();
 		for(RestntDTO restnt : restntList){
 			System.out.println(restnt.getRestntId());
-		}
+		}*/
 		
 		walkRange = settingService.getWalkRange();
 		model.addAttribute("walkRange", walkRange);
@@ -65,7 +65,7 @@ public class RandomSelectController {
 	}
 	
 	@RequestMapping("ladderMake.do")
-	String adminMainProc(Model model) {
+	String ladderMake(Model model) {
 
 		return "ladderMake";
 	}
@@ -85,6 +85,12 @@ public class RandomSelectController {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(json.toString());
+	}
+	
+	@RequestMapping("visitList.do")
+	String visitListProc(Model model) {
+
+		return "visitList";
 	}
 
 }

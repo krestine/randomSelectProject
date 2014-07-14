@@ -67,20 +67,19 @@
 	</select>
 
 
-	<!-- 회원:비밀번호만 변경,인증번호로 변경 -->
+	<!-- 회원:비밀번호 변경,인증번호로 변경 -->
 	<update id="setMemPasswdByMemberTerms" parameterType="MemberDTO">
 		update
 		member set mempasswd=#{tempPw}
 		where
-		memid=#{memId} and
-		mempasswd=#{memPasswd}
+		memid=#{memId}
 	</update>
 
 
-	<!-- 회원:정보수정 -->
+	<!-- 회원:전화번호 변경 -->
 	<update id="setMemberInfoByMemberTerms" parameterType="MemberDTO">
 		update
-		member set mempasswd=#{tempPw}, memmobile=#{memMobile}
+		member set memmobile=#{memMobile}
 		where
 		memid=#{memId}
 	</update>

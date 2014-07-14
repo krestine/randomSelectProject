@@ -103,7 +103,8 @@ label.error {
 		</div>
 		<div>
 			<label class="error" id="inputCheck" style="color: red">
-				${errmessage}</label>
+				${errmessage}</label> <label class="error" id="inputCheck"
+				style="color: blue"> ${sMsg}</label>
 		</div>
 		<div>
 			<a href="findIdForm.do">아이디/비밀번호 찾기</a>

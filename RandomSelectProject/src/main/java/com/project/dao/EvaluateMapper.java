@@ -31,8 +31,6 @@ public interface EvaluateMapper {
 			// 회원:평가한 방문리스트 수정,평가 안한 점수 입력
 			public void setScoreByEvaluateTerms(EvaluateDTO evaluateDto);
 
-			// ///////////////////////////////////////////////////////////////
-
 			// 회원: 평가한 식당목록
 			// 방문날짜,restntId
 
@@ -40,11 +38,12 @@ public interface EvaluateMapper {
 	        //  리스트 개수 
 			int getListCount(String memId);
 			// 게시물 삭제 
-//			public void deleteData(String memId, String evalId);
+
 			public void deleteData(Map<String, String> map);
 
+			//평가 안한 점수 입력
+			void setScoreByEvaluateTerms1(EvaluateDTO evaluateDto);
 
-
-
-
+			
+			
 }
