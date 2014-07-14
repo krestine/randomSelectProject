@@ -14,10 +14,60 @@
 						//비밀번호 변경폼보이기
 						$("#pwCheck_form").hide();
 						$("button.changeInfo").click(function() {
-							if ($("#pwChange_form").css("display") == "none") {
+							// 											if ($("#pwChange_form").css(
+							// 													"display") == "none"
+							// 													|| $("#mobileChange_form")
+							// 															.css("display") == "none") {
+							// 												$("#pwCheck_form").toggle();
+							// 											}
+							if ($(".infoChangBox").css("display") == "none") {
 								$("#pwCheck_form").toggle();
 							}
 						});
+
+						//비밀번호 변경,전화번호 보이기
+						$('.linkform a,.link_reg a')
+								.on(
+										'click',
+										function(e) {
+											var target = $(this).attr('href'), target_height = $(
+													target).actual('height');
+											$(form_wrapper).css(
+													{
+														'height' : form_wrapper
+																.height()
+													});
+
+											$(form_wrapper.find('form:visible'))
+													.fadeOut(
+															400,
+															function() {
+																form_wrapper
+																		.stop()
+																		.animate(
+																				{
+																					height : target_height,
+																					marginTop : (-(target_height / 2) - 24)
+																				},
+																				50,
+																				function() {
+																					$(
+																							target)
+																							.fadeIn(
+																									400);
+																					$(
+																							'.links_btm .linkform')
+																							.toggle();
+																					$(
+																							form_wrapper)
+																							.css(
+																									{
+																										'height' : ''
+																									});
+																				});
+															});
+											e.preventDefault();
+										});
 
 						//현재비밀번호 확인 ajax
 						$('#pwCheck_btn')
@@ -65,8 +115,13 @@
 																										50,
 																										function() {
 																										});
+
+																						// 																						$(
+																						// 																								'#pwChange_form')
+																						// 																								.toggle();
+
 																						$(
-																								'#pwChange_form')
+																								'.infoChangBox')
 																								.toggle();
 																					});
 																} else {
@@ -91,10 +146,14 @@
 		<div>이름 :${myInfo.memName}</div>
 
 		<div>등급 :${myInfo.memGrade}</div>
+
+		<div>전화번호 :${myInfo.memMobile}</div>
+
 	</form>
 	<div>
 		<button class="changeInfo">내정보 변경</button>
 	</div>
+
 	<div class="modifyBox">
 		<form id="pwCheck_form" action="" method="post">
 			<!-- 			<div> -->
@@ -112,8 +171,18 @@
 				<input type="button" id="pwCheck_btn" value="비밀번호 확인">
 			</div>
 		</form>
-		<div class="infoChangBox">
-			<form id="pwChange_form" action="myInfoProc.do" method="post"
+
+
+		<div class="infoChangBox" style="display: none">
+
+			<div>
+				<button class="changePw_btn">비밀번호 변경</button>
+			</div>
+			<div>
+				<button class="changeMobile_btn">전화번호 변경</button>
+			</div>
+
+			<form id="pwChange_form" action="passwordProc.do" method="post"
 				style="display: none">
 				<div>새 비밀번호</div>
 				<div>
@@ -130,7 +199,9 @@
 					<input type="submit" value="비밀번호 변경">
 				</div>
 			</form>
-			<form id="mobileChange_form" action="myInfoProc.do" method="post"
+
+
+			<form id="mobileChange_form" action="mobileProc.do" method="post"
 				style="display: none">
 				<div>전화번호</div>
 				<div>
@@ -144,6 +215,8 @@
 					<input type="submit" value="전화번호 변경">
 				</div>
 			</form>
+
+
 		</div>
 	</div>
 

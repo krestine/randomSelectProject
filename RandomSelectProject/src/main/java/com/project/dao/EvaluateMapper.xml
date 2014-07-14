@@ -14,14 +14,14 @@
 	<!--구성회:회원:식당평가한 목록 -->
 	<select id="getEvaluateListByMemId" parameterType="hashMap"
 		resultType="EvaluateDTO">
-		SELECT B.* , C.* 
-		FROM ( 
-			SELECT A.*, row_number() over (ORDER BY EVALDATE DESC) number_of_row 
-			FROM evaluate A 
-			WHERE A.memId=#{memId} ORDER BY EVALDATE DESC ) B, 
-			restnt C 
-		WHERE B.restntId = C.restntId and score != -1 AND B.number_of_row 
-			between #{startrow} and #{endrow}
+		SELECT B.* , C.*
+		FROM (
+		SELECT A.*, row_number() over (ORDER BY EVALDATE DESC) number_of_row
+		FROM evaluate A
+		WHERE A.memId=#{memId} ORDER BY EVALDATE DESC ) B,
+		restnt1 C
+		WHERE B.restntId = C.restntId and score != -1 AND B.number_of_row
+		between #{startrow} and #{endrow}
 
 	</select>
 
@@ -31,12 +31,13 @@
 
 		select evalId, score, evalDate, restntName
 		from Evaluate e,
-		restnt r
+		restnt1 r
 		where
 		e.memId=#{memId}
 		and e.restntId = r.restntId
-		and score = -1
-		
+		and score =
+		-1
+
 	</select>
 	<!--리스트 페이지 보여주는 -->
 	<select id="getListCount" parameterType="String" resultType="int">
@@ -49,10 +50,19 @@
 		evaluate set score=#{score} where evalId =#{evalId} and
 		memId=#{memId}
 	</update>
+	<!--회원:식당 평가 점수 입력 -->
+	<update id="setScoreByEvaluateTerms1" parameterType="EvaluateDTO">
+		update
+		evaluate set score=#{score} where evalId =#{evalId} and
+		memId=#{memId}
+	</update>
+
 
 	<!--회원: 식당 평가 점수 삭제 -->
-	<update id="deleteData" parameterType="HashMap" >
- 	update evaluate set score=-1 where memId=#{memId} and evalId=#{evalId}
+	<update id="deleteData" parameterType="HashMap">
+		update evaluate set score=-1 where memId=#{memId} and evalId=#{evalId}
 	</update>
+
+
 
 </mapper>
