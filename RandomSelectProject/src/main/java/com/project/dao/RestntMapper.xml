@@ -19,8 +19,17 @@
 		select
 		restntId,RESTNTNAME,RESTNTTEL,RESTNTCATE,RESTNTEVAL,ADRESS1,ADRESS2,
 		ADRESS3,ADRESS4, LATITUDE, LONGITUDE from restnt where active = '1'
-
-
+	</select>
+	
+	<select id="getRestntListByAdress" parameterType="RestntDTO" resultType="RestntDTO">
+		select
+		restntId,RESTNTNAME,RESTNTTEL,RESTNTCATE,RESTNTEVAL,ADRESS1,ADRESS2,
+		ADRESS3,ADRESS4, LATITUDE, LONGITUDE from restnt
+		where
+		adress1=#{adress1}and
+		adress2=#{adress2}and
+		adress3=#{adress3}and
+		active= '1'
 	</select>
 
 
@@ -91,10 +100,7 @@
 	<select id="getRestntInfoById" parameterType="RestntDTO"
 		resultType="RestntDTO">
 		select
-		restntId,restntName,
-		adress1,adress2,
-		adress3,adress4,
-		restnttel,restntcate,RESTNTEVAL from
+		* from
 		restnt where
 		restntId=#{restntId}
 		and active = '1'
@@ -153,11 +159,37 @@
 		and active = '1'
 	</select>
 
-	<select id="restntListPaging" parameterType="RestntDTO" resultType="RestntDTO">
-		select * from (select A.*,FLOOR((ROWNUM - 1)/#{viewCount} + 1)page, 
-		rownum from (select * from restnt where adress1=#{adress1} and adress2 = #{adress2} and adress3 =#{adress3} and active = '1' order by restntid ) A)
-     	where page = #{pageNum}  
+	<select id="restntListPaging" parameterType="RestntDTO"
+		resultType="RestntDTO">
+		select * from (select A.*,FLOOR((ROWNUM - 1)/#{viewCount} +
+		1)page,
+		rownum from (select * from restnt where adress1=#{adress1} and
+		adress2 =
+		#{adress2} and adress3 =#{adress3} and active = '1' order by
+		restntid
+		) A)
+		where page = #{pageNum}
 
 	</select>
-    
+
+	<select id="getRestntFullAddress" parameterType="RestntDTO"
+		resultType="RestntDTO">
+		select restntId, adress1, adress2, adress3, adress4 from
+		restnt where
+		adress1=#{adress1} and adress2 = #{adress2} and adress3
+		=#{adress3}
+		and active = '1' order by restntid
+	</select>
+
+	<update id="setRestntLocationInfo" parameterType="RestntDTO">
+		update restnt set
+		longitude = #{longitude},
+		latitude=#{latitude}
+
+		where
+		restntId =
+		#{restntId} and
+		active = '1'
+	</update>
+
 </mapper>

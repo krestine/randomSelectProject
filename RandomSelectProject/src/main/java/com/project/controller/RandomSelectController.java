@@ -44,10 +44,10 @@ public class RandomSelectController {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		model.addAttribute("loginUser", loginUser);
-		restntList = restntService.getRestntList();
+		/*restntList = restntService.getRestntList();
 		for(RestntDTO restnt : restntList){
 			System.out.println(restnt.getRestntId());
-		}
+		}*/
 		
 		walkRange = settingService.getWalkRange();
 		model.addAttribute("walkRange", walkRange);
