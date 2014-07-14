@@ -14,7 +14,7 @@
 	var newMenuId;
 	var addMenuFlag = 1;
 	var addMenuKey = 0;
-	var viewCount = 10;
+	var viewCount = 20;
 	
 	
 	$(document).ready(function() {
@@ -301,36 +301,15 @@
 						alert("error : ajax 통신 실패.");
 					},
 					success : function(json) {
+						var deleteFlag = json.deleteFlag;
 						
-						$('#selectBox').show(); 
-						$('#restntList').show();
-						$('#restntInfo').hide();
-						
-						var restnts = json.restnts;
-						
-						if (restnts[0].restntId != null) {
-							
-							$("#restntTable > tbody").html("");
-							var html = '<tbody id="restntListResult"><tr>';
-							$.each(restnts,function(key) {
-								var restntName = restnts[key].restntName;
-								var restntId = restnts[key].restntId;
-	
-								
-								html += '<td>'
-										+ '<input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId">';
-								html += restntName
-										+ '<button id="restntInfo'
-										+ key
-										+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr></tbody>';
-										
-							});
-							html += '<tr><td><button id="addMode"  type="button" onclick="addMode()">추가</button></td></tr></tbody>';
-							
-							$('#restntTable').append(html);
-							
+						if(deleteFlag != 0){
+							drawRestntList();	
 						}
-
+						else{
+							alert('삭제 실패');
+						}
+						
 					}
 				});
 	}
@@ -381,36 +360,13 @@
 				alert("error : ajax 통신 실패.");
 			},
 			success : function(json) {
+				var insertFlag = json.insertFlag;
 				
-				
-				$('#restntList').show();
-				$('#restntNameInput').val('');
-				$('#adress4Input').val('');
-				$('#restntTelInput').val('');
-				
-				var restnts = json.restnts;
-				
-				
-				if (restnts!= null) {
-					var html = '<tbody id="restntListResult"><tr>';
-					$.each(restnts,function(key) {
-						var restntName = restnts[key].restntName;
-						var restntId = restnts[key].restntId;
-
-						
-						html += '<td>'
-								+ '<input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId">';
-						html += restntName
-								+ '<button id="restntInfo'
-								+ key
-								+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr></tbody>';
-						
-					});
-					
-					html += '<tr><td><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr></tbody>';
-					
-					$('#restntTable').append(html);
-					
+				if(insertFlag != 0){
+					drawRestntList();	
+				}
+				else{
+					alert('추가 실패');
 				}
 	
 			}
@@ -767,15 +723,15 @@
 									var restntName = restnts[key].restntName;
 									var restntId = restnts[key].restntId;
 	
-									html += '<td>'
-											+ '<input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId">';
+									html += '<td>';
+											 
 									html += restntName
-											+ '<button id="restntInfo'
+											+ '</td><td><input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
 											+ key
 											+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr>';
 	
 								});
-								 html += '<tr><td><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr></tbody>';
+								 html += '<tr><td colspan=2><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr></tbody>';
 								$('#restntTable').append(html);
 		
 							}
@@ -795,7 +751,7 @@
 <body>
 
 
-	<div id="selectBox" align="center">
+	<div id="selectBox" align="center" >
 		주소 선택<br> <select id="adress1" class="adress1">
 			<c:forEach items="${adress1}" var="adress1">
 
@@ -818,12 +774,12 @@
 
 
 		</table>
-		<div id="restntListPage" align="center"></div>	
+		<div id="restntListPage" align="center" ></div>	
 	</div>
 
 	<div id="restntInfo" align="center">
 		<form id="restInfoForm">
-			<table border="2" id="restntInfoTable" width="30%">
+			<table border="2" id="restntInfoTable">
 				<caption>식당 정보</caption>
 
 

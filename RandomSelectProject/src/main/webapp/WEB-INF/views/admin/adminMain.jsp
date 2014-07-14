@@ -23,11 +23,11 @@
 <title>관리자</title>
 </head>
 <body>
-	
+	<div align="center">
 	<form id="GoSelect">
-		<input type="button" value="회원관리" onclick="memberGo()"> <input
-			type="button" value="식당관리" onclick="restntGo()">
+		<input type="button" value="회원관리" onclick="memberGo()" style="width: 120px; height: 50px;"> 
+		<input type="button" value="식당관리" onclick="restntGo()" style="width: 120px; height: 50px;">
 	</form>
-
+	</div>
 </body>
 </html>

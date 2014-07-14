@@ -24,4 +24,14 @@ public class VisitServiceImpl implements VisitService {
 	public String getLastVisitId() {
 		return visitMapper.getLastVisitId();
 	}
+
+	@Override
+	public VisitDTO getVisitInfoByMemId(String string) {
+		return visitMapper.getVisitInfoByMemId(string);
+	}
+
+	@Override
+	public void dropVisitById(String string) {
+		visitMapper.dropVisitById(string);
+	}
 }

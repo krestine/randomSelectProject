@@ -9,8 +9,10 @@
 </head>
 <body>
 
-	<!--꾸에에에에에에에엑  -->
+	
 
+	<div align="center">
+	<h1>회원 목록</h1>
 	<table border="2">
 		<caption></caption>
 		<thead>
@@ -19,6 +21,7 @@
 				<th>회원이름
 				<th>회원등급
 				<th>블랙리스트
+				<th>
 		<tbody>
 
 			<c:forEach items="${members}" var="member">
@@ -60,7 +63,7 @@
 			</c:forEach>
 	</table>
 
-
+</div>
 
 </body>
 </html>
