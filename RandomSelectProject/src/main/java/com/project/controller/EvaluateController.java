@@ -167,7 +167,9 @@ public class EvaluateController {
 		System.out.println("이벨아이디, 멤아이디::"+evalId+" & "+memId);
 	
 		System.out.println("edit()");
-		return "foreward:/evaluateList.do";
+		return "evaluate/evaluateList";
+	/*	<jsp:param name="paramName" value="vlaue1" />*/
+		/*<jsp:forward page="evaluateList.jsp" />*/
 	}
 
 
@@ -186,5 +188,21 @@ public class EvaluateController {
 		
 	}
 
+	//nEvaluateList에서 수정
+	@RequestMapping(value = "editOk.do", method = RequestMethod.POST)
+	public String setScoreByEvaluateTerms1(Model model, EvaluateDTO evaluateDto, 
+			String evalId, String memId, String score) {
+		System.out.println("memID edit::"+memId);
+		System.out.println("evalId deit::"+evalId);
+		evaluateDto.setMemId(memId);
+		evaluateDto.setEvalId(evalId);
+		evaluateDto.setScore(score);
+		evaluateService.setScoreByEvaluateTerms1(evaluateDto);
+		
+		System.out.println("이벨아이디, 멤아이디::"+evalId+" & "+memId);
 	
+		System.out.println("edit()");
+		return "evaluate/evaluateList";
+	
+}
 }

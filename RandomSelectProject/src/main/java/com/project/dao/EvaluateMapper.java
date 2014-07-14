@@ -41,8 +41,9 @@ public interface EvaluateMapper {
 
 			public void deleteData(Map<String, String> map);
 
+			//평가 안한 점수 입력
+			void setScoreByEvaluateTerms1(EvaluateDTO evaluateDto);
 
-
-
-
+			
+			
 }

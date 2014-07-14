@@ -76,7 +76,7 @@ else
 which.style.display="block"
 }
 </script> 
-<form action="edit.do" method="post">
+<form action="editOk.do" method="post">
 <a href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">수정</a>
 
 						<div id="${evaluate.evalId}" style="display: none">

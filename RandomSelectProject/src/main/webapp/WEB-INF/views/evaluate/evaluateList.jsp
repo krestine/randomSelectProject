@@ -92,6 +92,8 @@ which.style.display="block"
 							</select> 
 							<!-- <a
 						href="edit.do?memId=${evaluate.memId}&evalId=${evaluate.evalId}">확인</a> -->
+							
+							
 							<input type="submit" value="확인"
 								onclick="location.href='javascript:hideshow(document.getElementById('${evaluate.evalId}'))'">
 						</div>
@@ -105,8 +107,7 @@ which.style.display="block"
 					
 					</td>
 				</tr>
-				
-
+		
 			</c:forEach>
 		<tr>
 			<td colspan="5" align="center"><c:if test="${page <= 1 }">[이전]&nbsp; </c:if>
