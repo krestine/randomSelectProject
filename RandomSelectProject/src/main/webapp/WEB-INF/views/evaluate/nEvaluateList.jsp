@@ -63,11 +63,10 @@
 			<td>방문 평가 안한 음식점</td>
 
 			<td>방문한 날짜</td>
-			<td> </td>
-			
+			<td></td>
 			<c:forEach var="evaluate" items="${memberEvaluates}">
 				<tr height="35px">
-					<td align="center">${evaluate.evalId}</td>
+					<td align="center">${evaluate.memId}</td>
 					<td align="center"><c:choose>
 							<c:when test="${evaluate.score ==5}">
 						★★★★★
@@ -84,7 +83,29 @@
 							<c:when test="${evaluate.score ==1}">
 						★☆☆☆☆
 			</c:when>
-						</c:choose></td>
+						</c:choose> 
+						<script type="text/javascript">
+function hideshow(which){
+if (!document.getElementById)
+return
+if (which.style.display=="block")
+which.style.display="none"
+else
+which.style.display="block"
+}
+</script> <a href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">수정</a>
+
+						<div id="${evaluate.evalId}" style="display: none">
+
+							<select name="score" id="score">
+								<option value="5">★★★★★</option>
+								<option value="4">★★★★☆</option>
+								<option value="3">★★★☆☆</option>
+								<option value="2">★★☆☆☆</option>
+								<option value="1">★☆☆☆☆</option>
+							</select> <a href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">확인</a>
+						</div> <a href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">삭제</a>
+					</td>
 					<td>${evaluate.restntName}</td>
 					<td>${evaluate.evalDate}</td>
 					<td>

@@ -63,7 +63,7 @@
 		resultType="String">
 		select leave from member
 		where memid=#{memId} and
-		mempasswd=#{memPasswd}
+		mempasswd=#{memPasswd} and leave != '1'
 	</select>
 
 

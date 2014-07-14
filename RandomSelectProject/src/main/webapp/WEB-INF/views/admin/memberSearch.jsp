@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring"
 	uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,13 +18,13 @@
 		document.getElementById("serchSelect").action = "memberSearchByNameProc.do";
 		document.getElementById("serchSelect").submit();
 	}
-	
+
 	function gradeSearch() {
 
 		document.getElementById("serchSelect").action = "memberSearchByGradeProc.do";
 		document.getElementById("serchSelect").submit();
 	}
-	
+
 	function blackSearch() {
 
 		document.getElementById("serchSelect").action = "memberSearchByBlackProc.do";
@@ -34,34 +34,51 @@
 <title>회원 검색</title>
 </head>
 <body>
-	<form action="memberSearchProc.do" method="post">
-		아이디 입력<input type="text" name="param">
-		<input type="hidden" value="1" name="caseCode">
-		<input type="submit" value="검색">
-	</form>
-		<br>
-	<form action="memberSearchProc.do" method="post">	
-		이름 입력<input type="text" name="param">
-		<input type="hidden" value="2" name="caseCode">
-		<input type="submit" value="검색">
-	</form>
-		<br>
-	<form action="memberSearchProc.do" method="post">	
-		등급 선택
-		<select name="param">
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		<option value="5">5</option>
-		</select>
-		<input type="hidden" value="3" name="caseCode">
-		<input type="submit" value="검색">
-	</form>	
-		<br>
-		<form action="memberSearchProc.do" method="post">
-		<input type="hidden" value="4" name="caseCode">
-		블랙 리스트<input type="submit" value="검색">
-		</form>
+	<div align="center" style="position: relative; top: 10px;">
+		<h1>회원 검색</h1>
+		<table>
+
+			<tr>
+				<form action="memberSearchProc.do" method="post">
+					<td>아이디 입력</td>
+					<td><input type="text" name="param"></td> <input
+						type="hidden" value="1" name="caseCode">
+					<td><input type="submit" value="검색"></td>
+				</form>
+			</tr>
+
+			<tr>
+				<form action="memberSearchProc.do" method="post">
+					<td>이름 입력</td>
+					<td><input type="text" name="param"> <input
+						type="hidden" value="2" name="caseCode"></td>
+					<td><input type="submit" value="검색"></td>
+				</form>
+			</tr>
+			<tr>
+				<form action="memberSearchProc.do" method="post">
+					<td>등급 선택</td>
+					<td><select name="param">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+					</select></td>
+					<td><input type="hidden" value="3" name="caseCode"> <input
+						type="submit" value="검색"></td>
+				</form>
+			</tr>
+			<tr>
+
+				<form action="memberSearchProc.do" method="post">
+					<input type="hidden" value="4" name="caseCode">
+					<td>블랙 리스트</td>
+					<td></td>
+					<td><input type="submit" value="검색"></td>
+				</form>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>

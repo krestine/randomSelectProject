@@ -43,7 +43,7 @@ public interface RestntMapper {
 	List<SettingDTO> getAdress3();
 	
 	//관리자: 식당관리 - 주소필터 적용 - 식당 리스트 표시
-	List<RestntDTO> getRestntListByAddr(SettingDTO settingDto);
+	List<RestntDTO> getRestntListByAddr(RestntDTO restntDto);
 	
 	// 회원 : 식당 상세정보
 	RestntDTO getRestntInfoByRestntId(String restntId);
@@ -55,5 +55,8 @@ public interface RestntMapper {
 	String getLastRestntId(RestntDTO restntDto);
 	//식당 추가 : id 지정 로직에 필요: 해당 지역의 지역 코드 불러오기
 	String getAdressCode(RestntDTO restntDto);
-
+	//식당 리스트 페이징 구현 : 총 갯수 가져오기
+	Integer restntListTotalCount(RestntDTO restntDto);
+	//식당 리스트 페이징 구현 : 리스트 그리기
+	List<RestntDTO> restntListPaging(RestntDTO restntDto);
 }

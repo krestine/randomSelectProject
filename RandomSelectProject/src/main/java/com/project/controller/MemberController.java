@@ -11,10 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.dao.MemberMapper;
 import com.project.domain.MemberDTO;
 import com.project.service.MailService;
 import com.project.service.MemberService;
@@ -53,8 +51,10 @@ public class MemberController {
 
 		if (getId == null) {
 			view.addObject("result", "true");
+			System.out.println("사용가능한 아이디");
 		} else {
 			view.addObject("result", "false");
+			System.out.println("이미 사용하는 아이디");
 		}
 		return view;
 	}
@@ -107,21 +107,33 @@ public class MemberController {
 	// 내정보 : 현재비밀번호 확인 ajax
 	@RequestMapping("pwInfoCheck.do")
 	public ModelAndView pwInfoCheckAjax(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, MemberDTO memberDto,
+			HttpSession session) {
 		System.out.println("pwInfoCheckAjax");
-		
+
 		ModelAndView view = new ModelAndView("member/memAjax");
+		MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
+		System.out.println("session.loginUser=" + loginUser);
 
-		String memId = request.getParameter("memId");
-		System.out.println("memid=" + memId);
+		String memPasswd = request.getParameter("memPasswd");
+		System.out.println("memPasswd=" + memPasswd);
 
-		String getId = memberService.getMemIdByMemId(memId);
-		System.out.println("getid=" + getId);
+		System.out.println("loginUser.getMemId()=" + loginUser.getMemId());
 
-		if (getId == null) {
+		memberDto.setMemId(loginUser.getMemId());
+		memberDto.setMemPasswd(memPasswd);
+		System.out.println(memberDto);
+
+		// 현재비밀번호 확인
+		String leave = memberService.getMemPasswdByMemId(memberDto);
+		System.out.println("leave=" + leave);
+
+		if (leave != null && Integer.parseInt(leave) == 0) {
 			view.addObject("result", "true");
+			System.out.println("비밀번호 일치");
 		} else {
 			view.addObject("result", "false");
+			System.out.println("비밀번호 불일치");
 		}
 		return view;
 	}
@@ -165,9 +177,13 @@ public class MemberController {
 		System.out.println("loginProc()");
 
 		session = request.getSession();
+		System.out.println(session);
+
+		System.out.println(memberDto);
 
 		MemberDTO loginUser = memberService
 				.getMemberInfoByMemberTerms(memberDto);
+		System.out.println("loginUser" + loginUser);
 
 		if (loginUser != null) {
 			if (!session.isNew()) {
