@@ -418,27 +418,18 @@ public class AdminController {
 
 	@RequestMapping(value = "/ajaxRestntList.do")
 	public void ajaxRestntList(HttpServletRequest request,
-			HttpServletResponse response, SettingDTO settingDto)
+			HttpServletResponse response, RestntDTO restntDto )
 			throws IOException {
 		System.out.println("/ajaxRestntList.do");
 
-		// 패러미터 설정
-		String adress1 = request.getParameter("adress1");
-		String adress2 = request.getParameter("adress2");
-		String adress3 = request.getParameter("adress3");
-
+		System.out.println(restntDto);
 		// 확인
-		System.out.println(adress1);
-		System.out.println(adress2);
-		System.out.println(adress3);
-
-		settingDto.setAdress1(adress1);
-		settingDto.setAdress2(adress2);
-		settingDto.setAdress3(adress3);
-		System.out.println(settingDto);
-
+		
+		
 		// 쿼리 실행
-		restnts = restntService.getRestntListByAddr(settingDto);
+		
+		
+		restnts = restntService.restntListPaging(restntDto);
 		System.out.println(restnts);
 
 		// 제이슨으로 변환
@@ -535,30 +526,26 @@ public class AdminController {
 		
 		System.out.println(restntDto);
 		
-		settingDto.setAdress1(restntDto.getAdress1());
-		settingDto.setAdress2(restntDto.getAdress2());
-		settingDto.setAdress3(restntDto.getAdress3());
 		
-		System.out.println(settingDto);
+		Integer deleteFlag = 1;
+		
 		
 		System.out.println("쿼리 실행");
-		restntService.dropRestntById(restntDto.getRestntId());
+		try {
+			restntService.dropRestntById(restntDto.getRestntId());
+			 
+		} catch (Exception e) {
+			deleteFlag = 0;
+		}
 		
-		System.out.println("주소 정보");
 		
 		
-		System.out.println("쿼리 실행 후 식당 리스트 쿼리");
-		restnts = restntService.getRestntListByAddr(settingDto);
-		System.out.println(restnts);
-
-		// 제이슨으로 변환
-		JSONArray jsonArray = JSONArray.fromObject(restnts);
-
-		System.out.println("restnts - " + jsonArray);
-
+		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("restnts", jsonArray);
-
+		map.put("deleteFlag", deleteFlag);
+		
+		
 		JSONObject jsonObject = JSONObject.fromObject(map);
 		System.out.println("json - " + jsonObject);
 
@@ -574,11 +561,9 @@ public class AdminController {
 		
 		System.out.println(restntDto);
 		
-		settingDto.setAdress1(restntDto.getAdress1());
-		settingDto.setAdress2(restntDto.getAdress2());
-		settingDto.setAdress3(restntDto.getAdress3());
 		
-		System.out.println(settingDto);
+		
+		
 	
 		
 		
@@ -594,27 +579,18 @@ public class AdminController {
 		System.out.println(restntDto);
 		
 		System.out.println("추가 쿼리 실행");
-		restntService.putRestnt(restntDto);
+		Integer insertFlag = 1;
+		try {
+			restntService.putRestnt(restntDto);	
+		} catch (Exception e) {
+			insertFlag = 0;
+		}
 		
 		
-		
-		
-		
-		
-		
-		
-		System.out.println("추가 쿼리 실행 후 식당 리스트 쿼리");
-		restnts = restntService.getRestntListByAddr(settingDto);
-		System.out.println(restnts);
-
-		// 제이슨으로 변환
-		JSONArray jsonArray = JSONArray.fromObject(restnts);
-
-		System.out.println("restnts - " + jsonArray);
-
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("restnts", jsonArray);
-
+		map.put("insertFlag", insertFlag);
+		
+		
 		JSONObject jsonObject = JSONObject.fromObject(map);
 		System.out.println("json - " + jsonObject);
 
@@ -769,4 +745,28 @@ public class AdminController {
 			}
 
 		}	
+		@RequestMapping(value = "/ajaxRestntListPaging.do")
+		public void ajaxRestntListPaging(HttpServletRequest request,
+				HttpServletResponse response, RestntDTO restntDto)
+				throws IOException {
+			System.out.println("/ajaxRestntListPaging.do");
+			System.out.println(restntDto);
+			Integer totalCount = restntService.restntListTotalCount(restntDto);
+			System.out.println(totalCount);
+			
+
+			// 제이슨으로 변환
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("totalCount", totalCount);
+			
+			
+			JSONObject jsonObject = JSONObject.fromObject(map);
+			System.out.println("json - " + jsonObject);
+
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(jsonObject.toString());
+		}	
+		
 }
