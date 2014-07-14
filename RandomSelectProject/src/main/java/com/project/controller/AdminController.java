@@ -527,27 +527,25 @@ public class AdminController {
 		System.out.println(restntDto);
 		
 		
-		
+		Integer deleteFlag = 1;
 		
 		
 		System.out.println("쿼리 실행");
-		restntService.dropRestntById(restntDto.getRestntId());
+		try {
+			restntService.dropRestntById(restntDto.getRestntId());
+			 
+		} catch (Exception e) {
+			deleteFlag = 0;
+		}
 		
-		System.out.println("주소 정보");
 		
 		
-		System.out.println("쿼리 실행 후 식당 리스트 쿼리");
-		restnts = restntService.getRestntListByAddr(restntDto);
-		System.out.println(restnts);
-
-		// 제이슨으로 변환
-		JSONArray jsonArray = JSONArray.fromObject(restnts);
-
-		System.out.println("restnts - " + jsonArray);
-
+		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("restnts", jsonArray);
-
+		map.put("deleteFlag", deleteFlag);
+		
+		
 		JSONObject jsonObject = JSONObject.fromObject(map);
 		System.out.println("json - " + jsonObject);
 
@@ -581,27 +579,18 @@ public class AdminController {
 		System.out.println(restntDto);
 		
 		System.out.println("추가 쿼리 실행");
-		restntService.putRestnt(restntDto);
+		Integer insertFlag = 1;
+		try {
+			restntService.putRestnt(restntDto);	
+		} catch (Exception e) {
+			insertFlag = 0;
+		}
 		
 		
-		
-		
-		
-		
-		
-		
-		System.out.println("추가 쿼리 실행 후 식당 리스트 쿼리");
-		restnts = restntService.getRestntListByAddr(restntDto);
-		System.out.println(restnts);
-
-		// 제이슨으로 변환
-		JSONArray jsonArray = JSONArray.fromObject(restnts);
-
-		System.out.println("restnts - " + jsonArray);
-
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("restnts", jsonArray);
-
+		map.put("insertFlag", insertFlag);
+		
+		
 		JSONObject jsonObject = JSONObject.fromObject(map);
 		System.out.println("json - " + jsonObject);
 
