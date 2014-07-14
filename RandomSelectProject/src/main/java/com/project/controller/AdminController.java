@@ -769,4 +769,70 @@ public class AdminController {
 			out.print(jsonObject.toString());
 		}	
 		
+		@RequestMapping(value = "/addressTransfer1.do")
+		public void addressTransfer1(HttpServletRequest request,
+				HttpServletResponse response, RestntDTO restntDto )
+				throws IOException {
+			System.out.println("/addressTransfer1.do");
+
+			System.out.println(restntDto);
+			// 확인
+			
+			
+			// 쿼리 실행
+			
+			
+			restnts = restntService.getRestntFullAddress(restntDto);
+			System.out.println(restnts);
+
+			// 제이슨으로 변환
+			JSONArray jsonArray = JSONArray.fromObject(restnts);
+
+			System.out.println("restnts - " + jsonArray);
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("restnts", jsonArray);
+			
+			JSONObject jsonObject = JSONObject.fromObject(map);
+			System.out.println("json - " + jsonObject);
+
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(jsonObject.toString());
+		}
+		@RequestMapping(value = "/addressTransfer2.do", method = RequestMethod.POST)
+		void addressTransfer2(HttpServletRequest request,
+				HttpServletResponse response, RestntDTO restntDto) throws IOException {
+			System.out.println("/addressTransfer2.do");
+			
+			System.out.println(restntDto);
+			
+			
+			Integer insertFlag = 1;
+			
+			
+			System.out.println("쿼리 실행");
+			try {
+				restntService.setRestntLocationInfo(restntDto);
+				 
+			} catch (Exception e) {
+				insertFlag = 0;
+			}
+			
+			
+			
+			
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("insertFlag", insertFlag);
+			
+			
+			JSONObject jsonObject = JSONObject.fromObject(map);
+			System.out.println("json - " + jsonObject);
+
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(jsonObject.toString());
+
+		}
 }

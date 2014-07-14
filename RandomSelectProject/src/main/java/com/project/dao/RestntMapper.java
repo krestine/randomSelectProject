@@ -59,4 +59,8 @@ public interface RestntMapper {
 	Integer restntListTotalCount(RestntDTO restntDto);
 	//식당 리스트 페이징 구현 : 리스트 그리기
 	List<RestntDTO> restntListPaging(RestntDTO restntDto);
+	
+	List<RestntDTO> getRestntFullAddress(RestntDTO restntDto);
+	
+	void setRestntLocationInfo (RestntDTO restntDto);
 }
