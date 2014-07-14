@@ -93,7 +93,7 @@ public class EvaluateController {
 	}
 
 	// 평가 안한 식당목록(nEvaluateList.jsp)
-	@RequestMapping(value = "/nEvaluateListForm.do", method = RequestMethod.POST)
+	@RequestMapping(value = "nEvaluateListForm.do")
 	public String nEvaluateListForm(HttpServletRequest request, Model model,
 			String memId) {
 		System.out.println("nEvaluateListForm()");
@@ -167,9 +167,8 @@ public class EvaluateController {
 		System.out.println("이벨아이디, 멤아이디::"+evalId+" & "+memId);
 	
 		System.out.println("edit()");
-		return "evaluate/evaluateList";
-	/*	<jsp:param name="paramName" value="vlaue1" />*/
-		/*<jsp:forward page="evaluateList.jsp" />*/
+		return "forward:/evaluateList.do";
+
 	}
 
 
@@ -184,25 +183,21 @@ public class EvaluateController {
 		evaluateService.deleteData(map);
 		System.out.println("memID 딜리트::"+memId);
 		System.out.println("evalId 딜리트::"+evalId);
-		return "forward:/nEvaluateListForm.do";
+		return "redirect:/nEvaluateListForm.do";
 		
 	}
 
 	//nEvaluateList에서 수정
 	@RequestMapping(value = "editOk.do", method = RequestMethod.POST)
-	public String setScoreByEvaluateTerms1(Model model, EvaluateDTO evaluateDto, 
-			String evalId, String memId, String score) {
-		System.out.println("memID edit::"+memId);
-		System.out.println("evalId deit::"+evalId);
-		evaluateDto.setMemId(memId);
-		evaluateDto.setEvalId(evalId);
-		evaluateDto.setScore(score);
-		evaluateService.setScoreByEvaluateTerms1(evaluateDto);
+	public String setScoreByEvaluateTerms1(Model model, EvaluateDTO evaluateDto) 
+	{
+		System.out.println("수정한 내용: "+evaluateDto);
+		evaluateService.setScoreByEvaluateTerms(evaluateDto);
 		
-		System.out.println("이벨아이디, 멤아이디::"+evalId+" & "+memId);
+		
 	
 		System.out.println("edit()");
-		return "evaluate/evaluateList";
+		return "redirect: /evaluateList.do";
 	
 }
 }
