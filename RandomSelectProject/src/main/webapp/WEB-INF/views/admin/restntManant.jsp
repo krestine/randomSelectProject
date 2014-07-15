@@ -738,7 +738,7 @@
 		
 							if (restnts != null) {
 								$('#restntList').show();
-								 var html = '<tr>';
+								 var html = '<tr><th style="width: 45%" colspan=2>식당 이름</th></tr>';
 								 
 								 $.each(restnts,function(key) {
 									var restntName = restnts[key].restntName;
@@ -746,7 +746,7 @@
 	
 									
 											 
-									html += '<td>'+ restntName
+									html += '<tr><td>'+ restntName
 											+ '</td><td><input type = "hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
 											+ key
 											+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr>';
@@ -774,21 +774,19 @@
 
 </head>
 <body>
-	<button onclick="addressTransfer()">위도, 경도 환산</button>
-	<input type="text" id="transTest">
-	<button onclick="findLocationTest()">위도, 경도 환산 테스트</button>
+	
 	
 	<div id="selectBox" align="center" >
-		주소 선택<br> <select id="adress1" class="adress1">
+		주소 선택<br> <select id="adress1" class="selectpicker" data-live-search="true">
 			<c:forEach items="${adress1}" var="adress1">
 
 				<option value="${adress1}">${adress1}</option>
 
 			</c:forEach>
-		</select> <select id="adress2" class="adress2">
+		</select> <select id="adress2" class="selectpicker" data-live-search="true">
 			<option>시/도 를 선택하세요</option>
 
-		</select> <select id="adress3" class="adress3">
+		</select> <select id="adress3" class="selectpicker" data-live-search="true">
 			<option>시/군/구를 선택하세요</option>
 		</select>
 	</div>
@@ -796,7 +794,7 @@
 
 	<div id="restntList" align="center">
 
-		<table border="2" id="restntTable" class="table">
+		<table border="2" id="restntTable" class="table" style="width: 60%">
 			<caption>식당 리스트</caption>
 			<tbody id="restntListResult">
 			</tbody>
