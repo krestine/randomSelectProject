@@ -191,7 +191,7 @@
 			</div>
 			<div>
 				전화번호 <input type="text" id="mobileId" name="memMobile"
-					placeholder="010-1234-1234">
+					placeholder="ex)010-1234-1234">
 			</div>
 			<div>
 				<label id="idErrorMsg" style="color: red">${errmessage }</label>
@@ -214,7 +214,7 @@
 			</div>
 			<div>
 				전화번호 <input type="text" id="mobilePw" name="memMobile"
-					placeholder="010-1234-1234">
+					placeholder="ex)010-1234-1234">
 			</div>
 			<div>
 				<label id="pwErrorMsg" style="color: red"></label>
