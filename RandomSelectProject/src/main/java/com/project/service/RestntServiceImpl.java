@@ -121,6 +121,10 @@ public class RestntServiceImpl implements RestntService {
 		restntMapper.setRestntLocationInfo(restntDto);
 		
 	}
+	@Override
+	public List<RestntDTO> getRestntListByAdress2(RestntDTO restntDto) {
+		return restntMapper.getRestntListByAdress2(restntDto);
+	}
 	
 
 }
