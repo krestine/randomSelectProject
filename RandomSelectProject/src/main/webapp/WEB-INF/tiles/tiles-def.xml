@@ -101,6 +101,11 @@
 		<put-attribute name="main" value="/WEB-INF/views/ladder/ladderMake.jsp" />
 	</definition>
 	
+	<!-- 방문정보 -->
+	<definition name="visitList" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/history/visitList.jsp" />
+	</definition>
+	
 	 <!-- 회원 : 커뮤니티 친구 리스트-->
 	<definition name="mateList" extends="home">
 		<put-attribute name="main" value="/WEB-INF/views/community/mateList.jsp" />

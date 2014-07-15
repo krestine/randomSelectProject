@@ -524,7 +524,7 @@ public class SeedX
 		String returnString = stringBuffer.toString();
 		return returnString;
 	}
-	
+
 	public byte[] stringToPlain(String plain){
 		byte returnPlain[] = new byte[16];
 		if(plain.length()>16){
@@ -545,10 +545,12 @@ public class SeedX
 	
 	public String cipherToString(byte cipher[]){
 		StringBuffer stringBuffer= new StringBuffer();
-		for(int i=0;i<=15;i++){
+		for(int i=0;i<15;i++){
 			stringBuffer.append(Integer.toHexString(0xff&cipher[i]));
 			stringBuffer.append(" ");
 		}
+		stringBuffer.append(Integer.toHexString(0xff&cipher[15]));
+		
 		String returnString = stringBuffer.toString();
 		return returnString;
 	}
@@ -571,7 +573,7 @@ public class SeedX
 	
 	public byte[] getSeedDecrypt(byte cipher[], int roundKey[]){
 		byte plain[] = new byte[16];
-		SeedDecrypt(cipher, pdwRoundKey, plain);
+		SeedDecrypt(cipher, roundKey, plain);
 		return plain;
 	}
 	

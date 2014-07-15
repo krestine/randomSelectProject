@@ -43,18 +43,7 @@ public class EvaluateController {
 	private List<EvaluateDTO> memberEvaluates;
 	private Object evaluateList;
 
-	/*
-	 * @Autowired
-	 * 
-	 * /* // 회원 : 식당 리스트
-	 * 
-	 * @RequestMapping(value = "/evaluateListProc.do", method =
-	 * RequestMethod.POST) public String restntListProc(Model model, RestntDTO
-	 * restntDto) { List<RestntDTO> restnts = restntService.getRestntList();
-	 * model.addAttribute("restnts", restnts);
-	 * System.out.println("restntListProc()"); return "evaluate/evaluateList"; }
-	 */
-	// 평가 페이지
+	// 평가 페이지(evaluate.jsp)
 	@RequestMapping(value = "/evaluatemain.do", method = RequestMethod.POST)
 	public String evaluatemain(Model model, String memId,
 			HttpServletRequest request) {
@@ -64,25 +53,18 @@ public class EvaluateController {
 				"loginUser");
 		// 로그인 정보의 아이디를 패러미터로 세팅
 
-		List<EvaluateDTO> evaluates = evaluateService.getnEvaluateListByMemId(loginUser.getMemId());
+		List<EvaluateDTO> evaluates = evaluateService
+				.getnEvaluateListByMemId(loginUser.getMemId());
 		model.addAttribute("evaluates", evaluates);
 		return "evaluate";
 	}
 
-	// 식당평가한 목록
-
-	/*
-	 * @RequestMapping(value = "/evaluateList.do", method = RequestMethod.GET)
-	 * public String getEvaluateListForm(HttpServletRequest request, Model
-	 * model, String memId) { System.out.println("getEvaluateListForm"); return
-	 * "forward:evaluateListForm"; }
-	 */
-
+	// 식당평가한 목록(evaluateList.jsp)
 	@RequestMapping(value = "/evaluateList.do", method = RequestMethod.POST)
-	public ModelAndView evaluateListForm(HttpServletRequest request,
-			Model model) {
+	public ModelAndView evaluateListForm(HttpServletRequest request, Model model) {
 		System.out.println("evaluateList()");
-		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
+		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
+				"loginUser");
 		ModelAndView view = new ModelAndView("evaluateList");
 		System.out.println(loginUser.toString());
 		String memId = loginUser.getMemId();
@@ -90,7 +72,6 @@ public class EvaluateController {
 
 		int startrow = 1;
 		int limit = 11;
-
 
 		HashMap<String, Object> param = new HashMap<String, Object>();
 
@@ -110,8 +91,8 @@ public class EvaluateController {
 		return view;
 	}
 
-	// 평가 안한 식당목록
-	@RequestMapping(value = "/nEvaluateListForm.do", method = RequestMethod.POST)
+	// 평가 안한 식당목록(nEvaluateList.jsp)
+	@RequestMapping(value = "nEvaluateListForm.do")
 	public String nEvaluateListForm(HttpServletRequest request, Model model,
 			String memId) {
 		System.out.println("nEvaluateListForm()");
@@ -127,21 +108,19 @@ public class EvaluateController {
 		return "nEvaluateList";
 	}
 
-	// 평가 수정editOk
-	@RequestMapping(value = "edit.do", method = RequestMethod.POST)
-	public String edit(Model model, HttpServletRequest request) {
-		// 저장해줘..(쿼리문으로 xml에 쓰면돼)
-
-		return "edit";
-	}
-
-	// 평가 수정editOk
-	@RequestMapping(value = "editOk.do", method = RequestMethod.POST)
-	public String editOk(Model model, HttpServletRequest request) {
-		// 저장해줘..(쿼리문으로 xml에 쓰면돼)
-
-		return "editOk";
-	}
+	/*
+	 * public ModelAndView nEvaluateListForm(HttpServletRequest request, Model
+	 * model, String memId) { System.out.println("nEvaluateListForm()");
+	 * MemberDTO loginUser = (MemberDTO)
+	 * request.getSession().getAttribute("loginUser"); ModelAndView view = new
+	 * ModelAndView("evaluateList"); System.out.println(loginUser.toString());
+	 * memId = loginUser.getMemId(); System.out.println("회원아이디 :: 컨트롤러에서 dd아이디"
+	 * + memId);
+	 * 
+	 * memberEvaluates=evaluateService.getnEvaluateListByMemId(memId);
+	 * model.addAttribute("memberEvaluates", memberEvaluates);
+	 * System.out.println(memberEvaluates); return "nEvaluateList";
+	 */
 
 	@RequestMapping(value = "/evaluateListProc.do", method = RequestMethod.POST)
 	public String evaluateListProc(Model model, String memId,
@@ -159,10 +138,12 @@ public class EvaluateController {
 
 		System.out.println("평가 리스트 실행");
 		try {
-			/*List<EvaluateDTO> evaluates = evaluateService.getEvaluateListByMemId(memId);
-			model.addAttribute("evaluates", evaluates);
-			return "evaluateList";
-*/
+			/*
+			 * List<EvaluateDTO> evaluates =
+			 * evaluateService.getEvaluateListByMemId(memId);
+			 * model.addAttribute("evaluates", evaluates); return
+			 * "evaluateList";
+			 */
 		} catch (Exception e) {
 			model.addAttribute("errorMessage",
 					"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
@@ -171,72 +152,64 @@ public class EvaluateController {
 
 	}
 
-	// 식당 평가 수정
-	@RequestMapping(value = "/updateEvaluateListProc.do", method = RequestMethod.POST)
-	public String updateEvaluateListProc(Model model, EvaluateDTO evaluateDto) {
+	// 식당 평가 수정(evaluateList.nEvaluateList에서 사용)
+	@RequestMapping(value = "edit.do", method = RequestMethod.POST)
+	public String setScoreByEvaluateTerms(Model model, EvaluateDTO evaluateDto,
+			String evalId, String memId, String score,
+			HttpServletRequest request) {
+		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
+				"loginUser");
+
+		System.out.println("memID edit::" + memId);
+		System.out.println("evalId deit::" + evalId);
+		evaluateDto.setMemId(loginUser.getMemId());
+		evaluateDto.setEvalId(evalId);
+		evaluateDto.setScore(score);
 		evaluateService.setScoreByEvaluateTerms(evaluateDto);
-	/*	EvaluateDTO evaluate = (EvaluateDTO) evaluateService
-				.getEvaluateListByMemId(evaluateDto.getMemId());
-		model.addAttribute("evaluate", evaluate);*/
-		return "edit";
+
+		System.out.println("이벨아이디, 멤아이디::" + evalId + " & " + memId);
+
+		System.out.println("edit()");
+		return "forward:/evaluateList.do";
+
 	}
 
-/*	// 식당 평가 입력
-	@RequestMapping(value = "/nEvaluateListProc.do", method = RequestMethod.POST)
-	public String nEvaluateListProc(Model model, EvaluateDTO evaluateDTO) {
-		System.out.println("nEvaluateListProc()");
-		evaluateService.putScoreByEvaluateTerms(evaluateDTO);
-		return "nEvaluateList";
-	}*/
+	// 삭제(evaluateList.jsp에서 만 사용)
+	@RequestMapping(value = "delete.do")
+	public String deleteData(HttpServletRequest request, String memId,
+			String evalId) {
+		System.out.println("memID 딜리트::" + memId);
+		System.out.println("evalId 딜리트::" + evalId);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("memId", memId);
+		map.put("evalId", evalId);
+		evaluateService.deleteData(map);
+		System.out.println("memID 딜리트::" + memId);
+		System.out.println("evalId 딜리트::" + evalId);
+		return "redirect:/nEvaluateListForm.do";
 
-	// 삭제
-	@RequestMapping(value = "delete.do", method = RequestMethod.POST)
-	public String delete(HttpServletRequest request) {
-
-		Map<String, String[]> requestParams = request.getParameterMap();
-
-		/*
-		 * public String delete(@Valid Evaluate evaluate, Model model,
-		 * HttpServletRequest request) {
-		 */
-		/*
-		 * request.getParameter("memId");
-		 * evaluateService.deleteData(request.getParameter("memId"));
-		 */
-		for (Map.Entry<String, String[]> entry : requestParams.entrySet()) {
-			String key = entry.getKey(); // parameter name
-			String[] values = entry.getValue(); // parameter values as array of
-												// String
-
-			if (key.equals("deleteEvaluate")) {
-				for (int i = 0; i < values.length; i++) {
-					String deleteEvaluate = values[i];
-					System.out.println("삭제대상 => " + deleteEvaluate);
-
-				}
-			}
-		}
-
-		return "delete";
 	}
 
-	/*
-	 * //삭제
-	 * 
-	 * @RequestMapping(value="menuItemDelete.do", method=RequestMethod.POST)
-	 * public String menuItemDelete(HttpServletRequest request){
-	 * 
-	 * Map<String, String[]> requestParams = request.getParameterMap();
-	 * 
-	 * for (Map.Entry<String, String[]> entry : requestParams.entrySet()) {
-	 * String key = entry.getKey(); // parameter name String[] values =
-	 * entry.getValue(); // parameter values as array of String
-	 * 
-	 * 
-	 * if( key.equals("deleteItem")){ for (int i = 0; i < values.length; i++) {
-	 * String deleteItemId = values [i]; System.out.println("삭제대상 => " +
-	 * deleteItemId); // ItemService.deleteItem(deleteItemId); } } }
-	 * 
-	 * return "redirect:/menuListMng.do"; }
-	 */
+	// nEvaluateList에서 수정
+	@RequestMapping(value = "editOk.do", method = RequestMethod.POST)
+	public String setScoreByEvaluateTerms1(Model model,
+			EvaluateDTO evaluateDto, String evalId, String memId, String score,
+			HttpServletRequest request) {
+		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
+				"loginUser");
+
+		System.out.println("memID edit::" + memId);
+		System.out.println("evalId deit::" + evalId);
+		evaluateDto.setMemId(loginUser.getMemId());
+		evaluateDto.setEvalId(evalId);
+		evaluateDto.setScore(score);
+		evaluateService.setScoreByEvaluateTerms(evaluateDto);
+
+		System.out.println("이벨아이디, 멤아이디::" + evalId + " & " + memId);
+
+		System.out.println("edit()");
+		return "forward: /evaluateList.do";
+
+	}
+
 }

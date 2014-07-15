@@ -14,9 +14,24 @@
 		SYSDATE,
 		#{menuId, jdbcType=VARCHAR},
 		#{memId, jdbcType=VARCHAR},
-		#{restntId, jdbcType=VARCHAR})
+		#{restntId, jdbcType=VARCHAR},
+		#{restntName, jdbcType=VARCHAR},
+		#{active, jdbcType=VARCHAR})
 	</insert>
 	<select id="getLastVisitId" resultType="String">
 		select max(visitId) from visit
 	</select>
+	<select id="getVisitInfoByMemId" parameterType="String"
+		resultType="VisitDTO">
+		select visitDate, menuId, restntName from
+		visit where
+		memId=#{memId}
+		and active = '1'
+	</select>
+	<update id="dropVisitById" parameterType="String">
+		update visit set
+		active = '0'
+		where visittId = #{visitId} and
+		active = '1'
+	</update>
 </mapper>

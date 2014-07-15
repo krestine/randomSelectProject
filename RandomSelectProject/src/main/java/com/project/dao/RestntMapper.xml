@@ -19,8 +19,17 @@
 		select
 		restntId,RESTNTNAME,RESTNTTEL,RESTNTCATE,RESTNTEVAL,ADRESS1,ADRESS2,
 		ADRESS3,ADRESS4, LATITUDE, LONGITUDE from restnt where active = '1'
-
-
+	</select>
+	
+	<select id="getRestntListByAdress" parameterType="RestntDTO" resultType="RestntDTO">
+		select
+		restntId,RESTNTNAME,RESTNTTEL,RESTNTCATE,RESTNTEVAL,ADRESS1,ADRESS2,
+		ADRESS3,ADRESS4, LATITUDE, LONGITUDE from restnt
+		where
+		adress1=#{adress1}and
+		adress2=#{adress2}and
+		adress3=#{adress3}and
+		active= '1'
 	</select>
 
 
@@ -40,8 +49,9 @@
 		update restnt set
 		restntName = #{restntName},
 		restntTel=#{restntTel}
-		
-		where restntId = #{restntId} and
+
+		where restntId =
+		#{restntId} and
 		active = '1'
 
 	</update>
@@ -72,7 +82,7 @@
 
 
 	<!--관리자: 식당관리 - 주소필터 적용 - 식당 리스트 표시 -->
-	<select id="getRestntListByAddr" parameterType="SettingDTO"
+	<select id="getRestntListByAddr" parameterType="RestntDTO"
 		resultType="RestntDTO">
 		select restntId,
 		restntName from restnt
@@ -90,10 +100,7 @@
 	<select id="getRestntInfoById" parameterType="RestntDTO"
 		resultType="RestntDTO">
 		select
-		restntId,restntName,
-		adress1,adress2,
-		adress3,adress4,
-		restnttel,restntcate,RESTNTEVAL from
+		* from
 		restnt where
 		restntId=#{restntId}
 		and active = '1'
@@ -121,7 +128,8 @@
 	<select id="getRestntInfoByRestntId" parameterType="RestntDTO"
 		resultType="RestntDTO">
 		select restntname, restnteval, restntcate, restnttel
-		from restnt
+		from
+		restnt
 		where RESTNTID=#{RESTNTID}
 
 
@@ -136,9 +144,50 @@
 		and r.restntid=e.restntid
 		and e.memid= m.mateid
 		and mm.memid=m.memid
-		and score != -1
+		and
+		score != -1
 	</select>
 
+	<select id="restntListTotalCount" parameterType="RestntDTO"
+		resultType="java.lang.Integer">
+		SELECT COUNT(restntId) From
+		restnt WHERE
+		adress1=#{adress1}
+		and adress2 = #{adress2} and adress3 =#{adress3}
+		and active = '1'
+	</select>
 
+	<select id="restntListPaging" parameterType="RestntDTO"
+		resultType="RestntDTO">
+		select * from (select A.*,FLOOR((ROWNUM - 1)/#{viewCount} +
+		1)page,
+		rownum from (select * from restnt where adress1=#{adress1} and
+		adress2 =
+		#{adress2} and adress3 =#{adress3} and active = '1' order by
+		restntid
+		) A)
+		where page = #{pageNum}
+
+	</select>
+
+	<select id="getRestntFullAddress" parameterType="RestntDTO"
+		resultType="RestntDTO">
+		select restntId, adress1, adress2, adress3, adress4 from
+		restnt where
+		adress1=#{adress1} and adress2 = #{adress2} and adress3
+		=#{adress3}
+		and active = '1' order by restntid
+	</select>
+
+	<update id="setRestntLocationInfo" parameterType="RestntDTO">
+		update restnt set
+		longitude = #{longitude},
+		latitude=#{latitude}
+
+		where
+		restntId =
+		#{restntId} and
+		active = '1'
+	</update>
 
 </mapper>

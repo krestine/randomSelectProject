@@ -17,17 +17,7 @@
 		document.getElementById("select2").action = "evaluatemain.do";
 		document.getElementById("select2").submit();
 	}
-	function editGo() {
-
-		document.getElementById("select2").action = "edit.do";
-		document.getElementById("select2").submit();
-	}
-
-	function deleteGo() {
-
-		document.getElementById("select2").action = "delete.do";
-		document.getElementById("select2").submit();
-	}
+	
 </script>
 
 </head>
@@ -50,24 +40,16 @@
 		</tr>
 		<tr align="center" valign="middle" bgcolor="#00A5FF">
 			<td width="66px">번호</td>
-			<td width="100px"><label>평점</label> <select name="score"
-				id="score">
-					<option value="5">★★★★★</option>
-					<option value="4">★★★★☆</option>
-					<option value="3">★★★☆☆</option>
-					<option value="2">★★☆☆☆</option>
-					<option value="1">★☆☆☆☆</option>
-			</select></td>
-			<!-- 	<td><input type="text" name="evaluate" maxlength="300"
-					style="width: 300px" placeholder="의견을 140자 이내로 적어주세요"></td> -->
+			<td width="100px"><label>평점</label></td>
+
 			<td>방문 평가 안한 음식점</td>
 
 			<td>방문한 날짜</td>
-			<td> </td>
-			
-			<c:forEach var="evaluate" items="${memberEvaluates}">
+			<td></td>
+			<c:forEach var="evaluate" items="${memberEvaluates}"
+				varStatus="status">
 				<tr height="35px">
-					<td align="center">${evaluate.evalId}</td>
+					<td align="center">번호</td>
 					<td align="center"><c:choose>
 							<c:when test="${evaluate.score ==5}">
 						★★★★★
@@ -84,17 +66,45 @@
 							<c:when test="${evaluate.score ==1}">
 						★☆☆☆☆
 			</c:when>
-						</c:choose></td>
+						</c:choose> <script type="text/javascript">
+function hideshow(which){
+if (!document.getElementById)
+return
+if (which.style.display=="block")
+which.style.display="none"
+else
+which.style.display="block"
+}
+</script> 
+<form action="editOk.do" method="POST">
+<a href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">수정</a>
+
+						<div id="${evaluate.evalId}" style="display: none">
+
+							<input type="hidden" value="${evaluate.evalId}" name="evalId">
+							<input type="hidden" value="${evaluate.memId}" name="memId">
+
+
+							<select name="score" id="score">
+								<option value="5">★★★★★</option>
+								<option value="4">★★★★☆</option>
+								<option value="3">★★★☆☆</option>
+								<option value="2">★★☆☆☆</option>
+								<option value="1">★☆☆☆☆</option>
+							</select> 
+	<%--<a	href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">확인</a>
+ --%>					
+ 
+ 	<input type="submit" value="확인" onclick="location.href='javascript:hideshow(document.getElementById(memId=${evaluate.memId}&evalId=${evaluate.evalId}))'">
+		<%-- <a href="delete.do?memId=${evaluate.memId}&evalId=${evaluate.evalId}">삭제</a> --%>
+	
+	</div>
+				</form>
+				</td>
+				
 					<td>${evaluate.restntName}</td>
 					<td>${evaluate.evalDate}</td>
-					<td>
-						<form id="select2" method="POST">
-							<input type="button" onclick="editGo()" value="수정">
-						</form>
-
-						<form id="select2" method="POST">
-							<input type="button" onclick="deleteGo()" value="삭제">
-						</form>
+					<td>1::${evaluate.memId } <br> 2::${evaluate.evalId }
 					</td>
 				</tr>
 			</c:forEach>

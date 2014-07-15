@@ -2,6 +2,7 @@ package com.project.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.velocity.runtime.directive.Evaluate;
 
@@ -30,7 +31,7 @@ public interface EvaluateService {
 		// 회원:평가안한 방문리스트. 방문날짜 restntId
 		List<EvaluateDTO> getnEvaluateListByMemId(String memId);
 
-		// 회원:평가한 방문리스트 수정,평가 안한 점수 입력
+		// 회원:평가한 방문리스트 점수수정,
 		public void setScoreByEvaluateTerms(EvaluateDTO evaluateDto);
 
 		// ///////////////////////////////////////////////////////////////
@@ -42,7 +43,12 @@ public interface EvaluateService {
         //  리스트 개수 
 		int getListCount(String memId);
 		// 게시물 삭제 
-		public void deleteData(String memId, String evalId);
+//		public void deleteData(String memId, String evalId);
+		public void deleteData(Map<String, String> map);
+
+
+//평가 안한 점수 입력
+		void setScoreByEvaluateTerms1(EvaluateDTO evaluateDto);
 
 
 

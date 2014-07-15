@@ -7,8 +7,11 @@
 	<select id="getMenuListByRestntId" parameterType="String"
 		resultType="MenuDTO">
 		select
-		menuid,menuname,restntId,menuPrice,menuCalorie,menuNote from menu where
+		menuid,menuname,restntId,menuPrice,menuCalorie,menuNote from menu
+		where
 		restntid=#{restntId}
+		and active = '1'
+		order by menuId
 	</select>
 
 
@@ -20,17 +23,17 @@
 		menuid,menuname,restntId,menuPrice,menuCalorie,menuNote
 		where menuid =
 		#{menuId}
+		and active = '1'
 	</select>
 
 	<!--관리자 : 메뉴 추가 -->
 	<insert id="putMenu" parameterType="MenuDTO">
 		insert into menu
 		(menuId,
-		restntId, menuName, menuPrice, menuCalorie,menuNote)
+		restntId, menuName, menuPrice, menuCalorie,menuNote,active)
 		values
-		(sq_menu.NEXTVAL,
-		#{restntId},#{menuName},#{menuPrice},#{menuCalorie},#{menuNote})
-
+		(#{menuId},
+		#{restntId},#{menuName},#{menuPrice},#{menuCalorie},#{menuNote},'1')
 	</insert>
 
 	<!-- 관리자 : 메뉴 수정 -->
@@ -39,16 +42,50 @@
 		menuName=#{menuName},
 		menuPrice=#{menuPrice},
 		menuCalorie=#{menuCalorie},
-		menuNote=#{menuNote},
+		menuNote=#{menuNote}
 		where
 		menuId=#{menuId}
+		and active = '1'
 	</update>
 
 	<!-- 관리자 : 메뉴 삭제 -->
-	<delete id="dropMenuByMenuId" parameterType="String">
+	<update id="dropMenuByMenuId" parameterType="String">
+		update menu set
+		active='2'
+		where
+		menuId=#{menuId}
+		and active = '1'
+	</update>
+
+
+
+
+	<!-- 관리자 : 메뉴 추가 취소 -->
+	<delete id="addMenuCancel" parameterType="String">
 		delete from menu
 		where
 		menuId=#{menuId}
+		and active = '1'
 	</delete>
+
+	<select id="getLastMenuId" parameterType="String" resultType="String">
+		select max(menuid) from menu
+		where restntId=#{restntId}
+
+	</select>
+
+	<insert id="addMenuForm" parameterType="MenuDTO">
+		insert into menu
+		(menuId,
+		restntId,active)
+		values
+		(#{menuId},#{restntId},'1')
+
+	</insert>
+
+	
+
+
+
 
 </mapper>

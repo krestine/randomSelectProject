@@ -2,6 +2,7 @@ package com.project.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.velocity.runtime.directive.Evaluate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +45,10 @@ public class EvaluateServiceImpl implements EvaluateService {
 		return evaluateMapper.getnEvaluateListByMemId(memId);
 	}
 
-	// 평가한 방문리스트 수정,평가안한 방문리스트 입력
+	// 평가한 방문리스트 수정
 	@Override
-	public void setScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
-		return;
+	public void setScoreByEvaluateTerms(EvaluateDTO evaluateDto) {
+		evaluateMapper.setScoreByEvaluateTerms(evaluateDto);
 		// TODO Auto-generated method stub
 	}
 
@@ -60,9 +61,16 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	// 데이터 삭제
 	@Override
-	public void deleteData(String memId, String evalId) {
-		return ;
-
+//	public void deleteData(String memId, String evalId) {
+	public void deleteData(Map<String, String> map) {
+	evaluateMapper.deleteData(map);
+	}
+//평가안한 점수 입력
+	@Override
+	public void setScoreByEvaluateTerms1(EvaluateDTO evaluateDto) {
+		evaluateMapper.setScoreByEvaluateTerms1(evaluateDto);
+		
+		
 	}
 
 
