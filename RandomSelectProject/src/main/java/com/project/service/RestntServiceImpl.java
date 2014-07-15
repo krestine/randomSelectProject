@@ -104,7 +104,10 @@ public class RestntServiceImpl implements RestntService {
 		// TODO Auto-generated method stub
 		return restntMapper.getRestntListByAddr(restntDto);
 	}
-	
-
+	@Override
+	public List<RestntDTO> getRestntListByAdress(RestntDTO restntDto) {
+		// TODO Auto-generated method stub
+		return restntMapper.getRestntListByAdress(restntDto);
+	}
 
 }
