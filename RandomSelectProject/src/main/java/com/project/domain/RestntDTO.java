@@ -14,6 +14,7 @@ public class RestntDTO {
 	private String adress2;
 	private String adress3;
 	private String adress4;
+	private String adress5;
 	private String restntTel;
 	private String restntCate;
 	private String restntEval;

@@ -66,6 +66,7 @@
 		adress2,
 		adress3,
 		adress4,
+		adress5,
 		restntTel,
 		restntCate)
 		values
@@ -75,6 +76,7 @@
 		#{adress2},
 		#{adress3},
 		#{adress4},
+		#{adress5},
 		#{restntTel},
 		#{restntCate})
 	</insert>
@@ -174,8 +176,9 @@
 
 	<select id="getRestntFullAddress" parameterType="RestntDTO"
 		resultType="RestntDTO">
-		select restntId, adress1, adress2, adress3, adress4 from
+		select restntId, adress1, adress2, adress3, adress4, adress5 from
 		restnt where
+		
 		adress1=#{adress1} and adress2 = #{adress2} and adress3
 		=#{adress3}
 		and active = '1' order by restntid
