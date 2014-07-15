@@ -37,7 +37,7 @@ $(document).ready(function() {
 		</form>
 		<br>
 		
-		<form action="mateDetailProc.do" method="post">
+		<form id="mateDetail" action="mateDetailProc.do" method="post">
 			<input value="친구이름">
 			<input value="친구아이디">
 			<input value="친구등급"><br>

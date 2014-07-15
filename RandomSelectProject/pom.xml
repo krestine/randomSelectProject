@@ -25,8 +25,13 @@
 		<org.mybatis.version>3.0.6</org.mybatis.version>
 		<org.mybatis.spring.version>1.0.2</org.mybatis.spring.version>
 	</properties>
-
+	<!-- facebook4j -->
 	<dependencies>
+		<dependency>
+  			<groupId>org.facebook4j</groupId>
+  		<artifactId>facebook4j-core</artifactId>
+  	<version>[2.1,)</version>
+	</dependency>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

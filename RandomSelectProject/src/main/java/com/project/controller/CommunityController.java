@@ -71,6 +71,7 @@ public class CommunityController {
 							.getMateListByMemId(loginUser.getMemId());
 					System.out.println(mates);
 					model.addAttribute("mates", mates);
+					
 					return "mateList";
 
 				} catch (Exception e) {
@@ -86,21 +87,67 @@ public class CommunityController {
 		}
 		return "setting/error";
 	}
+	// 친구 리스트 ajax
+	/*
+	@RequestMapping(value="ajaxMateList.do")
+	public String ajaxMateList(Model model, HttpServletRequest request, HttpServletResponse response, MateDTO mateDto ) throws IOException{
+		loginUser = (MemberDTO) request.getSession().getAttribute(
+				"loginUser");
+		try {
+			if (loginUser.getMemId() != null || loginUser != null) {
+				
+				try {
+					System.out.println("/ajaxMateList.do");
+					String memId = request.getParameter(loginUser.getMemId());
+					System.out.println(memId);
+					mates=mateService.getMateListByMemId(memId);
+					model.addAttribute("mates", mates);
+					
+					JSONArray jsonArray = JSONArray.fromObject(mates);
+					System.out.println("mates -" + jsonArray);
+					Map<String, Object> map = new HashMap<String, Object>();
+					
+					JSONObject jsonObject = JSONObject.fromObject(map);
+					System.out.println("json - " + jsonObject);
+
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print(jsonObject.toString());
+					
+				} catch (Exception e) {
+					model.addAttribute("errorMessage",
+							"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
+					return "setting/error";
+				}
+			}
+			} catch (Exception e) {
+				model.addAttribute("errorMessage", "로그인 해주세요!");
+
+			}
+			return "setting/error";	
+					
+	}
+	*/
 	
+	// 친구 상세정보 ajax 
+
 	@RequestMapping(value="ajaxMateDetail.do")
 	public void ajaxMateDetail(HttpServletRequest request,
-			HttpServletResponse response, MateDTO mateDto) throws IOException{
-			
-			System.out.println("/ajaxMateList.do");
-			
-			String mateId = request.getParameter("mateId");
+			HttpServletResponse response, MateDTO mateDto, String mateId, String memId) throws IOException{
+		
+			mateInfo = mateService.getMemInfoByMemId(mateId);
 			System.out.println(mateId);
-			mate = mateService.getMemInfoByMemId(mateId);
-			System.out.println(mate);
 			
+			mate = mateService.getMateInfoByMateId(memId, mateId);
+			System.out.println(mate);
 			// 제이슨으로 변환 
 			
-			JSONObject jsonObject  = JSONObject.fromObject(mate);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("mateInfo", mateInfo);
+			map.put("mate", mate);
+		
+			JSONObject jsonObject  = JSONObject.fromObject(mateInfo);
+			JSONObject jsonObject2 =JSONObject.fromObject(mate);
 			System.out.println("json - "+ jsonObject);
 			
 			response.setContentType("text/html; charset=utf-8");
@@ -109,20 +156,10 @@ public class CommunityController {
 			
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	// 회원 : 친구 상세정보
-	@RequestMapping(value = "/mateDetailProc.do", method = RequestMethod.POST)
+	
+		// 회원 : 친구 상세정보
+	@RequestMapping(value = "/mateProcProc.do", method = RequestMethod.POST)
 	public String mateDetailProc(Model model, String mateId, String memId, HttpServletRequest request) {
 		// 친구의 상세정보		
 		
@@ -133,7 +170,6 @@ public class CommunityController {
 		model.addAttribute("mateInfo", mateInfo);
 		
 		// 친구의 상태정보		
-		
 		
 		mate = mateService.getMateInfoByMateId(memId, mateId);
 		System.out.println(mate);

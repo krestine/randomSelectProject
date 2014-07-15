@@ -61,6 +61,11 @@ $(document).ready(function() {
 						<input value="${menuInfo.menuCalorie}" name="menuCalorie"><br>
 						</c:forEach>
 					</form>
+					
+					
+				
+					
+					
 </div>
 </body>
 

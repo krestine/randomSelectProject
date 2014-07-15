@@ -132,7 +132,7 @@
 		resultType="RestntDTO">
 		select r.restntname, e.score, m.mateid, r.restntid
 		from restnt r, evaluate e, mate m, member mm
-		where mm.memid=#{mm.memid}
+		where mm.memid=#{mm.memid jdbcType=VARCHAR}
 		and r.restntid=e.restntid
 		and e.memid= m.mateid
 		and mm.memid=m.memid
