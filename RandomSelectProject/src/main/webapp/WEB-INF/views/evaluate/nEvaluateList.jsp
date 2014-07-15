@@ -76,7 +76,7 @@ else
 which.style.display="block"
 }
 </script> 
-<form action="editOk.do" method="post">
+<form action="editOk.do" method="POST">
 <a href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">수정</a>
 
 						<div id="${evaluate.evalId}" style="display: none">
@@ -95,7 +95,9 @@ which.style.display="block"
 	<%--<a	href="javascript:hideshow(document.getElementById('${evaluate.evalId}'))">확인</a>
  --%>					
  
- 	<input type="submit" value="확인" onclick="location.href='javascript:hideshow(document.getElementById('${evaluate.evalId}'))'">
+ 	<input type="submit" value="확인" onclick="location.href='javascript:hideshow(document.getElementById(memId=${evaluate.memId}&evalId=${evaluate.evalId}))'">
+		<%-- <a href="delete.do?memId=${evaluate.memId}&evalId=${evaluate.evalId}">삭제</a> --%>
+	
 	</div>
 				</form>
 				</td>

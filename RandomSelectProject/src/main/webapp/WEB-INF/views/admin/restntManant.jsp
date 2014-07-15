@@ -6,16 +6,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>식당 관리</title>
+
+<script type="text/javascript"
+	src="http://maps.googleapis.com/maps/api/js?sensor=true&language=ko">
+</script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	
 //전역 변수 : 메뉴 관련 기능에서 사용할 restntId
+	var geocoder = new google.maps.Geocoder();
 	var restntIdforMenu;
 	var newMenuId;
 	var addMenuFlag = 1;
 	var addMenuKey = 0;
 	var viewCount = 20;
-	
+	var longitude;
+	var latitude;
 	
 	$(document).ready(function() {
 
@@ -620,29 +626,38 @@
 				alert("error : ajax 통신 실패.");
 			},
 			success : function(json){
+				addMenuKey = 0;
+				addMenuFlag = 1;
+				$('#newRestnt').hide();
+				$('#restntList').hide();
+				$('#restntInfo').hide(); 
 				$("#restntTable > tbody").html("");
+				
+				
 				var restnts = json.restnts;
-
+				
 				if (restnts != null) {
 					$('#restntList').show();
-					 var html = '<tbody id="restntListResult"><tr>';
+					 var html = '<tr>';
 					 
 					 $.each(restnts,function(key) {
 						var restntName = restnts[key].restntName;
 						var restntId = restnts[key].restntId;
 
-						html += '<td>'
-								+ '<input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId">';
-						html += restntName
-								+ '<button id="restntInfo'
-								+ key
-								+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr>';
+						html += '<td>'+ restntName
+						+ '</td><td><input type="text" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
+						+ key
+						+ '" class="restntInfo" onclick="clickBtn(this);">관리</button><button class="'+key+'" type="button" onclick="nogada(this)">로동</button></td></tr>';
+								 
+						
 
 					});
-					 html += '<tr><td><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr></tbody>';
-					$('#restntTable').append(html);
+					 html += '<tr><td colspan=2><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr>';
+					$('#restntListResult').append(html);
 
 				}
+				
+				
 
 			}
 		});
@@ -717,22 +732,22 @@
 		
 							if (restnts != null) {
 								$('#restntList').show();
-								 var html = '<tbody id="restntListResult"><tr>';
+								 var html = '<tr>';
 								 
 								 $.each(restnts,function(key) {
 									var restntName = restnts[key].restntName;
 									var restntId = restnts[key].restntId;
 	
-									html += '<td>';
+									
 											 
-									html += restntName
-											+ '</td><td><input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
+									html += '<td>'+ restntName
+											+ '</td><td><input type = "text" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
 											+ key
-											+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr>';
+											+ '" class="restntInfo" onclick="clickBtn(this);">관리</button><button id="no'+key+'" type="button" onclick="nogada(this);">로동</button></td></tr>';
 	
 								});
-								 html += '<tr><td colspan=2><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr></tbody>';
-								$('#restntTable').append(html);
+								 html += '<tr><td colspan=2><button id="addMode" type="button" onclick="addMode()">추가</button><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr>';
+								$('#restntListResult').append(html);
 		
 							}
 		
@@ -745,12 +760,127 @@
 	}
 	
 	
+	function findLocation(obj) {
+		//docment.getElementById = view에서 해당 Id를 가진 컨트롤의 값을 가져옴
+
+		geocoder.geocode({
+			'address' : obj
+		}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				latitude = results[0].geometry.location.lat();
+				longitude =	results[0].geometry.location.lng();
+			} else {
+				alert('Geocode was not successful for the following reason: '
+						+ status);
+			}
+			alert(latitude);
+			alert(longitude);
+		
+		});
+		
+	}
+	
+	function findLocationTest() {
+		var obj = $('#transTest').val();
+		alert(obj);
+		geocoder.geocode({
+			'address' : obj
+		}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				latitude = results[0].geometry.location.lat();
+				longitude =	results[0].geometry.location.lng();
+			} else {
+				alert('Geocode was not successful for the following reason: '
+						+ status);
+			}
+		});
+		alert(longitude);
+		alert(latitude);
+		
+		
+	}
+	function nogada(obj) {
+		var number = obj.id;
+		var number1 = number.replace('no','');
+		var restntIdNo = $('#restntId'+number1).attr('value');
+		
+		alert(restntIdNo);
+		
+		var paramData = {
+				restntId : restntIdNo
+			};
+
+			$.ajax({
+				cache : false,
+				async : false,
+				type : 'POST',
+				url : 'ajaxRestntInfo.do',
+				data : paramData,
+				dataType : 'json',
+				error : function() {
+					alert("error : ajax 통신 실패.");
+		
+				},
+				//식당 정보 테이블 그리기
+				success : function(json){
+					
+		
+						
+						
+						var adress1 = json.adress1;
+						var adress2 = json.adress2;
+						var adress3 = json.adress3;
+						var adress4 = json.adress4;
+						
+						var adress = adress1 + adress2 + adress3 +adress4;
+						
+						alert('full adress :'+adress);
+						findLocation(adress);
+						
+						var param2 = {
+								restntId : json.restntId,
+								longitude : longitude,
+								latitude : latitude
+						};
+						
+						$.ajax({
+							cache : false,
+							async : false,
+							type : 'POST',
+							url : 'addressTransfer2.do',
+							data : param2,
+							dataType : 'json',
+							error : function() {
+								alert("error : ajax 통신 실패.");
+					
+							},
+							//식당 정보 테이블 그리기
+							success : function(json) {
+								var insertFlag = json.insertFlag;
+								if(insertFlag != 0){
+									alert('추가 성공');
+								}
+								else{
+									alert('추가 실패');
+								}
+					
+								
+							}
+					
+						});
+		
+					}
+		
+				});
+	}
 	</script>
 
 </head>
 <body>
-
-
+	<button onclick="addressTransfer()">위도, 경도 환산</button>
+	<input type="text" id="transTest">
+	<button onclick="findLocationTest()">위도, 경도 환산 테스트</button>
+	
 	<div id="selectBox" align="center" >
 		주소 선택<br> <select id="adress1" class="adress1">
 			<c:forEach items="${adress1}" var="adress1">
@@ -771,7 +901,8 @@
 
 		<table border="2" id="restntTable" >
 			<caption>식당 리스트</caption>
-
+			<tbody id="restntListResult">
+			</tbody>
 
 		</table>
 		<div id="restntListPage" align="center" ></div>	
@@ -779,7 +910,7 @@
 
 	<div id="restntInfo" align="center">
 		<form id="restInfoForm">
-			<table border="2" id="restntInfoTable">
+			<table border="2" id="restntInfoTable" class="table">
 				<caption>식당 정보</caption>
 
 
