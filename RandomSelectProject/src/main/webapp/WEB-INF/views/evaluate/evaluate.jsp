@@ -9,34 +9,42 @@
 <title>evaluateList.jsp</title>
 <style>
 .divHide {
- display:none;
- visibility:hidden;
+	display: none;
+	visibility: hidden;
 }
+
 .divShow {
- visibility:show;
+	visibility: show;
 }
+
 table {
- width:600px;
- border:1px solid #000000;
+	width: 600px;
+	border: 1px solid #000000;
 }
+
 caption {
- font-weight:bold;
+	font-weight: bold;
 }
+
 tr {
- height:30px;
+	height: 30px;
 }
+
 td {
- text-align:center;
- font-weight:bold;
+	text-align: center;
+	font-weight: bold;
 }
-#m1, #dm1 {
- background:#eeeeee;
+
+#m1,#dm1 {
+	background: #eeeeee;
 }
-#m2, #dm2 {
- background:#cccccc;
+
+#m2,#dm2 {
+	background: #cccccc;
 }
-#m3, #dm3 {
- background:#aaaaaa;
+
+#m3,#dm3 {
+	background: #aaaaaa;
 }
 </style>
 
@@ -52,24 +60,13 @@ td {
 		document.getElementById("select2").action = "nEvaluateListForm.do";
 		document.getElementById("select2").submit();
 	}
-	function editGo() {
-
-		document.getElementById("select2").action = "edit.do";
-		document.getElementById("select2").submit();
-	}
 
 	function mainGo() {
 		document.getElementById("select1").action = "main.do";
 		document.getElementById("select1").submit();
 	}
-	function myInfoGo() {
-		document.getElementById("select1").action = "myInfoForm.do";
-		document.getElementById("select1").submit();
-	}
-
-
 </script>
-<script>
+<!-- <script>
 function showHide(num) {
  
   var dm1 = document.getElementById("dm1"); // dom을 이용해서 값을 가져옴. 
@@ -92,10 +89,10 @@ function showHide(num) {
   }
   
  }
-</script>
+</script> -->
 </head>
 <body>
-<table>
+	<%-- <table>
 <caption>평가</caption>
 <tr>
 <td id="m1" onclick="showHide(1);">평가한음식점</td>
@@ -108,8 +105,8 @@ function showHide(num) {
 <td id="dm3" colspan="3" class="divHide">홈으로 </td>
 </tr>
 </table>
-
-<!-- <style>
+ --%>
+	<!-- <style>
 a:link {
 	color: blue;
 	text-decoration: none;
@@ -132,7 +129,7 @@ a:active {
 </style> -->
 
 
-<!-- <script type="text/javascript">
+	<!-- <script type="text/javascript">
 	function evaluateGo() {
 
 		document.getElementById("select2").action = "evaluateList.do";
@@ -159,51 +156,28 @@ a:active {
 		document.getElementById("select1").submit();
 	}</script>
  -->
-	
-
-<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>평가</title>
 
 
-</head>
-<body> -->
-	
 	<form id="select2" method="post">
 		<input type="button" onclick="evaluateGo()" value="평가한 페이지 ">
 		<input type="button" onclick="nEvaluateGo()" value="평가 안한 페이지">
-		<input type="button" onclick="editGo()" value="수정">
+		<input type="button" onclick="mainGo()" value="메인으로">
 	</form>
-			<div class="evaluateList">
-			
-	<c:forEach var="notice" items="${add}" varStatus="evaluate">
-		<dt class="listHead">
-			<h3>${notice.title}</h3>
-			<h4>${notice.regidate}</h4>
-		</dt>
-		<dd class="listContent">${notice.issue}
-			<a class="mainBoard" href="WEB-INF/evaluate/edit.do"
-				OnClick="editgo()">글수정</a> <a class="mainBoard" href="#"
-				OnClick="window.location='delete.do?notCD=${notice.notCD}'">삭제</a>
-		</dd>
-	</c:forEach>
-	<h3>메인으로</h3>
+	<%-- <div class="evaluateList">
 
-	<form id="select1" method="post">
-		<input type="button" onclick="mainGo()" value="메인으로 "> 
-		<input type="button" onclick="myInfoGo()" value="내정보수정">
-	</form>
-
-	<!--  <ul>
-      <li><a href="main.do" OnClick="window.location='main.do'">메인으로</a></li>
-     <li><a href="myInfoForm.do" OnClick="window.location='myInfoForm.do'">정보수정</a></li>
-    </ul>
- -->
-
+		<c:forEach var="notice" items="${add}" varStatus="evaluate">
+			<dt class="listHead">
+				<h3>${notice.title}</h3>
+				<h4>${notice.regidate}</h4>
+			</dt>
+			<dd class="listContent">${notice.issue}
+				<a class="mainBoard" href="WEB-INF/evaluate/edit.do"
+					OnClick="editgo()">글수정</a> <a class="mainBoard" href="#"
+					OnClick="window.location='delete.do?notCD=${notice.notCD}'">삭제</a>
+			</dd>
+		</c:forEach> </div>
+		--%>
 
 	
-
-		</table>
-	</div>
-
-	</body>
+</body>
 </html>

@@ -34,10 +34,10 @@ $(document).ready(function() {
 		<form id="community" method="post">
 		<input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn" />
 		<input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
-		</form>
+		</form>	
 		<br>
 		
-		<form action="mateDetailProc.do" method="post">
+		<form id="mateDetail" action="mateDetailProc.do" method="post">
 			<input value="친구이름">
 			<input value="친구아이디">
 			<input value="친구등급"><br>

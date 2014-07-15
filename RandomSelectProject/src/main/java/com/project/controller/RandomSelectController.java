@@ -2,11 +2,14 @@ package com.project.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,23 +39,24 @@ public class RandomSelectController {
 	@Autowired
 	private VisitService visitService;
 	
-	private List<RestntDTO> restntList;
+	//private List<RestntDTO> restntList;
 	private List<SettingDTO> walkRange;
+	private List<RestntDTO> restnts;
 	
 	@RequestMapping("/selectResult.do")
 	public String randomSelectMain(Model model, HttpServletRequest request){
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		model.addAttribute("loginUser", loginUser);
-		restntList = restntService.getRestntList();
+		/*restntList = restntService.getRestntList();
 		for(RestntDTO restnt : restntList){
 			System.out.println(restnt.getRestntId());
-		}
+		}*/
 		
 		walkRange = settingService.getWalkRange();
 		model.addAttribute("walkRange", walkRange);
 		
-		model.addAttribute("restntList", restntList);
+		//model.addAttribute("restntList", restntList);
 		return "selectResult";
 	}
 
@@ -85,6 +89,38 @@ public class RandomSelectController {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(json.toString());
+	}
+	
+	@RequestMapping(value = "/ajaxRandomRestnt.do")
+	public void ajaxRandomRestnt(HttpServletRequest request,
+			HttpServletResponse response, RestntDTO restntDto )
+			throws IOException {
+		System.out.println("/ajaxRandomRestnt.do");
+
+		System.out.println(restntDto);
+		// 확인
+		
+		
+		// 쿼리 실행
+		
+		
+		restnts = restntService.getRestntListByAdress(restntDto);
+		System.out.println(restnts);
+
+		// 제이슨으로 변환
+		JSONArray jsonArray = JSONArray.fromObject(restnts);
+
+		System.out.println("restnts - " + jsonArray);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("restnts", jsonArray);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
 	}
 	
 	@RequestMapping("visitList.do")

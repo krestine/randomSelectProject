@@ -58,5 +58,7 @@ public interface MemberService {
 
 	// 회원 : 설정 정보 불러오기 /
 	MemberDTO getOptionInfoByMemId(String memId);
+	
+	void setEvalCountAndMemGrade(MemberDTO memberDto);
 
 }

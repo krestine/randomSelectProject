@@ -524,7 +524,7 @@ public class SeedX
 		String returnString = stringBuffer.toString();
 		return returnString;
 	}
-	
+
 	public byte[] stringToPlain(String plain){
 		byte returnPlain[] = new byte[16];
 		if(plain.length()>16){

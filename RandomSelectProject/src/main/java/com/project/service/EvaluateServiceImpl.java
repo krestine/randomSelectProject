@@ -45,10 +45,10 @@ public class EvaluateServiceImpl implements EvaluateService {
 		return evaluateMapper.getnEvaluateListByMemId(memId);
 	}
 
-	// 평가한 방문리스트 수정,평가안한 방문리스트 입력
+	// 평가한 방문리스트 수정
 	@Override
-	public void setScoreByEvaluateTerms(EvaluateDTO evaluateDTO) {
-		evaluateMapper.setScoreByEvaluateTerms(evaluateDTO);
+	public void setScoreByEvaluateTerms(EvaluateDTO evaluateDto) {
+		evaluateMapper.setScoreByEvaluateTerms(evaluateDto);
 		// TODO Auto-generated method stub
 	}
 
@@ -64,6 +64,13 @@ public class EvaluateServiceImpl implements EvaluateService {
 //	public void deleteData(String memId, String evalId) {
 	public void deleteData(Map<String, String> map) {
 	evaluateMapper.deleteData(map);
+	}
+//평가안한 점수 입력
+	@Override
+	public void setScoreByEvaluateTerms1(EvaluateDTO evaluateDto) {
+		evaluateMapper.setScoreByEvaluateTerms1(evaluateDto);
+		
+		
 	}
 
 

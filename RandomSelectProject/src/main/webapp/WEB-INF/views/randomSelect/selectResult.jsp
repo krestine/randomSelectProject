@@ -33,6 +33,7 @@ language=구글 맵 언어
   
 <script type="text/javascript">
 	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId;
+	var myAddress1, myAddress2, myAddress3;
 	var myInfoWindow;
 	var randomLatitude, randomLongitude;
 	var map, mapResized;
@@ -66,6 +67,115 @@ language=구글 맵 언어
 			document.getElementById("visitList").submit();
 		}
 	}
+	
+	
+	
+	
+	
+	
+	function ajaxRandomRestnt(obj) {
+		
+		var tempDistance=0;
+		var tempCnt=0;
+		var tempRestntLatitude;
+		var tempRestntLongitude
+		var tempRestntName;
+		var tempRestntId;
+		
+		
+		var paramData = {	
+				adress1 : $('#adress1').val(),
+				adress2 : $('#adress2').val(),
+				adress3 : $('#adress3').val()
+		};
+		
+		
+		$.ajax({
+			cache : false,
+			async : false,
+			type : 'POST',
+			url : 'ajaxRandomRestnt.do',
+			data : paramData,
+			dataType : 'json',
+			error : function() {
+				alert("error : ajax 통신 실패.");
+			},
+			success : function(json){
+				$("#restntTable > tbody").html("");
+				var restnts = json.restnts;
+
+				if (restnts != null) {
+					$('#restntList').show();
+					 var html = '<tbody id="restntListResult"><tr>';
+					 
+					 $.each(restnts,function(key) {
+						 tempRestntLatitude = restnts[key].latitude;
+							tempRestntLongitude = restnts[key].longitude;
+							tempRestntName = restnts[key].restntName;
+							tempRestntId = restnts[key].restntId;
+
+							tempDistance=calcDistance(myLatitude, myLongitude, tempRestntLatitude, tempRestntLongitude);
+							
+							if(tempDistance<sRadius){
+								tempOKLatitude[tempCnt] = tempRestntLatitude;
+								tempOKLongitude[tempCnt] = tempRestntLongitude;
+								tempOKName[tempCnt] = tempRestntName;
+								tempOKId[tempCnt] = tempRestntId;
+								
+								
+								var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
+										tempRestntLongitude);
+								tempRestntMarker[tempCnt] = new google.maps.Marker({
+									position : tempRestntPos,
+									map : map,
+									animation: google.maps.Animation.DROP,
+									title : tempRestntName
+								});	
+								tempRestntMarker[tempCnt].setMap(map);
+								
+								tempCnt = tempCnt + 1;
+							}
+							
+							
+							
+							
+							
+							
+					});
+					 
+					 
+					 
+					 var selection= Math.floor(Math.random() * tempCnt);
+
+						tempRestntLatitude = tempOKLatitude[selection];
+						tempRestntLongitude = tempOKLongitude[selection];
+						tempRestntName = tempOKName[selection];
+						tempRestntId = tempOKId[selection];
+						
+						tempRestntMarker[selection].setIcon(restntImage2);
+						tempRestntMarker[selection].setAnimation(google.maps.Animation.BOUNCE);
+						myInfoWindow.close();
+						
+						var tempRestntInfo = new google.maps.InfoWindow();
+						tempRestntInfo.setContent("오늘의 식당 : " + tempRestntName);
+						tempRestntInfo.open(map, tempRestntMarker[selection]);
+						
+						myRestntName = tempRestntName;
+						myRestntId = tempRestntId;
+						
+						//calcRoute(tempRestntLatitude, tempRestntLongitude);
+					 
+					 
+
+				}
+
+			}
+		});
+	
+	}
+	
+	
+	
 	
 	function confirmRestnt() {
 		
@@ -205,19 +315,6 @@ language=구글 맵 언어
 		var tempRestntInfo = new google.maps.InfoWindow();
 		tempRestntInfo.setContent("오늘의 식당 : " + tempRestntName);
 		tempRestntInfo.open(map, tempRestntMarker[selection]);
-		
-		//google.maps.LatLng(latitude, longitude) = 위도와 경도 값을 '위치'개체로 바꾸는 것
-		/* var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
-				tempRestntLongitude);
-		var tempRestntMarker = new google.maps.Marker({
-			position : tempRestntPos,
-			map : map,
-			animation: google.maps.Animation.DROP
-		});
-		tempRestntMarker.setMap(map);
-		var tempRestntInfo = new google.maps.InfoWindow();
-		tempRestntInfo.setContent(tempRestntName);
-		tempRestntInfo.open(map, tempRestntMarker); */
 		
 		myRestntName = tempRestntName;
 		myRestntId = tempRestntId;
@@ -440,7 +537,7 @@ language=구글 맵 언어
 			id=moveToMyLocation value="내 위치로 이동" onclick="setMyCenter()">
 		<input type=button id=moveToRestntLocation value="식당 위치로 이동"
 			onclick="setRestntCenter()"> <input type=button
-			id=getAllRestnt value="식당 골라주기" onclick="getAllRestntList()">
+			id=getAllRestnt value="식당 골라주기" onclick="ajaxRandomRestnt()">
 		<br> <input type=text id=tempAddress value=""> <input
 			type=button id=geocodeTempAddress value="해당 주소 지도에 표시"
 			onclick="findLocation()"> <input type=text id=tempLatitude

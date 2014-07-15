@@ -15,7 +15,7 @@
 <style>
 </style>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top " >
       <div class="container">
         <div class="navbar-header" >
           <a href="main.do" class="navbar-brand">아무거나</a>
