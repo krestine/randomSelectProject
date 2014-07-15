@@ -9,7 +9,7 @@
 
 		select e.mateid, e.memid, m.memname
 		from mate e, member m
-		where e.memid=#{e.memId}
+		where e.memid=#{e.memId  jdbcType=VARCHAR}
 		and e.MATEID=m.MEMID
 		
 	</select>
@@ -18,7 +18,7 @@
 	<select id="getMateIdByMateId" resultType="MateDTO">
 	
 		select memId from mate where
-		memid=#{memId}
+		memid=#{memId  jdbcType=VARCHAR}
 	</select>
 
 	<!-- 회원: 친구상태정보 -->
@@ -26,8 +26,8 @@
 		resultType="MateDTO">
 		
 		select matestatus, infostatus from mate
-		where memid=#{memId}
-		and mateid=#{mateId}
+		where memid=#{memId  jdbcType=VARCHAR}
+		and mateid=#{mateId  jdbcType=VARCHAR}
 		
 	</select>
 	
@@ -36,7 +36,7 @@
 		resultType="MateDTO">
 		select DISTINCT r.memid, r.memname, r.memgrade, e.mateid
 		from member r, mate e 
-		where e.mateid=#{e.mateId}
+		where e.mateid=#{e.mateId  jdbcType=VARCHAR}
     	and e.mateid=r.memid
 		
 		<!-- select memname, e.MEMID
@@ -51,7 +51,7 @@
 	<select id="getMateInfoByMemId" parameterType="String"
 		resultType="MateDTO">
 		select memid, memname, memgrade from member where
-		memid=#{memId}
+		memid=#{memId  jdbcType=VARCHAR}
 	</select>
 
 

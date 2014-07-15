@@ -47,13 +47,14 @@
 	<!-- 회원: 식당 평가 수정 -->
 	<update id="setScoreByEvaluateTerms" parameterType="EvaluateDTO">
 		update
-		evaluate set score=#{score} where evalId =#{evalId} and
+		evaluate set score=#{score}  where evalId =#{evalId} and
 		memId=#{memId}
 	</update>
+	
 	<!--회원:식당 평가 점수 입력 -->
 	<update id="setScoreByEvaluateTerms1" parameterType="EvaluateDTO">
 		update
-		evaluate set score=#{score} where evalId =#{evalId} and
+		evaluate set score=#{score} , newData ='0' where evalId =#{evalId} and
 		memId=#{memId}
 	</update>
 

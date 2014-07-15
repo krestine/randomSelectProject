@@ -46,7 +46,6 @@ $(document).ready(function() {
 						<input value="${restnt.restntCate}" name="restntCate">
 						<input value="${restnt.restntTel}" name="restntTel"><br>
 						<br>
-						
 					<h4>	${restnt.restntName }<small>의 메뉴정보</small></h4>
 						<br>
 						
@@ -57,10 +56,11 @@ $(document).ready(function() {
 						<c:forEach items="${menuInfo }" var="menuInfo">
 						<input type="hidden" value="${menuInfo.menuId}" name="menuId">
 						<input value="${menuInfo.menuName}" name="menuName">
-						<input value="${menuInfo.menuPrice}" name="menuPrice">
+						<input value="${menuInfo.menuPrice}"name="menuPrice">
 						<input value="${menuInfo.menuCalorie}" name="menuCalorie"><br>
 						</c:forEach>
-					</form>
+					</form>	
+					
 </div>
 </body>
 

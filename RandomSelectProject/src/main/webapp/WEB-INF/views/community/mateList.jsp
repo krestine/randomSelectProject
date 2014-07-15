@@ -6,72 +6,67 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
 <script>
-	$('#mateDetail')
-			.click(
-					function() {
-						$('#mateDetail').hide();
-						$.ajax({
-							cache : false,
-							async : false,
-							type : 'POST',
-							url : 'ajaxMateDetail.do',
-							data : ('mateDetail=' + $('#mateDetail').val()),
-							dataType : 'json',
-							error : function() {
-								alert("에러 : 데이터가 안넘어갑니다.");
-							},
-							success : function(json) {
-								$('#mateDetail').show();
-							}
-						})
-						if (json.mateId != '') {
-
-							var memName = json.memName;
-							var memId = json.memId;
-							var memGrade = json.memGrade;
-							var infoStatus = json.infoStatus;
-							var mateStatus = json.mateStatus;
-							var html = '<tbody><form id="mateForm"><input value="'+memName+'"name="memName"><input value="'+memId+'"name="memId"><input value="'+memGrade+'"name="memGrade"><input value="'+mateStatus+'"name="mateStatus"><tr><th>상태</th><td><input value="'+infoStatus+'" name="infoStatus"></td></tr>';
-							$('#mateDetail').append(html);
-
-						}
-					});
-
-	$(document).ready(function() {
-		$('#restntListBtn').click(function() {
-			$('#community').attr("action", "restntListProc.do").submit();
+$(document).ready(function() {
+	$('#restntListBtn').click(function() {
+		$('#community').attr("action", "restntListProc.do").submit();
 		});
+});
+function mateDetailGo(obj){
+	alert($(obj).prev().attr("value"));
+	alert($(obj).prev().prev().prev().attr("value"));
+	var paramData = {
+			mateId : $(obj).prev().attr("value"),
+			memId : $(obj).prev().prev().prev().attr("value")
+		};
 
+	$.ajax({
+		cache : false,
+		async : false,
+		type : 'post',
+		url : 'ajaxMateDetail.do', 
+		data : paramData,
+		dataType : 'json',
+		error : function(){
+			alert ("에러 : 데이터가 안넘어갑니다.");
+		},
+		success : function(json){
+			var mateInfo = json.mateInfo;
+			var memName=mateInfo.memName;
+			var memId = mateInfo.memId;
+			var mate = json.mate;
+			var infoStatus=mate.infoStatus;
+			var html = '<form id="mateDetailForm"><input value="'+memName+'"name="memName"><input value="'+memId+'"name="memId">공유상태<input value="'+infoStatus+'" name="infoStatus"></td></tr>';
+			alert(json.mateInfo);
+		  $('#mateDetailResult').append(html); 
+		}
 	});
+}
 </script>
+ <style>
+       
+    </style>
 <title>mateList</title>
 </head>
-<body>
+<body>	
+<h1>친구리스트</h1>
+<div>
+	<form id="community" method="post" >
+		 <input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
+	</form>
 
-
-	<h4>친구리스트</h4>
-	<div>
-		<form id="community" method="post">
-			<input type="button" class="btn btn-success btn-sm" value="식당 리스트"
-				id="restntListBtn" />
-		</form>
-
-
-
-		<c:forEach var="mate" items="${mates}">
-			<form action="mateDetailProc.do" method="post">
-				<input type="hidden" value="${mate.memId}" name="memId"> <input
-					value="${mate.memName}" name="memName"> <input
-					value="${mate.mateId}" name="mateId"> <input type="submit"
-					class="btn btn-success btn-sm" value="상세보기">
-			</form>
-			<br>
-		</c:forEach>
-	</div>
+	<c:forEach var="mate" items="${mates}">		
+					
+						<input type="hidden" value="${mate.memId}" name="memId">				
+						<input value="${mate.memName}" class="btn btn-primary btn-sm" name="memName" >
+						<input type="hidden" value="${mate.mateId}" name="mateId">
+						<input type="button" class="btn btn-success btn-sm" id="mateDetail" onclick="mateDetailGo(this);"value="상세보기">
+					<br>
+					<div id="mateDetailResult">	
+						
+					</div>
+	</c:forEach>
+</div>
 </body>
 </html>
