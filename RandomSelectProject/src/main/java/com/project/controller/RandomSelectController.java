@@ -104,7 +104,7 @@ public class RandomSelectController {
 		// 쿼리 실행
 		
 		
-		restnts = restntService.getRestntListByAdress(restntDto);
+		restnts = restntService.getRestntListByAdress2(restntDto);
 		System.out.println(restnts);
 
 		// 제이슨으로 변환
