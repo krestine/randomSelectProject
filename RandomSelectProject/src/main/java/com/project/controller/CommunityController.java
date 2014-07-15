@@ -131,13 +131,16 @@ public class CommunityController {
 	
 	// 친구 상세정보 ajax 
 
-	@RequestMapping(value="ajaxMateDetail.do")
+@RequestMapping(value="ajaxMateDetail.do")
 	public void ajaxMateDetail(HttpServletRequest request,
-			HttpServletResponse response, MateDTO mateDto, String mateId, String memId) throws IOException{
-		
+		HttpServletResponse response, MateDTO mateDto, String mateId, String memId) throws IOException{
+		System.out.println("ajaxMateDetail.do");
+		System.out.println(mateId);
 			mateInfo = mateService.getMemInfoByMemId(mateId);
-			System.out.println(mateId);
+			System.out.println(mateInfo);
 			
+			System.out.println("memId:"+memId);
+			System.out.println("mateId:"+mateId);
 			mate = mateService.getMateInfoByMateId(memId, mateId);
 			System.out.println(mate);
 			// 제이슨으로 변환 
@@ -146,8 +149,7 @@ public class CommunityController {
 			map.put("mateInfo", mateInfo);
 			map.put("mate", mate);
 		
-			JSONObject jsonObject  = JSONObject.fromObject(mateInfo);
-			JSONObject jsonObject2 =JSONObject.fromObject(mate);
+			JSONObject jsonObject  = JSONObject.fromObject(map);
 			System.out.println("json - "+ jsonObject);
 			
 			response.setContentType("text/html; charset=utf-8");
@@ -159,7 +161,7 @@ public class CommunityController {
 
 	
 		// 회원 : 친구 상세정보
-	@RequestMapping(value = "/mateProcProc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/mateDetailProc.do", method = RequestMethod.POST)
 	public String mateDetailProc(Model model, String mateId, String memId, HttpServletRequest request) {
 		// 친구의 상세정보		
 		

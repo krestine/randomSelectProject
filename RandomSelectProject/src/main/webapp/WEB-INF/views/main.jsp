@@ -66,6 +66,8 @@ body { padding-top: 5px; }
 						<span class="icon-prev"></span></a> 
 						<a href="#theCarousel" class="carousel-control right" data-slide="next">
 						<span class="icon-next"></span></a>
+						
+						
 					</div>
 				</div>
 			</div>
