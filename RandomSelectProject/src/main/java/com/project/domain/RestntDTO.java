@@ -10,10 +10,19 @@ public class RestntDTO {
 	private Integer totalCount;
 	private Integer viewCount;
 	private Integer pageNum;
+	public String getAdress5() {
+		return adress5;
+	}
+
+	public void setAdress5(String adress5) {
+		this.adress5 = adress5;
+	}
+
 	private String adress1;
 	private String adress2;
 	private String adress3;
 	private String adress4;
+	private String adress5;
 	private String restntTel;
 	private String restntCate;
 	private String restntEval;
@@ -219,11 +228,12 @@ public class RestntDTO {
 				+ ", viewCount=" + viewCount + ", pageNum=" + pageNum
 				+ ", adress1=" + adress1 + ", adress2=" + adress2
 				+ ", adress3=" + adress3 + ", adress4=" + adress4
-				+ ", restntTel=" + restntTel + ", restntCate=" + restntCate
-				+ ", restntEval=" + restntEval + ", menuName=" + menuName
-				+ ", menuPrice=" + menuPrice + ", menuCalorie=" + menuCalorie
-				+ ", evalId=" + evalId + ", score=" + score + ", memId="
-				+ memId + ", mateId=" + mateId + ", latitude=" + latitude + "]";
+				+ ", adress5=" + adress5 + ", restntTel=" + restntTel
+				+ ", restntCate=" + restntCate + ", restntEval=" + restntEval
+				+ ", menuName=" + menuName + ", menuPrice=" + menuPrice
+				+ ", menuCalorie=" + menuCalorie + ", evalId=" + evalId
+				+ ", score=" + score + ", memId=" + memId + ", mateId="
+				+ mateId + ", latitude=" + latitude + "]";
 	}
 
 	@Override
@@ -234,6 +244,7 @@ public class RestntDTO {
 		result = prime * result + ((adress2 == null) ? 0 : adress2.hashCode());
 		result = prime * result + ((adress3 == null) ? 0 : adress3.hashCode());
 		result = prime * result + ((adress4 == null) ? 0 : adress4.hashCode());
+		result = prime * result + ((adress5 == null) ? 0 : adress5.hashCode());
 		result = prime * result + ((evalId == null) ? 0 : evalId.hashCode());
 		result = prime * result
 				+ ((latitude == null) ? 0 : latitude.hashCode());
@@ -296,6 +307,11 @@ public class RestntDTO {
 			if (other.adress4 != null)
 				return false;
 		} else if (!adress4.equals(other.adress4))
+			return false;
+		if (adress5 == null) {
+			if (other.adress5 != null)
+				return false;
+		} else if (!adress5.equals(other.adress5))
 			return false;
 		if (evalId == null) {
 			if (other.evalId != null)

@@ -161,6 +161,7 @@
 					var adress2 = json.adress2;
 					var adress3 = json.adress3;
 					var adress4 = json.adress4;
+					var adress5 = json.adress5;
 					var restntCate = json.restntCate;
 					var restntTel = json.restntTel;
 					var restntEval = json.restntEval;
@@ -173,8 +174,11 @@
 							+ '</label></td></tr>';
 					html += '<tr><th>도로 명</th><td><label>' + adress3
 							+ '</label></td></tr>';
-					html += '<tr><th>상세주소</th><td><label>' + adress4
+					html += '<tr><th>건물번호</th><td><label>' + adress4
 							+ '</label></td></tr>';
+							
+					html += '<tr><th>상세주소</th><td><label>' + adress5
+							+ '</label></td></tr>';		
 	
 					html += '<tr><th>분류</th><td><label>' + restntCate
 							+ '</label><td>';
@@ -645,7 +649,7 @@
 						var restntId = restnts[key].restntId;
 
 						html += '<td>'+ restntName
-						+ '</td><td><input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
+						+ '</td><td><input type="text" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
 						+ key
 						+ '" class="restntInfo" onclick="clickBtn(this);">관리</button><button class="'+key+'" type="button" onclick="nogada(this)">로동</button></td></tr>';
 								 
@@ -741,7 +745,7 @@
 									
 											 
 									html += '<td>'+ restntName
-											+ '</td><td><input type="hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
+											+ '</td><td><input type = "text" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
 											+ key
 											+ '" class="restntInfo" onclick="clickBtn(this);">관리</button><button id="no'+key+'" type="button" onclick="nogada(this);">로동</button></td></tr>';
 	
@@ -758,72 +762,7 @@
 		}
 		
 	}
-	function addressTransfer(){
-		var paramData = {
-				
-				adress1 : $('#adress1').val(),
-				adress2 : $('#adress2').val(),
-				adress3 : $('#adress3').val()
-			};
-		$.ajax({
-			cache : false,
-			async : false,
-			type : 'POST',
-			url : 'addressTransfer1.do',
-			data : paramData,
-			dataType : 'json',
-			error : function() {
-				alert("error : ajax 통신 실패.");
-			},
-			success : function(json){
-				var restnts = json.restnts;
-				
-				var count = 0;	
-				
-				setTimeout(function(){
-				$.each(restnts ,function(key) {
-					var adress = restnts[key].adress1 +	restnts[key].adress2 + restnts[key].adress3 + restnts[key].adress4;
-					
-					findLocation(adress);
-										
-					var restntData = {
-							restntId : restnts[key].restntId ,
-							latitude : latitude, 
-							longitude : longitude
-					};
-					$.ajax({
-						cache : false,
-						async : false,
-						type : 'POST',
-						url : 'addressTransfer2.do',
-						data : restntData,
-						dataType : 'json',
-						error : function() {
-							alert("error : ajax 통신 실패.");
-						},
-						success : function(json){
-							var insertFlag = json.insertFlag;
-							
-							if(insertFlag != 0){
-								count++;	
-							}
-							else{
-								alert('추가 실패');
-							}
-						}
-						
-						
-						
-					});
-					
-					
-				});
-				}, 500);
-				alert(count);
-			}
-			
-		});
-	}
+	
 	
 	function findLocation(obj) {
 		//docment.getElementById = view에서 해당 Id를 가진 컨트롤의 값을 가져옴
@@ -838,6 +777,9 @@
 				alert('Geocode was not successful for the following reason: '
 						+ status);
 			}
+			alert(latitude);
+			alert(longitude);
+		
 		});
 		
 	}
@@ -864,11 +806,76 @@
 	function nogada(obj) {
 		var number = obj.id;
 		var number1 = number.replace('no','');
-		var restntId = $('#restntId'+number1);
+		var restntIdNo = $('#restntId'+number1).attr('value');
 		
-		alert(restntId.attr('value'));
+		alert(restntIdNo);
 		
+		var paramData = {
+				restntId : restntIdNo
+			};
+
+			$.ajax({
+				cache : false,
+				async : false,
+				type : 'POST',
+				url : 'ajaxRestntInfo.do',
+				data : paramData,
+				dataType : 'json',
+				error : function() {
+					alert("error : ajax 통신 실패.");
 		
+				},
+				//식당 정보 테이블 그리기
+				success : function(json){
+					
+		
+						
+						
+						var adress1 = json.adress1;
+						var adress2 = json.adress2;
+						var adress3 = json.adress3;
+						var adress4 = json.adress4;
+						
+						var adress = adress1 + adress2 + adress3 +adress4;
+						
+						alert('full adress :'+adress);
+						findLocation(adress);
+						
+						var param2 = {
+								restntId : json.restntId,
+								longitude : longitude,
+								latitude : latitude
+						};
+						
+						$.ajax({
+							cache : false,
+							async : false,
+							type : 'POST',
+							url : 'addressTransfer2.do',
+							data : param2,
+							dataType : 'json',
+							error : function() {
+								alert("error : ajax 통신 실패.");
+					
+							},
+							//식당 정보 테이블 그리기
+							success : function(json) {
+								var insertFlag = json.insertFlag;
+								if(insertFlag != 0){
+									alert('추가 성공');
+								}
+								else{
+									alert('추가 실패');
+								}
+					
+								
+							}
+					
+						});
+		
+					}
+		
+				});
 	}
 	</script>
 

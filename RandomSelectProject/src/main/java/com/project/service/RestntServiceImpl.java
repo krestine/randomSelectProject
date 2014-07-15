@@ -110,6 +110,11 @@ public class RestntServiceImpl implements RestntService {
 		return restntMapper.getRestntFullAddress(restntDto);
 	}
 	
+	@Override
+	public List<RestntDTO> getRestntListByAdress(RestntDTO restntDto) {
+		return restntMapper.getRestntListByAdress(restntDto);
+	}
+	
 	@Transactional
 	@Override
 	public void setRestntLocationInfo(RestntDTO restntDto) {
@@ -117,6 +122,5 @@ public class RestntServiceImpl implements RestntService {
 		
 	}
 	
-
 
 }
