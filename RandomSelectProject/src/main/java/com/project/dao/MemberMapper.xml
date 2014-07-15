@@ -7,9 +7,9 @@
 	<!-- 공통:회원가입 -->
 	<insert id="putMember" parameterType="MemberDTO">
 		insert into member
-		(memid,memname,membirth,mempasswd,memmobile,memgrade,memwalkrange,memcarrange,black,leave)
+		(memid,memname,membirth,mempasswd,memmobile,memgrade,memwalkrange,memcarrange,black,leave,evalcount)
 		values (#{memId}, #{memName}, #{memBirth}, #{memPasswd},
-		#{memMobile},'1','100','1000','0','0')
+		#{memMobile},'1','100','1000','0','0','0')
 	</insert>
 
 
@@ -23,12 +23,11 @@
 	<!-- 회원:로그인 , loginUser -->
 	<select id="getMemberInfoByMemberTerms" parameterType="MemberDTO"
 		resultType="MemberDTO">
-		select memid, memgrade,memWalkRange,memCarRange,memExcMenu
+		select memid, memgrade,memWalkRange,memCarRange,memExcMenu,evalcount
 		from member
 		where
 		memid=#{memId} and
-		mempasswd=#{memPasswd} and leave !=
-		'1'
+		mempasswd=#{memPasswd} and leave != '1'
 	</select>
 
 
@@ -114,8 +113,15 @@
 		memExcMenu = #{memExcMenu}
 		where memid=#{memId}
 	</update>
-
-
+	
+	<!-- 회원 : 평가 시 평가 카운트 증가 -->
+	<update id="setEvalCountAndMemGrade" parameterType="MemberDTO">
+		update member
+		set
+		evalcount = #{evalCount},
+		memGrade = #{memGrade}
+		where memid=#{memId}
+	</update>
 	<!--관리자 : 아이디로 유저 검색 -->
 
 	<select id="getMemberListById" resultType="MemberDTO"

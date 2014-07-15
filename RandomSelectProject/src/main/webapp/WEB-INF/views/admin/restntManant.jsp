@@ -161,6 +161,7 @@
 					var adress2 = json.adress2;
 					var adress3 = json.adress3;
 					var adress4 = json.adress4;
+					var adress5 = json.adress5;
 					var restntCate = json.restntCate;
 					var restntTel = json.restntTel;
 					var restntEval = json.restntEval;
@@ -173,8 +174,11 @@
 							+ '</label></td></tr>';
 					html += '<tr><th>도로 명</th><td><label>' + adress3
 							+ '</label></td></tr>';
-					html += '<tr><th>상세주소</th><td><label>' + adress4
+					html += '<tr><th>건물번호</th><td><label>' + adress4
 							+ '</label></td></tr>';
+							
+					html += '<tr><th>상세주소</th><td><label>' + adress5
+							+ '</label></td></tr>';		
 	
 					html += '<tr><th>분류</th><td><label>' + restntCate
 							+ '</label><td>';

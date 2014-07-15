@@ -127,4 +127,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.getOptionInfoByMemId(memId);
 	}
 
+	@Override
+	public void setEvalCountAndMemGrade(MemberDTO memberDto) {
+		memberMapper.setEvalCountAndMemGrade(memberDto);
+		
+	}
+
 }

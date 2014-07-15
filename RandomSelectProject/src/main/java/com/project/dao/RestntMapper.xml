@@ -17,14 +17,12 @@
 	<!-- 회원, 관리자 : 식당 리스트 -->
 	<select id="getRestntList" resultType="RestntDTO">
 		select
-		restntId,RESTNTNAME,RESTNTTEL,RESTNTCATE,RESTNTEVAL,ADRESS1,ADRESS2,
-		ADRESS3,ADRESS4, LATITUDE, LONGITUDE from restnt where active = '1'
+		* from restnt where active = '1'
 	</select>
 	
 	<select id="getRestntListByAdress" parameterType="RestntDTO" resultType="RestntDTO">
 		select
-		restntId,RESTNTNAME,RESTNTTEL,RESTNTCATE,RESTNTEVAL,ADRESS1,ADRESS2,
-		ADRESS3,ADRESS4, LATITUDE, LONGITUDE from restnt
+		* from restnt
 		where
 		adress1=#{adress1}and
 		adress2=#{adress2}and

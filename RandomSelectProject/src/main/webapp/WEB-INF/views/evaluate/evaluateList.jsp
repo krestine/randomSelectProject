@@ -103,9 +103,7 @@ which.style.display="block"
 					</td>
 					<td>${evaluate.restntName}</td>
 					<td>${evaluate.evalDate}</td>
-					<td>1::${evaluate.memId } <br> 2::${evaluate.evalId }
 					
-					</td>
 				</tr>
 		
 			</c:forEach>
