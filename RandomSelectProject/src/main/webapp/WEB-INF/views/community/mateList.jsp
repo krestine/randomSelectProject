@@ -8,14 +8,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
+
 $(document).ready(function() {
 	$('#restntListBtn').click(function() {
 		$('#community').attr("action", "restntListProc.do").submit();
 		});
 });
+
 function mateDetailGo(obj){
-	alert($(obj).prev().attr("value"));
-	alert($(obj).prev().prev().prev().attr("value"));
+	
+	
 	var paramData = {
 			mateId : $(obj).prev().attr("value"),
 			memId : $(obj).prev().prev().prev().attr("value")
@@ -32,14 +34,15 @@ function mateDetailGo(obj){
 			alert ("에러 : 데이터가 안넘어갑니다.");
 		},
 		success : function(json){
+			
 			var mateInfo = json.mateInfo;
 			var memName=mateInfo.memName;
 			var memId = mateInfo.memId;
 			var mate = json.mate;
 			var infoStatus=mate.infoStatus;
-			var html = '<form id="mateDetailForm"><input value="'+memName+'"name="memName"><input value="'+memId+'"name="memId">공유상태<input value="'+infoStatus+'" name="infoStatus"></td></tr>';
-			alert(json.mateInfo);
-		  $('#mateDetailResult').append(html); 
+			var html = '<form id="mateDetailForm"><table class="table"><input value="친구이름"><input value="친구아이디"><br><input value="'+memName+'"name="memName"><input value="'+memId+'"name="memId"><input value="상태정보"><br><input value="'+infoStatus+'" name="infoStatus"></table>';
+			$('#mateName').empty();
+		 	 $('#mateDetailResult').html(html); 
 		}
 	});
 }
@@ -57,16 +60,18 @@ function mateDetailGo(obj){
 	</form>
 
 	<c:forEach var="mate" items="${mates}">		
-					
+					<form id="mateName">
 						<input type="hidden" value="${mate.memId}" name="memId">				
 						<input value="${mate.memName}" class="btn btn-primary btn-sm" name="memName" >
 						<input type="hidden" value="${mate.mateId}" name="mateId">
-						<input type="button" class="btn btn-success btn-sm" id="mateDetail" onclick="mateDetailGo(this);"value="상세보기">
+						<input type="button" class="btn btn-success btn-sm" id="mateDetail" onclick="mateDetailGo(this);"value="상세보기"class="btn btn-danger" 
+						data-toggle="collapse" data-target="#mateDetailResult">
+					</form>
 					<br>
-					<div id="mateDetailResult">	
-						
+					<div id="mateDetailResult" class="collapse">	
 					</div>
 	</c:forEach>
+	
 </div>
 </body>
 </html>

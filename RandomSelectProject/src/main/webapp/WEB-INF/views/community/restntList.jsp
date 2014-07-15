@@ -15,6 +15,37 @@ $(document).ready(function() {
 		$('#community').attr("action", "mateListProc.do").submit();
 	});
 });
+function restntDetailGo(obj){
+	
+	
+	var paramData = {
+			restnt : $(obj).prev().attr("value"),
+						: $(obj).prev().prev().prev().attr("value")
+		};
+
+	$.ajax({
+		cache : false,
+		async : false,
+		type : 'post',
+		url : 'ajaxRestntDetail.do', 
+		data : paramData,
+		dataType : 'json',
+		error : function(){
+			alert ("에러 : 데이터가 안넘어갑니다.");
+		},
+		success : function(json){
+			
+			var mateInfo = json.mateInfo;
+			var memName=mateInfo.memName;
+			var memId = mateInfo.memId;
+			var mate = json.mate;
+			var infoStatus=mate.infoStatus;
+			var html = '<form id="restntDetailForm"><table class="table"><input value="식당이름"><input value="식당평점"><br><input value="'+restntName+'"name="restntName"><input value="'+restntEval+'"name="restntEval"><br><input value="카테고리"><input value="전화번호"><br><input value="'+restntCate+'" name="restntCate"><input value="'+restntTel+'"name="restntTel"></table>';
+			$('#mateName').empty();
+		 	 $('#mateDetailResult').html(html); 
+		}
+	});
+}
 
 </script>
 <title>식당리스트</title>

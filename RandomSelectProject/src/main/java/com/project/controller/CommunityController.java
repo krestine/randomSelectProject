@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.project.domain.EvaluateDTO;
 import com.project.domain.MateDTO;
 import com.project.domain.MemberDTO;
@@ -195,24 +196,8 @@ public class CommunityController {
 		System.out.println("restnts여기?");
 		return "restntList";
 	}
-	
-	/*
-		@RequestMapping(value =  "/restntListProc.do", method = RequestMethod.POST)
-		public String restntListProc(Model model, String memId, HttpServletRequest request) {
-			//loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
-			evaluates= evaluateService.getEvaluateListByMateId(loginUser.getMemId());
-			model.addAttribute("evaluates", evaluates);
-			System.out.println(evaluates);
-			System.out.println("evaluates여기?");
-			return "community/restntList";
 		
-		
-	}
-	*/
-	
-	// 회원 : 식당 상세정보
-	
-	
+	// 회원 : 식당 상세정보		
 		@RequestMapping(value = "/restntDetailProc.do", method = RequestMethod.POST)
 		public String restntDetailProc(Model model, String restntId) {
 	
@@ -228,5 +213,26 @@ public class CommunityController {
 
 	}
 	
+		
+	@RequestMapping(value="/ajaxRestntDetail.do", method =RequestMethod.POST)
+	public void ajaxResntDetail(HttpServletRequest request,
+		HttpServletResponse response, String restntId) throws IOException{
+		
+		restnt = restntService.getRestntInfoByRestntId(restntId);
+		
+		menuInfo = menuService.getMenuListByRestntId(restntId);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("restnt", restnt);
+		map.put("menuInfo", menuInfo);
+	
+		JSONObject jsonObject  = JSONObject.fromObject(map);
+		System.out.println("json - "+ jsonObject);
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+		
+	}	
 }
 
