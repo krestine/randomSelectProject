@@ -28,6 +28,7 @@ language=구글 맵 언어
 </script>
 <script src="http://code.jquery.com/jquery-latest.js"
 	type="text/javascript"></script>
+<script src="/myapp/resources/js/jquery.cookie.js" type="text/javascript"></script>
 
 
   
@@ -328,52 +329,10 @@ language=구글 맵 언어
 		map.setCenter(pos);
 		map.setZoom(18);
 	}
-	function redrawMap() {
-		//맵을 강제로 다시 그리고 싶을 때 사용함.
-		google.maps.event.trigger(map, 'resize');
-	}
 
-	function justShowLocation() {
+	
 
-		var tempLatitude = document.getElementById('tempLatitude').value;
-		var tempLongitude = document.getElementById('tempLongitude').value;
-		var tempPos = new google.maps.LatLng(tempLatitude, tempLongitude);
-
-		var tempMarker2 = new google.maps.Marker({
-			map : map,
-			position : tempPos
-		});
-		tempMarker2.setMap(map);
-		map.setCenter(tempPos);
-		google.maps.event.addListener(tempMarker2, 'click', function() {
-			map.setCenter(tempMarker2.getPosition());
-			showCurrentLocation2(tempPos);
-		});
-
-	}
-
-	function findLocation() {
-		//docment.getElementById = view에서 해당 Id를 가진 컨트롤의 값을 가져옴
-		var tempAddress = document.getElementById('tempAddress').value;
-		geocoder.geocode({
-			'address' : tempAddress
-		}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-				map.setCenter(results[0].geometry.location);
-				var tempMarker = new google.maps.Marker({
-					map : map,
-					position : results[0].geometry.location
-				});
-				tempMarker.setMap(map);
-				$("#currentLocation").html(
-						results[0].geometry.location.lat() + ' '
-								+ results[0].geometry.location.lng());
-			} else {
-				alert('Geocode was not successful for the following reason: '
-						+ status);
-			}
-		});
-	}
+	
 
 	function newMyLocation() {
 		var newMyAddress = document.getElementById('newMyAddress').value;
@@ -383,6 +342,8 @@ language=구글 맵 언어
 		}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				myLocationManual=1;
+				$.cookie('newLatitude', results[0].geometry.location.lat(),  {expires: 1});
+				$.cookie('newLongitude', results[0].geometry.location.lng(), {expires: 1});
 				onSuccess(results[0].geometry.location.lat(),
 						results[0].geometry.location.lng(), 10);
 			} else {
@@ -402,6 +363,17 @@ language=구글 맵 언어
 		sRadius = tempSRadius;
 	}
 
+	function deleteMyLocation(){
+		$.cookie('newLatitude', null);
+		$.cookie('newLongitude', null);
+		$("#deleteMyLocationAlert").html('<font size="4"><span class="label label-success">초기화되었습니다.</span></font>');
+		setTimeout(removeDeleteMyLocationAlert, 3000);
+	}
+	
+	function removeDeleteMyLocationAlert(){
+		$("#deleteMyLocationAlert").html("");
+	}
+	
 	function onSuccess(Lat, Lon, accuracy) {
 
 		//alert('onSuccess');
@@ -409,14 +381,22 @@ language=구글 맵 언어
 
 		myLatitude = Lat;
 		myLongitude = Lon;
+		cookieLatitude = $.cookie('newLatitude');
+		cookieLongitude = $.cookie('newLongitude');
 		pos = new google.maps.LatLng(myLatitude, myLongitude);
 
 		$("#currentAccuracy").html("내 위치의 정확도 : " + accuracy + "m");
 		if (accuracy > 200) {
-			$("#accuracyAlert")
-					.html(
-							"<font color=red>단순IP기반의 위치추적 서비스는 정확하지 않습니다.<br>정확한 위치를 위해서 WI-FI 네트워크 또는 3G/4G 데이터 네트워크에 접속하시거나, 현재 주소를 수동으로 입력해 주세요.</font>");
-
+			
+			if(cookieLatitude==null){
+				$("#accuracyAlert")
+				.html(
+						"<font color=red>단순IP기반의 위치추적 서비스는 정확하지 않습니다.<br>정확한 위치를 위해서 WI-FI 네트워크 또는 3G/4G 데이터 네트워크에 접속하시거나, 현재 주소를 수동으로 입력해 주세요.</font>");
+			}
+			else{
+				onSuccess(cookieLatitude, cookieLongitude, 10);
+			}
+			
 			//objDiv.style.display = "block";
 		} else {
 			$("#accuracyAlert").empty;
@@ -494,6 +474,9 @@ language=구글 맵 언어
 		setSRadius();
 		directionsDisplay = new google.maps.DirectionsRenderer();
 
+		
+		
+		
 		//$('#getAllRestnt').removeAttr('disabled');
 
 		//myOptions = 구글 맵에 사용할 옵션
@@ -530,38 +513,48 @@ language=구글 맵 언어
 	}
 	//windows가 'load'될때 initalize()함수를 불러와라
 	google.maps.event.addDomListener(window, 'load', initialize);
+
+	$(document).ready(function () {
+		$('a[rel=popover]').popover()
+	});
+
 </script>
 </head>
 <body>
 	<div class="container" id="container" style="width: 100%">
 		<div id="map_canvas" style="width: 80%; height: 600px"></div>
-		<input type=button id=randomSelectInitialize value="맵 초기화"
-			onclick="initialize()" class="btn btn-info"><input type=button
-			id=moveToMyLocation value="내 위치로 이동" onclick="setMyCenter()" class="btn btn-info">
-		<input type=button
-			id=getAllRestnt value="식당 골라주기" onclick="ajaxRandomRestnt()" class="btn btn-primary">
-		<br> <input type=text id=tempAddress value=""> <input
-			type=button id=geocodeTempAddress value="해당 주소 지도에 표시"
-			onclick="findLocation()"> <input type=text id=tempLatitude
-			value=""> <input type=text id=tempLongitude value="">
-		<input type=button id=justShowMarker value="해당 좌표 지도에 표시"
+		<input type="button" id="randomSelectInitialize" value="맵 초기화"
+			onclick="initialize()" class="btn btn-info"><input type="button"
+			id="moveToMyLocation" value="내 위치로 이동" onclick="setMyCenter()" class="btn btn-info">
+		<input type="button"
+			id="getAllRestnt" value="식당 골라주기" onclick="ajaxRandomRestnt()" class="btn btn-primary">
+<!-- 		<br> <input type="text" id="tempAddress" value=""> <input
+			type="button" id="geocodeTempAddress" value="해당 주소 지도에 표시"
+			onclick="findLocation()"> <input type="text" id=tempLatitude
+			value=""> <input type="text" id="tempLongitude" value="">
+		<input type="button" id="justShowMarker" value="해당 좌표 지도에 표시"
 			onclick="justShowLocation()"> <br> 선택한 마커의 좌표 :
-		<div id=currentLocation></div>
-		<div id=currentAccuracy></div>
-		<div id=accuracyAlert></div>
-		<!-- <div id=newMyLocationForm style="display: none"> -->
-		<div id=newMyLocationForm>
-			<input type=text id=newMyAddress value=""> <input type=button
-				id=newMyLocation value="내 주소 수동으로 입력" onclick="newMyLocation()" class="btn btn-warning">
+		<div id="currentLocation"></div> -->
+		<div id="currentAccuracy"></div>
+		<div id="accuracyAlert"></div>
+		<div id="newMyLocationForm" class="input-group">
+			<div style="display: inline;">
+			<input type="text" id="newMyAddress" value="">
+			<button class="btn btn-warning btn-sm" id="newMyLocation"
+				onclick="newMyLocation()">내 주소 수동으로 입력</button>
+			<button class="btn btn-warning btn-sm" id="deleteMyLocation"
+				onclick="deleteMyLocation()">수동 입력 주소 초기화</button>
+				</div>
+			<div id="deleteMyLocationAlert" style="display: inline;"></div>
 		</div>
-		<button id="confirmRestnt" onclick="confirmRestnt()" class="btn btn-primary">식당 확정</button>
-		<div id="restntConfirmed"></div>
-		<%-- <div id="restnt_list">
+		<button id="confirmRestnt" onclick="confirmRestnt()"
+				class="btn btn-primary">식당 확정</button>
+			<div id="restntConfirmed"></div>
+			<%-- <div id="restnt_list">
 		<c:forEach items="${restntList}" var="item">
 			 ${item.restntName} ${item.latitude} ${item.longitude}<br>
 		</c:forEach>
 	</div> --%>
-		<button id="visitList" onclick="visitList()">방문 정보</button>
-	</div>	
-</body>
+			<button id="visitList" onclick="visitList()">방문 정보</button>
+		</div></body>
 </html>
