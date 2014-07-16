@@ -60,6 +60,7 @@
 
 <body>
 
+
 <center>
 	<div class="btn-group">	
       		<c:choose>
@@ -97,7 +98,7 @@
 				<li><input class="btn btn-success btn-sm" onclick="mateListGo()" value="친구리스트"></li>
 				<li><input class="btn btn-success btn-sm" onclick="restntListGo()" value="식당리스트"></li>
 				</ul> 
-				</div> 	 	
+				</div> 	 				
 				<div class="btn-group">
 					<input type="button" style="width: 150px; height: 100px;" class="btn btn-info" data-toggle="dropdown" value="평  가">
 					<!-- 단버튼 -->
