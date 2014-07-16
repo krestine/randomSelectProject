@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -122,6 +123,8 @@ public class RandomSelectController {
 		PrintWriter out = response.getWriter();
 		out.print(jsonObject.toString());
 	}
+	
+	
 	
 	@RequestMapping("visitList.do")
 	String visitListProc(Model model) {

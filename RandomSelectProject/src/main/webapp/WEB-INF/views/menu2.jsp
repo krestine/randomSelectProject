@@ -50,49 +50,88 @@
 	}
 </script>
 <style>
-
 </style>
-     
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 
 <body>
-<center>
-	<div class="btn-group">	
-      		<c:choose>
-			<c:when test="${sessionScope.loginUser==null}">
-				<form id="select1" method="post" style="display: inline;">
-					<input type="button"  style="width:150px;height:100px;" class="btn btn-default " onclick="loginGo()" value="로그인" > 
-					<input type="button"  style="width:150px;height:100px;" class="btn btn-warning"  onclick="registerGo()" value="회원가입">
-				</form>
-			</c:when>
-			
-			<c:when test="${sessionScope.loginUser.memGrade<7}">
-				<form id="select1" method="post" style="display: inline;">
-					<input type="button"  style="width:150px;height:100px;" class="btn btn-danger" onclick="logoutGo()" value="로그아웃">
-					<input type="button"  style="width:150px;height:100px;" class="btn btn-info" onclick="myInfoGo()" value="내정보">
-				</form>
-			</c:when>
-			
-			<c:when test="${sessionScope.loginUser.memGrade==666}">
-				<form id="select1" method="post" style="display: inline;">
-					<input type="button"  style="width:150px; height:100px;"  class="btn btn-danger" onclick="logoutGo()" value="로그아웃"> 
-					<input type="button"   style="width:150px;height:100px;" class="btn btn-info" onclick="adminGo()" value="관   리" >
-				</form>
-			</c:when>
-		</c:choose>
-	   		<form id="select3" style="display: inline;">
-			<input type="button"  style="width:150px;height:100px;" class="btn btn-primary" onclick="selectResult()" value="아무거나"> 
-			<!-- <input type="button" class="btn btn-warning" onclick="ladderMake()" value="복 불 복"> -->
-			
-		</form>
-   		<form id="select2" method="post" style="display: inline;">
-				<input type="button"  style="width:150px;height:100px;" class="btn btn-default" onclick="settingGo()" value="설   정"> 
-				<input type="button"  style="width:150px;height:100px;" class="btn btn-success" onclick="mateListGo()"value="커뮤니티" > 	
-				<input type="button"  style="width:150px;height:100px;" class="btn btn-info" onclick="evaluateGo()" value="평  가">
-		</form>
-	</div>
-</center>
+	<center>
+		<div class="btn-group">
+			<c:choose>
+				<c:when test="${sessionScope.loginUser==null}">
+					<form id="select1" method="post" style="display: inline;">
+						<input type="button" style="width: 150px; height: 100px;"
+							class="btn btn-default " onclick="loginGo()" value="로그인">
+						<input type="button" style="width: 150px; height: 100px;"
+							class="btn btn-warning" onclick="registerGo()" value="회원가입">
+					</form>
+				</c:when>
+
+				<c:when test="${sessionScope.loginUser.memGrade<7}">
+					<form id="select1" method="post" style="display: inline;">
+						<input type="button" style="width: 150px; height: 100px;"
+							class="btn btn-danger" onclick="logoutGo()" value="로그아웃">
+						<input type="button" style="width: 150px; height: 100px;"
+							class="btn btn-info" onclick="myInfoGo()" value="내정보">
+					</form>
+				</c:when>
+
+				<c:when test="${sessionScope.loginUser.memGrade==666}">
+					<form id="select1" method="post" style="display: inline;">
+						<input type="button" style="width: 150px; height: 100px;"
+							class="btn btn-danger" onclick="logoutGo()" value="로그아웃">
+						<input type="button" style="width: 150px; height: 100px;"
+							class="btn btn-info" onclick="adminGo()" value="관   리">
+					</form>
+				</c:when>
+			</c:choose>
+			<form id="select3" style="display: inline;">
+				<input type="button" style="width: 150px; height: 100px;"
+					class="btn btn-primary" onclick="selectResult()" value="아무거나">
+				<!-- <input type="button" class="btn btn-warning" onclick="ladderMake()" value="복 불 복"> -->
+
+			</form>
+
+
+			<form id="select2" method="post" style="display: inline;">
+				<input type="button" style="width: 150px; height: 100px;"
+					class="btn btn-default" onclick="settingGo()" value="설   정">
+				<input type="button" style="width: 150px; height: 100px;"
+					class="btn btn-default" onclick="mateListGo()" value="커뮤니티">
+				
+				<!-- 	<div class="btn-group">
+					<input type="button" style="width: 150px; height: 100px;"
+						class="btn btn-success" data-toggle="dropdown" value="커뮤니티">
+					onclick="mateListGo()"
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="mateListProc.do">친구리스트
+								페이지 </a></li>
+						<li><a
+							href="restntListProc.do">식당리스트
+								페이지 </a></li>
+
+					</ul>
+					</div> -->
+				<div class="btn-group">
+					<input type="button" style="width: 150px; height: 100px;"
+						class="btn btn-info" data-toggle="dropdown" value="평  가">
+
+					<!-- 단버튼 -->
+					<!-- <div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+   평가 <span class="caret"></span>    onclick="evaluateGo()"
+  </button> -->
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="evaluateList.do">평가한 페이지 </a></li>
+						<li><a href="nEvaluateListForm.do">평가 안한 페이지 </a></li>
+
+					</ul>
+				</div>
+
+			</form>
+		</div>
+	</center>
 </body>
 </html>

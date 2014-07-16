@@ -60,7 +60,7 @@ public class EvaluateController {
 	}
 
 	// 식당평가한 목록(evaluateList.jsp)
-	@RequestMapping(value = "/evaluateList.do", method = RequestMethod.POST)
+	@RequestMapping(value = "evaluateList.do")
 	public ModelAndView evaluateListForm(HttpServletRequest request, Model model) {
 		System.out.println("evaluateList()");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
@@ -108,20 +108,6 @@ public class EvaluateController {
 		return "nEvaluateList";
 	}
 
-	/*
-	 * public ModelAndView nEvaluateListForm(HttpServletRequest request, Model
-	 * model, String memId) { System.out.println("nEvaluateListForm()");
-	 * MemberDTO loginUser = (MemberDTO)
-	 * request.getSession().getAttribute("loginUser"); ModelAndView view = new
-	 * ModelAndView("evaluateList"); System.out.println(loginUser.toString());
-	 * memId = loginUser.getMemId(); System.out.println("회원아이디 :: 컨트롤러에서 dd아이디"
-	 * + memId);
-	 * 
-	 * memberEvaluates=evaluateService.getnEvaluateListByMemId(memId);
-	 * model.addAttribute("memberEvaluates", memberEvaluates);
-	 * System.out.println(memberEvaluates); return "nEvaluateList";
-	 */
-
 	@RequestMapping(value = "/evaluateListProc.do", method = RequestMethod.POST)
 	public String evaluateListProc(Model model, String memId,
 			HttpServletRequest request) {
@@ -138,12 +124,7 @@ public class EvaluateController {
 
 		System.out.println("평가 리스트 실행");
 		try {
-			/*
-			 * List<EvaluateDTO> evaluates =
-			 * evaluateService.getEvaluateListByMemId(memId);
-			 * model.addAttribute("evaluates", evaluates); return
-			 * "evaluateList";
-			 */
+			
 		} catch (Exception e) {
 			model.addAttribute("errorMessage",
 					"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
