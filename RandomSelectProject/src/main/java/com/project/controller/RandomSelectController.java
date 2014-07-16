@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -104,7 +105,7 @@ public class RandomSelectController {
 		// 쿼리 실행
 		
 		
-		restnts = restntService.getRestntListByAdress(restntDto);
+		restnts = restntService.getRestntListByAdress2(restntDto);
 		System.out.println(restnts);
 
 		// 제이슨으로 변환
@@ -122,6 +123,8 @@ public class RandomSelectController {
 		PrintWriter out = response.getWriter();
 		out.print(jsonObject.toString());
 	}
+	
+	
 	
 	@RequestMapping("visitList.do")
 	String visitListProc(Model model) {

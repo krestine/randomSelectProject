@@ -52,14 +52,14 @@
 	}
 </script>
 <style>
-
 </style>
-     
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 
 <body>
+
 <center>
 	<div class="btn-group">	
       		<c:choose>
@@ -97,12 +97,25 @@
 				<li><input class="btn btn-success btn-sm" onclick="mateListGo()" value="친구리스트"></li>
 				<li><input class="btn btn-success btn-sm" onclick="restntListGo()" value="식당리스트"></li>
 				</ul> 
-				</div> 
-				<input type="button"  style="width:150px;height:100px;" class="btn btn-info" onclick="evaluateGo()" value="평  가"> 		 	
-		
+				</div> 	 	
+				<div class="btn-group">
+					<input type="button" style="width: 150px; height: 100px;" class="btn btn-info" data-toggle="dropdown" value="평  가">
+					<!-- 단버튼 -->
+					<!-- <div class="btn-group">
+  					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+  					 평가 <span class="caret"></span>    onclick="evaluateGo()"
+  					</button> -->
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="evaluateList.do">평가한 페이지 </a></li>
+						<li><a href="nEvaluateListForm.do">평가 안한 페이지 </a></li>
+					</ul>
+				</div>
 		</form>
 				
 	</div>
 </center>
+
+	
+
 </body>
 </html>
