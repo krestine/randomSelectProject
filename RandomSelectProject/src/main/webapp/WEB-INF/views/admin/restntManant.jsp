@@ -19,7 +19,7 @@
 	var newMenuId;
 	var addMenuFlag = 1;
 	var addMenuKey = 0;
-	var viewCount = 20;
+	var viewCount = 10;
 	var longitude;
 	var latitude;
 	
@@ -36,7 +36,7 @@
 		});
 	
 		// 시/도 셀렉트 박스 기능 정의
-		$('#adress1').click(function() {
+		$('#adress1').change(function() {
 			addMenuKey = 0;
 			addMenuFlag = 1;
 			$('#restntList').hide();
@@ -62,6 +62,7 @@
 					},
 					success : function(json) {
 						$('#adress2').empty();
+						$('#adress2').append('<option disabled="disabled" selected="selected">시/군/구</option>');
 						for (var idx = 0; idx < json.adress2.length; idx++) {
 							var adress2 = json.adress2[idx];
 							$('#adress2').append(
@@ -78,7 +79,7 @@
 	
 		});
 		// 시/군/구 셀렉트 박스 기능 정의
-		$('#adress2').click(function() {
+		$('#adress2').change(function() {
 			addMenuKey = 0;
 			addMenuFlag = 1;
 			$('#restntList').hide();
@@ -103,6 +104,8 @@
 						success : function(
 								json) {
 							$('#adress3').empty();
+							$('#adress3').append('<option disabled="disabled" selected="selected">도로명</option>');
+							
 							for (var idx = 0; idx < json.adress3.length; idx++) {
 								var adress3 = json.adress3[idx];
 		
@@ -119,7 +122,7 @@
 			
 		});
 		//도로명 선택 셀렉트 박스 기능 정의
-		$('#adress3').click(function() {
+		$('#adress3').change(function() {
 			drawRestntList();
 			
 		});
@@ -134,109 +137,9 @@
 			restntId : $(obj).prev().attr("value")
 		};
 
-		$.ajax({
-			cache : false,
-			async : false,
-			type : 'POST',
-			url : 'ajaxRestntInfo.do',
-			data : paramData,
-			dataType : 'json',
-			error : function() {
-				alert("error : ajax 통신 실패.");
-	
-			},
-			//식당 정보 테이블 그리기
-			success : function(json) {
-				$("#restntInfoTable > tbody").html("");
-				$("#menuTable > tbody").html("");
-				$('#selectBox').hide();
-				$('#restntList').hide();
-				$('#restntInfo').show();
-	
-				if (json.restntId != '') {
-	
-					var restntName = json.restntName;
-					var restntId = json.restntId;
-					var adress1 = json.adress1;
-					var adress2 = json.adress2;
-					var adress3 = json.adress3;
-					var adress4 = json.adress4;
-					var adress5 = json.adress5;
-					var restntCate = json.restntCate;
-					var restntTel = json.restntTel;
-					var restntEval = json.restntEval;
-					restntIdforMenu = restntId;
-					
-					var html = '<tbody><form id="restntForm"><input type="hidden" value="'+restntId+'"name="restntId"><input type="hidden" value="'+adress1+'"name="adress1"><input type="hidden" value="'+adress2+'"name="adress2"><input type="hidden" value="'+adress3+'"name="adress3"><tr><th>식당명</th><td><input type="text"value="'+restntName+'" name="restntName"></td></tr>';
-					html += '<tr><th>시/도</th><td><label>' + adress1
-							+ '</label></td></tr>';
-					html += '<tr><th>시/군/구</th><td><label>' + adress2
-							+ '</label></td></tr>';
-					html += '<tr><th>도로 명</th><td><label>' + adress3
-							+ '</label></td></tr>';
-					html += '<tr><th>건물번호</th><td><label>' + adress4
-							+ '</label></td></tr>';
-							
-					html += '<tr><th>상세주소</th><td><label>' + adress5
-							+ '</label></td></tr>';		
-	
-					html += '<tr><th>분류</th><td><label>' + restntCate
-							+ '</label></td>';
-	
-					html += '</tr><tr><th>연락처</th><td><input type="text" value="'+restntTel+'"name="restntTel"></td></tr>';
-					html += '<tr><th>평균 별점</th><td><label>'
-							+ restntEval
-							+ '</label></td></tr></form></tbody>';
-					
-					$('#restntInfoTable').append(html);
-	
-				}
-	
-			}
-	
-		});
+		drawRestntInfo(paramData);
 
-		$.ajax({
-			cache : false,
-			async : false,
-			type : 'POST',
-			url : 'ajaxMenuList.do',
-			data : paramData,
-			dataType : 'json',
-			error : function() {
-				alert("error : ajax 통신 실패.");
-			},
-			success : function(json) {
-				
-				
-				var menus = json.menus;
-				if(menus!= null){
-					
-					addMenuFlag = 0;
-					
-					var html = '<tr><th>메뉴 이름</th><th>가격</th><th>칼로리</th><th>특이사항</th><th colspan="2">수정/삭제</th></tr>';
-					$.each(menus,function(key) {
-	
-						var menuName = menus[key].menuName;
-						var menuId = menus[key].menuId;
-						var menuPrice = menus[key].menuPrice;
-						var menuCalorie = menus[key].menuCalorie;
-						var menuNote = menus[key].menuNote;
-	
-						html += '<tr class="item'+key+'"><form id="menuForm'+key+'"><td><input type="hidden" id="menuId'+key+'" value="'+menuId+'"name="menuId" "class="menuId"><input type="text" value="'+menuName+'"name="menuName" id="menuName'+key+'" class="menuName"></td>';
-						html += '<td><input type="text" id="menuPrice'+key+'"  value="'+menuPrice +'"name="menuPrice"></td>';
-						html += '<td><input type="text" id="menuCalorie'+key+'" value="'+menuCalorie +'"name="menuCalorie"></td>';
-						html += '<td><input type="text" id="menuNote'+key+'" value="'+menuNote +'"name="menuNote"></td></form>';
-						html += '<td><button type="button" onclick="addMenuConfirm('+key+')" id="menuModBtn'+key+'">수정</button></td>';
-						html += '<td><button type="button" onclick="delMenu('+key+')" id="menuDelBtn'+key+'">삭제</button></td></tr>';
-						addMenuKey = key;
-					});
-					$('#menuTbody').append(html);
-					//$('#menuTable').append('</tbody>');
-					
-				}
-			}
-		});
+		drawMenuInfo(paramData);
 
 	}
 	//수정 버튼 기능 정의
@@ -532,7 +435,7 @@
 					
 					addMenuFlag = 0;
 					
-					var html = '<tr><th>메뉴 이름</th><th>가격</th><th>칼로리</th><th>특이사항</th><th colspan="2">수정/삭제</th></tr>';
+					var html = '<tr><th style="width: 8%">메뉴 이름</th><th style="width: 8%">가격</th><th style="width: 8%">칼로리</th><th style="width: 8%">특이사항</th><th colspan="2" style="width: 3%">수정/삭제</th></tr>';
 					$.each(menus,function(key) {
 	
 						var menuName = menus[key].menuName;
@@ -541,11 +444,11 @@
 						var menuCalorie = menus[key].menuCalorie;
 						var menuNote = menus[key].menuNote;
 	
-						html += '<tr class="item'+key+'"><form id="menuForm'+key+'"><td><input type="hidden" id="menuId'+key+'" value="'+menuId+'"name="menuId" "class="menuId"><input type="text" value="'+menuName+'"name="menuName" id="menuName'+key+'" class="menuName"></td>';
-						html += '<td><input type="text" id="menuPrice'+key+'"  value="'+menuPrice +'"name="menuPrice"></td>';
-						html += '<td><input type="text" id="menuCalorie'+key+'" value="'+menuCalorie +'"name="menuCalorie"></td>';
-						html += '<td><input type="text" id="menuNote'+key+'" value="'+menuNote +'"name="menuNote"></td></form>';
-						html += '<td><button type="button" onclick="addMenuConfirm('+key+')" id="menuModBtn'+key+'">수정</button></td>';
+						html += '<tr class="item'+key+'"><form id="menuForm'+key+'"><td><input type="hidden" id="menuId'+key+'" value="'+menuId+'"name="menuId" "class="menuId"><input type="text" value="'+menuName+'"name="menuName" id="menuName'+key+'" class="menuName" style="width: 8%></td>';
+						html += '<td><input type="text" id="menuPrice'+key+'"  value="'+menuPrice +'"name="menuPrice" style="width: 8%></td>';
+						html += '<td><input type="text" id="menuCalorie'+key+'" value="'+menuCalorie +'"name="menuCalorie" style="width: 8%></td>';
+						html += '<td><input type="text" id="menuNote'+key+'" value="'+menuNote +'"name="menuNote" style="width: 8%></td></form>';
+						html += '<td><button type="button" onclick="addMenuConfirm('+key+')" id="menuModBtn'+key+'" >수정</button></td>';
 						html += '<td><button type="button" onclick="delMenu('+key+')" id="menuDelBtn'+key+'">삭제</button></td></tr>';
 						addMenuKey = key;
 					});
@@ -656,15 +559,8 @@
 					});
 			 		html += '<tr><td colspan=2><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr>';
 					$('#restntListResult').append(html);
-								 
-						
-
 					
-
 				}
-				
-				
-
 			}
 		});
 	
@@ -738,7 +634,7 @@
 		
 							if (restnts != null) {
 								$('#restntList').show();
-								 var html = '<tr><th style="width: 45%" colspan=2>식당 이름</th></tr>';
+								 var html = '';
 								 
 								 $.each(restnts,function(key) {
 									var restntName = restnts[key].restntName;
@@ -766,8 +662,114 @@
 	}
 	
 	
+	function drawRestntInfo(paramData){
+		
+		$.ajax({
+			cache : false,
+			async : false,
+			type : 'POST',
+			url : 'ajaxRestntInfo.do',
+			data : paramData,
+			dataType : 'json',
+			error : function() {
+				alert("error : ajax 통신 실패.");
 	
+			},
+			//식당 정보 테이블 그리기
+			success : function(json) {
+				$("#restntInfoTable > tbody").html("");
+				$("#menuTable > tbody").html("");
+				$('#selectBox').hide();
+				$('#restntList').hide();
+				$('#restntInfo').show();
 	
+				if (json.restntId != '') {
+	
+					var restntName = json.restntName;
+					var restntId = json.restntId;
+					var adress1 = json.adress1;
+					var adress2 = json.adress2;
+					var adress3 = json.adress3;
+					var adress4 = json.adress4;
+					var adress5 = json.adress5;
+					var restntCate = json.restntCate;
+					var restntTel = json.restntTel;
+					var restntEval = json.restntEval;
+					restntIdforMenu = restntId;
+					
+					var html = '<tbody><form id="restntForm"><input type="hidden" value="'+restntId+'"name="restntId"><input type="hidden" value="'+adress1+'"name="adress1"><input type="hidden" value="'+adress2+'"name="adress2"><input type="hidden" value="'+adress3+'"name="adress3"><tr><th>식당명</th><td><input type="text"value="'+restntName+'" name="restntName"></td></tr>';
+					html += '<tr><th>시/도</th><td><label>' + adress1
+							+ '</label></td></tr>';
+					html += '<tr><th>시/군/구</th><td><label>' + adress2
+							+ '</label></td></tr>';
+					html += '<tr><th>도로 명</th><td><label>' + adress3
+							+ '</label></td></tr>';
+					html += '<tr><th>건물번호</th><td><label>' + adress4
+							+ '</label></td></tr>';
+							
+					html += '<tr><th>상세주소</th><td><label>' + adress5
+							+ '</label></td></tr>';		
+	
+					html += '<tr><th>분류</th><td><label>' + restntCate
+							+ '</label></td>';
+	
+					html += '</tr><tr><th>연락처</th><td><input type="text" value="'+restntTel+'"name="restntTel"></td></tr>';
+					html += '<tr><th>평균 별점</th><td><label>'
+							+ restntEval
+							+ '</label></td></tr></form></tbody>';
+					
+					$('#restntInfoTable').append(html);
+	
+				}
+	
+			}
+	
+		});
+	}
+	
+	function drawMenuInfo(paramData) {
+		$.ajax({
+			cache : false,
+			async : false,
+			type : 'POST',
+			url : 'ajaxMenuList.do',
+			data : paramData,
+			dataType : 'json',
+			error : function() {
+				alert("error : ajax 통신 실패.");
+			},
+			success : function(json) {
+				
+				
+				var menus = json.menus;
+				if(menus!= null){
+					
+					addMenuFlag = 0;
+					
+					var html = '<tr><th style="width: 100px">메뉴 이름</th><th style="width: 80px">가격</th><th style="width: 80px">칼로리</th><th style="width:100px">특이사항</th><th colspan="2" style="width: 90px">수정/삭제</th></tr>';
+					$.each(menus,function(key) {
+	
+						var menuName = menus[key].menuName;
+						var menuId = menus[key].menuId;
+						var menuPrice = menus[key].menuPrice;
+						var menuCalorie = menus[key].menuCalorie;
+						var menuNote = menus[key].menuNote;
+	
+						html += '<tr class="item'+key+'"><form id="menuForm'+key+'"><td align="center" valign="middle"><input type="hidden" id="menuId'+key+'" value="'+menuId+'"name="menuId" "class="menuId"><input type="text" value="'+menuName+'"name="menuName" id="menuName'+key+'" class="menuName" style="width: 90px"></td>';
+						html += '<td align="center" valign="middle"><input type="text" id="menuPrice'+key+'"  value="'+menuPrice +'"name="menuPrice" style="width: 48px">원</td>';
+						html += '<td align="center" valign="middle"><input type="text" id="menuCalorie'+key+'" value="'+menuCalorie +'"name="menuCalorie" style="width: 40px">kcal</td>';
+						html += '<td align="center" valign="middle"><input type="text" id="menuNote'+key+'" value="'+menuNote +'"name="menuNote" style="width: 90px"></td></form>';
+						html += '<td cellpadding="1px"><button type="button" onclick="addMenuConfirm('+key+')" id="menuModBtn'+key+'" tyle="width: 28px font-size: 3pt;">수정</button></td>';
+						html += '<td cellpadding="1px"><button type="button" onclick="delMenu('+key+')" id="menuDelBtn'+key+'" tyle="width: 28px font-size: 3pt;">삭제</button></td></tr>';
+						addMenuKey = key;
+					});
+					$('#menuTbody').append(html);
+					//$('#menuTable').append('</tbody>');
+					
+				}
+			}
+		});
+	}
 
 	
 	</script>
@@ -776,25 +778,26 @@
 <body>
 	
 	
-	<div id="selectBox" align="center" >
-		주소 선택<br> <select id="adress1" class="selectpicker" data-live-search="true">
+	<div id="selectBox" align="center">
+		주소 선택<br> <select id="adress1" style="width: 140px;">
+			<option disabled="disabled" selected="selected">시/도</option>
 			<c:forEach items="${adress1}" var="adress1">
 
 				<option value="${adress1}">${adress1}</option>
 
 			</c:forEach>
-		</select> <select id="adress2" class="selectpicker" data-live-search="true">
-			<option>시/도 를 선택하세요</option>
+		</select> <select id="adress2" style="width: 140px;">
+			<option disabled="disabled" selected="selected">시/군/구</option>
 
-		</select> <select id="adress3" class="selectpicker" data-live-search="true">
-			<option>시/군/구를 선택하세요</option>
+		</select> <select id="adress3" style="width: 140px;">
+			<option disabled="disabled" selected="selected">도로명</option>
 		</select>
 	</div>
 
 
 	<div id="restntList" align="center">
 
-		<table border="2" id="restntTable" class="table" style="width: 60%">
+		<table border="2" id="restntTable" class="table" style="width: 50%">
 			<caption>식당 리스트</caption>
 			<tbody id="restntListResult">
 			</tbody>
@@ -805,7 +808,7 @@
 
 	<div id="restntInfo" align="center">
 		<form id="restInfoForm">
-			<table border="2" id="restntInfoTable" class="table">
+			<table border="2" id="restntInfoTable" class="table" style="width: 35%">
 				<caption>식당 정보</caption>
 
 
@@ -820,7 +823,7 @@
 		<br> <br>
 
 		<div id="menuInfo" align="center">
-		<table border="2" id="menuTable" style="width: 30%;">
+		<table border="2" id="menuTable" class="table" style="width: 460px; font-size: 8pt;">
 			<caption>메뉴 정보</caption>
 			<tbody id="menuTbody">
 			</tbody>
@@ -838,7 +841,7 @@
 
 		식당 정보 입력
 		<form id="newRestntInfoForm">
-		<table border="2">
+		<table border="2" class="table" style="width: 35%">
 			
 			<tbody>
 				
@@ -852,24 +855,29 @@
 
 
 				<tr>
-					<th>주소1</th>
+					<th>시/도</th>
 
 					<td><input type="text" id="adress1Input"
 						name="adress1"></td>
 				</tr>
 				<tr>
-					<th>주소2</th>
+					<th>시/군/구</th>
 					<td><input type="text"  id="adress2Input"
 						name="adress2"></td>
 				</tr>
 				<tr>
-					<th>주소3</th>
+					<th>도로명</th>
 					<td><input type="text"  id="adress3Input"
 						name="adress3"></td>
 				</tr>
 				<tr>
-					<th>주소4</th>
-					<td><input type="text" name="adress4" id="adress4Input" placeholder="상세 주소를 입력하세요"></td>
+					<th>건물번호</th>
+					<td><input type="text" name="adress4" id="adress4Input" placeholder="건물 번호를 입력하세요"></td>
+				</tr>
+				
+				<tr>
+					<th>상세주소</th>
+					<td><input type="text" name="adress5" id="adress5Input" placeholder="상세 주소를 입력하세요"></td>
 				</tr>
 
 				<tr>
@@ -897,7 +905,7 @@
 				</tr>
 
 				
-				<tr><td><button type="button" onclick="addRestnt();">확인</button></td></tr>
+				<tr><td colspan="2" style=""><button type="button" onclick="addRestnt();">확인</button></td></tr>
 
 
 
