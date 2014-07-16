@@ -56,9 +56,11 @@ function restntDetailGo(obj){
 </script>
 <title>식당리스트</title>
 </head>
+
 <body>
+<div align="center">
 	<h4>친구들이 평가한 식당리스트</h4>
-<div>
+
 	<form id="community" method="post" >
 		<input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn"/> 
 	</form>

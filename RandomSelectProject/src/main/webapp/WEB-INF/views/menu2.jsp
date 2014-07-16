@@ -85,7 +85,7 @@
 				</form>
 			</c:when>
 		</c:choose>
-	   		<form id="select3" style="display: inline;">
+	   		<form id="select3" method="post" style="display: inline;">
 			<input type="button"  style="width:150px;height:100px;" class="btn btn-primary" onclick="selectResult()" value="아무거나"> 
 			<!-- <input type="button" class="btn btn-warning" onclick="ladderMake()" value="복 불 복"> -->
 			

@@ -54,7 +54,7 @@ function mateDetailGo(obj){
 </head>
 <body>	
 <h3>친구리스트</h3>
-<div container>
+<div align="center">
 	<form id="community" method="post" >
 		 <input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
 	</form>
