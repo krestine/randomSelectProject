@@ -26,7 +26,7 @@ input.error {
 }
 
 label.error {
-	margin-left: 10px;
+	display: block;
 	color: red;
 }
 </style>
@@ -55,7 +55,6 @@ label.error {
 	$(document)
 			.ready(
 					function() {
-						var cd = "${cfCD}";
 						// 달력
 						$("#memBirth").datepicker(
 								{
@@ -164,7 +163,7 @@ label.error {
 										function() {
 											var memId = $('#memId').val();
 											if (memId == "") {
-												alert("빈칸");
+												// 												alert("빈칸");
 												$('#certify')
 														.html(
 																'<font color=red>이메일을 확인해주세요.</font>');
@@ -222,6 +221,7 @@ label.error {
 						$("#register_form")
 								.validate(
 										{
+											errorClass : 'error',
 											//onkeyup : false,
 											//onfocusout : false,
 											//focusInvalid : false,
@@ -282,17 +282,22 @@ label.error {
 											},
 											errorPlacement : function(error,
 													element) {
-												if (element.attr("id") == "mPhoneCode"
-														|| element.attr("id") == "mPhoneMid"
-														|| element.attr("id") == "mPhoneEnd") {
-													error
-															.insertAfter("#mPhoneEnd");
-												} else {
-													error.insertAfter(element);
-												}
+												// 												if (element.attr("id") == "mPhoneCode"
+												// 														|| element.attr("id") == "mPhoneMid"
+												// 														|| element.attr("id") == "mPhoneEnd") {
+												// 													error
+												// 															.insertAfter("#mPhoneEnd");
+												// 												} else {
+												// 													error.insertAfter(element);
+												// 												}
+												$(element).closest(
+														'div.form-group')
+														.append(error);
+
 											},
 
 											messages : {
+												errorClass : 'error',
 												memId : {
 													required : "아이디를 입력해주세요",
 													email : "이메일 형식으로 써주세요.",
@@ -381,64 +386,70 @@ label.error {
 </head>
 <body>
 
+	<div align="center" class="col-lg-20">
 
+		<form role="form" id="register_form" method="post"
+			action="registerProc.do">
 
-	<form id="register_form" method="post" action="registerProc.do">
+			<div class="form-group">
+				<input type="text" id="memId" name="memId" placeholder="아이디"
+					class="signup" />
+				<!-- <button type="button" id="idCheck">중복체크</button> -->
+			</div>
+			<div>
+				<span id="check"></span>
+			</div>
+			<div class="form-group">
+				<input type="text" id="inputCD" name="inputCD" placeholder="인증번호"
+					class="signup" />
+				<button type="button" class="btn btn-warning btn-sm"
+					id="emailCertify_btn">인증번호전송</button>
+				<input type="hidden" id="certifyCD" name="certifyCD" class="signup"></input>
+			</div>
+			<div>
+				<span id="certify"></span>
+			</div>
+			<div class="form-group">
+				<input type="text" name="memName" placeholder="이름" class="signup" />
+			</div>
+			<div class="form-group">
+				<input type="password" id="memPasswd" placeholder="비밀번호"
+					name="memPasswd" class="signup" />
+			</div>
+			<div class="form-group">
+				<input type="password" name="memPasswdCheck" placeholder="비밀번호확인"
+					class="signup" />
+			</div>
+			<div class="form-group">
+				<input type="text" id="memBirth" name="memBirth" placeholder="생년월일"
+					class="signup" readonly="readonly" />
+			</div>
+			<!-- 		<div class="signup"> -->
+			<!-- 			전화번호 <select id="mPhoneCode" name="mPhoneCode"> -->
+			<!-- 				<option value="010" selected>010</option> -->
+			<!-- 				<option value="011">011</option> -->
+			<!-- 				<option value="016">016</option> -->
+			<!-- 				<option value="017">017</option> -->
+			<!-- 				<option value="018">018</option> -->
+			<!-- 				<option value="019">019</option> -->
+			<!-- 			</select> - <input type="text" id="mPhoneMid" name="mPhoneMid" size="4" -->
+			<!-- 				maxlength="4" /> - <input type="text" id="mPhoneEnd" -->
+			<!-- 				name="mPhoneEnd" size="4" maxlength="4" /> -->
+			<!-- 		</div> -->
 
-		<div>
-			아이디 <input type="text" id="memId" name="memId" class="signup" />
-			<!-- <button type="button" id="idCheck">중복체크</button> -->
-			<span id="check"></span>
-		</div>
+			<div class="form-group">
+				<input type="text" id="memMobile" placeholder="전화번호"
+					name="memMobile">
+			</div>
 
-		<div>
-			<button type="button" id="emailCertify_btn">인증번호전송</button>
-		</div>
-		<div>
-			인증번호 <input type="text" id="inputCD" name="inputCD" class="signup" />
-		</div>
-		<div>
-			<input type="hidden" id="certifyCD" name="certifyCD" class="signup"></input>
-			<span id="certify"></span>
-		</div>
+			<div class="form-group">${errmessage}</div>
 
-		<div>
-			이름 <input type="text" name="memName" class="signup" />
-		</div>
-		<div>
-			비밀번호 <input type="password" id="memPasswd" name="memPasswd"
-				class="signup" />
-		</div>
-		<div>
-			비밀번호확인 <input type="password" name="memPasswdCheck" class="signup" />
-		</div>
-		<div>
-			생년월일 <input type="text" id="memBirth" name="memBirth" class="signup"
-				readonly="readonly" />
-		</div>
-		<!-- 		<div class="signup"> -->
-		<!-- 			전화번호 <select id="mPhoneCode" name="mPhoneCode"> -->
-		<!-- 				<option value="010" selected>010</option> -->
-		<!-- 				<option value="011">011</option> -->
-		<!-- 				<option value="016">016</option> -->
-		<!-- 				<option value="017">017</option> -->
-		<!-- 				<option value="018">018</option> -->
-		<!-- 				<option value="019">019</option> -->
-		<!-- 			</select> - <input type="text" id="mPhoneMid" name="mPhoneMid" size="4" -->
-		<!-- 				maxlength="4" /> - <input type="text" id="mPhoneEnd" -->
-		<!-- 				name="mPhoneEnd" size="4" maxlength="4" /> -->
-		<!-- 		</div> -->
-		<div>
-			전화번호 <input type="text" id="memMobile" name="memMobile">
-		</div>
-
-		<div>${errmessage}</div>
-
-		<div>
-			<input type="submit" id="register" value="회원가입">
-		</div>
-	</form>
-
+			<div>
+				<input type="submit" id="register" class="btn btn-success btn-sm"
+					value="회원가입">
+			</div>
+		</form>
+	</div>
 
 </body>
 </html>
