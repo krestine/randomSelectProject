@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>nEvaluateList.jsp</title>
 <script type="text/javascript">
-	function mainGo() {
+/* 	function mainGo() {
 
 		document.getElementById("select1").action = "main.do";
 		document.getElementById("select1").submit();
@@ -16,7 +16,7 @@
 
 		document.getElementById("select2").action = "evaluatemain.do";
 		document.getElementById("select2").submit();
-	}
+	} */
 	
 </script>
 
@@ -25,12 +25,12 @@
 <body>
 	<h3>평가안한 식당 리스트</h3>
 
-	<form id="select1" method="post">
+<!-- 	<form id="select1" method="post">
 		<input type="button" onclick="mainGo()" value="메인으로 ">
 	</form>
 	<form id="select2" method="post">
 		<input type="button" onclick="evaluateMainGo()" value="평가메인으로">
-	</form>
+	</form> -->
 
 	<table width="600" border="1" bordercolor="#00A5FF">
 
@@ -96,7 +96,6 @@ which.style.display="block"
  --%>					
  
  	<input type="submit" value="확인" onclick="location.href='javascript:hideshow(document.getElementById(memId=${evaluate.memId}&evalId=${evaluate.evalId}))'">
-		<%-- <a href="delete.do?memId=${evaluate.memId}&evalId=${evaluate.evalId}">삭제</a> --%>
 	
 	</div>
 				</form>

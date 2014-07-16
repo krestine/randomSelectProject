@@ -60,7 +60,7 @@ public class EvaluateController {
 	}
 
 	// 식당평가한 목록(evaluateList.jsp)
-	@RequestMapping(value = "/evaluateList.do", method = RequestMethod.POST)
+	@RequestMapping(value = "evaluateList.do")
 	public ModelAndView evaluateListForm(HttpServletRequest request, Model model) {
 		System.out.println("evaluateList()");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(

@@ -9,14 +9,14 @@
 <title>게시판</title>
 <script type="text/javascript">
 
-	function mainGo() {
+	/* function mainGo() {
 		document.getElementById("select1").action = "main.do";
 		document.getElementById("select1").submit();
 	}
 	function evaluateMainGo() {
 		document.getElementById("select2").action = "evaluatemain.do";
 		document.getElementById("select2").submit();
-	}
+	} */
 </script>
 <title>게시판</title>
 </head>
@@ -25,12 +25,12 @@
 
 	<h3>평가한 식당 리스트</h3>
 
-	<form id="select1" method="post">
+	<%-- <form id="select1" method="post">
 		<input type="button" onclick="mainGo()" value="메인으로 ">
 	</form> <form id="select2" method="post">
 		<input type="button" onclick="evaluateMainGo()" value="평가메인으로">
 	</form>
-
+ --%>
 
 	<table width="600" border="1" bordercolor="#00A5FF">
 
