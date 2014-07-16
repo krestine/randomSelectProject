@@ -12,23 +12,23 @@
 <title>설정</title>
 </head>
 <body>
+	<div align="center">
+		<form action="settingProc.do" method="post">
+			검색 설정: 도보 <br> <select name="walkRange">
+				<c:forEach items="${walkRanges}" var="walkRange">
+					<c:choose>
 
-	<form action="settingProc.do" method="post">
-		검색 설정: 도보 <br> <select name="walkRange">
-			<c:forEach items="${walkRanges}" var="walkRange">
-				<c:choose>
+						<c:when test="${walkRange.walkRange==userInfo.memWalkRange}">
+							<option selected="selected">${walkRange.walkRange}</option>
+						</c:when>
 
-					<c:when test="${walkRange.walkRange==userInfo.memWalkRange}">
-						<option selected="selected">${walkRange.walkRange}</option>
-					</c:when>
+						<c:otherwise>
+							<option>${walkRange.walkRange}</option>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 
-					<c:otherwise>
-						<option>${walkRange.walkRange}</option>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-
-		</select> <br> 검색 설정 : 차량 <br> <select name="carRange">
+				<%-- </select> <br> 검색 설정 : 차량 <br> <select name="carRange">
 
 			<c:forEach items="${carRanges}" var="carRange">
 
@@ -40,35 +40,39 @@
 						<option>${carRange.carRange}</option>
 					</c:otherwise>
 				</c:choose>
-			</c:forEach>
+			</c:forEach> --%>
 
 
-		</select> <br> <br> 검색 설정 : 제외메뉴 <br>
-		<c:forEach items="${excMenus}" var="excMenu" varStatus="num">
+			</select> <br> <br> 검색 설정 : 제외메뉴 <br>
+			<div align="center">
+				<table>
+					
+					<tbody>
+											
+						<c:forEach items="${excMenus}" var="excMenu" varStatus="num">
+							<tr>
+								<c:choose>
+									<c:when test="${excMenu.excMenu==userSettings[num.index]}">
 
-			<c:choose>
-				<c:when test="${excMenu.excMenu==userSettings[num.index]}">
+										<td><input type="checkbox" value="${num.index}"
+											name="menus" checked="checked">${excMenu.excMenu}</td>
 
-					<input type="checkbox" value="${num.index}" name="menus"
-						checked="checked">${excMenu.excMenu}
-				<br>
-				</c:when>
-				<c:otherwise>
+									</c:when>
+									<c:otherwise>
+										<td><input type="checkbox" value="${num.index}"
+											name="menus">${excMenu.excMenu}</td>
+									</c:otherwise>
 
-					<input type="checkbox" value="${num.index}" name="menus">${excMenu.excMenu}
-				<br>
-				</c:otherwise>
+								</c:choose>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<br> <input type="submit" value="저장">
+			</div>
+		</form>
 
-			</c:choose>
-		</c:forEach>
-
-		<br> <input type="submit" value="저장">
-
-	</form>
-	<form action="main.do">
-		<input type="submit" value="메인으로">
-	</form>
-
+	</div>
 
 
 </body>
