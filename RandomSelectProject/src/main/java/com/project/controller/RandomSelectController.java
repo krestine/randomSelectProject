@@ -44,7 +44,7 @@ public class RandomSelectController {
 	private List<SettingDTO> walkRange;
 	private List<RestntDTO> restnts;
 	
-	@RequestMapping("/selectResult.do")
+	@RequestMapping(value="/selectResult.do", method=RequestMethod.POST)
 	public String randomSelectMain(Model model, HttpServletRequest request){
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");

@@ -179,7 +179,8 @@
 </head>
 <body>
 
-	<div class="findBox">
+	<div align="center" class="findBox">
+
 		<form id="findId_form" action="findIdProc.do" method="post">
 			<div>아이디 찾기</div>
 			<div>
@@ -227,7 +228,7 @@
 
 	</div>
 
-	<div class="linkBox">
+	<div align="center" class="linkBox">
 		<span class="linkform"><a href="#findPassword_form"
 			id="findPassword_btn">비밀번호찾기</a> </span> <span class="linkform"
 			style="display: none"> <a href="#findId_form" id="findId_btn">아이디
