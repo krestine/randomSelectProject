@@ -7,8 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>register.jsp</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -53,6 +55,7 @@ label.error {
 	$(document)
 			.ready(
 					function() {
+						var cd = "${cfCD}";
 						// 달력
 						$("#memBirth").datepicker(
 								{
@@ -66,6 +69,7 @@ label.error {
 											'9월(SEP)', '10월(OCT)', '11월(NOV)',
 											'12월(DEC)' ]
 								});
+
 						// 중복아이디체크
 						jQuery.validator
 								.addMethod(
@@ -154,34 +158,89 @@ label.error {
 											}
 										});
 
+						//이메일 인증 ajax
+						$('#emailCertify_btn')
+								.click(
+										function() {
+											var memId = $('#memId').val();
+											if (memId == "") {
+												alert("빈칸");
+												$('#certify')
+														.html(
+																'<font color=red>이메일을 확인해주세요.</font>');
+
+											} else {
+												$
+														.ajax({
+															cache : false,
+															async : false,
+															type : "POST",
+															data : "memId="
+																	+ memId,
+															url : "emailCertifyProc.do",
+															datatype : 'xml',
+															success : function(
+																	xml) {
+																var result = $(
+																		xml)
+																		.find(
+																				'checkCertify')
+																		.text();
+																if (result
+																		.trim() == 'true') {
+																	var cfCD = $(
+																			xml)
+																			.find(
+																					"cfCD")
+																			.text();
+																	// 																	console.log(cfCD);
+																	$(
+																			"#certifyCD")
+																			.val(
+																					cfCD);
+																	// 																	console.log($("#certifyCD").val());
+																	$(
+																			'#certify')
+																			.html(
+																					'<font color=blue>입력하신 메일로 인증번호가 발송되었습니다.</font>');
+																} else {
+																	alert("error");
+																	$(
+																			'#certify')
+																			.html(
+																					'<font color=red>인증번호를 재발급해주세요.</font>');
+																}
+															},
+															error : function() {
+																alert("재시도하세요")
+															}
+														});
+											}
+										});
+
 						// 회원가입 체크
 						$("#register_form")
 								.validate(
 										{
-
 											//onkeyup : false,
 											//onfocusout : false,
 											//focusInvalid : false,
 											//focusCleanup:true,
 											//ignore : '#memId',
-											groups : {
-												phoneGroup : "mPhoneCode mPhoneMid mPhoneEnd"
-											},
+
+											// 											groups : {
+											// 												phoneGroup : "mPhoneCode mPhoneMid mPhoneEnd"
+											// 											},
 
 											rules : {
 												memId : {
 													required : true,
 													email : true,
 													idCheck : true
-												/* ,remote : {
-															url : "idCheck.do",
-															type : "POST",
-															data : {
-																memId : function() {
-																	return $("#memId").val();
-																}
-															} 
-														}*/
+												},
+												inputCD : {
+													required : true,
+													equalTo : "#certifyCD"
 												},
 												memName : {
 													required : true,
@@ -190,7 +249,7 @@ label.error {
 												},
 												memPasswd : {
 													required : true,
-													minlength : 4
+													minlength : 6
 												},
 												memPasswdCheck : {
 													required : true,
@@ -210,12 +269,16 @@ label.error {
 												// 													number : true
 												// 												}
 												// 												,
-												phoneGroup : {
+												// 												phoneGroup : {
+												// 													required : true,
+												// 													number : true,
+												// 													mobileCheck : true
+												// 												}
+
+												memMobile : {
 													required : true,
-													number : true,
 													mobileCheck : true
 												}
-
 											},
 											errorPlacement : function(error,
 													element) {
@@ -235,6 +298,10 @@ label.error {
 													email : "이메일 형식으로 써주세요.",
 													idCheck : "이메일 형식으로 써주세요."
 												},
+												inputCD : {
+													required : "인증번호를 입력해주세요.",
+													equalTo : "인증번호가 일치하지 않습니다."
+												},
 												memName : {
 													required : "이름을 입력해주세요.",
 													minlength : "2자이상 입력해주세요.",
@@ -242,7 +309,7 @@ label.error {
 												},
 												memPasswd : {
 													required : "비밀번호를 입력해주세요.",
-													minlength : "4자이상 입력해주세요."
+													minlength : "6자이상 입력해주세요."
 												},
 												memPasswdCheck : {
 													required : "비밀번호 확인을 입력해주세요.",
@@ -261,10 +328,14 @@ label.error {
 												// 													required : "전화번호를 입력해주세요.",
 												// 													number : "숫자를 입력해주세요."
 												// 												},
-												phoneGroup : {
+												// 												phoneGroup : {
+												// 													required : "전화번호를 입력해주세요.",
+												// 													number : "숫자를 입력해주세요.",
+												// 													mobileCheck : "'010-1234-1234'형식으로 입력해주세요."
+												// 												}
+												memMobile : {
 													required : "전화번호를 입력해주세요.",
-													number : "숫자를 입력해주세요.",
-													mobileCheck : ""
+													mobileCheck : "'010-1234-1234'형식으로 입력해주세요."
 												}
 											},
 											submitHandler : function(form) {
@@ -288,15 +359,22 @@ label.error {
 								.addMethod(
 										'mobileCheck',
 										function() {
-											var mobile = $('#mPhoneCode').val()
-													+ "-"
-													+ $('#mPhoneCode').val()
-													+ "-"
-													+ $('#mPhoneCode').val();
-											var regex_mobile = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+											// 											var mobile = $('#mPhoneCode').val()
+											// 													+ "-"
+											// 													+ $('#mPhoneCode').val()
+											// 													+ "-"
+											// 													+ $('#mPhoneCode').val();
+											// 											var regex_mobile = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+											// 											if (!regex_mobile.test(mobile)) {
+											// 												return false;
+											// 											}
+											var result = true;
+											var mobile = $('#memMobile').val();
+											var regex_mobile = /[01](0|1|6|7|8|9)[-](\d{4}|\d{3})[-]\d{4}$/g;
 											if (!regex_mobile.test(mobile)) {
 												return false;
 											}
+											return result;
 										});
 					});
 </script>
@@ -312,6 +390,18 @@ label.error {
 			<!-- <button type="button" id="idCheck">중복체크</button> -->
 			<span id="check"></span>
 		</div>
+
+		<div>
+			<button type="button" id="emailCertify_btn">인증번호전송</button>
+		</div>
+		<div>
+			인증번호 <input type="text" id="inputCD" name="inputCD" class="signup" />
+		</div>
+		<div>
+			<input type="hidden" id="certifyCD" name="certifyCD" class="signup"></input>
+			<span id="certify"></span>
+		</div>
+
 		<div>
 			이름 <input type="text" name="memName" class="signup" />
 		</div>
@@ -326,21 +416,20 @@ label.error {
 			생년월일 <input type="text" id="memBirth" name="memBirth" class="signup"
 				readonly="readonly" />
 		</div>
-		<div class="signup">
-			전화번호 <select id="mPhoneCode" name="mPhoneCode">
-				<option value="010" selected>010</option>
-				<option value="011">011</option>
-				<option value="016">016</option>
-				<option value="017">017</option>
-				<option value="018">018</option>
-				<option value="019">019</option>
-			</select> - <input type="text" id="mPhoneMid" name="mPhoneMid" size="4"
-				maxlength="4" /> - <input type="text" id="mPhoneEnd"
-				name="mPhoneEnd" size="4" maxlength="4" />
-		</div>
+		<!-- 		<div class="signup"> -->
+		<!-- 			전화번호 <select id="mPhoneCode" name="mPhoneCode"> -->
+		<!-- 				<option value="010" selected>010</option> -->
+		<!-- 				<option value="011">011</option> -->
+		<!-- 				<option value="016">016</option> -->
+		<!-- 				<option value="017">017</option> -->
+		<!-- 				<option value="018">018</option> -->
+		<!-- 				<option value="019">019</option> -->
+		<!-- 			</select> - <input type="text" id="mPhoneMid" name="mPhoneMid" size="4" -->
+		<!-- 				maxlength="4" /> - <input type="text" id="mPhoneEnd" -->
+		<!-- 				name="mPhoneEnd" size="4" maxlength="4" /> -->
+		<!-- 		</div> -->
 		<div>
-			<script type="text/javascript"
-				src="${captchajs}?theme=clean&key=${captchaPublicKey}"></script>
+			전화번호 <input type="text" id="memMobile" name="memMobile">
 		</div>
 
 		<div>${errmessage}</div>

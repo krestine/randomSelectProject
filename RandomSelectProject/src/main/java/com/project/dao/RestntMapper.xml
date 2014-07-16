@@ -29,6 +29,15 @@
 		adress3=#{adress3}and
 		active= '1'
 	</select>
+	
+	<select id="getRestntListByAdress2" parameterType="RestntDTO" resultType="RestntDTO">
+		select
+		* from restnt
+		where
+		adress1=#{adress1}and
+		adress2=#{adress2}and
+		active= '1'
+	</select>
 
 
 	<!--관리자 : 식당 정보 삭제 -->

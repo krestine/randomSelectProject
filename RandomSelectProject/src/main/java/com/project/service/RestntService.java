@@ -50,6 +50,7 @@ public interface RestntService {
 
 	List<RestntDTO> getRestntFullAddress(RestntDTO restntDto);
 	List<RestntDTO> getRestntListByAdress(RestntDTO restntDto);
+	List<RestntDTO> getRestntListByAdress2(RestntDTO restntDto);
 
 	void setRestntLocationInfo(RestntDTO restntDto);
 

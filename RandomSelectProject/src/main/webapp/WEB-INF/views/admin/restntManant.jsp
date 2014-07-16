@@ -181,9 +181,9 @@
 							+ '</label></td></tr>';		
 	
 					html += '<tr><th>분류</th><td><label>' + restntCate
-							+ '</label><td>';
+							+ '</label></td>';
 	
-					html += '</td></tr><tr><th>연락처</th><td><input type="text" value="'+restntTel+'"name="restntTel"></td></tr>';
+					html += '</tr><tr><th>연락처</th><td><input type="text" value="'+restntTel+'"name="restntTel"></td></tr>';
 					html += '<tr><th>평균 별점</th><td><label>'
 							+ restntEval
 							+ '</label></td></tr></form></tbody>';
@@ -649,15 +649,17 @@
 						var restntId = restnts[key].restntId;
 
 						html += '<td>'+ restntName
-						+ '</td><td><input type="text" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
+						+ '</td><td><input type = "hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
 						+ key
-						+ '" class="restntInfo" onclick="clickBtn(this);">관리</button><button class="'+key+'" type="button" onclick="nogada(this)">로동</button></td></tr>';
+						+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr>';
+
+					});
+			 		html += '<tr><td colspan=2><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr>';
+					$('#restntListResult').append(html);
 								 
 						
 
-					});
-					 html += '<tr><td colspan=2><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr>';
-					$('#restntListResult').append(html);
+					
 
 				}
 				
@@ -736,7 +738,7 @@
 		
 							if (restnts != null) {
 								$('#restntList').show();
-								 var html = '<tr>';
+								 var html = '<tr><th style="width: 45%" colspan=2>식당 이름</th></tr>';
 								 
 								 $.each(restnts,function(key) {
 									var restntName = restnts[key].restntName;
@@ -744,13 +746,13 @@
 	
 									
 											 
-									html += '<td>'+ restntName
-											+ '</td><td><input type = "text" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
+									html += '<tr><td>'+ restntName
+											+ '</td><td><input type = "hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
 											+ key
-											+ '" class="restntInfo" onclick="clickBtn(this);">관리</button><button id="no'+key+'" type="button" onclick="nogada(this);">로동</button></td></tr>';
+											+ '" class="restntInfo" onclick="clickBtn(this);">관리</button></td></tr>';
 	
 								});
-								 html += '<tr><td colspan=2><button id="addMode" type="button" onclick="addMode()">추가</button><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr>';
+								 html += '<tr><td colspan=2><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr>';
 								$('#restntListResult').append(html);
 		
 							}
@@ -764,138 +766,27 @@
 	}
 	
 	
-	function findLocation(obj) {
-		//docment.getElementById = view에서 해당 Id를 가진 컨트롤의 값을 가져옴
-
-		geocoder.geocode({
-			'address' : obj
-		}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-				latitude = results[0].geometry.location.lat();
-				longitude =	results[0].geometry.location.lng();
-			} else {
-				alert('Geocode was not successful for the following reason: '
-						+ status);
-			}
-			alert(latitude);
-			alert(longitude);
-		
-		});
-		
-	}
 	
-	function findLocationTest() {
-		var obj = $('#transTest').val();
-		alert(obj);
-		geocoder.geocode({
-			'address' : obj
-		}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-				latitude = results[0].geometry.location.lat();
-				longitude =	results[0].geometry.location.lng();
-			} else {
-				alert('Geocode was not successful for the following reason: '
-						+ status);
-			}
-		});
-		alert(longitude);
-		alert(latitude);
-		
-		
-	}
-	function nogada(obj) {
-		var number = obj.id;
-		var number1 = number.replace('no','');
-		var restntIdNo = $('#restntId'+number1).attr('value');
-		
-		alert(restntIdNo);
-		
-		var paramData = {
-				restntId : restntIdNo
-			};
+	
 
-			$.ajax({
-				cache : false,
-				async : false,
-				type : 'POST',
-				url : 'ajaxRestntInfo.do',
-				data : paramData,
-				dataType : 'json',
-				error : function() {
-					alert("error : ajax 통신 실패.");
-		
-				},
-				//식당 정보 테이블 그리기
-				success : function(json){
-					
-		
-						
-						
-						var adress1 = json.adress1;
-						var adress2 = json.adress2;
-						var adress3 = json.adress3;
-						var adress4 = json.adress4;
-						
-						var adress = adress1 + adress2 + adress3 +adress4;
-						
-						alert('full adress :'+adress);
-						findLocation(adress);
-						
-						var param2 = {
-								restntId : json.restntId,
-								longitude : longitude,
-								latitude : latitude
-						};
-						
-						$.ajax({
-							cache : false,
-							async : false,
-							type : 'POST',
-							url : 'addressTransfer2.do',
-							data : param2,
-							dataType : 'json',
-							error : function() {
-								alert("error : ajax 통신 실패.");
-					
-							},
-							//식당 정보 테이블 그리기
-							success : function(json) {
-								var insertFlag = json.insertFlag;
-								if(insertFlag != 0){
-									alert('추가 성공');
-								}
-								else{
-									alert('추가 실패');
-								}
-					
-								
-							}
-					
-						});
-		
-					}
-		
-				});
-	}
+	
 	</script>
 
 </head>
 <body>
-	<button onclick="addressTransfer()">위도, 경도 환산</button>
-	<input type="text" id="transTest">
-	<button onclick="findLocationTest()">위도, 경도 환산 테스트</button>
+	
 	
 	<div id="selectBox" align="center" >
-		주소 선택<br> <select id="adress1" class="adress1">
+		주소 선택<br> <select id="adress1" class="selectpicker" data-live-search="true">
 			<c:forEach items="${adress1}" var="adress1">
 
 				<option value="${adress1}">${adress1}</option>
 
 			</c:forEach>
-		</select> <select id="adress2" class="adress2">
+		</select> <select id="adress2" class="selectpicker" data-live-search="true">
 			<option>시/도 를 선택하세요</option>
 
-		</select> <select id="adress3" class="adress3">
+		</select> <select id="adress3" class="selectpicker" data-live-search="true">
 			<option>시/군/구를 선택하세요</option>
 		</select>
 	</div>
@@ -903,7 +794,7 @@
 
 	<div id="restntList" align="center">
 
-		<table border="2" id="restntTable" >
+		<table border="2" id="restntTable" class="table" style="width: 60%">
 			<caption>식당 리스트</caption>
 			<tbody id="restntListResult">
 			</tbody>
