@@ -132,7 +132,7 @@ public class CommunityController {
 	
 	// 친구 상세정보 ajax 
 
-@RequestMapping(value="ajaxMateDetail.do")
+@RequestMapping(value="ajaxMateDetail.do", method = RequestMethod.POST)
 	public void ajaxMateDetail(HttpServletRequest request,
 		HttpServletResponse response, MateDTO mateDto, String mateId, String memId) throws IOException{
 		System.out.println("ajaxMateDetail.do");
@@ -213,19 +213,23 @@ public class CommunityController {
 
 	}
 	
-		
+	// 회원 : 식당 상세정보 ajax	
 	@RequestMapping(value="/ajaxRestntDetail.do", method =RequestMethod.POST)
 	public void ajaxResntDetail(HttpServletRequest request,
 		HttpServletResponse response, String restntId) throws IOException{
 		
 		restnt = restntService.getRestntInfoByRestntId(restntId);
+		System.out.println(restnt);
 		
 		menuInfo = menuService.getMenuListByRestntId(restntId);
+		System.out.println(menuInfo);
+		
+		JSONArray jsonArray = JSONArray.fromObject(menuInfo);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("restnt", restnt);
-		map.put("menuInfo", menuInfo);
-	
+		map.put("menuInfo", jsonArray);
+		
 		JSONObject jsonObject  = JSONObject.fromObject(map);
 		System.out.println("json - "+ jsonObject);
 		

@@ -26,12 +26,14 @@
 		document.getElementById("select1").action = "adminMainProc.do";
 		document.getElementById("select1").submit();
 	}
-
 	function mateListGo() {
 		document.getElementById("select2").action = "mateListProc.do";
 		document.getElementById("select2").submit();
 	}
-
+	function restntListGo(){
+		document.getElementById("select2").action = "restntListProc.do";
+		document.getElementById("select2").submit();	
+	}
 	function settingGo() {
 		document.getElementById("select2").action = "settingForm.do";
 		document.getElementById("select2").submit();
@@ -88,10 +90,18 @@
 			
 		</form>
    		<form id="select2" method="post" style="display: inline;">
-				<input type="button"  style="width:150px;height:100px;" class="btn btn-default" onclick="settingGo()" value="설   정"> 
-				<input type="button"  style="width:150px;height:100px;" class="btn btn-success" onclick="mateListGo()"value="커뮤니티" > 	
-				<input type="button"  style="width:150px;height:100px;" class="btn btn-info" onclick="evaluateGo()" value="평  가">
+				<input type="button"  style="width:150px;height:100px;" class="btn btn-default" onclick="settingGo()" value="설   정">
+				<div class=btn-group>
+				<input type="button"  style="width:150px;height:100px;" class="btn btn-success dropdown-toggle"value="커뮤니티"data-toggle="dropdown">
+				<ul class="dropdown-menu" role="menu">
+				<li><input class="btn btn-success btn-sm" onclick="mateListGo()" value="친구리스트"></li>
+				<li><input class="btn btn-success btn-sm" onclick="restntListGo()" value="식당리스트"></li>
+				</ul> 
+				</div> 
+				<input type="button"  style="width:150px;height:100px;" class="btn btn-info" onclick="evaluateGo()" value="평  가"> 		 	
+		
 		</form>
+				
 	</div>
 </center>
 </body>
