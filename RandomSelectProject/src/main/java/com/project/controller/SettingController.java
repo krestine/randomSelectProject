@@ -79,23 +79,38 @@ public class SettingController {
 	String settingProc(Model model, MemberDTO memberDto,
 			HttpServletRequest request) {
 		// 세션에서 로그인 정보 가져옴
+		System.out.println("/settingProc.do");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 
 		String[] menus = request.getParameterValues("menus");
-		memExcMenu = menuCodeEncoder(menus);
-
+		
+		if(menus != null){
+			memExcMenu = menuCodeEncoder(menus);	
+			memberDto.setMemExcMenu(memExcMenu);
+			System.out.println("셀렉트 박스 선택 값 ");
+			for(String str : menus){
+				System.out.println(str);
+			}		
+		}
+		else{
+			memberDto.setMemExcMenu(menuCode);
+		
+		}
+		
+		
+		
 		// 로그인 정보의 아이디를 패러미터로 세팅
 		memberDto.setMemId(loginUser.getMemId());
 		// 생성된 제외메뉴 코드를 패러미터로 세팅
-		memberDto.setMemExcMenu(memExcMenu);
+		
 
 		// 설정 페이지에서 입력한 값을 숫자로 변환하여 패러미터로 세팅
 		memWalkRange = Integer.parseInt(request.getParameter("walkRange"));
 		memberDto.setMemWalkRange(memWalkRange);
 
 		// 설정 페이지에서 입력한 값을 숫자로 변환하여 패러미터로 세팅
-		memCarRange = Integer.parseInt(request.getParameter("carRange"));
+		memCarRange = 0;
 		memberDto.setMemCarRange(memCarRange);
 		// 설정 정보 저장 쿼리 실행
 
@@ -137,6 +152,7 @@ public class SettingController {
 					.getExcMenuById(excMenuId) : "선택안함";
 			System.out.println(menuArray[i]);
 		}
+		
 		return menuArray;
 	}
 

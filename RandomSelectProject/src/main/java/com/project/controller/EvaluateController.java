@@ -190,7 +190,7 @@ public class EvaluateController {
 		
 		evaluateService.setScoreByEvaluateTerms(evaluateDto);
 
-		System.out.println("이벨아이디, 멤아이디::" + evalId + " & " + memId);
+		
 
 		System.out.println("edit()");
 		return "forward: /evaluateList.do";
