@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
+var viewCount = 10;
 
 $(document).ready(function() {
 	$('#restntListBtn').click(function() {
@@ -15,8 +16,39 @@ $(document).ready(function() {
 		});
 });
 
+function mateListPage(obj) {
+	var paramData= {
+			pageNum : parseInt(obj.id),
+			viewCount : viewCount,
+			
+			memId : $('#memId').val()			
+	};
+	$ajax({
+		cache : false,
+		async : false,
+		type : 'POST',
+		url : 'ajaxMateList.do',
+		data : paramData,
+		dataType : 'json',
+		error : function()	{
+			alert("error : ajax 통신 실패.");
+		}, 
+		success : function(json){
+			var mates = json.mates;
+			if(restnts != null){
+				$('#mateList').show();
+				var html= '<tr>';
+				
+				$.each(mates, function(key){
+					var mateName = mateName[key].mateName;
+				});
+				html=$('#mateListResult').html(html);
+			}
+		}
+	});	
+} 
+
 function mateDetailGo(obj){
-	
 	
 	var paramData = {
 			mateId : $(obj).prev().attr("value"),
@@ -46,6 +78,7 @@ function mateDetailGo(obj){
 		}
 	});
 }
+
 </script>
  <style>
        
@@ -55,12 +88,12 @@ function mateDetailGo(obj){
 <body>	
 
  <div class="container">
+<div class="row">
+<div class="span5">
 	<form id="community" method="post" >
 		 <input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
 	</form>
-<div align="center">
-<div class="row">
-<div class="span5">
+<div align="center">	
 			<table border=1>
 					
 					<tr>	

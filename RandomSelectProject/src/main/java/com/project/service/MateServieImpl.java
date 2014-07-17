@@ -47,7 +47,7 @@ public class MateServieImpl implements MateService {
 		return mateMapper.getMemInfoByMemId(mateId);
 	}
 
-	/*@Override
+	@Override
 	public Integer mateListTotalCount(MateDTO restntDto) {
 	
 		return mateMapper.mateListTotalCount(restntDto);
@@ -57,5 +57,5 @@ public class MateServieImpl implements MateService {
 	public List<MateDTO> mateListPaging(String memId) {
 		
 		return mateMapper.mateListPaging(memId);
-	}*/
+	}
 }

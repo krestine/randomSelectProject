@@ -59,7 +59,7 @@ public class CommunityController {
 	private List<MenuDTO> menuInfo;
 	
 	// 회원 : 친구 리스트
-	@RequestMapping(value = "/mateListProc.do", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/mateListProc.do", method = RequestMethod.POST)
 	public String mateListProc(Model model, HttpServletRequest request) {
 		
 		loginUser = (MemberDTO) request.getSession().getAttribute(
@@ -68,7 +68,7 @@ public class CommunityController {
 			if (loginUser.getMemId() != null || loginUser != null) {
 				
 				try {
-					mates = mateService.getMateListByMemId(loginUser.getMemId());
+					mates = mateService.mateListPaging(loginUser.getMemId());
 					System.out.println(mates);
 					model.addAttribute("mates", mates);
 					
@@ -86,11 +86,11 @@ public class CommunityController {
 
 		}
 		return "setting/error";
-	}
+	}*/
 	// 친구 리스트 ajax
-	/*
-	@RequestMapping(value="ajaxMateList.do")
-	public String ajaxMateList(Model model, HttpServletRequest request, HttpServletResponse response, MateDTO mateDto ) throws IOException{
+
+	@RequestMapping(value="ajaxMateList.do", method = RequestMethod.POST)
+	public void ajaxMateList(Model model, HttpServletRequest request, HttpServletResponse response, MateDTO mateDto ) throws IOException{
 		loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		try {
@@ -100,12 +100,13 @@ public class CommunityController {
 					System.out.println("/ajaxMateList.do");
 					String memId = request.getParameter(loginUser.getMemId());
 					System.out.println(memId);
-					mates=mateService.getMateListByMemId(memId);
+					mates=mateService.mateListPaging(memId);
 					model.addAttribute("mates", mates);
 					
 					JSONArray jsonArray = JSONArray.fromObject(mates);
 					System.out.println("mates -" + jsonArray);
 					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("mates", mates);
 					
 					JSONObject jsonObject = JSONObject.fromObject(map);
 					System.out.println("json - " + jsonObject);
@@ -115,21 +116,22 @@ public class CommunityController {
 					out.print(jsonObject.toString());
 					
 				} catch (Exception e) {
-					model.addAttribute("errorMessage",
-							"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
-					return "setting/error";
+					errorMessage(model.addAttribute("errorMessage",
+							"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요."));
+					
 				}
 			}
 			} catch (Exception e) {
-				model.addAttribute("errorMessage", "로그인 해주세요!");
-
-			}
-			return "setting/error";	
-					
+				errorMessage(model.addAttribute("errorMessage", "로그인 해주세요!"));
+			}				
 	}
-	*/
-	
+
 	// 친구 상세정보 ajax 
+
+private void errorMessage(Model addAttribute) {
+		
+		
+	}
 
 @RequestMapping(value="ajaxMateDetail.do", method = RequestMethod.POST)
 	public void ajaxMateDetail(HttpServletRequest request,

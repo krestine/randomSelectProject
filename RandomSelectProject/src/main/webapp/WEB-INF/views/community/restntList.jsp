@@ -61,7 +61,9 @@ function restntDetailGo(obj){
 <div class="container">
 <div class="row">
 <div class="span5">	
-	
+	<form id="community" method="post" >
+		 <input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn"/>
+	</form>
 	<div align="center">
 		
 	<table border=1>

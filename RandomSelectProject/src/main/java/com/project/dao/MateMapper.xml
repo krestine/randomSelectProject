@@ -55,22 +55,22 @@
 	</select>
 	
 	<!-- 친구 리스트 페이지 총 갯수 -->
-	<!-- <select id="mateListTotalCount" parameterType="MateDTO" resultType="java.lang.integer">
+	<select id="mateListTotalCount" parameterType="MateDTO" resultType="java.lang.Integer">
 		SELECT COUNT(m.memname) From
 		mate e, member m WHERE
 		e.memid=#{memId}
 		and e.mateid=m.memid
-	</select> -->
+	</select> 
 	
 	
 	<!-- 친구리스트 페이지 -->
-	<!-- <select id="mateListPaging" parameterType="MateDTO" resultType="MateDTO">
+	 <select id="mateListPaging" parameterType="MateDTO" resultType="MateDTO">
 		select * from (select A.*,FLOOR((ROWNUM -1)/#{viewCount} +1)page,
 		rownum from (select m.memname, e.mateid, e.memid
 		from mate e, member m
-		where e.memid=#{e.memId} and e.mateid=m.memid
+		where e.memid=#{e.memId jdbcType=VARCHAR} and e.mateid=m.memid
 		order by e.memid) A)where page=#{pageNum}
-	</select> -->
+	</select> 
 
 </mapper>
 
