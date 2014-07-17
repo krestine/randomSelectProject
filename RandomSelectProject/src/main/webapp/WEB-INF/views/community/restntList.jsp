@@ -16,18 +16,57 @@ $(document).ready(function() {
 	});
 });
 
+function restntDetailGo(obj){
+	
+	
+	var paramData = {
+			restntId : $(obj).prev().prev().prev().attr("value")
+	};
+	alert($(obj).prev().prev().prev().attr("value"));
+	$.ajax({
+		
+		cache : false,
+		async : false,
+		type : 'post',
+		url : 'ajaxRestntDetail.do', 
+		data : paramData,
+		dataType : 'json',
+		error : function(){
+			alert ("에러 : 데이터가 안넘어갑니다.");
+		},
+		success : function(json){
+			
+			var restnt = json.restnt;
+			var restntName=restnt.restntName;
+			var restntEval = restnt.restntEval;
+			var restntCate = restnt.restntCate;
+			var restntTel = restnt.restntTel;
+			
+			var menuInfo = json.menuInfo;
+			var menuName=menuInfo.menuName;
+			var menuPrice=menuInfo.menuPrice;
+			var menuCalorie=menuInfo.menuCalroie;
+			var html = '<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title"><h4>"'+restntName+'"<small>의 상세정보</small></h4><form id="restntDetailForm"><table class="table"><input value="식당이름"><input value="식당평점"><br><input value="'+restntName+'"name="restntName"><input value="'+restntEval+'"name="restntEval"><br><input value="카테고리"><input value="전화번호"><br><input value="'+restntCate+'" name="restntCate"><input value="'+restntTel+'"name="restntTel"><br><br><h4>"'+restntName+'"<small>의 메뉴정보</small></h4><br><input value="메뉴이름"><input value="가격"><input value="칼로리"><br><input value="'+menuName+'"name="menuName"><input value="'+menuPrice+'"name="menuPrice"><input value="'+menuCalorie+'"name="menuCalorie"></table></form><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">확인</button></div></div></div></div>';
+			
+		 	 $('#restntDetailResult').html(html); 
+		}
+	});
+}
+
 </script>
 <title>식당리스트</title>
 </head>
+
 <body>
+<div align="center">
 	<h4>친구들이 평가한 식당리스트</h4>
-<div>
+
 	<form id="community" method="post" >
 		<input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn"/> 
 	</form>
 	<c:forEach var="restnt" items="${restnts}">
 		
-						<form action="restntDetailProc.do" method="post">	
+						<form action="ajaxRestntDetailProc.do" method="post">	
 				
 						<input value="식당이름">
 						<input value="평균별점">
@@ -36,10 +75,19 @@ $(document).ready(function() {
 						<input type="hidden" value="${restnt.restntId }" name="restntId">
 						<input value="${restnt.restntName}" name="restntName">
 						<input value="${restnt.score}" name="score">
-						<input type="submit" class="btn btn-success btn-sm" value="상세보기">
+						
+						<input type="button" class="btn btn-success btn-sm" value="상세보기" id="restntDetail" onclick="restntDetailGo(this);" 
+						data-toggle="modal" data-target="#restntDetailResult">
 						</form>
 						<br>
+						
+						<div class="modal fade" id="restntDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						
+						</div>
 		</c:forEach>
+		
+		
+		
 </div>
 </body>
 
