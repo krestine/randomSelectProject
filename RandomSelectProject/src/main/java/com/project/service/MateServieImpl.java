@@ -46,4 +46,16 @@ public class MateServieImpl implements MateService {
 		// TODO Auto-generated method stub
 		return mateMapper.getMemInfoByMemId(mateId);
 	}
+
+	@Override
+	public Integer mateListTotalCount(MateDTO restntDto) {
+	
+		return mateMapper.mateListTotalCount(restntDto);
+	}
+
+	@Override
+	public List<MateDTO> mateListPaging(MateDTO mateDto) {
+		
+		return mateMapper.mateListPaging(mateDto);
+	}
 }

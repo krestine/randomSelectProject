@@ -58,36 +58,47 @@ function restntDetailGo(obj){
 </head>
 
 <body>
-<div align="center">
-	<h4>친구들이 평가한 식당리스트</h4>
 
-	<form id="community" method="post" >
-		<input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn"/> 
-	</form>
+<div class="container">
+<div class="row">
+<div class="span5">	
+	
+	<div align="center">
+		
+	<table border=1>
+	<tr>
+		<td colspan="3" align="center"><h5>친구들이 평가한 식당리스트</h5></td>
+	</tr>
+				
+			<tr>	
+				<th><input value="식당이름"disabled="disabled" class="btn btn-primary btn-sm"></th>
+				<th colspan="2"><input value="평균별점"disabled="disabled" class="btn btn-primary btn-sm" style="width: 100%;"></th>
+				
+			</tr>
 	<c:forEach var="restnt" items="${restnts}">
 		
-						<form action="ajaxRestntDetailProc.do" method="post">	
-				
-						<input value="식당이름">
-						<input value="평균별점">
-						<br>
+			
+			<tr>
+				<td>
 						<input type="hidden" value="${restnt.mateId }" name="mateId">
 						<input type="hidden" value="${restnt.restntId }" name="restntId">
-						<input value="${restnt.restntName}" name="restntName">
-						<input value="${restnt.score}" name="score">
+						<input class="btn btn-info btn-sm" disabled="disabled"value="${restnt.restntName}" name="restntName"></td>
+				<td>	<input class="btn btn-info btn-sm" disabled="disabled" value="${restnt.score}" name="score"><input type="button" class="btn btn-success btn-sm" value="상세보기" id="restntDetail" onclick="restntDetailGo(this);" 
+						data-toggle="modal" data-target="#restntDetailResult"></td>
+			
+			
+				
 						
-						<input type="button" class="btn btn-success btn-sm" value="상세보기" id="restntDetail" onclick="restntDetailGo(this);" 
-						data-toggle="modal" data-target="#restntDetailResult">
-						</form>
-						<br>
-						
+					
+			</tr>			
 						<div class="modal fade" id="restntDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						
 						</div>
 		</c:forEach>
-		
-		
-		
+	</table>
+</div>				
+</div>
+</div>
 </div>
 </body>
 
