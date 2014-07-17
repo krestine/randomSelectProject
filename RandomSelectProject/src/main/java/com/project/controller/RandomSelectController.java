@@ -44,6 +44,9 @@ public class RandomSelectController {
 	private List<SettingDTO> walkRange;
 	private List<RestntDTO> restnts;
 	
+	public static final double latitudePer100m = 0.00089904586958998;
+	public static final double longitudePer100m = 0.00139478242579723;
+	
 	@RequestMapping(value="/selectResult.do", method=RequestMethod.POST)
 	public String randomSelectMain(Model model, HttpServletRequest request){
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
