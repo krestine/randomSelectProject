@@ -2,6 +2,7 @@ package com.project.service;
 
 import java.util.List;
 
+import com.project.domain.LatLngDTO;
 import com.project.domain.RestntDTO;
 import com.project.domain.SettingDTO;
 
@@ -51,6 +52,7 @@ public interface RestntService {
 	List<RestntDTO> getRestntFullAddress(RestntDTO restntDto);
 	List<RestntDTO> getRestntListByAdress(RestntDTO restntDto);
 	List<RestntDTO> getRestntListByAdress2(RestntDTO restntDto);
+	List<RestntDTO> getRestntListByLatLng(LatLngDTO latLngDto);
 
 	void setRestntLocationInfo(RestntDTO restntDto);
 

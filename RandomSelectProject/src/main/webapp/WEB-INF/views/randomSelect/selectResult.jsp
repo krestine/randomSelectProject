@@ -82,7 +82,9 @@ language=구글 맵 언어
 		var paramData = {
 			adress1 : myAddress[1],
 			adress2 : myAddress[2],
-			//adress3 : myAddress[3]
+			adress3 : sRadius,
+			latitude : myLatitude,
+			longitude : myLongitude
 		};
 
 		$.ajax({
@@ -366,7 +368,7 @@ language=구글 맵 언어
 		var tempSRadius = "<c:out value="${loginUser.memWalkRange}" />";
 		tempSRadius = Number(tempSRadius);
 		if (tempSRadius == 0) {
-			tempSRadius = 1000;
+			tempSRadius = 500;
 			login = 0;
 		}
 		sRadius = tempSRadius;

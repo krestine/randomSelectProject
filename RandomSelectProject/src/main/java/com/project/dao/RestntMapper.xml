@@ -38,6 +38,16 @@
 		adress2=#{adress2}and
 		active= '1'
 	</select>
+	
+	<select id="getRestntListByLatLng" parameterType="LatLngDTO" resultType="RestntDTO">
+		select
+		* from restnt
+		where
+		latitude between #{minLat} and #{maxLat} and
+		longitude between #{minLng} and #{maxLng} and
+		active ='1'
+		
+	</select>
 
 
 	<!--관리자 : 식당 정보 삭제 -->
