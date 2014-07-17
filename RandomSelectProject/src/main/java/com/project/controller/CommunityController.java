@@ -68,8 +68,7 @@ public class CommunityController {
 			if (loginUser.getMemId() != null || loginUser != null) {
 				
 				try {
-					mates = mateService
-							.getMateListByMemId(loginUser.getMemId());
+					mates = mateService.getMateListByMemId(loginUser.getMemId());
 					System.out.println(mates);
 					model.addAttribute("mates", mates);
 					
