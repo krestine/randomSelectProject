@@ -13,7 +13,7 @@ public interface EvaluateService {
 	// 관리자 : 유저의 평가 목록 열람
 		// 회원: 평가한 식당목록. 평가한 방문 리스트
 
-	List<EvaluateDTO> getEvaluateListByMemId(HashMap<String,Object> param);
+	List<EvaluateDTO> getEvaluateListByMemId(EvaluateDTO evaluateDto);
 
 
 

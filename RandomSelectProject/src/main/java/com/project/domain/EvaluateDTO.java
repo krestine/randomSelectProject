@@ -8,6 +8,22 @@ public class EvaluateDTO {
 	private String restntId;
 	private String evalDate;
 	private String restntName;
+	private Integer viewCount;
+	private Integer pageNum;
+	
+	
+	public Integer getViewCount() {
+		return viewCount;
+	}
+	public void setViewCount(Integer viewCount) {
+		this.viewCount = viewCount;
+	}
+	public Integer getPageNum() {
+		return pageNum;
+	}
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
 	public String getEvalId() {
 		return evalId;
 	}
@@ -52,11 +68,14 @@ public class EvaluateDTO {
 				+ ((evalDate == null) ? 0 : evalDate.hashCode());
 		result = prime * result + ((evalId == null) ? 0 : evalId.hashCode());
 		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
+		result = prime * result + ((pageNum == null) ? 0 : pageNum.hashCode());
 		result = prime * result
 				+ ((restntId == null) ? 0 : restntId.hashCode());
 		result = prime * result
 				+ ((restntName == null) ? 0 : restntName.hashCode());
 		result = prime * result + ((score == null) ? 0 : score.hashCode());
+		result = prime * result
+				+ ((viewCount == null) ? 0 : viewCount.hashCode());
 		return result;
 	}
 	@Override
@@ -83,6 +102,11 @@ public class EvaluateDTO {
 				return false;
 		} else if (!memId.equals(other.memId))
 			return false;
+		if (pageNum == null) {
+			if (other.pageNum != null)
+				return false;
+		} else if (!pageNum.equals(other.pageNum))
+			return false;
 		if (restntId == null) {
 			if (other.restntId != null)
 				return false;
@@ -98,13 +122,19 @@ public class EvaluateDTO {
 				return false;
 		} else if (!score.equals(other.score))
 			return false;
+		if (viewCount == null) {
+			if (other.viewCount != null)
+				return false;
+		} else if (!viewCount.equals(other.viewCount))
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
 		return "EvaluateDTO [evalId=" + evalId + ", score=" + score
 				+ ", memId=" + memId + ", restntId=" + restntId + ", evalDate="
-				+ evalDate + ", restntName=" + restntName + "]";
+				+ evalDate + ", restntName=" + restntName + ", viewCount="
+				+ viewCount + ", pageNum=" + pageNum + "]";
 	}
 	
 	
