@@ -66,8 +66,12 @@ public class EvaluateController {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		System.out.println("패러미터로 받은 DTO:" + evaluateDto);
-		
+		if(loginUser==null){
+			model.addAttribute("errorMessage", "로그인 하라고!!");
+			return "setting/error";
+		}
 		String memId = loginUser.getMemId();
+		
 		System.out.println("회원아이디 :: 컨트롤러에서 멤아이디" + memId);
 
 		Integer viewCount = 10;
