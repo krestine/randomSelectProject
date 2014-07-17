@@ -375,8 +375,8 @@ language=구글 맵 언어
 	}
 
 	function deleteMyLocation(){
-		$.cookie('newLatitude', null);
-		$.cookie('newLongitude', null);
+		$.cookie('newLatitude', "deleted");
+		$.cookie('newLongitude', "deleted");
 		$("#deleteMyLocationAlert").html('<font size="4"><span class="label label-success">초기화되었습니다.</span></font>');
 		setTimeout(removeDeleteMyLocationAlert, 3000);
 	}
@@ -397,9 +397,9 @@ language=구글 맵 언어
 		pos = new google.maps.LatLng(myLatitude, myLongitude);
 
 		$("#currentAccuracy").html("내 위치의 정확도 : " + accuracy + "m");
-		if (accuracy > 200) {
+		if (accuracy > 20) {
 			
-			if(cookieLatitude==null || cookieLatitude==0 || cookieLatitude==''){
+			if(cookieLatitude==null || cookieLatitude=='deleted'){
 				$("#accuracyAlert")
 				.html(
 						"<font color=red>단순IP기반의 위치추적 서비스는 정확하지 않습니다.<br>정확한 위치를 위해서 WI-FI 네트워크 또는 3G/4G 데이터 네트워크에 접속하시거나, 현재 주소를 수동으로 입력해 주세요.</font>");
