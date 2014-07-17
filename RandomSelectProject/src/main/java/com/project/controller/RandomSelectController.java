@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.domain.LatLngDTO;
 import com.project.domain.MemberDTO;
 import com.project.domain.RestntDTO;
 import com.project.domain.SettingDTO;
@@ -43,6 +43,9 @@ public class RandomSelectController {
 	//private List<RestntDTO> restntList;
 	private List<SettingDTO> walkRange;
 	private List<RestntDTO> restnts;
+	
+	public static final double latitudePer100m = 0.00089904586958998;
+	public static final double longitudePer100m = 0.00139478242579723;
 	
 	@RequestMapping(value="/selectResult.do", method=RequestMethod.POST)
 	public String randomSelectMain(Model model, HttpServletRequest request){
@@ -96,6 +99,16 @@ public class RandomSelectController {
 	public void ajaxRandomRestnt(HttpServletRequest request,
 			HttpServletResponse response, RestntDTO restntDto )
 			throws IOException {
+		
+		LatLngDTO latLngDto = new LatLngDTO();
+		int sRadius = Integer.parseInt(restntDto.getAdress3());
+		double latitude = Double.parseDouble(restntDto.getLatitude());
+		double longitude = Double.parseDouble(restntDto.getLongitude());
+		latLngDto.setMinLat(latitude - sRadius/100*latitudePer100m);
+		latLngDto.setMaxLat(latitude + sRadius/100*latitudePer100m);
+		latLngDto.setMinLng(longitude - sRadius/100*longitudePer100m);
+		latLngDto.setMaxLng(longitude + sRadius/100*longitudePer100m);
+		
 		System.out.println("/ajaxRandomRestnt.do");
 
 		System.out.println(restntDto);
@@ -105,7 +118,9 @@ public class RandomSelectController {
 		// 쿼리 실행
 		
 		
-		restnts = restntService.getRestntListByAdress2(restntDto);
+		//restnts = restntService.getRestntListByAdress2(restntDto);
+		restnts = restntService.getRestntListByLatLng(latLngDto);
+		
 		System.out.println(restnts);
 
 		// 제이슨으로 변환

@@ -35,9 +35,9 @@ language=구글 맵 언어
 <script type="text/javascript">
 	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId;
 	var myAddress = new Array(10);
-	var myInfoWindow;
+	var myInfoWindow, markerEventParam;
 	var randomLatitude, randomLongitude;
-	var map, mapResized;
+	var map;
 	var restntList;
 	var pos, pos2;
 	var sRadius;
@@ -57,7 +57,7 @@ language=구글 맵 언어
 	var tempOKId = new Array(100);
 	
 	var tempRestntMarker = new Array(100);
-	
+	var tempRestntInfoArray = new Array(100);
 	
 /* 	google.maps.event.addListener(map, 'bounds_changed', function(){
 		map.setCenter(pos);
@@ -82,7 +82,9 @@ language=구글 맵 언어
 		var paramData = {
 			adress1 : myAddress[1],
 			adress2 : myAddress[2],
-			//adress3 : myAddress[3]
+			adress3 : sRadius,
+			latitude : myLatitude,
+			longitude : myLongitude
 		};
 
 		$.ajax({
@@ -134,6 +136,15 @@ language=구글 맵 언어
 									});
 							
 										  tempRestntMarker[tempCnt].setMap(map);
+										  markerEventParam=tempCnt;
+										  
+										  google.maps.event.addListener(tempRestntMarker[tempCnt], 'click', function(tempCnt) {
+										      return function() {
+										          alert(tempRestntMarker[tempCnt].title);
+										      }
+										    }(tempCnt));
+										  
+										  //google.maps.event.addListener(tempRestntMarker[tempCnt], 'click', markerEvent);
 										  
 							//},tempCnt*100);
 										  
@@ -357,15 +368,15 @@ language=구글 맵 언어
 		var tempSRadius = "<c:out value="${loginUser.memWalkRange}" />";
 		tempSRadius = Number(tempSRadius);
 		if (tempSRadius == 0) {
-			tempSRadius = 1000;
+			tempSRadius = 500;
 			login = 0;
 		}
 		sRadius = tempSRadius;
 	}
 
 	function deleteMyLocation(){
-		$.cookie('newLatitude', null);
-		$.cookie('newLongitude', null);
+		$.cookie('newLatitude', "deleted");
+		$.cookie('newLongitude', "deleted");
 		$("#deleteMyLocationAlert").html('<font size="4"><span class="label label-success">초기화되었습니다.</span></font>');
 		setTimeout(removeDeleteMyLocationAlert, 3000);
 	}
@@ -386,9 +397,9 @@ language=구글 맵 언어
 		pos = new google.maps.LatLng(myLatitude, myLongitude);
 
 		$("#currentAccuracy").html("내 위치의 정확도 : " + accuracy + "m");
-		if (accuracy > 200) {
+		if (accuracy > 20) {
 			
-			if(cookieLatitude==null){
+			if(cookieLatitude==null || cookieLatitude=='deleted'){
 				$("#accuracyAlert")
 				.html(
 						"<font color=red>단순IP기반의 위치추적 서비스는 정확하지 않습니다.<br>정확한 위치를 위해서 WI-FI 네트워크 또는 3G/4G 데이터 네트워크에 접속하시거나, 현재 주소를 수동으로 입력해 주세요.</font>");
@@ -515,7 +526,7 @@ language=구글 맵 언어
 	google.maps.event.addDomListener(window, 'load', initialize);
 
 	$(document).ready(function () {
-		$('a[rel=popover]').popover()
+
 	});
 
 </script>
@@ -526,8 +537,7 @@ language=구글 맵 언어
 		<input type="button" id="randomSelectInitialize" value="맵 초기화"
 			onclick="initialize()" class="btn btn-info"><input type="button"
 			id="moveToMyLocation" value="내 위치로 이동" onclick="setMyCenter()" class="btn btn-info">
-		<input type="button"
-			id="getAllRestnt" value="식당 골라주기" onclick="ajaxRandomRestnt()" class="btn btn-primary">
+		<button id="getAllRestnt" onclick="ajaxRandomRestnt()" class="btn btn-primary">식당 골라주기</button>
 <!-- 		<br> <input type="text" id="tempAddress" value=""> <input
 			type="button" id="geocodeTempAddress" value="해당 주소 지도에 표시"
 			onclick="findLocation()"> <input type="text" id=tempLatitude

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.dao.RestntMapper;
+import com.project.domain.LatLngDTO;
 import com.project.domain.RestntDTO;
 import com.project.domain.SettingDTO;
 
@@ -124,6 +125,10 @@ public class RestntServiceImpl implements RestntService {
 	@Override
 	public List<RestntDTO> getRestntListByAdress2(RestntDTO restntDto) {
 		return restntMapper.getRestntListByAdress2(restntDto);
+	}
+	@Override
+	public List<RestntDTO> getRestntListByLatLng(LatLngDTO latLngDto) {
+		return restntMapper.getRestntListByLatLng(latLngDto);
 	}
 	
 

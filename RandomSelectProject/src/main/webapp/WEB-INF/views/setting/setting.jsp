@@ -14,16 +14,16 @@
 <body>
 	<div align="center">
 		<form action="settingProc.do" method="post">
-			검색 설정: 도보 <br> <select name="walkRange">
+			검색 범위 설정 <br> <select name="walkRange">
 				<c:forEach items="${walkRanges}" var="walkRange">
 					<c:choose>
 
 						<c:when test="${walkRange.walkRange==userInfo.memWalkRange}">
-							<option selected="selected">${walkRange.walkRange}</option>
+							<option selected="selected" value="${walkRange.walkRange}">${walkRange.walkRange}m</option>
 						</c:when>
 
 						<c:otherwise>
-							<option>${walkRange.walkRange}</option>
+							<option value="${walkRange.walkRange}">${walkRange.walkRange}m </option>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -43,7 +43,7 @@
 			</c:forEach> --%>
 
 
-			</select> <br> <br> 검색 설정 : 제외메뉴 <br>
+			</select> <br> <br>  제외메뉴 설정 <br>
 			<div align="center">
 				<table>
 					

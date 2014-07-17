@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,8 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+
+	private SeedX x = new SeedX();
 
 	/*
 	 * 회원가입, 로그인, 아이디/비번 찾기 ajax
@@ -209,45 +212,49 @@ public class MemberController {
 	public String registerProc(HttpServletRequest request, Model model,
 			MemberDTO memberDto, HttpSession session) {
 		System.out.println("registerProc()");
+		try {
+			String inputPW = (String) request.getParameter("memPasswd");
+			System.out.println("입력한 비밀번호=" + inputPW);
 
-		String inputPW = (String) request.getParameter("memPasswd");
-		System.out.println("입력한 비밀번호=" + inputPW);
+			if (inputPW == "") {
+				// if (memberDto.toString().contains("")) {
+				System.out.println("''포함된 값");
+				return "forward:registerForm.do";
+			}
 
-		if (inputPW == "") {
-			// if (memberDto.toString().contains("")) {
-			System.out.println("''포함된 값");
-			return "forward:registerForm.do";
+			// 입력한 비밀번호 암호화
+			SeedX x = new SeedX();
+			int[] roundKey = x.getSeedRoundKey();
+			System.out.println("roundKey=" + roundKey);
+			byte[] plainCD = x.stringToPlain(inputPW);
+			System.out.println("plainCD=" + plainCD);
+			byte[] encruptCD = x.getSeedEncrypt(plainCD, roundKey);
+			System.out.println("encruptCD=" + encruptCD);
+			String finCD = x.cipherToString(encruptCD);
+			System.out.println(" finCD=" + finCD);
+
+			memberDto.setMemPasswd(finCD);
+
+			// memberDto.setMemMobile(memberDto.getmPhoneCode() + "-"
+			// + memberDto.getmPhoneMid() + "-" + memberDto.getmPhoneEnd());
+			System.out.println(memberDto);
+
+			// if (memberDto.toString().contains(null)) {
+			// else {
+			memberService.putMember(memberDto);
+
+			System.out.println("회원가입완료");
+			// }
+		} catch (DuplicateKeyException e) {
+			System.out.println("DuplicateKeyException");
 		}
-
-		// 입력한 비밀번호 암호화
-		SeedX x = new SeedX();
-		int[] roundKey = x.getSeedRoundKey();
-		System.out.println("roundKey=" + roundKey);
-		byte[] plainCD = x.stringToPlain(inputPW);
-		System.out.println("plainCD=" + plainCD);
-		byte[] encruptCD = x.getSeedEncrypt(plainCD, roundKey);
-		System.out.println("encruptCD=" + encruptCD);
-		String finCD = x.cipherToString(encruptCD);
-		System.out.println(" finCD=" + finCD);
-
-		memberDto.setMemPasswd(finCD);
-
-		// memberDto.setMemMobile(memberDto.getmPhoneCode() + "-"
-		// + memberDto.getmPhoneMid() + "-" + memberDto.getmPhoneEnd());
-		System.out.println(memberDto);
-
-		// if (memberDto.toString().contains(null)) {
-		// else {
-		memberService.putMember(memberDto);
-
-		System.out.println("회원가입완료");
-		// }
-
 		model.addAttribute("sMsg", "회원가입을 환영합니다. 로그인 해주세요.");
 		// session.removeAttribute("loginUser");
 		// session.invalidate();
 		return "forward:loginForm.do";
+		// return loginForm();
 		// return "registerOk";
+
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -272,7 +279,7 @@ public class MemberController {
 		String inputPW = (String) request.getParameter("memPasswd");
 		System.out.println("입력한 비밀번호=" + inputPW);
 		// 입력한 비밀번호 암호화 비교
-		SeedX x = new SeedX();
+		// SeedX x = new SeedX();
 		int[] roundKey = x.getSeedRoundKey();
 		System.out.println("roundKey=" + roundKey);
 		byte[] plainCD = x.stringToPlain(inputPW);
@@ -295,8 +302,8 @@ public class MemberController {
 			session.setAttribute("loginUser", loginUser);
 			// model.addAttribute("loginUser", loginUser);
 
-			return "forward:main.do";
-
+			// return "forward:main.do";
+			return "main";
 		} else {
 			request.setAttribute("errmessage", "아이디와 비밀번호를 확인해주세요");
 			return "forward:loginForm.do";
@@ -475,11 +482,19 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "dropProc.do", method = RequestMethod.POST)
-	public String dropProc(Model model, MemberDTO memberDto, HttpSession session) {
+	public String dropProc(Model model, MemberDTO memberDto,
+			HttpSession session, HttpServletRequest request) {
 		System.out.println("dropProc()");
-		memberService.setLeave(memberDto);
-		session.removeAttribute("loginUser");
-		session.invalidate();
+		try {
+			MemberDTO loginUser = (MemberDTO) request.getSession()
+					.getAttribute("loginUser");
+			System.out.println(" loginUser.getMemId()=" + loginUser.getMemId());
+			memberDto.setMemId(loginUser.getMemId());
+			memberService.setLeave(memberDto);
+		} catch (NullPointerException e) {
+			session.removeAttribute("loginUser");
+			session.invalidate();
+		}
 		return "dropOk";
 	}
 
