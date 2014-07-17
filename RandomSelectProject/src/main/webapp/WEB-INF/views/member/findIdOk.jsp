@@ -7,6 +7,5 @@
 <title>findIdOk.jsp</title>
 </head>
 <body>${userId}
-
 </body>
 </html>

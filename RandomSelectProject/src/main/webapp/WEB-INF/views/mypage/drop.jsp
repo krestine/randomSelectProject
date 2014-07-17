@@ -7,38 +7,47 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>drop.jsp</title>
+<script
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
+<style type="text/css">
+input.error {
+	border: 1px dashed red;
+}
+
+label.error {
+	margin-left: 10px;
+	color: red;
+}
+</style>
 <script type="text/javascript">
-	function main() {
-		document.getElementById("form").action = "main.do";
-		document.getElementById("form").submit();
-	}
-	function drop() {
-		document.getElementById("form").action = "dropProc.do";
-		document.getElementById("form").submit();
-	}
+	$("#reasonForm").validate({
+		rules : {
+			leaveReason : "required"
+		},
+		messages : {
+			leaveReason : "탈퇴이유를 적어주세요."
+		},
+		submitHandler : function(form) {
+			$(form).Submit();
+		}
+	});
 </script>
+<title>drop.jsp</title>
 </head>
 <body>
-	탈퇴한 아이디는 영구적으로 사용불가합니다.
-	<br> 재가입시 다른 아이디를 사용해 주세요.
-	<br>
-	<form id="form" action="dropProc.do" method="post">
-		<table align="center" border="0" cellspacing="0" cellpadding="0"
-			bgcolor="white">
-
-			<tr>
-				<td>탈퇴사유</td>
-				<td><input type="text" name="leaveReason"></td>
-			</tr>
-
-			<tr>
-				<td><input type="hidden" name="memId"
-					value="${sessionScope.loginUser.memId}"></td>
-				<td><input type="button" onclick="drop()" value="회원탈퇴"></td>
-				<td><input type="button" onclick="main()" value="메인으로"></td>
-			</tr>
-		</table>
-	</form>
+	<div align="center">
+		<form role="form" id="reasonForm" action="dropProc.do" method="post">
+			<div class="form-group">
+				탈퇴한&nbsp;아이디는&nbsp;<font color=red>영구적으로</font>&nbsp;사용불가합니다. <br>
+				재가입시&nbsp;다른&nbsp;아이디를&nbsp;사용해주세요. <br>
+			</div>
+			<div class="form-group">
+				<input type="text" name="leaveReason" placeholder="탈퇴사유">
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-danger btn-sm" value="회원탈퇴">
+			</div>
+		</form>
+	</div>
 </body>
 </html>

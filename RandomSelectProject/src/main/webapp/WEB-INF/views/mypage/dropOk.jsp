@@ -7,7 +7,12 @@
 <title>dropOk.jsp</title>
 </head>
 <body>
-	탈퇴되었습니다.
-	<input type="button" onclick="main.do" value="메인으로">
+	<div align="center">
+		<div class="form-group">탈퇴되었습니다.</div>
+		<div class="form-group">
+			<input type="button" class="btn btn-success btn-sm" onclick="main.do"
+				value="메인으로">
+		</div>
+	</div>
 </body>
 </html>
