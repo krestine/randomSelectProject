@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- <meta http-equiv="refresh" content="5; url=http://localhost:9080/myapp/"> -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/myapp/resources/js/jquery.cookie.js"
 	type="text/javascript"></script>
@@ -161,7 +162,8 @@ label.error {
 </script>
 </head>
 <body>
-	<div align="center" class="col-lg-10">
+	<div align="center">
+		<label style="color: blue"> ${sMsg}</label>
 		<form role="form" id="loginForm" action="loginProc.do" method="post">
 			<div class="form-group">
 				<input type="text" id="memId" name="memId" placeholder="아이디">
@@ -174,13 +176,13 @@ label.error {
 
 			<div class="form-group">
 				<input type="checkbox" id="rememId" name="rememId">아이디기억 <input
-					type="submit" id="loginbtn" class="btn btn-success btn-sm"
+					type="submit" id="loginbtn" class="btn btn-primary btn-sm"
 					value="로그인">
 			</div>
 			<div class="form-group">
 				<label class="error" id="inputCheck" style="color: red">
 					${errmessage}</label> <label class="error" id="inputCheck"
-					style="color: blue"> ${sMsg}</label>
+					style="color: blue"></label>
 			</div>
 			<div>
 				<a href="findIdForm.do">아이디/비밀번호 찾기</a>
