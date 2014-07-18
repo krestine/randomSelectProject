@@ -14,7 +14,7 @@ var viewCount = 10;
 $(document).ready(function(){
 	function mateListPageInit() {
 		var paramData= {
-				pageNum : 1;
+				pageNum : 1,
 				viewCount : viewCount,
 				memId : $('#memId').val()			
 		};
@@ -116,7 +116,7 @@ function mateDetailGo(obj){
 						<input type="hidden" value="${mate.memId}" name="memId">
 						<input type="hidden" value="${mate.mateId}" name="mateId">				
 						<input type="button"value="${mate.memName}" id="mateName" class="btn btn-info btn-sm" name="memName" onclick="mateDetailGo(this);"value="상세보기"class="btn btn-danger" 
-						data-toggle="modal" data-target="#mateDetailResult"></td>
+						data-toggle="modal" data-target="#mateDetailResult" style="width:100%"></td>
 					</tr>	
 				
 						

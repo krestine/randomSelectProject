@@ -68,7 +68,7 @@
 		select * from (select A.*,FLOOR((ROWNUM -1)/#{viewCount} +1)page,
 		rownum from (select m.memname, e.mateid, e.memid
 		from mate e, member m
-		where e.memid=#{e.memId jdbcType=VARCHAR} and e.mateid=m.memid
+		where e.memid=#{memId} and e.mateid=m.memid
 		order by e.memid) A)where page=#{pageNum}
 	</select> 
 
