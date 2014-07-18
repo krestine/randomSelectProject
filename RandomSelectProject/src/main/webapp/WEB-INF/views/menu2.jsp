@@ -4,7 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
 <script type="text/javascript">
 	function loginGo() {
 		document.getElementById("select1").action = "loginForm.do";
@@ -50,7 +49,20 @@
 		document.getElementById("select3").action = "ladderMake.do";
 		document.getElementById("select3").submit();
 	}
-</script>
+
+	function memberGo() {
+
+		document.getElementById("select1").action = "memberSearchForm.do";
+		document.getElementById("select1").submit();
+	}
+
+	function restntGo() {
+
+		document.getElementById("select1").action = "restntManantProc.do";
+		document.getElementById("select1").submit();
+	}
+	
+	</script>
 <style>
 </style>
 
@@ -92,13 +104,15 @@
 					<form id="select1" method="post" style="display: inline;">
 						<input type="button" style="width: 150px; height: 100px;"
 							class="btn btn-danger" onclick="logoutGo()" value="로그아웃">
+						<div class=btn-group>
 						<input type="button" style="width: 150px; height: 100px;"
 							class="btn btn-info"  value="관   리" data-toggle="dropdown">
 						<ul class="dropdown-menu" role="menu">
-						<li><input class="btn btn-info"
-							onclick="mateListGo()" value="회원 관리"></li>
-						<li><input class="btn btn-info"
-							onclick="restntListGo()" value="식당 관리"></li>
+						<li><input class="btn btn-info btn-sm"
+							onclick="memberGo()" value="회원 관리"></li>
+						<li><input class="btn btn-info btn-sm"
+							onclick="restntGo()" value="식당 관리"></li>
+						</div>
 					</ul>
 					</form>
 				</c:when>
