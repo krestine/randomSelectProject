@@ -5,11 +5,14 @@
 <html>
 <head>
 
+<script src="http://code.jquery.com/jquery-latest.js"
+	type="text/javascript"></script>
+<script src="/myapp/resources/js/jquery.cookie.js" type="text/javascript"></script>
+<script type="text/javascript"
+	src="http://maps.googleapis.com/maps/api/js?sensor=true&language=ko"></script>
 <link rel="stylesheet" type="text/css" href="/myapp/resources/css/bootstrap.min.css" />
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="/myapp/resources/js/bootstrap.min.js"></script>
-
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <style>
