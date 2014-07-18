@@ -5,48 +5,45 @@
 <%@ page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+<head><link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css' />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 var viewCount = 10;
 
-$(document).ready(function() {
-	$('#restntListBtn').click(function() {
-		$('#community').attr("action", "restntListProc.do").submit();
-		});
-});
 
-function mateListPage(obj) {
-	var paramData= {
-			pageNum : parseInt(obj.id),
-			viewCount : viewCount,
-			
-			memId : $('#memId').val()			
-	};
-	$ajax({
-		cache : false,
-		async : false,
-		type : 'POST',
-		url : 'ajaxMateList.do',
-		data : paramData,
-		dataType : 'json',
-		error : function()	{
-			alert("error : ajax 통신 실패.");
-		}, 
-		success : function(json){
-			var mates = json.mates;
-			if(restnts != null){
-				$('#mateList').show();
-				var html= '<tr>';
-				
-				$.each(mates, function(key){
-					var mateName = mateName[key].mateName;
-				});
-				html=$('#mateListResult').html(html);
+$(document).ready(function(){
+	function mateListPageInit() {
+		var paramData= {
+				pageNum : 1;
+				viewCount : viewCount,
+				memId : $('#memId').val()			
+		};
+		$ajax({
+			cache : false,
+			async : false,
+			type : 'POST',
+			url : 'ajaxMateList.do',
+			data : paramData,
+			dataType : 'json',
+			error : function()	{
+				alert("error : ajax 통신 실패.");
+			}, 
+			success : function(json){
+				var mates = json.mates;
+				if(restnts != null){
+					$('#mateList').show();		
+					var html= '<tr>';
+					
+					$.each(mates, function(key){
+						var mateName = mateName[key].mateName;
+					});
+					html=$('#mateList').html(html);
+				}
 			}
-		}
-	});	
-} 
+		});	
+	} 
+}); 
+
 
 function mateDetailGo(obj){
 	
@@ -79,9 +76,20 @@ function mateDetailGo(obj){
 	});
 }
 
+
+	$('#restntListBtn').click(function() {
+		$('#community').attr("action", "restntListProc.do").submit();
+		});
+
 </script>
  <style>
-       
+       body{
+	font-size: 12px;
+	font-size: 1rem;
+	font-family: 'Nanum Gothic', Helvetica, Arial, sans-serif;
+	text-rendering: optimizeLegibility;
+	color: #444;
+}
     </style>
 <title>mateList</title>
 </head>
@@ -107,7 +115,7 @@ function mateDetailGo(obj){
 						<td>
 						<input type="hidden" value="${mate.memId}" name="memId">
 						<input type="hidden" value="${mate.mateId}" name="mateId">				
-						<input type="button "value="${mate.memName}" id="mateName" class="btn btn-info btn-sm" name="memName" onclick="mateDetailGo(this);"value="상세보기"class="btn btn-danger" 
+						<input type="button"value="${mate.memName}" id="mateName" class="btn btn-info btn-sm" name="memName" onclick="mateDetailGo(this);"value="상세보기"class="btn btn-danger" 
 						data-toggle="modal" data-target="#mateDetailResult"></td>
 					</tr>	
 				

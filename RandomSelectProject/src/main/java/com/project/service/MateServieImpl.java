@@ -54,8 +54,8 @@ public class MateServieImpl implements MateService {
 	}
 
 	@Override
-	public List<MateDTO> mateListPaging(String memId) {
+	public List<MateDTO> mateListPaging(MateDTO mateDto) {
 		
-		return mateMapper.mateListPaging(memId);
+		return mateMapper.mateListPaging(mateDto);
 	}
 }

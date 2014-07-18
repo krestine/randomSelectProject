@@ -24,7 +24,7 @@ public interface MateMapper {
 	// 친구 리스트 페이징 구현 : 페이지 총 갯수
 	Integer mateListTotalCount(MateDTO restntDto);
 	// 친구 리스트 페이징 구현 : 리스트 그리기
-	List<MateDTO> mateListPaging(String memId);
+	List<MateDTO> mateListPaging(MateDTO mateDto);
 	
 
 }
