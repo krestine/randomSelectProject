@@ -135,7 +135,7 @@ public class AdminController {
 		memberService.setMemberInfo(memberDto);
 		members = memberService.getMemberListById(memId);
 		model.addAttribute("members", members);
-		return "memberList";
+		return memberSearchProc(1, memId, model);
 	}
 
 	// 식당 관리 페이지
