@@ -49,7 +49,20 @@
 		document.getElementById("select3").action = "ladderMake.do";
 		document.getElementById("select3").submit();
 	}
-</script>
+
+	function memberGo() {
+
+		document.getElementById("select1").action = "memberSearchForm.do";
+		document.getElementById("select1").submit();
+	}
+
+	function restntGo() {
+
+		document.getElementById("select1").action = "restntManantProc.do";
+		document.getElementById("select1").submit();
+	}
+	
+	</script>
 <style>
 </style>
 
@@ -96,9 +109,9 @@
 							class="btn btn-info"  value="관   리" data-toggle="dropdown">
 						<ul class="dropdown-menu" role="menu">
 						<li><input class="btn btn-info btn-sm"
-							onclick="mateListGo()" value="회원 관리"></li>
+							onclick="memberGo()" value="회원 관리"></li>
 						<li><input class="btn btn-info btn-sm"
-							onclick="restntListGo()" value="식당 관리"></li>
+							onclick="restntGo()" value="식당 관리"></li>
 						</div>
 					</ul>
 					</form>
