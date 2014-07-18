@@ -25,17 +25,6 @@ body,.container {
 	padding: 0;
 }
 </style>
-<!-- sensor=해당 단말기에 맵 성능 향상을 위한 센서가 있을 경우 강제로 사용
-language=구글 맵 언어
--->
-<script type="text/javascript"
-	src="http://maps.googleapis.com/maps/api/js?sensor=true&language=ko">
-</script>
-<script src="http://code.jquery.com/jquery-latest.js"
-	type="text/javascript"></script>
-<script src="/myapp/resources/js/jquery.cookie.js" type="text/javascript"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
-
   
 <script type="text/javascript">
 	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId;
@@ -327,8 +316,9 @@ language=구글 맵 언어
 		//map.setCenter(latlng) = 설정된 위치로 맵 중심 이동
 		//map.setZoom(Int) = 설정된 숫자값으로 맵 확대율 조정
 		map.setCenter(pos);
+		myInfoWindow.setContent('내 위치 : ' + myLocation);
+		myInfoWindow.open(map, myMarker);
 		map.setZoom(18);
-		myInfoWindow.open();
 	}
 
 	function newMyLocation() {
@@ -345,7 +335,7 @@ language=구글 맵 언어
 					onSuccess(results[0].geometry.location.lat(),
 							results[0].geometry.location.lng(), 10);
 				} else {
-					$("#deleteMyLocationAlert").html('<font size="4"><span class="label label-danger">입력한 주소에 해당하는 좌표가 없습니다.</span></font>');
+					$("#deleteMyLocationAlert").html('<h4><span class="label label-danger">입력한 주소에 해당하는 좌표가 없습니다.</span></h4>');
 					setTimeout(removeDeleteMyLocationAlert, 3000);
 				}
 			});
@@ -359,12 +349,13 @@ language=구글 맵 언어
 			login = 0;
 		}
 		sRadius = tempSRadius;
+		alert(sRadius);
 	}
 
 	function deleteMyLocation(){
 		$.cookie('newLatitude', "deleted");
 		$.cookie('newLongitude', "deleted");
-		$("#deleteMyLocationAlert").html('<font size="4"><span class="label label-success">초기화되었습니다.</span></font>');
+		$("#deleteMyLocationAlert").html('<h4><span class="label label-success">초기화되었습니다.</span></h4>');
 		setTimeout(removeDeleteMyLocationAlert, 3000);
 	}
 	
@@ -384,7 +375,7 @@ language=구글 맵 언어
 		pos = new google.maps.LatLng(myLatitude, myLongitude);
 
 		$("#currentAccuracy").html("<h4>내 위치의 정확도 : " + accuracy + "m</h4>");
-		if (accuracy > 20) {
+		if (accuracy > 200) {
 			
 			if(cookieLatitude==null || cookieLatitude=='deleted'){
 				$("#accuracyAlert")
@@ -447,7 +438,8 @@ language=구글 맵 언어
 
 		google.maps.event.addListener(myMarker, 'click', function() {
 			map.setCenter(myMarker.getPosition());
-			myInfoWindow.open();
+			myInfoWindow.setContent('내 위치 : ' + myLocation);
+			myInfoWindow.open(map, myMarker);
 		});
 
 		map.setCenter(pos);
@@ -525,7 +517,7 @@ language=구글 맵 언어
 </script>
 </head>
 <body>
-	<div class="container" id="container" style="width: 100%" align="center">
+	<div class="container" id="container" style="width: 100%;" align="center">
 		<div id="map_canvas" style="width: 80%; height: 100%"></div>
 		<input type="button" id="randomSelectInitialize" value="맵 초기화"
 			onclick="initialize()" class="btn btn-info"><input type="button"
