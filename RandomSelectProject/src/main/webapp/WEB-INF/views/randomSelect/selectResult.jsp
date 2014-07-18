@@ -28,11 +28,11 @@ body,.container {
   
 <script type="text/javascript">
 	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId;
-	var myAddress = new Array(100);
+	var myAddress = new Array(10);
 	var myInfoWindow = new google.maps.InfoWindow();
 	var markerEventParam;
 	var randomLatitude, randomLongitude;
-	var map;
+	var map, myMarker;
 	var restntList;
 	var pos, pos2;
 	var sRadius;
@@ -393,7 +393,7 @@ body,.container {
 		}
 
 		//google.maps.Marker(option); = 맵 위에 마커를 표시
-		var myMarker = new google.maps.Marker({
+		myMarker = new google.maps.Marker({
 			position : pos,
 			map : map,
 			icon : markerImage1,
