@@ -7,11 +7,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css' />
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style type="text/css">
 html {
 	height: 100%;
+}
+
+body{
+	font-family: 'Nanum Gothic', Helvetica, Arial, sans-serif;
+	text-rendering: optimizeLegibility;
 }
 
 body,.container {
@@ -29,26 +34,27 @@ language=구글 맵 언어
 <script src="http://code.jquery.com/jquery-latest.js"
 	type="text/javascript"></script>
 <script src="/myapp/resources/js/jquery.cookie.js" type="text/javascript"></script>
-
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 
   
 <script type="text/javascript">
 	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId;
-	var myAddress = new Array(10);
-	var myInfoWindow, markerEventParam;
+	var myAddress = new Array(100);
+	var myInfoWindow = new google.maps.InfoWindow();
+	var markerEventParam;
 	var randomLatitude, randomLongitude;
 	var map;
 	var restntList;
 	var pos, pos2;
 	var sRadius;
-	var login=1;
+	var login=1, isinit=0;
 	var myLocationManual=0;
 	var geocoder = new google.maps.Geocoder();
 	var directionsDisplay;
 	var directionsService = new google.maps.DirectionsService();
 	
 	var restntImage1 = "http://www.googledrive.com/host/0B1_N1p_Ulcy_YV9sQldSU19ZLTQ";
-	var restntImage2 = "http://www.googledrive.com/host/0B1_N1p_Ulcy_RTJnQ09sY0hQLXM;"
+	var restntImage2 = "http://www.googledrive.com/host/0B1_N1p_Ulcy_RTJnQ09sY0hQLXM";
 	var markerImage1 = "http://www.googledrive.com/host/0B1_N1p_Ulcy_Ni15YkJId3lxUTg";
 	
 	var tempOKLatitude = new Array(100);
@@ -72,6 +78,12 @@ language=구글 맵 언어
 
 	function ajaxRandomRestnt(obj) {
 
+		if(isinit==0){
+			 initialize();
+			 myInfoWindow.close();
+		}
+		isinit=0;
+		
 		var tempDistance = 0;
 		var tempCnt = 0;
 		var tempRestntLatitude;
@@ -132,7 +144,8 @@ language=구글 맵 언어
 										position : tempRestntPos,
 										map : map,
 										animation : google.maps.Animation.DROP,
-										title : tempRestntName
+										title : tempRestntName,
+										restntId : tempRestntId
 									});
 							
 										  tempRestntMarker[tempCnt].setMap(map);
@@ -140,7 +153,54 @@ language=구글 맵 언어
 										  
 										  google.maps.event.addListener(tempRestntMarker[tempCnt], 'click', function(tempCnt) {
 										      return function() {
-										          alert(tempRestntMarker[tempCnt].title);
+										          //alert(tempRestntMarker[tempCnt].restntId);
+										          
+										          
+										          
+										          
+										          
+										      	var paramData = {
+										    			restntId : tempRestntMarker[tempCnt].restntId
+										    		};
+
+										    	$.ajax({
+										    		cache : false,
+										    		async : false,
+										    		type : 'post',
+										    		url : 'ajaxRandomRestntDetail.do', 
+										    		data : paramData,
+										    		dataType : 'json',
+										    		error : function(){
+										    			alert ("에러 : 데이터가 안넘어갑니다.");
+										    		},
+										    		success : function(json){
+										    			
+										    			$('#randomRestntDetailResult').empty();
+										    			
+										    			var restntName = json.restntName;
+										    			var restntAddress = json.adress1 + ' ' + json.adress2 + ' ' + json.adress3 + ' ' + json.adress4 + ' ' + json.adress5;
+										    			var restntTel = json.restntTel;
+										    			var restntCate = json.restntCate;
+										    			var restntEval = json.restntEval;
+										    			
+										    			var html = '<div class="modal-dialog"><div class="modal-content"><div class="modal-header">'
+										    			html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>'
+										    			html+='<h4 class="modal-title">식당 상세정보</h4></div><div class="modal-body"><table class="table">'
+										    			html+='<tr><td align="center" class="btn btn-primary" style="width: 100%">식당이름</td></tr><tr><td><input value="'+restntName+'"name="restntName" style="width: 100%"></td></tr>'
+										    			html+='<tr><td align="center" class="btn btn-primary" style="width: 100%">식당종류</td></td></tr><tr><td><input value="'+restntCate+'"name="restntCate" style="width: 100%"></td></tr>'
+										    			html+='<tr><td align="center" class="btn btn-primary" style="width: 100%">식당전화번호</td></tr><tr><td><input value="'+restntTel+'"name="restntTel" style="width: 100%"></td></tr>'
+										    			html+='<tr><td align="center" class="btn btn-primary" style="width: 100%">식당평점</td></tr><tr><td><input value="'+restntEval+'"name="restntEval" style="width: 100%"></td></tr>'
+										    			html+='<tr><td align="center" class="btn btn-primary" style="width: 100%">식당주소</td></tr>'
+										    			html+='<tr><td><input value="'+restntAddress+'" name="restntAddress" style="width: 100%"></td></tr></table></div>'
+										    			html+='<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">확인</button></div></div></div</div>';
+										    		 	$('#randomRestntDetailResult').html(html); 
+										    		}
+										    	});
+										    	
+										    	$('#randomRestntDetailResult').modal({
+										    		  keyboard: true
+										    		});
+								    	
 										      }
 										    }(tempCnt));
 										  
@@ -262,113 +322,40 @@ language=구글 맵 언어
 
 		return Math.round(ret);
 	}
-
-	function getAllRestntList() {
-		//javascript에서도 c태그 및 EL태그 사용 가능.
-
-		var tempDistance = 0;
-		var tempCnt = 0;
-		var tempRestntLatitude;
-		var tempRestntLongitude
-		var tempRestntName;
-		var tempRestntId;
-
-		//$('#getAllRestnt').attr('disabled',true);
-
-		<c:forEach items="${restntList}" var="item" varStatus="counter">
-
-		//javascript 변수에 EL태그의 값을 직접 넣을 때는 직접 넣을 수 없고
-		//<c:out value=""/> 태그를 통해 view를 거쳐서 넣을 수 있음.
-		tempRestntLatitude = "<c:out value="${item.latitude}" />";
-		tempRestntLongitude = "<c:out value="${item.longitude}" />";
-		tempRestntName = "<c:out value="${item.restntName}" />";
-		tempRestntId = "<c:out value="${item.restntId}" />";
-
-		tempDistance = calcDistance(myLatitude, myLongitude,
-				tempRestntLatitude, tempRestntLongitude);
-
-		if (tempDistance < sRadius) {
-			tempOKLatitude[tempCnt] = tempRestntLatitude;
-			tempOKLongitude[tempCnt] = tempRestntLongitude;
-			tempOKName[tempCnt] = tempRestntName;
-			tempOKId[tempCnt] = tempRestntId;
-
-			var tempRestntPos = new google.maps.LatLng(tempRestntLatitude,
-					tempRestntLongitude);
-			tempRestntMarker[tempCnt] = new google.maps.Marker({
-				position : tempRestntPos,
-				map : map,
-				animation : google.maps.Animation.DROP,
-				title : tempRestntName
-			});
-			tempRestntMarker[tempCnt].setMap(map);
-
-			/* var tempRestntInfo = new google.maps.InfoWindow();
-			tempRestntInfo.setContent(tempRestntName);
-			tempRestntInfo.open(map, tempRestntMarker[tempCnt]); */
-
-			tempCnt = tempCnt + 1;
-
-		}
-
-		</c:forEach>
-
-		var selection = Math.floor(Math.random() * tempCnt);
-
-		tempRestntLatitude = tempOKLatitude[selection];
-		tempRestntLongitude = tempOKLongitude[selection];
-		tempRestntName = tempOKName[selection];
-		tempRestntId = tempOKId[selection];
-
-		tempRestntMarker[selection].setIcon(restntImage2);
-		tempRestntMarker[selection].setAnimation(google.maps.Animation.BOUNCE);
-		myInfoWindow.close();
-
-		var tempRestntInfo = new google.maps.InfoWindow();
-		tempRestntInfo.setContent("오늘의 식당 : " + tempRestntName);
-		tempRestntInfo.open(map, tempRestntMarker[selection]);
-
-		myRestntName = tempRestntName;
-		myRestntId = tempRestntId;
-
-		calcRoute(tempRestntLatitude, tempRestntLongitude);
-	}
-
+	
 	function setMyCenter() {
 		//map.setCenter(latlng) = 설정된 위치로 맵 중심 이동
 		//map.setZoom(Int) = 설정된 숫자값으로 맵 확대율 조정
 		map.setCenter(pos);
 		map.setZoom(18);
+		myInfoWindow.open();
 	}
-
-	
-
-	
 
 	function newMyLocation() {
 		var newMyAddress = document.getElementById('newMyAddress').value;
-		$("#accuracyAlert").empty();
-		geocoder.geocode({
-			'address' : newMyAddress
-		}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-				myLocationManual=1;
-				$.cookie('newLatitude', results[0].geometry.location.lat(),  {expires: 1});
-				$.cookie('newLongitude', results[0].geometry.location.lng(), {expires: 1});
-				onSuccess(results[0].geometry.location.lat(),
-						results[0].geometry.location.lng(), 10);
-			} else {
-				alert('Geocode was not successful for the following reason: '
-						+ status);
-			}
-		});
+			
+			geocoder.geocode({
+				'address' : newMyAddress
+			}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					myLocationManual=1;
+					$("#accuracyAlert").empty();
+					$.cookie('newLatitude', results[0].geometry.location.lat(),  {expires: 1});
+					$.cookie('newLongitude', results[0].geometry.location.lng(), {expires: 1});
+					onSuccess(results[0].geometry.location.lat(),
+							results[0].geometry.location.lng(), 10);
+				} else {
+					$("#deleteMyLocationAlert").html('<font size="4"><span class="label label-danger">입력한 주소에 해당하는 좌표가 없습니다.</span></font>');
+					setTimeout(removeDeleteMyLocationAlert, 3000);
+				}
+			});
 	}
 
 	function setSRadius() {
 		var tempSRadius = "<c:out value="${loginUser.memWalkRange}" />";
 		tempSRadius = Number(tempSRadius);
 		if (tempSRadius == 0) {
-			tempSRadius = 500;
+			tempSRadius = 200;
 			login = 0;
 		}
 		sRadius = tempSRadius;
@@ -396,13 +383,13 @@ language=구글 맵 언어
 		cookieLongitude = $.cookie('newLongitude');
 		pos = new google.maps.LatLng(myLatitude, myLongitude);
 
-		$("#currentAccuracy").html("내 위치의 정확도 : " + accuracy + "m");
+		$("#currentAccuracy").html("<h4>내 위치의 정확도 : " + accuracy + "m</h4>");
 		if (accuracy > 20) {
 			
 			if(cookieLatitude==null || cookieLatitude=='deleted'){
 				$("#accuracyAlert")
 				.html(
-						"<font color=red>단순IP기반의 위치추적 서비스는 정확하지 않습니다.<br>정확한 위치를 위해서 WI-FI 네트워크 또는 3G/4G 데이터 네트워크에 접속하시거나, 현재 주소를 수동으로 입력해 주세요.</font>");
+						'<h4><font color=red>단순IP기반의 위치추적 서비스는 정확하지 않습니다.<br>정확한 위치를 위해서 WI-FI 네트워크 또는 3G/4G 데이터 네트워크에 접속하시거나,<br>현재 주소를 수동으로 입력해 주세요.</font></h4>');
 			}
 			else{
 				onSuccess(cookieLatitude, cookieLongitude, 10);
@@ -460,7 +447,7 @@ language=구글 맵 언어
 
 		google.maps.event.addListener(myMarker, 'click', function() {
 			map.setCenter(myMarker.getPosition());
-			showCurrentLocation(myLatitude, myLongitude);
+			myInfoWindow.open();
 		});
 
 		map.setCenter(pos);
@@ -477,11 +464,17 @@ language=구글 맵 언어
 	function initialize() {
 
 		//alert('start init');
+		
+		isinit=1;
 
-		google.maps.event.addDomListener(window, 'resize', function() {
+		/* google.maps.event.addDomListener(window, 'resize', function() {
 			map.setCenter(pos);
-		});
-
+		}); */
+		/* window.onresize = function(event) {
+			map.setCenter(pos);
+		};*/
+		$(window).resize(function () { map.setCenter(pos); });
+		
 		setSRadius();
 		directionsDisplay = new google.maps.DirectionsRenderer();
 
@@ -532,8 +525,8 @@ language=구글 맵 언어
 </script>
 </head>
 <body>
-	<div class="container" id="container" style="width: 100%">
-		<div id="map_canvas" style="width: 80%; height: 600px"></div>
+	<div class="container" id="container" style="width: 100%" align="center">
+		<div id="map_canvas" style="width: 80%; height: 100%"></div>
 		<input type="button" id="randomSelectInitialize" value="맵 초기화"
 			onclick="initialize()" class="btn btn-info"><input type="button"
 			id="moveToMyLocation" value="내 위치로 이동" onclick="setMyCenter()" class="btn btn-info">
@@ -549,14 +542,14 @@ language=구글 맵 언어
 		<div id="accuracyAlert"></div>
 		<div id="newMyLocationForm" class="input-group">
 			<div style="display: inline;">
-			<input type="text" id="newMyAddress" value="">
-			<button class="btn btn-warning btn-sm" id="newMyLocation"
+			<input type="text" id="newMyAddress" value="" style="width: 100%">
+			<button class="btn btn-warning" id="newMyLocation"
 				onclick="newMyLocation()">내 주소 수동으로 입력</button>
-			<button class="btn btn-warning btn-sm" id="deleteMyLocation"
+			<button class="btn btn-warning" id="deleteMyLocation"
 				onclick="deleteMyLocation()">수동 입력 주소 초기화</button>
 				</div>
-			<div id="deleteMyLocationAlert" style="display: inline;"></div>
 		</div>
+		<div id="deleteMyLocationAlert"></div>
 		<button id="confirmRestnt" onclick="confirmRestnt()"
 				class="btn btn-primary">식당 확정</button>
 			<div id="restntConfirmed"></div>
@@ -566,5 +559,6 @@ language=구글 맵 언어
 		</c:forEach>
 	</div> --%>
 			<button id="visitList" onclick="visitList()">방문 정보</button>
+			<div class="modal fade" id="randomRestntDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 		</div></body>
 </html>

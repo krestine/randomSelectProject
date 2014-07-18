@@ -140,6 +140,24 @@ public class RandomSelectController {
 	}
 	
 	
+	@RequestMapping(value = "/ajaxRandomRestntDetail.do")
+	public void ajaxRandomRestntDetail(HttpServletRequest request,
+			HttpServletResponse response, String restntId )
+			throws IOException {
+
+		System.out.println(restntId);
+		RestntDTO restnt = restntService.getRestntInfoById(restntId);
+		System.out.println(restnt);
+
+		JSONObject jsonObject = JSONObject.fromObject(restnt);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+	}
+		
+	
 	
 	@RequestMapping("visitList.do")
 	String visitListProc(Model model) {
