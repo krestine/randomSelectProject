@@ -92,13 +92,15 @@
 					<form id="select1" method="post" style="display: inline;">
 						<input type="button" style="width: 150px; height: 100px;"
 							class="btn btn-danger" onclick="logoutGo()" value="로그아웃">
+						<div class=btn-group>
 						<input type="button" style="width: 150px; height: 100px;"
 							class="btn btn-info"  value="관   리" data-toggle="dropdown">
 						<ul class="dropdown-menu" role="menu">
-						<li><input class="btn btn-info"
+						<li><input class="btn btn-info btn-sm"
 							onclick="mateListGo()" value="회원 관리"></li>
-						<li><input class="btn btn-info"
+						<li><input class="btn btn-info btn-sm"
 							onclick="restntListGo()" value="식당 관리"></li>
+						</div>
 					</ul>
 					</form>
 				</c:when>
