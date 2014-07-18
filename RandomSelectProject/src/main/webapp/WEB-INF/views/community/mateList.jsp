@@ -10,7 +10,6 @@
 <script>
 var viewCount = 10;
 
-
 $(document).ready(function(){
 	function mateListPageInit() {
 		var paramData= {
@@ -44,7 +43,6 @@ $(document).ready(function(){
 	} 
 }); 
 
-
 function mateDetailGo(obj){
 	
 	var paramData = {
@@ -75,7 +73,6 @@ function mateDetailGo(obj){
 		}
 	});
 }
-
 
 	$('#restntListBtn').click(function() {
 		$('#community').attr("action", "restntListProc.do").submit();
@@ -118,8 +115,7 @@ function mateDetailGo(obj){
 						<input type="button"value="${mate.memName}" id="mateName" class="btn btn-info btn-sm" name="memName" onclick="mateDetailGo(this);"value="상세보기"class="btn btn-danger" 
 						data-toggle="modal" data-target="#mateDetailResult" style="width:100%"></td>
 					</tr>	
-				
-						
+							
 					<div class="modal fade" id="mateDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					</div>	
 				</c:forEach>
