@@ -93,7 +93,13 @@
 						<input type="button" style="width: 150px; height: 100px;"
 							class="btn btn-danger" onclick="logoutGo()" value="로그아웃">
 						<input type="button" style="width: 150px; height: 100px;"
-							class="btn btn-info" onclick="adminGo()" value="관   리">
+							class="btn btn-info"  value="관   리" data-toggle="dropdown">
+						<ul class="dropdown-menu" role="menu">
+						<li><input class="btn btn-info"
+							onclick="mateListGo()" value="회원 관리"></li>
+						<li><input class="btn btn-info"
+							onclick="restntListGo()" value="식당 관리"></li>
+					</ul>
 					</form>
 				</c:when>
 			</c:choose>

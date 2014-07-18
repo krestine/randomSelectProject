@@ -22,7 +22,15 @@ $(document).ready(function() {
 
 </script>
 <title>restntDetail</title>
-
+<style type="text/css">       
+body{
+	font-size: 12px;
+	font-size: 1rem;
+	font-family: 'Nanum Gothic', Helvetica, Arial, sans-serif;
+	text-rendering: optimizeLegibility;
+	color: #444;
+}
+</style>
 </head>
 <body>
 

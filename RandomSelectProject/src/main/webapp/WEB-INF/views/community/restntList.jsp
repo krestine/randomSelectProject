@@ -5,7 +5,7 @@
 <%@ page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+<head><link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css' />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
@@ -20,9 +20,8 @@ function restntDetailGo(obj){
 	
 	
 	var paramData = {
-			restntId : $(obj).prev().prev().prev().attr("value")
+			restntId : $(obj).prev().prev().prev()	.attr("value")
 	};
-	alert($(obj).prev().prev().prev().attr("value"));
 	$.ajax({
 		
 		cache : false,
@@ -58,36 +57,46 @@ function restntDetailGo(obj){
 </head>
 
 <body>
-<div align="center">
-	<h4>친구들이 평가한 식당리스트</h4>
 
+<div class="container">
+<div class="row">
+<div class="span5">	
 	<form id="community" method="post" >
-		<input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn"/> 
+		 <input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn"/>
 	</form>
-	<c:forEach var="restnt" items="${restnts}">
+	<div align="center">
 		
-						<form action="ajaxRestntDetailProc.do" method="post">	
+	<table border=1>
+	<tr>
+		<td colspan="1" align="center"><h5>친구들이 평가한 식당리스트</h5></td>
+	</tr>
 				
-						<input value="식당이름">
-						<input value="평균별점">
-						<br>
+			<tr>	
+				<th><input value="식당이름"disabled="disabled" class="btn btn-primary btn-sm">
+				<input value="평균별점"disabled="disabled" class="btn btn-primary btn-sm" >
+				
+				</th>
+				
+			</tr>
+	<c:forEach var="restnt" items="${restnts}">
+			<tr>
+				<td>
 						<input type="hidden" value="${restnt.mateId }" name="mateId">
 						<input type="hidden" value="${restnt.restntId }" name="restntId">
-						<input value="${restnt.restntName}" name="restntName">
-						<input value="${restnt.score}" name="score">
-						
+						<input class="btn btn-info btn-sm" disabled="disabled"value="${restnt.restntName}" name="restntName">
+						<input class="btn btn-info btn-sm" disabled="disabled" value="${restnt.score}" name="score">
 						<input type="button" class="btn btn-success btn-sm" value="상세보기" id="restntDetail" onclick="restntDetailGo(this);" 
-						data-toggle="modal" data-target="#restntDetailResult">
-						</form>
-						<br>
-						
+						data-toggle="modal" data-target="#restntDetailResult"></td>
+
+			</tr>			
 						<div class="modal fade" id="restntDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						
 						</div>
 		</c:forEach>
-		
-		
-		
+	</table>
+</div>				
+</div>
+</div>
 </div>
 </body>
 
