@@ -64,7 +64,7 @@ public class SettingController {
 				} catch (Exception e) {
 					model.addAttribute("errorMessage",
 							"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
-					return "setting/error";
+					return "error";
 				}
 
 			}
@@ -72,7 +72,7 @@ public class SettingController {
 			model.addAttribute("errorMessage", "로그인 해주세요!");
 
 		}
-		return "setting/error";
+		return "error";
 	}
 
 	@RequestMapping(value = "/settingProc.do", method = RequestMethod.POST)
@@ -121,7 +121,7 @@ public class SettingController {
 			model.addAttribute("errorMessage",
 					"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
 		}
-		return "setting/error";
+		return "error";
 
 	}
 

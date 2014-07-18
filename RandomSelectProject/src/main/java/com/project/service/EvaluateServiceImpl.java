@@ -34,8 +34,8 @@ public class EvaluateServiceImpl implements EvaluateService {
 	}
 
 	// 평가안한 방문리스트
-	public List<EvaluateDTO> getnEvaluateListByMemId(String memId) {
-		return evaluateMapper.getnEvaluateListByMemId(memId);
+	public List<EvaluateDTO> getnEvaluateListByMemId(EvaluateDTO evaluateDto) {
+		return evaluateMapper.getnEvaluateListByMemId(evaluateDto);
 	}
 
 	// 평가한 방문리스트 수정
@@ -70,6 +70,13 @@ public class EvaluateServiceImpl implements EvaluateService {
 	public List<EvaluateDTO> getEvaluateListByMemId(EvaluateDTO evaluateDto) {
 		// TODO Auto-generated method stub
 		return evaluateMapper.getEvaluateListByMemId(evaluateDto);
+	}
+
+	
+	@Override
+	public int getNonEvalListCount(String memId) {
+		
+		return evaluateMapper.getNonEvalListCount(memId);
 	}
 
 }

@@ -107,7 +107,7 @@ public class AdminController {
 
 		default:
 			model.addAttribute("errorMessage", "검색 오류 발생");
-			return "setting/error";
+			return "error";
 		}
 		grades = settingService.getGradeValue();
 		model.addAttribute("grades", grades);
