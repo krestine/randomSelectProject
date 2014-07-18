@@ -10,7 +10,7 @@ public interface EvaluateMapper {
 	// 관리자 : 유저의 평가 목록 열람
 			// 회원: 평가한 식당목록. 평가한 방문 리스트
 
-		List<EvaluateDTO> getEvaluateListByMemId(HashMap<String,Object> param);
+		List<EvaluateDTO> getEvaluateListByMemId(EvaluateDTO evaluateDto);
 
 
 
@@ -26,7 +26,7 @@ public interface EvaluateMapper {
 			List<EvaluateDTO> getScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
 
 			// 회원:평가안한 방문리스트. 방문날짜 restntId
-			List<EvaluateDTO> getnEvaluateListByMemId(String memId);
+			List<EvaluateDTO> getnEvaluateListByMemId(EvaluateDTO evaluateDto);
 
 			// 회원:평가한 방문리스트 수정,평가 안한 점수 입력
 			public void setScoreByEvaluateTerms(EvaluateDTO evaluateDto);
@@ -43,7 +43,8 @@ public interface EvaluateMapper {
 
 			//평가 안한 점수 입력
 			void setScoreByEvaluateTerms1(EvaluateDTO evaluateDto);
-
+			int getNonEvalListCount (String memId);
+			
 			
 			
 }

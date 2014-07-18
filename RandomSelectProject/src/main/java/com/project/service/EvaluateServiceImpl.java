@@ -19,13 +19,6 @@ public class EvaluateServiceImpl implements EvaluateService {
 	// 평가 한 방문리스트
 	private static HashMap<String, Object> param = new HashMap<String, Object>();
 
-	@Override
-	public List<EvaluateDTO> getEvaluateListByMemId(HashMap<String, Object> param) {
-		// TODO Auto-generated method stub
-	
-		return 	evaluateMapper.getEvaluateListByMemId(param);
-	}
-
 	// 식당이름
 	@Override
 	public List<EvaluateDTO> getRestntnameByRestId(String restntId) {
@@ -41,8 +34,8 @@ public class EvaluateServiceImpl implements EvaluateService {
 	}
 
 	// 평가안한 방문리스트
-	public List<EvaluateDTO> getnEvaluateListByMemId(String memId) {
-		return evaluateMapper.getnEvaluateListByMemId(memId);
+	public List<EvaluateDTO> getnEvaluateListByMemId(EvaluateDTO evaluateDto) {
+		return evaluateMapper.getnEvaluateListByMemId(evaluateDto);
 	}
 
 	// 평가한 방문리스트 수정
@@ -52,7 +45,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 		// TODO Auto-generated method stub
 	}
 
-	//리스트 개수 
+	// 리스트 개수
 	@Override
 	public int getListCount(String memId) {
 		// TODO Auto-generated method stub
@@ -61,17 +54,29 @@ public class EvaluateServiceImpl implements EvaluateService {
 
 	// 데이터 삭제
 	@Override
-//	public void deleteData(String memId, String evalId) {
+	// public void deleteData(String memId, String evalId) {
 	public void deleteData(Map<String, String> map) {
-	evaluateMapper.deleteData(map);
+		evaluateMapper.deleteData(map);
 	}
-//평가안한 점수 입력
+
+	// 평가안한 점수 입력
 	@Override
 	public void setScoreByEvaluateTerms1(EvaluateDTO evaluateDto) {
 		evaluateMapper.setScoreByEvaluateTerms1(evaluateDto);
-		
-		
+
 	}
 
+	@Override
+	public List<EvaluateDTO> getEvaluateListByMemId(EvaluateDTO evaluateDto) {
+		// TODO Auto-generated method stub
+		return evaluateMapper.getEvaluateListByMemId(evaluateDto);
+	}
+
+	
+	@Override
+	public int getNonEvalListCount(String memId) {
+		
+		return evaluateMapper.getNonEvalListCount(memId);
+	}
 
 }
