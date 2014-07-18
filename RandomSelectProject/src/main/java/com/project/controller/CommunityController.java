@@ -66,8 +66,11 @@ public class CommunityController {
 				"loginUser");
 			
 			if (loginUser.getMemId() != null || loginUser != null) {
-				
+					mateDto.setPageNum(1);
+					mateDto.setViewCount(10);
+					mateDto.setMemId(loginUser.getMemId());
 					System.out.println(mateDto);
+					
 					mates = mateService.mateListPaging(mateDto);
 					
 					System.out.println(mates);
