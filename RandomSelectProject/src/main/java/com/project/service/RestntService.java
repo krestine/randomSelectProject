@@ -41,7 +41,7 @@ public interface RestntService {
 	String getAdressCode(RestntDTO restntDto);
 
 	// 회원 : 친구가 평가한 식당 리스트
-	List<RestntDTO> getEvalRestntListByMateId(String memId);
+	List<RestntDTO> getEvalRestntListByMateId(RestntDTO restntDto);
 
 	// 식당 리스트 페이징 구현 : 총 갯수 가져오기
 	Integer restntListTotalCount(RestntDTO restntDto);

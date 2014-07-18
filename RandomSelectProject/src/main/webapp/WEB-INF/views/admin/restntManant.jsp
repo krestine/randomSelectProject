@@ -641,7 +641,7 @@
 									var restntId = restnts[key].restntId;
 	
 									
-											 
+		 
 									html += '<tr><td>'+ restntName
 											+ '</td><td><input type = "hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
 											+ key
