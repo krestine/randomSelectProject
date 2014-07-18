@@ -7,6 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>${errorMessage}
+<body>
+<div align="center">${errorMessage}</div>
+
 </body>
 </html>

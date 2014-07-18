@@ -8,26 +8,15 @@ public class MateDTO {
 	private String infoStatus;
 	private String memName;
 	private String memGrade;
+	private Integer viewCount;
+	private Integer pageNum;
 	
-	public MateDTO(String memId2, String mateId2) {
-		memId=memId2;
-		mateId=mateId2;
+	public MateDTO(){
 		
 	}
-	public MateDTO() {
 	
-	}
-	public String getMemName() {
-		return memName;
-	}
-	public void setMemName(String memName) {
-		this.memName = memName;
-	}
-	public String getMemGrade() {
-		return memGrade;
-	}
-	public void setMemGrade(String memGrade) {
-		this.memGrade = memGrade;
+	public MateDTO(String memId2, String mateId2) {
+		
 	}
 	public String getMemId() {
 		return memId;
@@ -53,6 +42,30 @@ public class MateDTO {
 	public void setInfoStatus(String infoStatus) {
 		this.infoStatus = infoStatus;
 	}
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
+	public String getMemGrade() {
+		return memGrade;
+	}
+	public void setMemGrade(String memGrade) {
+		this.memGrade = memGrade;
+	}
+	public Integer getViewCount() {
+		return viewCount;
+	}
+	public void setViewCount(Integer viewCount) {
+		this.viewCount = viewCount;
+	}
+	public Integer getPageNum() {
+		return pageNum;
+	}
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,6 +79,9 @@ public class MateDTO {
 				+ ((memGrade == null) ? 0 : memGrade.hashCode());
 		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
 		result = prime * result + ((memName == null) ? 0 : memName.hashCode());
+		result = prime * result + ((pageNum == null) ? 0 : pageNum.hashCode());
+		result = prime * result
+				+ ((viewCount == null) ? 0 : viewCount.hashCode());
 		return result;
 	}
 	@Override
@@ -107,13 +123,24 @@ public class MateDTO {
 				return false;
 		} else if (!memName.equals(other.memName))
 			return false;
+		if (pageNum == null) {
+			if (other.pageNum != null)
+				return false;
+		} else if (!pageNum.equals(other.pageNum))
+			return false;
+		if (viewCount == null) {
+			if (other.viewCount != null)
+				return false;
+		} else if (!viewCount.equals(other.viewCount))
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
 		return "MateDTO [memId=" + memId + ", mateId=" + mateId
 				+ ", mateStatus=" + mateStatus + ", infoStatus=" + infoStatus
-				+ ", memName=" + memName + ", memGrade=" + memGrade + "]";
+				+ ", memName=" + memName + ", memGrade=" + memGrade
+				+ ", viewCount=" + viewCount + ", pageNum=" + pageNum + "]";
 	}
 	
 	

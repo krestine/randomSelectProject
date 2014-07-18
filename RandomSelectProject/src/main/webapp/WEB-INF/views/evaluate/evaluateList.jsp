@@ -10,7 +10,14 @@
 <title>evaluateList.jsp</title>
 <script type="text/javascript">
 </script>
-
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+function evalPage(obj){
+	
+	$('#pageNum').val(parseInt(obj.id));
+	$('#pageForm').submit();
+}
+</script>
 </head>
 <body>
 	<center>
@@ -22,7 +29,11 @@
 		<input type="button" onclick="evaluateMainGo()" value="평가메인으로">
 	</form>
  --%>
-
+	
+		<form action="evaluateList.do" id="pageForm">
+			<input id="pageNum" name="pageNum" type="hidden">
+			<input id="memId" name="memId" value="${memId}" type="hidden">
+		</form>
 		<table width="600" border="1" bordercolor="#00A5FF">
 
 			<tr align="center" valign="middle">
@@ -57,7 +68,8 @@
 								<c:when test="${evaluate.score ==1}">
 						★☆☆☆☆
 			</c:when>
-							</c:choose> <script type="text/javascript">
+							</c:choose> 
+<script type="text/javascript">
 function hideshow(which){
 if (!document.getElementById)
 return
@@ -98,17 +110,14 @@ which.style.display="block";
 
 				</c:forEach>
 			<tr>
-				<td colspan="5" align="center"><c:if test="${page <= 1 }">[이전]&nbsp; </c:if>
-					<c:if test="${page > 1 }">
-						<a href="/evaluateList.do?memId=${memId}&page=${page-1}">이전</a>&nbsp;</c:if>
-					<c:forEach begin="${startpage }" end="${endpage }" var="a">
-						<c:if test="${a==page }">[${a}]</c:if>
-						<c:if test="${a!=page }">
-							<a href="/evaluateList.do?memId=${memId}&page=${a}">[${a}]</a>&nbsp;</c:if>
-					</c:forEach> <c:if test="${page>=maxpage }">[다음]</c:if> <c:if
-						test="${page<maxpage }">
-						<a href="/evaluateList.do?memId=${memId}&page=${page+1}">[다음]</a>
-					</c:if></td>
+				<td colspan="5" align="center">
+					
+					<c:forEach  var="a" begin="1" end="${pageCount}">
+						
+						<a onclick="evalPage(this)" id="${a}">[${a}]</a>
+					
+					</c:forEach>
+						</td>
 			</tr>
 
 		</table>

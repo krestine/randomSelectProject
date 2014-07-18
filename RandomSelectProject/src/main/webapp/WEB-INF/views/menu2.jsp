@@ -92,13 +92,7 @@
 		</form>
    		<form id="select2" method="post" style="display: inline;">
 				<input type="button"  style="width:150px;height:100px;" class="btn btn-default" onclick="settingGo()" value="설   정">
-				<div class=btn-group>
-				<input type="button"  style="width:150px;height:100px;" class="btn btn-success dropdown-toggle"value="커뮤니티"data-toggle="dropdown">
-				<ul class="dropdown-menu" role="menu">
-				<li><input class="btn btn-success btn-sm" onclick="mateListGo()" value="친구리스트"></li>
-				<li><input class="btn btn-success btn-sm" onclick="restntListGo()" value="식당리스트"></li>
-				</ul> 
-				</div> 	 				
+				<input type="button"  style="width:150px;height:100px;" class="btn btn-success"onclick="mateListGo()"value="커뮤니티">			
 				<div class="btn-group">
 					<input type="button" style="width: 150px; height: 100px;" class="btn btn-info" data-toggle="dropdown" value="평  가">
 					<!-- 단버튼 -->

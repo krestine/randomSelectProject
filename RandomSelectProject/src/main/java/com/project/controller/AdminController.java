@@ -107,7 +107,7 @@ public class AdminController {
 
 		default:
 			model.addAttribute("errorMessage", "검색 오류 발생");
-			return "setting/error";
+			return "error";
 		}
 		grades = settingService.getGradeValue();
 		model.addAttribute("grades", grades);
@@ -117,8 +117,8 @@ public class AdminController {
 
 	// 회원 리스트에서 아이디 클릭 -> 회원의 평가 정보 리스트 표시 페이지
 	@RequestMapping(value = "/memberEvaluateListProc.do", method = RequestMethod.POST)
-	String memberEvaluateListProc(Model model, HashMap<String, Object> memId) {
-		memberEvaluates = evaluateService.getEvaluateListByMemId(memId);
+	String memberEvaluateListProc(Model model,EvaluateDTO evaluateDto) {
+		memberEvaluates = evaluateService.getEvaluateListByMemId(evaluateDto);
 		model.addAttribute("memberEvaluates", memberEvaluates);
 		return "admin/memberEvaluateListAdmin";
 	}

@@ -5,18 +5,47 @@
 <%@ page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+<head><link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css' />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
+var viewCount = 10;
 
-$(document).ready(function() {
-	$('#restntListBtn').click(function() {
-		$('#community').attr("action", "restntListProc.do").submit();
-		});
-});
+
+$(document).ready(function(){
+	function mateListPageInit() {
+		var paramData= {
+				pageNum : 1;
+				viewCount : viewCount,
+				memId : $('#memId').val()			
+		};
+		$ajax({
+			cache : false,
+			async : false,
+			type : 'POST',
+			url : 'ajaxMateList.do',
+			data : paramData,
+			dataType : 'json',
+			error : function()	{
+				alert("error : ajax 통신 실패.");
+			}, 
+			success : function(json){
+				var mates = json.mates;
+				if(restnts != null){
+					$('#mateList').show();		
+					var html= '<tr>';
+					
+					$.each(mates, function(key){
+						var mateName = mateName[key].mateName;
+					});
+					html=$('#mateList').html(html);
+				}
+			}
+		});	
+	} 
+}); 
+
 
 function mateDetailGo(obj){
-	
 	
 	var paramData = {
 			mateId : $(obj).prev().attr("value"),
@@ -46,34 +75,58 @@ function mateDetailGo(obj){
 		}
 	});
 }
+
+
+	$('#restntListBtn').click(function() {
+		$('#community').attr("action", "restntListProc.do").submit();
+		});
+
 </script>
  <style>
-       
+       body{
+	font-size: 12px;
+	font-size: 1rem;
+	font-family: 'Nanum Gothic', Helvetica, Arial, sans-serif;
+	text-rendering: optimizeLegibility;
+	color: #444;
+}
     </style>
 <title>mateList</title>
 </head>
 <body>	
-<h3>친구리스트</h3>
-<div align="center">
+
+ <div class="container">
+<div class="row">
+<div class="span5">
 	<form id="community" method="post" >
 		 <input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
 	</form>
-
-	<c:forEach var="mate" items="${mates}">		
-					<form id="mateName">
+<div align="center">	
+			<table border=1>
+					
+					<tr>	
+						<td align="center"><h5>친구리스트</h5></td>
+					</tr>
+					<tr>
+						<td align="center" class="btn btn-primary btn-sm" disabled="disabled"style="width: 100%">이름</td>
+					</tr>
+				<c:forEach var="mate" items="${mates}">		
+					<tr>
+						<td>
 						<input type="hidden" value="${mate.memId}" name="memId">
 						<input type="hidden" value="${mate.mateId}" name="mateId">				
-						<input type="button "value="${mate.memName}" id="mateName" class="btn btn-primary btn-sm" name="memName" onclick="mateDetailGo(this);"value="상세보기"class="btn btn-danger" 
-						data-toggle="modal" data-target="#mateDetailResult">
+						<input type="button"value="${mate.memName}" id="mateName" class="btn btn-info btn-sm" name="memName" onclick="mateDetailGo(this);"value="상세보기"class="btn btn-danger" 
+						data-toggle="modal" data-target="#mateDetailResult"></td>
+					</tr>	
+				
 						
-						
-						
-					</form>
-					<br>	
 					<div class="modal fade" id="mateDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					</div>	
-	</c:forEach>
-	
+				</c:forEach>
+			</table>
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>

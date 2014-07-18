@@ -44,7 +44,7 @@ public class EvaluateController {
 	private Object evaluateList;
 
 	// 평가 페이지(evaluate.jsp)
-	@RequestMapping(value = "/evaluatemain.do", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/evaluatemain.do", method = RequestMethod.POST)
 	public String evaluatemain(Model model, String memId,
 			HttpServletRequest request) {
 		System.out.println("evaluatemain()");
@@ -57,52 +57,80 @@ public class EvaluateController {
 				.getnEvaluateListByMemId(loginUser.getMemId());
 		model.addAttribute("evaluates", evaluates);
 		return "evaluate";
-	}
+	}*/
 
 	// 식당평가한 목록(evaluateList.jsp)
 	@RequestMapping(value = "evaluateList.do")
-	public ModelAndView evaluateListForm(HttpServletRequest request, Model model) {
+	public String evaluateListForm(HttpServletRequest request, Model model, EvaluateDTO evaluateDto) {
 		System.out.println("evaluateList()");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
-		ModelAndView view = new ModelAndView("evaluateList");
-		System.out.println(loginUser.toString());
+		System.out.println("패러미터로 받은 DTO:" + evaluateDto);
+		if(loginUser==null){
+			model.addAttribute("errorMessage", "로그인 해주세요!!");
+			return "error";
+		}
 		String memId = loginUser.getMemId();
+		
 		System.out.println("회원아이디 :: 컨트롤러에서 멤아이디" + memId);
 
-		int startrow = 1;
-		int limit = 11;
-
-		HashMap<String, Object> param = new HashMap<String, Object>();
-
-		param.put("memId", memId);
-		param.put("startrow", String.valueOf(startrow));
-		param.put("endrow", String.valueOf(startrow + limit));
-		List<EvaluateDTO> ev = evaluateService.getEvaluateListByMemId(param);
+		Integer viewCount = 10;
+		evaluateDto.setViewCount(viewCount);
+		evaluateDto.setMemId(memId);
+		
+		if(evaluateDto.getPageNum() == null){
+			evaluateDto.setPageNum(1);
+		}
+		
+		
+		List<EvaluateDTO> ev = evaluateService.getEvaluateListByMemId(evaluateDto);
 
 		// 총 리스트 수
-		int listcount = evaluateService.getListCount(memId);
+		Integer listcount = evaluateService.getListCount(memId);
 		System.out.println("count는 " + listcount);
-
+		Integer pageCount = (int) Math.ceil((listcount/viewCount));
+		Integer pageNum = evaluateDto.getPageNum();
+		String pageCountStr = pageCount.toString();
 		// 게시글 리스트
-		view.addObject("boardList", ev);
-
+		
+		model.addAttribute("boardList", ev);
+		model.addAttribute("pageCount", pageCountStr);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("memId", memId);
 		System.out.println("evaluateContorller:" + memId);
-		return view;
+		return "evaluateList";
 	}
 
 	// 평가 안한 식당목록(nEvaluateList.jsp)
 	@RequestMapping(value = "nEvaluateListForm.do")
 	public String nEvaluateListForm(HttpServletRequest request, Model model,
-			String memId) {
+			EvaluateDTO evaluateDto) {
+		
+		
 		System.out.println("nEvaluateListForm()");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
-
+		if(loginUser==null){
+			model.addAttribute("errorMessage", "로그인 해주세요!!");
+			return "error";
+		}
 		System.out.println(loginUser.toString());
-		memId = loginUser.getMemId();
-		System.out.println(memId);
-		memberEvaluates = evaluateService.getnEvaluateListByMemId(memId);
+		String memId = loginUser.getMemId();
+		evaluateDto.setMemId(memId);
+		Integer viewCount = 10;
+		evaluateDto.setViewCount(viewCount);
+		if(evaluateDto.getPageNum() == null){
+			evaluateDto.setPageNum(1);
+		}
+		Integer listcount = evaluateService.getListCount(memId);
+		System.out.println("count는 " + listcount);
+		Integer pageCount = (int) Math.ceil((listcount/viewCount));
+		Integer pageNum = evaluateDto.getPageNum();
+		String pageCountStr = pageCount.toString();
+		model.addAttribute("pageCount", pageCountStr);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("memId", memId);
+		memberEvaluates = evaluateService.getnEvaluateListByMemId(evaluateDto);
 		model.addAttribute("memberEvaluates", memberEvaluates);
 		System.out.println(memberEvaluates);
 		return "nEvaluateList";

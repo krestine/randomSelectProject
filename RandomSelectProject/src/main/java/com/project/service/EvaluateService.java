@@ -11,46 +11,41 @@ import com.project.domain.EvaluateDTO;
 public interface EvaluateService {
 
 	// 관리자 : 유저의 평가 목록 열람
-		// 회원: 평가한 식당목록. 평가한 방문 리스트
+	// 회원: 평가한 식당목록. 평가한 방문 리스트
 
-	List<EvaluateDTO> getEvaluateListByMemId(HashMap<String,Object> param);
+	List<EvaluateDTO> getEvaluateListByMemId(EvaluateDTO evaluateDto);
 
+	// 식당이름
+	List<EvaluateDTO> getRestntnameByRestId(String restntId);
 
+	/* EvaluateDTO setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto); */
+	/* void setEvaluateInfoByEvaluateTerms(String evaluateDto); */
 
-		// 식당이름
-		List<EvaluateDTO> getRestntnameByRestId(String restntId);
+	// 평가점수
+	List<EvaluateDTO> getScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
 
+	// 회원:평가안한 방문리스트. 방문날짜 restntId
+	List<EvaluateDTO> getnEvaluateListByMemId(EvaluateDTO evaluateDto);
 
+	// 회원:평가한 방문리스트 점수수정,
+	public void setScoreByEvaluateTerms(EvaluateDTO evaluateDto);
 
-		/* EvaluateDTO setEvaluateInfoByEvaluateTerms(EvaluateDTO evaluateDto); */
-		/* void setEvaluateInfoByEvaluateTerms(String evaluateDto); */
+	// ///////////////////////////////////////////////////////////////
 
-		// 평가점수
-		List<EvaluateDTO> getScoreByEvaluateTerms(EvaluateDTO evaluateDTO);
+	// 회원: 평가한 식당목록
+	// 방문날짜,restntId
 
-		// 회원:평가안한 방문리스트. 방문날짜 restntId
-		List<EvaluateDTO> getnEvaluateListByMemId(String memId);
+	/* List<EvaluateDTO> getVisitsByMemid(String memId); */
+	// 리스트 개수
+	int getListCount(String memId);
 
-		// 회원:평가한 방문리스트 점수수정,
-		public void setScoreByEvaluateTerms(EvaluateDTO evaluateDto);
+	// 게시물 삭제
+	// public void deleteData(String memId, String evalId);
+	public void deleteData(Map<String, String> map);
 
-		// ///////////////////////////////////////////////////////////////
+	// 평가 안한 점수 입력
+	void setScoreByEvaluateTerms1(EvaluateDTO evaluateDto);
 
-		// 회원: 평가한 식당목록
-		// 방문날짜,restntId
+	int getNonEvalListCount(String memId);
 
-		/*List<EvaluateDTO> getVisitsByMemid(String memId);*/
-        //  리스트 개수 
-		int getListCount(String memId);
-		// 게시물 삭제 
-//		public void deleteData(String memId, String evalId);
-		public void deleteData(Map<String, String> map);
-
-
-//평가 안한 점수 입력
-		void setScoreByEvaluateTerms1(EvaluateDTO evaluateDto);
-
-
-
-		}
-
+}

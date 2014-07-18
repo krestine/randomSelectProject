@@ -181,47 +181,54 @@
 
 	<div align="center" class="findBox">
 
-		<form id="findId_form" action="findIdProc.do" method="post">
-			<div>아이디 찾기</div>
+		<form role="form" id="findId_form" action="findIdProc.do"
+			method="post">
 			<div>
-				이름 <input type="text" id="nameId" name="memName">
+				<h5 class="text-primary">아이디 찾기</h5>
 			</div>
-			<div>
-				생년월일 <input type="text" id="dateId" name="memBirth"
-					readonly="readonly">
+			<div class="form-group">
+				<input type="text" id="nameId" name="memName" placeholder="이름">
 			</div>
-			<div>
-				전화번호 <input type="text" id="mobileId" name="memMobile"
-					placeholder="ex)010-1234-1234">
+			<div class="form-group">
+				<input type="text" id="dateId" name="memBirth" readonly="readonly"
+					placeholder="생년월일">
+			</div>
+			<div class="form-group">
+				<input type="text" id="mobileId" name="memMobile"
+					placeholder="전화번호 ex)010-1234-1234">
 			</div>
 			<div>
 				<label id="idErrorMsg" style="color: red">${errmessage }</label>
 			</div>
 			<div>
-				<input type="submit" id="findId_btn" value="아이디찾기">
+				<input type="submit" class="btn btn-primary btn-sm" id="findId_btn"
+					value="아이디찾기">
 			</div>
 		</form>
 
 
-		<form id="findPassword_form" action="findPasswordProc.do"
+		<form role="form" id="findPassword_form" action="findPasswordProc.do"
 			method="post" style="display: none">
-			<div>비밀번호 찾기</div>
 			<div>
-				아이디 <input type="text" id="idPw" name="memId">
+				<h5 class="text-warning">비밀번호 찾기</h5>
 			</div>
-			<div>
-				생년월일 <input type="text" id="datePw" name="memBirth"
+			<div class="form-group">
+				<input type="text" id="idPw" name="memId" placeholder="아이디">
+			</div>
+			<div class="form-group">
+				<input type="text" id="datePw" name="memBirth" placeholder="생년월일"
 					readonly="readonly">
 			</div>
-			<div>
-				전화번호 <input type="text" id="mobilePw" name="memMobile"
-					placeholder="ex)010-1234-1234">
+			<div class="form-group">
+				<input type="text" id="mobilePw" name="memMobile"
+					placeholder="전화번호 ex)010-1234-1234">
 			</div>
 			<div>
 				<label id="pwErrorMsg" style="color: red"></label>
 			</div>
 			<div>
-				<input type="button" id="findPwCheck_btn" value="비밀번호찾기">
+				<input type="button" class="btn btn-warning btn-sm"
+					id="findPwCheck_btn" value="비밀번호찾기">
 			</div>
 
 		</form>
