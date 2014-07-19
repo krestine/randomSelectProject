@@ -3,6 +3,7 @@ package com.project.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.crsh.shell.impl.command.system.repl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,7 @@ public class SettingController {
 
 	@RequestMapping(value = "/settingProc.do", method = RequestMethod.POST)
 	String settingProc(Model model, MemberDTO memberDto,
-			HttpServletRequest request) {
+			HttpServletRequest request ,HttpSession session) {
 		// 세션에서 로그인 정보 가져옴
 		System.out.println("/settingProc.do");
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
@@ -113,9 +114,18 @@ public class SettingController {
 		memCarRange = 0;
 		memberDto.setMemCarRange(memCarRange);
 		// 설정 정보 저장 쿼리 실행
-
+		
+		
+		
+		
+		
 		try {
+			
 			memberService.setOptionInfoByMemId(memberDto);
+			loginUser.setMemExcMenu(memberDto.getMemExcMenu());
+			loginUser.setMemWalkRange(memberDto.getMemWalkRange());
+			session.setAttribute("loginUser", loginUser);
+			
 			return settingForm(model, request);
 		} catch (Exception e) {
 			model.addAttribute("errorMessage",
