@@ -30,9 +30,8 @@ body,.container {
 	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId;
 	var myAddress = new Array(10);
 	var myInfoWindow = new google.maps.InfoWindow();
-	var markerEventParam;
 	var randomLatitude, randomLongitude;
-	var map, myMarker;
+	var map, myMarker, excMenu;
 	var restntList;
 	var pos, pos2;
 	var sRadius;
@@ -84,6 +83,7 @@ body,.container {
 			adress1 : myAddress[1],
 			adress2 : myAddress[2],
 			adress3 : sRadius,
+			adress4 : excMenu,
 			latitude : myLatitude,
 			longitude : myLongitude
 		};
@@ -343,13 +343,19 @@ body,.container {
 
 	function setSRadius() {
 		var tempSRadius = "<c:out value="${loginUser.memWalkRange}" />";
+		var tempExcMenu = "<c:out value="${loginUser.memExcMenu}" />";
 		tempSRadius = Number(tempSRadius);
 		if (tempSRadius == 0) {
 			tempSRadius = 200;
 			login = 0;
 		}
+		if(tempExcMenu==""){
+			tempExcMen="00000000000000";
+			login=0;
+		}
 		sRadius = tempSRadius;
-		alert(sRadius);
+		excMenu = tempExcMenu;
+		//alert(sRadius);
 	}
 
 	function deleteMyLocation(){
