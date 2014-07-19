@@ -140,7 +140,6 @@ public class CommunityController {
 		out.print(jsonObject.toString());
 
 	}
-
 	// 회원 : 친구 상세정보
 	@RequestMapping(value = "/mateDetailProc.do", method = RequestMethod.POST)
 	public String mateDetailProc(Model model, String mateId, String memId,
@@ -163,6 +162,26 @@ public class CommunityController {
 		System.out.println("mate 확인");
 		return "mateDetail";
 	}
+	
+	@RequestMapping(value ="/ajaxMateListPaging.do", method = RequestMethod.POST )	
+	public void ajaxMateListPaging(HttpServletRequest request,
+			HttpServletResponse response, MateDTO mateDto) throws IOException{
+		Integer totalCount = mateService.mateListTotalCount(mateDto);
+		System.out.println(totalCount);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("totalCount", totalCount);
+		
+		
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+		
+	}
+	
 
 	// 회원 : 친구들이 평가한 식당 리스트
 

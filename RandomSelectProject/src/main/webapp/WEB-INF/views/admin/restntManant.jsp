@@ -651,8 +651,7 @@
 								 html += '<tr><td colspan=2><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr>';
 								$('#restntListResult').append(html);
 		
-							}
-		
+							}		
 						}
 					});
 				 
