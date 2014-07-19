@@ -57,10 +57,12 @@ public class SettingController {
 					List<SettingDTO> walkRanges = settingService.getWalkRange();
 					List<SettingDTO> carRanges = settingService.getCarRange();
 					List<SettingDTO> excMenus = settingService.getExcMenu();
+					
 					model.addAttribute("walkRanges", walkRanges);
 					model.addAttribute("carRanges", carRanges);
 					model.addAttribute("excMenus", excMenus);
-
+					
+					
 					return "setting";
 				} catch (Exception e) {
 					model.addAttribute("errorMessage",
@@ -125,7 +127,7 @@ public class SettingController {
 			loginUser.setMemExcMenu(memberDto.getMemExcMenu());
 			loginUser.setMemWalkRange(memberDto.getMemWalkRange());
 			session.setAttribute("loginUser", loginUser);
-			
+			model.addAttribute("settingProcCode","1");
 			return settingForm(model, request);
 		} catch (Exception e) {
 			model.addAttribute("errorMessage",

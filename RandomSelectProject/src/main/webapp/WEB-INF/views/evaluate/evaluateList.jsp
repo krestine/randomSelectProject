@@ -34,13 +34,13 @@ function evalPage(obj){
 			<input id="pageNum" name="pageNum" type="hidden">
 			<input id="memId" name="memId" value="${memId}" type="hidden">
 		</form>
-		<table width="600" border="1" bordercolor="#00A5FF">
+		<table width="50%" border="1" bordercolor="#00A5FF">
 
 			<tr align="center" valign="middle">
 				<td colspan="5">평가한 목록</td>
 			</tr>
 			<tr align="center" valign="middle" bgcolor="#00A5FF">
-				<td width="66px">번호</td>
+				
 				<td width="100px"><label>평점</label></td>
 
 				<td>방문 평가 한 음식점</td>
@@ -51,7 +51,7 @@ function evalPage(obj){
 
 					<tr height="35px">
 
-						<td align="center">번호</td>
+						
 						<td align="center"><c:choose>
 								<c:when test="${evaluate.score ==5}">
 						★★★★★
