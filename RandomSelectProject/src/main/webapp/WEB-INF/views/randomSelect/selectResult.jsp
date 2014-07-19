@@ -95,8 +95,8 @@ body,.container {
 			url : 'ajaxRandomRestnt.do',
 			data : paramData,
 			dataType : 'json',
-			error : function() {
-				alert("error : ajax 통신 실패.");
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("error : ajax 통신 실패." + textStatus + errorThrown);
 			},
 			success : function(json) {
 				$("#restntTable > tbody").html("");
@@ -350,7 +350,7 @@ body,.container {
 			login = 0;
 		}
 		if(tempExcMenu==""){
-			tempExcMen="00000000000000";
+			tempExcMenu="00000000000000";
 			login=0;
 		}
 		sRadius = tempSRadius;
