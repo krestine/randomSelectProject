@@ -43,6 +43,8 @@ public class RandomSelectController {
 	//private List<RestntDTO> restntList;
 	private List<SettingDTO> walkRange;
 	private List<RestntDTO> restnts;
+	private StringBuffer stringBuffer;
+	private String menuCode = "00000000000000";
 	
 	public static final double latitudePer100m = 0.00089904586958998;
 	public static final double longitudePer100m = 0.00139478242579723;
@@ -52,6 +54,9 @@ public class RandomSelectController {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		model.addAttribute("loginUser", loginUser);
+
+		
+		
 		/*restntList = restntService.getRestntList();
 		for(RestntDTO restnt : restntList){
 			System.out.println(restnt.getRestntId());
@@ -108,6 +113,7 @@ public class RandomSelectController {
 		latLngDto.setMaxLat(latitude + sRadius/100*latitudePer100m);
 		latLngDto.setMinLng(longitude - sRadius/100*longitudePer100m);
 		latLngDto.setMaxLng(longitude + sRadius/100*longitudePer100m);
+		String excMenu = restntDto.getAdress4();
 		
 		System.out.println("/ajaxRandomRestnt.do");
 
@@ -120,6 +126,19 @@ public class RandomSelectController {
 		
 		//restnts = restntService.getRestntListByAdress2(restntDto);
 		restnts = restntService.getRestntListByLatLng(latLngDto);
+		
+		String[] excMenuArray = new String[14];
+		excMenuArray = menuCodeDecoder(excMenu);
+		
+		for(int i=0;i<=14;i++){
+			if(excMenuArray[i]!="선택함"){
+				for(int j=0;j<restnts.size();j++){
+					if(restnts.get(j).getRestntCate()==excMenuArray[i]){
+						restnts.remove(j);
+					}
+				}
+			}
+		}
 		
 		System.out.println(restnts);
 
@@ -165,4 +184,19 @@ public class RandomSelectController {
 		return "visitList";
 	}
 
+	public String[] menuCodeDecoder(String menuCode) {
+		stringBuffer = new StringBuffer(menuCode);
+		String[] menuArray = new String[14];
+		for (Integer i = 0; i < 14; i++) {
+			Character indexCode = stringBuffer.charAt(i);
+			System.out.println(indexCode);
+			String excMenuId = i.toString();
+			menuArray[i] = (indexCode == '1') ? "선택함" : settingService
+					.getExcMenuById(excMenuId);
+			System.out.println(menuArray[i]);
+		}
+		
+		return menuArray;
+	}
+	
 }
