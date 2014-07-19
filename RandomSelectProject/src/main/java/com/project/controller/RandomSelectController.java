@@ -2,6 +2,7 @@ package com.project.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -130,28 +131,24 @@ public class RandomSelectController {
 		String[] excMenuArray = new String[14];
 		excMenuArray = menuCodeDecoder(excMenu);
 		
-		for(int i=0;i<=14;i++){
-			if(excMenuArray[i]!="선택함"){
+		for(int k=0;k<14;k++){
+			for(int i=0;i<14;i++){
+				System.err.println("delete menu " + excMenuArray[i]);
 				for(int j=0;j<restnts.size();j++){
-					if(restnts.get(j).getRestntCate()==excMenuArray[i]){
+					if(restnts.get(j).getRestntCate().trim().compareTo(excMenuArray[i].trim())==0){
 						restnts.remove(j);
 					}
 				}
 			}
 		}
 		
-		System.out.println(restnts);
-
 		// 제이슨으로 변환
 		JSONArray jsonArray = JSONArray.fromObject(restnts);
-
-		System.out.println("restnts - " + jsonArray);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("restnts", jsonArray);
 
 		JSONObject jsonObject = JSONObject.fromObject(map);
-		System.out.println("json - " + jsonObject);
 
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -191,8 +188,8 @@ public class RandomSelectController {
 			Character indexCode = stringBuffer.charAt(i);
 			System.out.println(indexCode);
 			String excMenuId = i.toString();
-			menuArray[i] = (indexCode == '1') ? "선택함" : settingService
-					.getExcMenuById(excMenuId);
+			menuArray[i] = (indexCode == '1') ? settingService
+					.getExcMenuById(excMenuId) : "선택안함";
 			System.out.println(menuArray[i]);
 		}
 		
