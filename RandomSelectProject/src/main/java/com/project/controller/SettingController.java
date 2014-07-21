@@ -31,7 +31,7 @@ public class SettingController {
 	private StringBuffer stringBuffer;
 	private int memWalkRange;
 	private int memCarRange;
-	private String memExcMenu;
+	
 	private RandomSelectController main;
 
 	@RequestMapping(value = "/settingForm.do", method = RequestMethod.POST)
@@ -88,16 +88,30 @@ public class SettingController {
 
 		String[] menus = request.getParameterValues("menus");
 		
+		
 		if(menus != null){
-			memExcMenu = menuCodeEncoder(menus);	
-			memberDto.setMemExcMenu(memExcMenu);
-			System.out.println("셀렉트 박스 선택 값 ");
-			for(String str : menus){
+			for(String str :menus){
 				System.out.println(str);
-			}		
+			}
+			System.out.println();
+			String memExcMenu = menuCodeEncoder(menus);	
+			
+			
+			System.out.println("인코딩 결과"+memExcMenu);
+			if(memExcMenu.equals("11111111111111")){
+					
+				memExcMenu = "00000000000000";
+				memberDto.setMemExcMenu(memExcMenu);
+			}
+			else{
+				memberDto.setMemExcMenu(memExcMenu);
+			}
+			
+			
+				
 		}
 		else{
-			memberDto.setMemExcMenu(menuCode);
+			memberDto.setMemExcMenu("00000000000000");
 		
 		}
 		
@@ -144,12 +158,11 @@ public class SettingController {
 				stringBuffer = new StringBuffer(menuCode);
 				stringBuffer.setCharAt(index, '1');
 				menuCode = stringBuffer.toString();
-				System.out.println(menuCode);
+				
 			}
 
 		}
-		System.out.println("메뉴코드 테스트");
-		System.out.println(menuCode);
+		
 		return menuCode;
 	}
 
@@ -158,11 +171,11 @@ public class SettingController {
 		String[] menuArray = new String[14];
 		for (Integer i = 0; i < 14; i++) {
 			Character indexCode = stringBuffer.charAt(i);
-			System.out.println(indexCode);
+			
 			String excMenuId = i.toString();
 			menuArray[i] = (indexCode == '1') ? settingService
 					.getExcMenuById(excMenuId) : "선택안함";
-			System.out.println(menuArray[i]);
+			
 		}
 		
 		return menuArray;
