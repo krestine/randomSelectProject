@@ -13,7 +13,7 @@
 
 	<!--구성회:회원:식당평가한 목록 -->
 	<select id="getEvaluateListByMemId" parameterType="EvaluateDTO"
-		resultType="EvaluateDTO">
+		resultType="EvaluateDTO">	
 		select * from (
 		select A.*,FLOOR((ROWNUM - 1)/#{viewCount}+1)page,
 		rownum 
@@ -82,7 +82,29 @@
 		and active = '1'
 	</select>
 
+	<select id="countEvalByMemIdAndResntId" parameterType="EvaluateDTO" resultType="java.lang.Integer">
+		select count(*) from evaluate
+		where memId=#{memId} and restntId=#{restntId}
+	</select>
 
-
-
+	<insert id="putEval" parameterType="EvaluateDTO">
+		insert into evaluate
+		(evalId,
+		score,
+		memId,
+		restntId,
+		evalDate,
+		newData)
+		values
+		(#{evalId},
+		-1,
+		#{memId},
+		#{restntId},
+		SYSDATE,
+		'1')
+	</insert>
+	
+	<select id="getLastEvalId" resultType="String">
+		select max(evalId) from evaluate
+	</select>
 </mapper>

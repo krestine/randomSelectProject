@@ -2,7 +2,6 @@ package com.project.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +18,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.domain.EvaluateDTO;
 import com.project.domain.LatLngDTO;
 import com.project.domain.MemberDTO;
 import com.project.domain.RestntDTO;
 import com.project.domain.SettingDTO;
 import com.project.domain.VisitDTO;
+import com.project.service.EvaluateService;
 import com.project.service.MemberService;
 import com.project.service.RestntService;
 import com.project.service.SettingService;
@@ -40,6 +41,8 @@ public class RandomSelectController {
 	private SettingService settingService;
 	@Autowired
 	private VisitService visitService;
+	@Autowired
+	private EvaluateService evalService;
 	
 	//private List<RestntDTO> restntList;
 	private List<SettingDTO> walkRange;
@@ -87,14 +90,23 @@ public class RandomSelectController {
 	
 	@RequestMapping(value = "/ajaxConfirmRestnt.do", method = RequestMethod.POST)
 	void ajaxConfirmRestnt(HttpServletRequest request,
-			HttpServletResponse response, String restntId) throws IOException {
+			HttpServletResponse response, String restntId, String restntName) throws IOException {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		
 		int lastVisitId = Integer.parseInt(visitService.getLastVisitId());
 		System.out.println(restntId);
-		VisitDTO visitDto = new VisitDTO((lastVisitId+1)+"", "1", loginUser.getMemId(), restntId);
+		VisitDTO visitDto = new VisitDTO((lastVisitId+1)+"", "1", loginUser.getMemId(), restntId, restntName);
 		visitService.putVisit(visitDto);
+		
+		int lastEvalId = Integer.parseInt(evalService.getLastEvalId());
+		
+		EvaluateDTO evalDto = new EvaluateDTO((lastEvalId+1)+"", "-1", loginUser.getMemId(), restntId, restntName);
+		Integer evalCount = evalService.countEvalByMemIdAndResntId(evalDto);
+		if(evalCount==0){
+			evalService.putEval(evalDto);
+		}
+		
 		JSONObject json = new JSONObject();
 		json.put("restntId", restntId);
 		response.setContentType("text/html; charset=utf-8");
@@ -172,13 +184,30 @@ public class RandomSelectController {
 		out.print(jsonObject.toString());
 	}
 		
+	@RequestMapping(value = "/deleteVisitInfo.do", method = RequestMethod.POST)
+	String deleteVisitInfo(VisitDTO visitDto, Model model, HttpServletRequest request) {
+		String visitId = visitDto.getVisitId();
+		visitService.dropVisitById(visitId);
+		
+		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
+				"loginUser");
+		model.addAttribute("loginUser", loginUser);
+		
+		System.out.println("login User : " + loginUser.getMemId());
+		
+		visits = visitService.getVisitInfoByMemId(loginUser.getMemId());
+		model.addAttribute("visits", visits);
+		
+		return "visitList";
+	}
 	
-	
-	@RequestMapping("visitList.do")
+	@RequestMapping("/visitList.do")
 	String visitListProc(Model model, HttpServletRequest request) {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		model.addAttribute("loginUser", loginUser);
+		
+		System.out.println("login User : " + loginUser.getMemId());
 		
 		visits = visitService.getVisitInfoByMemId(loginUser.getMemId());
 		model.addAttribute("visits", visits);

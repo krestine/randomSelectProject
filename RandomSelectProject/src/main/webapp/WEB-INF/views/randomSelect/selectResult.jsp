@@ -59,9 +59,16 @@ body,.container {
 	
 	function visitList(){
 		if(login==1){
-			document.getElementById("visitList").action = "visitList.do";
-			document.getElementById("visitList").submit();
+			document.getElementById("visitAction").action = "visitList.do";
+			document.getElementById("visitAction").submit();
+		}else{
+			alert("로그인 해 주세요.")
 		}
+	}
+	
+	function ladderGame(){
+		document.getElementById("visitAction").action = "ladderMake.do";
+		document.getElementById("visitAction").submit();
 	}
 
 	function ajaxRandomRestnt(obj) {
@@ -237,7 +244,8 @@ body,.container {
 		if (login == 1) {
 
 			var paramData = {
-				restntId : myRestntId
+				restntId : myRestntId,
+				restntName : myRestntName
 			};
 
 			$.ajax({
@@ -555,7 +563,11 @@ body,.container {
 			 ${item.restntName} ${item.latitude} ${item.longitude}<br>
 		</c:forEach>
 	</div> --%>
-			<button id="visitList" onclick="visitList()" class="btn btn-info">방문 정보</button>
+			<form id="visitAction" method="post">
+
+				<input type="button" value="방문 정보" id="visitListButton"  onclick="visitList()" class="btn btn-info">
+				<input type="button" value="사다리" id="ladderGameButton" onclick="ladderGame()" class="btn btn-primary">
+			</form>
 			<div class="modal fade" id="randomRestntDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 		</div></body>
 </html>

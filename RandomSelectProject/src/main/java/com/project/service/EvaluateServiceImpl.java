@@ -79,4 +79,19 @@ public class EvaluateServiceImpl implements EvaluateService {
 		return evaluateMapper.getNonEvalListCount(memId);
 	}
 
+	@Override
+	public Integer countEvalByMemIdAndResntId(EvaluateDTO evaluateDto) {
+		return evaluateMapper.countEvalByMemIdAndResntId(evaluateDto);
+	}
+
+	@Override
+	public void putEval(EvaluateDTO evaluateDto) {
+		evaluateMapper.putEval(evaluateDto);
+	}
+
+	@Override
+	public String getLastEvalId() {
+		return evaluateMapper.getLastEvalId();
+	}
+
 }
