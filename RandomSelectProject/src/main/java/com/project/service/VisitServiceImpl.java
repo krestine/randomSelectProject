@@ -1,5 +1,7 @@
 package com.project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,12 +28,12 @@ public class VisitServiceImpl implements VisitService {
 	}
 
 	@Override
-	public VisitDTO getVisitInfoByMemId(String string) {
-		return visitMapper.getVisitInfoByMemId(string);
+	public void dropVisitById(String string) {
+		visitMapper.dropVisitById(string);
 	}
 
 	@Override
-	public void dropVisitById(String string) {
-		visitMapper.dropVisitById(string);
+	public List<VisitDTO> getVisitInfoByMemId(String string) {
+		return visitMapper.getVisitInfoByMemId(string);
 	}
 }

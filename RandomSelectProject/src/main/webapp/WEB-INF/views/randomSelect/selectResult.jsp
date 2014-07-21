@@ -7,7 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css' />
+<link href='http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css' rel='stylesheet' type='text/css' />
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style type="text/css">
 html {
@@ -15,7 +15,7 @@ html {
 }
 
 body{
-	font-family: 'Nanum Gothic', Helvetica, Arial, sans-serif;
+	font-family: 'Nanum Gothic Coding', sans-serif;
 	text-rendering: optimizeLegibility;
 }
 
@@ -95,8 +95,8 @@ body,.container {
 			url : 'ajaxRandomRestnt.do',
 			data : paramData,
 			dataType : 'json',
-			error : function() {
-				alert("error : ajax 통신 실패.");
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("error : ajax 통신 실패." + textStatus + errorThrown);
 			},
 			success : function(json) {
 				$("#restntTable > tbody").html("");
@@ -105,9 +105,7 @@ body,.container {
 				if (restnts != null) {
 					
 					$.each(restnts, function(key) {
-									  
-									  
-									  
+
 						tempRestntLatitude = restnts[key].latitude;
 						tempRestntLongitude = restnts[key].longitude;
 						tempRestntName = restnts[key].restntName;
@@ -198,11 +196,7 @@ body,.container {
 							//},tempCnt*100);
 										  
 							tempCnt = tempCnt + 1;
-
 						}
-						
-						
-						
 
 					});
 
@@ -260,16 +254,17 @@ body,.container {
 
 					if (json.restntId != '') {
 
-						var html = '식당 방문정보가 추가되었습니다.';
+						var html = '<h4><span class="label label-danger">식당 방문정보가 추가되었습니다.</span></h4>';
 						$('#restntConfirmed').html(html);
-
+						setTimeout(removeRestntConfirmed, 3000);
 					}
 
 				}
 			});
 		} else {
-			var html = '<font color=red>식당 방문정보 기능을 이용하시려면 로그인을 해 주세요.</font>';
+			var html = '<h4><span class="label label-danger">식당 방문정보 기능을 이용하시려면 로그인을 해 주세요.</span></h4>';
 			$('#restntConfirmed').html(html);
+			setTimeout(removeRestntConfirmed, 3000);
 		}
 	}
 
@@ -329,6 +324,7 @@ body,.container {
 			}, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					myLocationManual=1;
+					isinit=1;
 					$("#accuracyAlert").empty();
 					$.cookie('newLatitude', results[0].geometry.location.lat(),  {expires: 1});
 					$.cookie('newLongitude', results[0].geometry.location.lng(), {expires: 1});
@@ -350,7 +346,7 @@ body,.container {
 			login = 0;
 		}
 		if(tempExcMenu==""){
-			tempExcMen="00000000000000";
+			tempExcMenu="00000000000000";
 			login=0;
 		}
 		sRadius = tempSRadius;
@@ -369,6 +365,10 @@ body,.container {
 		$("#deleteMyLocationAlert").html("");
 	}
 	
+	function removeRestntConfirmed(){
+		$("#restntConfirmed").html("");
+	}
+	
 	function onSuccess(Lat, Lon, accuracy) {
 
 		//alert('onSuccess');
@@ -380,7 +380,7 @@ body,.container {
 		cookieLongitude = $.cookie('newLongitude');
 		pos = new google.maps.LatLng(myLatitude, myLongitude);
 
-		$("#currentAccuracy").html("<h4>내 위치의 정확도 : " + accuracy + "m</h4>");
+		$("#currentAccuracy").html('<h4><button class="btn btn-success">내 위치의 정확도 : ' + accuracy + 'm</button></h4>');
 		if (accuracy > 200) {
 			
 			if(cookieLatitude==null || cookieLatitude=='deleted'){
@@ -525,10 +525,12 @@ body,.container {
 <body>
 	<div class="container" id="container" style="width: 100%;" align="center">
 		<div id="map_canvas" style="width: 80%; height: 100%"></div>
-		<input type="button" id="randomSelectInitialize" value="맵 초기화"
-			onclick="initialize()" class="btn btn-info"><input type="button"
-			id="moveToMyLocation" value="내 위치로 이동" onclick="setMyCenter()" class="btn btn-info">
+		<button id="randomSelectInitialize" onclick="initialize()" class="btn btn-info">맵 초기화</button>
+		<button id="moveToMyLocation" onclick="setMyCenter()" class="btn btn-info">내 위치로 이동</button>
 		<button id="getAllRestnt" onclick="ajaxRandomRestnt()" class="btn btn-primary">식당 골라주기</button>
+				<button id="confirmRestnt" onclick="confirmRestnt()"
+				class="btn btn-primary">식당 확정</button>
+							<div id="restntConfirmed"></div>
 <!-- 		<br> <input type="text" id="tempAddress" value=""> <input
 			type="button" id="geocodeTempAddress" value="해당 주소 지도에 표시"
 			onclick="findLocation()"> <input type="text" id=tempLatitude
@@ -536,7 +538,7 @@ body,.container {
 		<input type="button" id="justShowMarker" value="해당 좌표 지도에 표시"
 			onclick="justShowLocation()"> <br> 선택한 마커의 좌표 :
 		<div id="currentLocation"></div> -->
-		<div id="currentAccuracy"></div>
+		<div id="currentAccuracy" style="width: 100%;"></div>
 		<div id="accuracyAlert"></div>
 		<div id="newMyLocationForm" class="input-group">
 			<div style="display: inline;">
@@ -548,15 +550,12 @@ body,.container {
 				</div>
 		</div>
 		<div id="deleteMyLocationAlert"></div>
-		<button id="confirmRestnt" onclick="confirmRestnt()"
-				class="btn btn-primary">식당 확정</button>
-			<div id="restntConfirmed"></div>
 			<%-- <div id="restnt_list">
 		<c:forEach items="${restntList}" var="item">
 			 ${item.restntName} ${item.latitude} ${item.longitude}<br>
 		</c:forEach>
 	</div> --%>
-			<button id="visitList" onclick="visitList()">방문 정보</button>
+			<button id="visitList" onclick="visitList()" class="btn btn-info">방문 정보</button>
 			<div class="modal fade" id="randomRestntDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 		</div></body>
 </html>
