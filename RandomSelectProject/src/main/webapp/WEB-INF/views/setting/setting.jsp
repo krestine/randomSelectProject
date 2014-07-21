@@ -23,6 +23,21 @@ $(document).ready(function(){
 function remove(){
 	$("#show").html('');	
 }
+function check() {
+	var checkValue = 0;
+	for(var i =0; i < 14; i++){
+		if($("input:checkbox[id='"+i+"']").is(":checked")){
+			checkValue += i;
+		}
+	}
+	if(checkValue==91){
+		$("#show").html('<h4>아무것도 안드실려고요??</h4>');	
+		setTimeout(remove, 3000);
+	}
+	else{
+		$('#settingForm').submit();
+	}
+}
 
 </script>
 </head>
@@ -31,40 +46,10 @@ function remove(){
 
 		<input type="hidden" value="${settingProcCode}" id="settingFlag">
 
-		<form action="settingProc.do" method="post">
-			<%-- <h3>검색 범위 설정</h3><br> <select name="walkRange">
-				<c:forEach items="${walkRanges}" var="walkRange">
-					<c:choose>
-
-						<c:when test="${walkRange.walkRange==userInfo.memWalkRange}">
-							<option selected="selected" value="${walkRange.walkRange}">${walkRange.walkRange}m</option>
-						</c:when>
-
-						<c:otherwise>
-							<option value="${walkRange.walkRange}">${walkRange.walkRange}m
-							</option>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-
-			</select> --%>
-			<%-- <br> 검색 설정 : 차량 <br> <select name="carRange">
-
-				<c:forEach items="${carRanges}" var="carRange">
-
-					<c:choose>
-						<c:when test="${carRange.carRange==userInfo.memCarRange}">
-							<option selected="selected">${carRange.carRange}</option>
-						</c:when>
-						<c:otherwise>
-							<option>${carRange.carRange}</option>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-
-			</select>  --%>
+		<form action="settingProc.do" method="post" id="settingForm">
 			
-			<div align="center">
+			
+			
 				<table>
 					
 					<tbody style="width: 50%">
@@ -97,11 +82,11 @@ function remove(){
 									<c:when test="${excMenu.excMenu==userSettings[num.index]}">
 
 										<td style="font-size: 15pt;"><input type="checkbox" value="${num.index}"
-											name="menus" checked="checked" style="width: 25px; height: 25px;"></td>
+											name="menus" checked="checked" style="width: 25px; height: 25px;" id="${num.index}"></td>
 										<td>${excMenu.excMenu}</td>
 									</c:when>
 									<c:otherwise>
-										<td style="font-size: 15pt;"><input type="checkbox" value="${num.index}"
+										<td style="font-size: 15pt;"><input type="checkbox" value="${num.index}" id="${num.index}"
 											name="menus" style="width: 25px; height: 25px;"></td>
 										<td>${excMenu.excMenu}</td>	
 											
@@ -112,14 +97,15 @@ function remove(){
 						</c:forEach>
 					</tbody>
 				</table>
-				<br> <input type="submit" class="btn btn-default" value="저장">
+				</form>
+				<button class="btn btn-default" onclick="check()">저장</button>
 				<div id="show" align="center">
 				
 				</div>
 			</div>
-		</form>
+		
 
-	</div>
+
 
 
 </body>
