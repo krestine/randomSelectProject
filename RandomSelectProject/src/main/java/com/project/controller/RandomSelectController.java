@@ -44,6 +44,7 @@ public class RandomSelectController {
 	//private List<RestntDTO> restntList;
 	private List<SettingDTO> walkRange;
 	private List<RestntDTO> restnts;
+	private List<VisitDTO> visits;
 	private StringBuffer stringBuffer;
 	private String menuCode = "00000000000000";
 	
@@ -131,16 +132,14 @@ public class RandomSelectController {
 		String[] excMenuArray = new String[14];
 		excMenuArray = menuCodeDecoder(excMenu);
 		
-		for(int k=0;k<14;k++){
 			for(int i=0;i<14;i++){
-				System.err.println("delete menu " + excMenuArray[i]);
 				for(int j=0;j<restnts.size();j++){
 					if(restnts.get(j).getRestntCate().trim().compareTo(excMenuArray[i].trim())==0){
 						restnts.remove(j);
+						j--;
 					}
 				}
 			}
-		}
 		
 		// 제이슨으로 변환
 		JSONArray jsonArray = JSONArray.fromObject(restnts);
@@ -176,8 +175,14 @@ public class RandomSelectController {
 	
 	
 	@RequestMapping("visitList.do")
-	String visitListProc(Model model) {
-
+	String visitListProc(Model model, HttpServletRequest request) {
+		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
+				"loginUser");
+		model.addAttribute("loginUser", loginUser);
+		
+		visits = visitService.getVisitInfoByMemId(loginUser.getMemId());
+		model.addAttribute("visits", visits);
+		
 		return "visitList";
 	}
 
