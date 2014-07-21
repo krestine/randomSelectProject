@@ -98,6 +98,7 @@ function check() {
 					</tbody>
 				</table>
 				</form>
+				
 				<button class="btn btn-default" onclick="check()">저장</button>
 				<div id="show" align="center">
 				

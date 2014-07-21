@@ -608,7 +608,7 @@
 						}
 						
 						
-						
+
 						$('#restntListPage').append(link);
 						
 					}
@@ -641,7 +641,7 @@
 									var restntId = restnts[key].restntId;
 	
 									
-											 
+		 
 									html += '<tr><td>'+ restntName
 											+ '</td><td><input type = "hidden" id="restntId'+key+'" name="restntId" value="'+restntId+'" class="restntId"><button id="restntInfo'
 											+ key
@@ -651,8 +651,7 @@
 								 html += '<tr><td colspan=2><button id="addMode" type="button" onclick="addMode()">추가</button></td></tr>';
 								$('#restntListResult').append(html);
 		
-							}
-		
+							}		
 						}
 					});
 				 

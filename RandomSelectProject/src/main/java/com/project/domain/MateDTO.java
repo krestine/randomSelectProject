@@ -8,6 +8,7 @@ public class MateDTO {
 	private String infoStatus;
 	private String memName;
 	private String memGrade;
+	private String memBirth;
 	private Integer viewCount;
 	private Integer pageNum;
 	
@@ -15,6 +16,14 @@ public class MateDTO {
 		
 	}
 	
+	public String getMemBirth() {
+		return memBirth;
+	}
+
+	public void setMemBirth(String memBirth) {
+		this.memBirth = memBirth;
+	}
+
 	public MateDTO(String memId2, String mateId2) {
 		
 	}
@@ -76,6 +85,8 @@ public class MateDTO {
 		result = prime * result
 				+ ((mateStatus == null) ? 0 : mateStatus.hashCode());
 		result = prime * result
+				+ ((memBirth == null) ? 0 : memBirth.hashCode());
+		result = prime * result
 				+ ((memGrade == null) ? 0 : memGrade.hashCode());
 		result = prime * result + ((memId == null) ? 0 : memId.hashCode());
 		result = prime * result + ((memName == null) ? 0 : memName.hashCode());
@@ -107,6 +118,11 @@ public class MateDTO {
 			if (other.mateStatus != null)
 				return false;
 		} else if (!mateStatus.equals(other.mateStatus))
+			return false;
+		if (memBirth == null) {
+			if (other.memBirth != null)
+				return false;
+		} else if (!memBirth.equals(other.memBirth))
 			return false;
 		if (memGrade == null) {
 			if (other.memGrade != null)
@@ -140,7 +156,8 @@ public class MateDTO {
 		return "MateDTO [memId=" + memId + ", mateId=" + mateId
 				+ ", mateStatus=" + mateStatus + ", infoStatus=" + infoStatus
 				+ ", memName=" + memName + ", memGrade=" + memGrade
-				+ ", viewCount=" + viewCount + ", pageNum=" + pageNum + "]";
+				+ ", memBirth=" + memBirth + ", viewCount=" + viewCount
+				+ ", pageNum=" + pageNum + "]";
 	}
 	
 	

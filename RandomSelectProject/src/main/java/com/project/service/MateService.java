@@ -8,7 +8,7 @@ import com.project.domain.MemberDTO;
 
 public interface MateService {
 	//  회원 : 친구 리스트
-	List<MateDTO> getMateListByMemId(String memId);
+	List<MateDTO> getMateListByMemId(MateDTO mateDto);
 
 	// 회원 : 친구 아이디
 	MateDTO getMateIdByMateId(String mateId);
