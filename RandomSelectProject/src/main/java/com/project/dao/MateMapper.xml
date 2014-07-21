@@ -9,7 +9,7 @@
 
 		select e.mateid, e.memid, m.memname
 		from mate e, member m
-		where e.memid=#{e.memId  jdbcType=VARCHAR}
+		where e.memid=#{memId}
 		and e.MATEID=m.MEMID
 		
 	</select>
@@ -18,7 +18,7 @@
 	<select id="getMateIdByMateId" resultType="MateDTO">
 	
 		select memId from mate where
-		memid=#{memId  jdbcType=VARCHAR}
+		memid=#{memId}
 	</select>
 
 	<!-- 회원: 친구상태정보 -->
@@ -26,17 +26,17 @@
 		resultType="MateDTO">
 		
 		select matestatus, infostatus from mate
-		where memid=#{memId  jdbcType=VARCHAR}
-		and mateid=#{mateId  jdbcType=VARCHAR}
+		where memid=#{memId}
+		and mateid=#{mateId}
 		
 	</select>
 	
 	<!-- 회원:친구의 정보-->
 	<select id="getMemInfoByMemId" parameterType="String"
 		resultType="MateDTO">
-		select DISTINCT r.memid, r.memname, r.memgrade, e.mateid
+		select DISTINCT r.memid, r.memname, r.memgrade, r.membirth, e.mateid, e.infostatus, e.matestatus
 		from member r, mate e 
-		where e.mateid=#{e.mateId  jdbcType=VARCHAR}
+		where e.mateid=#{mateId}
     	and e.mateid=r.memid
 		
 		<!-- select memname, e.MEMID
@@ -51,26 +51,26 @@
 	<select id="getMateInfoByMemId" parameterType="String"
 		resultType="MateDTO">
 		select memid, memname, memgrade from member where
-		memid=#{memId  jdbcType=VARCHAR}
+		memid=#{memId}
 	</select>
 	
-	<!-- 친구 리스트 페이지 총 갯수 -->
-	<select id="mateListTotalCount" parameterType="MateDTO" resultType="java.lang.Integer">
+	 <!-- 친구 리스트 페이지 총 갯수 -->
+	<!--  <select id="mateListTotalCount" parameterType="MateDTO" resultType="java.lang.Integer">
 		SELECT COUNT(m.memname) From
 		mate e, member m WHERE
 		e.memid=#{memId}
 		and e.mateid=m.memid
-	</select> 
+	</select>  -->
 	
 	
 	<!-- 친구리스트 페이지 -->
-	 <select id="mateListPaging" parameterType="MateDTO" resultType="MateDTO">
+	<!--  <select id="mateListPaging" parameterType="MateDTO" resultType="MateDTO">
 		select * from (select A.*,FLOOR((ROWNUM -1)/#{viewCount} +1)page,
 		rownum from (select m.memname, e.mateid, e.memid
 		from mate e, member m
 		where e.memid=#{memId} and e.mateid=m.memid
 		order by e.memid) A)where page=#{pageNum}
-	</select> 
+	</select>  -->
 
 </mapper>
 

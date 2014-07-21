@@ -21,9 +21,9 @@ public class MateServieImpl implements MateService {
 	private MemberMapper memberMapper;
 
 	@Override
-	public List<MateDTO> getMateListByMemId(String memId) {
+	public List<MateDTO> getMateListByMemId(MateDTO mateDto) {
 		// TODO Auto-generated method stub
-		return mateMapper.getMateListByMemId(memId);
+		return mateMapper.getMateListByMemId(mateDto);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class MateServieImpl implements MateService {
 		// TODO Auto-generated method stub
 		System.out.println("객체에 담은것");
 		MateDTO mateDto = new MateDTO(memId, mateId);
-		
+		System.out.println("객체에 담은것"+mateDto);
 		return mateMapper.getMateInfoByMateId(mateDto);
 	}
 

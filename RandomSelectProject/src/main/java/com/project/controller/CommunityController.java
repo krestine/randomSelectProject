@@ -55,7 +55,7 @@ public class CommunityController {
 	private List<EvaluateDTO> evaluates;
 	private EvaluateDTO evaluate;
 	private List<MenuDTO> menuInfo;
-
+	private MateDTO pageNum;
 		
 	// 회원 : 친구 리스트
 	@RequestMapping(value = "/mateListProc.do", method = RequestMethod.POST)
@@ -67,13 +67,10 @@ public class CommunityController {
 		}
 			try{
 					mateDto.setPageNum(1);
-					mateDto.setViewCount(10);
-					mateDto.setMemId(loginUser.getMemId());
-					System.out.println(mateDto);			
-					mates = mateService.mateListPaging(mateDto);
-					System.out.println(mates);
-					model.addAttribute("mates", mates);					
-					
+					mateDto.setMemId(loginUser.getMemId());	
+					mates = mateService.getMateListByMemId(mateDto);
+					model.addAttribute("mates", mates);	
+					System.out.println("mates"+mates);
 				}catch(Exception e){
 					model.addAttribute("errorMessage", "데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");		
 					return "setting/error";
@@ -96,7 +93,7 @@ public class CommunityController {
 		System.out.println("/ajaxMateList.do");
 		mateDto.setMemId(loginUser.getMemId()); 
 		System.out.println(mateDto);
-		mates = mateService.mateListPaging(mateDto);
+		mates = mateService.getMateListByMemId(mateDto);
 
 		JSONArray jsonArray = JSONArray.fromObject(mates);
 		System.out.println("mates -" + jsonArray);
@@ -119,18 +116,18 @@ public class CommunityController {
 			String memId) throws IOException {
 		System.out.println("ajaxMateDetail.do");
 		System.out.println(mateId);
+		
 		mateInfo = mateService.getMemInfoByMemId(mateId);
-		System.out.println(mateInfo);
+		System.out.println("mateInfo:"+mateInfo);
 
-		System.out.println("memId:" + memId);
-		System.out.println("mateId:" + mateId);
-		mate = mateService.getMateInfoByMateId(memId, mateId);
-		System.out.println(mate);
+	
+		// mate = mateService.getMateInfoByMateId(memId, mateId);
+		
 		// 제이슨으로 변환
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("mateInfo", mateInfo);
-		map.put("mate", mate);
+		//map.put("mate", mate);
 
 		JSONObject jsonObject = JSONObject.fromObject(map);
 		System.out.println("json - " + jsonObject);
@@ -163,24 +160,27 @@ public class CommunityController {
 		return "mateDetail";
 	}
 	
-	@RequestMapping(value ="/ajaxMateListPaging.do", method = RequestMethod.POST )	
+	/*@RequestMapping(value ="/ajaxMateListPaging.do", method = RequestMethod.POST )	
 	public void ajaxMateListPaging(HttpServletRequest request,
 			HttpServletResponse response, MateDTO mateDto) throws IOException{
+		System.out.println("ajaxMateListPaging.do");
+		System.out.println(mateDto);
 		Integer totalCount = mateService.mateListTotalCount(mateDto);
+		
 		System.out.println(totalCount);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("totalCount", totalCount);
 		
-		
+		System.out.println(map);
 		JSONObject jsonObject = JSONObject.fromObject(map);
 		System.out.println("json - " + jsonObject);
 
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(jsonObject.toString());
-		
-	}
+			
+	}*/
 	
 
 	// 회원 : 친구들이 평가한 식당 리스트
@@ -223,9 +223,9 @@ public class CommunityController {
 		model.addAttribute("menuInfo", menuInfo);
 		System.out.println("menuInfo");
 		System.out.println(menuInfo);
-
+		
 		return "restntDetail";
-
+		
 	}
 
 	// 회원 : 식당 상세정보 ajax

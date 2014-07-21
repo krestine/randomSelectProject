@@ -11,6 +11,25 @@
 
 <script>
 $(document).ready(function() {
+	
+/* function restntList(){
+		$.ajax({
+			cache : false,
+			async : false,
+			type : 'post',
+			url : 'ajaxRestntList.do',
+			data : $('form').serialize(),
+			dataType : 'json',
+			error : function(){
+				alert ("에러 : 데이터가 안넘어갑니다.");
+			},
+			success : function(json){
+				alert("성공?");
+			}
+	})
+}
+ */	
+	
 	$('#mateListBtn').click(function() {
 		$('#community').attr("action", "mateListProc.do").submit();
 	});
@@ -79,16 +98,17 @@ function restntDetailGo(obj){
 				
 			</tr>
 	<c:forEach var="restnt" items="${restnts}">
-			<tr>
-				<td>
+				<tr>
+				<td>		
 						<input type="hidden" value="${restnt.mateId }" name="mateId">
 						<input type="hidden" value="${restnt.restntId }" name="restntId">
 						<input class="btn btn-info btn-sm" disabled="disabled"value="${restnt.restntName}" name="restntName">
 						<input class="btn btn-info btn-sm" disabled="disabled" value="${restnt.score}" name="score">
 						<input type="button" class="btn btn-success btn-sm" value="상세보기" id="restntDetail" onclick="restntDetailGo(this);" 
 						data-toggle="modal" data-target="#restntDetailResult"></td>
+						</tr>
 
-			</tr>			
+						
 						<div class="modal fade" id="restntDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						
 						</div>
