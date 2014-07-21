@@ -1,65 +1,96 @@
 package com.project.domain;
 
+import java.sql.Timestamp;
+
 public class EvaluateDTO {
 	// memberField
 	private String evalId;
 	private String score;
 	private String memId;
 	private String restntId;
-	private String evalDate;
+	private Timestamp evalDate;
 	private String restntName;
 	private Integer viewCount;
 	private Integer pageNum;
 	
+	public EvaluateDTO(String evalId, String score, String memId,
+			String restntId, String restntName) {
+		super();
+		this.evalId = evalId;
+		this.score = score;
+		this.memId = memId;
+		this.restntId = restntId;
+		this.restntName = restntName;
+	}
 	
-	public Integer getViewCount() {
-		return viewCount;
+	public EvaluateDTO(){
+		
 	}
-	public void setViewCount(Integer viewCount) {
-		this.viewCount = viewCount;
-	}
-	public Integer getPageNum() {
-		return pageNum;
-	}
-	public void setPageNum(Integer pageNum) {
-		this.pageNum = pageNum;
-	}
+
 	public String getEvalId() {
 		return evalId;
 	}
+
 	public void setEvalId(String evalId) {
 		this.evalId = evalId;
 	}
+
 	public String getScore() {
 		return score;
 	}
+
 	public void setScore(String score) {
 		this.score = score;
 	}
+
 	public String getMemId() {
 		return memId;
 	}
+
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
+
 	public String getRestntId() {
 		return restntId;
 	}
+
 	public void setRestntId(String restntId) {
 		this.restntId = restntId;
 	}
-	public String getEvalDate() {
+
+	public Timestamp getEvalDate() {
 		return evalDate;
 	}
-	public void setEvalDate(String evalDate) {
+
+	public void setEvalDate(Timestamp evalDate) {
 		this.evalDate = evalDate;
 	}
+
 	public String getRestntName() {
 		return restntName;
 	}
+
 	public void setRestntName(String restntName) {
 		this.restntName = restntName;
 	}
+
+	public Integer getViewCount() {
+		return viewCount;
+	}
+
+	public void setViewCount(Integer viewCount) {
+		this.viewCount = viewCount;
+	}
+
+	public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -136,7 +167,4 @@ public class EvaluateDTO {
 				+ evalDate + ", restntName=" + restntName + ", viewCount="
 				+ viewCount + ", pageNum=" + pageNum + "]";
 	}
-	
-	
-
 }

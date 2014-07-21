@@ -45,6 +45,9 @@ public interface EvaluateMapper {
 			void setScoreByEvaluateTerms1(EvaluateDTO evaluateDto);
 			int getNonEvalListCount (String memId);
 			
+			Integer countEvalByMemIdAndResntId(EvaluateDTO evaluateDto);
 			
+			void putEval(EvaluateDTO evaluateDto);
 			
+			String getLastEvalId();
 }

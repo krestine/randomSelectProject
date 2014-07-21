@@ -48,4 +48,9 @@ public interface EvaluateService {
 
 	int getNonEvalListCount(String memId);
 
+	Integer countEvalByMemIdAndResntId(EvaluateDTO evaluateDto);
+	
+	void putEval(EvaluateDTO evaluateDto);
+	
+	String getLastEvalId();
 }
