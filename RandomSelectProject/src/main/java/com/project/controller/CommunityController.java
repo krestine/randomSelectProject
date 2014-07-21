@@ -211,7 +211,30 @@ public class CommunityController {
 			}
 		return "restntList";
 	}
+	
+	// 회원 : 친구들이 평가한 식당 리스트 ajax
+	@RequestMapping(value = "/ajaxRestntListProc.do", method = RequestMethod.POST)
+	public void ajaxMateList(HttpServletRequest request,
+			HttpServletResponse response, RestntDTO restntDto) throws IOException {
 
+		System.out.println("/ajaxRestntListProc.do");
+		restntDto.setMemId(loginUser.getMemId()); 
+		System.out.println(restntDto);
+		restnts = restntService.getEvalRestntListByMateId(restntDto);
+
+		JSONArray jsonArray = JSONArray.fromObject(restnts);
+		System.out.println("restnts -" + jsonArray);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("restnts", restnts);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+	}
+	
 	// 회원 : 식당 상세정보
 	@RequestMapping(value = "/restntDetailProc.do", method = RequestMethod.POST)
 	public String restntDetailProc(Model model, String restntId) {

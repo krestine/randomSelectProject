@@ -210,18 +210,16 @@ var paramData = {
 	<div align="center">
 	<h3>친구리스트</h3>
 	<table class="table paginated" id="tbl" style="width:50%;" align="center">	
-				
-		</table>	
+	</table>	
+	
 	<c:forEach var="mate" items="${mates}">		
 					<form id="mateName">
 						<input type="hidden" value="${mate.memId}" name="memId">
 						<input type="hidden" value="${mate.mateId}" name="mateId">
-										
 					</form>				
 	</c:forEach>
 		
-	<div class="modal fade" id="mateDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						
+	<div class="modal fade" id="mateDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">						
 	</div>
 				
 		
