@@ -202,25 +202,26 @@ var paramData = {
 </head>
 <body>	
 
-<div class="container">
-	<div class="row">
-		<div class="span5">
+<div container>
+	<div row>
 	<form id="community" method="post" >
 		 <input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
 	</form>
 	<div align="center">
 	<h3>친구리스트</h3>
 	<table class="table paginated" id="tbl" style="width:50%;" align="center">	
-	</table>	
-	
+				
+		</table>	
 	<c:forEach var="mate" items="${mates}">		
 					<form id="mateName">
 						<input type="hidden" value="${mate.memId}" name="memId">
 						<input type="hidden" value="${mate.mateId}" name="mateId">
+										
 					</form>				
 	</c:forEach>
 		
-	<div class="modal fade" id="mateDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">						
+	<div class="modal fade" id="mateDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						
 	</div>
 				
 		

@@ -98,8 +98,8 @@
 		values
 		(#{evalId},
 		-1,
-		#{memId},
-		#{restntId},
+		#{memId, jdbcType=VARCHAR},
+		#{restntId, jdbcType=VARCHAR},
 		SYSDATE,
 		'1')
 	</insert>
