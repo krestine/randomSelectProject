@@ -73,12 +73,12 @@ public class CommunityController {
 					System.out.println("mates"+mates);
 				}catch(Exception e){
 					model.addAttribute("errorMessage", "데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");		
-					return "setting/error";
+					return "error";
 				}
 				
-				}catch (Exception e) {model.addAttribute("errorMessage", "로그인 해주세요!");
+				}catch (Exception e) {model.addAttribute("sMsg", "로그인이 필요한 서비스입니다. 로그인 해주세요.");
 				
-				return "setting/error";
+				return "forward:loginForm.do";
 				}	
 				
 				return "mateList";	
@@ -201,13 +201,13 @@ public class CommunityController {
 			}catch(Exception e){
 				model.addAttribute("errorMessage", "데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
 				
-				return "setting/error";
+				return "error";
 			}
 			
 			}catch (Exception e) {
-				model.addAttribute("errorMessage", "로그인 해주세요!");
+				model.addAttribute("sMsg", "로그인이 필요한 서비스입니다. 로그인 해주세요.");
 			
-				return "setting/error";
+				return "forward:loginForm.do";
 			}
 		return "restntList";
 	}

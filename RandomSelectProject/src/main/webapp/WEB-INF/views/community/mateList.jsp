@@ -25,7 +25,7 @@ $(document).ready(function() {
 			success : function(json){
 					
 					var lists=json.mates; 
-					var temp = "<thead><tr><td class='listth' ></td>"+"<td class='listth'></td></tr></thead>";
+					var temp = "<thead><tr><td class='listth' align='center'>이름</td></tr></thead>";
 						 for (var i=0; i< lists.length; i++) {
 						temp += '<tr><td class="listtd" align="center">'+'<input type="hidden" value="'+lists[i].memId+'" name="memId"><input type="hidden" value="'+lists[i].mateId+'" name="mateId"><input type="button" value="'+ lists[i].memName +'"class="btn btn-info btn-sm" onclick="mateDetail(this);" data-toggle="modal" data-target="#mateDetailResult"></div>'+'</td></tr>';
 						
