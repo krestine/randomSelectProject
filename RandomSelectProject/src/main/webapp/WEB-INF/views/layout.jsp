@@ -12,9 +12,10 @@ body { padding-top: 5px;}
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
-<body background="/myapp/resources/img/bg.png">
-	<br>
-	<br>
+<div class="col-md-1"></div>
+<div class="col-md-10">
+	
+
 	<div align="center">
 		<table width="100%" border="0">
 			<tr>
@@ -33,5 +34,7 @@ body { padding-top: 5px;}
 			</tr>
 		</table>
 	</div>
+</div>
+<div class="col-md-1"></div>	
 </body>
 </html>

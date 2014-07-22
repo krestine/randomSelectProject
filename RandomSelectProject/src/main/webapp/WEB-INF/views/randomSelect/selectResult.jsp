@@ -7,18 +7,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link
-	href='http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css'
-	rel='stylesheet' type='text/css' />
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style type="text/css">
 html {
 	height: 100%;
-}
-
-body {
-	font-family: 'Nanum Gothic Coding', sans-serif;
-	text-rendering: optimizeLegibility;
 }
 
 body,.container {
@@ -29,7 +21,7 @@ body,.container {
 </style>
 
 <script type="text/javascript">
-	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId;
+	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId, myAccuracy;
 	var myAddress = new Array(10);
 	var myInfoWindow = new google.maps.InfoWindow();
 	var randomLatitude, randomLongitude;
@@ -37,7 +29,7 @@ body,.container {
 	var restntList;
 	var pos, pos2;
 	var sRadius;
-	var login = 1, isinit = 0;
+	var login = 1, isinit = 0, skipGeoLocation=0;
 	var myLocationManual = 0;
 	var geocoder = new google.maps.Geocoder();
 	var directionsDisplay;
@@ -75,10 +67,8 @@ body,.container {
 
 	function ajaxRandomRestnt(obj) {
 
-		if (isinit == 0) {
-			initialize();
-			myInfoWindow.close();
-		}
+		initialize();
+		myInfoWindow.close();
 		isinit = 0;
 
 		var tempDistance = 0;
@@ -383,6 +373,7 @@ body,.container {
 						},
 						function(results, status) {
 							if (status == google.maps.GeocoderStatus.OK) {
+								
 								myLocationManual = 1;
 								isinit = 1;
 								$("#accuracyAlert").empty();
@@ -445,6 +436,7 @@ body,.container {
 
 		myLatitude = Lat;
 		myLongitude = Lon;
+		myAccuracy = accuracy;
 		cookieLatitude = $.cookie('newLatitude');
 		cookieLongitude = $.cookie('newLongitude');
 		pos = new google.maps.LatLng(myLatitude, myLongitude);
@@ -504,6 +496,7 @@ body,.container {
 					myInfoWindow.setContent('내 위치 : ' + myLocation);
 					myInfoWindow.open(map, myMarker);
 					splitMyAddress();
+					skipGeoLocation=1;
 				} else {
 					alert('결과를 찾을 수 없습니다.');
 				}
@@ -562,6 +555,7 @@ body,.container {
 				myOptions);
 		directionsDisplay.setMap(map);
 		//alert('before geoloation');
+		if(skipGeoLocation==0){
 		if (navigator.geolocation) {
 			//alert('navigator.geolocation: ' + navigator.geolocation);
 
@@ -580,9 +574,12 @@ body,.container {
 		} else {
 			alert('위치 추적 서비스 동작 실패');
 		}
+		}else{
+			onSuccess(myLatitude, myLongitude, myAccuracy);
+		}
 
 	}
-	//windows가 'load'될때 initalize()함수를 불러와라
+	//windows가 'load'될때 initialize()함수를 불러와라
 	google.maps.event.addDomListener(window, 'load', initialize);
 
 	$(document).ready(function() {
