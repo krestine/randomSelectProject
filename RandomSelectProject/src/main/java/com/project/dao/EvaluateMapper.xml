@@ -104,7 +104,7 @@
 		'1')
 	</insert>
 	
-	<select id="getLastEvalId" resultType="String">
+	<select id="getLastEvalId" resultType="java.lang.Integer">
 		select max(evalId) from evaluate
 	</select>
 </mapper>

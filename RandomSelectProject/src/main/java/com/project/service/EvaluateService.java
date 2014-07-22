@@ -52,5 +52,5 @@ public interface EvaluateService {
 	
 	void putEval(EvaluateDTO evaluateDto);
 	
-	String getLastEvalId();
+	Integer getLastEvalId();
 }

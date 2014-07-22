@@ -7,14 +7,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href='http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css' rel='stylesheet' type='text/css' />
+<link
+	href='http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css'
+	rel='stylesheet' type='text/css' />
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style type="text/css">
 html {
 	height: 100%;
 }
 
-body{
+body {
 	font-family: 'Nanum Gothic Coding', sans-serif;
 	text-rendering: optimizeLegibility;
 }
@@ -25,7 +27,7 @@ body,.container {
 	padding: 0;
 }
 </style>
-  
+
 <script type="text/javascript">
 	var myLatitude, myLongitude, myLocation, myRestntName, myRestntId;
 	var myAddress = new Array(10);
@@ -35,50 +37,50 @@ body,.container {
 	var restntList;
 	var pos, pos2;
 	var sRadius;
-	var login=1, isinit=0;
-	var myLocationManual=0;
+	var login = 1, isinit = 0;
+	var myLocationManual = 0;
 	var geocoder = new google.maps.Geocoder();
 	var directionsDisplay;
 	var directionsService = new google.maps.DirectionsService();
-	
+
 	var restntImage1 = "http://www.googledrive.com/host/0B1_N1p_Ulcy_YV9sQldSU19ZLTQ";
 	var restntImage2 = "http://www.googledrive.com/host/0B1_N1p_Ulcy_RTJnQ09sY0hQLXM";
 	var markerImage1 = "http://www.googledrive.com/host/0B1_N1p_Ulcy_Ni15YkJId3lxUTg";
-	
+
 	var tempOKLatitude = new Array(100);
 	var tempOKLongitude = new Array(100);
 	var tempOKName = new Array(100);
 	var tempOKId = new Array(100);
-	
+
 	var tempRestntMarker = new Array(100);
 	var tempRestntInfoArray = new Array(100);
-	
-/* 	google.maps.event.addListener(map, 'bounds_changed', function(){
-		map.setCenter(pos);
-	}); */
-	
-	function visitList(){
-		if(login==1){
+
+	/* 	google.maps.event.addListener(map, 'bounds_changed', function(){
+	 map.setCenter(pos);
+	 }); */
+
+	function visitList() {
+		if (login == 1) {
 			document.getElementById("visitAction").action = "visitList.do";
 			document.getElementById("visitAction").submit();
-		}else{
+		} else {
 			alert("로그인 해 주세요.")
 		}
 	}
-	
-	function ladderGame(){
+
+	function ladderGame() {
 		document.getElementById("visitAction").action = "ladderMake.do";
 		document.getElementById("visitAction").submit();
 	}
 
 	function ajaxRandomRestnt(obj) {
 
-		if(isinit==0){
-			 initialize();
-			 myInfoWindow.close();
+		if (isinit == 0) {
+			initialize();
+			myInfoWindow.close();
 		}
-		isinit=0;
-		
+		isinit = 0;
+
 		var tempDistance = 0;
 		var tempCnt = 0;
 		var tempRestntLatitude;
@@ -95,181 +97,228 @@ body,.container {
 			longitude : myLongitude
 		};
 
-		$.ajax({
-			cache : false,
-			async : false,
-			type : 'POST',
-			url : 'ajaxRandomRestnt.do',
-			data : paramData,
-			dataType : 'json',
-			error : function(jqXHR, textStatus, errorThrown) {
-				alert("error : ajax 통신 실패." + textStatus + errorThrown);
-			},
-			success : function(json) {
-				$("#restntTable > tbody").html("");
-				var restnts = json.restnts;
+		$
+				.ajax({
+					cache : false,
+					async : false,
+					type : 'POST',
+					url : 'ajaxRandomRestnt.do',
+					data : paramData,
+					dataType : 'json',
+					error : function(jqXHR, textStatus, errorThrown) {
+						alert("error : ajax 통신 실패." + textStatus + errorThrown);
+					},
+					success : function(json) {
+						$("#restntTable > tbody").html("");
+						var restnts = json.restnts;
 
-				if (restnts != null) {
-					
-					$.each(restnts, function(key) {
+						if (restnts != null) {
 
-						tempRestntLatitude = restnts[key].latitude;
-						tempRestntLongitude = restnts[key].longitude;
-						tempRestntName = restnts[key].restntName;
-						tempRestntId = restnts[key].restntId;
+							$
+									.each(
+											restnts,
+											function(key) {
 
-						tempDistance = calcDistance(myLatitude, myLongitude,
-								tempRestntLatitude, tempRestntLongitude);
+												tempRestntLatitude = restnts[key].latitude;
+												tempRestntLongitude = restnts[key].longitude;
+												tempRestntName = restnts[key].restntName;
+												tempRestntId = restnts[key].restntId;
 
-						if (tempDistance < sRadius) {
-							
-							tempOKLatitude[tempCnt] = tempRestntLatitude;
-							tempOKLongitude[tempCnt] = tempRestntLongitude;
-							tempOKName[tempCnt] = tempRestntName;
-							tempOKId[tempCnt] = tempRestntId;
+												tempDistance = calcDistance(
+														myLatitude,
+														myLongitude,
+														tempRestntLatitude,
+														tempRestntLongitude);
 
-							var tempRestntPos = new google.maps.LatLng(
-									tempRestntLatitude, tempRestntLongitude);
-							
+												if (tempDistance < sRadius) {
+
+													tempOKLatitude[tempCnt] = tempRestntLatitude;
+													tempOKLongitude[tempCnt] = tempRestntLongitude;
+													tempOKName[tempCnt] = tempRestntName;
+													tempOKId[tempCnt] = tempRestntId;
+
+													var tempRestntPos = new google.maps.LatLng(
+															tempRestntLatitude,
+															tempRestntLongitude);
+
+													//setTimeout(function() {
+
+													tempRestntMarker[tempCnt] = new google.maps.Marker(
+															{
+																position : tempRestntPos,
+																map : map,
+																animation : google.maps.Animation.DROP,
+																title : tempRestntName,
+																restntId : tempRestntId
+															});
+
+													tempRestntMarker[tempCnt]
+															.setMap(map);
+													markerEventParam = tempCnt;
+
+													google.maps.event
+															.addListener(
+																	tempRestntMarker[tempCnt],
+																	'click',
+																	function(
+																			tempCnt) {
+																		return function() {
+																			//alert(tempRestntMarker[tempCnt].restntId);
+
+																			var paramData = {
+																				restntId : tempRestntMarker[tempCnt].restntId
+																			};
+
+																			$
+																					.ajax({
+																						cache : false,
+																						async : false,
+																						type : 'post',
+																						url : 'ajaxRandomRestntDetail.do',
+																						data : paramData,
+																						dataType : 'json',
+																						error : function() {
+																							alert("에러 : 데이터가 안넘어갑니다.");
+																						},
+																						success : function(
+																								json) {
+
+																							$(
+																									'#randomRestntDetailResult')
+																									.empty();
+
+																							var restntName = json.restntName;
+																							var restntAddress = json.adress1
+																									+ ' '
+																									+ json.adress2
+																									+ ' '
+																									+ json.adress3
+																									+ ' '
+																									+ json.adress4
+																									+ ' '
+																									+ json.adress5;
+																							var restntTel = json.restntTel;
+																							var restntCate = json.restntCate;
+																							var restntEval = json.restntEval;
+
+																							var html = '<div class="modal-dialog"><div class="modal-content"><div class="modal-header">'
+																							html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>'
+																							html += '<h4 class="modal-title">식당 상세정보</h4></div><div class="modal-body"><table class="table">'
+																							html += '<tr><td align="center" class="btn btn-primary" style="width: 100%">식당이름</td></tr><tr><td><input value="'
+																									+ restntName
+																									+ '"name="restntName" style="width: 100%"></td></tr>'
+																							html += '<tr><td align="center" class="btn btn-primary" style="width: 100%">식당종류</td></td></tr><tr><td><input value="'
+																									+ restntCate
+																									+ '"name="restntCate" style="width: 100%"></td></tr>'
+																							html += '<tr><td align="center" class="btn btn-primary" style="width: 100%">식당전화번호</td></tr><tr><td><input value="'
+																									+ restntTel
+																									+ '"name="restntTel" style="width: 100%"></td></tr>'
+																							html += '<tr><td align="center" class="btn btn-primary" style="width: 100%">식당평점</td></tr><tr><td><input value="'
+																									+ restntEval
+																									+ '"name="restntEval" style="width: 100%"></td></tr>'
+																							html += '<tr><td align="center" class="btn btn-primary" style="width: 100%">식당주소</td></tr>'
+																							html += '<tr><td><input value="'
+																									+ restntAddress
+																									+ '" name="restntAddress" style="width: 100%"></td></tr></table></div>'
+																							html += '<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">확인</button></div></div></div</div>';
+																							$(
+																									'#randomRestntDetailResult')
+																									.html(
+																											html);
+																						}
+																					});
+
+																			$(
+																					'#randomRestntDetailResult')
+																					.modal(
+																							{
+																								keyboard : true
+																							});
+
+																		}
+																	}(tempCnt));
+
+													//google.maps.event.addListener(tempRestntMarker[tempCnt], 'click', markerEvent);
+
+													//},tempCnt*100);
+
+													tempCnt = tempCnt + 1;
+												}
+
+											});
+
 							//setTimeout(function() {
-								
-							tempRestntMarker[tempCnt] = new google.maps.Marker(
-									{
-										position : tempRestntPos,
-										map : map,
-										animation : google.maps.Animation.DROP,
-										title : tempRestntName,
-										restntId : tempRestntId
-									});
-							
-										  tempRestntMarker[tempCnt].setMap(map);
-										  markerEventParam=tempCnt;
-										  
-										  google.maps.event.addListener(tempRestntMarker[tempCnt], 'click', function(tempCnt) {
-										      return function() {
-										          //alert(tempRestntMarker[tempCnt].restntId);
-										          
-										          
-										          
-										          
-										          
-										      	var paramData = {
-										    			restntId : tempRestntMarker[tempCnt].restntId
-										    		};
 
-										    	$.ajax({
-										    		cache : false,
-										    		async : false,
-										    		type : 'post',
-										    		url : 'ajaxRandomRestntDetail.do', 
-										    		data : paramData,
-										    		dataType : 'json',
-										    		error : function(){
-										    			alert ("에러 : 데이터가 안넘어갑니다.");
-										    		},
-										    		success : function(json){
-										    			
-										    			$('#randomRestntDetailResult').empty();
-										    			
-										    			var restntName = json.restntName;
-										    			var restntAddress = json.adress1 + ' ' + json.adress2 + ' ' + json.adress3 + ' ' + json.adress4 + ' ' + json.adress5;
-										    			var restntTel = json.restntTel;
-										    			var restntCate = json.restntCate;
-										    			var restntEval = json.restntEval;
-										    			
-										    			var html = '<div class="modal-dialog"><div class="modal-content"><div class="modal-header">'
-										    			html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>'
-										    			html+='<h4 class="modal-title">식당 상세정보</h4></div><div class="modal-body"><table class="table">'
-										    			html+='<tr><td align="center" class="btn btn-primary" style="width: 100%">식당이름</td></tr><tr><td><input value="'+restntName+'"name="restntName" style="width: 100%"></td></tr>'
-										    			html+='<tr><td align="center" class="btn btn-primary" style="width: 100%">식당종류</td></td></tr><tr><td><input value="'+restntCate+'"name="restntCate" style="width: 100%"></td></tr>'
-										    			html+='<tr><td align="center" class="btn btn-primary" style="width: 100%">식당전화번호</td></tr><tr><td><input value="'+restntTel+'"name="restntTel" style="width: 100%"></td></tr>'
-										    			html+='<tr><td align="center" class="btn btn-primary" style="width: 100%">식당평점</td></tr><tr><td><input value="'+restntEval+'"name="restntEval" style="width: 100%"></td></tr>'
-										    			html+='<tr><td align="center" class="btn btn-primary" style="width: 100%">식당주소</td></tr>'
-										    			html+='<tr><td><input value="'+restntAddress+'" name="restntAddress" style="width: 100%"></td></tr></table></div>'
-										    			html+='<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">확인</button></div></div></div</div>';
-										    		 	$('#randomRestntDetailResult').html(html); 
-										    		}
-										    	});
-										    	
-										    	$('#randomRestntDetailResult').modal({
-										    		  keyboard: true
-										    		});
-								    	
-										      }
-										    }(tempCnt));
-										  
-										  //google.maps.event.addListener(tempRestntMarker[tempCnt], 'click', markerEvent);
-										  
-							//},tempCnt*100);
-										  
-							tempCnt = tempCnt + 1;
+							var selection = Math.floor(Math.random() * tempCnt);
+
+							tempRestntLatitude = tempOKLatitude[selection];
+							tempRestntLongitude = tempOKLongitude[selection];
+							tempRestntName = tempOKName[selection];
+							tempRestntId = tempOKId[selection];
+
+							tempRestntMarker[selection].setIcon(restntImage2);
+							tempRestntMarker[selection]
+									.setAnimation(google.maps.Animation.BOUNCE);
+							myInfoWindow.close();
+
+							var tempRestntInfo = new google.maps.InfoWindow();
+							tempRestntInfo.setContent("오늘의 식당 : "
+									+ tempRestntName);
+							tempRestntInfo.open(map,
+									tempRestntMarker[selection]);
+
+							myRestntName = tempRestntName;
+							myRestntId = tempRestntId;
+
+							//},(tempCnt+10)*100);
+
+							//calcRoute(tempRestntLatitude, tempRestntLongitude);
+
 						}
 
-					});
-
-					//setTimeout(function() {
-					
-					var selection = Math.floor(Math.random() * tempCnt);
-
-					tempRestntLatitude = tempOKLatitude[selection];
-					tempRestntLongitude = tempOKLongitude[selection];
-					tempRestntName = tempOKName[selection];
-					tempRestntId = tempOKId[selection];
-
-					tempRestntMarker[selection].setIcon(restntImage2);
-					tempRestntMarker[selection]
-							.setAnimation(google.maps.Animation.BOUNCE);
-					myInfoWindow.close();
-
-					var tempRestntInfo = new google.maps.InfoWindow();
-					tempRestntInfo.setContent("오늘의 식당 : " + tempRestntName);
-					tempRestntInfo.open(map, tempRestntMarker[selection]);
-
-					myRestntName = tempRestntName;
-					myRestntId = tempRestntId;
-					
-					//},(tempCnt+10)*100);
-
-					//calcRoute(tempRestntLatitude, tempRestntLongitude);
-
-				}
-
-			}
-		});
+					}
+				});
 
 	}
 
 	function confirmRestnt() {
 
 		if (login == 1) {
+			if (isinit == 0) {
 
-			var paramData = {
-				restntId : myRestntId,
-				restntName : myRestntName
-			};
+				var paramData = {
+					restntId : myRestntId,
+					restntName : myRestntName
+				};
 
-			$.ajax({
-				cache : false,
-				async : false,
-				type : 'POST',
-				url : 'ajaxConfirmRestnt.do',
-				data : paramData,
-				dataType : 'json',
-				error : function() {
-					alert("에러 : 데이터가 안넘어갑니다.");
-				},
-				success : function(json) {
+				$
+						.ajax({
+							cache : false,
+							async : false,
+							type : 'POST',
+							url : 'ajaxConfirmRestnt.do',
+							data : paramData,
+							dataType : 'json',
+							error : function() {
+								alert("에러 : 데이터가 안넘어갑니다.");
+							},
+							success : function(json) {
 
-					if (json.restntId != '') {
+								if (json.restntId != '') {
 
-						var html = '<h4><span class="label label-danger">식당 방문정보가 추가되었습니다.</span></h4>';
-						$('#restntConfirmed').html(html);
-						setTimeout(removeRestntConfirmed, 3000);
-					}
+									var html = '<h4><span class="label label-danger">식당 방문정보가 추가되었습니다.</span></h4>';
+									$('#restntConfirmed').html(html);
+									setTimeout(removeRestntConfirmed, 3000);
+								}
 
-				}
-			});
-		} else {
+							}
+						});
+			} else {
+				var html = '<h4><span class="label label-danger">식당 방문정보 기능을 이용하시려면 식당 골라주기 버튼을 눌러주세요.</span></h4>';
+				$('#restntConfirmed').html(html);
+				setTimeout(removeRestntConfirmed, 3000);
+			}
+		}else {
 			var html = '<h4><span class="label label-danger">식당 방문정보 기능을 이용하시려면 로그인을 해 주세요.</span></h4>';
 			$('#restntConfirmed').html(html);
 			setTimeout(removeRestntConfirmed, 3000);
@@ -314,7 +363,7 @@ body,.container {
 
 		return Math.round(ret);
 	}
-	
+
 	function setMyCenter() {
 		//map.setCenter(latlng) = 설정된 위치로 맵 중심 이동
 		//map.setZoom(Int) = 설정된 숫자값으로 맵 확대율 조정
@@ -326,23 +375,34 @@ body,.container {
 
 	function newMyLocation() {
 		var newMyAddress = document.getElementById('newMyAddress').value;
-			
-			geocoder.geocode({
-				'address' : newMyAddress
-			}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					myLocationManual=1;
-					isinit=1;
-					$("#accuracyAlert").empty();
-					$.cookie('newLatitude', results[0].geometry.location.lat(),  {expires: 1});
-					$.cookie('newLongitude', results[0].geometry.location.lng(), {expires: 1});
-					onSuccess(results[0].geometry.location.lat(),
-							results[0].geometry.location.lng(), 10);
-				} else {
-					$("#deleteMyLocationAlert").html('<h4><span class="label label-danger">입력한 주소에 해당하는 좌표가 없습니다.</span></h4>');
-					setTimeout(removeDeleteMyLocationAlert, 3000);
-				}
-			});
+
+		geocoder
+				.geocode(
+						{
+							'address' : newMyAddress
+						},
+						function(results, status) {
+							if (status == google.maps.GeocoderStatus.OK) {
+								myLocationManual = 1;
+								isinit = 1;
+								$("#accuracyAlert").empty();
+								$.cookie('newLatitude',
+										results[0].geometry.location.lat(), {
+											expires : 1
+										});
+								$.cookie('newLongitude',
+										results[0].geometry.location.lng(), {
+											expires : 1
+										});
+								onSuccess(results[0].geometry.location.lat(),
+										results[0].geometry.location.lng(), 10);
+							} else {
+								$("#deleteMyLocationAlert")
+										.html(
+												'<h4><span class="label label-danger">입력한 주소에 해당하는 좌표가 없습니다.</span></h4>');
+								setTimeout(removeDeleteMyLocationAlert, 3000);
+							}
+						});
 	}
 
 	function setSRadius() {
@@ -353,30 +413,31 @@ body,.container {
 			tempSRadius = 200;
 			login = 0;
 		}
-		if(tempExcMenu==""){
-			tempExcMenu="00000000000000";
-			login=0;
+		if (tempExcMenu == "") {
+			tempExcMenu = "00000000000000";
+			login = 0;
 		}
 		sRadius = tempSRadius;
 		excMenu = tempExcMenu;
 		//alert(sRadius);
 	}
 
-	function deleteMyLocation(){
+	function deleteMyLocation() {
 		$.cookie('newLatitude', "deleted");
 		$.cookie('newLongitude', "deleted");
-		$("#deleteMyLocationAlert").html('<h4><span class="label label-success">초기화되었습니다.</span></h4>');
+		$("#deleteMyLocationAlert").html(
+				'<h4><span class="label label-success">초기화되었습니다.</span></h4>');
 		setTimeout(removeDeleteMyLocationAlert, 3000);
 	}
-	
-	function removeDeleteMyLocationAlert(){
+
+	function removeDeleteMyLocationAlert() {
 		$("#deleteMyLocationAlert").html("");
 	}
-	
-	function removeRestntConfirmed(){
+
+	function removeRestntConfirmed() {
 		$("#restntConfirmed").html("");
 	}
-	
+
 	function onSuccess(Lat, Lon, accuracy) {
 
 		//alert('onSuccess');
@@ -388,18 +449,19 @@ body,.container {
 		cookieLongitude = $.cookie('newLongitude');
 		pos = new google.maps.LatLng(myLatitude, myLongitude);
 
-		$("#currentAccuracy").html('<h4><button class="btn btn-success">내 위치의 정확도 : ' + accuracy + 'm</button></h4>');
+		$("#currentAccuracy").html(
+				'<h4><button class="btn btn-success">내 위치의 정확도 : ' + accuracy
+						+ 'm</button></h4>');
 		if (accuracy > 200) {
-			
-			if(cookieLatitude==null || cookieLatitude=='deleted'){
+
+			if (cookieLatitude == null || cookieLatitude == 'deleted') {
 				$("#accuracyAlert")
-				.html(
-						'<h4><font color=red>단순IP기반의 위치추적 서비스는 정확하지 않습니다.<br>정확한 위치를 위해서 WI-FI 네트워크 또는 3G/4G 데이터 네트워크에 접속하시거나,<br>현재 주소를 수동으로 입력해 주세요.</font></h4>');
-			}
-			else{
+						.html(
+								'<h4><font color=red>단순IP기반의 위치추적 서비스는 정확하지 않습니다.<br>정확한 위치를 위해서 WI-FI 네트워크 또는 3G/4G 데이터 네트워크에 접속하시거나,<br>현재 주소를 수동으로 입력해 주세요.</font></h4>');
+			} else {
 				onSuccess(cookieLatitude, cookieLongitude, 10);
 			}
-			
+
 			//objDiv.style.display = "block";
 		} else {
 			$("#accuracyAlert").empty;
@@ -463,15 +525,15 @@ body,.container {
 		//alert('onError');
 	}
 
-	function splitMyAddress(){
+	function splitMyAddress() {
 		myAddress = myLocation.split(" ");
 	}
-	
+
 	function initialize() {
 
 		//alert('start init');
-		
-		isinit=1;
+
+		isinit = 1;
 
 		/* google.maps.event.addDomListener(window, 'resize', function() {
 			map.setCenter(pos);
@@ -479,14 +541,13 @@ body,.container {
 		/* window.onresize = function(event) {
 			map.setCenter(pos);
 		};*/
-		$(window).resize(function () { map.setCenter(pos); });
-		
+		$(window).resize(function() {
+			map.setCenter(pos);
+		});
+
 		setSRadius();
 		directionsDisplay = new google.maps.DirectionsRenderer();
 
-		
-		
-		
 		//$('#getAllRestnt').removeAttr('disabled');
 
 		//myOptions = 구글 맵에 사용할 옵션
@@ -524,22 +585,25 @@ body,.container {
 	//windows가 'load'될때 initalize()함수를 불러와라
 	google.maps.event.addDomListener(window, 'load', initialize);
 
-	$(document).ready(function () {
+	$(document).ready(function() {
 
 	});
-
 </script>
 </head>
 <body>
-	<div class="container" id="container" style="width: 100%;" align="center">
+	<div class="container" id="container" style="width: 100%;"
+		align="center">
 		<div id="map_canvas" style="width: 80%; height: 100%"></div>
-		<button id="randomSelectInitialize" onclick="initialize()" class="btn btn-info">맵 초기화</button>
-		<button id="moveToMyLocation" onclick="setMyCenter()" class="btn btn-info">내 위치로 이동</button>
-		<button id="getAllRestnt" onclick="ajaxRandomRestnt()" class="btn btn-primary">식당 골라주기</button>
-				<button id="confirmRestnt" onclick="confirmRestnt()"
-				class="btn btn-primary">식당 확정</button>
-							<div id="restntConfirmed"></div>
-<!-- 		<br> <input type="text" id="tempAddress" value=""> <input
+		<button id="randomSelectInitialize" onclick="initialize()"
+			class="btn btn-info">맵 초기화</button>
+		<button id="moveToMyLocation" onclick="setMyCenter()"
+			class="btn btn-info">내 위치로 이동</button>
+		<button id="getAllRestnt" onclick="ajaxRandomRestnt()"
+			class="btn btn-primary">식당 골라주기</button>
+		<button id="confirmRestnt" onclick="confirmRestnt()"
+			class="btn btn-primary">식당 확정</button>
+		<div id="restntConfirmed"></div>
+		<!-- 		<br> <input type="text" id="tempAddress" value=""> <input
 			type="button" id="geocodeTempAddress" value="해당 주소 지도에 표시"
 			onclick="findLocation()"> <input type="text" id=tempLatitude
 			value=""> <input type="text" id="tempLongitude" value="">
@@ -550,24 +614,28 @@ body,.container {
 		<div id="accuracyAlert"></div>
 		<div id="newMyLocationForm" class="input-group">
 			<div style="display: inline;">
-			<input type="text" id="newMyAddress" value="" style="width: 100%">
-			<button class="btn btn-warning" id="newMyLocation"
-				onclick="newMyLocation()">내 주소 수동으로 입력</button>
-			<button class="btn btn-warning" id="deleteMyLocation"
-				onclick="deleteMyLocation()">수동 입력 주소 초기화</button>
-				</div>
+				<input type="text" id="newMyAddress" value="" style="width: 100%">
+				<button class="btn btn-warning" id="newMyLocation"
+					onclick="newMyLocation()">내 주소 수동으로 입력</button>
+				<button class="btn btn-warning" id="deleteMyLocation"
+					onclick="deleteMyLocation()">수동 입력 주소 초기화</button>
+			</div>
 		</div>
 		<div id="deleteMyLocationAlert"></div>
-			<%-- <div id="restnt_list">
+		<%-- <div id="restnt_list">
 		<c:forEach items="${restntList}" var="item">
 			 ${item.restntName} ${item.latitude} ${item.longitude}<br>
 		</c:forEach>
 	</div> --%>
-			<form id="visitAction" method="post">
+		<form id="visitAction" method="post">
 
-				<input type="button" value="방문 정보" id="visitListButton"  onclick="visitList()" class="btn btn-info">
-				<input type="button" value="사다리" id="ladderGameButton" onclick="ladderGame()" class="btn btn-primary">
-			</form>
-			<div class="modal fade" id="randomRestntDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
-		</div></body>
+			<input type="button" value="방문 정보" id="visitListButton"
+				onclick="visitList()" class="btn btn-info"> <input
+				type="button" value="사다리" id="ladderGameButton"
+				onclick="ladderGame()" class="btn btn-primary">
+		</form>
+		<div class="modal fade" id="randomRestntDetailResult" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+	</div>
+</body>
 </html>
