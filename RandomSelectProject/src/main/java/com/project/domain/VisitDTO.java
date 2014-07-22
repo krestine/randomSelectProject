@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class VisitDTO {
 	//memberField
-	private String visitId;
+	private Integer visitId;
 	private Timestamp visitDate;
 	private String menuId;
 	private String memId;
@@ -12,7 +12,7 @@ public class VisitDTO {
 	private String restntName;
 	private String active;
 	//memberField end
-	public VisitDTO(String visitId, String menuId,
+	public VisitDTO(Integer visitId, String menuId,
 			String memId, String restntId, String restntName) {
 		super();
 		this.visitId = visitId;
@@ -21,10 +21,13 @@ public class VisitDTO {
 		this.restntId = restntId;
 		this.restntName = restntName;
 	}
-	public String getVisitId() {
+	public VisitDTO(){
+		
+	}
+	public Integer getVisitId() {
 		return visitId;
 	}
-	public void setVisitId(String visitId) {
+	public void setVisitId(Integer visitId) {
 		this.visitId = visitId;
 	}
 	public Timestamp getVisitDate() {
@@ -132,4 +135,5 @@ public class VisitDTO {
 			return false;
 		return true;
 	}
+	
 }

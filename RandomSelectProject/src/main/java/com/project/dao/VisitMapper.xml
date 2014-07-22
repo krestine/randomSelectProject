@@ -28,7 +28,7 @@
 		select visitId, visitDate, menuId, restntName from
 		visit where
 		memId=#{memId}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             and
-		active = '1'
+		active = '1' order by visitId
 	</select>
 	<update id="dropVisitById" parameterType="String">
 		update visit set
