@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- <meta http-equiv="refresh" content="5; url=http://localhost:9080/myapp/"> -->
+
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/myapp/resources/js/jquery.cookie.js"
 	type="text/javascript"></script>
@@ -25,71 +25,38 @@ label.error {
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
-
-		$("#rememId").click(function() {
-			//쿠키정보가져오기 확인
-			console.log($.cookie("cookieId"));
-
-			if ($.cookie("cookieId") != null) {
-				if (!$.cookie("cookieId").equals($('#memId').val())) {
-					//쿠키정보지우기
-					$.cookie("cookieId", null);
-					//쿠키저장
-					$.cookie('cookieId', $('#memId').val(), {
-						expires : 7
-					});
-					console.log("cookieId=" + $('#memId').val());
-				}
-			} else {
-				$('#memId').cookieFill();
-				//쿠키정보가져오기 확인
-				console.log($.cookie("cookieId"));
-			}
-		});
-
-		// 				//쿠키 질문
-		// 				function confirmSave(checkbox) {
-		// 					var isRemember;
-		// 					if (checkbox.checked) {
-		// 						isRemember = confirm("이 PC에 로그인 정보를 저장하시겠습니까?");
-		// 						if (!isRemember) {
-		// 							checkbox.checked = false;
-		// 						}
-		// 					}
-		// 				}
-		// 				//뭘 언제까지 저장할지 정해주는것
-		// 				function setSave(name, value, expiredays) {
-		// 					var today = new Date();
-		// 					today.setDate(today.getDate() + expiredays);
-		// 					document.cookie = name + "=" + escape(value)
-		// 							+ ";path=/;expires=" + today.toGMTString() + ";"
-		// 				}
-		// 				//저장할 아이디
-		// 				function saveLogin(memId) {
-		// 					if (memId != "") {
-		// 						//3일동안 쿠키값저장
-		// 						setSave("cookieId", memId, 3);
-		// 					} else {
-		// 						setSave("cookieId", memId, -1);
-		// 					}
-		// 				}
-		// 				//쿠키아이디 가져오기
-		// 				function getLogin() {
-		// 					var cook = document.cookie + ";";
-		// 					var idx = cook.indexOf(key, 0);
-		// 					var val = "";
-		// 					if (idx != -1) {
-		// 						cook = cook.substring(idx, cook.length);
-		// 						begin = cook.indexOf("=", 0) + 1;
-		// 						end = cook.indexOf(";", begin);
-		// 						val = unescape(cook.substring(begin, end));
-		// 					}
-		// 					if (val != "") {
-		// 						document.form.id.value = memId;
-		// 						document.form.rememId.checked = true;
-		// 					}
-		// 				}
-
+		//쿠키값불러오기
+		var remember = $.cookie("remember");
+		if (remember == 'true') {
+			var cookieId = $.cookie("cookieId");
+			$('#memId').attr("value", cookieId);
+			$("#rememId").attr("checked", true);
+		}
+		// 		//아이디기억체크박스
+		// 		$("#rememId").click(function() {
+		// 			var isChecked = $("#rememId").prop('checked');
+		// 			// 			if ($(this).is(':checked')) {
+		// 			if (isChecked) {
+		// 				var memId = $('#memId').val();
+		// 				//쿠키저장
+		// 				$.cookie("cookieId", memId, {
+		// 					expire : 7
+		// 				});
+		// 				$.cookie("remember", true, {
+		// 					expires : 7
+		// 				});
+		// 				$('#inputCheck').text("아이디가 저장됩니다.");
+		// 				setTimeout(function() {
+		// 					$('#inputCheck').hide();
+		// 				}, 3000);
+		// 			} else {
+		// 				//쿠키지움
+		// 				$.cookie("cookieId", null);
+		// 				$.cookie("remember", false);
+		// 			}
+		// 			alert($.cookie("cookieId"));
+		// 		});
+		//유효성검사
 		$("#loginForm").validate({
 			onkeyup : false,
 			onfocusout : false,
@@ -114,11 +81,27 @@ label.error {
 				}
 			},
 			submitHandler : function(form) {
-				// 	if (form.rememId.checked) {
-				// 					saveLogin(form.memId.value);
-				// 				} else {
-				// 					saveLogin("");
-				// 				}
+				//아이디기억체크박스
+				var isChecked = $("#rememId").prop('checked');
+				// 			if ($(this).is(':checked')) {
+				if (isChecked) {
+					var memId = $('#memId').val();
+					//쿠키저장
+					$.cookie("cookieId", memId, {
+						expire : 7
+					});
+					$.cookie("remember", true, {
+						expires : 7
+					});
+					$('#inputCheck').text("아이디가 저장됩니다.");
+					setTimeout(function() {
+						$('#inputCheck').hide();
+					}, 3000);
+				} else {
+					//쿠키지움
+					$.cookie("cookieId", null);
+					$.cookie("remember", false);
+				}
 				$(form).submit();
 			}
 		});
@@ -181,8 +164,7 @@ label.error {
 			</div>
 			<div class="form-group">
 				<label class="error" id="inputCheck" style="color: red">
-					${errmessage}</label> <label class="error" id="inputCheck"
-					style="color: blue"></label>
+					${errmessage}</label>
 			</div>
 			<div>
 				<a href="findIdForm.do">아이디/비밀번호 찾기</a>

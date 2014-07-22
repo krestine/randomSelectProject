@@ -31,27 +31,6 @@ label.error {
 }
 </style>
 <script type="text/javascript">
-	/* var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; */
-	/* 	 
-	 $('#memId').blur(
-	 function() {
-	 $.ajax({
-	 type : 'POST',
-	 url : 'idCheck.do',
-	 data : 'xml',
-	 success : function(xml) {
-	 var result = $(xml).find('idCheck').text();
-	 if (result == 'true') {
-	 $('#idCheck').text('사용할 수 있는 아이디입니다.');
-	 $('#join').removeAttr('disabled');
-	 } else {
-	 $('#idCheck').text('사용할 수 없는 아이디입니다.');
-	 $('#join').removeAttr('disabled',
-	 'disabled').focus();
-	 }
-	 }
-	 });
-	 }); */
 	$(document)
 			.ready(
 					function() {
@@ -222,16 +201,6 @@ label.error {
 								.validate(
 										{
 											errorClass : 'error',
-											//onkeyup : false,
-											//onfocusout : false,
-											//focusInvalid : false,
-											//focusCleanup:true,
-											//ignore : '#memId',
-
-											// 											groups : {
-											// 												phoneGroup : "mPhoneCode mPhoneMid mPhoneEnd"
-											// 											},
-
 											rules : {
 												memId : {
 													required : true,
@@ -256,24 +225,6 @@ label.error {
 													equalTo : "#memPasswd"
 												},
 												memBirth : "required",
-												// 												mPhoneCode : {
-												// 													required : true,
-												// 													number : true
-												// 												},
-												// 												mPhoneMid : {
-												// 													required : true,
-												// 													number : true
-												// 												},
-												// 												mPhoneEnd : {
-												// 													required : true,
-												// 													number : true
-												// 												}
-												// 												,
-												// 												phoneGroup : {
-												// 													required : true,
-												// 													number : true,
-												// 													mobileCheck : true
-												// 												}
 
 												memMobile : {
 													required : true,
@@ -282,14 +233,6 @@ label.error {
 											},
 											errorPlacement : function(error,
 													element) {
-												// 												if (element.attr("id") == "mPhoneCode"
-												// 														|| element.attr("id") == "mPhoneMid"
-												// 														|| element.attr("id") == "mPhoneEnd") {
-												// 													error
-												// 															.insertAfter("#mPhoneEnd");
-												// 												} else {
-												// 													error.insertAfter(element);
-												// 												}
 												$(element).closest(
 														'div.form-group')
 														.append(error);
@@ -321,23 +264,6 @@ label.error {
 													equalTo : "비밀번호가 일치하지 않습니다."
 												},
 												memBirth : "생일을 입력해주세요.",
-												// 												mPhoneCode : {
-												// 													required : "전화번호를 입력해주세요.",
-												// 													number : "숫자를 입력해주세요."
-												// 												},
-												// 												mPhoneMid : {
-												// 													required : "전화번호를 입력해주세요.",
-												// 													number : "숫자를 입력해주세요."
-												// 												},
-												// 												mPhoneEnd : {
-												// 													required : "전화번호를 입력해주세요.",
-												// 													number : "숫자를 입력해주세요."
-												// 												},
-												// 												phoneGroup : {
-												// 													required : "전화번호를 입력해주세요.",
-												// 													number : "숫자를 입력해주세요.",
-												// 													mobileCheck : "'010-1234-1234'형식으로 입력해주세요."
-												// 												}
 												memMobile : {
 													required : "전화번호를 입력해주세요.",
 													mobileCheck : "'010-1234-1234'형식으로 입력해주세요."
@@ -364,15 +290,6 @@ label.error {
 								.addMethod(
 										'mobileCheck',
 										function() {
-											// 											var mobile = $('#mPhoneCode').val()
-											// 													+ "-"
-											// 													+ $('#mPhoneCode').val()
-											// 													+ "-"
-											// 													+ $('#mPhoneCode').val();
-											// 											var regex_mobile = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
-											// 											if (!regex_mobile.test(mobile)) {
-											// 												return false;
-											// 											}
 											var result = true;
 											var mobile = $('#memMobile').val();
 											var regex_mobile = /[01](0|1|6|7|8|9)[-](\d{4}|\d{3})[-]\d{4}$/g;
@@ -394,18 +311,21 @@ label.error {
 			<div class="form-group">
 				<input type="text" id="memId" name="memId" placeholder="아이디"
 					class="signup" />
-				<!-- <button type="button" id="idCheck">중복체크</button> -->
 			</div>
 			<div>
 				<span id="check"></span>
 			</div>
+
 			<div class="form-group">
+				<input type="hidden" id="certifyCD" name="certifyCD" class="signup" />
 				<input type="text" id="inputCD" name="inputCD" placeholder="인증번호"
 					class="signup" />
+			</div>
+			<div class="form-group">
 				<button type="button" class="btn btn-warning btn-sm"
 					id="emailCertify_btn">인증번호전송</button>
-				<input type="hidden" id="certifyCD" name="certifyCD" class="signup"></input>
 			</div>
+
 			<div>
 				<span id="certify"></span>
 			</div>
@@ -424,18 +344,6 @@ label.error {
 				<input type="text" id="memBirth" name="memBirth" placeholder="생년월일"
 					class="signup" readonly="readonly" />
 			</div>
-			<!-- 		<div class="signup"> -->
-			<!-- 			전화번호 <select id="mPhoneCode" name="mPhoneCode"> -->
-			<!-- 				<option value="010" selected>010</option> -->
-			<!-- 				<option value="011">011</option> -->
-			<!-- 				<option value="016">016</option> -->
-			<!-- 				<option value="017">017</option> -->
-			<!-- 				<option value="018">018</option> -->
-			<!-- 				<option value="019">019</option> -->
-			<!-- 			</select> - <input type="text" id="mPhoneMid" name="mPhoneMid" size="4" -->
-			<!-- 				maxlength="4" /> - <input type="text" id="mPhoneEnd" -->
-			<!-- 				name="mPhoneEnd" size="4" maxlength="4" /> -->
-			<!-- 		</div> -->
 
 			<div class="form-group">
 				<input type="text" id="memMobile" placeholder="전화번호"
