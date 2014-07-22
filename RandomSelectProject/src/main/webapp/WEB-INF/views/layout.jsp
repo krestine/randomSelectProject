@@ -14,9 +14,8 @@ body { padding-top: 5px;}
 </head>
 <div class="col-md-1"></div>
 <div class="col-md-10">
-	<body background="/myapp/resources/img/bg.png">
-	<br>
-	<br>
+	
+
 	<div align="center">
 		<table width="100%" border="0">
 			<tr>

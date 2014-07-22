@@ -14,13 +14,13 @@
 		values
 		(#{visitId},
 		SYSDATE,
-		#{menuId},
-		#{memId},
-		#{restntId},
-		#{restntName},
+		#{menuId, jdbcType=VARCHAR},
+		#{memId, jdbcType=VARCHAR},
+		#{restntId, jdbcType=VARCHAR},
+		#{restntName, jdbcType=VARCHAR},
 		'1')
 	</insert>
-	<select id="getLastVisitId" resultType="String">
+	<select id="getLastVisitId" resultType="java.lang.Integer">
 		select max(visitId) from visit
 	</select>
 	<select id="getVisitInfoByMemId" parameterType="String"

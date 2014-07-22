@@ -49,5 +49,5 @@ public interface EvaluateMapper {
 			
 			void putEval(EvaluateDTO evaluateDto);
 			
-			String getLastEvalId();
+			Integer getLastEvalId();
 }

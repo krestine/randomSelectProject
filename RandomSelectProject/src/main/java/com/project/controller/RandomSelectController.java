@@ -94,16 +94,28 @@ public class RandomSelectController {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		
-		int lastVisitId = Integer.parseInt(visitService.getLastVisitId());
+		int lastVisitId;
+		Object tempLastVisitId = visitService.getLastVisitId();
+		if(tempLastVisitId==null){
+			lastVisitId = 0;
+		}else{
+			lastVisitId = (int) tempLastVisitId;
+		}
 		System.out.println(restntId);
 		VisitDTO visitDto = new VisitDTO((lastVisitId+1)+"", "1", loginUser.getMemId(), restntId, restntName);
 		visitService.putVisit(visitDto);
 		
-		int lastEvalId = Integer.parseInt(evalService.getLastEvalId());
-		
+		int lastEvalId;
+		Object tempLastEvalId = evalService.getLastEvalId();
+		if(tempLastEvalId==null){
+			lastEvalId = 0;
+		}else{
+			lastEvalId = (int) tempLastEvalId;
+		}
+
 		EvaluateDTO evalDto = new EvaluateDTO((lastEvalId+1)+"", "-1", loginUser.getMemId(), restntId, restntName);
 		Integer evalCount = evalService.countEvalByMemIdAndResntId(evalDto);
-		if(evalCount==0){
+		if((int)evalCount==0){
 			evalService.putEval(evalDto);
 		}
 		

@@ -14,15 +14,15 @@ body { padding-top: 5px; }
 <body>
 
 <div class="row">
-	<div class="col-md-1">여백</div>	
+	<div class="col-md-1"></div>	
 	<div class ="col-md-10">
 			
 	</div>	
-	<div class="col-md-1">여백</div>
+	<div class="col-md-1"></div>
 </div>
 
 <div class="row">
-	<div class="col-md-1">여백</div>
+	<div class="col-md-1"></div>
 		
 	<div class="col-xs-10 .col-sm-6 .col-md-8">
 					<div id="theCarousel" class="carousel slide span5" >
@@ -79,7 +79,7 @@ body { padding-top: 5px; }
 	<div class=".col-xs-6 .col-sm-6 .col-md-4">	
 	</div>
 	
-	<div class="col-md-1">여백</div>
+	<div class="col-md-1"></div>
 </div>	
 				
 	

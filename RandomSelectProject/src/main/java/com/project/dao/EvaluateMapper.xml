@@ -98,13 +98,13 @@
 		values
 		(#{evalId},
 		-1,
-		#{memId},
-		#{restntId},
+		#{memId, jdbcType=VARCHAR},
+		#{restntId, jdbcType=VARCHAR},
 		SYSDATE,
 		'1')
 	</insert>
 	
-	<select id="getLastEvalId" resultType="String">
+	<select id="getLastEvalId" resultType="java.lang.Integer">
 		select max(evalId) from evaluate
 	</select>
 </mapper>

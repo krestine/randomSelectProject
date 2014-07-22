@@ -28,7 +28,7 @@ $(document).ready(function() {
 				var lists=json.restnts; 
 				var temp = "<thead><tr><td class='listth' ></td>"+"<td class='listth'></td></tr></thead>";
 					 for (var i=0; i< lists.length; i++) {
-					temp += '<tr><td class="listtd" align="center">'+'<input type="hidden" value="'+lists[i].mateId+'" name="mateId"><input type="hidden" value="'+lists[i].restntId+'" name="restntId"><input type="button" value="'+ lists[i].restntName +'"class="btn btn-info btn-sm" disabled="disabled"><input type="button" value="'+lists[i].score+'"class="btn btn-info btn-sm" disabled="disabled"><input type="button" class="btn btn-success btn-sm" value="상세보기" id="restntDetail" onclick="restntDetailGo(this);"data-toggle="modal" data-target="#restntDetailResult">'+'</td></tr>';
+					temp += '<tr><td class="listtd">'+'<input type="hidden" value="'+lists[i].mateId+'" name="mateId"><input type="hidden" value="'+lists[i].restntId+'" name="restntId"><input type="button" value="'+ lists[i].restntName +'"class="btn btn-info btn-sm" disabled="disabled"><input type="button" class="btn btn-success btn-sm" style="float:right;" value="상세보기" id="restntDetail" onclick="restntDetailGo(this);"data-toggle="modal" data-target="#restntDetailResult">'+'</td></tr>';
 					
 					}
 					 $("#tbl").html(temp);
@@ -134,9 +134,6 @@ $(document).ready(function() {
 				}
 		
 		
-		$('#mateListBtn').click(function() {
-			$('#community').attr("action", "mateListProc.do").submit();
-		});
 	
 });
 
@@ -188,10 +185,9 @@ $(document).ready(function() {
 </head>
 
 <body>
-	
-		<form id="community" method="post" >
-		 <input type="button" class="btn btn-success btn-sm" value="친구 리스트" id="mateListBtn"/>
-		</form>
+
+
+
 	<div align="center">
 		
 	<table class="table paginated" id="tbl" style="width:50%;" align="center">
@@ -207,8 +203,7 @@ $(document).ready(function() {
 		<div class="modal fade" id="restntDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		</div>
 			
-</div>				
-
+</div>
 </body>
 
 </html>
