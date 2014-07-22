@@ -67,8 +67,11 @@ public class EvaluateController {
 				"loginUser");
 		System.out.println("패러미터로 받은 DTO:" + evaluateDto);
 		if(loginUser==null){
-			model.addAttribute("errorMessage", "로그인 해주세요!!");
-			return "error";
+			/*model.addAttribute("errorMessage", "로그인 해주세요!!");
+			return "error";*/
+			
+			model.addAttribute("sMsg", " 로그인 해주세요.");
+			return "forward:loginForm.do";
 		}
 		String memId = loginUser.getMemId();
 		
@@ -111,8 +114,10 @@ public class EvaluateController {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
 		if(loginUser==null){
-			model.addAttribute("errorMessage", "로그인 해주세요!!");
-			return "error";
+			/*model.addAttribute("errorMessage", "로그인 해주세요!!");
+			return "error";*/
+			model.addAttribute("sMsg", " 로그인 해주세요.");
+			return "forward:loginForm.do";
 		}
 		System.out.println(loginUser.toString());
 		String memId = loginUser.getMemId();
