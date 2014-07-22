@@ -76,9 +76,9 @@ public class CommunityController {
 					return "setting/error";
 				}
 				
-				}catch (Exception e) {model.addAttribute("errorMessage", "로그인 해주세요!");
+				}catch (Exception e) {model.addAttribute("sMsg", "로그인이 필요한 서비스입니다. 로그인 해주세요!");
 				
-				return "setting/error";
+				return "forward:loginForm.do";
 				}	
 				
 				return "mateList";	
@@ -205,9 +205,9 @@ public class CommunityController {
 			}
 			
 			}catch (Exception e) {
-				model.addAttribute("errorMessage", "로그인 해주세요!");
+				model.addAttribute("sMsg", "로그인이 필요한 서비스입니다. 로그인 해주세요!");
 			
-				return "setting/error";
+				return "forward:loginForm.do";
 			}
 		return "restntList";
 	}

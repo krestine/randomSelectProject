@@ -18,7 +18,7 @@
 		select A.*,FLOOR((ROWNUM - 1)/#{viewCount}+1)page,
 		rownum 
 		from (
-		select memId,evalId, score, evalDate, restntName from Evaluate e, restnt1 r
+		select memId,evalId, score, evalDate, restntName from Evaluate e, restnt r
 		where e.memId=#{memId} and e.restntId = r.restntId and score != -1
 			)
 		A
@@ -35,7 +35,7 @@
 		select A.*,FLOOR((ROWNUM - 1)/#{viewCount}+1)page,
 		rownum 
 		from (
-		select memId,evalId, score, evalDate, restntName from Evaluate e, restnt1 r
+		select memId,evalId, score, evalDate, restntName from Evaluate e, restnt r
 		where e.memId=#{memId} and e.restntId = r.restntId and score = -1
 			)
 		A
