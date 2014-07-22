@@ -8,15 +8,17 @@
 body { padding-top: 5px; }
 
 </style>
-<title>Insert title here</title>
+<title>eatcalk main</title>
 
 </head>
 <body>
-
-	<center>
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-xs-12 .col-sm-6 .col-md-8">
 		
-			<div class="row">
-				<div class="span10">
+		
+		
+		<div class="span10">
 
 					<div id="theCarousel" class="carousel slide span5" >
 					<div class="carousel-option">
@@ -64,15 +66,20 @@ body { padding-top: 5px; }
 						<a href="#theCarousel" class="carousel-control left" data-slide="prev">
 						<span class="icon-prev"></span></a> 
 						<a href="#theCarousel" class="carousel-control right" data-slide="next">
-						<span class="icon-next"></span></a>
-						
-						
+						<span class="icon-next"></span></a>			
 					</div>
 				</div>
 			</div>
-		</div>
+	</div>	
+	<div class=".col-xs-6 .col-sm-6 .col-md-4">
+	
+	</div>
+	<div class="col-md-2"></div>
+</div>	
+				
+	
 
 
-	</center>
+
 </body>
 </html>
