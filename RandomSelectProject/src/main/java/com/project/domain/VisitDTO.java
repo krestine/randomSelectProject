@@ -21,6 +21,9 @@ public class VisitDTO {
 		this.restntId = restntId;
 		this.restntName = restntName;
 	}
+	public VisitDTO(){
+		
+	}
 	public String getVisitId() {
 		return visitId;
 	}
