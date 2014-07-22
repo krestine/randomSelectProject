@@ -102,6 +102,43 @@ public class MemberController {
 		return text.toString();
 	}
 
+	// 로그인 : 아이디 찾기 ajax
+	@RequestMapping(value = "findIdProc.do", method = RequestMethod.POST)
+	public ModelAndView findIdProc(HttpServletRequest request,
+			HttpServletResponse response, MemberDTO memberDto, Model model) {
+		System.out.println("findIdProc()");
+
+		ModelAndView view = new ModelAndView("member/memAjax");
+
+		String memName = request.getParameter("memName");
+		System.out.println("memName=" + memName);
+
+		String memBirth = request.getParameter("memBirth");
+		System.out.println("memBirth=" + memBirth);
+
+		String memMobile = request.getParameter("memMobile");
+		System.out.println("memMobile=" + memMobile);
+
+		memberDto.setMemName(memName);
+		memberDto.setMemBirth(memBirth);
+		memberDto.setMemMobile(memMobile);
+
+		System.out.println(memberDto);
+
+		String userId = memberService.getMemIdByMemberTerms(memberDto);
+
+		if (userId == null) {
+			view.addObject("idResult", "false");
+			System.out.println("정보 불일치");
+		} else {
+			view.addObject("idResult", "true");
+			System.out.println("회원정보 일치");
+		}
+		System.out.println(userId);
+		view.addObject("result", userId);
+		return view;
+	}
+
 	// 로그인 : 비밀번호 찾기 ajax
 	@RequestMapping("pwCheck.do")
 	public ModelAndView pwCheckAjax(HttpServletRequest request,
@@ -139,13 +176,56 @@ public class MemberController {
 			} else {
 				view.addObject("pwResult", "true");
 				System.out.println("회원정보 일치");
+
+				// ///////////////////////////////////////////////////////////////////////
+				String fromUser = "6amugeona@gmail.com";
+				String toUser = (String) request.getParameter("memId");
+				String subject = "[6randomSelect] 요청하신 인증번호입니다.";
+				// 랜덤으로 인증번호 생성
+				String randomCD = Math.round(Math.random() * 99999999) / 1 + "";
+				System.out.println("randomCD=" + randomCD);
+				// 인증번호 암호화
+				SeedX x = new SeedX();
+				int[] roundKey = x.getSeedRoundKey();
+				System.out.println("roundKey=" + roundKey);
+				byte[] plainCD = x.stringToPlain(randomCD);
+				System.out.println("plainCD=" + plainCD);
+				byte[] encruptCD = x.getSeedEncrypt(plainCD, roundKey);
+				System.out.println("encruptCD=" + encruptCD);
+				String finCD = x.cipherToString(encruptCD);
+				System.out.println(" finCD=" + finCD);
+
+				String text = getEmailText(randomCD, toUser);
+
+				mailService.sendMail(fromUser, toUser, subject, text);
+
+				memberDto.setMemId(toUser);
+				// 암호화된 CD를 비밀번호로 저장
+				memberDto.setTempPw(finCD);
+				memberService.setMemPasswdByMemberTerms(memberDto);
+
 			}
 		} else {
 			view.addObject("pwResult", "incorrectId");
 			System.out.println("아이디 없음");
 		}
+
+		System.out.println(userId);
+		view.addObject("resultCD", userId);
 		return view;
 	}
+
+	// 임시비밀번호 메일발송내용
+	protected String getEmailText(String randomCD, String toUser) {
+		StringBuilder text = new StringBuilder();
+		text.append("<h2>[6randomSelect] 임시 비밀번호입니다.</h2><br>");
+		text.append(randomCD);
+		text.append("<br><a href=" + urlPath + "loginForm.do"
+				+ ">임시번호로 로그인후 비밀번호를 변경해주세요.</a>");
+		return text.toString();
+	}
+
+	// //////////////////////////////////////////////////////////
 
 	// 내정보 : 현재비밀번호 확인 ajax
 	@RequestMapping("pwInfoCheck.do")
@@ -302,8 +382,8 @@ public class MemberController {
 			session.setAttribute("loginUser", loginUser);
 			// model.addAttribute("loginUser", loginUser);
 
-			// return "forward:main.do";
-			return "main";
+			return "forward:main.do";
+			// return "main";
 		} else {
 			request.setAttribute("errmessage", "아이디와 비밀번호를 확인해주세요");
 			return "forward:loginForm.do";
@@ -320,18 +400,18 @@ public class MemberController {
 		return "findId";
 	}
 
-	@RequestMapping(value = "findIdProc.do", method = RequestMethod.POST)
-	public String findIdProc(Model model, MemberDTO memberDto) {
-		System.out.println("findIdProc()");
-		String userId = memberService.getMemIdByMemberTerms(memberDto);
-
-		if (userId == null) {
-			model.addAttribute("errmessage", "정보를 다시 확인해주세요");
-			return "forward:findIdForm.do";
-		}
-		model.addAttribute("userId", userId);
-		return "findIdOk";
-	}
+	// @RequestMapping(value = "findIdProc.do", method = RequestMethod.POST)
+	// public String findIdProc(Model model, MemberDTO memberDto) {
+	// System.out.println("findIdProc()");
+	// String userId = memberService.getMemIdByMemberTerms(memberDto);
+	//
+	// if (userId == null) {
+	// model.addAttribute("errmessage", "정보를 다시 확인해주세요");
+	// return "forward:findIdForm.do";
+	// }
+	// model.addAttribute("userId", userId);
+	// return "findIdOk";
+	// }
 
 	// 비밀번호찾기, 임시비밀번호 변경
 	/*
@@ -339,58 +419,59 @@ public class MemberController {
 	 * System.out.println("findPasswordForm()"); return "findPassword"; }
 	 */
 
-	@RequestMapping(value = "findPasswordProc.do", method = RequestMethod.POST)
-	public String findPasswordProc(Model model, MemberDTO memberDto,
-			HttpServletRequest request) {
-		System.out.println("findPasswordProc()");
-		String userPassword = memberService
-				.getMemPasswdByMemberTerms(memberDto);
-
-		if (userPassword == null) {
-			model.addAttribute("errmessage", "정보를 다시 확인해주세요");
-			return "forward:pwCheck.do";
-		}
-
-		String fromUser = "6amugeona@gmail.com";
-		String toUser = (String) request.getParameter("memId");
-		String subject = "[6randomSelect] 요청하신 인증번호입니다.";
-		// 랜덤으로 인증번호 생성
-		String randomCD = Math.round(Math.random() * 99999999) / 1 + "";
-		System.out.println("randomCD=" + randomCD);
-		// 인증번호 암호화
-		SeedX x = new SeedX();
-		int[] roundKey = x.getSeedRoundKey();
-		System.out.println("roundKey=" + roundKey);
-		byte[] plainCD = x.stringToPlain(randomCD);
-		System.out.println("plainCD=" + plainCD);
-		byte[] encruptCD = x.getSeedEncrypt(plainCD, roundKey);
-		System.out.println("encruptCD=" + encruptCD);
-		String finCD = x.cipherToString(encruptCD);
-		System.out.println(" finCD=" + finCD);
-
-		String text = getEmailText(randomCD, toUser);
-
-		mailService.sendMail(fromUser, toUser, subject, text);
-
-		memberDto.setMemId(toUser);
-		// 암호화된 CD를 비밀번호로 저장
-		memberDto.setTempPw(finCD);
-		memberService.setMemPasswdByMemberTerms(memberDto);
-
-		model.addAttribute("userMail", toUser);
-		// model.addAttribute("userPassword", userPassword);
-		return "findPasswordOk";
-	}
-
-	// 임시비밀번호 메일발송내용
-	protected String getEmailText(String randomCD, String toUser) {
-		StringBuilder text = new StringBuilder();
-		text.append("<h2>[6randomSelect] 임시 비밀번호입니다.</h2><br>");
-		text.append(randomCD);
-		text.append("<br><a href=" + urlPath + "loginForm.do"
-				+ ">임시번호로 로그인후 비밀번호를 변경해주세요.</a>");
-		return text.toString();
-	}
+	// @RequestMapping(value = "findPasswordProc.do", method =
+	// RequestMethod.POST)
+	// public String findPasswordProc(Model model, MemberDTO memberDto,
+	// HttpServletRequest request) {
+	// System.out.println("findPasswordProc()");
+	// String userPassword = memberService
+	// .getMemPasswdByMemberTerms(memberDto);
+	//
+	// if (userPassword == null) {
+	// model.addAttribute("errmessage", "정보를 다시 확인해주세요");
+	// return "forward:pwCheck.do";
+	// }
+	//
+	// String fromUser = "6amugeona@gmail.com";
+	// String toUser = (String) request.getParameter("memId");
+	// String subject = "[6randomSelect] 요청하신 인증번호입니다.";
+	// // 랜덤으로 인증번호 생성
+	// String randomCD = Math.round(Math.random() * 99999999) / 1 + "";
+	// System.out.println("randomCD=" + randomCD);
+	// // 인증번호 암호화
+	// SeedX x = new SeedX();
+	// int[] roundKey = x.getSeedRoundKey();
+	// System.out.println("roundKey=" + roundKey);
+	// byte[] plainCD = x.stringToPlain(randomCD);
+	// System.out.println("plainCD=" + plainCD);
+	// byte[] encruptCD = x.getSeedEncrypt(plainCD, roundKey);
+	// System.out.println("encruptCD=" + encruptCD);
+	// String finCD = x.cipherToString(encruptCD);
+	// System.out.println(" finCD=" + finCD);
+	//
+	// String text = getEmailText(randomCD, toUser);
+	//
+	// mailService.sendMail(fromUser, toUser, subject, text);
+	//
+	// memberDto.setMemId(toUser);
+	// // 암호화된 CD를 비밀번호로 저장
+	// memberDto.setTempPw(finCD);
+	// memberService.setMemPasswdByMemberTerms(memberDto);
+	//
+	// model.addAttribute("userMail", toUser);
+	// // model.addAttribute("userPassword", userPassword);
+	// return "findPasswordOk";
+	// }
+	//
+	// // 임시비밀번호 메일발송내용
+	// protected String getEmailText(String randomCD, String toUser) {
+	// StringBuilder text = new StringBuilder();
+	// text.append("<h2>[6randomSelect] 임시 비밀번호입니다.</h2><br>");
+	// text.append(randomCD);
+	// text.append("<br><a href=" + urlPath + "loginForm.do"
+	// + ">임시번호로 로그인후 비밀번호를 변경해주세요.</a>");
+	// return text.toString();
+	// }
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -412,7 +493,9 @@ public class MemberController {
 	public String passwordProc(Model model, MemberDTO memberDto,
 			HttpSession session, HttpServletRequest request) {
 		System.out.println("passwordProc()");
-
+		if (session.getAttribute("loginUser") == null) {
+			return "forward:loginForm.do";
+		}
 		MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
 		System.out.println("loginUser.getMemId()=" + loginUser.getMemId());
 

@@ -13,28 +13,33 @@ input.error {
 }
 
 label.error {
-	margin-left: 10px;
+	/* 	margin-left: 10px; */
+	display: block;
 	color: red;
 }
 
-.div_tb {
-	position: relative;
-	/* 	margin-left: 50%; */
-	left: 50%;
-	width: 300px;
-	height: 100px;
+/* This parent can be any width and height */
+.block {
 	text-align: center;
-	display: table;
-	width: 50%;
+	/* 	background: #ccc; */
+	margin-bottom: 10px;
 }
 
-.div_tr {
-	display: table-row;
+/* The ghost, nudged to maintain perfect centering */
+.block:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	margin-right: -0.25em; /* Adjusts for spacing */
 }
 
-.div_tc {
-	display: table-cell;
-	margin: 5px;
+/* The element to be centered, can
+   also be of any width and height */
+.centered {
+	display: inline-block;
+	vertical-align: middle;
+	width: 300px;
 }
 </style>
 <script type="text/javascript">
@@ -63,6 +68,7 @@ label.error {
 
 						});
 
+						
 						//현재비밀번호 확인 ajax
 						$('#pwCheck_btn')
 								.click(
@@ -186,48 +192,61 @@ label.error {
 											}
 											return result;
 										});
-
+						//엔터키 방지 
+						$('#pwCheck_form')
+								.bind(
+										"keyup keypress",
+										function(e) {
+											var code = e.keyCode || e.which;
+											if (code == 13) {
+												e.preventDefault();
+												$('#pwCheckMsg')
+														.html(
+																'<font color=red>enter입력금지</font>');
+												return false;
+											}
+										});
 					});
 </script>
 <title>myInfo.jsp</title>
 </head>
 <body>
-	<div class="div_tb">
-		<form>
-			<div class="div_tr">
-				<div class="div_tc">아이디</div>
-				<div class="div_tc">&nbsp;:&nbsp;&nbsp;</div>
-				<div class="div_tc">${sessionScope.loginUser.memId}</div>
-			</div>
-			<div class="div_tr">
-				<div class="div_tc">이&nbsp;&nbsp;름</div>
-				<div class="div_tc">&nbsp;:&nbsp;&nbsp;</div>
-				<div class="div_tc">${myInfo.memName}</div>
-			</div>
-			<div class="div_tr">
-				<div class="div_tc">등&nbsp;&nbsp;급</div>
-				<div class="div_tc">&nbsp;:&nbsp;&nbsp;</div>
-				<div class="div_tc">${myInfo.memGrade}</div>
-			</div>
-			<div class="div_tr">
-				<div class="div_tc">전화번호</div>
-				<div class="div_tc">&nbsp;:&nbsp;&nbsp;</div>
-				<div class="div_tc">${myInfo.memMobile}</div>
-			</div>
-			<div class="div_tr">
-				<div>
-					<label style="color: blue"> ${sMsg}</label>
-				</div>
-			</div>
-		</form>
+	<table align=center>
+		<tr>
+			<td>아이디</td>
+			<td>:&nbsp;&nbsp;</td>
+			<td>${sessionScope.loginUser.memId}</td>
+		</tr>
+		<tr>
+			<td>이&nbsp;&nbsp;름&nbsp;</td>
+			<td>:&nbsp;&nbsp;</td>
+			<td>${myInfo.memName}</td>
+		</tr>
+		<tr>
+			<td>등&nbsp;&nbsp;급&nbsp;</td>
+			<td>:&nbsp;&nbsp;</td>
+			<td>${myInfo.memGrade}</td>
+		</tr>
+		<tr>
+			<td>전화번호</td>
+			<td>:&nbsp;&nbsp;</td>
+			<td>${myInfo.memMobile}</td>
+		</tr>
+		<tr>
+			<td colspan=3 align=center><font color=blue> ${sMsg}</font></td>
+		</tr>
+	</table>
 
-		<button id="changeInfo" class="btn btn-info btn-sm">내정보 변경</button>
+	<div class="block" style="margin-top: 10px;">
+		<div class="centered">
+			<button id="changeInfo" class="btn btn-info btn-sm">내정보 변경</button>
+		</div>
 
-		<div class="modifyBox">
+		<div class="modifyBox" style="margin-top: 10px;">
 			<form id="pwCheck_form" action="" method="post" style="display: none">
-				<div>현재비밀번호</div>
 				<div>
-					<input type="password" id="prePasswd" name="memPasswd">
+					<input type="password" id="prePasswd" name="memPasswd"
+						placeholder="현재&nbsp;비밀번호">
 				</div>
 				<div>
 					<label id="pwCheckMsg"></label>
@@ -238,58 +257,58 @@ label.error {
 				</div>
 			</form>
 
-			<div class="tabtable">
-				<div class="dropdown" style="display: none">
-					<ul class="nav nav-tabs" id="changeFormTab">
-						<!-- 				<li class="active"><a href="#pwChange_form" data-toggle="tab">비밀번호 -->
-						<!-- 						변경</a></li> -->
-						<!-- 				<li><a href="#mobileChange_form" data-toggle="tab">전화번호 변경</a></li> -->
-						<li class="active"><a href="#pane1" data-toggle="tab">비밀번호
-								변경</a></li>
-						<li><a href="#pane2" data-toggle="tab">전화번호 변경</a></li>
-					</ul>
+			<div class="block">
+				<div class="centered" style="align: center; position: static;">
+					<div class="dropdown" style="display: none">
+						<div style="position: relative; left: 55px;">
+							<ul class="nav nav-tabs" id="changeFormTab">
+								<li class="active"><a href="#pane1" data-toggle="tab">비밀번호
+										변경</a></li>
+								<li><a href="#pane2" data-toggle="tab">전화번호 변경</a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 
 
 				<div class="infoChangeBox">
 					<div class="tab-content">
 
-
 						<div class="tab-pane active" id="pane1">
-							<form id="pwChange_form" action="passwordProc.do" method="post"
-								style="display: none">
-
-								<div>새 비밀번호</div>
-								<div>
-									<input type="password" id="tempPw" name="tempPw">
-								</div>
-								<div>새 비밀번호 확인</div>
-								<div>
-									<input type="password" id="tempPw2" name="tempPw2">
-								</div>
-								<div>
-									<label id="infoErrorMsg" style="color: red"></label>
-								</div>
-								<div>
-									<input type="submit" class="btn btn-warning btn-sm"
-										value="새 비밀번호로 로그인">
-								</div>
-							</form>
+							<div class="form-group">
+								<form id="pwChange_form" action="passwordProc.do" method="post"
+									style="display: none">
+									<div class="form-group"></div>
+									<div class="form-group">
+										<input type="password" id="tempPw" name="tempPw"
+											placeholder="새&nbsp;비밀번호">
+									</div>
+									<div class="form-group">
+										<input type="password" id="tempPw2" name="tempPw2"
+											placeholder="새&nbsp;비밀번호&nbsp;확인">
+									</div>
+									<div>
+										<label id="infoErrorMsg" style="color: red"></label>
+									</div>
+									<div class="form-group">
+										<input type="submit" class="btn btn-warning btn-sm"
+											value="새 비밀번호로 로그인">
+									</div>
+								</form>
+							</div>
 						</div>
-
 
 						<div class="tab-pane" id="pane2">
 							<form id="mobileChange_form" action="mobileProc.do" method="post"
 								style="display: block">
-								<div>전화번호</div>
-								<div>
+								<div class="form-group"></div>
+								<div class="form-group">
 									<input type="text" id="memMobile" name="memMobile"
-										placeholder="${myInfo.memMobile}">
+										placeholder="전화번호"> <label id="mobileErrorMsg"
+										style="color: red"></label>
 								</div>
-								<div>
-									<label id="mobileErrorMsg" style="color: red"></label>
-								</div>
-								<div>
+
+								<div class="form-group">
 									<input type="submit" class="btn btn-success btn-sm"
 										value="전화번호 변경">
 								</div>
@@ -304,10 +323,9 @@ label.error {
 		</div>
 
 
-		<div>
+		<div class="centered">
 			<a href="dropForm.do">회원탈퇴</a>
 		</div>
 	</div>
-
 </body>
 </html>

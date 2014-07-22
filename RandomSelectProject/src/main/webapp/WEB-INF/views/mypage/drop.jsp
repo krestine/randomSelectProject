@@ -15,21 +15,23 @@ input.error {
 }
 
 label.error {
-	margin-left: 10px;
+	display: block;
 	color: red;
 }
 </style>
 <script type="text/javascript">
-	$("#reasonForm").validate({
-		rules : {
-			leaveReason : "required"
-		},
-		messages : {
-			leaveReason : "탈퇴이유를 적어주세요."
-		},
-		submitHandler : function(form) {
-			$(form).Submit();
-		}
+	$(document).ready(function() {
+		$("#reasonForm").validate({
+			rules : {
+				leaveReason : "required"
+			},
+			messages : {
+				leaveReason : "탈퇴사유를 적어주세요."
+			},
+			submitHandler : function(form) {
+				$(form).Submit();
+			}
+		});
 	});
 </script>
 <title>drop.jsp</title>

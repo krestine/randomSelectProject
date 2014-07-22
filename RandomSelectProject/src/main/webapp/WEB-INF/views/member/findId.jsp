@@ -16,11 +16,11 @@
 <!-- <script type="text/javascript"  src="//code.jquery.com/jquery-1.10.2.js"></script> -->
 <script
 	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
-
 <script type="text/javascript">
 	$(document)
 			.ready(
 					function() {
+
 						// 달력 
 						$("#dateId,#datePw").datepicker(
 								{
@@ -32,7 +32,8 @@
 											'3월(MAR)', '4월(APR)', '5월(MAY)',
 											'6월(JUN)', '7월(JUL)', '8월(AUG)',
 											'9월(SEP)', '10월(OCT)', '11월(NOV)',
-											'12월(DEC)' ]
+											'12월(DEC)' ],
+
 								});
 
 						//toggle로 div나누기 
@@ -65,11 +66,13 @@
 											e.preventDefault();
 										});
 
-						//아이디폼 정규식
-						//$("#findId_btn").click(function() {
-						$("#findId_form")
-								.submit(
+						// 						$("#findRsModal").modal('hide');
+
+						//아이디찾기 ajax&modal
+						$("#findId_btn")
+								.click(
 										function() {
+											// 						$("#findId_form").submit(function() {
 											var name = $('#nameId').val();
 											var date = $('#dateId').val();
 											var mobile = $('#mobileId').val();
@@ -82,21 +85,73 @@
 														.html(
 																'<font color=red>모두 입력해주세요.</font>');
 												return false;
+											} else if (!regex_name.test(name)) {
+												$('#idErrorMsg')
+														.html(
+																'<font color=red>이름은 한글로 입력해주세요.</font>');
+												return false;
+											} else if (!regex_mobile
+													.test(mobile)) {
+												$('#idErrorMsg')
+														.html(
+																'<font color=red>전화번호는 -을 포함한 숫자로 입력해주세요.</font>');
+												return false;
+
 											} else {
-												if (!regex_name.test(name)) {
-													$('#idErrorMsg')
-															.html(
-																	'<font color=red>이름은 한글로 입력해주세요.</font>');
-													return false;
-												} else if (!regex_mobile
-														.test(mobile)) {
-													$('#idErrorMsg')
-															.html(
-																	'<font color=red>전화번호는 -을 포함한 숫자로 입력해주세요.</font>');
-													return false;
-												}
+												$
+														.ajax({
+															cache : false,
+															async : false,
+															type : 'POST',
+															url : 'findIdProc.do',
+															data : 'memName='
+																	+ name
+																	+ '&memBirth='
+																	+ date
+																	+ '&memMobile='
+																	+ mobile,
+															dataType : 'xml',
+															error : function() {
+																alert("error");
+															},
+															success : function(
+																	xml) {
+																var result = $(
+																		xml)
+																		.find(
+																				'checkId')
+																		.text();
+																if (result
+																		.trim() == 'true') {
+																	$(
+																			'#idErrorMsg')
+																			.html(
+																					'');
+																	var userId = $(
+																			xml)
+																			.find(
+																					'check')
+																			.text();
+																	alert(userId);
+																	
+																	var htmlId = '<div align="center">	찾으신&nbsp;아이디는 &nbsp;<span id="findUserId" style="color: blue;">"'+userId+'"</span>&nbsp;입니다.</div>';
+																	
+																	$('.panpanel-body').html(htmlId);
+																	$('.findResult_panel').toggle();
+																	// 																	var htmlId = ' <div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div align="center">찾으신&nbsp;아이디는 &nbsp;<span id="findUserId" style="color:blue;">"'+userId+'"</span>&nbsp;입니다.</div></div><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></div><!-- /.modal-content --></div><!-- /.modal-dialog -->';
+																	// 																	$('#findRsModal').html(htmlId);
+																	// 																	$("#findRsModal").modal('show');
+																} else {
+																	$(
+																			'#idErrorMsg')
+																			.html(
+																					'<font color=red>일치하는 아이디가 없습니다.</font>');
+
+																}
+															}
+														});
+
 											}
-											return true;
 										});
 						//}
 
@@ -152,9 +207,23 @@
 																		.text();
 																if (result
 																		.trim() == 'true') {
+																	// 																	$('#findPassword_form').submit();
 																	$(
-																			'#findPassword_form')
-																			.submit();
+																			'#pwErrorMsg')
+																			.html(
+																					'');
+																	var userMail = $(
+																			xml)
+																			.find(
+																					'checkCertify')
+																			.text();
+
+																	alert(userMail);
+
+																	// 																	var htmlPw = ' <div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div align="center"><span id="findPwCheck" style="color:blue;">"'+userMail+'"</span>로&nbsp;인증번호가&nbsp;발송되었습니다.<br>메일을&nbsp;확인해&nbsp;주세요.</div></div><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></div><!-- /.modal-content --></div><!-- /.modal-dialog -->';
+
+																	// 																	$('#findRsModal').html(htmlPw);
+																	// 																	$("#findRsModal").modal('show');
 																} else {
 																	if (result
 																			.trim() == 'incorrectInfo') {
@@ -178,6 +247,11 @@
 </script>
 </head>
 <body>
+	<div class="findResult_panel" style="display: none">
+		<div class="panel panel-default">
+			<div class="panel-body"></div>
+		</div>
+	</div>
 
 	<div align="center" class="findBox">
 
@@ -201,14 +275,16 @@
 				<label id="idErrorMsg" style="color: red">${errmessage }</label>
 			</div>
 			<div>
-				<input type="submit" class="btn btn-primary btn-sm" id="findId_btn"
+				<input type="button" class="btn btn-primary btn-sm" id="findId_btn"
 					value="아이디찾기">
 			</div>
 		</form>
 
 
-		<form role="form" id="findPassword_form" action="findPasswordProc.do"
-			method="post" style="display: none">
+		<form role="form" id="findPassword_form" method="post"
+			action="pwCheck.do" style="display: none">
+			<!-- 		 action="findPasswordProc.do" -->
+
 			<div>
 				<h5 class="text-warning">비밀번호 찾기</h5>
 			</div>
@@ -227,6 +303,8 @@
 				<label id="pwErrorMsg" style="color: red"></label>
 			</div>
 			<div>
+				<!-- 				<input type="button" class="btn btn-warning btn-sm" -->
+				<!-- 					id="findPwCheck_btn" value="비밀번호찾기"> -->
 				<input type="button" class="btn btn-warning btn-sm"
 					id="findPwCheck_btn" value="비밀번호찾기">
 			</div>
@@ -243,8 +321,8 @@
 		</span>
 	</div>
 
-
-
-
+	<!-- 모달 -->
+	<!-- 	<div id="findRsModal" class="modal fade" role="dialog"  aria-hidden="true" data-backdrop="false"></div> -->
+	<!-- 	<div id="findPwModal" class="modal fade" role="dialog" aria-hidden="true" ></div> -->
 </body>
 </html>
