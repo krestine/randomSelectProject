@@ -177,7 +177,7 @@ public class EvaluateController {
 		System.out.println("memID edit::" + memId);
 		System.out.println("evalId deit::" + evalId);
 		evaluateDto.setMemId(loginUser.getMemId());
-		evaluateDto.setEvalId(evalId);
+		evaluateDto.setEvalId(Integer.parseInt(evalId));
 		evaluateDto.setScore(score);
 		evaluateService.setScoreByEvaluateTerms(evaluateDto);
 
@@ -218,7 +218,7 @@ public class EvaluateController {
 		
 		// 점수 수정 쿼리 실행
 		evaluateDto.setMemId(loginUser.getMemId());
-		evaluateDto.setEvalId(evalId);
+		evaluateDto.setEvalId(Integer.parseInt(evalId));
 		evaluateDto.setScore(score);
 		
 		evaluateService.setScoreByEvaluateTerms(evaluateDto);

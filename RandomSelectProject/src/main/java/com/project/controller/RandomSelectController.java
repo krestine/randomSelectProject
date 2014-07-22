@@ -102,7 +102,7 @@ public class RandomSelectController {
 			lastVisitId = (int) tempLastVisitId;
 		}
 		System.out.println(restntId);
-		VisitDTO visitDto = new VisitDTO((lastVisitId+1)+"", "1", loginUser.getMemId(), restntId, restntName);
+		VisitDTO visitDto = new VisitDTO((lastVisitId+1), "1", loginUser.getMemId(), restntId, restntName);
 		visitService.putVisit(visitDto);
 		
 		int lastEvalId;
@@ -113,7 +113,7 @@ public class RandomSelectController {
 			lastEvalId = (int) tempLastEvalId;
 		}
 
-		EvaluateDTO evalDto = new EvaluateDTO((lastEvalId+1)+"", "-1", loginUser.getMemId(), restntId, restntName);
+		EvaluateDTO evalDto = new EvaluateDTO((lastEvalId+1), "-1", loginUser.getMemId(), restntId, restntName);
 		Integer evalCount = evalService.countEvalByMemIdAndResntId(evalDto);
 		if((int)evalCount==0){
 			evalService.putEval(evalDto);
@@ -198,8 +198,8 @@ public class RandomSelectController {
 		
 	@RequestMapping(value = "/deleteVisitInfo.do", method = RequestMethod.POST)
 	String deleteVisitInfo(VisitDTO visitDto, Model model, HttpServletRequest request) {
-		String visitId = visitDto.getVisitId();
-		visitService.dropVisitById(visitId);
+		Integer visitId = visitDto.getVisitId();
+		visitService.dropVisitById(visitId+"");
 		
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");

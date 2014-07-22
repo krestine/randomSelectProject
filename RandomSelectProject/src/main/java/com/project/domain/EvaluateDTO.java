@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class EvaluateDTO {
 	// memberField
-	private String evalId;
+	private Integer evalId;
 	private String score;
 	private String memId;
 	private String restntId;
@@ -13,7 +13,7 @@ public class EvaluateDTO {
 	private Integer viewCount;
 	private Integer pageNum;
 	
-	public EvaluateDTO(String evalId, String score, String memId,
+	public EvaluateDTO(Integer evalId, String score, String memId,
 			String restntId, String restntName) {
 		super();
 		this.evalId = evalId;
@@ -27,11 +27,11 @@ public class EvaluateDTO {
 		
 	}
 
-	public String getEvalId() {
+	public Integer getEvalId() {
 		return evalId;
 	}
 
-	public void setEvalId(String evalId) {
+	public void setEvalId(Integer evalId) {
 		this.evalId = evalId;
 	}
 
@@ -92,6 +92,14 @@ public class EvaluateDTO {
 	}
 
 	@Override
+	public String toString() {
+		return "EvaluateDTO [evalId=" + evalId + ", score=" + score
+				+ ", memId=" + memId + ", restntId=" + restntId + ", evalDate="
+				+ evalDate + ", restntName=" + restntName + ", viewCount="
+				+ viewCount + ", pageNum=" + pageNum + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -109,6 +117,7 @@ public class EvaluateDTO {
 				+ ((viewCount == null) ? 0 : viewCount.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -159,12 +168,5 @@ public class EvaluateDTO {
 		} else if (!viewCount.equals(other.viewCount))
 			return false;
 		return true;
-	}
-	@Override
-	public String toString() {
-		return "EvaluateDTO [evalId=" + evalId + ", score=" + score
-				+ ", memId=" + memId + ", restntId=" + restntId + ", evalDate="
-				+ evalDate + ", restntName=" + restntName + ", viewCount="
-				+ viewCount + ", pageNum=" + pageNum + "]";
 	}
 }
