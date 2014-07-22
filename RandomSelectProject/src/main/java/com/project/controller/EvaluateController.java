@@ -169,7 +169,7 @@ public class EvaluateController {
 	// 식당 평가 수정(evaluateList.nEvaluateList에서 사용)
 	@RequestMapping(value = "edit.do", method = RequestMethod.POST)
 	public String setScoreByEvaluateTerms(Model model, EvaluateDTO evaluateDto,
-			String evalId, String memId, String score,
+			Integer evalId, String memId, String score,
 			HttpServletRequest request) {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
@@ -191,12 +191,12 @@ public class EvaluateController {
 	// 삭제(evaluateList.jsp에서 만 사용)
 	@RequestMapping(value = "delete.do")
 	public String deleteData(HttpServletRequest request, String memId,
-			String evalId) {
+			Integer evalId) {
 		System.out.println("memID 딜리트::" + memId);
 		System.out.println("evalId 딜리트::" + evalId);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("memId", memId);
-		map.put("evalId", evalId);
+		map.put("evalId", evalId.toString());
 		evaluateService.deleteData(map);
 		System.out.println("memID 딜리트::" + memId);
 		System.out.println("evalId 딜리트::" + evalId);
@@ -207,7 +207,7 @@ public class EvaluateController {
 	// nEvaluateList에서 수정
 	@RequestMapping(value = "editOk.do", method = RequestMethod.POST)
 	public String setScoreByEvaluateTerms1(Model model,
-			EvaluateDTO evaluateDto, String evalId, String memId, String score,
+			EvaluateDTO evaluateDto, Integer evalId, String memId, String score,
 			HttpServletRequest request) {
 		MemberDTO loginUser = (MemberDTO) request.getSession().getAttribute(
 				"loginUser");
