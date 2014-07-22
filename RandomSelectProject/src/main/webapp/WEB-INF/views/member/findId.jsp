@@ -132,12 +132,17 @@
 																			.find(
 																					'check')
 																			.text();
-																	alert(userId);
-																	
-																	var htmlId = '<div align="center">	찾으신&nbsp;아이디는 &nbsp;<span id="findUserId" style="color: blue;">"'+userId+'"</span>&nbsp;입니다.</div>';
-																	
-																	$('.panpanel-body').html(htmlId);
-																	$('.findResult_panel').toggle();
+// 																	alert(userId);
+
+																	var htmlId = '<div class="alert alert-dismissable alert-warning"><button type="button" class="close" data-dismiss="alert">×</button><p align="center">찾으신&nbsp;아이디는 &nbsp;<span id="findUserId" style="color: blue;">"'
+																			+ userId
+																			+ '"</span>&nbsp;입니다.</p></div>';
+																	$(htmlId)
+																			.appendTo(
+																					"#findResult_body");
+																	$(
+																			'#findResult_div')
+																			.show();
 																	// 																	var htmlId = ' <div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div align="center">찾으신&nbsp;아이디는 &nbsp;<span id="findUserId" style="color:blue;">"'+userId+'"</span>&nbsp;입니다.</div></div><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></div><!-- /.modal-content --></div><!-- /.modal-dialog -->';
 																	// 																	$('#findRsModal').html(htmlId);
 																	// 																	$("#findRsModal").modal('show');
@@ -218,8 +223,18 @@
 																					'checkCertify')
 																			.text();
 
-																	alert(userMail);
+// 																	alert(userMail);
 
+																	var htmlPw='<div class="alert alert-dismissable alert-success"><button type="button" class="close" data-dismiss="alert">×</button><p align="center"><span id="findPwCheck" style="color: blue;">"'+userMail+'"</span>로&nbsp;인증번호가&nbsp;발송되었습니다.<br>메일을&nbsp;확인해&nbsp;주세요.</p></div>';
+																	
+																	$(htmlPw)
+																	.appendTo(
+																			"#findResult_body");
+															$(
+																	'#findResult_div')
+																	.show();
+																	
+																	
 																	// 																	var htmlPw = ' <div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div align="center"><span id="findPwCheck" style="color:blue;">"'+userMail+'"</span>로&nbsp;인증번호가&nbsp;발송되었습니다.<br>메일을&nbsp;확인해&nbsp;주세요.</div></div><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></div><!-- /.modal-content --></div><!-- /.modal-dialog -->';
 
 																	// 																	$('#findRsModal').html(htmlPw);
@@ -247,10 +262,10 @@
 </script>
 </head>
 <body>
-	<div class="findResult_panel" style="display: none">
-		<div class="panel panel-default">
-			<div class="panel-body"></div>
-		</div>
+	<div class="row" id="findResult_div" style="display: none">
+		<div class="col-md-4"></div>
+		<div class="col-md-4" id="findResult_body"></div>
+		<div class="col-md-4"></div>
 	</div>
 
 	<div align="center" class="findBox">
