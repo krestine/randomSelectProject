@@ -202,8 +202,9 @@ var paramData = {
 </head>
 <body>	
 
-<div container>
-	<div row>
+<div class="container">
+	<div class="row">
+		<div class="span5">
 	<form id="community" method="post" >
 		 <input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
 	</form>
