@@ -23,7 +23,7 @@ public class VisitServiceImpl implements VisitService {
 
 	@Transactional
 	@Override
-	public String getLastVisitId() {
+	public Integer getLastVisitId() {
 		return visitMapper.getLastVisitId();
 	}
 

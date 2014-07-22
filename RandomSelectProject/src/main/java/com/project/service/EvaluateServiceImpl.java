@@ -90,7 +90,7 @@ public class EvaluateServiceImpl implements EvaluateService {
 	}
 
 	@Override
-	public String getLastEvalId() {
+	public Integer getLastEvalId() {
 		return evaluateMapper.getLastEvalId();
 	}
 

@@ -6,7 +6,7 @@ import com.project.domain.VisitDTO;
 
 public interface VisitService {
 	void putVisit(VisitDTO visitDto);
-	String getLastVisitId();
+	Integer getLastVisitId();
 	List<VisitDTO> getVisitInfoByMemId(String string);
 	void dropVisitById(String string);
 }
