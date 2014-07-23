@@ -8,7 +8,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8 initial-scale=1.0" />
-
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <title>evaluateList.jsp</title>
 <script type="text/javascript">
 </script>

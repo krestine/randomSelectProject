@@ -29,6 +29,7 @@ function evalPage(obj){
 	$('#pageForm').submit();
 }
 </script>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 </head>
 <body>
 <div class="row">
