@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head><link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css' />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8 initial-scale=1.0"/>
 
 
 <script>
@@ -186,7 +186,7 @@ $(document).ready(function() {
 
 <body>
 <div class="row">
-<div class="col-md-12"><a href="mateListProc.do"><img src="/myapp/resources/img/community.png" style="width:100%;"></a></div>	
+<div class="col-md-12"><a href="restntListProc.do"><img src="/myapp/resources/img/community.png" style="width:100%;"></a></div>	
 </div>
 
 
