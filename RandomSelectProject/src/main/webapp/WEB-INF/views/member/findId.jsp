@@ -16,6 +16,19 @@
 <!-- <script type="text/javascript"  src="//code.jquery.com/jquery-1.10.2.js"></script> -->
 <script
 	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+<style type="text/css">
+ html { 
+ 	height: 100%; 
+ 	margin: 0; 
+ 	padding: 0; 
+ }
+
+ body,.container {
+ 	height: 100%;
+ 	margin: 0; 
+	padding: 0; 
+ } 
+</style>
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -265,7 +278,7 @@
 <body>
 	<div class="row">
 		<div class="col-md-12">
-			<a href="mateListProc.do"><img
+			<a href="findIdForm.do"><img
 				src="/myapp/resources/img/aboutUser.png" style="width: 100%;"></a>
 		</div>
 	</div>
