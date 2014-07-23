@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,17 +43,16 @@ function evalPage(obj){
 		<input type="button" onclick="evaluateMainGo()" value="평가메인으로">
 	</form> -->
 		<form action="nEvaluateListForm.do" id="pageForm">
-			<input id="pageNum" name="pageNum" type="hidden">
-			<input id="memId" name="memId" value="${memId}" type="hidden">
+			<input id="pageNum" name="pageNum" type="hidden"> <input
+				id="memId" name="memId" value="${memId}" type="hidden">
 		</form>
-		<table width="600" border="1" bordercolor="#00A5FF">
+		<table width="50%" border="1" bordercolor="#00A5FF">
 
 			<tr align="center" valign="middle">
-				<td colspan="5">평가안한 목록</td>
-
+				<td colspan="5">평가한 목록</td>
 			</tr>
 			<tr align="center" valign="middle" bgcolor="#00A5FF">
-				<td width="66px">번호</td>
+
 				<td width="100px"><label>평점</label></td>
 
 				<td>방문 평가 안한 음식점</td>
@@ -61,7 +62,7 @@ function evalPage(obj){
 				<c:forEach var="evaluate" items="${memberEvaluates}"
 					varStatus="status">
 					<tr height="35px">
-						<td align="center">번호</td>
+
 						<td align="center"><c:choose>
 								<c:when test="${evaluate.score ==5}">
 						★★★★★
@@ -78,7 +79,9 @@ function evalPage(obj){
 								<c:when test="${evaluate.score ==1}">
 						★☆☆☆☆
 			</c:when>
-							</c:choose> <script type="text/javascript">
+							</c:choose> 
+							
+<script type="text/javascript">
 function hideshow(which){
 if (!document.getElementById)
 return
@@ -110,24 +113,25 @@ which.style.display="block";
 
 									<input type="submit" value="확인"
 										onclick="location.href='javascript:hideshow(document.getElementById(memId=${evaluate.memId}&evalId=${evaluate.evalId}))'">
+<button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>
 
 								</div>
 							</form></td>
 
 						<td>${evaluate.restntName}</td>
-						<td>${evaluate.evalDate}</td>
+						<td style="text-align: center;">
+						<f:formatDate
+								value="${evaluate.evalDate}" pattern="YYYY-MM-D" /></td>
 
 					</tr>
 				</c:forEach>
 			<tr>
-				<td colspan="5" align="center">
-					
-					<c:forEach  var="a" begin="1" end="${pageCount}">
-						
+				<td colspan="5" align="center"><c:forEach var="a" begin="1"
+						end="${pageCount}">
+
 						<a onclick="evalPage(this)" id="${a}">[${a}]</a>
-					
-					</c:forEach>
-						</td>
+
+					</c:forEach></td>
 			</tr>
 
 		</table>
