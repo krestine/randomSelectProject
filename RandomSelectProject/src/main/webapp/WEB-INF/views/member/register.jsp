@@ -20,6 +20,7 @@
 
 <!-- <script src="./js/ajaxValidate.js" type="text/javascript"></script> -->
 <script src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style type="text/css">
 input.error {
 	border: 1px dashed red;

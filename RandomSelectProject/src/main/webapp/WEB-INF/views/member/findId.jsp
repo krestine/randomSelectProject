@@ -16,6 +16,7 @@
 <!-- <script type="text/javascript"  src="//code.jquery.com/jquery-1.10.2.js"></script> -->
 <script
 	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style type="text/css">
  html { 
  	height: 100%; 
@@ -278,7 +279,7 @@
 <body>
 	<div class="row">
 		<div class="col-md-12">
-			<img
+			<a href="loginForm.do"><img
 				src="/myapp/resources/img/aboutUser.png" style="width: 100%;"></a>
 		</div>
 	</div>

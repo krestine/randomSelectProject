@@ -10,7 +10,7 @@
 	type="text/javascript"></script>
 <script
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
-
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <title>login.jsp</title>
 <style type="text/css">
 input.error {

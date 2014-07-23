@@ -7,6 +7,7 @@
 <meta http-equiv="refresh"
 	content="2; url=http://localhost:9080/myapp/logoutForm.do">
 <title>dropOk.jsp</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style type="text/css">
  html { 
  	height: 100%; 
