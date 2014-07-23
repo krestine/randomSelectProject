@@ -12,7 +12,7 @@
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=true&language=ko"></script>
 <link rel="stylesheet" type="text/css"
-	href="/myapp/resources/css/bootstrap.min.css" media="screen" />
+	href="/myapp/resources/css/bootstrap.min.css"/>
 <script type="text/javascript"
 	src="/myapp/resources/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
