@@ -316,7 +316,7 @@ label.error {
 	<div class="row">
 		<div class="col-md-12">
 			<a href="registerForm.do"><img
-				src="/myapp/resources/img/aboutUser.png" style="width: 100%;"></a>
+				src="/myapp/resources/img/signup.png" style="width: 100%;"></a>
 		</div>
 	</div>
 	<div align="center" class="col-lg-20">
