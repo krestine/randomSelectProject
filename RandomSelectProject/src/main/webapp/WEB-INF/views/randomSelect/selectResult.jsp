@@ -11,11 +11,14 @@
 <style type="text/css">
 html {
 	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 body,.container {
 	height: 100%;
 	margin: 0;
+	padding: 0;
 }
 </style>
 
@@ -589,7 +592,8 @@ body,.container {
 <body>
 	<div class="container" id="container" style="width: 100%;"
 		align="center">
-		<div id="map_canvas" style="width: 80%; height: 100%"></div>
+		<div style="width: 100%;"><img src="/myapp/resources/img/eatcalk.png" style="width:100%;"></div>	
+		<div id="map_canvas" style="width: 100%; height: 100%"></div>
 		<button id="randomSelectInitialize" onclick="initialize()"
 			class="btn btn-info">맵 초기화</button>
 		<button id="moveToMyLocation" onclick="setMyCenter()"
