@@ -21,6 +21,13 @@ function evalPage(obj){
 </script>
 </head>
 <body>
+	<div class="row">
+<div class="col-md-12"><a href="evaluateList.do"><img src="/myapp/resources/img/evaluate.png" style="width:100%;"></a></div>	
+</div>
+
+	
+	
+	
 	<center>
 		<h3>평가한 식당 리스트</h3>
 
