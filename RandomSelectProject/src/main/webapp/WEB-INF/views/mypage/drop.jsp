@@ -50,7 +50,7 @@ label.error {
 <body>
 	<div class="row">
 		<div class="col-md-12">
-			<a href="dropForm.do"><img
+			<img
 				src="/myapp/resources/img/aboutUser.png" style="width: 100%;"></a>
 		</div>
 	</div>
