@@ -34,14 +34,14 @@
 		document.getElementById("select1").action = "logoutForm.do";
 		document.getElementById("select1").submit();
 	}
-	/* function mateListGo() {
+	function mateListGo() {
 		document.getElementById("select2").action = "mateListProc.do";
 		document.getElementById("select2").submit();
 	}
 	function restntListGo() {
 		document.getElementById("select2").action = "restntListProc.do";
 		document.getElementById("select2").submit();
-	} */
+	} 
 	function settingGo() {
 		document.getElementById("select2").action = "settingForm.do";
 		document.getElementById("select2").submit();
@@ -107,18 +107,20 @@
 				</ul>
 			</c:when>
 		</c:choose>
-
+		
+		<form id="select2" method="post">
 		<ul class="nav navbar-nav">
 			<li><a onclick="selectResultGo()">아무거나</a></li>
 			<li><a onclick="settingGo()">설 정</a></li>
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown">커뮤니티<b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><a href="mateListProc.do">친구리스트</a></li>
-					<li><a href="restntListProc.do">식당리스트</a></li>
+					<li><a onclick="mateListGo()">친구리스트</a></li>
+					<li><a onclick="restntListGo()">식당리스트</a></li>
 				</ul></li>
 		</ul>
-
+		</form>
+		
 		<ul class="nav navbar-nav">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown">평 가<b class="caret"></b></a>
@@ -127,6 +129,7 @@
 					<li><a href="nEvaluateListForm.do">평가 안한 페이지 </a></li>
 				</ul></li>
 		</ul>
+		
 	</div>
 	<!-- /.navbar-collapse --> </nav>
 </body>

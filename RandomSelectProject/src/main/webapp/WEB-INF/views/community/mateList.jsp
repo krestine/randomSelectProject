@@ -207,8 +207,8 @@ var paramData = {
 
 	
 	<div align="center">
-	<h3>친구리스트</h3>
-	<table class="table paginated" id="tbl" style="width:50%;" align="center">	
+	<h4>친구리스트</h4>
+	<table class="table paginated" id="tbl" style="width:30%;" align="center">	
 				
 		</table>	
 	<c:forEach var="mate" items="${mates}">		

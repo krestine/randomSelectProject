@@ -191,8 +191,8 @@ $(document).ready(function() {
 
 
 	<div align="center">
-		<h3>친구들이 평가한 식당리스트</h3>
-	<table class="table paginated" id="tbl" style="width:50%;" align="center">
+		<h4>친구들이 평가한 식당리스트</h4>
+	<table class="table paginated" id="tbl" style="width:30%;" align="center">
 		<td colspan="1" align="center"></td>	
 	</table>	
 	<c:forEach var="restnt" items="${restnts}">
