@@ -136,11 +136,12 @@ public class SettingController {
 			 * "데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요."); }
 			 */
 		} else {
-			model.addAttribute("errorMessage", "로그인 해주세요!!");
+//			model.addAttribute("errorMessage", "로그인 해주세요!!");
+			model.addAttribute("sMsg", " 로그인 해주세요.");
 		}
 
-		return "error";
-
+//		return "error";
+		return "forward:loginForm.do";
 	}
 
 	public String menuCodeEncoder(String[] menus) {
