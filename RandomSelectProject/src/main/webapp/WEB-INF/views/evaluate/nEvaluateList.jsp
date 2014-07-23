@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8 initial-scale=1.0" />
 <title>nEvaluateList.jsp</title>
 <script type="text/javascript">
 /* 	function mainGo() {
@@ -30,9 +30,10 @@ function evalPage(obj){
 }
 </script>
 </head>
-
 <body>
-
+<div class="row">
+<div class="col-md-12"><a href="nEvaluateListForm.do"><img src="/myapp/resources/img/evaluate.png" style="width:100%;"></a></div>	
+</div>
 	<CENTER>
 		<h3>평가안한 식당 리스트</h3>
 
@@ -46,7 +47,7 @@ function evalPage(obj){
 			<input id="pageNum" name="pageNum" type="hidden"> <input
 				id="memId" name="memId" value="${memId}" type="hidden">
 		</form>
-		<table width="50%" border="1" bordercolor="#00A5FF">
+		<table width="70%" border="1" bordercolor="#00A5FF">
 
 			<tr align="center" valign="middle">
 				<td colspan="5">평가한 목록</td>
