@@ -39,6 +39,7 @@ label.error {
 	vertical-align: middle;
 	width: 300px;
 }
+
 </style>
 <script type="text/javascript">
 	$(document)
@@ -207,6 +208,12 @@ label.error {
 <title>myInfo.jsp</title>
 </head>
 <body>
+	<div class="row">
+		<div class="col-md-12">
+			<a href="mateListProc.do"><img
+				src="/myapp/resources/img/aboutUser.png" style="width: 100%;"></a>
+		</div>
+	</div>
 	<table align=center>
 		<tr>
 			<td>아이디</td>
