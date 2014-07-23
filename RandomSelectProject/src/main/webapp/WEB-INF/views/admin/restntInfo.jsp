@@ -14,6 +14,19 @@
 				</c:otherwise>
 
 	</c:choose></title>
+<style>
+html {
+	height: 100%;
+	margin : 0;
+	padding : 0;
+}
+
+body,.container {
+	height: 100%;
+	margin: 0;
+	padding : 0;
+}
+</style>	
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -76,6 +89,7 @@
 			}); */
 </script>
 </head>
+
 <body>
 
 

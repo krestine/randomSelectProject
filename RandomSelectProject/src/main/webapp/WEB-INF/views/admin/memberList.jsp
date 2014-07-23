@@ -6,7 +6,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 명단</title>
+<style>
+html {
+	height: 100%;
+	margin : 0;
+	padding : 0;
+}
+
+body,.container {
+	height: 100%;
+	margin: 0;
+	padding : 0;
+}
+</style>
 </head>
+
 <body>
 
 	

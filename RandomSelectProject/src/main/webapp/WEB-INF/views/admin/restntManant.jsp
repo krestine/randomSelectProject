@@ -6,7 +6,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>식당 관리</title>
+<style>
+html {
+	height: 100%;
+	margin : 0;
+	padding : 0;
+}
 
+body,.container {
+	height: 100%;
+	margin: 0;
+	padding : 0;
+}
+</style>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=true&language=ko">
 </script>
@@ -772,10 +784,11 @@
 
 	
 	</script>
-
 </head>
 <body>
-	
+<div class="row">
+<div class="col-md-12"><img src="/myapp/resources/img/admin.png" style="width:100%;"></div>	
+</div>	
 	
 	<div id="selectBox" align="center">
 		주소 선택<br> <select id="adress1" style="width: 140px;">

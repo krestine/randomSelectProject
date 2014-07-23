@@ -32,9 +32,26 @@
 	}
 </script>
 <title>회원 검색</title>
+<style>
+html {
+	height: 100%;
+	margin : 0;
+	padding : 0;
+}
+
+body,.container {
+	height: 100%;
+	margin: 0;
+	padding : 0;
+}
+</style>
 </head>
+
 <body>
-	<div align="center" style="position: relative; top: 10px;">
+<div class="row">
+<div class="col-md-12"><img src="/myapp/resources/img/admin.png" style="width:100%;"></div>	
+</div>
+	<div align="center" style="position: relative; ">
 		<h1>회원 검색</h1>
 		<table>
 
