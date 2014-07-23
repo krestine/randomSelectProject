@@ -67,8 +67,7 @@ public class EvaluateController {
 				"loginUser");
 		System.out.println("패러미터로 받은 DTO:" + evaluateDto);
 		if(loginUser==null){
-			/*model.addAttribute("errorMessage", "로그인 해주세요!!");
-			return "error";*/
+			
 			
 			model.addAttribute("sMsg", " 로그인 해주세요.");
 			return "forward:loginForm.do";
