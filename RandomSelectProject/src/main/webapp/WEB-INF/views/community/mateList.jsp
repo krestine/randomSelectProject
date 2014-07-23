@@ -25,9 +25,9 @@ $(document).ready(function() {
 			success : function(json){
 					
 					var lists=json.mates; 
-					var temp = "<thead><tr><td class='listth' ></td>"+"<td class='listth'></td></tr></thead>";
+					var temp = "<thead><tr><td class='listth' align='center'></td></tr></thead>";
 						 for (var i=0; i< lists.length; i++) {
-						temp += '<tr><td class="listtd" align="center">'+'<input type="hidden" value="'+lists[i].memId+'" name="memId"><input type="hidden" value="'+lists[i].mateId+'" name="mateId"><input type="button" value="'+ lists[i].memName +'"class="btn btn-info btn-sm" onclick="mateDetail(this);" data-toggle="modal" data-target="#mateDetailResult"></div>'+'</td></tr>';
+						temp += '<tr><td class="listtd" align="center">'+'<input type="button" <input type="hidden" value="'+lists[i].memId+'" name="memId"><input type="hidden" value="'+lists[i].mateId+'" name="mateId"><input type="button" value="'+ lists[i].memName +'"class="btn btn-info btn-sm" onclick="mateDetail(this);" data-toggle="modal" data-target="#mateDetailResult"></div>'+'</td></tr>';
 						
 						}
  						
@@ -146,9 +146,7 @@ $(document).ready(function() {
 			 });
 			}
 		
-	$('#restntListBtn').click(function() {
-		$('#community').attr("action", "restntListProc.do").submit();
-	});
+	
 		
 	
 });	
@@ -183,7 +181,7 @@ var paramData = {
 			var memBirth = mateInfo.memBirth;
 			var infoStatus=mateInfo.infoStatus;
 			var mateStatus=mateInfo.mateStatus;
-			var html = '<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title"><h4>"'+memName+'"님의 상세정보<br><table class="table"><input value="친구이름"><input value="친구아이디"><br><input value="'+memName+'"name="memName"><input value="'+memId+'"name="memId"><br><input value="생일"><input value="등급"><br><input value="'+memBirth+'" name="memBirth"><input value="'+memGrade+'" name="memGrade"></table><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">확인</button></div></div></div>';
+			var html = '<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title"><h4>"'+memName+'"님의 상세정보<br><table class="table" align="center"><tr><td><input value="친구이름"><input value="친구아이디"><br><input value="'+memName+'"name="memName"><input value="'+memId+'"name="memId"></td></tr><tr><td><input value="생일"><input value="등급"><br><input value="'+memBirth+'" name="memBirth"><input value="'+memGrade+'" name="memGrade"></td></tr></table><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">확인</button></div></div></div>';
 		 	$('#mateDetailResult').html(html); 
 		}
 	});
@@ -202,11 +200,8 @@ var paramData = {
 </head>
 <body>	
 
-<div container>
-	<div row>
-	<form id="community" method="post" >
-		 <input type="button" class="btn btn-success btn-sm" value="식당 리스트" id="restntListBtn"/>
-	</form>
+
+	
 	<div align="center">
 	<h3>친구리스트</h3>
 	<table class="table paginated" id="tbl" style="width:50%;" align="center">	
@@ -223,12 +218,8 @@ var paramData = {
 	<div class="modal fade" id="mateDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						
 	</div>
-				
-		
+	</div>			
 						
-		
-</div>
-</div>
-</div>
+
 </body>
 </html>

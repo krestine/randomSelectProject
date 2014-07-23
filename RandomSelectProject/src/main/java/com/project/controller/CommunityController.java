@@ -76,9 +76,9 @@ public class CommunityController {
 					return "setting/error";
 				}
 				
-				}catch (Exception e) {model.addAttribute("errorMessage", "로그인 해주세요!");
+				}catch (Exception e) {model.addAttribute("sMsg", "로그인이 필요한 서비스입니다. 로그인 해주세요!");
 				
-				return "setting/error";
+				return "forward:loginForm.do";
 				}	
 				
 				return "mateList";	
@@ -205,13 +205,36 @@ public class CommunityController {
 			}
 			
 			}catch (Exception e) {
-				model.addAttribute("errorMessage", "로그인 해주세요!");
+				model.addAttribute("sMsg", "로그인이 필요한 서비스입니다. 로그인 해주세요!");
 			
-				return "setting/error";
+				return "forward:loginForm.do";
 			}
 		return "restntList";
 	}
+	
+	// 회원 : 친구들이 평가한 식당 리스트 ajax
+	@RequestMapping(value = "/ajaxRestntListProc.do", method = RequestMethod.POST)
+	public void ajaxMateList(HttpServletRequest request,
+			HttpServletResponse response, RestntDTO restntDto) throws IOException {
 
+		System.out.println("/ajaxRestntListProc.do");
+		restntDto.setMemId(loginUser.getMemId()); 
+		System.out.println(restntDto);
+		restnts = restntService.getEvalRestntListByMateId(restntDto);
+
+		JSONArray jsonArray = JSONArray.fromObject(restnts);
+		System.out.println("restnts -" + jsonArray);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("restnts", restnts);
+
+		JSONObject jsonObject = JSONObject.fromObject(map);
+		System.out.println("json - " + jsonObject);
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonObject.toString());
+	}
+	
 	// 회원 : 식당 상세정보
 	@RequestMapping(value = "/restntDetailProc.do", method = RequestMethod.POST)
 	public String restntDetailProc(Model model, String restntId) {

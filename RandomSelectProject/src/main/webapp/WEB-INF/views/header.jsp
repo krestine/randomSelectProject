@@ -79,16 +79,11 @@ function navbarRandomSelect() {
 </script>
 </head>
 <style>
-</style>
-<body>
-	<!-- 	<div class="navbar navbar-inverse navbar-fixed-top " > -->
-	<!-- 	      <div class="container"> -->
-	<!-- 	        <div class="navbar-header" > -->
-	<!--           <a href="main.do" class="navbar-brand">아무거나</a> -->
 
-	<!--         </div> -->
-	<!--       </div> -->
-	<!--     </div> -->
+</style>
+
+<body>
+
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<!-- 	<nav class="navbar navbar-default" role="navigation"> Brand and toggle get grouped for better mobile display -->
 	<div class="navbar-header">
@@ -99,6 +94,7 @@ function navbarRandomSelect() {
 		</button>
 		<a class="navbar-brand" href="main.do">잇콕</a>
 	</div>
+
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
