@@ -6,14 +6,13 @@
 <head>
 <style type="text/css">
 
-body { padding-top: 5px;}
-}
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
-<div class="col-md-1"></div>
-<div class="col-md-10">
+<!-- <div class="col-md-1"></div>
+<div class="col-md-10"> -->
 	
 
 	<div align="center">
@@ -34,7 +33,7 @@ body { padding-top: 5px;}
 			</tr>
 		</table>
 	</div>
-</div>
-<div class="col-md-1"></div>	
+<!-- </div>
+<div class="col-md-1"></div>	 -->
 </body>
 </html>

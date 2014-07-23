@@ -58,7 +58,7 @@ public class CommunityController {
 	private MateDTO pageNum;
 		
 	// 회원 : 친구 리스트
-	@RequestMapping(value = "/mateListProc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/mateListProc.do")
 	public String mateListProc(Model model, MateDTO mateDto, HttpServletRequest request) {
 
 		loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
@@ -66,7 +66,7 @@ public class CommunityController {
 				if (loginUser.getMemId() != null || loginUser != null) { 
 		}
 			try{
-					mateDto.setPageNum(1);
+					//mateDto.setPageNum(1);
 					mateDto.setMemId(loginUser.getMemId());	
 					mates = mateService.getMateListByMemId(mateDto);
 					model.addAttribute("mates", mates);	
@@ -185,7 +185,7 @@ public class CommunityController {
 
 	// 회원 : 친구들이 평가한 식당 리스트
 
-	@RequestMapping(value = "/restntListProc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/restntListProc.do")
 	public String restntListProc(Model model, RestntDTO restntDto, HttpServletRequest request) {
 		loginUser = (MemberDTO) request.getSession().getAttribute("loginUser");
 		try{
