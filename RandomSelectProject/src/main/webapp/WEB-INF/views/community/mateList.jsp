@@ -205,10 +205,9 @@ var paramData = {
 <div class="col-md-12"><a href="mateListProc.do"><img src="/myapp/resources/img/community.png" style="width:100%;"></a></div>	
 </div>
 
-	
 	<div align="center">
-	<h3>친구리스트</h3>
-	<table class="table paginated" id="tbl" style="width:50%;" align="center">	
+	<h4>친구리스트</h4>
+	<table class="table paginated" id="tbl" style="width:30%;" align="center">	
 				
 		</table>	
 	<c:forEach var="mate" items="${mates}">		
@@ -221,6 +220,9 @@ var paramData = {
 		
 	<div class="modal fade" id="mateDetailResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						
+
+
+
 	</div>
 	</div>			
 						

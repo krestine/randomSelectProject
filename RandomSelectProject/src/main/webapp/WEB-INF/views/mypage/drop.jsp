@@ -18,6 +18,17 @@ label.error {
 	display: block;
 	color: red;
 }
+ html { 
+ 	height: 100%; 
+ 	margin: 0; 
+ 	padding: 0; 
+ }
+
+ body,.container {
+ 	height: 100%;
+ 	margin: 0; 
+	padding: 0; 
+ } 
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -39,7 +50,7 @@ label.error {
 <body>
 	<div class="row">
 		<div class="col-md-12">
-			<a href="mateListProc.do"><img
+			<a href="dropForm.do"><img
 				src="/myapp/resources/img/aboutUser.png" style="width: 100%;"></a>
 		</div>
 	</div>
