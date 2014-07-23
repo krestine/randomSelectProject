@@ -7,12 +7,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+<meta name="viewport" content="initial-scale=0.5, user-scalable=yes" />
 <style type="text/css">
 html {
 	height: 100%;
 	margin: 0;
-	padding: 0;
+	padding-top: 45px;
 }
 
 body,.container {
