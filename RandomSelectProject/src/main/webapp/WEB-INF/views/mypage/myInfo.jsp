@@ -220,8 +220,8 @@ label.error {
 <body>
 	<div class="row">
 		<div class="col-md-12">
-			<a href="myInfoForm.do"><img
-				src="/myapp/resources/img/aboutUser.png" style="width: 100%;"></a>
+			<img
+				src="/myapp/resources/img/myinfo.png" style="width: 100%;"></a>
 		</div>
 	</div>
 	<table align=center>
