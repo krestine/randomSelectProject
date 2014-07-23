@@ -9,6 +9,7 @@
 <head>
 <link href='http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css' rel='stylesheet' type='text/css' />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style type="text/css">
 body{
 	font-family: 'Nanum Gothic Coding', sans-serif;

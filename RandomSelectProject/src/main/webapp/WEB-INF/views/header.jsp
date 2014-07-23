@@ -117,8 +117,8 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">커뮤니티<b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="mateListProc.do">친구리스트</a></li>
-						<li><a href="restntListProc.do">식당리스트</a></li>
+						<li><a onclick="mateListGo()">친구리스트</a></li>
+						<li><a onclick="restntListGo()">식당리스트</a></li>
 					</ul></li>
 			</ul>
 		</form>
