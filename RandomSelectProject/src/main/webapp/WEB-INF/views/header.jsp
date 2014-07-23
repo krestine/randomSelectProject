@@ -41,14 +41,14 @@
 	function restntListGo() {
 		document.getElementById("select2").action = "restntListProc.do";
 		document.getElementById("select2").submit();
-	} 
+
 	function settingGo() {
 		document.getElementById("select2").action = "settingForm.do";
 		document.getElementById("select2").submit();
 	}
-	function selectResult() {
-		document.getElementById("select3").action = "selectResult.do";
-		document.getElementById("select3").submit();
+	function selectResultGo() {
+		document.getElementById("select2").action = "selectResult.do";
+		document.getElementById("select2").submit();
 	}
 	function memberGo() {
 		document.getElementById("select1").action = "memberSearchForm.do";
@@ -61,7 +61,6 @@
 </script>
 </head>
 <style>
-
 </style>
 
 <body>
@@ -80,22 +79,15 @@
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
-		<c:choose>
-			<c:when test="${sessionScope.loginUser==null}">
-				<ul class="nav navbar-nav">
-					<li><a onclick="loginGo()">로그인</a></li>
-					<li><a onclick="registerGo()">회원가입</a></li>
-				</ul>
-			</c:when>
+		<form method="post" id="select1">
+			<c:choose>
+				<c:when test="${sessionScope.loginUser==null}">
+					<ul class="nav navbar-nav">
 
-			<c:when test="${sessionScope.loginUser.memGrade<7}">
-				<ul class="nav navbar-nav">
-					<li><a onclick="logoutGo()">로그아웃</a></li>
-					<li><a onclick="myInfoGo()">내정보</a></li>
-				</ul>
-			</c:when>
+						<li><a onclick="loginGo()">로그인</a></li>
+						<li><a onclick="registerGo()">회원가입</a></li>
 
-			<c:when test="${sessionScope.loginUser.memGrade==666}">
+
 				<ul class="nav navbar-nav">
 					<li><a onclick="logoutGo()">로그아웃</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -107,29 +99,32 @@
 				</ul>
 			</c:when>
 		</c:choose>
-		
-		<form id="select2" method="post">
-		<ul class="nav navbar-nav">
-			<li><a onclick="selectResultGo()">아무거나</a></li>
-			<li><a onclick="settingGo()">설 정</a></li>
-			<li class="dropdown"><a href="#" class="dropdown-toggle"
-				data-toggle="dropdown">커뮤니티<b class="caret"></b></a>
-				<ul class="dropdown-menu">
-					<li><a onclick="mateListGo()">친구리스트</a></li>
-					<li><a onclick="restntListGo()">식당리스트</a></li>
-				</ul></li>
-		</ul>
+		</form>	
+	
+
+		<form method="post" id="select2">
+			<ul class="nav navbar-nav">
+				<li><a onclick="selectResultGo()">아무거나</a></li>
+				<li><a onclick="settingGo()">설 정</a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">커뮤니티<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="mateListProc.do">친구리스트</a></li>
+						<li><a href="restntListProc.do">식당리스트</a></li>
+					</ul></li>
+			</ul>
 		</form>
-		
-		<ul class="nav navbar-nav">
-			<li class="dropdown"><a href="#" class="dropdown-toggle"
-				data-toggle="dropdown">평 가<b class="caret"></b></a>
-				<ul class="dropdown-menu">
-					<li><a href="evaluateList.do">평가한 페이지 </a></li>
-					<li><a href="nEvaluateListForm.do">평가 안한 페이지 </a></li>
-				</ul></li>
-		</ul>
-		
+		<form method="post" id="select3">
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">평 가<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="evaluateList.do">평가한 페이지 </a></li>
+						<li><a href="nEvaluateListForm.do">평가 안한 페이지 </a></li>
+					</ul></li>
+			</ul>
+		</form>
+
 	</div>
 	<!-- /.navbar-collapse --> </nav>
 </body>
