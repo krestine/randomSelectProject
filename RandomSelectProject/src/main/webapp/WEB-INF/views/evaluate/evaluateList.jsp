@@ -104,8 +104,7 @@ which.style.display="block";
 
 						</td>
 						<td>${evaluate.restntName}</td>
-						<td style="text-align: center;"><f:formatDate
-								value="${evaluate.evalDate}" pattern="YYYY-MM-D" /></td>
+						<td style="text-align: center;">${evaluate.evalDate}"</td>
 
 					</tr>
 
