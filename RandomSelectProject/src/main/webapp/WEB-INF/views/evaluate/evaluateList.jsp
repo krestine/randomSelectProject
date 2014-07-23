@@ -39,7 +39,7 @@ function evalPage(obj){
 			<input id="pageNum" name="pageNum" type="hidden"> <input
 				id="memId" name="memId" value="${memId}" type="hidden">
 		</form>
-		<table width="80%" border="1" bordercolor="#00A5FF">
+		<table width="70%" border="1" bordercolor="#00A5FF">
 
 			<tr align="center" valign="middle">
 				<td colspan="5">평가한 목록</td>
