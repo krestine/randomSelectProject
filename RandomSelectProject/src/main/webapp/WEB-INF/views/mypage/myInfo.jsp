@@ -39,7 +39,17 @@ label.error {
 	vertical-align: middle;
 	width: 300px;
 }
+ html { 
+ 	height: 100%; 
+ 	margin: 0; 
+ 	padding: 0; 
+ }
 
+ body,.container {
+ 	height: 100%;
+ 	margin: 0; 
+	padding: 0; 
+ } 
 </style>
 <script type="text/javascript">
 	$(document)
@@ -210,7 +220,7 @@ label.error {
 <body>
 	<div class="row">
 		<div class="col-md-12">
-			<a href="mateListProc.do"><img
+			<a href="myInfoForm.do"><img
 				src="/myapp/resources/img/aboutUser.png" style="width: 100%;"></a>
 		</div>
 	</div>

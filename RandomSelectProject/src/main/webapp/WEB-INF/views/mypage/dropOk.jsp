@@ -7,8 +7,27 @@
 <meta http-equiv="refresh"
 	content="2; url=http://localhost:9080/myapp/logoutForm.do">
 <title>dropOk.jsp</title>
+<style type="text/css">
+ html { 
+ 	height: 100%; 
+ 	margin: 0; 
+ 	padding: 0; 
+ }
+
+ body,.container {
+ 	height: 100%;
+ 	margin: 0; 
+	padding: 0; 
+ } 
+</style>
 </head>
 <body>
+	<div class="row">
+		<div class="col-md-12">
+			<a href="#"><img
+				src="/myapp/resources/img/aboutUser.png" style="width: 100%;"></a>
+		</div>
+	</div>
 	<div align="center">
 		<div class="form-group">탈퇴되었습니다.</div>
 		<div class="form-group">
