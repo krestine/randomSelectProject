@@ -14,7 +14,9 @@ html {
 
 body {
 	margin: 0;
-	padding-top: 50px;
+
+	padding: 0;
+
 }
 
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary
@@ -1102,7 +1104,9 @@ body {
 	line-height: 1.42857143;
 	color: #222222;
 	background-color: #ffffff;
+
 	padding-top: 0;
+
 }
 
 input,button,select,textarea {
