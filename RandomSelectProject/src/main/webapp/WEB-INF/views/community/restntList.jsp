@@ -28,7 +28,7 @@ $(document).ready(function() {
 				var lists=json.restnts; 
 				var temp = "<thead><tr><td class='listth' ></td>"+"<td class='listth'></td></tr></thead>";
 					 for (var i=0; i< lists.length; i++) {
-					temp += '<tr><td class="listtd">'+'<input type="hidden" value="'+lists[i].mateId+'" name="mateId"><input type="hidden" value="'+lists[i].restntId+'" name="restntId"><input type="button" value="'+ lists[i].restntName +'"class="btn btn-info btn-sm" disabled="disabled"><input type="button" class="btn btn-success btn-sm" style="float:right;" value="상세보기" id="restntDetail" onclick="restntDetailGo(this);"data-toggle="modal" data-target="#restntDetailResult">'+'</td></tr>';
+					temp += '<tr><td class="listtd">'+'<input type="hidden" value="'+lists[i].mateId+'" name="mateId"><input type="hidden" value="'+lists[i].restntId+'" name="restntId"><input type="button" value="'+ lists[i].restntName +'"class="btn btn-info btn-sm" disabled="disabled"><input type="button" class="btn btn-info btn-sm" style="float:right;" value="상세보기" id="restntDetail" onclick="restntDetailGo(this);" data-toggle="modal" data-target="#restntDetailResult">'+'</td></tr>';
 					
 					}
 					 $("#tbl").html(temp);
@@ -141,7 +141,7 @@ $(document).ready(function() {
 	
 	
 	var paramData = {
-			restntId : $(obj).prev().prev().prev().attr("value")
+			restntId : $(obj).prev().prev().attr("value")
 	};
 	$.ajax({
 		
@@ -177,21 +177,23 @@ $(document).ready(function() {
 <style type="text/css">
 .clickable {cursor: pointer;}
 .hover {text-decoration: underline;}
-.odd{ background: #B4E5FF;}
+.odd{ background: #E8F5FF;}
 .even{ background: #E1F6FA;}
-.active{ width:10px; height:10px; background:#f60; color:white;}
+.active{ width:10px; height:10px; background:#C8C8FF;; color:white;}
 </style>
 <title>식당리스트</title>
 </head>
 
 <body>
-
+<div class="row">
+<div class="col-md-12"><a href="mateListProc.do"><img src="/myapp/resources/img/community.png" style="width:100%;"></a></div>	
+</div>
 
 
 	<div align="center">
-		
+		<h3>친구들이 평가한 식당리스트</h3>
 	<table class="table paginated" id="tbl" style="width:50%;" align="center">
-		<td colspan="1" align="center"><h5>친구들이 평가한 식당리스트</h5></td>	
+		<td colspan="1" align="center"></td>	
 	</table>	
 	<c:forEach var="restnt" items="${restnts}">
 				<form id="restntListForm">		

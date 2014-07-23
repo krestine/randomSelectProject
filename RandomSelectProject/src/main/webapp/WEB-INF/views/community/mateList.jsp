@@ -14,7 +14,7 @@ $(document).ready(function() {
 			
 		$.ajax({
 			cache : false,
-			//async : false,
+			async : false,
 			type : 'POST',
 			url : 'ajaxMateList.do',
 			data : $('form').serialize(),
@@ -27,7 +27,7 @@ $(document).ready(function() {
 					var lists=json.mates; 
 					var temp = "<thead><tr><td class='listth' align='center'></td></tr></thead>";
 						 for (var i=0; i< lists.length; i++) {
-						temp += '<tr><td class="listtd" align="center">'+'<input type="button" <input type="hidden" value="'+lists[i].memId+'" name="memId"><input type="hidden" value="'+lists[i].mateId+'" name="mateId"><input type="button" value="'+ lists[i].memName +'"class="btn btn-info btn-sm" onclick="mateDetail(this);" data-toggle="modal" data-target="#mateDetailResult"></div>'+'</td></tr>';
+						temp += '<tr><td class="listtd" align="center">'+'<input type="hidden" value="'+lists[i].memId+'" name="memId"><input type="hidden" value="'+lists[i].mateId+'" name="mateId"><input type="button" value="'+ lists[i].memName +'"class="btn btn-info btn-sm" disabled="disabled" style="float:left;"><input type="button" class="btn btn-info btn-sm"  value="상세보기"style="float:right;" onclick="mateDetail(this);" data-toggle="modal" data-target="#mateDetailResult"></div>'+'</td></tr>';
 						
 						}
  						
@@ -156,7 +156,7 @@ function mateDetail(obj){
 
 
 var paramData = {
-			mateId : $(obj).prev().attr("value"),
+			mateId : $(obj).prev().prev().attr("value"),
 			memId : $(obj).prev().prev().attr("value"),
 			
 		}; 
@@ -181,7 +181,7 @@ var paramData = {
 			var memBirth = mateInfo.memBirth;
 			var infoStatus=mateInfo.infoStatus;
 			var mateStatus=mateInfo.mateStatus;
-			var html = '<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title"><h4>"'+memName+'"님의 상세정보<br><table class="table" align="center"><tr><td><input value="친구이름"><input value="친구아이디"><br><input value="'+memName+'"name="memName"><input value="'+memId+'"name="memId"></td></tr><tr><td><input value="생일"><input value="등급"><br><input value="'+memBirth+'" name="memBirth"><input value="'+memGrade+'" name="memGrade"></td></tr></table><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">확인</button></div></div></div>';
+			var html = '<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title"><h4>"'+memName+'"님의 상세정보<br><table class="table" align="center"><input value="친구이름"><input value="친구아이디"><br><input value="'+memName+'"name="memName"><input value="'+memId+'"name="memId"><br><input value="생일"><input value="등급"><br><input value="'+memBirth+'" name="memBirth"><input value="'+memGrade+'" name="memGrade"></table><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">확인</button></div></div></div>';
 		 	$('#mateDetailResult').html(html); 
 		}
 	});
@@ -192,14 +192,16 @@ var paramData = {
 <style type="text/css">
 .clickable {cursor: pointer;}
 .hover {text-decoration: underline;}
-.odd{ background: #B4E5FF;}
+.odd{ background: #E8F5FF;}
 .even{ background: #E1F6FA;}
-.active{ width:10px; height:10px; background:#f60; color:white;}
+.active{ width:10px; height:10px; background:#C8C8FF; color:white;}
 </style>
 <title>mateList</title>
 </head>
 <body>	
-
+<div class="row">
+<div class="col-md-12"><a href="mateListProc.do"><img src="/myapp/resources/img/community.png" style="width:100%;"></a></div>	
+</div>
 
 	
 	<div align="center">

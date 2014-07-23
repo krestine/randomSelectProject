@@ -25,13 +25,13 @@
 		document.getElementById("select1").action = "adminMainProc.do";
 		document.getElementById("select1").submit();
 	}
-	function mateListGo() {
+/* 	function mateListGo() {
 		document.getElementById("select2").action = "mateListProc.do";
 		document.getElementById("select2").submit();
 	}
 	function restntListGo() {
 		document.getElementById("select2").action = "restntListProc.do";
-		document.getElementById("select2").submit();
+		document.getElementById("select2").submit(); */
 	}
 	function settingGo() {
 		document.getElementById("select2").action = "settingForm.do";
@@ -72,7 +72,7 @@
 
 <body>
 
-
+<%-- 
 	<center>
 		<div class="btn-group">
 			<c:choose>
@@ -153,7 +153,7 @@
 			</form>
 
 		</div>
-	</center>
+	</center> --%>
 
 </body>
 </html>
