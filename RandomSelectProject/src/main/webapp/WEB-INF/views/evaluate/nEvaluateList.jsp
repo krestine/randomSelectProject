@@ -113,15 +113,14 @@ which.style.display="block";
 
 									<input type="submit" value="확인"
 										onclick="location.href='javascript:hideshow(document.getElementById(memId=${evaluate.memId}&evalId=${evaluate.evalId}))'">
-<button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>
+
 
 								</div>
 							</form></td>
 
 						<td>${evaluate.restntName}</td>
 						<td style="text-align: center;">
-						<f:formatDate
-								value="${evaluate.evalDate}" pattern="YYYY-MM-D" /></td>
+						${evaluate.evalDate}</td>
 
 					</tr>
 				</c:forEach>
