@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script
-	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
 <style type="text/css">
 input.error {
 	border: 1px dashed red;
@@ -52,9 +50,7 @@ label.error {
 						$("#pwCheck_form").hide();
 						$("button#changeInfo").click(function() {
 							// 							if ($(".linkBox").css("display") == "none") {
-							if ($(".dropdown").css("display") == "none") {
 								$("#pwCheck_form").toggle();
-							}
 						});
 
 						//tab으로 비밀번호변경,전화번호변경
