@@ -42,6 +42,9 @@ function check() {
 </script>
 </head>
 <body>
+<div class="row">
+<div class="col-md-12"><img src="/myapp/resources/img/setting.png" style="width:100%;"></div>	
+</div>
 	<div align="center">
 
 		<input type="hidden" value="${settingProcCode}" id="settingFlag">
