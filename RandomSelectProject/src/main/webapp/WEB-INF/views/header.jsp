@@ -62,7 +62,6 @@
 </head>
 <style>
 </style>
-
 <body>
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -99,9 +98,53 @@
 				</ul>
 			</c:when>
 		</c:choose>
-		</form>	
-	
+		
+		<form id="select2" method="post">
+		<ul class="nav navbar-nav">
+			<li><a onclick="selectResultGo()">아무거나</a></li>
+			<li><a onclick="settingGo()">설 정</a></li>
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown">커뮤니티<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a onclick="mateListGo()">친구리스트</a></li>
+					<li><a onclick="restntListGo()">식당리스트</a></li>
+				</ul></li>
+		</ul>
+		</form>
+		
+		<ul class="nav navbar-nav">
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown">평 가<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="evaluateList.do">평가한 페이지 </a></li>
+					<li><a href="nEvaluateListForm.do">평가 안한 페이지 </a></li>
+				</ul></li>
+		</ul>
+		
+					</ul>
+				</c:when>
 
+				<c:when test="${sessionScope.loginUser.memGrade<7}">
+					<ul class="nav navbar-nav">
+						<li><a onclick="logoutGo()">로그아웃</a></li>
+						<li><a onclick="myInfoGo()">내정보</a></li>
+					</ul>
+				</c:when>
+
+				<c:when test="${sessionScope.loginUser.memGrade==666}">
+					<ul class="nav navbar-nav">
+						<li><a onclick="logoutGo()">로그아웃</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">관 리<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a onclick="memberGo()">회원 관리</a></li>
+								<li><a onclick="restntGo()">식당 관리</a></li>
+							</ul></li>
+					</ul>
+				</c:when>
+			</c:choose>
+		
+		</form>
 		<form method="post" id="select2">
 			<ul class="nav navbar-nav">
 				<li><a onclick="selectResultGo()">아무거나</a></li>
