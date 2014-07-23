@@ -302,9 +302,13 @@ label.error {
 </script>
 </head>
 <body>
-
+	<div class="row">
+		<div class="col-md-12">
+			<a href="mateListProc.do"><img
+				src="/myapp/resources/img/aboutUser.png" style="width: 100%;"></a>
+		</div>
+	</div>
 	<div align="center" class="col-lg-20">
-
 		<form role="form" id="register_form" method="post"
 			action="registerProc.do">
 

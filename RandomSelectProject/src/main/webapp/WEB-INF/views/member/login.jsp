@@ -145,6 +145,12 @@ label.error {
 </script>
 </head>
 <body>
+	<div class="row">
+		<div class="col-md-12">
+			<a href="mateListProc.do"><img
+				src="/myapp/resources/img/aboutUser.png" style="width: 100%;"></a>
+		</div>
+	</div>
 	<div align="center">
 		<label style="color: blue"> ${sMsg}</label>
 		<form role="form" id="loginForm" action="loginProc.do" method="post">

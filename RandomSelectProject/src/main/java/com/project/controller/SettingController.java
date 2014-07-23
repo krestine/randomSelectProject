@@ -46,7 +46,7 @@ public class SettingController {
 
 					MemberDTO userInfo = memberService
 							.getOptionInfoByMemId(loginUser.getMemId());
-					System.out.println("userInfo::"+userInfo);
+					System.out.println("userInfo::" + userInfo);
 					String[] userSettings = menuCodeDecoder(userInfo
 							.getMemExcMenu());
 					/*
@@ -69,13 +69,13 @@ public class SettingController {
 							"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
 					return "error";
 				}
-
 			}
 		} catch (Exception e) {
-			model.addAttribute("errorMessage", "로그인 해주세요!");
-
+			// model.addAttribute("errorMessage", "로그인 해주세요!");
+			model.addAttribute("sMsg", " 로그인 해주세요.");
 		}
-		return "error";
+		// return "error";
+		return "forward:loginForm.do";
 	}
 
 	@RequestMapping(value = "/settingProc.do", method = RequestMethod.POST)
@@ -99,8 +99,7 @@ public class SettingController {
 				memberDto.setMemExcMenu(memExcMenu);
 				menuCode = "00000000000000";
 
-			} 
-			else {
+			} else {
 				memberDto.setMemExcMenu("00000000000000");
 
 			}
@@ -121,28 +120,25 @@ public class SettingController {
 
 			System.out.println(memberDto);
 			memberService.setOptionInfoByMemId(memberDto);
-			
+
 			loginUser.setMemExcMenu(memberDto.getMemExcMenu());
 			loginUser.setMemWalkRange(memberDto.getMemWalkRange());
 			session.setAttribute("loginUser", loginUser);
 			model.addAttribute("settingProcCode", "1");
 			return settingForm(model, request);
-			
-		/*	try{
 
-				
-			
-			} 
-			catch(Exception e){
-				model.addAttribute("errorMessage",
-						"데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요.");
-			}*/
+			/*
+			 * try{
+			 * 
+			 * 
+			 * 
+			 * } catch(Exception e){ model.addAttribute("errorMessage",
+			 * "데이터 베이스 오류가 발생했습니다<br> 잠시 후에 다시 시도 해주세요."); }
+			 */
+		} else {
+			model.addAttribute("errorMessage", "로그인 해주세요!!");
 		}
-		else{
-			model.addAttribute("errorMessage",
-					"로그인 해주세요!!");	
-		}
-		
+
 		return "error";
 
 	}
