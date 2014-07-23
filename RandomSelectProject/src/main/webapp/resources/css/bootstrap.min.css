@@ -15,7 +15,11 @@ html {
 body {
 	margin: 0;
 
+
 	padding: 0;
+
+
+	padding-top: 45px;
 
 }
 
@@ -1104,9 +1108,13 @@ body {
 	line-height: 1.42857143;
 	color: #222222;
 	background-color: #ffffff;
+<<<<<<< HEAD
 
 	padding-top: 0;
 
+=======
+	padding-top: 45px;
+>>>>>>> branch 'master' of https://github.com/krestine/randomSelectProject.git
 }
 
 input,button,select,textarea {
